@@ -1,0 +1,110 @@
+/* CreateUsuario.css */
+.create-usuario-page {
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.create-usuario-header {
+  display: flex;
+  flex-direction: inline-flex;
+  width: 100%;
+  background-color: white; /* Color del encabezado */
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
+  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+  z-index: 100;
+}
+
+.create-usuario-content {
+    margin-top: 100px;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;  /* Cambiado de column a row */
+    align-items: flex-start;  /* Cambiado de flex-start a center */
+    justify-content: center;  /* Cambiado de flex-start a center */
+}
+
+.create-usuario-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;  /* Agregado para ocupar el 70% del espacio */
+}
+
+.button-container {
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;  /* Agregado para apilar los botones verticalmente */
+    justify-content: flex-start;  /* Cambiado de space-between a flex-start */
+    width: 7%;  /* Agregado para ocupar el 30% del espacio */
+}
+
+.create-usuario-content input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.form-description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #0C231E;
+}
+
+.create-usuario-button {
+    display: flex;
+    justify-content: center;
+    padding: 15px 15px;
+    margin-top: 20px;
+    background-color: #12322B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.create-usuario-button:hover {
+    background-color: #0C231E;
+}
+
+.message-POST-success,
+.message-POST-failed {
+  margin-top: 10px;  
+  padding: 10px;  
+  width: 100%;  
+  text-align: center;  
+}
+
+.message-POST-success {
+    color: #0C231E;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.message-POST-failed {
+    color: red;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .toggle-show-password {
+    position: absolute;
+    right: 5px;
+    background: none;
+    border: none;
+  }

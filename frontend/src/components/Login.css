@@ -1,0 +1,96 @@
+/* Login.css */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: whitesmoke; /* Color de fondo principal */
+  color: white; /* Texto blanco para contrastar con el fondo oscuro */
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; /* Fuente común en páginas institucionales, reemplazar con la fuente exacta si es necesario */
+}
+.login-page {
+  background-color: whitesmoke; /* Color de fondo principal */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align:center
+}
+
+.login-header {
+  width: 100%;
+  background-color: white; /* Puedes cambiarlo al color deseado del header */
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+.header-logo {
+  height: 80px; /* Ajusta esto según el tamaño deseado para el logo */
+}
+
+.welcome-message {
+  color: white;
+  font-size: 24px; /* Ajusta esto según el tamaño deseado para el texto */
+  margin: 10px 0;
+}
+
+.department-name {
+  color: white;
+  font-size: 18px; /* Ajusta esto según el tamaño deseado para el texto */
+  margin: 0;
+}
+
+.mr-machine {
+  width: 100%; /* Ajusta el tamaño como sea necesario */
+  max-width: 300px; /* Ajusta el tamaño como sea necesario */
+  margin-top: 2rem;
+  display:flex;
+}
+
+.login-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  color: #404041; /* Color de texto principal */
+}
+
+.login-form label {
+  display: block;
+  margin-top: 10px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-form button {
+  padding: 10px 15px;
+  width: 100% 0;
+  background-color: #12322B; /* Botón con el color institucional */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  
+}
+
+.login-form button:hover {
+  background-color: #0C231E; /* Un tono ligeramente más claro para el hover */
+}
+
+.error-message {
+  color: #d9534f; /* Color rojo para errores, puedes ajustar este color según el estilo institucional */
+}
+
+

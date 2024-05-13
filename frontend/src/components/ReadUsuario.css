@@ -1,0 +1,87 @@
+.read-usuario-page {
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.read-usuario-header {
+    width: 100%;
+    background-color: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+ }
+
+.read-usuario-content {
+    margin-top: 180px;
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.pagination-read-usuario{
+    margin-top: 35px;  
+}
+
+.read-usuario-button {
+    display: flex;
+    width: 75%;
+    padding: 10px 5px;
+    margin-bottom: 100px;
+    margin-right: 50px;
+    background-color: #12322B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.read-usuario-button:hover {
+    background-color: #0C231E;
+}
+
+.read-button-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    justify-content: flex-start;
+    width: 20%;
+}
+
+.read-usuario-table-descripcion-columna {
+    color: #12322B;
+    font-weight: bold;
+}
+
+.read-usuario-table-descripcion-filas {
+    color: #12322B;
+}
+
+.usuario-table {
+    width: 95%;
+    border-collapse: collapse;
+    font: 0.2em;
+    margin-top: 50px;
+    margin-right: 10px;
+}
+
+.usuario-table th, .usuario-table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.usuario-table th {
+    background-color: whitesmoke;
+}

@@ -1,0 +1,66 @@
+/* SuperRoot.css */
+.super-root-page {
+  background-color: whitesmoke; /* Color de fondo */
+  height: 100vh; /* Altura completa de la ventana del navegador */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #0C231E;
+}
+
+.super-root-header {
+  display: flex;
+  flex-direction: inline-flex;
+  width: 100%;
+  background-color: white; /* Color del encabezado */
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
+  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+  z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
+}
+
+.header-logo {
+  margin-left: 10px; /* Agrega margen a la izquierda del logo */
+}
+
+.header-texts {
+  text-align: center;
+  flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
+}
+
+.welcome-message {
+  font-size: 24px;
+  margin: 0;
+  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
+}
+
+.department-name {
+  font-size: 18px;
+  margin: 0;
+  color: #0C231E;
+}
+/* Asegúrate de agregar un margen superior al contenido principal para que no se superponga con el encabezado fijo */
+.super-root-content {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dropdown-content{
+  display: flex;
+  flex-direction: column;
+}
+.dropdown-item{
+  padding: 5px 10px;
+  color: #0C231E;
+  box-sizing: border-box;
+}
+.dropdown-item:hover{
+  background-color: #0C231E;
+  color: white;
+}

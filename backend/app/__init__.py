@@ -8,12 +8,6 @@ import os
 db = SQLAlchemy()
 migrate = Migrate()
 
-from .models import *
-
-from .routes.auth import auth_bp
-from .routes.medicos import medicos_bp
-from .routes.usuarios import usuarios_bp
-
 def create_app():
     app = Flask(__name__)
 
@@ -27,14 +21,13 @@ def create_app():
 
     CORS(app, resources={r"/api/*": {"origins": "*"}})  # Ajusta las CORS según tus necesidades
 
+    from .routes.auth import auth_bp
+    from .routes.medicos import medicos_bp
+    from .routes.usuarios import usuarios_bp
+
     app.register_blueprint(auth_bp, url_prefix='/api')
     app.register_blueprint(medicos_bp, url_prefix='/api')
     app.register_blueprint(usuarios_bp, url_prefix='/api')
-
-    @app.cli.command("create_db")
-    def create_db():
-        with app.app_context():
-            db.create_all()
 
     return app
 

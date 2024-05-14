@@ -12,9 +12,9 @@ migrate = Migrate()
 from .models import * 
 
  # Importa e inicializa los blueprints
-    from .routes.auth import auth_bp
-    from .routes.medicos import medicos_bp
-    from .routes.usuarios import usuarios_bp
+ from .routes.auth import auth_bp
+ from .routes.medicos import medicos_bp
+ from .routes.usuarios import usuarios_bp
 
 def create_app():
     app = Flask(__name__)

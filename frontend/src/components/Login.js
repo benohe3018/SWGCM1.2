@@ -28,6 +28,7 @@ const Login = () => {
         password: password,
         captcha: token
       });
+      console.log("Response from server:", response.data); 
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.role);
 

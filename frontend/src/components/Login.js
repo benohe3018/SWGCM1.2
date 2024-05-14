@@ -52,7 +52,7 @@ const Login = () => {
           break;
       }
     } catch (error) {
-      setError('Error al iniciar sesión.');
+      setError('Error al iniciar sesión. Por favor intente de nuevo');
       console.error('Error de login:', error.response);
     }
   });

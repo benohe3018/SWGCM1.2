@@ -13,7 +13,7 @@ def create_app():
 
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
     # Asegúrate de que la URL de la base de datos comienza con 'postgresql://'
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://postgres:Barc3lona3018?@localhost:5432/swgcm')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://postgres:Barc3lona3018?@localhost:5432/swgcm').replace("postgres://", "postgresql://")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)

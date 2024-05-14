@@ -8,6 +8,11 @@ import os
 db = SQLAlchemy()
 migrate = Migrate()
 
+ # Importa e inicializa los blueprints
+    from .routes.auth import auth_bp
+    from .routes.medicos import medicos_bp
+    from .routes.usuarios import usuarios_bp
+
 def create_app():
     app = Flask(__name__)
 
@@ -21,11 +26,6 @@ def create_app():
     jwt = JWTManager(app)
 
     CORS(app, resources={r"/api/*": {"origins": "*"}})  # Ajusta las CORS según tus necesidades
-
-    # Importa e inicializa los blueprints
-    from .routes.auth import auth_bp
-    from .routes.medicos import medicos_bp
-    from .routes.usuarios import usuarios_bp
 
     app.register_blueprint(auth_bp, url_prefix='/api')
     app.register_blueprint(medicos_bp, url_prefix='/api')

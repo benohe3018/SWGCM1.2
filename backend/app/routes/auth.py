@@ -20,6 +20,7 @@ def generate_token(identity, role):
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
+    print("Data received:", data)
     username = data.get('nombre_usuario')
     password = data.get('password')
     captcha = data.get('captcha')
@@ -33,6 +34,7 @@ def login():
         }
     })
     recaptcha_data = recaptcha_response.json()
+    print("reCAPTCHA response:", recaptcha_data)
     if 'event' not in recaptcha_data or 'riskAnalysis' not in recaptcha_data:
         print('Unexpected response from reCAPTCHA Enterprise:', recaptcha_data)
         return jsonify({"message": "Invalid CAPTCHA"}), 401
@@ -40,9 +42,10 @@ def login():
         return jsonify({"message": "Invalid CAPTCHA"}), 401
 
     user = Usuario.query.filter_by(nombre_usuario=username).first()
+    print("User found:", user)
     if user and check_password_hash(user.contraseña, password):
         token = generate_token(user.id, user.rol)
         return jsonify({"message": "Login successful", "token": token, "role": user.rol}), 200
-    
+    print("Invalid credentials for user:", username)
     return jsonify({"message": "Invalid credentials"}), 401
 

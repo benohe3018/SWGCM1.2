@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -17,7 +17,7 @@ from .routes.medicos import medicos_bp
 from .routes.usuarios import usuarios_bp
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
     # Asegúrate de que la URL de la base de datos comienza con 'postgresql://'
@@ -34,9 +34,13 @@ def create_app():
     app.register_blueprint(medicos_bp, url_prefix='/api')
     app.register_blueprint(usuarios_bp, url_prefix='/api')
 
-    @app.route('/')
-    def home():
-        return 'Bienvenido a la aplicación SWGCM, funcionando correctamente!'
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def serve(path):
+        if path != "" and os.path.exists(app.static_folder + '/' + path):
+            return send_from_directory(app.static_folder, path)
+        else:
+            return send_from_directory(app.static_folder, 'index.html')
 
     return app
 

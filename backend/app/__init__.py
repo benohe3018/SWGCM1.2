@@ -34,5 +34,9 @@ def create_app():
     app.register_blueprint(medicos_bp, url_prefix='/api')
     app.register_blueprint(usuarios_bp, url_prefix='/api')
 
+    @app.route('/')
+    def home():
+        return 'Bienvenido a la aplicación SWGCM, funcionando correctamente!'
+
     return app
 

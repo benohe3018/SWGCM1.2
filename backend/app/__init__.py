@@ -8,6 +8,9 @@ import os
 db = SQLAlchemy()
 migrate = Migrate()
 
+# Importa todos los modelos
+from .models import * 
+
  # Importa e inicializa los blueprints
     from .routes.auth import auth_bp
     from .routes.medicos import medicos_bp

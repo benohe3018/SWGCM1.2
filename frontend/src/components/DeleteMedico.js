@@ -12,7 +12,7 @@ const DeleteMedico = () => {
 
   useEffect(() => {
     const fetchMedicos = async () => {
-      const response = await fetch('http://localhost:5000/api/medicos');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
       const data = await response.json();
       setMedicos(data);
     };
@@ -20,7 +20,7 @@ const DeleteMedico = () => {
   }, []);
 
   const handleDelete = async (id_medico) => {
-    await fetch(`http://localhost:5000/api/medicos/${id_medico}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/${id_medico}`, {
       method: 'DELETE',
     });
     setMedicos(medicos.filter(medico => medico.id_medico !== id_medico));

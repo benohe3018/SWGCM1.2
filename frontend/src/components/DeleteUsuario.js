@@ -12,7 +12,7 @@ const DeleteUsuario = () => {
 
   useEffect(() => {
     const fetchUsuarios = async () => {
-      const response = await fetch('http://localhost:5000/api/usuarios');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`);
       const data = await response.json();
       setUsuarios(data);
     };
@@ -20,7 +20,7 @@ const DeleteUsuario = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:5000/api/usuarios/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/${id}`, {
       method: 'DELETE',
     });
     setUsuarios(usuarios.filter(usuario => usuario.id !== id));

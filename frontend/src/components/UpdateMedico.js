@@ -12,7 +12,7 @@ const UpdateMedico = () => {
 
   useEffect(() => {
     const fetchMedicos = async () => {
-      const response = await fetch('http://localhost:5000/api/medicos');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
       const data = await response.json();
       setMedicos(data);
     };
@@ -31,7 +31,7 @@ const UpdateMedico = () => {
 
   const handleSave = async (id_medico) => {
     const medicoToUpdate = medicos.find(medico => medico.id_medico === id_medico);
-    await fetch(`http://localhost:5000/api/medicos/${id_medico}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/${id_medico}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -54,6 +54,24 @@ const UpdateMedico = () => {
   const currentMedicos = medicos.slice(indexOfFirstMedico, indexOfLastMedico);
 
   const totalPages = Math.ceil(medicos.length / medicosPerPage);
+
+  const especialidades = [
+    'Traumatología',
+    'Cardiología',
+    'Cirugia',
+    'Endocrinología',
+    'Neurocirugia',
+    'Medicina interna',
+    'Nefrología',
+    'Neurología',
+    'Oncología',
+    'Pediatría',
+    'Urología',
+    'Salud en el trabajo',
+    'Medicina de Urgencias',
+    'Radiología'
+    // Agrega más especialidades según sea necesario
+  ];
 
   return (
     <div className="update-medico-page">
@@ -106,7 +124,12 @@ const UpdateMedico = () => {
                 </td>
                 <td>
                   {editingId === medico.id_medico ? (
-                    <input type="text" name="especialidad" value={medico.especialidad} onChange={event => handleInputChange(event, medico.id_medico)} />
+                    <select name="especialidad" value={medico.especialidad} onChange={event => handleInputChange(event, medico.id_medico)}>
+                      <option value="">Seleccione una especialidad</option>
+                      {especialidades.map(especialidad => (
+                        <option key={especialidad} value={especialidad}>{especialidad}</option>
+                      ))}
+                    </select>
                   ) : (
                     medico.especialidad
                   )}

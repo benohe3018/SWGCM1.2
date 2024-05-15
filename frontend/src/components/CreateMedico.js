@@ -46,7 +46,7 @@ const CreateMedico = () => {
     }
 
     // Verifica si la matrícula ya existe
-    const responseCheck = await fetch(`http://localhost:5000/api/medicos/matricula/${matricula}`);
+    const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/matricula/${matricula}`);
     const dataCheck = await responseCheck.json();
     if (responseCheck.ok && Object.keys(dataCheck).length > 0) {
     alert('El médico ya existe en la base de datos. intente con un nuevo registro');
@@ -55,7 +55,7 @@ const CreateMedico = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/medicos', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +109,8 @@ const CreateMedico = () => {
     'Pediatría',
     'Urología',
     'Salud en el trabajo',
-    'Medicina de Urgencias'
+    'Medicina de Urgencias',
+    'Radiología'
     // Agrega más especialidades según sea necesario
   ];
   

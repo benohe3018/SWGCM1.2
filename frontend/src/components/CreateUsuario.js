@@ -58,7 +58,7 @@ const CreateUsuario = () => {
     }
 
     // Verifica si la matrícula ya existe
-    const responseCheck = await fetch(`http://localhost:5000/api/usuarios/matricula/${matricula}`);
+    const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/matricula/${matricula}`);
     const dataCheck = await responseCheck.json();
     if (responseCheck.ok && Object.keys(dataCheck).length > 0) {
       alert('El usuario ya existe en la base de datos. intente con un nuevo registro');
@@ -70,7 +70,7 @@ const CreateUsuario = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/usuarios', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

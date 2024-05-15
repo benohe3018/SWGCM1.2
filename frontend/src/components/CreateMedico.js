@@ -126,9 +126,13 @@ const CreateMedico = () => {
       <div className="create-medico-content">
         <form onSubmit={handleSubmit}>
           <h3 className="form-description">Capture los datos del Médico</h3>
+          <label htmlFor="nombre">Nombre del Médico:</label>
           <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre del Médico" />
+          <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
           <input type="text" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
+          <label htmlFor="apellidoMaterno">Apellido Materno:</label>
           <input type="text" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
+          <label htmlFor="matricula">Matrícula del Médico:</label>
           <input type="text" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" />
           <select value={especialidad} onChange={e => setEspecialidad(e.target.value)}>
           <option value="">Seleccione una especialidad</option>

@@ -168,11 +168,9 @@ const CreateUsuario = () => {
           </button>
             {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
             {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
-        </form>
-        <div className="button-container">
-          <button className="create-usuario-button" onClick={handleGoBack}>Ir Atrás</button>
+            <button className="create-usuario-button" onClick={handleGoBack}>Ir Atrás</button>
           <button className="create-usuario-button" onClick={handleExit}>Ir a Inicio</button>
-        </div>
+        </form>
       </div>
     </div>
   );

@@ -1,80 +1,87 @@
 .create-medico-page {
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: white;
-  }
-  
-  .create-medico-header {
-    width: 100%;
-    background-color: white;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-  }
-  
-  .create-medico-content {
-    margin-top: 180px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  
-  form {
-    width: 100%;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #12322B;
-  }
-  
-  input, select {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #12322B;
-  }
-  
-  .create-medico-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .create-medico-button:hover {
-    background-color: #0C231E;
-  }
-  
-  .message-POST-success {
-    color: green;
-    font-weight: bold;
-    margin-top: 20px;
-  }
+  background-color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.create-medico-header {
+  width: 100%;
+  background-color: white;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.create-medico-content {
+  margin-top: 180px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Cambiado de flex-start a center */
+  justify-content: flex-start;
+}
+
+form {
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #12322B;
+}
+
+input, select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #12322B;
+}
+
+.create-medico-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #12322B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+.create-medico-button:hover {
+  background-color: #0C231E;
+}
+
+.message-POST-success {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
 
 .message-POST-failed {
-    color: red;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+  color: red;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
 }

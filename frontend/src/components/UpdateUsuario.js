@@ -8,6 +8,7 @@ const UpdateUsuario = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [successMessage, setSuccessMessage] = useState('');
   const usuariosPerPage = 5;
 
   useEffect(() => {
@@ -20,9 +21,22 @@ const UpdateUsuario = () => {
   }, []);
 
   const handleInputChange = (event, id) => {
+    const { name, value } = event.target;
+
+    // Validaciones para evitar caracteres inválidos
+    if (name === 'nombre_usuario' || name === 'nombre_real' || name === 'apellido_paterno' || name === 'apellido_materno') {
+      if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/.test(value)) {
+        return;
+      }
+    } else if (name === 'matricula') {
+      if (!/^\d*$/.test(value)) {
+        return;
+      }
+    }
+
     setUsuarios(usuarios.map(usuario => {
       if (usuario.id === id) {
-        return {...usuario, [event.target.name]: event.target.value};
+        return { ...usuario, [name]: value };
       } else {
         return usuario;
       }
@@ -39,6 +53,10 @@ const UpdateUsuario = () => {
       body: JSON.stringify(usuarioToUpdate)
     });
     setEditingId(null);
+    setSuccessMessage('El registro se ha actualizado correctamente');
+    setTimeout(() => {
+      setSuccessMessage('');
+    }, 3000);
   };
 
   const handleGoBack = () => {
@@ -55,6 +73,12 @@ const UpdateUsuario = () => {
 
   const totalPages = Math.ceil(usuarios.length / usuariosPerPage);
 
+  const roles = [
+    'Usuario_de_Campo',
+    'Usuario_administrador',
+    'Administrador'
+  ];
+
   return (
     <div className="update-usuario-page">
       <header className="update-usuario-header">
@@ -63,12 +87,13 @@ const UpdateUsuario = () => {
         <h2 className="department-name">Actualizar Registros de Usuarios</h2>
       </header>
       <div className="update-usuario-content">
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <div className="button-update-container">
           <button className="button-update-usuario" onClick={handleGoBack}>Ir Atrás</button>
           <button className="button-update-usuario" onClick={handleExit}>Ir a Inicio</button>
         </div>
         <div className="usuario-table-container">
-          <table className='usuario-table'>
+          <table className="usuario-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -115,7 +140,12 @@ const UpdateUsuario = () => {
                   </td>
                   <td>
                     {editingId === usuario.id ? (
-                      <input type="text" name="rol" value={usuario.rol} onChange={event => handleInputChange(event, usuario.id)} />
+                      <select name="rol" value={usuario.rol} onChange={event => handleInputChange(event, usuario.id)}>
+                        <option value="">Seleccione un rol</option>
+                        {roles.map(rol => (
+                          <option key={rol} value={rol}>{rol}</option>
+                        ))}
+                      </select>
                     ) : (
                       usuario.rol
                     )}
@@ -139,17 +169,17 @@ const UpdateUsuario = () => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className="pagination-update-usuario">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-          <button 
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={page === currentPage ? 'active' : ''}
-          >
-            {page}
-          </button>
-        ))}
+        <div className="pagination-update-usuario">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <button 
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={page === currentPage ? 'active' : ''}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

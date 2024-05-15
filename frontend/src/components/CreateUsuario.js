@@ -139,24 +139,31 @@ const CreateUsuario = () => {
       <div className="create-usuario-content">
         <form onSubmit={handleSubmit}>
           <h3 className="form-description">Capture los datos del Usuario</h3>
+          <label htmlFor="nombreUsuario">Nombre de Usuario:</label>
           <input type="text" value={nombreUsuario} onChange={e => setNombreUsuario(e.target.value)} placeholder="Nombre de Usuario" />
           <div className="password-container">
+            <label htmlFor="contraseña">Contraseña:</label>
             <input type={showPassword ? "text" : "password"} value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Contraseña" />
             <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
           <div className="password-container">
+            <label htmlFor="confirmContraseña">Confirmar Contraseña:</label>
             <input type={showPassword ? "text" : "password"} value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Confirmar Contraseña" />
             <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          <label htmlFor="nombre">Nombre del Usuario:</label>
+          <label htmlFor="nombreReal">Nombre Real:</label>
           <input type="text" value={nombreReal} onChange={e => setNombreReal(e.target.value)} placeholder="Nombre Real" />
+          <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
           <input type="text" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
+          <label htmlFor="apellidoMaterno">Apellido Materno:</label>
           <input type="text" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
+          <label htmlFor="matricula">Matrícula del Usuario:</label>
           <input type="text" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Usuario" />
+          <label htmlFor="rol">Rol:</label>
           <select value={rol} onChange={e => setRol(e.target.value)}>
             <option value="">Seleccione un rol</option>
             {roles.map(rol => (

@@ -85,44 +85,45 @@ const UpdateMedico = () => {
           <button className="button-update-medico" onClick={handleGoBack}>Ir Atrás</button>
           <button className="button-update-medico" onClick={handleExit}>Ir a Inicio</button>
         </div>
-        <table className='medico-table'>
-          <thead>
-            <tr className='read-medico-table-descripcion-columna'>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Apellido Paterno</th>
-              <th>Apellido Materno</th>
-              <th>Especialidad</th>
-              <th>Matricula</th>
-              <th>Editar</th>
-            </tr>
-          </thead>
-          <tbody className='read-medico-table-descripcion-filas'>
-                {currentMedicos.map(medico => (
-              <tr key={medico.id_medico}>
-                <td>{medico.id_medico}</td>
-                <td>
-                  {editingId === medico.id_medico ? (
-                    <input type="text" name="nombre_medico" value={medico.nombre_medico} onChange={event => handleInputChange(event, medico.id_medico)} />
-                  ) : (
-                    medico.nombre_medico
-                  )}
-                </td>
-                <td>
-                  {editingId === medico.id_medico ? (
-                    <input type="text" name="apellido_paterno_medico" value={medico.apellido_paterno_medico} onChange={event => handleInputChange(event, medico.id_medico)} />
-                  ) : (
-                    medico.apellido_paterno_medico
-                  )}
-                </td>
-                <td>
-                  {editingId === medico.id_medico ? (
-                    <input type="text" name="apellido_materno_medico" value={medico.apellido_materno_medico} onChange={event => handleInputChange(event, medico.id_medico)} />
-                  ) : (
-                    medico.apellido_materno_medico
-                  )}
-                </td>
-                <td>
+        <div className="medico-table-container">
+          <table className="medico-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Especialidad</th>
+                <th>Matricula</th>
+                <th>Editar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentMedicos.map(medico => (
+                <tr key={medico.id_medico}>
+                  <td>{medico.id_medico}</td>
+                  <td>
+                    {editingId === medico.id_medico ? (
+                      <input type="text" name="nombre_medico" value={medico.nombre_medico} onChange={event => handleInputChange(event, medico.id_medico)} />
+                    ) : (
+                      medico.nombre_medico
+                    )}
+                  </td>
+                  <td>
+                    {editingId === medico.id_medico ? (
+                      <input type="text" name="apellido_paterno_medico" value={medico.apellido_paterno_medico} onChange={event => handleInputChange(event, medico.id_medico)} />
+                    ) : (
+                      medico.apellido_paterno_medico
+                    )}
+                  </td>
+                  <td>
+                    {editingId === medico.id_medico ? (
+                      <input type="text" name="apellido_materno_medico" value={medico.apellido_materno_medico} onChange={event => handleInputChange(event, medico.id_medico)} />
+                    ) : (
+                      medico.apellido_materno_medico
+                    )}
+                  </td>
+                  <td>
                   {editingId === medico.id_medico ? (
                     <select name="especialidad" value={medico.especialidad} onChange={event => handleInputChange(event, medico.id_medico)}>
                       <option value="">Seleccione una especialidad</option>
@@ -150,22 +151,24 @@ const UpdateMedico = () => {
                 </td>
               </tr>
             ))}
-      </tbody>
+          </tbody>
         </table>
-      </div> 
+      </div>
       <div className="pagination-update-medico">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-            <button 
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={page === currentPage ? 'active' : ''}
-            >
-              {page}
-            </button>
-          ))}
-        </div> 
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+          <button 
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={page === currentPage ? 'active' : ''}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default UpdateMedico;
+

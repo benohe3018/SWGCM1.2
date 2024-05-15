@@ -67,88 +67,90 @@ const UpdateUsuario = () => {
           <button className="button-update-usuario" onClick={handleGoBack}>Ir Atrás</button>
           <button className="button-update-usuario" onClick={handleExit}>Ir a Inicio</button>
         </div>
-        <table className='usuario-table'>
-          <thead>
-            <tr className='read-usuario-table-descripcion-columna'>
-              <th>ID</th>
-              <th>Nombre de Usuario</th>
-              <th>Nombre Real</th>
-              <th>Apellido Paterno</th>
-              <th>Apellido Materno</th>
-              <th>Rol</th>
-              <th>Matricula</th>
-              <th>Editar</th>
-            </tr>
-          </thead>
-          <tbody className='read-usuario-table-descripcion-filas'>
-                {currentUsuarios.map(usuario => (
-              <tr key={usuario.id}>
-                <td>{usuario.id}</td>
-                <td>
-                  {editingId === usuario.id ? (
-                    <input type="text" name="nombre_usuario" value={usuario.nombre_usuario} onChange={event => handleInputChange(event, usuario.id)} />
-                  ) : (
-                    usuario.nombre_usuario
-                  )}
-                </td>
-                <td>
-                  {editingId === usuario.id ? (
-                    <input type="text" name="nombre_real" value={usuario.nombre_real} onChange={event => handleInputChange(event, usuario.id)} />
-                  ) : (
-                    usuario.nombre_real
-                  )}
-                </td>
-                <td>
-                  {editingId === usuario.id ? (
-                    <input type="text" name="apellido_paterno" value={usuario.apellido_paterno} onChange={event => handleInputChange(event, usuario.id)} />
-                  ) : (
-                    usuario.apellido_paterno
-                  )}
-                </td>
-                <td>
-                  {editingId === usuario.id ? (
-                    <input type="text" name="apellido_materno" value={usuario.apellido_materno} onChange={event => handleInputChange(event, usuario.id)} />
-                  ) : (
-                    usuario.apellido_materno
-                  )}
-                </td>
-                <td>
-                  {editingId === usuario.id ? (
-                    <input type="text" name="rol" value={usuario.rol} onChange={event => handleInputChange(event, usuario.id)} />
-                  ) : (
-                    usuario.rol
-                  )}
-                </td>
-                <td>
-                  {editingId === usuario.id ? (
-                    <input type="text" name="matricula" value={usuario.matricula} onChange={event => handleInputChange(event, usuario.id)} />
-                  ) : (
-                    usuario.matricula
-                  )}
-                </td>
-                <td>
-                  {editingId === usuario.id ? (
-                    <button onClick={() => handleSave(usuario.id)}>Guardar</button>
-                  ) : (
-                    <button onClick={() => setEditingId(usuario.id)}>Editar</button>
-                  )}
-                </td>
+        <div className="usuario-table-container">
+          <table className='usuario-table'>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre de Usuario</th>
+                <th>Nombre Real</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Rol</th>
+                <th>Matricula</th>
+                <th>Editar</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> 
+            </thead>
+            <tbody>
+              {currentUsuarios.map(usuario => (
+                <tr key={usuario.id}>
+                  <td>{usuario.id}</td>
+                  <td>
+                    {editingId === usuario.id ? (
+                      <input type="text" name="nombre_usuario" value={usuario.nombre_usuario} onChange={event => handleInputChange(event, usuario.id)} />
+                    ) : (
+                      usuario.nombre_usuario
+                    )}
+                  </td>
+                  <td>
+                    {editingId === usuario.id ? (
+                      <input type="text" name="nombre_real" value={usuario.nombre_real} onChange={event => handleInputChange(event, usuario.id)} />
+                    ) : (
+                      usuario.nombre_real
+                    )}
+                  </td>
+                  <td>
+                    {editingId === usuario.id ? (
+                      <input type="text" name="apellido_paterno" value={usuario.apellido_paterno} onChange={event => handleInputChange(event, usuario.id)} />
+                    ) : (
+                      usuario.apellido_paterno
+                    )}
+                  </td>
+                  <td>
+                    {editingId === usuario.id ? (
+                      <input type="text" name="apellido_materno" value={usuario.apellido_materno} onChange={event => handleInputChange(event, usuario.id)} />
+                    ) : (
+                      usuario.apellido_materno
+                    )}
+                  </td>
+                  <td>
+                    {editingId === usuario.id ? (
+                      <input type="text" name="rol" value={usuario.rol} onChange={event => handleInputChange(event, usuario.id)} />
+                    ) : (
+                      usuario.rol
+                    )}
+                  </td>
+                  <td>
+                    {editingId === usuario.id ? (
+                      <input type="text" name="matricula" value={usuario.matricula} onChange={event => handleInputChange(event, usuario.id)} />
+                    ) : (
+                      usuario.matricula
+                    )}
+                  </td>
+                  <td>
+                    {editingId === usuario.id ? (
+                      <button onClick={() => handleSave(usuario.id)}>Guardar</button>
+                    ) : (
+                      <button onClick={() => setEditingId(usuario.id)}>Editar</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div className="pagination-update-usuario">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-            <button 
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={page === currentPage ? 'active' : ''}
-            >
-              {page}
-            </button>
-          ))}
-        </div> 
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+          <button 
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={page === currentPage ? 'active' : ''}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

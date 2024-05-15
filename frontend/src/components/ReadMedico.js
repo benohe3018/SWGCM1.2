@@ -54,28 +54,30 @@ const ReadMedico = () => {
             <p>Cargando...</p>
           ) : (
             <>
-              <table className="medico-table">
-                <thead>
-                  <tr className='read-medico-table-descripcion-columna'>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>Especialidad</th>
-                    <th>Matricula</th>
-                  </tr>
-                </thead>
-                <tbody className='read-medico-table-descripcion-filas'>
-                  {currentMedicos.map(medico => (
-                    <tr key={medico.id_medico}>
-                      <td>{medico.nombre_medico}</td>
-                      <td>{medico.apellido_paterno_medico}</td>
-                      <td>{medico.apellido_materno_medico}</td>
-                      <td>{medico.especialidad}</td>
-                      <td>{medico.matricula}</td>
+              <div className="medico-table-container">
+                <table className="medico-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Apellido Paterno</th>
+                      <th>Apellido Materno</th>
+                      <th>Especialidad</th>
+                      <th>Matricula</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {currentMedicos.map(medico => (
+                      <tr key={medico.id_medico}>
+                        <td>{medico.nombre_medico}</td>
+                        <td>{medico.apellido_paterno_medico}</td>
+                        <td>{medico.apellido_materno_medico}</td>
+                        <td>{medico.especialidad}</td>
+                        <td>{medico.matricula}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <div className="pagination-read-medico">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
@@ -90,7 +92,6 @@ const ReadMedico = () => {
             </>
           )}
         </div>
-        
       </div>
     </div>
   );

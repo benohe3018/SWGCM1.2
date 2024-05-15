@@ -49,14 +49,14 @@ const ReadUsuario = () => {
           <button className="read-usuario-button" onClick={handleGoBack}>Ir Atrás</button>
           <button className="read-usuario-button" onClick={handleExit}>Ir a Inicio</button>
         </div>
-        <div className="table-container">
+        <div className="usuario-table-container">
           {isLoading ? (
             <p>Cargando...</p>
           ) : (
             <>
               <table className="usuario-table">
                 <thead>
-                  <tr className='read-usuario-table-descripcion-columna'>
+                  <tr>
                     <th>Nombre de Usuario</th>
                     <th>Nombre Real</th>
                     <th>Apellido Paterno</th>
@@ -65,7 +65,7 @@ const ReadUsuario = () => {
                     <th>Matricula</th>
                   </tr>
                 </thead>
-                <tbody className='read-usuario-table-descripcion-filas'>
+                <tbody>
                   {currentUsuarios.map(usuario => (
                     <tr key={usuario.id}>
                       <td>{usuario.nombre_usuario}</td>
@@ -92,7 +92,6 @@ const ReadUsuario = () => {
             </>
           )}
         </div>
-        
       </div>
     </div>
   );

@@ -1,87 +1,104 @@
 .read-usuario-page {
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: white;
+  background-color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: black;
 }
 
 .read-usuario-header {
-    width: 100%;
-    background-color: white;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    z-index: 100;
- }
+  width: 100%;
+  background-color: white;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
 
 .read-usuario-content {
-    margin-top: 180px;
-    width: 45%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.pagination-read-usuario{
-    margin-top: 35px;  
-}
-
-.read-usuario-button {
-    display: flex;
-    width: 75%;
-    padding: 10px 5px;
-    margin-bottom: 100px;
-    margin-right: 50px;
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.read-usuario-button:hover {
-    background-color: #0C231E;
+  margin-top: 180px;
+  width: 90%; /* Cambiar de 45% a 90% para un mejor uso del espacio */
+  display: flex;
+  flex-direction: column; /* Cambiar de row a column */
+  align-items: center; /* Centrar el contenido */
+  justify-content: center; /* Centrar el contenido */
 }
 
 .read-button-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    justify-content: flex-start;
-    width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Añadir un margen inferior */
 }
 
-.read-usuario-table-descripcion-columna {
-    color: #12322B;
-    font-weight: bold;
+.read-usuario-button {
+  width: 100px;
+  padding: 10px;
+  margin: 5px;
+  background-color: #12322B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.read-usuario-table-descripcion-filas {
-    color: #12322B;
+.read-usuario-button:hover {
+  background-color: #0C231E;
+}
+
+.usuario-table-container {
+  width: 100%;
+  overflow-x: auto; /* Añadir scroll horizontal si la tabla se desborda */
 }
 
 .usuario-table {
-    width: 95%;
-    border-collapse: collapse;
-    font: 0.2em;
-    margin-top: 50px;
-    margin-right: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto; /* Centrando la tabla */
 }
 
 .usuario-table th, .usuario-table td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
+  border: 1px solid black;
+  text-align: center;
+  padding: 8px;
+  white-space: nowrap; /* Evitar el wrap del texto */
 }
 
 .usuario-table th {
-    background-color: whitesmoke;
+  background-color: whitesmoke;
+  color: #12322B;
+  font-weight: bold;
 }
+
+.usuario-table td {
+  color: #12322B;
+}
+
+.pagination-read-usuario {
+  margin-top: 20px;
+}
+
+.pagination-read-usuario button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-read-usuario button.active {
+  background-color: #12322B;
+  color: white;
+}
+
+.pagination-read-usuario button:hover {
+  background-color: #0C231E;
+}
+
+  

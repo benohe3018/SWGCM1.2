@@ -53,47 +53,49 @@ const DeleteUsuario = () => {
           <button className="button-delete-usuario" onClick={handleGoBack}>Ir Atrás</button>
           <button className="button-delete-usuario" onClick={handleExit}>Ir a Inicio</button>
         </div>
-        <table className="usuario-table">
-          <thead>
-            <tr className='read-usuario-table-descripcion-columna'>
-              <th>ID</th>
-              <th>Nombre Usuario</th>
-              <th>Nombre Real</th>
-              <th>Apellido Paterno</th>
-              <th>Apellido Materno</th>
-              <th>Matricula</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody className='read-usuario-table-descripcion-filas'>
-            {currentUsuarios.map(usuario => (
-              <tr key={usuario.id}>
-                <td>{usuario.id}</td>
-                <td>{usuario.nombre_usuario}</td>
-                <td>{usuario.nombre_real}</td>
-                <td>{usuario.apellido_paterno}</td>
-                <td>{usuario.apellido_materno}</td>
-                <td>{usuario.matricula}</td>
-                <td>
-                  <button onClick={() => handleDelete(usuario.id)}>Eliminar</button>
-                </td>
+        <div className="usuario-table-container">
+          <table className="usuario-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre Usuario</th>
+                <th>Nombre Real</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Matricula</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentUsuarios.map(usuario => (
+                <tr key={usuario.id}>
+                  <td>{usuario.id}</td>
+                  <td>{usuario.nombre_usuario}</td>
+                  <td>{usuario.nombre_real}</td>
+                  <td>{usuario.apellido_paterno}</td>
+                  <td>{usuario.apellido_materno}</td>
+                  <td>{usuario.matricula}</td>
+                  <td>
+                    <button onClick={() => handleDelete(usuario.id)}>Eliminar</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="pagination-delete-usuario">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={page === currentPage ? 'active' : ''}
-            >
-              {page}
-            </button>
-          ))}
-          {message && <p className='message-Delete-success'>El registro se ha eliminado.</p>}
-        </div>  
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={page === currentPage ? 'active' : ''}
+          >
+            {page}
+          </button>
+        ))}
+        {message && <p className="message-delete-success">{message}</p>}
+      </div>
     </div>
   );
 };

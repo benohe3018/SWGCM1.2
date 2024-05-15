@@ -53,47 +53,49 @@ const DeleteMedico = () => {
           <button className="button-delete-medico" onClick={handleGoBack}>Ir Atrás</button>
           <button className="button-delete-medico" onClick={handleExit}>Ir a Inicio</button>
         </div>
-        <table className="medico-table">
-          <thead>
-            <tr className='read-medico-table-descripcion-columna'>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Apellido Paterno</th>
-              <th>Apellido Materno</th>
-              <th>Especialidad</th>
-              <th>Matricula</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody className='read-medico-table-descripcion-filas'>
-            {currentMedicos.map(medico => (
-              <tr key={medico.id}>
-                <td>{medico.id_medico}</td>
-                <td>{medico.nombre_medico}</td>
-                <td>{medico.apellido_paterno_medico}</td>
-                <td>{medico.apellido_materno_medico}</td>
-                <td>{medico.especialidad}</td>
-                <td>{medico.matricula}</td>
-                <td>
-                  <button onClick={() => handleDelete(medico.id_medico)}>Eliminar</button>
-                </td>
+        <div className="medico-table-container">
+          <table className="medico-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Especialidad</th>
+                <th>Matricula</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentMedicos.map(medico => (
+                <tr key={medico.id_medico}>
+                  <td>{medico.id_medico}</td>
+                  <td>{medico.nombre_medico}</td>
+                  <td>{medico.apellido_paterno_medico}</td>
+                  <td>{medico.apellido_materno_medico}</td>
+                  <td>{medico.especialidad}</td>
+                  <td>{medico.matricula}</td>
+                  <td>
+                    <button onClick={() => handleDelete(medico.id_medico)}>Eliminar</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="pagination-delete-medico">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={page === currentPage ? 'active' : ''}
-            >
-              {page}
-            </button>
-          ))}
-          {message && <p className='message-Delete-success'>El registro se ha eliminado.</p>}
-        </div>  
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={page === currentPage ? 'active' : ''}
+          >
+            {page}
+          </button>
+        ))}
+        {message && <p className='message-delete-success'>{message}</p>}
+      </div>
     </div>
   );
 };

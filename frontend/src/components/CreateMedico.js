@@ -144,13 +144,11 @@ const CreateMedico = () => {
           <button className="create-medico-button" type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Guardando...' : 'Guardar'}
           </button>
+          <button className="create-medico-button" onClick={handleGoBack}>Ir Atrás</button>
+          <button className="create-medico-button" onClick={handleExit}>Ir a Inicio</button>
           {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
           {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
         </form>
-        <div className="button-container">
-          <button className="create-medico-button" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="create-medico-button" onClick={handleExit}>Ir a Inicio</button>
-        </div>
       </div>
     </div>
   );

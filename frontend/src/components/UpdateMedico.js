@@ -8,6 +8,7 @@ const UpdateMedico = () => {
   const [medicos, setMedicos] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [successMessage, setSuccessMessage] = useState('');
   const medicosPerPage = 5;
 
   useEffect(() => {
@@ -20,9 +21,22 @@ const UpdateMedico = () => {
   }, []);
 
   const handleInputChange = (event, id_medico) => {
+    const { name, value } = event.target;
+
+    // Validaciones para evitar caracteres inválidos
+    if (name === 'nombre_medico' || name === 'apellido_paterno_medico' || name === 'apellido_materno_medico') {
+      if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/.test(value)) {
+        return;
+      }
+    } else if (name === 'matricula') {
+      if (!/^\d*$/.test(value)) {
+        return;
+      }
+    }
+
     setMedicos(medicos.map(medico => {
       if (medico.id_medico === id_medico) {
-        return {...medico, [event.target.name]: event.target.value};
+        return { ...medico, [name]: value };
       } else {
         return medico;
       }
@@ -39,6 +53,10 @@ const UpdateMedico = () => {
       body: JSON.stringify(medicoToUpdate)
     });
     setEditingId(null);
+    setSuccessMessage('El registro se ha actualizado correctamente');
+    setTimeout(() => {
+      setSuccessMessage('');
+    }, 3000);
   };
 
   const handleGoBack = () => {
@@ -70,7 +88,6 @@ const UpdateMedico = () => {
     'Salud en el trabajo',
     'Medicina de Urgencias',
     'Radiología'
-    // Agrega más especialidades según sea necesario
   ];
 
   return (
@@ -81,6 +98,7 @@ const UpdateMedico = () => {
         <h2 className="department-name">Actualizar Registros de Médicos</h2>
       </header>
       <div className="update-medico-content">
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <div className="button-update-container">
           <button className="button-update-medico" onClick={handleGoBack}>Ir Atrás</button>
           <button className="button-update-medico" onClick={handleExit}>Ir a Inicio</button>
@@ -124,51 +142,50 @@ const UpdateMedico = () => {
                     )}
                   </td>
                   <td>
-                  {editingId === medico.id_medico ? (
-                    <select name="especialidad" value={medico.especialidad} onChange={event => handleInputChange(event, medico.id_medico)}>
-                      <option value="">Seleccione una especialidad</option>
-                      {especialidades.map(especialidad => (
-                        <option key={especialidad} value={especialidad}>{especialidad}</option>
-                      ))}
-                    </select>
-                  ) : (
-                    medico.especialidad
-                  )}
-                </td>
-                <td>
-                  {editingId === medico.id_medico ? (
-                    <input type="text" name="matricula" value={medico.matricula} onChange={event => handleInputChange(event, medico.id_medico)} />
-                  ) : (
-                    medico.matricula
-                  )}
-                </td>
-                <td>
-                  {editingId === medico.id_medico ? (
-                    <button onClick={() => handleSave(medico.id_medico)}>Guardar</button>
-                  ) : (
-                    <button onClick={() => setEditingId(medico.id_medico)}>Editar</button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="pagination-update-medico">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-          <button 
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={page === currentPage ? 'active' : ''}
-          >
-            {page}
-          </button>
-        ))}
+                    {editingId === medico.id_medico ? (
+                      <select name="especialidad" value={medico.especialidad} onChange={event => handleInputChange(event, medico.id_medico)}>
+                        <option value="">Seleccione una especialidad</option>
+                        {especialidades.map(especialidad => (
+                          <option key={especialidad} value={especialidad}>{especialidad}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      medico.especialidad
+                    )}
+                  </td>
+                  <td>
+                    {editingId === medico.id_medico ? (
+                      <input type="text" name="matricula" value={medico.matricula} onChange={event => handleInputChange(event, medico.id_medico)} />
+                    ) : (
+                      medico.matricula
+                    )}
+                  </td>
+                  <td>
+                    {editingId === medico.id_medico ? (
+                      <button onClick={() => handleSave(medico.id_medico)}>Guardar</button>
+                    ) : (
+                      <button onClick={() => setEditingId(medico.id_medico)}>Editar</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="pagination-update-medico">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <button 
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={page === currentPage ? 'active' : ''}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default UpdateMedico;
-

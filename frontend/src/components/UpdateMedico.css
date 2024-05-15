@@ -100,3 +100,9 @@
 .pagination-update-medico button:hover {
   background-color: #0C231E;
 }
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

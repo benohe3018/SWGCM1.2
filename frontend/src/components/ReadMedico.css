@@ -91,10 +91,11 @@ body {
   position: fixed;
   top: 70px; /* Ajustado para que quede debajo del menú */
   z-index: 100;
+  display:flex;
 }
 
 .read-medico-content {
-  margin-top: 180px;
+  margin-top: 200px;
   width: 90%; /* Cambiar de 45% a 90% para un mejor uso del espacio */
   display: flex;
   flex-direction: column; /* Cambiar de row a column */

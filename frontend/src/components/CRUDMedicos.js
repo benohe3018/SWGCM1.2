@@ -14,14 +14,13 @@ const CRUDMedicos = () => {
         </div>
       </header>
       <nav className="navbar">
-        <div className="logo">IMSS</div>
         <ul className="nav-links">
-          <li><Link to="/">Inicio</Link></li>
-          <li><Link to="/create-medico">Capturar nuevo Medico</Link></li>
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
           <li><Link to="/read-medico">Ver Medicos</Link></li>
           <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
           <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
-          <li><Link to="/dashboard-root">Módulo de Administración</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
         </ul>
         <div className="hamburger">
           <div className="line"></div>
@@ -30,21 +29,7 @@ const CRUDMedicos = () => {
         </div>
       </nav>
       <div className="crud-medicos-content">
-        <Link to="/create-medico">
-          <button className="crud-medicos-button">Capturar nuevo Medico</button>
-        </Link>
-        <Link to="/read-medico">
-          <button className="crud-medicos-button">Ver Medicos</button>
-        </Link>
-        <Link to="/update-medico">
-          <button className="crud-medicos-button">Actualizar Registro de Médico</button>
-        </Link>
-        <Link to="/delete-medico">
-          <button className="crud-medicos-button">Borrar Registro de Médico</button>
-        </Link>
-        <Link to="/dashboard-root">
-          <button className="crud-medicos-button">Ir a inicio</button>
-        </Link>
+      <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
       </div>
       <script src="script.js"></script> 
     </div>

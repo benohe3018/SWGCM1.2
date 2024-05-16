@@ -27,7 +27,7 @@
 .crud-medicos-content {
   width: 100%; /* Ajusta el tamaño como sea necesario */
   max-width: 300px; /* Ajusta el tamaño como sea necesario */
-  margin-top: 180px;
+  margin-top: 280px;
   display:flex;
 }
 li:hoover{

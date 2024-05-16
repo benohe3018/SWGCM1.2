@@ -115,14 +115,13 @@ const CreateMedico = () => {
         </div>
       </header>
       <nav className="navbar">
-        <div className="logo">IMSS</div>
         <ul className="nav-links">
-          <li><Link to="/">Inicio</Link></li>
+          <li><Link to="/">Cambiar Sesión</Link></li>
           <li><Link to="/create-medico">Capturar nuevo Medico</Link></li>
           <li><Link to="/read-medico">Ver Medicos</Link></li>
           <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
           <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
-          <li><Link to="/dashboard-root">Módulo de Administración</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
         </ul>
         <div className="hamburger">
           <div className="line"></div>

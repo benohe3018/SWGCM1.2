@@ -30,4 +30,10 @@
   margin-top: 2rem;
   display:flex;
 }
+li:hoover{
+    color: #0C231E;
+}
 
+.header-logo{
+    height: 80px;
+}

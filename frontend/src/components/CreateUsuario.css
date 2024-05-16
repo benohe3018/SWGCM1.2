@@ -20,6 +20,7 @@
     z-index: 100;
   }
   .Button-ir-atras-inicio{
+    background-color: #12322B;
     color: white;
     border: none;
     border-radius: 5px;
@@ -28,8 +29,22 @@
     text-align: center;
     padding: 10px 20px;
     margin: 10px;
-    margin-top: 25px;
+    margin-top: 180px;
   }
+.Button-ir-atras-inicio:hover {
+        background-color: #0C231E;
+}
+
+.create-usuario-buttons{
+    background-color: #12322B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
   
   .create-usuario-content {
     margin-top: 180px;

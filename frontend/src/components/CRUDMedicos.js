@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './CRUDMedicos.css';
 import logoIMSS from '../images/LogoIMSS.jpg'; // Asegúrate de que la ruta al logo es correcta
+import mrMachine from '../images/MRMachine.jpg';
 
 const CRUDMedicos = () => {
   return (
@@ -29,7 +30,7 @@ const CRUDMedicos = () => {
         </div>
       </nav>
       <div className="crud-medicos-content">
-      <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
+      <img src={mrMachine} alt="Logo IMSS" className="header-logo" />
       </div>
       <script src="script.js"></script> 
     </div>

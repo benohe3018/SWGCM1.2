@@ -25,25 +25,9 @@
 }
 
 .crud-medicos-content {
-    margin-top: 50px;
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 100%; /* Ajusta el tamaño como sea necesario */
+  max-width: 300px; /* Ajusta el tamaño como sea necesario */
+  margin-top: 2rem;
+  display:flex;
 }
 
-.crud-medicos-button {
-    padding: 10px 15px;
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.crud-medicos-button:hover {
-    background-color: #0C231E;
-}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ReadMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
@@ -41,14 +42,27 @@ const ReadMedico = () => {
     <div className="read-medico-page">
       <header className="read-medico-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <h1 className="welcome-message">Bienvenido al Módulo de gestion de Medicos</h1>
-        <h2 className="department-name">Medicos Registrados en la base de datos</h2>
-      </header>
-      <div className="read-medico-content">
-        <div className="read-button-container">
-          <button className="read-medico-button" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="read-medico-button" onClick={handleExit}>Ir a Inicio</button>
+        <div className="header-texts">
+          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="department-name">Médicos Registrados en la base de datos</h2>
         </div>
+      </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
+          <li><Link to="/read-medico">Ver Médicos</Link></li>
+          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
+          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
+      <div className="read-medico-content">
         <div className="table-container">
           {isLoading ? (
             <p>Cargando...</p>
@@ -62,7 +76,7 @@ const ReadMedico = () => {
                       <th>Apellido Paterno</th>
                       <th>Apellido Materno</th>
                       <th>Especialidad</th>
-                      <th>Matricula</th>
+                      <th>Matrícula</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -93,6 +107,7 @@ const ReadMedico = () => {
           )}
         </div>
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

@@ -90,9 +90,9 @@ body {
   padding: 10px 20px;
   box-sizing: border-box;
   position: fixed;
-  top: 60px; /* Ajustado para que quede debajo del menú */
+  top: 70px; /* Ajustado para que quede debajo del menú */
   z-index: 100;
-  display:flex
+  display:flex;
 }
 
 .form-description {

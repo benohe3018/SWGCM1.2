@@ -1,3 +1,76 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #004d40;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #004d40;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
 .read-medico-page {
   background-color: whitesmoke;
   height: 100vh;
@@ -16,7 +89,7 @@
   padding: 10px 20px;
   box-sizing: border-box;
   position: fixed;
-  top: 0;
+  top: 70px; /* Ajustado para que quede debajo del menú */
   z-index: 100;
 }
 
@@ -27,29 +100,6 @@
   flex-direction: column; /* Cambiar de row a column */
   align-items: center; /* Centrar el contenido */
   justify-content: center; /* Centrar el contenido */
-}
-
-.read-button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px; /* Añadir un margen inferior */
-}
-
-.read-medico-button {
-  width: 100px;
-  padding: 10px;
-  margin: 5px;
-  background-color: #12322B;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.read-medico-button:hover {
-  background-color: #0C231E;
 }
 
 .medico-table-container {

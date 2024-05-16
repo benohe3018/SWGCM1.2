@@ -136,6 +136,10 @@ const CreateUsuario = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
+      <div className='Button-ir-atras-inicio'>
+        <button className="create-usuario-button" onClick={handleGoBack}>Ir Atrás</button>
+        <button className="create-usuario-button" onClick={handleExit}>Ir a Inicio</button>
+      </div>
       <div className="create-usuario-content">
         <form onSubmit={handleSubmit}>
           <input type="text" value={nombreUsuario} onChange={e => setNombreUsuario(e.target.value)} placeholder="Nombre de Usuario" />
@@ -164,8 +168,6 @@ const CreateUsuario = () => {
           <button className="create-usuario-button" type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Guardando...' : 'Guardar'}
           </button>
-          <button className="create-usuario-button" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="create-usuario-button" onClick={handleExit}>Ir a Inicio</button>
             {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
             {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
         </form>

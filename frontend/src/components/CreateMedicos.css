@@ -19,6 +19,9 @@
   top: 0;
   z-index: 100;
 }
+.form-description{
+  color: #12322B;
+}
 
 .create-medico-content {
   margin-top: 180px;

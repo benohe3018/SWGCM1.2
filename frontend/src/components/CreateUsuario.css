@@ -35,7 +35,7 @@
         background-color: #0C231E;
 }
 
-.create-usuario-buttons{
+.create-usuario-button1{
     background-color: #12322B;
     color: white;
     border: none;
@@ -47,7 +47,7 @@
 }
   
   .create-usuario-content {
-    margin-top: 180px;
+    margin-top: 10px;
     width: 50%;
     display: flex;
     flex-direction: column;

@@ -136,7 +136,7 @@ const CreateUsuario = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      <div className='Button-ir-atras-inicio'>
+      <div className="Button-ir-atras-inicio">
         <button className="create-usuario-button1" onClick={handleGoBack}>Ir Atrás</button>
         <button className="create-usuario-button2" onClick={handleExit}>Ir a Inicio</button>
       </div>

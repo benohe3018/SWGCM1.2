@@ -30,7 +30,7 @@ const CRUDMedicos = () => {
         </div>
       </nav>
       <div className="crud-medicos-content">
-      <img src={mrMachine} alt="Logo IMSS" className="header-logo" />
+      <img src={mrMachine} alt="Logo IMSS" className="header-logoMR" />
       </div>
       <script src="script.js"></script> 
     </div>

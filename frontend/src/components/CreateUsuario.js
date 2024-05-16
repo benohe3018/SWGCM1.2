@@ -137,8 +137,8 @@ const CreateUsuario = () => {
         </div>
       </header>
       <div className='Button-ir-atras-inicio'>
-        <button className="create-usuario-button" onClick={handleGoBack}>Ir Atrás</button>
-        <button className="create-usuario-button" onClick={handleExit}>Ir a Inicio</button>
+        <button className="create-usuario-button1" onClick={handleGoBack}>Ir Atrás</button>
+        <button className="create-usuario-button2" onClick={handleExit}>Ir a Inicio</button>
       </div>
       <div className="create-usuario-content">
         <form onSubmit={handleSubmit}>

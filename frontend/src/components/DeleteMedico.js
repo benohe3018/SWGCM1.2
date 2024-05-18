@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './DeleteMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const DeleteMedico = () => {
-  const navigate = useNavigate();
   const [medicos, setMedicos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [message, setMessage] = useState(null);
@@ -27,14 +26,6 @@ const DeleteMedico = () => {
     setMessage('El registro se ha borrado exitosamente');
   };
 
-  const handleGoBack = () => {
-    navigate(-1); // Navega a la página anterior
-  };
-
-  const handleExit = () => {
-    navigate('/dashboard-root'); // Navega a la página principal
-  };
-
   const indexOfLastMedico = currentPage * medicosPerPage;
   const indexOfFirstMedico = indexOfLastMedico - medicosPerPage;
   const currentMedicos = medicos.slice(indexOfFirstMedico, indexOfLastMedico);
@@ -45,14 +36,27 @@ const DeleteMedico = () => {
     <div className="delete-medico-page">
       <header className="delete-medico-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <h1 className="welcome-message">Bienvenido al Módulo de gestion de Medicos</h1>
-        <h2 className="department-name">Borrar Registros de Medicos</h2>
-      </header>
-      <div className="delete-medico-content">
-        <div className="button-delete-container">
-          <button className="button-delete-medico" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="button-delete-medico" onClick={handleExit}>Ir a Inicio</button>
+        <div className="header-texts">
+          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="department-name">Borrar Registros de Médicos</h2>
         </div>
+      </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
+          <li><Link to="/read-medico">Ver Médicos</Link></li>
+          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
+          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
+      <div className="delete-medico-content">
         <div className="medico-table-container">
           <table className="medico-table">
             <thead>
@@ -62,7 +66,7 @@ const DeleteMedico = () => {
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>Especialidad</th>
-                <th>Matricula</th>
+                <th>Matrícula</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -83,19 +87,20 @@ const DeleteMedico = () => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className="pagination-delete-medico">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-          <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={page === currentPage ? 'active' : ''}
-          >
-            {page}
-          </button>
-        ))}
+        <div className="pagination-delete-medico">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={page === currentPage ? 'active' : ''}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
         {message && <p className='message-delete-success'>{message}</p>}
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

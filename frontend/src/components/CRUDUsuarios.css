@@ -1,5 +1,77 @@
-/* CRUDusuarioss.css */
-.crud-usuarios-page {
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #004d40;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: #004d40;
+    }
+  
+    .nav-links li {
+      margin: 10px 0;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  }
+  
+  .crud-usuarios-page {
     background-color: whitesmoke;
     height: 100vh;
     display: flex;
@@ -9,40 +81,33 @@
     font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
     color: white;
-}
-
-.crud-usuarios-header {
-  display: flex;
-  flex-direction: inline-flex;
-  width: 100%;
-  background-color: white; /* Color del encabezado */
-  padding: 10px 20px;
-  box-sizing: border-box;
-  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
-  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
-  z-index: 100;
-}
-
-.crud-usuarios-content {
-    margin-top: 100px;
-    width: 100%;
-    flex-grow: 1;
+  }
+  
+  .crud-usuarios-header {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.crud-usuarios-button {
-    padding: 10px 15px;
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.crud-usuarios-button:hover {
-    background-color: #0C231E;
-}
+    flex-direction: inline-flex;
+    width: 100%;
+    background-color: white; /* Color del encabezado */
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
+    top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+    z-index: 100;
+    margin-top: 70px;
+  }
+  
+  .crud-usuarios-content {
+    width: 100%; /* Ajusta el tamaño como sea necesario */
+    max-width: 300px; /* Ajusta el tamaño como sea necesario */
+    margin-top: 280px;
+    display: flex;
+  }
+  
+  .header-logoMR {
+    height: 280px;
+  }
+  
+  li:hover {
+    color: #0C231E;
+  }
+  

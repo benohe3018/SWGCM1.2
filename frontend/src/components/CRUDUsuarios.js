@@ -1,8 +1,8 @@
-// CRUDUsuarios.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './CRUDUsuarios.css';
 import logoIMSS from '../images/LogoIMSS.jpg'; // Asegúrate de que la ruta al logo es correcta
+import mrMachine from '../images/MRMachine.jpg';
 
 const CRUDUsuarios = () => {
   return (
@@ -14,23 +14,25 @@ const CRUDUsuarios = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-usuario">Capturar Nuevo Usuario</Link></li>
+          <li><Link to="/read-usuario">Ver Usuarios</Link></li>
+          <li><Link to="/update-usuario">Actualizar Registro de Usuario</Link></li>
+          <li><Link to="/delete-usuario">Borrar Registro de Usuario</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
       <div className="crud-usuarios-content">
-        <Link to="/create-usuario">
-          <button className="crud-usuarios-button">Capturar nuevo Usuario</button>
-        </Link>
-        <Link to="/read-usuario">
-          <button className="crud-usuarios-button">Ver Usuarios</button>
-        </Link>
-        <Link to="/update-usuario">
-          <button className="crud-usuarios-button">Actualizar Registro de Usuario</button>
-        </Link>
-        <Link to="/delete-usuario">
-          <button className="crud-usuarios-button">Borrar Registro de Usuario</button>
-        </Link>
-        <Link to="/dashboard-root">
-          <button className="crud-medicos-button">Ir a inicio</button>
-        </Link>
+        <img src={mrMachine} alt="Imagen Resonancia Magnética" className="header-logoMR" />
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

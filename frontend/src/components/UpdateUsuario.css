@@ -91,6 +91,7 @@ body {
   position: fixed;
   top: 70px; /* Ajustado para que quede debajo del menú */
   z-index: 100;
+  display: flex;
 }
 
 .update-usuario-content {

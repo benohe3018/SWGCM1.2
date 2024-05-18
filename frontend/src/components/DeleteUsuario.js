@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './DeleteUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const DeleteUsuario = () => {
-  const navigate = useNavigate();
   const [usuarios, setUsuarios] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [message, setMessage] = useState(null);
@@ -27,14 +26,7 @@ const DeleteUsuario = () => {
     setMessage('El registro se ha borrado exitosamente');
   };
 
-  const handleGoBack = () => {
-    navigate(-1); // Navega a la página anterior
-  };
-
-  const handleExit = () => {
-    navigate('/dashboard-root'); // Navega a la página principal
-  };
-
+  
   const indexOfLastUsuario = currentPage * usuariosPerPage;
   const indexOfFirstUsuario = indexOfLastUsuario - usuariosPerPage;
   const currentUsuarios = usuarios.slice(indexOfFirstUsuario, indexOfLastUsuario);
@@ -45,14 +37,27 @@ const DeleteUsuario = () => {
     <div className="delete-usuario-page">
       <header className="delete-usuario-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <h1 className="welcome-message">Bienvenido al Módulo de gestion de Usuarios</h1>
-        <h2 className="department-name">Borrar Registros de Usuarios</h2>
-      </header>
-      <div className="delete-usuario-content">
-        <div className="button-delete-container">
-          <button className="button-delete-usuario" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="button-delete-usuario" onClick={handleExit}>Ir a Inicio</button>
+        <div className="header-texts">
+          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
+          <h2 className="department-name">Borrar Registros de Usuarios</h2>
         </div>
+      </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-usuario">Capturar Nuevo Usuario</Link></li>
+          <li><Link to="/read-usuario">Ver Usuario</Link></li>
+          <li><Link to="/update-usuario">Actualizar Registro de Usuario</Link></li>
+          <li><Link to="/delete-usuario">Borrar Registro de Usuario</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
+      <div className="delete-usuario-content">
         <div className="usuario-table-container">
           <table className="usuario-table">
             <thead>
@@ -96,6 +101,7 @@ const DeleteUsuario = () => {
         ))}
         {message && <p className="message-delete-success">{message}</p>}
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

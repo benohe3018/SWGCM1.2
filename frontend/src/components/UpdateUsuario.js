@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './UpdateUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const UpdateUsuario = () => {
-  const navigate = useNavigate();
   const [usuarios, setUsuarios] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,14 +58,6 @@ const UpdateUsuario = () => {
     }, 3000);
   };
 
-  const handleGoBack = () => {
-    navigate(-1); // Navega a la página anterior
-  };
-
-  const handleExit = () => {
-    navigate('/dashboard-root'); // Navega a la página principal
-  };
-
   const indexOfLastUsuario = currentPage * usuariosPerPage;
   const indexOfFirstUsuario = indexOfLastUsuario - usuariosPerPage;
   const currentUsuarios = usuarios.slice(indexOfFirstUsuario, indexOfLastUsuario);
@@ -83,15 +74,28 @@ const UpdateUsuario = () => {
     <div className="update-usuario-page">
       <header className="update-usuario-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <h1 className="welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
-        <h2 className="department-name">Actualizar Registros de Usuarios</h2>
+        <div className="header-texts">
+          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
+          <h2 className="department-name">Actualizar Registros de Usuarios</h2>
+        </div>
       </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-usuario">Capturar Nuevo Usuario</Link></li>
+          <li><Link to="/read-usuario">Ver Usuario</Link></li>
+          <li><Link to="/update-usuario">Actualizar Registro de Usuario</Link></li>
+          <li><Link to="/delete-usuario">Borrar Registro de Usuario</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
       <div className="update-usuario-content">
         {successMessage && <p className="success-message">{successMessage}</p>}
-        <div className="button-update-container">
-          <button className="button-update-usuario" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="button-update-usuario" onClick={handleExit}>Ir a Inicio</button>
-        </div>
         <div className="usuario-table-container">
           <table className="usuario-table">
             <thead>
@@ -181,6 +185,7 @@ const UpdateUsuario = () => {
           ))}
         </div>
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

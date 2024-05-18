@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ReadUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const ReadUsuario = () => {
-  const navigate = useNavigate();
   const [usuarios, setUsuarios] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,16 +20,6 @@ const ReadUsuario = () => {
     fetchUsuarios();
   }, []);
 
-  const handleGoBack = (event) => {
-    event.preventDefault();
-    navigate(-1);
-  };
-
-  const handleExit = (event) => {
-    event.preventDefault();
-    navigate("/dashboard-root");
-  };
-
   const indexOfLastUsuario = currentPage * usuariosPerPage;
   const indexOfFirstUsuario = indexOfLastUsuario - usuariosPerPage;
   const currentUsuarios = usuarios.slice(indexOfFirstUsuario, indexOfLastUsuario);
@@ -41,14 +30,27 @@ const ReadUsuario = () => {
     <div className="read-usuario-page">
       <header className="read-usuario-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <h1 className="welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
-        <h2 className="department-name">Usuarios Registrados en la base de datos</h2>
-      </header>
-      <div className="read-usuario-content">
-        <div className="read-button-container">
-          <button className="read-usuario-button" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="read-usuario-button" onClick={handleExit}>Ir a Inicio</button>
+        <div className="header-texts">
+          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
+          <h2 className="department-name">Usuarios Registrados en la base de datos</h2>
         </div>
+      </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
+          <li><Link to="/read-medico">Ver Médicos</Link></li>
+          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
+          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
+      <div className="read-usuario-content">
         <div className="usuario-table-container">
           {isLoading ? (
             <p>Cargando...</p>
@@ -62,7 +64,7 @@ const ReadUsuario = () => {
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
                     <th>Rol</th>
-                    <th>Matricula</th>
+                    <th>Matrícula</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -93,6 +95,7 @@ const ReadUsuario = () => {
           )}
         </div>
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

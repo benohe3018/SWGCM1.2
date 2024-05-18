@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './UpdateMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const UpdateMedico = () => {
-  const navigate = useNavigate();
   const [medicos, setMedicos] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,14 +58,6 @@ const UpdateMedico = () => {
     }, 3000);
   };
 
-  const handleGoBack = () => {
-    navigate(-1); // Navega a la página anterior
-  };
-
-  const handleExit = () => {
-    navigate('/dashboard-root'); // Navega a la página principal
-  };
-
   const indexOfLastMedico = currentPage * medicosPerPage;
   const indexOfFirstMedico = indexOfLastMedico - medicosPerPage;
   const currentMedicos = medicos.slice(indexOfFirstMedico, indexOfLastMedico);
@@ -94,15 +85,28 @@ const UpdateMedico = () => {
     <div className="update-medico-page">
       <header className="update-medico-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <h1 className="welcome-message">Bienvenido al Módulo de gestion de Medicos</h1>
-        <h2 className="department-name">Actualizar Registros de Médicos</h2>
+        <div className="header-texts">
+          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="department-name">Actualizar Registros de Médicos</h2>
+        </div>
       </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
+          <li><Link to="/read-medico">Ver Médicos</Link></li>
+          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
+          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
       <div className="update-medico-content">
         {successMessage && <p className="success-message">{successMessage}</p>}
-        <div className="button-update-container">
-          <button className="button-update-medico" onClick={handleGoBack}>Ir Atrás</button>
-          <button className="button-update-medico" onClick={handleExit}>Ir a Inicio</button>
-        </div>
         <div className="medico-table-container">
           <table className="medico-table">
             <thead>
@@ -184,6 +188,7 @@ const UpdateMedico = () => {
           ))}
         </div>
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

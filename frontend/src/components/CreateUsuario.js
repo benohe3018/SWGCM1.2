@@ -1,13 +1,12 @@
 // CreateUsuario.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 import './CreateUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';  // Asegúrate de que la ruta al logo es correcta
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importa los iconos de ojo
 
 const CreateUsuario = () => {
-  const navigate = useNavigate();
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [confirmContraseña, setConfirmContraseña] = useState(''); // Nuevo estado para la confirmación de la contraseña
@@ -106,16 +105,6 @@ const CreateUsuario = () => {
     }
   };
 
-  const handleGoBack = (event) => {
-    event.preventDefault();
-    navigate(-1);  
-  };
-
-  const handleExit = (event) => {
-    event.preventDefault();
-    navigate("/dashboard-root")  
-  };
-
   const toggleShowPassword = () => {
     setShowPassword(!showPassword); 
   };
@@ -136,10 +125,21 @@ const CreateUsuario = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      <div className="Button-ir-atras-inicio">
-        <button className="create-usuario-button1" onClick={handleGoBack}>Ir Atrás</button>
-        <button className="create-usuario-button2" onClick={handleExit}>Ir a Inicio</button>
-      </div>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Cambiar Sesión</Link></li>
+          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
+          <li><Link to="/read-medico">Ver Médicos</Link></li>
+          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
+          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+        <div className="hamburger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+      </nav>
       <div className="create-usuario-content">
         <form onSubmit={handleSubmit}>
           <input type="text" value={nombreUsuario} onChange={e => setNombreUsuario(e.target.value)} placeholder="Nombre de Usuario" />
@@ -162,16 +162,17 @@ const CreateUsuario = () => {
           <select value={rol} onChange={e => setRol(e.target.value)}>
             <option value="">Seleccione un rol</option>
             {roles.map(rol => (
-              <option value={rol}>{rol}</option>
+              <option key={rol} value={rol}>{rol}</option>
             ))}
           </select>
           <button className="create-usuario-button" type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Guardando...' : 'Guardar'}
           </button>
-            {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
-            {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
+          {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
+          {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
         </form>
       </div>
+      <script src="script.js"></script>
     </div>
   );
 };

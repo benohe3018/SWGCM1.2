@@ -1,137 +1,168 @@
-.create-usuario-page {
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #004d40;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: white;
-  }
-  
-  .create-usuario-header {
     width: 100%;
-    background-color: white;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-  }
-  .Button-ir-atras-inicio{
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    padding: 10px 20px;
-    margin: 10px;
-    margin-top: 180px;
-  }
-
-.create-usuario-button1{
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px;
-    padding: 10px 20px;
-}
-
-.create-usuario-button1:hover {
-    background-color: #0C231E;
-}
-
-.create-usuario-button2{
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px;
-    padding: 10px 20px; 
-}
-.create-usuario-button2:hover {
-    background-color: #0C231E;
-}
-  
-  .create-usuario-content {
-    margin-top: 10px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
-  form {
-    width: 100%;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #12322B;
-  }
-  
-  input, select {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #12322B;
-  }
-  
-  .create-usuario-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px; /* Añadido margen para separación */
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .create-usuario-button:hover {
-    background-color: #0C231E;
-  }
-  
-  .message-POST-success {
-    color: green;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-  
-  .message-POST-failed {
-    color: red;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
-  .password-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
-  .toggle-show-password {
     position: absolute;
-    right: 5px;
-    background: none;
-    border: none;
+    top: 60px;
+    left: 0;
+    background-color: #004d40;
   }
-  
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+.create-usuario-page {
+  background-color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.create-usuario-header {
+  width: 100%;
+  background-color: white;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 70px; /* Ajustado para que quede debajo del menú */
+  z-index: 100;
+  display: flex;
+}
+
+.create-usuario-content {
+  margin-top: 180px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+form {
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #12322B;
+}
+
+input, select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #12322B;
+}
+
+.create-usuario-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px; /* Añadido margen para separación */
+  background-color: #12322B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+.create-usuario-button:hover {
+  background-color: #0C231E;
+}
+
+.message-POST-success {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.message-POST-failed {
+  color: red;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-show-password {
+  position: absolute;
+  right: 5px;
+  background: none;
+  border: none;
+}
   

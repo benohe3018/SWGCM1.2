@@ -128,10 +128,10 @@ const CreateUsuario = () => {
       <nav className="navbar">
         <ul className="nav-links">
           <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
-          <li><Link to="/read-medico">Ver Médicos</Link></li>
-          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
-          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
+          <li><Link to="/create-usuario">Capturar Nuevo Usuario</Link></li>
+          <li><Link to="/read-usuario">Ver usuarios</Link></li>
+          <li><Link to="/update-usuario">Actualizar Registro de Usuario</Link></li>
+          <li><Link to="/delete-usuario">Borrar Registro de Usuario</Link></li>
           <li><Link to="/dashboard-root">Página de Inicio</Link></li>
         </ul>
         <div className="hamburger">

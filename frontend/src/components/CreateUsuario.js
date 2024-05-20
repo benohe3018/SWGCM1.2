@@ -1,15 +1,13 @@
-// CreateUsuario.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import scrypt from 'scrypt-js'; // Importa scrypt en lugar de bcrypt
 import './CreateUsuario.css';
-import logoIMSS from '../images/LogoIMSS.jpg';  // Asegúrate de que la ruta al logo es correcta
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importa los iconos de ojo
+import logoIMSS from '../images/LogoIMSS.jpg';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const CreateUsuario = () => {
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [contraseña, setContraseña] = useState('');
-  const [confirmContraseña, setConfirmContraseña] = useState(''); // Nuevo estado para la confirmación de la contraseña
+  const [confirmContraseña, setConfirmContraseña] = useState('');
   const [rol, setRol] = useState('');
   const [nombreReal, setNombreReal] = useState('');
   const [apellidoPaterno, setApellidoPaterno] = useState('');
@@ -17,7 +15,7 @@ const CreateUsuario = () => {
   const [matricula, setMatricula] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(null);
-  const [showPassword, setShowPassword] = useState(false); // Nuevo estado para mostrar u ocultar la contraseña
+  const [showPassword, setShowPassword] = useState(false);
 
   const isValidName = (name) => {
     const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/;
@@ -25,20 +23,18 @@ const CreateUsuario = () => {
   };
 
   const isValidMatricula = (matricula) => {
-    const regex = /^[0-9]{1,12}$/; // La matrícula debe ser un número de hasta 12 dígitos
+    const regex = /^[0-9]{1,12}$/;
     return regex.test(matricula);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Verifica si las contraseñas coinciden
     if (contraseña !== confirmContraseña) {
       alert('Las contraseñas no coinciden.');
       return;
     }
 
-    // Valida los campos de entrada
     if (!isValidName(nombreReal)) {
       alert('Por favor, introduce un nombre válido.');
       return;
@@ -56,21 +52,12 @@ const CreateUsuario = () => {
       return;
     }
 
-    // Verifica si la matrícula ya existe
     const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/matricula/${matricula}`);
     const dataCheck = await responseCheck.json();
     if (responseCheck.ok && Object.keys(dataCheck).length > 0) {
-      alert('El usuario ya existe en la base de datos. intente con un nuevo registro');
+      alert('El usuario ya existe en la base de datos. Intente con un nuevo registro.');
       return;
     }
-
-    // Hashea la contraseña usando scrypt en lugar de bcrypt
-    const salt = new TextEncoder().encode('some-random-salt'); // Reemplaza 'some-random-salt' con tu propia sal
-    const passwordBuffer = new TextEncoder().encode(contraseña);
-    const N = 32768, r = 8, p = 1, dkLen = 64; // Parámetros de scrypt
-    const hashedPasswordBuffer = await scrypt.scrypt(passwordBuffer, salt, N, r, p, dkLen);
-    const hashedPasswordArray = new Uint8Array(hashedPasswordBuffer);
-    const hashedPassword = Array.prototype.map.call(hashedPasswordArray, x => ('00' + x.toString(16)).slice(-2)).join('');
 
     setIsSubmitting(true);
     try {
@@ -81,7 +68,7 @@ const CreateUsuario = () => {
         },
         body: JSON.stringify({
           nombre_usuario: nombreUsuario,
-          contraseña: hashedPassword,
+          contraseña: contraseña,  // Enviar la contraseña en texto plano
           rol,
           nombre_real: nombreReal,
           apellido_paterno: apellidoPaterno,
@@ -94,7 +81,7 @@ const CreateUsuario = () => {
         setSubmitSuccess(true);
         setNombreUsuario('');
         setContraseña('');
-        setConfirmContraseña(''); 
+        setConfirmContraseña('');
         setRol('');
         setNombreReal('');
         setApellidoPaterno('');
@@ -111,7 +98,7 @@ const CreateUsuario = () => {
   };
 
   const toggleShowPassword = () => {
-    setShowPassword(!showPassword); 
+    setShowPassword(!showPassword);
   };
 
   const roles = [
@@ -120,7 +107,7 @@ const CreateUsuario = () => {
     'Usuario_administrador',
     'Usuario_de_Campo',
   ];
-  
+
   return (
     <div className="create-usuario-page">
       <header className="create-usuario-header">

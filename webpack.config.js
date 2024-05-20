@@ -1,5 +1,10 @@
-export const resolve = {
-  fallback: {
-    "crypto": require.resolve("crypto-browserify")
-  }
+module.exports = {
+  // ...
+  resolve: {
+    fallback: {
+      "crypto": false,
+      // ...
+    },
+  },
+  // ...
 };

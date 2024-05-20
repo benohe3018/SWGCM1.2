@@ -1,5 +1,5 @@
-# usuarios.py
 from flask import Blueprint, request, jsonify
+from werkzeug.security import generate_password_hash
 from ..models import Usuario
 from .. import db
 from sqlalchemy.exc import SQLAlchemyError
@@ -11,7 +11,18 @@ def create_usuario():
     data = request.get_json()  # Obtiene los datos de la solicitud
     print(data)  # Imprime los datos recibidos en la solicitud
     try:
-        new_usuario = Usuario(nombre_usuario=data['nombre_usuario'], contraseña=data['contraseña'], rol=data['rol'], nombre_real=data['nombre_real'], apellido_paterno=data['apellido_paterno'], apellido_materno=data['apellido_materno'], matricula=data['matricula'])
+        # Genera el hash de la contraseña
+        hashed_password = generate_password_hash(data['contraseña'])
+        
+        new_usuario = Usuario(
+            nombre_usuario=data['nombre_usuario'],
+            contraseña=hashed_password,  # Almacena el hash en lugar de la contraseña en texto plano
+            rol=data['rol'],
+            nombre_real=data['nombre_real'],
+            apellido_paterno=data['apellido_paterno'],
+            apellido_materno=data['apellido_materno'],
+            matricula=data['matricula']
+        )
         db.session.add(new_usuario)
         db.session.commit()
         return jsonify({
@@ -52,14 +63,14 @@ def update_usuario(id):
         data = request.get_json()
         usuario = Usuario.query.get_or_404(id)
         usuario.nombre_usuario = data['nombre_usuario']
-        usuario.contraseña = data['contraseña']
+        usuario.contraseña = generate_password_hash(data['contraseña'])  # Genera el hash de la nueva contraseña
         usuario.rol = data['rol']
         usuario.nombre_real = data['nombre_real']
         usuario.apellido_paterno = data['apellido_paterno']
         usuario.apellido_materno = data['apellido_materno']
         usuario.matricula = data['matricula']
         db.session.commit()
-        return jsonify(usuario.serialize()), 200  # Llama al nuevo método aquí
+        return jsonify(usuario.serialize()), 200
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -74,7 +85,7 @@ def delete_usuario(id):
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
-    
+
 @usuarios_bp.route('/usuarios/matricula/<matricula>', methods=['GET'])
 def get_usuario_by_matricula(matricula):
     usuario = Usuario.query.filter_by(matricula=matricula).first()

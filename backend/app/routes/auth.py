@@ -1,14 +1,17 @@
 import requests
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
-from datetime import timedelta
+from datetime.timedelta import timedelta
 from werkzeug.security import check_password_hash
 import os
+from ..models import Usuario
 
 api_key = os.getenv('RECAPTCHA_API_KEY')
 site_key = os.getenv('RECAPTCHA_SITE_KEY')
 project_id = os.getenv('RECAPTCHA_PROJECT_ID')
-from ..models import Usuario
+
+# Asegúrate de importar Blueprint desde flask
+from flask import Blueprint
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -26,7 +29,7 @@ def login():
     captcha = data.get('captcha')
 
     # Verifica el CAPTCHA
-    recaptcha_response = requests.post(f'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments?key={api_key}', json = {
+    recaptcha_response = requests.post(f'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments?key={api_key}', json={
         'event': {
             'token': captcha,
             'expectedAction': 'LOGIN',

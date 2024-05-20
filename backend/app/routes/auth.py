@@ -1,7 +1,7 @@
 import requests
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
-from datetime.timedelta import timedelta
+from datetime import timedelta
 from werkzeug.security import check_password_hash
 import os
 from ..models import Usuario

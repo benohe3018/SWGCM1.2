@@ -38,10 +38,14 @@ def update_medico(id_medico):
 
 @medicos_bp.route('/medicos/<int:id_medico>', methods=['DELETE'])
 def delete_medico(id_medico):
-    medico = Medico.query.get_or_404(id_medico)
-    db.session.delete(medico)
-    db.session.commit()
-    return jsonify({'message': 'El médico ha sido eliminado correctamente.'})
+    try:
+        medico = Medico.query.get_or_404(id_medico)
+        db.session.delete(medico)
+        db.session.commit()
+        return jsonify({'message': 'El médico ha sido eliminado correctamente.'})
+    except Exception as e:
+        print(e)
+        return jsonify({'message': 'Ha ocurrido un error al intentar eliminar el médico.'}), 500
 
 @medicos_bp.route('/medicos/matricula/<int:matricula>', methods=['GET'])
 def get_medico_by_matricula(matricula):

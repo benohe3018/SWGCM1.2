@@ -1,23 +1,25 @@
 from flask import Blueprint, request, jsonify
-from werkzeug.security import generate_password_hash
+from sqlalchemy.exc import SQLAlchemyError # type: ignore
+import hashlib
 from ..models import Usuario
 from .. import db
-from sqlalchemy.exc import SQLAlchemyError
 
 usuarios_bp = Blueprint('usuarios', __name__)
 
+def generate_password_hash_sha256(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
 @usuarios_bp.route('/usuarios', methods=['POST'])
 def create_usuario():
-    data = request.get_json()  # Obtiene los datos de la solicitud
-    print(data)  # Imprime los datos recibidos en la solicitud
+    data = request.get_json()
+    print(data)
     try:
-        # Genera el hash de la contraseña
-        hashed_password = generate_password_hash(data['contraseña'])
-        print("Hash de la contraseña generada:", hashed_password)  # Agrega un log para ver el hash generado
+        hashed_password = generate_password_hash_sha256(data['contraseña'])
+        print("Hash de la contraseña generada:", hashed_password)
         
         new_usuario = Usuario(
             nombre_usuario=data['nombre_usuario'],
-            contraseña=hashed_password,  # Almacena el hash en lugar de la contraseña en texto plano
+            contraseña=hashed_password,
             rol=data['rol'],
             nombre_real=data['nombre_real'],
             apellido_paterno=data['apellido_paterno'],
@@ -36,9 +38,9 @@ def create_usuario():
             'apellido_materno': new_usuario.apellido_materno,
             'matricula': new_usuario.matricula
         }), 201
-    except Exception as e:  # Captura cualquier excepción
+    except Exception as e:
         db.session.rollback()
-        print("Error al crear el usuario:", e)  # Agrega un log para el error
+        print("Error al crear el usuario:", e)
         return jsonify({"error": str(e)}), 500
 
 @usuarios_bp.route('/usuarios', methods=['GET'])
@@ -64,7 +66,7 @@ def update_usuario(id):
         data = request.get_json()
         usuario = Usuario.query.get_or_404(id)
         usuario.nombre_usuario = data['nombre_usuario']
-        usuario.contraseña = generate_password_hash(data['contraseña'])  # Genera el hash de la nueva contraseña
+        usuario.contraseña = generate_password_hash_sha256(data['contraseña'])
         usuario.rol = data['rol']
         usuario.nombre_real = data['nombre_real']
         usuario.apellido_paterno = data['apellido_paterno']

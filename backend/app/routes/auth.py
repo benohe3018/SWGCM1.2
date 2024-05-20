@@ -46,7 +46,9 @@ def login():
     if user:
         print("Contraseña en texto plano:", password)  # Agrega un log para ver la contraseña en texto plano
         print("Contraseña almacenada (hash):", user.contraseña)  # Agrega un log para ver el hash almacenado
-        if check_password_hash(user.contraseña, password):
+        is_password_correct = check_password_hash(user.contraseña, password)
+        print("¿La contraseña es correcta?", is_password_correct)  # Log para verificación de contraseña
+        if is_password_correct:
             print("Contraseña verificada correctamente para el usuario:", username)
             token = generate_token(user.id, user.rol)
             return jsonify({"message": "Login successful", "token": token, "role": user.rol}), 200

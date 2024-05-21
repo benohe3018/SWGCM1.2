@@ -1,7 +1,6 @@
 // CreateUsuario.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import scrypt from 'scrypt-js'; // Importa scrypt en lugar de bcrypt
 import './CreateUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';  // Asegúrate de que la ruta al logo es correcta
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importa los iconos de ojo
@@ -64,14 +63,6 @@ const CreateUsuario = () => {
       return;
     }
 
-    // Hashea la contraseña usando scrypt en lugar de bcrypt
-    const salt = new TextEncoder().encode('some-random-salt'); // Reemplaza 'some-random-salt' con tu propia sal
-    const passwordBuffer = new TextEncoder().encode(contraseña);
-    const N = 32768, r = 8, p = 1, dkLen = 64; // Parámetros de scrypt
-    const hashedPasswordBuffer = await scrypt.scrypt(passwordBuffer, salt, N, r, p, dkLen);
-    const hashedPasswordArray = new Uint8Array(hashedPasswordBuffer);
-    const hashedPassword = Array.prototype.map.call(hashedPasswordArray, x => ('00' + x.toString(16)).slice(-2)).join('');
-
     setIsSubmitting(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`, {
@@ -81,7 +72,7 @@ const CreateUsuario = () => {
         },
         body: JSON.stringify({
           nombre_usuario: nombreUsuario,
-          contraseña: hashedPassword,
+          contraseña: contraseña, // Enviar la contraseña en texto plano
           rol,
           nombre_real: nombreReal,
           apellido_paterno: apellidoPaterno,

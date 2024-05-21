@@ -2,21 +2,17 @@ import hashlib
 from flask import Blueprint, request, jsonify
 from ..models import Usuario
 from .. import db
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError # type: ignore
 
 usuarios_bp = Blueprint('usuarios', __name__)
-
-def generate_sha256_hash(password):
-    return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 @usuarios_bp.route('/usuarios', methods=['POST'])
 def create_usuario():
     data = request.get_json()  # Obtiene los datos de la solicitud
     print(data)  # Imprime los datos recibidos en la solicitud
     try:
-        # Genera el hash de la contraseña usando SHA256
-        password = data['contraseña']
-        hashed_password = generate_sha256_hash(password)
+        # Genera el hash de la contraseña
+        hashed_password = hashlib.sha256(data['contraseña'].encode()).hexdigest()
         print("Hash de la contraseña generada:", hashed_password)  # Agrega un log para ver el hash generado
         
         new_usuario = Usuario(
@@ -68,7 +64,7 @@ def update_usuario(id):
         data = request.get_json()
         usuario = Usuario.query.get_or_404(id)
         usuario.nombre_usuario = data['nombre_usuario']
-        usuario.contraseña = generate_sha256_hash(data['contraseña'])  # Genera el hash de la nueva contraseña
+        usuario.contraseña = hashlib.sha256(data['contraseña'].encode()).hexdigest()  # Genera el hash de la nueva contraseña
         usuario.rol = data['rol']
         usuario.nombre_real = data['nombre_real']
         usuario.apellido_paterno = data['apellido_paterno']

@@ -21,11 +21,15 @@
 }
 
 .login-header {
+  display: flex;
+  flex-direction: inline-flex;
   width: 100%;
-  background-color: white; /* Puedes cambiarlo al color deseado del header */
+  background-color: white; /* Color del encabezado */
   padding: 10px 20px;
   box-sizing: border-box;
-  display: flex;
+  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
+  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+  z-index: 100;
 }
 
 .header-logo {

@@ -25,6 +25,7 @@
   background-color: white; /* Puedes cambiarlo al color deseado del header */
   padding: 10px 20px;
   box-sizing: border-box;
+  display: flex;
 }
 
 .header-logo {

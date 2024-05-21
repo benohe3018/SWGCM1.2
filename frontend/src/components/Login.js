@@ -34,16 +34,16 @@ const Login = () => {
 
       // Redirige según el rol
       switch (response.data.role) {
-        case 'administrador':
+        case 'Admin':
           navigate('/dashboard-admin');
           break;
         case 'root':
           navigate('/dashboard-root');
           break;
-        case 'usuario_administrador':
+        case 'Usuario_administrador':
           navigate('/dashboard-user-admin');
           break;
-        case 'usuario_campo':
+        case 'Usuario_de_Campo':
           navigate('/dashboard-field-user');
           break;
         default:

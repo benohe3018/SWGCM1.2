@@ -19,6 +19,7 @@ import ReadUsuario from './components/ReadUsuario';
 import UpdateUsuario from './components/UpdateUsuario';
 import DeleteUsuario from './components/DeleteUsuario';
 import Admin from './components/Admin';
+import UsuarioDeCampo from './components/UsuarioDeCampo';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/update-usuario" element={<UpdateUsuario/>} />
         <Route path="/delete-usuario" element={<DeleteUsuario/>} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/dashboard-field-user" element={<UsuarioDeCampo />} />
       </Routes>
     </Router>
   );

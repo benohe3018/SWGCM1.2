@@ -1,0 +1,32 @@
+/* UsuarioDeCampo.css */
+.usuario-de-campo-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.usuario-de-campo-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.header-logo {
+    width: 100px;
+    height: auto;
+}
+
+.welcome-message, .department-name {
+    text-align: center;
+}
+
+.usuario-de-campo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

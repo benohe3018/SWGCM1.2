@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './ReadMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const ReadMedico = () => {
-  const navigate = useNavigate();
   const [medicos, setMedicos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,16 +19,6 @@ const ReadMedico = () => {
   useEffect(() => {
     fetchMedicos();
   }, []);
-
-  const handleGoBack = (event) => {
-    event.preventDefault();
-    navigate(-1);
-  };
-
-  const handleExit = (event) => {
-    event.preventDefault();
-    navigate("/dashboard-root");
-  };
 
   const indexOfLastMedico = currentPage * medicosPerPage;
   const indexOfFirstMedico = indexOfLastMedico - medicosPerPage;

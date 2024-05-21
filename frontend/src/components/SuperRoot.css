@@ -45,7 +45,7 @@
 }
 /* Asegúrate de agregar un margen superior al contenido principal para que no se superponga con el encabezado fijo */
 .super-root-content {
-  margin-top: 100px;
+  margin-top: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;

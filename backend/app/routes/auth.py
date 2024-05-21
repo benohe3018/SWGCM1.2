@@ -1,8 +1,8 @@
+import hashlib
 import requests
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token # type: ignore
+from flask_jwt_extended import create_access_token
 from datetime import timedelta
-import hashlib
 import os
 from ..models import Usuario
 
@@ -17,16 +17,13 @@ def generate_token(identity, role):
     additional_claims = {"role": role}
     return create_access_token(identity=identity, expires_delta=expires, additional_claims=additional_claims)
 
-def generate_password_hash_sha256(password):
-    return hashlib.sha256(password.encode()).hexdigest()
-
-def check_password_hash_sha256(stored_hash, password):
-    return stored_hash == hashlib.sha256(password.encode()).hexdigest()
+def verify_sha256_hash(stored_hash, password):
+    return stored_hash == hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    print("Datos recibidos para el login:", data)
+    print("Datos recibidos para el login:", data)  # Agrega un log para ver los datos recibidos
     username = data.get('nombre_usuario')
     password = data.get('password')
     captcha = data.get('captcha')
@@ -40,7 +37,7 @@ def login():
         }
     })
     recaptcha_data = recaptcha_response.json()
-    print("Respuesta de reCAPTCHA:", recaptcha_data)
+    print("Respuesta de reCAPTCHA:", recaptcha_data)  # Agrega un log para ver la respuesta de reCAPTCHA
     if 'event' not in recaptcha_data or 'riskAnalysis' not in recaptcha_data:
         print('Respuesta inesperada de reCAPTCHA Enterprise:', recaptcha_data)
         return jsonify({"message": "Invalid CAPTCHA"}), 401
@@ -48,18 +45,18 @@ def login():
         return jsonify({"message": "Invalid CAPTCHA"}), 401
 
     user = Usuario.query.filter_by(nombre_usuario=username).first()
-    print("Usuario encontrado:", user)
+    print("Usuario encontrado:", user)  # Agrega un log para ver el usuario encontrado
     if user:
-        print("Contraseña en texto plano:", password)
-        print("Contraseña almacenada (hash):", user.contraseña)
-        is_password_correct = check_password_hash_sha256(user.contraseña, password)
-        print("¿La contraseña es correcta?", is_password_correct)
+        print("Contraseña en texto plano:", password)  # Agrega un log para ver la contraseña en texto plano
+        print("Contraseña almacenada (hash):", user.contraseña)  # Agrega un log para ver el hash almacenado
+        is_password_correct = verify_sha256_hash(user.contraseña, password)
+        print("¿La contraseña es correcta?", is_password_correct)  # Log para verificación de contraseña
         if is_password_correct:
             print("Contraseña verificada correctamente para el usuario:", username)
             token = generate_token(user.id, user.rol)
             return jsonify({"message": "Login successful", "token": token, "role": user.rol}), 200
         else:
-            print("Las credenciales no son válidas para el usuario:", username)
+            print("Las credenciales no son válidas para el usuario:", username)  # Agrega un log para credenciales no válidas
     else:
-        print("Usuario no encontrado:", username)
+        print("Usuario no encontrado:", username)  # Agrega un log para usuario no encontrado
     return jsonify({"message": "Invalid credentials"}), 401

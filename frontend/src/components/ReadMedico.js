@@ -7,6 +7,8 @@ const ReadMedico = () => {
   const [medicos, setMedicos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchType, setSearchType] = useState('nombre_medico');
   const medicosPerPage = 5;
 
   const fetchMedicos = async () => {
@@ -20,11 +22,19 @@ const ReadMedico = () => {
     fetchMedicos();
   }, []);
 
+  const handleSearch = (medicos) => {
+    return medicos.filter(medico => {
+      const value = medico[searchType].toLowerCase();
+      return value.includes(searchTerm.toLowerCase());
+    });
+  };
+
   const indexOfLastMedico = currentPage * medicosPerPage;
   const indexOfFirstMedico = indexOfLastMedico - medicosPerPage;
-  const currentMedicos = medicos.slice(indexOfFirstMedico, indexOfLastMedico);
+  const filteredMedicos = handleSearch(medicos);
+  const currentMedicos = filteredMedicos.slice(indexOfFirstMedico, indexOfLastMedico);
 
-  const totalPages = Math.ceil(medicos.length / medicosPerPage);
+  const totalPages = Math.ceil(filteredMedicos.length / medicosPerPage);
 
   return (
     <div className="read-medico-page">
@@ -51,6 +61,20 @@ const ReadMedico = () => {
         </div>
       </nav>
       <div className="read-medico-content">
+        <div className="search-container">
+          <input 
+            type="text" 
+            value={searchTerm} 
+            onChange={e => setSearchTerm(e.target.value)} 
+            placeholder="Buscar..."
+          />
+          <select value={searchType} onChange={e => setSearchType(e.target.value)}>
+            <option value="nombre_medico">Nombre</option>
+            <option value="apellido_paterno_medico">Apellido Paterno</option>
+            <option value="apellido_materno_medico">Apellido Materno</option>
+            <option value="matricula">Matrícula</option>
+          </select>
+        </div>
         <div className="table-container">
           {isLoading ? (
             <p>Cargando...</p>
@@ -95,7 +119,6 @@ const ReadMedico = () => {
           )}
         </div>
       </div>
-      <script src="script.js"></script>
     </div>
   );
 };

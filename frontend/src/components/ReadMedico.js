@@ -7,9 +7,9 @@ const ReadMedico = () => {
   const [medicos, setMedicos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchType, setSearchType] = useState('nombre_medico');
   const medicosPerPage = 5;
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchField, setSearchField] = useState('nombre');
 
   const fetchMedicos = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
@@ -22,16 +22,29 @@ const ReadMedico = () => {
     fetchMedicos();
   }, []);
 
-  const handleSearch = (medicos) => {
-    return medicos.filter(medico => {
-      const value = medico[searchType].toLowerCase();
-      return value.includes(searchTerm.toLowerCase());
-    });
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   };
+
+  const handleFieldChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
+  const filteredMedicos = medicos.filter((medico) => {
+    if (searchField === 'nombre') {
+      return medico.nombre_medico.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellidoPaterno') {
+      return medico.apellido_paterno_medico.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellidoMaterno') {
+      return medico.apellido_materno_medico.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'matricula') {
+      return medico.matricula.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    return medico;
+  });
 
   const indexOfLastMedico = currentPage * medicosPerPage;
   const indexOfFirstMedico = indexOfLastMedico - medicosPerPage;
-  const filteredMedicos = handleSearch(medicos);
   const currentMedicos = filteredMedicos.slice(indexOfFirstMedico, indexOfLastMedico);
 
   const totalPages = Math.ceil(filteredMedicos.length / medicosPerPage);
@@ -62,16 +75,16 @@ const ReadMedico = () => {
       </nav>
       <div className="read-medico-content">
         <div className="search-container">
-          <input 
-            type="text" 
-            value={searchTerm} 
-            onChange={e => setSearchTerm(e.target.value)} 
+          <input
+            type="text"
             placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearch}
           />
-          <select value={searchType} onChange={e => setSearchType(e.target.value)}>
-            <option value="nombre_medico">Nombre</option>
-            <option value="apellido_paterno_medico">Apellido Paterno</option>
-            <option value="apellido_materno_medico">Apellido Materno</option>
+          <select value={searchField} onChange={handleFieldChange}>
+            <option value="nombre">Nombre</option>
+            <option value="apellidoPaterno">Apellido Paterno</option>
+            <option value="apellidoMaterno">Apellido Materno</option>
             <option value="matricula">Matrícula</option>
           </select>
         </div>
@@ -124,3 +137,4 @@ const ReadMedico = () => {
 };
 
 export default ReadMedico;
+

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './SuperRoot.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
+import mrMachine from '../images/MRMachine.jpg';
 
 const SuperRoot = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
   return (
     <div className="super-root-page">
       <header className="super-root-header">
@@ -17,24 +14,22 @@ const SuperRoot = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/crud-medicos">Cambiar Sesión</Link></li>
+          <li><Link to="/crud-medicos">Capturar Nuevo Medico</Link></li>
+          <li><Link to="/ver-medicos">Ver Medicos</Link></li>
+          <li><Link to="/actualizar-medico">Actualizar Registro de Médico</Link></li>
+          <li><Link to="/borrar-medico">Borrar Registro de Médico</Link></li>
+          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+        </ul>
+      </nav>
       <main className="super-root-content">
-        <p>Bienvenido al panel de administración del superusuario.</p>
-        <div className="dropdown-container">
-          <button onClick={toggleDropdown} className="dropdown-button">Menú de Opciones</button>
-          {isOpen && (
-            <div className="dropdown-content">
-              <Link to="/crud-medicos" className="dropdown-item">Módulo de Médicos</Link>
-              <Link to="/crud-usuarios" className="dropdown-item">Módulo de Usuarios</Link>
-              <Link to="/informes-medicos" className="dropdown-item">Módulo de Informes</Link>
-              <Link to="/gestion-citas" className="dropdown-item">Módulo de Citas</Link>
-              <Link to="/estudios-radiologicos" className="dropdown-item">Modulo de Estudios Radiológicos</Link>
-              <Link to="/admin" className="dropdown-item">Modulo de Administración</Link>
-            </div>
-          )}
-        </div>
+        <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />
       </main>
     </div>
   );
-};
+}
 
 export default SuperRoot;
+

@@ -85,7 +85,6 @@ const ReadMedico = () => {
             <option value="nombre">Nombre</option>
             <option value="apellidoPaterno">Apellido Paterno</option>
             <option value="apellidoMaterno">Apellido Materno</option>
-            <option value="matricula">Matrícula</option>
           </select>
         </div>
         <div className="table-container">

@@ -16,12 +16,12 @@ const SuperRoot = () => {
       </header>
       <nav className="navbar">
         <ul className="nav-links">
-          <li><Link to="/crud-medicos">Cambiar Sesión</Link></li>
-          <li><Link to="/crud-medicos">Capturar Nuevo Medico</Link></li>
-          <li><Link to="/ver-medicos">Ver Medicos</Link></li>
-          <li><Link to="/actualizar-medico">Actualizar Registro de Médico</Link></li>
-          <li><Link to="/borrar-medico">Borrar Registro de Médico</Link></li>
-          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+          <li><Link to="/crud-medicos">Módulo de Médicos</Link></li>
+          <li><Link to="/crud-usuarios">Módulo de Usuarios</Link></li>
+          <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
+          <li><Link to="/gestion-citas">Módulo de Citas</Link></li>
+          <li><Link to="/estudios-radiologicos">Modulo de Estudios Radiológicos</Link></li>
+          <li><Link to="/admin">Modulo de Administración</Link></li>
         </ul>
       </nav>
       <main className="super-root-content">
@@ -32,4 +32,3 @@ const SuperRoot = () => {
 }
 
 export default SuperRoot;
-

@@ -20,12 +20,20 @@ const CreateUsuario = () => {
 
   const isValidName = (name) => {
     const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/;
-    return regex.test(name);
+    return regex.test(name) && name.length >= 2 && name.length <= 50;
   };
 
   const isValidMatricula = (matricula) => {
     const regex = /^[0-9]{1,12}$/; // La matrícula debe ser un número de hasta 12 dígitos
     return regex.test(matricula);
+  };
+
+  const isValidUsername = (username) => {
+    return username.length >= 4 && username.length <= 20;
+  };
+
+  const isValidPassword = (password) => {
+    return password.length >= 8 && password.length <= 50;
   };
 
   const handleSubmit = async (event) => {
@@ -38,16 +46,24 @@ const CreateUsuario = () => {
     }
 
     // Valida los campos de entrada
+    if (!isValidUsername(nombreUsuario)) {
+      alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres).');
+      return;
+    }
+    if (!isValidPassword(contraseña)) {
+      alert('Por favor, introduce una contraseña válida (8-50 caracteres).');
+      return;
+    }
     if (!isValidName(nombreReal)) {
-      alert('Por favor, introduce un nombre válido.');
+      alert('Por favor, introduce un nombre real válido (2-50 caracteres).');
       return;
     }
     if (!isValidName(apellidoPaterno)) {
-      alert('Por favor, introduce un apellido paterno válido.');
+      alert('Por favor, introduce un apellido paterno válido (2-50 caracteres).');
       return;
     }
     if (!isValidName(apellidoMaterno)) {
-      alert('Por favor, introduce un apellido materno válido.');
+      alert('Por favor, introduce un apellido materno válido (2-50 caracteres).');
       return;
     }
     if (!isValidMatricula(matricula)) {
@@ -59,7 +75,7 @@ const CreateUsuario = () => {
     const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/matricula/${matricula}`);
     const dataCheck = await responseCheck.json();
     if (responseCheck.ok && Object.keys(dataCheck).length > 0) {
-      alert('El usuario ya existe en la base de datos. intente con un nuevo registro');
+      alert('El usuario ya existe en la base de datos. Intente con un nuevo registro');
       return;
     }
 
@@ -168,7 +184,6 @@ const CreateUsuario = () => {
           {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
         </form>
       </div>
-      <script src="script.js"></script>
     </div>
   );
 };

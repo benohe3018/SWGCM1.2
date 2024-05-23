@@ -8,6 +8,8 @@ const UpdateMedico = () => {
   const [editingId, setEditingId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [successMessage, setSuccessMessage] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchField, setSearchField] = useState('nombre');
   const medicosPerPage = 5;
 
   useEffect(() => {
@@ -58,11 +60,32 @@ const UpdateMedico = () => {
     }, 3000);
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFieldChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
+  const filteredMedicos = medicos.filter((medico) => {
+    if (searchField === 'nombre') {
+      return medico.nombre_medico.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellidoPaterno') {
+      return medico.apellido_paterno_medico.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellidoMaterno') {
+      return medico.apellido_materno_medico.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'matricula') {
+      return medico.matricula.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    return medico;
+  });
+
   const indexOfLastMedico = currentPage * medicosPerPage;
   const indexOfFirstMedico = indexOfLastMedico - medicosPerPage;
-  const currentMedicos = medicos.slice(indexOfFirstMedico, indexOfLastMedico);
+  const currentMedicos = filteredMedicos.slice(indexOfFirstMedico, indexOfLastMedico);
 
-  const totalPages = Math.ceil(medicos.length / medicosPerPage);
+  const totalPages = Math.ceil(filteredMedicos.length / medicosPerPage);
 
   const especialidades = [
     'Traumatología',
@@ -107,6 +130,20 @@ const UpdateMedico = () => {
       </nav>
       <div className="update-medico-content">
         {successMessage && <p className="success-message">{successMessage}</p>}
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <select value={searchField} onChange={handleFieldChange}>
+            <option value="nombre">Nombre</option>
+            <option value="apellidoPaterno">Apellido Paterno</option>
+            <option value="apellidoMaterno">Apellido Materno</option>
+            <option value="matricula">Matrícula</option>
+          </select>
+        </div>
         <div className="medico-table-container">
           <table className="medico-table">
             <thead>
@@ -194,3 +231,4 @@ const UpdateMedico = () => {
 };
 
 export default UpdateMedico;
+

@@ -1,7 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+.delete-medico-page {
+  background-color: whitesmoke; /* Color de fondo */
+  height: 100vh; /* Altura completa de la ventana del navegador */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #0C231E;
 }
 
 .navbar {
@@ -71,36 +77,46 @@ body {
   }
 }
 
-.delete-medico-page {
-  background-color: whitesmoke;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
-
 .delete-medico-header {
+  display: flex;
+  flex-direction: inline-flex;
   width: 100%;
-  background-color: white;
+  background-color: white; /* Color del encabezado */
   padding: 10px 20px;
   box-sizing: border-box;
-  position: fixed;
-  top: 70px; /* Ajustado para que quede debajo del menú */
-  z-index: 100;
-  display: flex;
+  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
+  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+  z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
+  margin-top: 70px; /* Ajustado para que quede debajo del menú */
+}
+
+.header-logo {
+  margin-left: 10px; /* Agrega margen a la izquierda del logo */
+}
+
+.header-texts {
+  text-align: center;
+  flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
+}
+
+.welcome-message {
+  font-size: 24px;
+  margin: 0;
+  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
+}
+
+.department-name {
+  font-size: 18px;
+  margin: 0;
+  color: #0C231E;
 }
 
 .delete-medico-content {
-  margin-top: 250px;
-  width: 90%;
+  margin-top: 220px; /* Ajusta este valor si es necesario */
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .medico-table-container {
@@ -111,41 +127,62 @@ body {
 .medico-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .medico-table th, .medico-table td {
-  border: 1px solid black;
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: center;
-  padding: 8px;
-  white-space: nowrap;
 }
 
 .medico-table th {
-  background-color: whitesmoke;
-  color: #12322B;
-  font-weight: bold;
+  background-color: #f4f4f4;
 }
 
-.medico-table td {
-  color: #12322B;
+.success-message {
+  color: green;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.search-container select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .pagination-delete-medico {
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .pagination-delete-medico button {
+  padding: 10px 15px;
   margin: 0 5px;
-  padding: 5px 10px;
+  background-color: #12322B;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .pagination-delete-medico button.active {
-  background-color: #12322B;
-  color: white;
+  background-color: #0C231E;
 }
 
 .pagination-delete-medico button:hover {
@@ -157,5 +194,6 @@ body {
   font-weight: bold;
   margin-top: 20px;
 }
+
 
   

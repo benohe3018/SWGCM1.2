@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './CreateMedicos.css';
 import logoIMSS from '../images/LogoIMSS.jpg'; // Asegúrate de que la ruta al logo es correcta
 
 const CreateMedico = () => {
-  const navigate = useNavigate();
   const [nombre, setNombre] = useState('');
   const [apellidoPaterno, setApellidoPaterno] = useState('');
   const [apellidoMaterno, setApellidoMaterno] = useState('');
@@ -16,7 +14,7 @@ const CreateMedico = () => {
 
   const isValidName = (name) => {
     const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/;
-    return regex.test(name);
+    return regex.test(name) && name.length >= 2 && name.length <= 50;
   };
 
   const isValidMatricula = (matricula) => {
@@ -29,15 +27,15 @@ const CreateMedico = () => {
 
     // Valida los campos de entrada
     if (!isValidName(nombre)) {
-      alert('Por favor, introduce un nombre válido.');
+      alert('Por favor, introduce un nombre válido (2-50 caracteres).');
       return;
     }
     if (!isValidName(apellidoPaterno)) {
-      alert('Por favor, introduce un apellido paterno válido.');
+      alert('Por favor, introduce un apellido paterno válido (2-50 caracteres).');
       return;
     }
     if (!isValidName(apellidoMaterno)) {
-      alert('Por favor, introduce un apellido materno válido.');
+      alert('Por favor, introduce un apellido materno válido (2-50 caracteres).');
       return;
     }
     if (!isValidMatricula(matricula)) {
@@ -154,7 +152,6 @@ const CreateMedico = () => {
           {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
         </form>
       </div>
-      <script src="script.js"></script> 
     </div>
   );
 };

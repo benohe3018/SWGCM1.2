@@ -7,6 +7,8 @@ const DeleteUsuario = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [message, setMessage] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchField, setSearchField] = useState('nombre_usuario');
   const usuariosPerPage = 5;
 
   useEffect(() => {
@@ -26,12 +28,34 @@ const DeleteUsuario = () => {
     setMessage('El registro se ha borrado exitosamente');
   };
 
-  
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFieldChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
+  const filteredUsuarios = usuarios.filter((usuario) => {
+    if (searchField === 'nombre_usuario') {
+      return usuario.nombre_usuario.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'nombre_real') {
+      return usuario.nombre_real.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellido_paterno') {
+      return usuario.apellido_paterno.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellido_materno') {
+      return usuario.apellido_materno.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'matricula') {
+      return usuario.matricula.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    return usuario;
+  });
+
   const indexOfLastUsuario = currentPage * usuariosPerPage;
   const indexOfFirstUsuario = indexOfLastUsuario - usuariosPerPage;
-  const currentUsuarios = usuarios.slice(indexOfFirstUsuario, indexOfLastUsuario);
+  const currentUsuarios = filteredUsuarios.slice(indexOfFirstUsuario, indexOfLastUsuario);
 
-  const totalPages = Math.ceil(usuarios.length / usuariosPerPage);
+  const totalPages = Math.ceil(filteredUsuarios.length / usuariosPerPage);
 
   return (
     <div className="delete-usuario-page">
@@ -58,6 +82,20 @@ const DeleteUsuario = () => {
         </div>
       </nav>
       <div className="delete-usuario-content">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <select value={searchField} onChange={handleFieldChange}>
+            <option value="nombre_usuario">Nombre Usuario</option>
+            <option value="nombre_real">Nombre Real</option>
+            <option value="apellido_paterno">Apellido Paterno</option>
+            <option value="apellido_materno">Apellido Materno</option>
+          </select>
+        </div>
         <div className="usuario-table-container">
           <table className="usuario-table">
             <thead>
@@ -88,17 +126,17 @@ const DeleteUsuario = () => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className="pagination-delete-usuario">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-          <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={page === currentPage ? 'active' : ''}
-          >
-            {page}
-          </button>
-        ))}
+        <div className="pagination-delete-usuario">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={page === currentPage ? 'active' : ''}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
         {message && <p className="message-delete-success">{message}</p>}
       </div>
       <script src="script.js"></script>

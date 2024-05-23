@@ -80,7 +80,7 @@ body {
   justify-content: flex-start;
   font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: center;
-  color: black;
+  color: #0C231E;
 }
 
 .delete-usuario-header {
@@ -95,7 +95,7 @@ body {
 }
 
 .delete-usuario-content {
-  margin-top: 250px;
+  margin-top: 220px;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -103,49 +103,69 @@ body {
   justify-content: center;
 }
 
+.success-message {
+  color: green;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.search-container select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
 .usuario-table-container {
   width: 100%;
-  overflow-x: auto;
 }
 
 .usuario-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .usuario-table th, .usuario-table td {
-  border: 1px solid black;
-  text-align: center;
-  padding: 8px;
-  white-space: nowrap;
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
 }
 
 .usuario-table th {
-  background-color: whitesmoke;
-  color: #12322B;
-  font-weight: bold;
-}
-
-.usuario-table td {
-  color: #12322B;
+  background-color: #f4f4f4;
 }
 
 .pagination-delete-usuario {
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .pagination-delete-usuario button {
+  padding: 10px 15px;
   margin: 0 5px;
-  padding: 5px 10px;
+  background-color: #12322B;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .pagination-delete-usuario button.active {
-  background-color: #12322B;
-  color: white;
+  background-color: #0C231E;
 }
 
 .pagination-delete-usuario button:hover {

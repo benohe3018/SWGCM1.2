@@ -1,7 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+.read-usuario-page {
+  background-color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: black;
 }
 
 .navbar {
@@ -71,36 +77,65 @@ body {
   }
 }
 
-.read-usuario-page {
-  background-color: whitesmoke;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
-
 .read-usuario-header {
+  display: flex;
+  flex-direction: inline-flex;
   width: 100%;
   background-color: white;
   padding: 10px 20px;
   box-sizing: border-box;
   position: fixed;
-  top: 70px; /* Ajustado para que quede debajo del menú */
+  top: 0;
   z-index: 100;
-  display: flex;
+  margin-top: 70px; /* Ajustado para que quede debajo del menú */
+}
+
+.header-logo {
+  margin-left: 10px;
+}
+
+.header-texts {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.welcome-message {
+  font-size: 24px;
+  margin: 0;
+  color: #0C231E;
+}
+
+.department-name {
+  font-size: 18px;
+  margin: 0;
+  color: #0C231E;
 }
 
 .read-usuario-content {
-  margin-top: 250px;
-  width: 90%;
+  margin-top: 220px;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.search-container {
+  display: flex;
   justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.search-container select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .usuario-table-container {
@@ -111,45 +146,43 @@ body {
 .usuario-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .usuario-table th, .usuario-table td {
-  border: 1px solid black;
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: center;
-  padding: 8px;
-  white-space: nowrap;
 }
 
 .usuario-table th {
-  background-color: whitesmoke;
-  color: #12322B;
-  font-weight: bold;
-}
-
-.usuario-table td {
-  color: #12322B;
+  background-color: #f4f4f4;
 }
 
 .pagination-read-usuario {
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .pagination-read-usuario button {
+  padding: 10px 15px;
   margin: 0 5px;
-  padding: 5px 10px;
+  background-color: #12322B;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .pagination-read-usuario button.active {
-  background-color: #12322B;
-  color: white;
+  background-color: #0C231E;
 }
 
 .pagination-read-usuario button:hover {
   background-color: #0C231E;
 }
+
 
   

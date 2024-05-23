@@ -8,6 +8,8 @@ const UpdateUsuario = () => {
   const [editingId, setEditingId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [successMessage, setSuccessMessage] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchField, setSearchField] = useState('nombre_usuario');
   const usuariosPerPage = 5;
 
   useEffect(() => {
@@ -58,11 +60,34 @@ const UpdateUsuario = () => {
     }, 3000);
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFieldChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
+  const filteredUsuarios = usuarios.filter((usuario) => {
+    if (searchField === 'nombre_usuario') {
+      return usuario.nombre_usuario.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'nombre_real') {
+      return usuario.nombre_real.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellido_paterno') {
+      return usuario.apellido_paterno.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellido_materno') {
+      return usuario.apellido_materno.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'matricula') {
+      return usuario.matricula.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    return usuario;
+  });
+
   const indexOfLastUsuario = currentPage * usuariosPerPage;
   const indexOfFirstUsuario = indexOfLastUsuario - usuariosPerPage;
-  const currentUsuarios = usuarios.slice(indexOfFirstUsuario, indexOfLastUsuario);
+  const currentUsuarios = filteredUsuarios.slice(indexOfFirstUsuario, indexOfLastUsuario);
 
-  const totalPages = Math.ceil(usuarios.length / usuariosPerPage);
+  const totalPages = Math.ceil(filteredUsuarios.length / usuariosPerPage);
 
   const roles = [
     'Usuario_de_Campo',
@@ -96,6 +121,20 @@ const UpdateUsuario = () => {
       </nav>
       <div className="update-usuario-content">
         {successMessage && <p className="success-message">{successMessage}</p>}
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <select value={searchField} onChange={handleFieldChange}>
+            <option value="nombre_usuario">Nombre de Usuario</option>
+            <option value="nombre_real">Nombre Real</option>
+            <option value="apellido_paterno">Apellido Paterno</option>
+            <option value="apellido_materno">Apellido Materno</option>
+          </select>
+        </div>
         <div className="usuario-table-container">
           <table className="usuario-table">
             <thead>

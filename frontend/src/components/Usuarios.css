@@ -1,19 +1,45 @@
 /* Usuarios.css */
-.usuarios-citas-header {
-    background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
-    display: flex;
+.usuario-de-campo-header {
+    width: 100%;
+    background-color: white; /* Color del encabezado */
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
+    top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+    z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
+    display: inline;
 }
 
-.gestion-citas-title {
-    color: #6c757d;
+.usuario-de-campo-welcome-message {
+    color: #0C231E;
     font-size: 24px;
-    font-weight: bold;
-}
-.en-construccion-message {
-    color: #6c757d;
-    font-size: 18px;
     margin-top: 20px;
+}
+
+.department-name{
+    color: #0C231E;
+    font-size: 18px;
+    margin: 0;
+}
+
+.usuario-de-campo-en-construccion-message {
+    margin-top: 250px; 
+    width: 100%;
+    color: #0C231E;
+    font-size: 18px;
     text-align: center;
+}
+
+.usuario-de-campo-button{
+    padding: 10px 20px;
+    background-color: #12322B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.usuario-de-campo-button:hover {
+    background-color: #0C231E;
 }

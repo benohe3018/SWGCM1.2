@@ -12,21 +12,10 @@ const Administrador = () => {
         <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
         <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
       </header>
-      <main className="administrador-content">
-        <p>Bienvenido al panel de administración.</p>
-        <Link to="/gestion-citas">
-          <button className="administrator-button">Gestión de Citas</button>
-        </Link>
-        <Link to="/informes-medicos">
-          <button className="administrator-button">Informes</button>
-        </Link>
-        <Link to="/usuarios">
-          <button className="administrator-button">Usuarios</button>
-        </Link>
-        <Link to="/estudios-radiologicos">
-          <button className="administrator-button">Estudios Radiológicos</button>
-        </Link>
-      </main>
+      <h3 className="en-construccion-message">Esta página está en construcción.</h3>
+      <Link to="/dashboard-root">
+        <button className="administrator-button">Volver al inicio de sesión</button>
+      </Link>
     </div>
   );
 };

@@ -42,7 +42,7 @@ function App() {
         <Route path="/read-usuario" element={<ReadUsuario/>} />
         <Route path="/update-usuario" element={<UpdateUsuario/>} />
         <Route path="/delete-usuario" element={<DeleteUsuario/>} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/dashboard-user-admin" element={<Admin />} />
         <Route path="/dashboard-field-user" element={<UsuarioDeCampo />} />
       </Routes>
     </Router>

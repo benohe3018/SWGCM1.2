@@ -13,7 +13,7 @@ const Admin = () => {
                 <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
             </header>
             <h3 className="en-construccion-message">Esta página está en construcción.</h3>
-            <Link to="/dashboard-root">
+            <Link to="/">
                 <button className="administrator-button">Volver al inicio de sesión</button>
             </Link>
         </div>

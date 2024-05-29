@@ -6,7 +6,7 @@ import logoIMSS from '../images/LogoIMSS.jpg';
 
 const UsuarioDeCampo = () => {
     return (
-        <div>
+        <div className="usuario-de-campo-page">
             <header className="usuario-de-campo-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
                 <h1 className="usuario-de-campo-welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>

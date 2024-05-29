@@ -1,43 +1,51 @@
 /* Usuarios.css */
+.usuario-de-campo-page {
+    background-color: whitesmoke; /* Color de fondo */
+    height: 100vh; /* Altura completa de la ventana del navegador */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #0C231E;
+  }
 .usuario-de-campo-header {
     width: 100%;
-    background-color: white; /* Color del encabezado */
-    padding: 10px 20px;
-    box-sizing: border-box;
-    position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
-    top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
-    z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
-    display: inline;
+  background-color: white; /* Color del encabezado */
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
+  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+  z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
+  display: inline;
   }
   
   .usuario-de-campo-welcome-message {
-    color: #0C231E;
-    font-size: 24px;
-    margin-top: 20px;
+  color: #0C231E;
+  font-size: 24px;
+  margin-top: 20px;
   }
   
   .department-name{
-    color: #0C231E;
-    font-size: 18px;
-    margin: 0;
+  color: #0C231E;
+  font-size: 18px;
+  margin: 0;
   }
   
   .usuario-de-campo-en-construccion-message {
-    margin-top: 250px; 
-    width: 100%;
-    color: #0C231E;
-    font-size: 18px;
-    text-align: center;
+  margin-top: 250px; 
+  width: 100%;
   }
   
   .usuario-de-campo-button{
-    padding: 10px 20px;
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #12322B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
   }
   
   .usuario-de-campo-button:hover {

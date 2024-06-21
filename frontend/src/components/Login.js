@@ -15,6 +15,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Tipo de contraseña:", typeof password);//necesito saber que tipo es "password"
+    console.log("Contraseña:", password);
     if (!username || !password ) {
       setError('Por favor ingresa tu nombre de usuario y contraseña.');
       return;

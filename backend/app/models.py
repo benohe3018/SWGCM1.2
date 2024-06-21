@@ -65,7 +65,7 @@ class Usuario(db.Model):
     __tablename__ = 'usuarios'
     id = db.Column(db.Integer, primary_key=True)
     nombre_usuario = db.Column(db.String(50), nullable=False)
-    contraseña = db.Column(db.String(128), nullable=False)
+    contrasena = db.Column(db.String(128), nullable=False)
     def set_password(self, password):
         self.contraseña = generate_password_hash(password)
     matricula = db.Column(db.BigInteger, unique=True, nullable=False)

@@ -22,7 +22,7 @@ def hash_password(password):
 
 def check_password_hash(stored_hash, password):
     print(f"Stored hash: {stored_hash[:60]}...")
-    print(f"Password to check: {password[:3]}...")
+    print(f"Password to check: {password}...")
     try:
         result = bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
         print(f"bcrypt.checkpw result: {result}")
@@ -65,7 +65,7 @@ def login():
     if user:
         print(f"Usuario encontrado: {user.nombre_usuario}")
         print(f"Tipo de hash almacenado: {type(user.contrasena)}")
-        print(f"Hash almacenado (primeros 20 caracteres): {user.contrasena[:20]}...")
+        print(f"Hash almacenado (primeros 20 caracteres): {user.contrasena[:60]}...")
         print(f"Longitud del hash almacenado: {len(user.contrasena)}")
         
         if user.contrasena.startswith('$2b$'):

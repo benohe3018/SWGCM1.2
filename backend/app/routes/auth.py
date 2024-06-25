@@ -24,6 +24,7 @@ def check_password_hash(stored_hash, password):
     print(f"Stored hash: {stored_hash[:60]}...")
     print(f"Password to check: {password}...")
     try:
+        # Asegurarse de que tanto el hash almacenado como el password estén en formato bytes
         if isinstance(password, str):
             password = password.encode('utf-8')
         if isinstance(stored_hash, str):
@@ -32,6 +33,7 @@ def check_password_hash(stored_hash, password):
         result = bcrypt.checkpw(password, stored_hash)
         print(f"bcrypt.checkpw result: {result}")
         
+        # Para depuración, generamos un nuevo hash y lo comparamos
         new_hash = bcrypt.hashpw(password, bcrypt.gensalt())
         print(f"Newly generated hash: {new_hash[:60]}...")
         print(f"Hashes are different (expected): {new_hash != stored_hash}")
@@ -39,19 +41,6 @@ def check_password_hash(stored_hash, password):
         return result
     except Exception as e:
         print(f"Error in check_password_hash: {str(e)}")
-        return False
-
-def update_password_hash(user_id, new_password):
-    try:
-        new_hash = hash_password(new_password)
-        user = Usuario.query.get(user_id)
-        if user:
-            user.contrasena = new_hash
-            db.session.commit()
-            return True
-        return False
-    except Exception as e:
-        print(f"Error in update_password_hash: {str(e)}")
         return False
 
 @auth_bp.route('/login', methods=['POST'])
@@ -64,6 +53,7 @@ def login():
     print(f"Nombre de usuario recibido: {username}")
     print(f"Tipo de contraseña recibida: {type(password)}")
 
+    # Verifica el CAPTCHA
     recaptcha_response = requests.post(f'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments?key={api_key}', json={
         'event': {
             'token': captcha,

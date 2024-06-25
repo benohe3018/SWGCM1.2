@@ -21,9 +21,15 @@ def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 def check_password_hash(stored_hash, password):
-    if isinstance(stored_hash, str):
-        stored_hash = stored_hash.encode('utf-8')
-    return bcrypt.checkpw(password.encode('utf-8'), stored_hash)
+    print(f"Stored hash: {stored_hash[:20]}...")
+    print(f"Password to check: {password[:3]}...")
+    try:
+        result = bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
+        print(f"bcrypt.checkpw result: {result}")
+        return result
+    except Exception as e:
+        print(f"Error in check_password_hash: {str(e)}")
+        return False
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
@@ -57,6 +63,7 @@ def login():
         print(f"Longitud del hash almacenado: {len(user.contrasena)}")
         
         if user.contrasena.startswith('$2b$'):
+            print(f"Contraseña recibida completa: {password}")
             if check_password_hash(user.contrasena, password):
                 print("Verificación de contraseña exitosa")
                 token = generate_token(user.id, user.rol)

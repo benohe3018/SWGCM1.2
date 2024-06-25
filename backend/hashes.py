@@ -1,9 +1,9 @@
-import hashlib
+import bcrypt
 
-def generate_password_hash(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+password = "HalaMadrid3018?"
+new_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+print(f"Nuevo hash generado: {new_hash.decode('utf-8')}")
 
-password = "LuisUno46"
-hash = generate_password_hash(password)
-print(f"Hash generado: {hash}")
-   
+# Ahora verifica este nuevo hash
+result = bcrypt.checkpw(password.encode('utf-8'), new_hash)
+print(f"¿La contraseña es correcta con el nuevo hash? {result}")

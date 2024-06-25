@@ -24,8 +24,11 @@ def check_password_hash(stored_hash, password):
     print(f"Stored hash: {stored_hash[:20]}...")
     print(f"Password to check: {password[:3]}...")
     try:
-        result = bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
-        print(f"bcrypt.checkpw result: {result}")
+        # Generar un nuevo hash con la contraseña proporcionada
+        new_hash = bcrypt.hashpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
+        # Comparar el nuevo hash con el hash almacenado
+        result = new_hash == stored_hash.encode('utf-8')
+        print(f"Manual comparison result: {result}")
         return result
     except Exception as e:
         print(f"Error in check_password_hash: {str(e)}")

@@ -1,9 +1,11 @@
 import bcrypt
 import requests
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token # type: ignore
+from flask_jwt_extended import create_access_token
 from datetime import timedelta
 import os
+import hmac
+
 from ..models import Usuario, db
 
 api_key = os.getenv('RECAPTCHA_API_KEY')
@@ -21,26 +23,13 @@ def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 def check_password_hash(stored_hash, password):
-    print(f"Stored hash: {stored_hash[:60]}...")
-    print(f"Password to check: {password}...")
     try:
-        # Asegurarse de que tanto el hash almacenado como el password estén en formato bytes
         if isinstance(password, str):
             password = password.encode('utf-8')
         if isinstance(stored_hash, str):
             stored_hash = stored_hash.encode('utf-8')
-
-        result = bcrypt.checkpw(password, stored_hash)
-        print(f"bcrypt.checkpw result: {result}")
-        
-        # Para depuración, generamos un nuevo hash y lo comparamos
-        new_hash = bcrypt.hashpw(password, bcrypt.gensalt())
-        print(f"Newly generated hash: {new_hash[:60]}...")
-        print(f"Hashes are different (expected): {new_hash != stored_hash}")
-        
-        return result
-    except Exception as e:
-        print(f"Error in check_password_hash: {str(e)}")
+        return bcrypt.checkpw(password, stored_hash)
+    except Exception:
         return False
 
 @auth_bp.route('/login', methods=['POST'])
@@ -49,9 +38,6 @@ def login():
     username = data.get('nombre_usuario')
     password = data.get('password')
     captcha = data.get('captcha')
-
-    print(f"Nombre de usuario recibido: {username}")
-    print(f"Tipo de contraseña recibida: {type(password)}")
 
     # Verifica el CAPTCHA
     recaptcha_response = requests.post(f'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments?key={api_key}', json={
@@ -68,25 +54,13 @@ def login():
         return jsonify({"message": "Invalid CAPTCHA"}), 401
 
     user = Usuario.query.filter_by(nombre_usuario=username).first()
-    if user:
-        print(f"Usuario encontrado: {user.nombre_usuario}")
-        print(f"Tipo de hash almacenado: {type(user.contrasena)}")
-        print(f"Hash almacenado (primeros 20 caracteres): {user.contrasena[:60]}...")
-        print(f"Longitud del hash almacenado: {len(user.contrasena)}")
-        
-        if user.contrasena.startswith('$2b$'):
-            print(f"Contraseña recibida completa: {password}")
-            if check_password_hash(user.contrasena, password):
-                print("Verificación de contraseña exitosa")
-                token = generate_token(user.id, user.rol)
-                return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
-            else:
-                print("Verificación de contraseña fallida")
-                print(f"Contraseña recibida (completa): {password}...")
-        else:
-            print("El hash almacenado no es un hash bcrypt válido")
-    else:
-        print("Usuario no encontrado")
+    if user is None:
+        user = Usuario(contrasena='$2b$12$' + 'x'*53)  # Hash falso para prevenir enumeration attacks
+
+    if hmac.compare_digest(user.contrasena[:4], '$2b$'):
+        if check_password_hash(user.contrasena, password):
+            token = generate_token(user.id, user.rol)
+            return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
 
     return jsonify({"message": "Credenciales inválidas"}), 401
 

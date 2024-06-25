@@ -21,7 +21,9 @@ def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 def check_password_hash(stored_hash, password):
-    return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
+    if isinstance(stored_hash, str):
+        stored_hash = stored_hash.encode('utf-8')
+    return bcrypt.checkpw(password.encode('utf-8'), stored_hash)
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
@@ -48,15 +50,24 @@ def login():
         return jsonify({"message": "Invalid CAPTCHA"}), 401
 
     user = Usuario.query.filter_by(nombre_usuario=username).first()
-    if user and user.contrasena.startswith('$2b$'):  # Verifica que sea un hash bcrypt
+    if user:
         print(f"Usuario encontrado: {user.nombre_usuario}")
         print(f"Tipo de hash almacenado: {type(user.contrasena)}")
+        print(f"Hash almacenado (primeros 20 caracteres): {user.contrasena[:20]}...")
+        print(f"Longitud del hash almacenado: {len(user.contrasena)}")
         
-        if check_password_hash(user.contrasena, password):
-            token = generate_token(user.id, user.rol)
-            return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
+        if user.contrasena.startswith('$2b$'):
+            if check_password_hash(user.contrasena, password):
+                print("Verificación de contraseña exitosa")
+                token = generate_token(user.id, user.rol)
+                return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
+            else:
+                print("Verificación de contraseña fallida")
+                print(f"Contraseña recibida (primeros 3 caracteres): {password[:3]}...")
         else:
-            print("Verificación de contraseña fallida")
+            print("El hash almacenado no es un hash bcrypt válido")
+    else:
+        print("Usuario no encontrado")
 
     return jsonify({"message": "Credenciales inválidas"}), 401
 

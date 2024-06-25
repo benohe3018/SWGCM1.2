@@ -21,14 +21,17 @@ def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 def check_password_hash(stored_hash, password):
-    print(f"Stored hash: {stored_hash[:20]}...")
+    print(f"Stored hash: {stored_hash[:60]}...")
     print(f"Password to check: {password[:3]}...")
     try:
-        # Generar un nuevo hash con la contraseña proporcionada
-        new_hash = bcrypt.hashpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
-        # Comparar el nuevo hash con el hash almacenado
-        result = new_hash == stored_hash.encode('utf-8')
-        print(f"Manual comparison result: {result}")
+        result = bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
+        print(f"bcrypt.checkpw result: {result}")
+        
+        # Para depuración, generamos un nuevo hash y lo comparamos
+        new_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        print(f"Newly generated hash: {new_hash[:60]}...")
+        print(f"Hashes are different (expected): {new_hash != stored_hash.encode('utf-8')}")
+        
         return result
     except Exception as e:
         print(f"Error in check_password_hash: {str(e)}")

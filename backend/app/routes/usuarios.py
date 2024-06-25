@@ -31,7 +31,7 @@ def create_usuario():
         return jsonify({
             'id': new_usuario.id,
             'nombre_usuario': new_usuario.nombre_usuario,
-            'contraseña': new_usuario.contraseña,
+            'contraseña': new_usuario.contrasena,
             'rol': new_usuario.rol,
             'nombre_real': new_usuario.nombre_real,
             'apellido_paterno': new_usuario.apellido_paterno,
@@ -50,7 +50,7 @@ def read_usuarios():
         return jsonify([{
             'id': usuario.id,
             'nombre_usuario': usuario.nombre_usuario,
-            'contraseña': usuario.contraseña,
+            'contraseña': usuario.contrasena,
             'rol': usuario.rol,
             'nombre_real': usuario.nombre_real,
             'apellido_paterno': usuario.apellido_paterno,
@@ -66,7 +66,7 @@ def update_usuario(id):
         data = request.get_json()
         usuario = Usuario.query.get_or_404(id)
         usuario.nombre_usuario = data['nombre_usuario']
-        usuario.contraseña = generate_password_hash(data['contraseña'])  # Genera el hash de la nueva contraseña
+        usuario.contrasena = generate_password_hash(data['contraseña'])  # Genera el hash de la nueva contraseña
         usuario.rol = data['rol']
         usuario.nombre_real = data['nombre_real']
         usuario.apellido_paterno = data['apellido_paterno']
@@ -97,7 +97,7 @@ def get_usuario_by_matricula(matricula):
     return jsonify({
         'id': usuario.id,
         'nombre_usuario': usuario.nombre_usuario,
-        'contraseña': usuario.contraseña,
+        'contraseña': usuario.contrasena,
         'rol': usuario.rol,
         'nombre_real': usuario.nombre_real,
         'apellido_paterno': usuario.apellido_paterno,

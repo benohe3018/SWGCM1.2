@@ -76,7 +76,7 @@ def login():
                 return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
             else:
                 print("Verificación de contraseña fallida")
-                print(f"Contraseña recibida (primeros 3 caracteres): {password[:3]}...")
+                print(f"Contraseña recibida (completa): {password}...")
         else:
             print("El hash almacenado no es un hash bcrypt válido")
     else:

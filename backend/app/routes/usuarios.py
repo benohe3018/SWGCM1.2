@@ -15,7 +15,7 @@ def create_usuario():
     print(data)  # Imprime los datos recibidos en la solicitud
     try:
         # Genera el hash de la contraseña
-        hashed_password = generate_password_hash(data['contraseña'].encode()).hexdigest()
+        hashed_password = generate_password_hash(data['contraseña'])
         
         new_usuario = Usuario(
             nombre_usuario=data['nombre_usuario'],

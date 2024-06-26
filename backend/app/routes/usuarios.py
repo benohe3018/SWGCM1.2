@@ -15,11 +15,11 @@ def create_usuario():
     print(data)  # Imprime los datos recibidos en la solicitud
     try:
         # Genera el hash de la contraseña
-        hashed_password = generate_password_hash(data['contrasena'])
+        hashed_password = generate_password_hash(data['contraseña'])  # Nota: 'contraseña' con tilde
         
         new_usuario = Usuario(
             nombre_usuario=data['nombre_usuario'],
-            contrasena=hashed_password,  # Almacena el hash en lugar de la contraseña en texto plano
+            contrasena=hashed_password,  # Nota: 'contrasena' sin tilde
             rol=data['rol'],
             nombre_real=data['nombre_real'],
             apellido_paterno=data['apellido_paterno'],
@@ -38,9 +38,13 @@ def create_usuario():
             'apellido_materno': new_usuario.apellido_materno,
             'matricula': new_usuario.matricula
         }), 201
-    except Exception as e:  # Captura cualquier excepción
+    except KeyError as e:
         db.session.rollback()
-        print("Error al crear el usuario:", e)  # Agrega un log para el error
+        print(f"Error al crear el usuario: Falta el campo {str(e)}")
+        return jsonify({"error": f"Falta el campo {str(e)}"}), 400
+    except Exception as e:
+        db.session.rollback()
+        print("Error al crear el usuario:", str(e))
         return jsonify({"error": str(e)}), 500
 
 @usuarios_bp.route('/usuarios', methods=['GET'])
@@ -66,14 +70,23 @@ def update_usuario(id):
         data = request.get_json()
         usuario = Usuario.query.get_or_404(id)
         usuario.nombre_usuario = data['nombre_usuario']
-        usuario.contrasena = generate_password_hash(data['contraseña'])  # Genera el hash de la nueva contraseña
+        usuario.contrasena = generate_password_hash(data['contraseña'])  # Nota: 'contraseña' con tilde
         usuario.rol = data['rol']
         usuario.nombre_real = data['nombre_real']
         usuario.apellido_paterno = data['apellido_paterno']
         usuario.apellido_materno = data['apellido_materno']
         usuario.matricula = data['matricula']
         db.session.commit()
-        return jsonify(usuario.serialize()), 200
+        return jsonify({
+            'id': usuario.id,
+            'nombre_usuario': usuario.nombre_usuario,
+            'contraseña': usuario.contrasena,
+            'rol': usuario.rol,
+            'nombre_real': usuario.nombre_real,
+            'apellido_paterno': usuario.apellido_paterno,
+            'apellido_materno': usuario.apellido_materno,
+            'matricula': usuario.matricula
+        }), 200
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500

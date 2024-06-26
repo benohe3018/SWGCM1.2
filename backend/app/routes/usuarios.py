@@ -15,11 +15,11 @@ def create_usuario():
     print(data)  # Imprime los datos recibidos en la solicitud
     try:
         # Genera el hash de la contraseña
-        hashed_password = generate_password_hash(data['contraseña'])
+        hashed_password = generate_password_hash(data['contrasena'])
         
         new_usuario = Usuario(
             nombre_usuario=data['nombre_usuario'],
-            contraseña=hashed_password,  # Almacena el hash en lugar de la contraseña en texto plano
+            contrasena=hashed_password,  # Almacena el hash en lugar de la contraseña en texto plano
             rol=data['rol'],
             nombre_real=data['nombre_real'],
             apellido_paterno=data['apellido_paterno'],

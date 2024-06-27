@@ -1,7 +1,7 @@
 import bcrypt
 import requests
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from datetime import timedelta
 import os
 import hmac
@@ -93,3 +93,13 @@ def register():
     db.session.commit()
     
     return jsonify({"message": "Usuario registrado exitosamente"}), 201
+
+@auth_bp.route('/active_user', methods=['GET'])
+@jwt_required()
+def get_active_user():
+    user_id = get_jwt_identity()
+    user = Usuario.query.filter_by(id=user_id).first()
+    if user:
+        return jsonify({"id": user.id, "nombre_usuario": user.nombre_usuario, "rol": user.rol}), 200
+    else:
+        return jsonify({"message": "Usuario no encontrado"}), 404

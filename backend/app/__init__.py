@@ -9,9 +9,9 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 # Importa todos los modelos
-from .models import * 
+from .models import *
 
- # Importa e inicializa los blueprints
+# Importa e inicializa los blueprints
 from .routes.auth import auth_bp
 from .routes.medicos import medicos_bp
 from .routes.usuarios import usuarios_bp
@@ -20,8 +20,13 @@ def create_app():
     app = Flask(__name__, static_folder='/app/frontend/build', static_url_path='')
 
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
-    # Asegúrate de que la URL de la base de datos comienza con 'postgresql://'
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://postgres:Barc3lona3018?@localhost:5432/swgcm').replace("postgres://", "postgresql://")
+    
+    # Configuración mejorada de la base de datos
+    database_url = os.getenv('DATABASE_URL', 'postgresql://postgres:Barc3lona3018?@localhost:5432/swgcm')
+    if database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)

@@ -17,7 +17,7 @@ from .routes.medicos import medicos_bp
 from .routes.usuarios import usuarios_bp
 
 def create_app():
-    app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
+    app = Flask(__name__, static_folder='../frontend/build', static_url_path='')
 
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
     
@@ -48,4 +48,5 @@ def create_app():
             return send_from_directory(app.static_folder, 'index.html')
 
     return app
+
 

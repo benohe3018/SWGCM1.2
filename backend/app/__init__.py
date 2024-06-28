@@ -17,7 +17,8 @@ from .routes.medicos import medicos_bp
 from .routes.usuarios import usuarios_bp
 
 def create_app():
-    app = Flask(__name__, static_folder='/app/frontend/build', static_url_path='')
+    relative_static_folder_path = '../../frontend/build'
+    app = Flask(__name__, static_folder=relative_static_folder_path, static_url_path='')
 
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
     # Asegúrate de que la URL de la base de datos comienza con 'postgresql://'
@@ -28,7 +29,7 @@ def create_app():
     migrate.init_app(app, db)
     jwt = JWTManager(app)
 
-    CORS(app, resources={r"/api/*": {"origins": "*"}})  # Ajusta las CORS según tus necesidades
+    CORS(app, resources={r"/api/*": {"origins": "*"}})  
 
     app.register_blueprint(auth_bp, url_prefix='/api')
     app.register_blueprint(medicos_bp, url_prefix='/api')

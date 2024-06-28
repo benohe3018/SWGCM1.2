@@ -11,7 +11,7 @@ migrate = Migrate()
 # Importa todos los modelos
 from .models import * 
 
- # Importa e inicializa los blueprints
+ # Importa e inicializa los blueprints desde un archivo x la base de datos
 from .routes.auth import auth_bp
 from .routes.medicos import medicos_bp
 from .routes.usuarios import usuarios_bp

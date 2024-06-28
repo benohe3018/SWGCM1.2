@@ -11,7 +11,7 @@ def generate_password_hash(password):
 
 @usuarios_bp.route('/usuarios', methods=['POST'])
 def create_usuario():
-    data = request.get_json()  # Obtiene los datos de la solicitud
+    data = request.get_json()  # Obtiene los datos de la solicitud desde un usuario
     print(data)  # Imprime los datos recibidos en la solicitud
     try:
         # Genera el hash de la contraseña

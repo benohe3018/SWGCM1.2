@@ -90,7 +90,7 @@ body {
   padding: 20px;
   box-sizing: border-box;
   position: fixed;
-  top: 70px; /* Ajustado para que quede debajo del menú */
+  top: 50px; /* Ajustado para que quede debajo del menú */
   z-index: 100;
   display:flex;
 }

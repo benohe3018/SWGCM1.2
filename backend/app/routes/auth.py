@@ -4,9 +4,10 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
 import os
-import hmac
-
+from argon2.exceptions import VerifyMismatchError
+from .config import ph
 from ..models import Usuario, db
+from argon2.exceptions import HashingError
 
 api_key = os.getenv('RECAPTCHA_API_KEY')
 site_key = os.getenv('RECAPTCHA_SITE_KEY')
@@ -20,16 +21,19 @@ def generate_token(identity, role):
     return create_access_token(identity=identity, expires_delta=expires, additional_claims=additional_claims)
 
 def hash_password(password):
-    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    try:
+        return ph.hash(password)
+    except HashingError as e:
+        print(f"Error al generar el hash de la contraseña: {str(e)}")
+        raise ValueError("Error al procesar la contraseña")
 
 def check_password_hash(stored_hash, password):
     try:
-        if isinstance(password, str):
-            password = password.encode('utf-8')
-        if isinstance(stored_hash, str):
-            stored_hash = stored_hash.encode('utf-8')
-        return bcrypt.checkpw(password, stored_hash)
-    except Exception:
+        if stored_hash.startswith('$2b$'):  # Es un hash bcrypt
+            return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
+        else:  # Es un hash Argon2
+            return ph.verify(stored_hash, password)
+    except (VerifyMismatchError, ValueError):
         return False
 
 @auth_bp.route('/login', methods=['POST'])
@@ -52,16 +56,17 @@ def login():
         return jsonify({"message": "Invalid CAPTCHA"}), 401
     if recaptcha_data['event']['expectedAction'] != 'LOGIN' or recaptcha_data['riskAnalysis']['score'] < 0.5:
         return jsonify({"message": "Invalid CAPTCHA"}), 401
+    
+    print(f"Intento de login para usuario: {username}")
 
     user = Usuario.query.filter_by(nombre_usuario=username).first()
-    if user is None:
-        user = Usuario(contrasena='$2b$12$' + 'x'*53)  # Hash falso para prevenir enumeration attacks
-
-    if hmac.compare_digest(user.contrasena[:4], '$2b$'):
-        if check_password_hash(user.contrasena, password):
-            token = generate_token(user.id, user.rol)
-            return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
-
+    if user and check_password_hash(user.contrasena, password):
+        if user.contrasena.startswith('$2b$'):  # Es un hash bcrypt, actualizar a Argon2
+            new_hash = hash_password(password)
+            user.contrasena = new_hash
+            db.session.commit()
+        token = generate_token(user.id, user.rol)
+        return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
     return jsonify({"message": "Credenciales inválidas"}), 401
 
 @auth_bp.route('/register', methods=['POST'])

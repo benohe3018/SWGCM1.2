@@ -122,7 +122,7 @@ const CreateUsuario = () => {
   };
 
   const roles = [
-    'Root',
+    'root',
     'Admin',
     'Usuario_administrador',
     'Usuario_de_Campo',

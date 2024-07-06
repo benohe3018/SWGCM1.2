@@ -11,7 +11,7 @@ def get_estudios():
     try:
         estudios = EstudiosRadiologicos.query.all()
         return jsonify([{
-            'id': estudio.id,
+            'id_estudio': estudio.id_estudio,
             'nombre_estudio': estudio.nombre_estudio,
             'descripcion_estudio': estudio.descripcion_estudio
         } for estudio in estudios]), 200
@@ -33,7 +33,7 @@ def create_estudio():
         db.session.add(new_estudio)
         db.session.commit()
         return jsonify({
-            'id': new_estudio.id,
+            'id_estudio': new_estudio.id_estudio,
             'nombre_estudio': new_estudio.nombre_estudio,
             'descripcion_estudio': new_estudio.descripcion_estudio
         }), 201
@@ -54,7 +54,7 @@ def update_estudio(id):
         estudio.descripcion_estudio = data.get('descripcion_estudio', estudio.descripcion_estudio)
         db.session.commit()
         return jsonify({
-            'id': estudio.id,
+            'id_estudio': estudio.id_estudio,
             'nombre_estudio': estudio.nombre_estudio,
             'descripcion_estudio': estudio.descripcion_estudio
         }), 200
@@ -74,4 +74,5 @@ def delete_estudio(id):
         db.session.rollback()
         logging.error("Error al eliminar estudio: %s", str(e))
         return jsonify({"error": "Error al eliminar el estudio"}), 500
+
 

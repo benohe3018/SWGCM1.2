@@ -56,7 +56,7 @@ class Paciente(db.Model):
 
 class EstudiosRadiologicos(db.Model):
     __tablename__ = 'estudiosradiologicos'
-    id = db.Column(db.Integer, primary_key=True)
+    id_estudio = db.Column(db.Integer, primary_key=True)
     nombre_estudio = db.Column(db.String(100), nullable=False)
     descripcion_estudio = db.Column(db.String(255), nullable=False)
     citas = db.relationship('Cita', backref='estudio_radiologico', lazy=True)

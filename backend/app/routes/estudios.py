@@ -74,4 +74,3 @@ def delete_estudio(id):
         db.session.rollback()
         logging.error("Error al eliminar estudio: %s", str(e))
         return jsonify({"error": "Error al eliminar el estudio"}), 500
-

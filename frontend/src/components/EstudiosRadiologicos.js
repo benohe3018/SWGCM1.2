@@ -15,8 +15,47 @@ const EstudiosRadiologicos = () => {
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        cargarEstudios();
+        inicializarEstudios();
     }, []);
+
+    const inicializarEstudios = async () => {
+        try {
+            setCargando(true);
+            const data = await getEstudios();
+            if (data.length === 0) {
+                await crearEstudiosPrueba();
+            } else {
+                setEstudios(data);
+            }
+            setError(null);
+        } catch (error) {
+            console.error("Error al inicializar estudios:", error);
+            setError("Hubo un problema al cargar los estudios. Por favor, intente de nuevo.");
+        } finally {
+            setCargando(false);
+        }
+    };
+
+    const crearEstudiosPrueba = async () => {
+        const estudiosPrueba = [
+            { nombre_estudio: "Resonancia Magnética de Cerebro", descripcion_estudio: "Estudio de imagen detallado del cerebro" },
+            { nombre_estudio: "Tomografía Computarizada de Tórax", descripcion_estudio: "Imagen de rayos X del pecho" },
+            { nombre_estudio: "Radiografía de Tórax", descripcion_estudio: "Imagen simple de rayos X del pecho" },
+            { nombre_estudio: "Ultrasonido Abdominal", descripcion_estudio: "Estudio de imagen del abdomen usando ondas sonoras" },
+            { nombre_estudio: "Mamografía", descripcion_estudio: "Imagen de rayos X de las mamas" }
+        ];
+
+        for (let estudio of estudiosPrueba) {
+            try {
+                await createEstudio(estudio);
+            } catch (error) {
+                console.error("Error al crear estudio de prueba:", error);
+            }
+        }
+
+        const nuevosEstudios = await getEstudios();
+        setEstudios(nuevosEstudios);
+    };
 
     const cargarEstudios = async () => {
         try {

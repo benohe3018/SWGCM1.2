@@ -2,6 +2,11 @@ import React from 'react';
 import './TablaEstudios.css';
 
 const TablaEstudios = ({ estudios, onEditar, onEliminar }) => {
+  
+  if (!Array.isArray(estudios) || estudios.length === 0) {
+    return <p>No hay estudios disponibles favor de capturar.</p>;
+  }
+
   return (
     <div className="tabla-estudios-container">
       <table className="tabla-estudios">
@@ -20,10 +25,16 @@ const TablaEstudios = ({ estudios, onEditar, onEliminar }) => {
               <td>{estudio.nombre_estudio}</td>
               <td>{estudio.descripcion_estudio}</td>
               <td>
-                <button onClick={() => onEditar(estudio.id_estudio)} className="editar-button">
+                <button 
+                  onClick={() => onEditar(estudio.id_estudio)} 
+                  className="editar-button"
+                >
                   Editar
                 </button>
-                <button onClick={() => onEliminar(estudio.id_estudio)} className="eliminar-button">
+                <button 
+                  onClick={() => onEliminar(estudio.id_estudio)} 
+                  className="eliminar-button"
+                >
                   Eliminar
                 </button>
               </td>

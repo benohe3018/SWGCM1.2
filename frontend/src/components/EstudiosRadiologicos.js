@@ -1,4 +1,3 @@
-//EstudiosRadiologicos.js
 import React, { useState, useEffect } from "react";
 import './EstudiosRadiologicos.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
@@ -10,8 +9,10 @@ import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estu
 const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
-    const [modoFormulario, setModoFormulario] = useState(''); // 'crear' o 'editar'
+    const [modoFormulario, setModoFormulario] = useState('');
     const [mostrarModal, setMostrarModal] = useState(false);
+    const [error, setError] = useState(null);
+    const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
         cargarEstudios();
@@ -19,49 +20,68 @@ const EstudiosRadiologicos = () => {
 
     const cargarEstudios = async () => {
         try {
+            setCargando(true);
             const data = await getEstudios();
             setEstudios(data);
+            setError(null);
         } catch (error) {
             console.error("Error al cargar estudios:", error);
+            setError("Hubo un problema al cargar los estudios. Por favor, intente de nuevo.");
+        } finally {
+            setCargando(false);
         }
     };
 
     const handleCrearEstudio = async (nuevoEstudio) => {
         try {
             await createEstudio(nuevoEstudio);
-            cargarEstudios();
+            await cargarEstudios();
             setModoFormulario('');
         } catch (error) {
             console.error("Error al crear estudio:", error);
+            setError("No se pudo crear el estudio. Por favor, intente de nuevo.");
         }
     };
 
     const handleEditarEstudio = async (estudioEditado) => {
         try {
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
-            cargarEstudios();
+            await cargarEstudios();
             setModoFormulario('');
             setEstudioSeleccionado(null);
         } catch (error) {
             console.error("Error al editar estudio:", error);
+            setError("No se pudo editar el estudio. Por favor, intente de nuevo.");
         }
     };
 
-    const handleEliminarEstudio = async (id) => {
-        setEstudioSeleccionado(estudios.find(e => e.id_estudio === id));
-        setMostrarModal(true);
+    const handleEliminarEstudio = (id) => {
+        const estudio = estudios.find(e => e.id_estudio === id);
+        if (estudio) {
+            setEstudioSeleccionado(estudio);
+            setMostrarModal(true);
+        }
     };
 
     const confirmarEliminarEstudio = async () => {
         try {
             await deleteEstudio(estudioSeleccionado.id_estudio);
-            cargarEstudios();
+            await cargarEstudios();
             setMostrarModal(false);
             setEstudioSeleccionado(null);
         } catch (error) {
             console.error("Error al eliminar estudio:", error);
+            setError("No se pudo eliminar el estudio. Por favor, intente de nuevo.");
         }
     };
+
+    if (cargando) {
+        return <div>Cargando estudios...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div className="estudios-radiologicos-container">
@@ -86,14 +106,18 @@ const EstudiosRadiologicos = () => {
                     />
                 )}
 
-                <TablaEstudios
-                    estudios={estudios}
-                    onEditar={(id) => {
-                        setEstudioSeleccionado(estudios.find(e => e.id_estudio === id));
-                        setModoFormulario('editar');
-                    }}
-                    onEliminar={handleEliminarEstudio}
-                />
+                {estudios.length > 0 ? (
+                    <TablaEstudios
+                        estudios={estudios}
+                        onEditar={(id) => {
+                            setEstudioSeleccionado(estudios.find(e => e.id_estudio === id));
+                            setModoFormulario('editar');
+                        }}
+                        onEliminar={handleEliminarEstudio}
+                    />
+                ) : (
+                    <p>No hay estudios disponibles.</p>
+                )}
             </main>
 
             <ModalConfirmacion

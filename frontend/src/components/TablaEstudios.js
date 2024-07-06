@@ -20,19 +20,19 @@ const TablaEstudios = ({ estudios, onEditar, onEliminar }) => {
         </thead>
         <tbody>
           {estudios.map((estudio) => (
-            <tr key={estudio.id_estudio}>
-              <td>{estudio.id_estudio}</td>
+            <tr key={estudio.id}>
+              <td>{estudio.id}</td> {/* Asegúrate de usar 'id' */}
               <td>{estudio.nombre_estudio}</td>
               <td>{estudio.descripcion_estudio}</td>
               <td>
                 <button 
-                  onClick={() => onEditar(estudio.id_estudio)} 
+                  onClick={() => onEditar(estudio.id)}  
                   className="editar-button"
                 >
                   Editar
                 </button>
                 <button 
-                  onClick={() => onEliminar(estudio.id_estudio)} 
+                  onClick={() => onEliminar(estudio.id)}  
                   className="eliminar-button"
                 >
                   Eliminar

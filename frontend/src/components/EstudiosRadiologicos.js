@@ -84,7 +84,7 @@ const EstudiosRadiologicos = () => {
 
     const handleEditarEstudio = async (estudioEditado) => {
         try {
-            await updateEstudio(estudioEditado.id_estudio, estudioEditado);
+            await updateEstudio(estudioEditado.id, estudioEditado); // Asegúrate de usar 'id'
             await cargarEstudios();
             setModoFormulario('');
             setEstudioSeleccionado(null);
@@ -95,7 +95,7 @@ const EstudiosRadiologicos = () => {
     };
 
     const handleEliminarEstudio = (id) => {
-        const estudio = estudios.find(e => e.id_estudio === id);
+        const estudio = estudios.find(e => e.id === id); // Asegúrate de usar 'id'
         if (estudio) {
             setEstudioSeleccionado(estudio);
             setMostrarModal(true);
@@ -104,7 +104,7 @@ const EstudiosRadiologicos = () => {
 
     const confirmarEliminarEstudio = async () => {
         try {
-            await deleteEstudio(estudioSeleccionado.id_estudio);
+            await deleteEstudio(estudioSeleccionado.id); // Asegúrate de usar 'id'
             await cargarEstudios();
             setMostrarModal(false);
             setEstudioSeleccionado(null);
@@ -149,7 +149,7 @@ const EstudiosRadiologicos = () => {
                     <TablaEstudios
                         estudios={estudios}
                         onEditar={(id) => {
-                            setEstudioSeleccionado(estudios.find(e => e.id_estudio === id));
+                            setEstudioSeleccionado(estudios.find(e => e.id === id)); // Asegúrate de usar 'id'
                             setModoFormulario('editar');
                         }}
                         onEliminar={handleEliminarEstudio}

@@ -93,7 +93,7 @@ class Cita(db.Model):
     fecha_hora_cita = db.Column(db.DateTime, nullable=False)
     nss_paciente = db.Column(db.String(20), db.ForeignKey('pacientes.NSS'), nullable=False)
     id_medico_refiere = db.Column(db.Integer, db.ForeignKey('medicos.id_medico'))
-    id_estudio_radiologico = db.Column(db.Integer, db.ForeignKey('estudios_radiologicos.id'))
+    id_estudio_radiologico = db.Column(db.Integer, db.ForeignKey('estudiosradiologicos.id'))
     id_usuario_registra = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
     id_unidad_medica_origen = db.Column(db.Integer, db.ForeignKey('unidades_medicina_familiar.id'))
     id_hospital_origen = db.Column(db.Integer, db.ForeignKey('hospitales.id'))

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import './EstudiosRadiologicos.css'; // Importamos el archivo CSS actualizado
-import logoIMSS from '../images/LogoIMSS.jpg';
-import TablaEstudios from './TablaEstudios';
-import FormularioEstudio from './FormularioEstudio';
-import ModalConfirmacion from './ModalConfirmacion';
-import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
 import { Link } from 'react-router-dom';
+import './EstudiosRadiologicos.css'; 
+import logoIMSS from '../images/LogoIMSS.jpg';
+import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
+import FormularioEstudio from './FormularioEstudio';
 
 const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
@@ -150,7 +148,9 @@ const EstudiosRadiologicos = () => {
             </nav>
 
             <div className="estudios-radiologicos-content">
-                <button onClick={() => setModoFormulario('crear')} className="crear-estudio-button">Crear Nuevo Estudio</button>
+                <button className="crear-estudio-button" onClick={() => setModoFormulario('crear')}>
+                    Crear Nuevo Estudio
+                </button>
 
                 {modoFormulario && (
                     <FormularioEstudio
@@ -164,26 +164,42 @@ const EstudiosRadiologicos = () => {
                     />
                 )}
 
-                {estudios.length > 0 ? (
-                    <TablaEstudios
-                        estudios={estudios}
-                        onEditar={(id) => {
-                            setEstudioSeleccionado(estudios.find(e => e.id_estudio === id));
-                            setModoFormulario('editar');
-                        }}
-                        onEliminar={handleEliminarEstudio}
-                    />
-                ) : (
-                    <p>No hay estudios disponibles.</p>
-                )}
+                <div className="tabla-estudios-container">
+                    <table className="tabla-estudios">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre del Estudio</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {estudios.map((estudio) => (
+                                <tr key={estudio.id_estudio}>
+                                    <td>{estudio.id_estudio}</td>
+                                    <td>{estudio.nombre_estudio}</td>
+                                    <td>{estudio.descripcion_estudio}</td>
+                                    <td>
+                                        <button 
+                                          onClick={() => setModoFormulario('editar')} 
+                                          className="editar-button"
+                                        >
+                                            Editar
+                                        </button>
+                                        <button 
+                                          onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
+                                          className="eliminar-button"
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <ModalConfirmacion
-                isOpen={mostrarModal}
-                onClose={() => setMostrarModal(false)}
-                onConfirm={confirmarEliminarEstudio}
-                mensaje="¿Está seguro de que desea eliminar este estudio?"
-            />
         </div>
     );
 };

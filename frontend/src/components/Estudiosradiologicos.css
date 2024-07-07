@@ -121,57 +121,36 @@
   
   .crear-estudio-button {
     padding: 10px 20px;
-    margin-bottom: 20px;
     background-color: #004d40;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 20px;
   }
   
-  .estudio-table-container {
+  .crear-estudio-button:hover {
+    background-color: #00352e;
+  }
+  
+  .tabla-estudios-container {
     width: 100%;
     overflow-x: auto;
   }
   
-  .estudio-table {
+  .tabla-estudios {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
   }
   
-  .estudio-table th, .estudio-table td {
+  .tabla-estudios th, .tabla-estudios td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
   }
   
-  .estudio-table th {
+  .tabla-estudios th {
     background-color: #f4f4f4;
-  }
-  
-  .pagination-read-estudio {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-top: 10px;
-  }
-  
-  .pagination-read-estudio button {
-    padding: 10px 15px;
-    margin: 0 5px;
-    background-color: #12322B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .pagination-read-estudio button.active {
-    background-color: #0C231E;
-  }
-  
-  .pagination-read-estudio button:hover {
-    background-color: #0C231E;
   }
   

@@ -126,7 +126,7 @@ const EstudiosRadiologicos = () => {
 
     return (
         <div className="estudios-radiologicos-page">
-            <header className="estudios-radiologicos-header">
+            <header className="header-container">
                 <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
                 <div className="header-texts">
                     <h1 className="welcome-message">Sistema de Gestión de Estudios Radiológicos</h1>
@@ -136,11 +136,11 @@ const EstudiosRadiologicos = () => {
 
             <nav className="navbar">
                 <ul className="nav-links">
-                    <li><Link to="/" onClick={() => setVista('')}>Cambiar Sesión</Link></li>
-                    <li><Link to="#" onClick={() => setVista('crear')}>Capturar Nuevo Estudio Radiológico</Link></li>
-                    <li><Link to="#" onClick={() => setVista('ver')}>Ver Estudios Capturados</Link></li>
-                    <li><Link to="#" onClick={() => setVista('actualizar')}>Actualizar Registro de Estudios</Link></li>
-                    <li><Link to="#" onClick={() => setVista('borrar')}>Borrar Registro de Estudios</Link></li>
+                    <li><Link to="/">Cambiar Sesión</Link></li>
+                    <li><Link to="/create-estudio">Capturar Nuevo Estudio Radiológico</Link></li>
+                    <li><Link to="/read-estudio">Ver Estudios Capturados</Link></li>
+                    <li><Link to="/update-estudio">Actualizar Registro de Estudios</Link></li>
+                    <li><Link to="/delete-estudio">Borrar Registro de Estudios</Link></li>
                     <li><Link to="/dashboard-root">Página de Inicio</Link></li>
                 </ul>
                 <div className="hamburger">
@@ -150,57 +150,42 @@ const EstudiosRadiologicos = () => {
                 </div>
             </nav>
 
-            <div className="estudios-radiologicos-content">
-                {vista === 'crear' && (
-                    <FormularioEstudio
-                        modo="crear"
-                        onSubmit={handleCrearEstudio}
-                        onCancel={() => setVista('')}
-                    />
-                )}
+            {/* Render contenido basado en la acción seleccionada */}
+            {modoFormulario === 'crear' && (
+                <FormularioEstudio
+                    modo="crear"
+                    onSubmit={handleCrearEstudio}
+                    onCancel={() => setModoFormulario('')}
+                />
+            )}
 
-                {vista === 'ver' && (
-                    <div className="tabla-estudios-container">
-                        <table className="tabla-estudios">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre del Estudio</th>
-                                    <th>Descripción</th>
-                                    <th>Acciones</th>
+            {modoFormulario === '' && (
+                <div className="tabla-estudios-container">
+                    <table className="tabla-estudios">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre del Estudio</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {estudios.map((estudio) => (
+                                <tr key={estudio.id_estudio}>
+                                    <td>{estudio.id_estudio}</td>
+                                    <td>{estudio.nombre_estudio}</td>
+                                    <td>{estudio.descripcion_estudio}</td>
+                                    <td>
+                                        <button onClick={() => setModoFormulario('editar')} className="editar-button">Editar</button>
+                                        <button onClick={() => handleEliminarEstudio(estudio.id_estudio)} className="eliminar-button">Eliminar</button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {estudios.map((estudio) => (
-                                    <tr key={estudio.id_estudio}>
-                                        <td>{estudio.id_estudio}</td>
-                                        <td>{estudio.nombre_estudio}</td>
-                                        <td>{estudio.descripcion_estudio}</td>
-                                        <td>
-                                            <button 
-                                              onClick={() => {
-                                                  setModoFormulario('editar');
-                                                  setEstudioSeleccionado(estudio);
-                                                  setVista('editar');
-                                              }} 
-                                              className="editar-button"
-                                            >
-                                                Editar
-                                            </button>
-                                            <button 
-                                              onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
-                                              className="eliminar-button"
-                                            >
-                                                Eliminar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-            </div>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 };

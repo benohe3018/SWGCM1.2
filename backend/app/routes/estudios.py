@@ -22,7 +22,9 @@ def get_estudios():
 @estudios_bp.route('/estudios', methods=['POST'])
 def create_estudio():
     data = request.get_json()
+    logging.info("Datos recibidos: %s", data)
     if not all(k in data for k in ('nombre_estudio', 'descripcion_estudio')):
+        logging.error("Campos faltantes en la solicitud POST: %s", data)
         return jsonify({"error": "Faltan campos requeridos"}), 400
     
     try:
@@ -39,11 +41,13 @@ def create_estudio():
         }), 201
     except IntegrityError:
         db.session.rollback()
+        logging.error("El estudio ya existe: %s", data)
         return jsonify({"error": "El estudio ya existe"}), 400
     except SQLAlchemyError as e:
         db.session.rollback()
         logging.error("Error en la base de datos al crear estudio: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+
 
 @estudios_bp.route('/estudios/<int:id>', methods=['PUT'])
 def update_estudio(id):

@@ -137,7 +137,7 @@ const EstudiosRadiologicos = () => {
                     <li><Link to="/create-estudio">Capturar Nuevo Estudio Radiológico</Link></li>
                     <li><Link to="/read-estudio">Ver Estudios Capturados</Link></li>
                     <li><Link to="/update-estudio">Actualizar Registro de Estudios</Link></li>
-                    <li><Link to="/delete-estudio">Borrar Registro de Estudios</Link></li>
+                    <li><Link to="/delete-estudio">Borrar Registro de Estudios Radiológicos</Link></li>
                     <li><Link to="/dashboard-root">Página de Inicio</Link></li>
                 </ul>
                 <div className="hamburger">

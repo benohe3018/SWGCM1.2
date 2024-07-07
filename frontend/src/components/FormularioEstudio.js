@@ -54,7 +54,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
 
   return (
     <div className="formulario-estudio-container">
-      <h2>{modo === 'crear' ? 'Crear Nuevo Estudio' : 'Editar Estudio'}</h2>
+      <h2 className="titulo-formulario">{modo === 'crear' ? 'Crear Nuevo Estudio' : 'Editar Estudio'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nombre">Nombre del Estudio:</label>
@@ -78,10 +78,10 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
           />
         </div>
         <div className="form-actions">
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" className="boton-crear" disabled={isSubmitting}>
             {isSubmitting ? 'Enviando...' : (modo === 'crear' ? 'Crear Estudio' : 'Actualizar Estudio')}
           </button>
-          <button type="button" onClick={onCancel}>Cancelar</button>
+          <button type="button" className="boton-cancelar" onClick={onCancel}>Cancelar</button>
         </div>
       </form>
     </div>

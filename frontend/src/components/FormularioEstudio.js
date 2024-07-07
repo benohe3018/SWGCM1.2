@@ -1,4 +1,3 @@
-// FormularioEstudio.js
 import React, { useState, useEffect } from 'react';
 import './FormularioEstudio.css';
 
@@ -18,28 +17,32 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     event.preventDefault();
     
     if (!isValidNombre(nombre)) {
-      alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
-      return;
+        alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
+        return;
     }
     if (!isValidDescripcion(descripcion)) {
-      alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
-      return;
+        alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
+        return;
     }
 
     setIsSubmitting(true);
-    try {
-      await onSubmit({
+    const estudio = {
         nombre_estudio: nombre,
         descripcion_estudio: descripcion,
-      });
-      setNombre('');
-      setDescripcion('');
+    };
+    console.log("Datos enviados: ", estudio);
+
+    try {
+        await onSubmit(estudio);
+        setNombre('');
+        setDescripcion('');
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+        console.error('Error al enviar el formulario:', error);
     } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
     }
-  };
+};
+
 
   const isValidNombre = (nombre) => {
     return nombre.length >= 2 && nombre.length <= 100;
@@ -65,7 +68,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="descripcion">Descripción:</label>
+          <label htmlFor="descripcion">Descripción Del Estudio:</label>
           <textarea
             id="descripcion"
             value={descripcion}
@@ -75,10 +78,10 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
           />
         </div>
         <div className="form-actions">
-          <button type="submit" disabled={isSubmitting} className="crear-button">
+          <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Enviando...' : (modo === 'crear' ? 'Crear Estudio' : 'Actualizar Estudio')}
           </button>
-          <button type="button" onClick={onCancel} className="cancelar-button">Cancelar</button>
+          <button type="button" onClick={onCancel}>Cancelar</button>
         </div>
       </form>
     </div>

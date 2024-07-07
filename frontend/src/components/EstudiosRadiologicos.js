@@ -156,7 +156,7 @@ const EstudiosRadiologicos = () => {
                     <FormularioEstudio
                         modo={modoFormulario}
                         estudioInicial={estudioSeleccionado}
-                        onSubmit={modoFormulario === 'crear' ? handleCrearEstudio : handleEditarEstudio}
+                        onSubmit={handleCrearEstudio}
                         onCancel={() => {
                             setModoFormulario('');
                             setEstudioSeleccionado(null);
@@ -205,3 +205,4 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+

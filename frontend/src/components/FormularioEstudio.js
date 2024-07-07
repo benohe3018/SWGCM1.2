@@ -24,13 +24,15 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
       alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
       return;
     }
-
+  
     setIsSubmitting(true);
     try {
-      await onSubmit({
+      const estudioData = {
         nombre_estudio: nombre,
         descripcion_estudio: descripcion,
-      });
+      };
+      console.log('Estudio Data:', estudioData); // Añadir esta línea
+      await onSubmit(estudioData);
       setNombre('');
       setDescripcion('');
     } catch (error) {

@@ -9,10 +9,8 @@ const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
     const [modoFormulario, setModoFormulario] = useState('');
-    const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
     const [cargando, setCargando] = useState(true);
-    const [vista, setVista] = useState(''); // Nueva variable para controlar la vista actual
 
     useEffect(() => {
         inicializarEstudios();
@@ -76,7 +74,6 @@ const EstudiosRadiologicos = () => {
             await createEstudio(nuevoEstudio);
             await cargarEstudios();
             setModoFormulario('');
-            setVista(''); // Cierra el formulario y muestra la vista principal
         } catch (error) {
             console.error("Error al crear estudio:", error);
             setError("No se pudo crear el estudio. Por favor, intente de nuevo.");
@@ -89,7 +86,6 @@ const EstudiosRadiologicos = () => {
             await cargarEstudios();
             setModoFormulario('');
             setEstudioSeleccionado(null);
-            setVista(''); // Cierra el formulario y muestra la vista principal
         } catch (error) {
             console.error("Error al editar estudio:", error);
             setError("No se pudo editar el estudio. Por favor, intente de nuevo.");
@@ -100,7 +96,6 @@ const EstudiosRadiologicos = () => {
         const estudio = estudios.find(e => e.id_estudio === id);
         if (estudio) {
             setEstudioSeleccionado(estudio);
-            setMostrarModal(true);
         }
     };
 
@@ -108,7 +103,6 @@ const EstudiosRadiologicos = () => {
         try {
             await deleteEstudio(estudioSeleccionado.id_estudio);
             await cargarEstudios();
-            setMostrarModal(false);
             setEstudioSeleccionado(null);
         } catch (error) {
             console.error("Error al eliminar estudio:", error);
@@ -126,7 +120,7 @@ const EstudiosRadiologicos = () => {
 
     return (
         <div className="estudios-radiologicos-page">
-            <header className="header-container">
+            <header className="estudios-radiologicos-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
                 <div className="header-texts">
                     <h1 className="welcome-message">Sistema de Gestión de Estudios Radiológicos</h1>
@@ -140,7 +134,7 @@ const EstudiosRadiologicos = () => {
                     <li><Link to="/create-estudio">Capturar Nuevo Estudio Radiológico</Link></li>
                     <li><Link to="/read-estudio">Ver Estudios Capturados</Link></li>
                     <li><Link to="/update-estudio">Actualizar Registro de Estudios</Link></li>
-                    <li><Link to="/delete-estudio">Borrar Registro de Estudios</Link></li>
+                    <li><Link to="/delete-estudio">Borrar Registro de Estudios Radiológicos</Link></li>
                     <li><Link to="/dashboard-root">Página de Inicio</Link></li>
                 </ul>
                 <div className="hamburger">
@@ -150,16 +144,23 @@ const EstudiosRadiologicos = () => {
                 </div>
             </nav>
 
-            {/* Render contenido basado en la acción seleccionada */}
-            {modoFormulario === 'crear' && (
-                <FormularioEstudio
-                    modo="crear"
-                    onSubmit={handleCrearEstudio}
-                    onCancel={() => setModoFormulario('')}
-                />
-            )}
+            <div className="estudios-radiologicos-content">
+                <button className="crear-estudio-button" onClick={() => setModoFormulario('crear')}>
+                    Crear Nuevo Estudio
+                </button>
 
-            {modoFormulario === '' && (
+                {modoFormulario && (
+                    <FormularioEstudio
+                        modo={modoFormulario}
+                        estudioInicial={estudioSeleccionado}
+                        onSubmit={handleCrearEstudio}
+                        onCancel={() => {
+                            setModoFormulario('');
+                            setEstudioSeleccionado(null);
+                        }}
+                    />
+                )}
+
                 <div className="tabla-estudios-container">
                     <table className="tabla-estudios">
                         <thead>
@@ -177,15 +178,25 @@ const EstudiosRadiologicos = () => {
                                     <td>{estudio.nombre_estudio}</td>
                                     <td>{estudio.descripcion_estudio}</td>
                                     <td>
-                                        <button onClick={() => setModoFormulario('editar')} className="editar-button">Editar</button>
-                                        <button onClick={() => handleEliminarEstudio(estudio.id_estudio)} className="eliminar-button">Eliminar</button>
+                                        <button 
+                                          onClick={() => setModoFormulario('editar')} 
+                                          className="editar-button"
+                                        >
+                                            Editar
+                                        </button>
+                                        <button 
+                                          onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
+                                          className="eliminar-button"
+                                        >
+                                            Eliminar
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
-            )}
+            </div>
         </div>
     );
 };

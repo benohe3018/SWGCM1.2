@@ -17,32 +17,30 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     event.preventDefault();
     
     if (!isValidNombre(nombre)) {
-        alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
-        return;
+      alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
+      return;
     }
     if (!isValidDescripcion(descripcion)) {
-        alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
-        return;
+      alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
+      return;
     }
-
+  
     setIsSubmitting(true);
-    const estudio = {
+    try {
+      const estudioData = {
         nombre_estudio: nombre,
         descripcion_estudio: descripcion,
-    };
-    console.log("Datos enviados: ", estudio);
-
-    try {
-        await onSubmit(estudio);
-        setNombre('');
-        setDescripcion('');
+      };
+      console.log('Estudio Data:', estudioData); // Añadir esta línea
+      await onSubmit(estudioData);
+      setNombre('');
+      setDescripcion('');
     } catch (error) {
-        console.error('Error al enviar el formulario:', error);
+      console.error('Error al enviar el formulario:', error);
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
     }
-};
-
+  };
 
   const isValidNombre = (nombre) => {
     return nombre.length >= 2 && nombre.length <= 100;
@@ -68,7 +66,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="descripcion">Descripción Del Estudio:</label>
+          <label htmlFor="descripcion">Descripción:</label>
           <textarea
             id="descripcion"
             value={descripcion}

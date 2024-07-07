@@ -9,7 +9,6 @@ const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
     const [modoFormulario, setModoFormulario] = useState('');
-    const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
     const [cargando, setCargando] = useState(true);
 
@@ -97,7 +96,6 @@ const EstudiosRadiologicos = () => {
         const estudio = estudios.find(e => e.id_estudio === id);
         if (estudio) {
             setEstudioSeleccionado(estudio);
-            setMostrarModal(true);
         }
     };
 
@@ -105,7 +103,6 @@ const EstudiosRadiologicos = () => {
         try {
             await deleteEstudio(estudioSeleccionado.id_estudio);
             await cargarEstudios();
-            setMostrarModal(false);
             setEstudioSeleccionado(null);
         } catch (error) {
             console.error("Error al eliminar estudio:", error);

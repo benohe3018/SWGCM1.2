@@ -17,30 +17,32 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     event.preventDefault();
     
     if (!isValidNombre(nombre)) {
-      alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
-      return;
+        alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
+        return;
     }
     if (!isValidDescripcion(descripcion)) {
-      alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
-      return;
+        alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
+        return;
     }
-  
+
     setIsSubmitting(true);
-    try {
-      const estudioData = {
+    const estudio = {
         nombre_estudio: nombre,
         descripcion_estudio: descripcion,
-      };
-      console.log('Estudio Data:', estudioData); // Añadir esta línea
-      await onSubmit(estudioData);
-      setNombre('');
-      setDescripcion('');
+    };
+    console.log("Datos enviados: ", estudio);
+
+    try {
+        await onSubmit(estudio);
+        setNombre('');
+        setDescripcion('');
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+        console.error('Error al enviar el formulario:', error);
     } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
     }
-  };
+};
+
 
   const isValidNombre = (nombre) => {
     return nombre.length >= 2 && nombre.length <= 100;

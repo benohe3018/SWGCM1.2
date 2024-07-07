@@ -1,18 +1,177 @@
-/*Estudiosradiologicos.css*/
-.estudios-radiologicos-citas-header {
-    background-color: #f8f9fa;
-    padding: 20px;
+.estudios-radiologicos-page {
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
-}
-
-.gestion-citas-title {
-    color: #6c757d;
-    font-size: 24px;
+    color: black;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #004d40;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    font-size: 1.5em;
     font-weight: bold;
-}
-.en-construccion-message {
-    color: #6c757d;
-    font-size: 18px;
-    margin-top: 20px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: #004d40;
+    }
+  
+    .nav-links li {
+      margin: 10px 0;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  }
+  
+  .estudios-radiologicos-header {
+    display: flex;
+    flex-direction: inline-flex;
+    width: 100%;
+    background-color: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    margin-top: 70px; /* Ajustado para que quede debajo del menú */
+  }
+  
+  .header-logo {
+    margin-left: 10px;
+  }
+  
+  .header-texts {
     text-align: center;
-}
+    flex-grow: 1;
+  }
+  
+  .welcome-message {
+    font-size: 24px;
+    margin: 0;
+    color: #0C231E;
+  }
+  
+  .department-name {
+    font-size: 18px;
+    margin: 0;
+    color: #0C231E;
+  }
+  
+  .estudios-radiologicos-content {
+    margin-top: 220px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .crear-estudio-button {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: #004d40;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .estudio-table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .estudio-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .estudio-table th, .estudio-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .estudio-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .pagination-read-estudio {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  
+  .pagination-read-estudio button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #12322B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pagination-read-estudio button.active {
+    background-color: #0C231E;
+  }
+  
+  .pagination-read-estudio button:hover {
+    background-color: #0C231E;
+  }
+  

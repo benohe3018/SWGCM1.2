@@ -2,9 +2,8 @@ import React from 'react';
 import './TablaEstudios.css';
 
 const TablaEstudios = ({ estudios, onEditar, onEliminar }) => {
-  
   if (!Array.isArray(estudios) || estudios.length === 0) {
-    return <p>No hay estudios disponibles favor de capturar.</p>;
+    return <p>No hay estudios disponibles. Favor de capturar.</p>;
   }
 
   return (
@@ -20,19 +19,19 @@ const TablaEstudios = ({ estudios, onEditar, onEliminar }) => {
         </thead>
         <tbody>
           {estudios.map((estudio) => (
-            <tr key={estudio.id}>
-              <td>{estudio.id}</td> {/* Asegúrate de usar 'id' */}
+            <tr key={estudio.id_estudio}>
+              <td>{estudio.id_estudio}</td>
               <td>{estudio.nombre_estudio}</td>
               <td>{estudio.descripcion_estudio}</td>
               <td>
                 <button 
-                  onClick={() => onEditar(estudio.id)}  
+                  onClick={() => onEditar(estudio.id_estudio)} 
                   className="editar-button"
                 >
                   Editar
                 </button>
                 <button 
-                  onClick={() => onEliminar(estudio.id)}  
+                  onClick={() => onEliminar(estudio.id_estudio)} 
                   className="eliminar-button"
                 >
                   Eliminar

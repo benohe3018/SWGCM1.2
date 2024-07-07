@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import './EstudiosRadiologicos.css';
+import './EstudiosRadiologicos.css'; // Importamos el archivo CSS actualizado
 import logoIMSS from '../images/LogoIMSS.jpg';
 import TablaEstudios from './TablaEstudios';
 import FormularioEstudio from './FormularioEstudio';
 import ModalConfirmacion from './ModalConfirmacion';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
+import { Link } from 'react-router-dom';
 
 const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
@@ -84,7 +85,7 @@ const EstudiosRadiologicos = () => {
 
     const handleEditarEstudio = async (estudioEditado) => {
         try {
-            await updateEstudio(estudioEditado.id, estudioEditado); // Asegúrate de usar 'id'
+            await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
             setModoFormulario('');
             setEstudioSeleccionado(null);
@@ -95,7 +96,7 @@ const EstudiosRadiologicos = () => {
     };
 
     const handleEliminarEstudio = (id) => {
-        const estudio = estudios.find(e => e.id === id); // Asegúrate de usar 'id'
+        const estudio = estudios.find(e => e.id_estudio === id);
         if (estudio) {
             setEstudioSeleccionado(estudio);
             setMostrarModal(true);
@@ -104,7 +105,7 @@ const EstudiosRadiologicos = () => {
 
     const confirmarEliminarEstudio = async () => {
         try {
-            await deleteEstudio(estudioSeleccionado.id); // Asegúrate de usar 'id'
+            await deleteEstudio(estudioSeleccionado.id_estudio);
             await cargarEstudios();
             setMostrarModal(false);
             setEstudioSeleccionado(null);
@@ -123,16 +124,34 @@ const EstudiosRadiologicos = () => {
     }
 
     return (
-        <div className="estudios-radiologicos-container">
+        <div className="estudios-radiologicos-page">
             <header className="estudios-radiologicos-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-                <h1>Sistema de Gestión de Estudios Radiológicos</h1>
-                <h2>Departamento de Resonancia Magnética - HGR #46</h2>
+                <div className="header-texts">
+                    <h1 className="welcome-message">Sistema de Gestión de Estudios Radiológicos</h1>
+                    <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+                </div>
             </header>
 
-            <main className="estudios-radiologicos-main">
-                <button onClick={() => setModoFormulario('crear')}>Crear Nuevo Estudio</button>
-                
+            <nav className="navbar">
+                <ul className="nav-links">
+                    <li><Link to="/">Cambiar Sesión</Link></li>
+                    <li><Link to="/create-estudio">Capturar Nuevo Estudio Radiológico</Link></li>
+                    <li><Link to="/read-estudio">Ver Estudios Capturados</Link></li>
+                    <li><Link to="/update-estudio">Actualizar Registro de Estudios</Link></li>
+                    <li><Link to="/delete-estudio">Borrar Registro de Estudios</Link></li>
+                    <li><Link to="/dashboard-root">Página de Inicio</Link></li>
+                </ul>
+                <div className="hamburger">
+                    <div className="line"></div>
+                    <div className="line"></div>
+                    <div className="line"></div>
+                </div>
+            </nav>
+
+            <div className="estudios-radiologicos-content">
+                <button onClick={() => setModoFormulario('crear')} className="crear-estudio-button">Crear Nuevo Estudio</button>
+
                 {modoFormulario && (
                     <FormularioEstudio
                         modo={modoFormulario}
@@ -149,7 +168,7 @@ const EstudiosRadiologicos = () => {
                     <TablaEstudios
                         estudios={estudios}
                         onEditar={(id) => {
-                            setEstudioSeleccionado(estudios.find(e => e.id === id)); // Asegúrate de usar 'id'
+                            setEstudioSeleccionado(estudios.find(e => e.id_estudio === id));
                             setModoFormulario('editar');
                         }}
                         onEliminar={handleEliminarEstudio}
@@ -157,7 +176,7 @@ const EstudiosRadiologicos = () => {
                 ) : (
                     <p>No hay estudios disponibles.</p>
                 )}
-            </main>
+            </div>
 
             <ModalConfirmacion
                 isOpen={mostrarModal}

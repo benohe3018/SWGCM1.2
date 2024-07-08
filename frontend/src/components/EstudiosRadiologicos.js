@@ -86,6 +86,9 @@ const EstudiosRadiologicos = () => {
 
     const handleEditarEstudio = async (estudioEditado) => {
         try {
+            if (!estudioEditado.id_estudio) {
+                throw new Error("El ID del estudio no está definido");
+            }
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
             setModoFormulario('');
@@ -180,18 +183,18 @@ const EstudiosRadiologicos = () => {
                                         <td>
                                             <div className="botones-acciones">
                                                 <button 
-                                                  onClick={() => {
-                                                      setModoFormulario('editar');
-                                                      setEstudioSeleccionado(estudio);
-                                                      setVista('editar');
-                                                  }} 
-                                                  className="editar-button"
+                                                    onClick={() => {
+                                                        setModoFormulario('editar');
+                                                        setEstudioSeleccionado(estudio);
+                                                        setVista('editar');
+                                                    }} 
+                                                    className="editar-button"
                                                 >
                                                     Editar
                                                 </button>
                                                 <button 
-                                                  onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
-                                                  className="eliminar-button"
+                                                    onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
+                                                    className="eliminar-button"
                                                 >
                                                     Eliminar
                                                 </button>
@@ -203,7 +206,7 @@ const EstudiosRadiologicos = () => {
                         </table>
                     </div>
                 )}
-                {vista === 'editar' && (
+                {vista === 'editar' && estudioSeleccionado && (
                     <FormularioEstudio
                         modo="editar"
                         estudioInicial={estudioSeleccionado}
@@ -212,30 +215,10 @@ const EstudiosRadiologicos = () => {
                     />
                 )}
             </div>
-            {mostrarModal && (
-                <div className="modal-overlay">
-                    <div className="modal">
-                        <p>¿Estás seguro de que deseas eliminar este estudio?</p>
-                        <div className="modal-actions">
-                            <button 
-                              onClick={confirmarEliminarEstudio}
-                              className="confirmar-button"
-                            >
-                                Confirmar
-                            </button>
-                            <button 
-                              onClick={() => setMostrarModal(false)}
-                              className="cancelar-button"
-                            >
-                                Cancelar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
 
 export default EstudiosRadiologicos;
+
 

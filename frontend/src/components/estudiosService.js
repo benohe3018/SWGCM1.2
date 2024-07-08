@@ -33,10 +33,11 @@ export const updateEstudio = async (id, estudioData) => {
 };
 
 export const deleteEstudio = async (id) => {
-  try {
-    await axios.delete(`${API_URL}/estudios/${id}`);
-  } catch (error) {
-    console.error('Error deleting estudio:', error);
-    throw error;
+  const response = await fetch(`/api/estudios/${id}`, {
+      method: 'DELETE'
+  });
+  if (!response.ok) {
+      throw new Error('No se pudo eliminar el estudio');
   }
+  return response.json();
 };

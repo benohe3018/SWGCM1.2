@@ -4,6 +4,7 @@ import './EstudiosRadiologicos.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
 import FormularioEstudio from './FormularioEstudio';
+import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
 const EstudiosRadiologicos = () => {
@@ -62,6 +63,7 @@ const EstudiosRadiologicos = () => {
         try {
             setCargando(true);
             const data = await getEstudios();
+            data.sort((a, b) => a.id_estudio - b.id_estudio); // Ordenar estudios por ID
             setEstudios(data);
             setError(null);
         } catch (error) {
@@ -71,7 +73,7 @@ const EstudiosRadiologicos = () => {
             setCargando(false);
         }
     };
-
+    
     const handleCrearEstudio = async (nuevoEstudio) => {
         try {
             await createEstudio(nuevoEstudio);
@@ -218,6 +220,12 @@ const EstudiosRadiologicos = () => {
                     />
                 )}
             </div>
+            {mostrarModal && (
+                <ModalConfirmacion
+                    onConfirm={confirmarEliminarEstudio}
+                    onCancel={() => setMostrarModal(false)}
+                />
+            )}
         </div>
     );
 };

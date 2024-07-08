@@ -1,20 +1,17 @@
 import React from 'react';
 import './ModalConfirmacion.css';
 
-const ModalConfirmacion = ({ isOpen, onClose, onConfirm, mensaje }) => {
-  if (!isOpen) return null;
-
+const ModalConfirmacion = ({ onConfirm, onCancel }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2>Confirmación</h2>
-        <p>{mensaje}</p>
-        <div className="modal-actions">
-          <button onClick={onConfirm} className="confirm-button">Confirmar</button>
-          <button onClick={onClose} className="cancel-button">Cancelar</button>
-        </div>
+      <div className="modal-overlay">
+          <div className="modal">
+              <p>¿Estás seguro de que deseas eliminar este estudio?</p>
+              <div className="modal-actions">
+                  <button className="confirmar-button" onClick={onConfirm}>Confirmar</button>
+                  <button className="cancelar-button" onClick={onCancel}>Cancelar</button>
+              </div>
+          </div>
       </div>
-    </div>
   );
 };
 

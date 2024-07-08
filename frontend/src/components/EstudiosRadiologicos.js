@@ -89,6 +89,7 @@ const EstudiosRadiologicos = () => {
             if (!estudioEditado.id_estudio) {
                 throw new Error("El ID del estudio no está definido");
             }
+            console.log("Editando estudio con ID:", estudioEditado.id_estudio); // Log para ver el ID del estudio
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
             setModoFormulario('');
@@ -105,11 +106,13 @@ const EstudiosRadiologicos = () => {
         if (estudio) {
             setEstudioSeleccionado(estudio);
             setMostrarModal(true);
+            console.log("Seleccionado para eliminar:", estudio.id_estudio); // Log para ver el ID del estudio a eliminar
         }
     };
 
     const confirmarEliminarEstudio = async () => {
         try {
+            console.log("Confirmando eliminación de estudio con ID:", estudioSeleccionado.id_estudio); // Log para ver el ID del estudio antes de eliminar
             await deleteEstudio(estudioSeleccionado.id_estudio);
             await cargarEstudios();
             setMostrarModal(false);
@@ -220,5 +223,3 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
-
-

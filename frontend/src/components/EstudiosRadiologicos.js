@@ -10,15 +10,12 @@ import mrMachine from '../images/MRMachine.jpg';
 const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
-    const [modoFormulario, setModoFormulario] = useState('');
+    const [setModoFormulario] = useState('');
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
+    const [mensaje, setMensaje] = useState(null); // Estado para el mensaje de confirmación
     const [cargando, setCargando] = useState(true);
     const [vista, setVista] = useState(''); 
-
-    useEffect(() => {
-        inicializarEstudios();
-    }, []);
 
     const inicializarEstudios = async () => {
         try {
@@ -27,6 +24,7 @@ const EstudiosRadiologicos = () => {
             if (data.length === 0) {
                 await crearEstudiosPrueba();
             } else {
+                data.sort((a, b) => a.id_estudio - b.id_estudio); // Ordenar estudios por ID
                 setEstudios(data);
             }
             setError(null);
@@ -37,6 +35,10 @@ const EstudiosRadiologicos = () => {
             setCargando(false);
         }
     };
+
+    useEffect(() => {
+        inicializarEstudios();
+    }, []);
 
     const crearEstudiosPrueba = async () => {
         const estudiosPrueba = [
@@ -80,6 +82,8 @@ const EstudiosRadiologicos = () => {
             await cargarEstudios();
             setModoFormulario('');
             setVista(''); // Cierra el formulario y muestra la vista principal
+            setMensaje('Estudio creado exitosamente.'); // Mostrar mensaje de éxito
+            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
         } catch (error) {
             console.error("Error al crear estudio:", error);
             setError("No se pudo crear el estudio. Por favor, intente de nuevo.");
@@ -96,7 +100,9 @@ const EstudiosRadiologicos = () => {
             await cargarEstudios();
             setModoFormulario('');
             setEstudioSeleccionado(null);
-            setVista(''); // Cierra el formulario y muestra la vista principal
+            setVista('ver'); // Cambiar a la vista de estudios capturados
+            setMensaje('Estudio actualizado exitosamente.'); // Mostrar mensaje de éxito
+            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
         } catch (error) {
             console.error("Error al editar estudio:", error);
             setError("No se pudo editar el estudio. Por favor, intente de nuevo.");
@@ -119,6 +125,8 @@ const EstudiosRadiologicos = () => {
             await cargarEstudios();
             setMostrarModal(false);
             setEstudioSeleccionado(null);
+            setMensaje('Estudio eliminado exitosamente.'); // Mostrar mensaje de éxito
+            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
         } catch (error) {
             console.error("Error al eliminar estudio:", error);
             setError("No se pudo eliminar el estudio. Por favor, intente de nuevo.");
@@ -160,6 +168,7 @@ const EstudiosRadiologicos = () => {
             </nav>
             {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}      
             <div className="estudios-radiologicos-content">
+                {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
                 {vista === 'crear' && (
                     <FormularioEstudio
                         modo="crear"
@@ -231,4 +240,5 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+
 

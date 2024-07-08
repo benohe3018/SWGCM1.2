@@ -36,6 +36,8 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  padding:10px 15px;
+  margin-left: 15px;
 }
 
 .form-actions .crear-button {

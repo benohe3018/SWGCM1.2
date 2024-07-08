@@ -4,12 +4,14 @@ import './FormularioEstudio.css';
 const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
+  const [idEstudio, setIdEstudio] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (modo === 'editar' && estudioInicial) {
       setNombre(estudioInicial.nombre_estudio);
       setDescripcion(estudioInicial.descripcion_estudio);
+      setIdEstudio(estudioInicial.id_estudio);
     }
   }, [modo, estudioInicial]);
 
@@ -27,6 +29,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
 
     setIsSubmitting(true);
     const estudio = {
+        id_estudio: idEstudio, // Asegurarnos de que el ID del estudio se pase correctamente
         nombre_estudio: nombre,
         descripcion_estudio: descripcion,
     };
@@ -36,6 +39,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
         await onSubmit(estudio);
         setNombre('');
         setDescripcion('');
+        setIdEstudio(null);
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
     } finally {
@@ -89,3 +93,4 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioEstudio;
+

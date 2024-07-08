@@ -186,18 +186,18 @@ const EstudiosRadiologicos = () => {
                                         <td>
                                             <div className="botones-acciones">
                                                 <button 
-                                                    onClick={() => {
-                                                        setModoFormulario('editar');
-                                                        setEstudioSeleccionado(estudio);
-                                                        setVista('editar');
-                                                    }} 
-                                                    className="editar-button"
+                                                  onClick={() => {
+                                                      setModoFormulario('editar');
+                                                      setEstudioSeleccionado(estudio);
+                                                      setVista('editar');
+                                                  }} 
+                                                  className="editar-button"
                                                 >
                                                     Editar
                                                 </button>
                                                 <button 
-                                                    onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
-                                                    className="eliminar-button"
+                                                  onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
+                                                  className="eliminar-button"
                                                 >
                                                     Eliminar
                                                 </button>
@@ -223,3 +223,4 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+

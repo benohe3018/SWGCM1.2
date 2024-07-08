@@ -178,22 +178,24 @@ const EstudiosRadiologicos = () => {
                                         <td>{estudio.nombre_estudio}</td>
                                         <td>{estudio.descripcion_estudio}</td>
                                         <td>
-                                            <button 
-                                              onClick={() => {
-                                                  setModoFormulario('editar');
-                                                  setEstudioSeleccionado(estudio);
-                                                  setVista('editar');
-                                              }} 
-                                              className="editar-button"
-                                            >
-                                                Editar
-                                            </button>
-                                            <button 
-                                              onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
-                                              className="eliminar-button"
-                                            >
-                                                Eliminar
-                                            </button>
+                                                <div className="botones-acciones">
+                                                    <button 
+                                                    onClick={() => {
+                                                        setModoFormulario('editar');
+                                                        setEstudioSeleccionado(estudio);
+                                                        setVista('editar');
+                                                    }} 
+                                                    className="editar-button"
+                                                    >
+                                                        Editar
+                                                    </button>
+                                                    <button 
+                                                    onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
+                                                    className="eliminar-button"
+                                                    >
+                                                        Eliminar
+                                                    </button>
+                                                </div>
                                         </td>
                                     </tr>
                                 ))}

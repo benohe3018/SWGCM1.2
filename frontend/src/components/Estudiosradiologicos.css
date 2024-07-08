@@ -55,6 +55,10 @@
   background-color: white;
   margin: 4px 0;
 }
+.botones-acciones {
+  display: flex;
+  gap: 10px;
+}
 .editar-button{
   background-color: #0C231E;
   color: white;
@@ -64,7 +68,8 @@
   cursor: pointer;
 }
 .editar-button:hover{
-  background-color: white;
+  background-color: whitesmoke;
+  color: black;
 }
 .eliminar-button{
   background-color: #dc3545;
@@ -76,7 +81,8 @@
 }
 
 .eliminar-button:hover{
-  background-color: white;
+  background-color: whitesmoke;
+  color: black
 }
 @media (max-width: 768px) {
   .nav-links {

@@ -13,7 +13,7 @@ const EstudiosRadiologicos = () => {
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
     const [cargando, setCargando] = useState(true);
-    const [vista, setVista] = useState(''); // Nueva variable para controlar la vista actual
+    const [vista, setVista] = useState(''); 
 
     useEffect(() => {
         inicializarEstudios();
@@ -178,24 +178,24 @@ const EstudiosRadiologicos = () => {
                                         <td>{estudio.nombre_estudio}</td>
                                         <td>{estudio.descripcion_estudio}</td>
                                         <td>
-                                                <div className="botones-acciones">
-                                                    <button 
-                                                    onClick={() => {
-                                                        setModoFormulario('editar');
-                                                        setEstudioSeleccionado(estudio);
-                                                        setVista('editar');
-                                                    }} 
-                                                    className="editar-button"
-                                                    >
-                                                        Editar
-                                                    </button>
-                                                    <button 
-                                                    onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
-                                                    className="eliminar-button"
-                                                    >
-                                                        Eliminar
-                                                    </button>
-                                                </div>
+                                            <div className="botones-acciones">
+                                                <button 
+                                                  onClick={() => {
+                                                      setModoFormulario('editar');
+                                                      setEstudioSeleccionado(estudio);
+                                                      setVista('editar');
+                                                  }} 
+                                                  className="editar-button"
+                                                >
+                                                    Editar
+                                                </button>
+                                                <button 
+                                                  onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
+                                                  className="eliminar-button"
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
@@ -203,7 +203,36 @@ const EstudiosRadiologicos = () => {
                         </table>
                     </div>
                 )}
+                {vista === 'editar' && (
+                    <FormularioEstudio
+                        modo="editar"
+                        estudioInicial={estudioSeleccionado}
+                        onSubmit={handleEditarEstudio}
+                        onCancel={() => setVista('')}
+                    />
+                )}
             </div>
+            {mostrarModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <p>¿Estás seguro de que deseas eliminar este estudio?</p>
+                        <div className="modal-actions">
+                            <button 
+                              onClick={confirmarEliminarEstudio}
+                              className="confirmar-button"
+                            >
+                                Confirmar
+                            </button>
+                            <button 
+                              onClick={() => setMostrarModal(false)}
+                              className="cancelar-button"
+                            >
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

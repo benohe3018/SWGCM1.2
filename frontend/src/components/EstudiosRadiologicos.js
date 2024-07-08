@@ -150,7 +150,7 @@ const EstudiosRadiologicos = () => {
                     <div className="line"></div>
                 </div>
             </nav>
-            <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />
+            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}      
             <div className="estudios-radiologicos-content">
                 {vista === 'crear' && (
                     <FormularioEstudio

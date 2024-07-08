@@ -4,6 +4,7 @@ import './EstudiosRadiologicos.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
 import FormularioEstudio from './FormularioEstudio';
+import mrMachine from '../images/MRMachine.jpg';
 
 const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
@@ -149,7 +150,7 @@ const EstudiosRadiologicos = () => {
                     <div className="line"></div>
                 </div>
             </nav>
-
+            <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />
             <div className="estudios-radiologicos-content">
                 {vista === 'crear' && (
                     <FormularioEstudio

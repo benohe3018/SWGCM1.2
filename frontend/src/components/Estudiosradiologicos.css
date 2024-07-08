@@ -134,4 +134,10 @@
 .tabla-estudios th {
   background-color: #f4f4f4;
 }
+.mr-machine {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 2rem;
+  display: flex;
+}
   

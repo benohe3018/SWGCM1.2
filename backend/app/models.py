@@ -49,7 +49,7 @@ class Paciente(db.Model):
     apellido_paterno = db.Column(db.String(50), nullable=False)
     apellido_materno = db.Column(db.String(50), nullable=False)
     direccion = db.Column(db.String(100), nullable=True)
-    telefono = db.Column(db.String(20), nullable=True)
+    telefono = db.Column(db.String(10), nullable=True)
     sexo = db.Column(db.String(1), nullable=False)
     peso = db.Column(db.Float, nullable=False)
     citas = db.relationship('Cita', backref='paciente', lazy=True)
@@ -98,6 +98,7 @@ class Cita(db.Model):
     id_unidad_medica_origen = db.Column(db.Integer, db.ForeignKey('unidades_medicina_familiar.id'))
     id_hospital_origen = db.Column(db.Integer, db.ForeignKey('hospitales.id'))
     id_operador = db.Column(db.Integer, db.ForeignKey('operador.id'))
+    
 
 class Informe(db.Model):
     __tablename__ = 'informes'

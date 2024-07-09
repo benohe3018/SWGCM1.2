@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import './EstudiosRadiologicos.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
@@ -10,14 +10,13 @@ import mrMachine from '../images/MRMachine.jpg';
 const EstudiosRadiologicos = () => {
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
-    const [setModoFormulario] = useState('');
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
     const [mensaje, setMensaje] = useState(null); // Estado para el mensaje de confirmación
     const [cargando, setCargando] = useState(true);
     const [vista, setVista] = useState(''); 
 
-    const inicializarEstudios = async () => {
+    const inicializarEstudios = useCallback(async () => {
         try {
             setCargando(true);
             const data = await getEstudios();
@@ -34,11 +33,11 @@ const EstudiosRadiologicos = () => {
         } finally {
             setCargando(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         inicializarEstudios();
-    }, []);
+    }, [inicializarEstudios]);
 
     const crearEstudiosPrueba = async () => {
         const estudiosPrueba = [
@@ -80,7 +79,6 @@ const EstudiosRadiologicos = () => {
         try {
             await createEstudio(nuevoEstudio);
             await cargarEstudios();
-            setModoFormulario('');
             setVista(''); // Cierra el formulario y muestra la vista principal
             setMensaje('Estudio creado exitosamente.'); // Mostrar mensaje de éxito
             setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
@@ -98,7 +96,6 @@ const EstudiosRadiologicos = () => {
             console.log("Editando estudio con ID:", estudioEditado.id_estudio); // Log para ver el ID del estudio
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
-            setModoFormulario('');
             setEstudioSeleccionado(null);
             setVista('ver'); // Cambiar a la vista de estudios capturados
             setMensaje('Estudio actualizado exitosamente.'); // Mostrar mensaje de éxito
@@ -198,7 +195,6 @@ const EstudiosRadiologicos = () => {
                                             <div className="botones-acciones">
                                                 <button 
                                                   onClick={() => {
-                                                      setModoFormulario('editar');
                                                       setEstudioSeleccionado(estudio);
                                                       setVista('editar');
                                                   }} 
@@ -240,5 +236,7 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+
+
 
 

@@ -49,14 +49,14 @@ class Paciente(db.Model):
     apellido_paterno = db.Column(db.String(50), nullable=False)
     apellido_materno = db.Column(db.String(50), nullable=False)
     direccion = db.Column(db.String(100), nullable=True)
-    telefono = db.Column(db.String(20), nullable=True)
+    telefono = db.Column(db.String(10), nullable=True)
     sexo = db.Column(db.String(1), nullable=False)
     peso = db.Column(db.Float, nullable=False)
     citas = db.relationship('Cita', backref='paciente', lazy=True)
 
 class EstudiosRadiologicos(db.Model):
-    __tablename__ = 'estudios_radiologicos'
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'estudiosradiologicos'
+    id_estudio = db.Column(db.Integer, primary_key=True)
     nombre_estudio = db.Column(db.String(100), nullable=False)
     descripcion_estudio = db.Column(db.String(255), nullable=False)
     citas = db.relationship('Cita', backref='estudio_radiologico', lazy=True)
@@ -93,11 +93,12 @@ class Cita(db.Model):
     fecha_hora_cita = db.Column(db.DateTime, nullable=False)
     nss_paciente = db.Column(db.String(20), db.ForeignKey('pacientes.NSS'), nullable=False)
     id_medico_refiere = db.Column(db.Integer, db.ForeignKey('medicos.id_medico'))
-    id_estudio_radiologico = db.Column(db.Integer, db.ForeignKey('estudios_radiologicos.id'))
+    id_estudio_radiologico = db.Column(db.Integer, db.ForeignKey('estudiosradiologicos.id_estudio'))
     id_usuario_registra = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
     id_unidad_medica_origen = db.Column(db.Integer, db.ForeignKey('unidades_medicina_familiar.id'))
     id_hospital_origen = db.Column(db.Integer, db.ForeignKey('hospitales.id'))
     id_operador = db.Column(db.Integer, db.ForeignKey('operador.id'))
+    
 
 class Informe(db.Model):
     __tablename__ = 'informes'

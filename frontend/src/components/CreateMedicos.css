@@ -87,10 +87,10 @@ body {
 .create-medico-header {
   width: 100%;
   background-color: white;
-  padding: 10px 20px;
+  padding: 20px;
   box-sizing: border-box;
   position: fixed;
-  top: 70px; /* Ajustado para que quede debajo del menú */
+  top: 50px; /* Ajustado para que quede debajo del menú */
   z-index: 100;
   display:flex;
 }

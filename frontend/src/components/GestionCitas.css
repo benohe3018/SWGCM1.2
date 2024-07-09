@@ -1,5 +1,11 @@
 .gestion-citas-page {
-    font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: Arial, sans-serif;
 }
 
 .gestion-citas-header {

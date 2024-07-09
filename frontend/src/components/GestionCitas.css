@@ -53,6 +53,12 @@
 .nav-links a:hover {
     background-color: #004481;
 }
+.mr-machine {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 2rem;
+    display: flex;
+  }
 
 .hamburger {
     display: none;

@@ -5,9 +5,10 @@
 .gestion-citas-header {
     display: flex;
     align-items: center;
-    background-color: #004481;
+    background-color: whitesmoke;
     color: white;
     padding: 10px;
+    margin-top: 70px;
 }
 
 .header-logo {

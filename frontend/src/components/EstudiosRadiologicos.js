@@ -202,6 +202,7 @@ const EstudiosRadiologicos = () => {
             </div>
             {mostrarModal && (
                 <ModalConfirmacion
+                    mensaje="¿Estás seguro de que deseas eliminar este estudio?"
                     onConfirm={confirmarEliminarEstudio}
                     onCancel={() => setMostrarModal(false)}
                 />
@@ -211,6 +212,7 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+
 
 
 

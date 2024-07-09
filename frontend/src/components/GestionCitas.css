@@ -1,18 +1,123 @@
-/* GestionCitas.css */
+.gestion-citas-page {
+    font-family: Arial, sans-serif;
+}
+
 .gestion-citas-header {
-    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    background-color: #004481;
+    color: white;
+    padding: 10px;
+}
+
+.header-logo {
+    height: 60px;
+    margin-right: 20px;
+}
+
+.header-texts h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-texts h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.navbar {
+    background-color: #006AA7;
+    overflow: hidden;
+}
+
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: block;
+}
+
+.nav-links a:hover {
+    background-color: #004481;
+}
+
+.hamburger {
+    display: none;
+}
+
+.gestion-citas-content {
     padding: 20px;
+}
+
+.tabla-citas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-citas th, .tabla-citas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabla-citas th {
+    background-color: #004481;
+    color: white;
+}
+
+.botones-acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.editar-button, .eliminar-button {
+    background-color: #006AA7;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.editar-button:hover, .eliminar-button:hover {
+    background-color: #004481;
+}
+
+.mensaje-confirmacion {
+    background-color: #dff0d8;
+    color: #3c763d;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.modal-confirmacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
     text-align: center;
 }
 
-.gestion-citas-title {
-    color: #6c757d;
-    font-size: 24px;
-    font-weight: bold;
-}
-.en-construccion-message {
-    color: #6c757d;
-    font-size: 18px;
-    margin-top: 20px;
-    text-align: center;
-}

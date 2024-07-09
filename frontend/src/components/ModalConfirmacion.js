@@ -1,14 +1,14 @@
 import React from 'react';
 import './ModalConfirmacion.css';
 
-const ModalConfirmacion = ({ onConfirm, onCancel }) => {
+const ModalConfirmacion = ({ onConfirm, onCancel, mensaje }) => {
   return (
       <div className="modal-overlay">
-          <div className="modal">
-              <p>¿Estás seguro de que deseas eliminar este estudio?</p>
+          <div className="modal-content">
+              <p>{mensaje}</p>
               <div className="modal-actions">
-                  <button className="confirmar-button" onClick={onConfirm}>Confirmar</button>
-                  <button className="cancelar-button" onClick={onCancel}>Cancelar</button>
+                  <button className="confirm-button" onClick={onConfirm}>Confirmar</button>
+                  <button className="cancel-button" onClick={onCancel}>Cancelar</button>
               </div>
           </div>
       </div>

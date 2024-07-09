@@ -130,8 +130,6 @@ const EstudiosRadiologicos = () => {
                     <li><Link to="/" onClick={() => setVista('')}>Cambiar Sesión</Link></li>
                     <li><Link to="#" onClick={() => setVista('crear')}>Capturar Nuevo Estudio Radiológico</Link></li>
                     <li><Link to="#" onClick={() => setVista('ver')}>Ver Estudios Capturados</Link></li>
-                    <li><Link to="#" onClick={() => setVista('actualizar')}>Actualizar Registro de Estudios</Link></li>
-                    <li><Link to="#" onClick={() => setVista('borrar')}>Borrar Registro de Estudios</Link></li>
                     <li><Link to="/dashboard-root">Página de Inicio</Link></li>
                 </ul>
                 <div className="hamburger">

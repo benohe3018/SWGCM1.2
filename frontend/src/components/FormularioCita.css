@@ -42,18 +42,20 @@
 }
 
 .form-actions button[type="submit"] {
-    background-color: #006AA7;
+    background-color: #004d40;
     color: white;
 }
 
 .form-actions button[type="submit"]:hover {
-    background-color: #004481;
+    background-color: white;
+    color:black
 }
 
 .form-actions button[type="button"] {
-    background-color: #ccc;
+    background-color: #dc3545;
 }
 
 .form-actions button[type="button"]:hover {
-    background-color: #999;
+    background-color: white;
+    color: black;
 }

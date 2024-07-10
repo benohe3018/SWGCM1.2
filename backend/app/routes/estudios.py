@@ -79,4 +79,16 @@ def delete_estudio(id):
         logging.error("Error al eliminar estudio: %s", str(e))
         return jsonify({"error": "Error al eliminar el estudio"}), 500
 
+# Nuevo endpoint para listar estudios radiológicos
+@estudios_bp.route('/estudios/list', methods=['GET'])
+def list_estudios():
+    try:
+        estudios = EstudiosRadiologicos.query.all()
+        return jsonify([{
+            'id_estudio': estudio.id_estudio,
+            'nombre_estudio': estudio.nombre_estudio
+        } for estudio in estudios]), 200
+    except SQLAlchemyError as e:
+        logging.error("Error al recuperar estudios: %s", str(e))
+        return jsonify({"error": "Error al recuperar estudios"}), 500
 

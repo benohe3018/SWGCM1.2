@@ -2,6 +2,9 @@
 from flask import Blueprint, request, jsonify
 from ..models import Medico
 from .. import db
+#Nuevas importaciones para implementar el modulo de citas
+import logging
+from sqlalchemy.exc import SQLAlchemyError
 
 medicos_bp = Blueprint('medicos', __name__)
 
@@ -53,3 +56,18 @@ def get_medico_by_matricula(matricula):
     if medico is None:
         return jsonify({}), 404
     return jsonify(medico.serialize), 200
+
+#Nuevo Bloque de Código para implementar el modulo de citas.
+@medicos_bp.route('/medicos/list', methods=['GET'])
+def list_medicos():
+    try:
+        medicos = Medico.query.all()
+        return jsonify([{
+            'id_medico': medico.id_medico,
+            'nombre': medico.nombre_medico,
+            'apellido_paterno': medico.apellido_paterno_medico,
+            'apellido_materno': medico.apellido_materno_medico
+        } for medico in medicos]), 200
+    except SQLAlchemyError as e:
+        logging.error("Error al recuperar médicos: %s", str(e))
+        return jsonify({"error": "Error al recuperar médicos"}), 500

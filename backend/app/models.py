@@ -1,7 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, LargeBinary
+from . import db
 
 db = SQLAlchemy()
+Base = declarative_base()
 
 class Medico(db.Model):
     __tablename__ = 'medicos'
@@ -116,6 +120,33 @@ class Operador(db.Model):
     apellido_materno = db.Column(db.String(50), nullable=False)
     numero_telefonico = db.Column(db.String(20), nullable=True)
     citas = db.relationship('Cita', backref='operador', lazy=True)
+    
+#Modelo para la encriptacion en AES + CBC    
+class PacientePrueba(Base):
+    __tablename__ = 'pacientes_prueba'
+    id = Column(Integer, primary_key=True)
+    nss = Column(LargeBinary, nullable=False)
+    nombre_paciente = Column(LargeBinary, nullable=False)
+    apellido_paterno_paciente = Column(LargeBinary, nullable=False)
+    apellido_materno_paciente = Column(LargeBinary, nullable=False)
+    especialidad_medica = Column(LargeBinary, nullable=False)
+    nombre_completo_medico = Column(LargeBinary, nullable=False)
+    estudio_solicitado = Column(LargeBinary, nullable=False)
+    unidad_medica_procedencia = Column(LargeBinary, nullable=False)
+    diagnostico_presuntivo = Column(LargeBinary, nullable=False)
+
+    def __init__(self, nss, nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente,
+                 especialidad_medica, nombre_completo_medico, estudio_solicitado, 
+                 unidad_medica_procedencia, diagnostico_presuntivo):
+        self.nss = nss
+        self.nombre_paciente = nombre_paciente
+        self.apellido_paterno_paciente = apellido_paterno_paciente
+        self.apellido_materno_paciente = apellido_materno_paciente
+        self.especialidad_medica = especialidad_medica
+        self.nombre_completo_medico = nombre_completo_medico
+        self.estudio_solicitado = estudio_solicitado
+        self.unidad_medica_procedencia = unidad_medica_procedencia
+        self.diagnostico_presuntivo = diagnostico_presuntivo
 
     
 

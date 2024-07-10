@@ -4,7 +4,7 @@ import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getCitas, createCita, updateCita, deleteCita } from './citasService';
 import FormularioCita from './FormularioCita';
-import ModalConfirmacion from './ModalConfirmacion'; // Reutiliza el componente existente
+import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
@@ -214,5 +214,6 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
+
 
 

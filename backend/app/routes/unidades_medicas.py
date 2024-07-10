@@ -80,12 +80,13 @@ def delete_unidad(id):
 
 # Nuevo endpoint para listar unidades médicas
 @unidades_medicas_bp.route('/unidades/list', methods=['GET'])
-def list_unidades():
+def get_unidades():
     try:
         unidades = UnidadesMedicinaFamiliar.query.all()
         return jsonify([{
             'id_unidad_medica': unidad.id,
-            'nombre_unidad_medica': unidad.nombre_unidad_medica
+            'nombre_unidad_medica': unidad.nombre_unidad_medica,
+            'direccion_unidad_medica': unidad.direccion_unidad_medica
         } for unidad in unidades]), 200
     except SQLAlchemyError as e:
         logging.error("Error al recuperar unidades médicas: %s", str(e))

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
@@ -13,11 +14,38 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
         id_operador: ''
     });
 
+    const [medicos, setMedicos] = useState([]);
+    const [estudios, setEstudios] = useState([]);
+    const [unidades, setUnidades] = useState([]);
+    const [hospitales, setHospitales] = useState([]);
+
     useEffect(() => {
         if (modo === 'editar' && citaInicial) {
             setFormData(citaInicial);
         }
     }, [modo, citaInicial]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [medicosRes, estudiosRes, unidadesRes, hospitalesRes] = await Promise.all([
+                    axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`),
+                    axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`),
+                    axios.get(`${process.env.REACT_APP_API_URL}/api/unidades/list`),
+                    axios.get(`${process.env.REACT_APP_API_URL}/api/hospitales/list`)
+                ]);
+
+                setMedicos(medicosRes.data);
+                setEstudios(estudiosRes.data);
+                setUnidades(unidadesRes.data);
+                setHospitales(hospitalesRes.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -42,24 +70,44 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
                 <input type="text" id="nss_paciente" name="nss_paciente" value={formData.nss_paciente} onChange={handleChange} required />
             </div>
             <div className="form-group">
-                <label htmlFor="id_medico_refiere">ID del Médico que Refiere:</label>
-                <input type="number" id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleChange} required />
+                <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
+                <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleChange} required>
+                    <option value="">Seleccione un médico</option>
+                    {medicos.map(medico => (
+                        <option key={medico.id_medico} value={medico.id_medico}>{medico.nombre_medico}</option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
-                <label htmlFor="id_estudio_radiologico">ID del Estudio Radiológico:</label>
-                <input type="number" id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleChange} required />
+                <label htmlFor="id_estudio_radiologico">Estudio Radiológico:</label>
+                <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleChange} required>
+                    <option value="">Seleccione un estudio</option>
+                    {estudios.map(estudio => (
+                        <option key={estudio.id_estudio} value={estudio.id_estudio}>{estudio.nombre_estudio}</option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
                 <label htmlFor="id_usuario_registra">ID del Usuario que Registra:</label>
                 <input type="number" id="id_usuario_registra" name="id_usuario_registra" value={formData.id_usuario_registra} onChange={handleChange} required />
             </div>
             <div className="form-group">
-                <label htmlFor="id_unidad_medica_origen">ID de la Unidad Médica de Origen:</label>
-                <input type="number" id="id_unidad_medica_origen" name="id_unidad_medica_origen" value={formData.id_unidad_medica_origen} onChange={handleChange} required />
+                <label htmlFor="id_unidad_medica_origen">Unidad Médica de Origen:</label>
+                <select id="id_unidad_medica_origen" name="id_unidad_medica_origen" value={formData.id_unidad_medica_origen} onChange={handleChange} required>
+                    <option value="">Seleccione una unidad médica</option>
+                    {unidades.map(unidad => (
+                        <option key={unidad.id_unidad_medica} value={unidad.id_unidad_medica}>{unidad.nombre_unidad_medica}</option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
-                <label htmlFor="id_hospital_origen">ID del Hospital de Origen:</label>
-                <input type="number" id="id_hospital_origen" name="id_hospital_origen" value={formData.id_hospital_origen} onChange={handleChange} required />
+                <label htmlFor="id_hospital_origen">Hospital de Origen:</label>
+                <select id="id_hospital_origen" name="id_hospital_origen" value={formData.id_hospital_origen} onChange={handleChange} required>
+                    <option value="">Seleccione un hospital</option>
+                    {hospitales.map(hospital => (
+                        <option key={hospital.id_hospital} value={hospital.id_hospital}>{hospital.nombre_hospital}</option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
                 <label htmlFor="id_operador">ID del Operador:</label>
@@ -74,3 +122,4 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
+

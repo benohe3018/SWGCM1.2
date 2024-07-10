@@ -1,25 +1,45 @@
 import axios from 'axios';
 
-const API_URL = '/api/citas';
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const getCitas = async () => {
-    const response = await axios.get(API_URL);
+  try {
+    const response = await axios.get(`${API_URL}/api/citas`);
     return response.data;
+  } catch (error) {
+    console.error('Error fetching citas:', error);
+    throw error;
+  }
 };
 
-export const createCita = async (cita) => {
-    const response = await axios.post(API_URL, cita);
+export const createCita = async (citaData) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/citas`, citaData);
     return response.data;
+  } catch (error) {
+    console.error('Error creating cita:', error);
+    throw error;
+  }
 };
 
-export const updateCita = async (id, cita) => {
-    const response = await axios.put(`${API_URL}/${id}`, cita);
+export const updateCita = async (id, citaData) => {
+  try {
+    const response = await axios.put(`${API_URL}/api/citas/${id}`, citaData);
     return response.data;
+  } catch (error) {
+    console.error('Error updating cita:', error);
+    throw error;
+  }
 };
 
 export const deleteCita = async (id) => {
-    const response = await axios.delete(`${API_URL}/${id}`);
+  try {
+    const response = await axios.delete(`${API_URL}/api/citas/${id}`);
     return response.data;
+  } catch (error) {
+    console.error('Error deleting cita:', error);
+    throw error;
+  }
 };
 
 

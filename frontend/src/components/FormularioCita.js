@@ -5,6 +5,7 @@ import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
+    fecha_hora_estudio: '', // Nuevo campo para la fecha y hora del estudio
     nss_paciente: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
@@ -54,6 +55,10 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   return (
     <form className="form-cita" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="fecha_hora_estudio">Fecha y Hora del Estudio:</label>
+        <input type="datetime-local" id="fecha_hora_estudio" name="fecha_hora_estudio" value={formData.fecha_hora_estudio} onChange={handleChange} required />
+      </div>
       <div className="form-group">
         <label htmlFor="nss_paciente">NSS del Paciente:</label>
         <input type="text" id="nss_paciente" name="nss_paciente" value={formData.nss_paciente} onChange={handleChange} required />

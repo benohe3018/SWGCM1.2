@@ -1,125 +1,119 @@
+// FormularioCita.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
-    const [formData, setFormData] = useState({
-        fecha_hora_cita: '',
-        nss_paciente: '',
-        id_medico_refiere: '',
-        id_estudio_radiologico: '',
-        id_usuario_registra: '',
-        id_unidad_medica_origen: '',
-        id_hospital_origen: '',
-        id_operador: ''
+  const [formData, setFormData] = useState({
+    nss_paciente: '',
+    nombre_paciente: '',
+    apellido_paterno_paciente: '',
+    apellido_materno_paciente: '',
+    especialidad_medica_envia: '',
+    id_medico_refiere: '',
+    id_estudio_radiologico: '',
+    unidad_medica_procedencia: '',
+    diagnostico_presuntivo: ''
+  });
+  const [medicos, setMedicos] = useState([]);
+  const [estudios, setEstudios] = useState([]);
+
+  useEffect(() => {
+    if (modo === 'editar' && citaInicial) {
+      setFormData(citaInicial);
+    }
+  }, [modo, citaInicial]);
+
+  useEffect(() => {
+    const fetchMedicos = async () => {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/medicos/list`);
+      setMedicos(response.data);
+    };
+
+    const fetchEstudios = async () => {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/estudios/list`);
+      setEstudios(response.data);
+    };
+
+    fetchMedicos();
+    fetchEstudios();
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
     });
+  };
 
-    const [medicos, setMedicos] = useState([]);
-    const [estudios, setEstudios] = useState([]);
-    const [unidades, setUnidades] = useState([]);
-    const [hospitales, setHospitales] = useState([]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(formData), 'your-secret-key').toString();
+    onSubmit(encryptedData);
+  };
 
-    useEffect(() => {
-        if (modo === 'editar' && citaInicial) {
-            setFormData(citaInicial);
-        }
-    }, [modo, citaInicial]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const [medicosRes, estudiosRes, unidadesRes, hospitalesRes] = await Promise.all([
-                    axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`),
-                    axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`),
-                    axios.get(`${process.env.REACT_APP_API_URL}/api/unidades/list`),
-                    axios.get(`${process.env.REACT_APP_API_URL}/api/hospitales/list`)
-                ]);
-
-                setMedicos(medicosRes.data);
-                setEstudios(estudiosRes.data);
-                setUnidades(unidadesRes.data);
-                setHospitales(hospitalesRes.data);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(formData);
-    };
-
-    return (
-        <form className="form-cita" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label htmlFor="fecha_hora_cita">Fecha y Hora de la Cita:</label>
-                <input type="datetime-local" id="fecha_hora_cita" name="fecha_hora_cita" value={formData.fecha_hora_cita} onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="nss_paciente">NSS del Paciente:</label>
-                <input type="text" id="nss_paciente" name="nss_paciente" value={formData.nss_paciente} onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
-                <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleChange} required>
-                    <option value="">Seleccione un médico</option>
-                    {medicos.map(medico => (
-                        <option key={medico.id_medico} value={medico.id_medico}>{medico.nombre_medico}</option>
-                    ))}
-                </select>
-            </div>
-            <div className="form-group">
-                <label htmlFor="id_estudio_radiologico">Estudio Radiológico:</label>
-                <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleChange} required>
-                    <option value="">Seleccione un estudio</option>
-                    {estudios.map(estudio => (
-                        <option key={estudio.id_estudio} value={estudio.id_estudio}>{estudio.nombre_estudio}</option>
-                    ))}
-                </select>
-            </div>
-            <div className="form-group">
-                <label htmlFor="id_usuario_registra">ID del Usuario que Registra:</label>
-                <input type="number" id="id_usuario_registra" name="id_usuario_registra" value={formData.id_usuario_registra} onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="id_unidad_medica_origen">Unidad Médica de Origen:</label>
-                <select id="id_unidad_medica_origen" name="id_unidad_medica_origen" value={formData.id_unidad_medica_origen} onChange={handleChange} required>
-                    <option value="">Seleccione una unidad médica</option>
-                    {unidades.map(unidad => (
-                        <option key={unidad.id_unidad_medica} value={unidad.id_unidad_medica}>{unidad.nombre_unidad_medica}</option>
-                    ))}
-                </select>
-            </div>
-            <div className="form-group">
-                <label htmlFor="id_hospital_origen">Hospital de Origen:</label>
-                <select id="id_hospital_origen" name="id_hospital_origen" value={formData.id_hospital_origen} onChange={handleChange} required>
-                    <option value="">Seleccione un hospital</option>
-                    {hospitales.map(hospital => (
-                        <option key={hospital.id_hospital} value={hospital.id_hospital}>{hospital.nombre_hospital}</option>
-                    ))}
-                </select>
-            </div>
-            <div className="form-group">
-                <label htmlFor="id_operador">ID del Operador:</label>
-                <input type="number" id="id_operador" name="id_operador" value={formData.id_operador} onChange={handleChange} required />
-            </div>
-            <div className="form-actions">
-                <button type="submit">{modo === 'crear' ? 'Crear Cita' : 'Actualizar Cita'}</button>
-                <button type="button" onClick={onCancel}>Cancelar</button>
-            </div>
-        </form>
-    );
+  return (
+    <form className="form-cita" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="nss_paciente">NSS del Paciente:</label>
+        <input type="text" id="nss_paciente" name="nss_paciente" value={formData.nss_paciente} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="nombre_paciente">Nombre del Paciente:</label>
+        <input type="text" id="nombre_paciente" name="nombre_paciente" value={formData.nombre_paciente} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="apellido_paterno_paciente">Apellido Paterno del Paciente:</label>
+        <input type="text" id="apellido_paterno_paciente" name="apellido_paterno_paciente" value={formData.apellido_paterno_paciente} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="apellido_materno_paciente">Apellido Materno del Paciente:</label>
+        <input type="text" id="apellido_materno_paciente" name="apellido_materno_paciente" value={formData.apellido_materno_paciente} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="especialidad_medica_envia">Especialidad Médica que Envía:</label>
+        <input type="text" id="especialidad_medica_envia" name="especialidad_medica_envia" value={formData.especialidad_medica_envia} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
+        <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleChange} required>
+          <option value="">Seleccione un Médico</option>
+          {medicos.map((medico) => (
+            <option key={medico.id_medico} value={medico.id_medico}>
+              {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="id_estudio_radiologico">Estudio Solicitado:</label>
+        <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleChange} required>
+          <option value="">Seleccione un Estudio</option>
+          {estudios.map((estudio) => (
+            <option key={estudio.id_estudio} value={estudio.id_estudio}>
+              {estudio.nombre_estudio}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="unidad_medica_procedencia">Unidad Médica de Procedencia:</label>
+        <input type="text" id="unidad_medica_procedencia" name="unidad_medica_procedencia" value={formData.unidad_medica_procedencia} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="diagnostico_presuntivo">Diagnóstico Presuntivo:</label>
+        <input type="text" id="diagnostico_presuntivo" name="diagnostico_presuntivo" value={formData.diagnostico_presuntivo} onChange={handleChange} required />
+      </div>
+      <div className="form-actions">
+        <button type="submit">Enviar</button>
+        <button type="button" onClick={onCancel}>Cancelar</button>
+      </div>
+    </form>
+  );
 };
 
 export default FormularioCita;
+
+
 

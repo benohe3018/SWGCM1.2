@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getCitas, createCita, updateCita, deleteCita } from './citasService';
+import { getCitas, createPacientePrueba, updateCita, deleteCita } from './citasService';
 import FormularioCita from './FormularioCita';
-import ModalConfirmacion from './ModalConfirmacion';
+import ModalConfirmacion from './ModalConfirmacion'; 
 import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
@@ -12,7 +12,7 @@ const GestionCitas = () => {
     const [citaSeleccionada, setCitaSeleccionada] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
-    const [mensaje, setMensaje] = useState(null); // Estado para el mensaje de confirmación
+    const [mensaje, setMensaje] = useState(null); 
     const [cargando, setCargando] = useState(true);
     const [vista, setVista] = useState('');
 
@@ -20,7 +20,7 @@ const GestionCitas = () => {
         try {
             setCargando(true);
             const data = await getCitas();
-            data.sort((a, b) => a.id_cita - b.id_cita); // Ordenar citas por ID
+            data.sort((a, b) => a.id_cita - b.id_cita); 
             setCitas(data);
             setError(null);
         } catch (error) {
@@ -39,7 +39,7 @@ const GestionCitas = () => {
         try {
             setCargando(true);
             const data = await getCitas();
-            data.sort((a, b) => a.id_cita - b.id_cita); // Ordenar citas por ID
+            data.sort((a, b) => a.id_cita - b.id_cita); 
             setCitas(data);
             setError(null);
         } catch (error) {
@@ -50,13 +50,13 @@ const GestionCitas = () => {
         }
     };
 
-    const handleCrearCita = async (nuevaCita) => {
+    const handleCrearCita = async (encryptedData) => {
         try {
-            await createCita(nuevaCita);
+            await createPacientePrueba(encryptedData);
             await cargarCitas();
-            setVista(''); // Cierra el formulario y muestra la vista principal
-            setMensaje('Cita creada exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setVista(''); 
+            setMensaje('Cita creada exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
             console.error("Error al crear cita:", error);
             setError("No se pudo crear la cita. Por favor, intente de nuevo.");
@@ -68,13 +68,13 @@ const GestionCitas = () => {
             if (!citaEditada.id_cita) {
                 throw new Error("El ID de la cita no está definido");
             }
-            console.log("Editando cita con ID:", citaEditada.id_cita); // Log para ver el ID de la cita
+            console.log("Editando cita con ID:", citaEditada.id_cita); 
             await updateCita(citaEditada.id_cita, citaEditada);
             await cargarCitas();
             setCitaSeleccionada(null);
-            setVista('ver'); // Cambiar a la vista de citas capturadas
-            setMensaje('Cita actualizada exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setVista('ver'); 
+            setMensaje('Cita actualizada exitosamente.'); 
+            setTimeout(() => setMensaje(null), 3000); 
         } catch (error) {
             console.error("Error al editar cita:", error);
             setError("No se pudo editar la cita. Por favor, intente de nuevo.");
@@ -86,19 +86,19 @@ const GestionCitas = () => {
         if (cita) {
             setCitaSeleccionada(cita);
             setMostrarModal(true);
-            console.log("Seleccionado para eliminar:", cita.id_cita); // Log para ver el ID de la cita a eliminar
+            console.log("Seleccionado para eliminar:", cita.id_cita);
         }
     };
 
     const confirmarEliminarCita = async () => {
         try {
-            console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id_cita); // Log para ver el ID de la cita antes de eliminar
+            console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id_cita);
             await deleteCita(citaSeleccionada.id_cita);
             await cargarCitas();
             setMostrarModal(false);
             setCitaSeleccionada(null);
-            setMensaje('Cita eliminada exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setMensaje('Cita eliminada exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
             console.error("Error al eliminar cita:", error);
             setError("No se pudo eliminar la cita. Por favor, intente de nuevo.");
@@ -214,6 +214,7 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
+
 
 
 

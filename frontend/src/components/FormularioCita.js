@@ -1,4 +1,3 @@
-// FormularioCita.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
@@ -27,12 +26,12 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   useEffect(() => {
     const fetchMedicos = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/medicos/list`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`);
       setMedicos(response.data);
     };
 
     const fetchEstudios = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/estudios/list`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`);
       setEstudios(response.data);
     };
 
@@ -81,7 +80,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
           <option value="">Seleccione un Médico</option>
           {medicos.map((medico) => (
             <option key={medico.id_medico} value={medico.id_medico}>
-              {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
+              {`${medico.nombre} ${medico.apellido_paterno} ${medico.apellido_materno}`}
             </option>
           ))}
         </select>
@@ -114,6 +113,3 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
-
-
-

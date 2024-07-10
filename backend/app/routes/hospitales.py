@@ -79,14 +79,3 @@ def delete_hospital(id):
         return jsonify({"error": "Error al eliminar el hospital"}), 500
 
 # Nuevo endpoint para listar hospitales
-@hospitales_bp.route('/hospitales/list', methods=['GET'])
-def list_hospitales():
-    try:
-        hospitales = Hospital.query.all()
-        return jsonify([{
-            'id_hospital': hospital.id,
-            'nombre_hospital': hospital.nombre_hospital
-        } for hospital in hospitales]), 200
-    except SQLAlchemyError as e:
-        logging.error("Error al recuperar hospitales: %s", str(e))
-        return jsonify({"error": "Error al recuperar hospitales"}), 500

@@ -30,9 +30,9 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit(formData);  // No se requiere encriptación en el cliente
   };
-
+  
   return (
     <form className="form-cita" onSubmit={handleSubmit}>
       <div className="form-group">
@@ -94,7 +94,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
         <button type="button" onClick={onCancel}>Cancelar</button>
       </div>
     </form>
-  );
+  );  
 };
 
 export default FormularioCita;

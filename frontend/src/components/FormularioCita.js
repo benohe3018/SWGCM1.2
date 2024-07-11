@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import CryptoJS from 'crypto-js';
 import './FormularioCita.css';
 
-const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
+const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudios }) => {
   const [formData, setFormData] = useState({
     fecha_hora_estudio: '',
     nss_paciente: '',
@@ -16,29 +14,12 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     unidad_medica_procedencia: '',
     diagnostico_presuntivo: ''
   });
-  const [medicos, setMedicos] = useState([]);
-  const [estudios, setEstudios] = useState([]);
 
   useEffect(() => {
     if (modo === 'editar' && citaInicial) {
       setFormData(citaInicial);
     }
   }, [modo, citaInicial]);
-
-  useEffect(() => {
-    const fetchMedicos = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`);
-      setMedicos(response.data);
-    };
-
-    const fetchEstudios = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`);
-      setEstudios(response.data);
-    };
-
-    fetchMedicos();
-    fetchEstudios();
-  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -49,8 +30,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(formData), 'your-secret-key').toString();
-    onSubmit(encryptedData);
+    onSubmit(formData);
   };
 
   return (
@@ -118,5 +98,6 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
+
 
 

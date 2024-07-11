@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './FormularioCita.css';
 
-const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudios }) => {
+const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     fecha_hora_estudio: '',
     nss: '',
@@ -12,14 +13,33 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
     id_medico_refiere: '',
     id_estudio_radiologico: '',
     unidad_medica_procedencia: '',
-    diagnostico_presuntivo: ''
+    diagnostico_presuntivo: '',
+    nombre_completo_medico: '' // Añadido
   });
+
+  const [medicos, setMedicos] = useState([]);
+  const [estudios, setEstudios] = useState([]);
 
   useEffect(() => {
     if (modo === 'editar' && citaInicial) {
       setFormData(citaInicial);
     }
   }, [modo, citaInicial]);
+
+  useEffect(() => {
+    const fetchMedicos = async () => {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`);
+      setMedicos(response.data);
+    };
+
+    const fetchEstudios = async () => {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`);
+      setEstudios(response.data);
+    };
+
+    fetchMedicos();
+    fetchEstudios();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -28,11 +48,20 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
     });
   };
 
+  const handleMedicoChange = (e) => {
+    const selectedMedico = medicos.find(medico => medico.id_medico === parseInt(e.target.value));
+    setFormData({
+      ...formData,
+      id_medico_refiere: e.target.value,
+      nombre_completo_medico: `${selectedMedico.nombre} ${selectedMedico.apellido_paterno} ${selectedMedico.apellido_materno}`
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);  // No se requiere encriptación en el cliente
+    onSubmit(formData);  // Enviar datos sin encriptar en el frontend
   };
-  
+
   return (
     <form className="form-cita" onSubmit={handleSubmit}>
       <div className="form-group">
@@ -40,8 +69,8 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
         <input type="datetime-local" id="fecha_hora_estudio" name="fecha_hora_estudio" value={formData.fecha_hora_estudio} onChange={handleChange} required />
       </div>
       <div className="form-group">
-        <label htmlFor="nss">NSS del Paciente:</label> {/* Cambio aquí */}
-        <input type="text" id="nss" name="nss" value={formData.nss} onChange={handleChange} required /> {/* Cambio aquí */}
+        <label htmlFor="nss">NSS del Paciente:</label>
+        <input type="text" id="nss" name="nss" value={formData.nss} onChange={handleChange} required />
       </div>
       <div className="form-group">
         <label htmlFor="nombre_paciente">Nombre del Paciente:</label>
@@ -56,12 +85,12 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
         <input type="text" id="apellido_materno_paciente" name="apellido_materno_paciente" value={formData.apellido_materno_paciente} onChange={handleChange} required />
       </div>
       <div className="form-group">
-        <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label> {/* Cambio aquí */}
-        <input type="text" id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required /> {/* Cambio aquí */}
+        <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label>
+        <input type="text" id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required />
       </div>
       <div className="form-group">
         <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
-        <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleChange} required>
+        <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleMedicoChange} required>
           <option value="">Seleccione un Médico</option>
           {medicos.map((medico) => (
             <option key={medico.id_medico} value={medico.id_medico}>

@@ -7,7 +7,7 @@ import os
 
 pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
 
-@pacientes_prueba_bp.route('/pacientes_prueba', methods=['POST'])
+@pacientes_prueba_bp.route('/api/pacientes_prueba', methods=['POST'])
 def create_paciente_prueba():
     data = request.get_json()
     key = os.getenv('ENCRYPTION_KEY', 'mysecretkey12345').encode()

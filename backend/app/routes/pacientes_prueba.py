@@ -6,6 +6,7 @@ from datetime import datetime
 import os
 from sqlalchemy.exc import SQLAlchemyError
 import logging
+from .encryption import decrypt_data
 
 pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
 
@@ -54,5 +55,33 @@ def create_paciente_prueba():
         db.session.rollback()
         logging.error("Error en la base de datos al crear paciente prueba: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+    
+#Nuevo bloque de código para leer datos desde la base de datos#
+@pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
+def get_pacientes_prueba():
+    try:
+        key = os.getenv('ENCRYPTION_KEY', 'mysecretkey12345').encode()
+        pacientes = PacientePrueba.query.all()
+        decrypted_pacientes = []
+        
+        for paciente in pacientes:
+            decrypted_pacientes.append({
+                'id': paciente.id,
+                'fecha_hora_estudio': paciente.fecha_hora_estudio.strftime('%Y-%m-%dT%H:%M'),
+                'nss': decrypt_data(paciente.nss, key),
+                'nombre_paciente': decrypt_data(paciente.nombre_paciente, key),
+                'apellido_paterno_paciente': decrypt_data(paciente.apellido_paterno_paciente, key),
+                'apellido_materno_paciente': decrypt_data(paciente.apellido_materno_paciente, key),
+                'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
+                'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
+                'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
+                'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
+                'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key)
+            })
+
+        return jsonify(decrypted_pacientes), 200
+    except SQLAlchemyError as e:
+        logging.error("Error al recuperar pacientes_prueba: %s", str(e))
+        return jsonify({"error": "Error al recuperar pacientes_prueba"}), 500
 
 

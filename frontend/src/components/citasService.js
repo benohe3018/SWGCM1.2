@@ -69,6 +69,40 @@ export const createPacientePrueba = async (data) => {
   }
 };
 
+export const getPacientesPrueba = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/pacientes_prueba`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching pacientes_prueba:', error);
+    throw error;
+  }
+};
+
+export const updatePacientePrueba = async (id, data) => {
+  try {
+    const response = await axios.put(`${API_URL}/api/pacientes_prueba/${id}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating paciente_prueba:', error);
+    throw error;
+  }
+};
+
+export const deletePacientePrueba = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/api/pacientes_prueba/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting paciente_prueba:', error);
+    throw error;
+  }
+};
+
 // Función para obtener la lista de médicos
 export const getMedicos = async () => {
   try {

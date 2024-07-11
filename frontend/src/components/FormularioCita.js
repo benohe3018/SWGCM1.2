@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
@@ -10,14 +11,11 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     apellido_paterno_paciente: '',
     apellido_materno_paciente: '',
     especialidad_medica: '',
-    id_medico_refiere: '',
-    id_estudio_radiologico: '',
+    nombre_completo_medico: '',
+    estudio_solicitado: '',
     unidad_medica_procedencia: '',
-    diagnostico_presuntivo: '',
-    nombre_completo_medico: '', // Añadido
-    estudio_solicitado: '' // Añadido
+    diagnostico_presuntivo: ''
   });
-
   const [medicos, setMedicos] = useState([]);
   const [estudios, setEstudios] = useState([]);
 
@@ -49,27 +47,21 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     });
   };
 
-  const handleMedicoChange = (e) => {
-    const selectedMedico = medicos.find(medico => medico.id_medico === parseInt(e.target.value));
-    setFormData({
-      ...formData,
-      id_medico_refiere: e.target.value,
-      nombre_completo_medico: `${selectedMedico.nombre} ${selectedMedico.apellido_paterno} ${selectedMedico.apellido_materno}`
-    });
-  };
-
-  const handleEstudioChange = (e) => {
-    const selectedEstudio = estudios.find(estudio => estudio.id_estudio === parseInt(e.target.value));
-    setFormData({
-      ...formData,
-      id_estudio_radiologico: e.target.value,
-      estudio_solicitado: selectedEstudio.nombre_estudio
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);  // Enviar datos sin encriptar en el frontend
+    const encryptedData = {
+      ...formData,
+      nss: CryptoJS.AES.encrypt(formData.nss, 'your-secret-key').toString(),
+      nombre_paciente: CryptoJS.AES.encrypt(formData.nombre_paciente, 'your-secret-key').toString(),
+      apellido_paterno_paciente: CryptoJS.AES.encrypt(formData.apellido_paterno_paciente, 'your-secret-key').toString(),
+      apellido_materno_paciente: CryptoJS.AES.encrypt(formData.apellido_materno_paciente, 'your-secret-key').toString(),
+      especialidad_medica: CryptoJS.AES.encrypt(formData.especialidad_medica, 'your-secret-key').toString(),
+      nombre_completo_medico: CryptoJS.AES.encrypt(formData.nombre_completo_medico, 'your-secret-key').toString(),
+      estudio_solicitado: CryptoJS.AES.encrypt(formData.estudio_solicitado, 'your-secret-key').toString(),
+      unidad_medica_procedencia: CryptoJS.AES.encrypt(formData.unidad_medica_procedencia, 'your-secret-key').toString(),
+      diagnostico_presuntivo: CryptoJS.AES.encrypt(formData.diagnostico_presuntivo, 'your-secret-key').toString()
+    };
+    onSubmit(encryptedData);
   };
 
   return (
@@ -95,26 +87,26 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
         <input type="text" id="apellido_materno_paciente" name="apellido_materno_paciente" value={formData.apellido_materno_paciente} onChange={handleChange} required />
       </div>
       <div className="form-group">
-        <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label>
+        <label htmlFor="especialidad_medica">Especialidad Médica:</label>
         <input type="text" id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required />
       </div>
       <div className="form-group">
-        <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
-        <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleMedicoChange} required>
+        <label htmlFor="nombre_completo_medico">Nombre Completo del Médico:</label>
+        <select id="nombre_completo_medico" name="nombre_completo_medico" value={formData.nombre_completo_medico} onChange={handleChange} required>
           <option value="">Seleccione un Médico</option>
           {medicos.map((medico) => (
-            <option key={medico.id_medico} value={medico.id_medico}>
-              {`${medico.nombre} ${medico.apellido_paterno} ${medico.apellido_materno}`}
+            <option key={medico.id_medico} value={`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}>
+              {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
             </option>
           ))}
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor="id_estudio_radiologico">Estudio Solicitado:</label>
-        <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleEstudioChange} required>
+        <label htmlFor="estudio_solicitado">Estudio Solicitado:</label>
+        <select id="estudio_solicitado" name="estudio_solicitado" value={formData.estudio_solicitado} onChange={handleChange} required>
           <option value="">Seleccione un Estudio</option>
           {estudios.map((estudio) => (
-            <option key={estudio.id_estudio} value={estudio.id_estudio}>
+            <option key={estudio.id_estudio} value={estudio.nombre_estudio}>
               {estudio.nombre_estudio}
             </option>
           ))}
@@ -137,6 +129,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
+
 
 
 

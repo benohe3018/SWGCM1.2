@@ -2,15 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getCitas, createPacientePrueba, updateCita, deleteCita, getMedicos, getEstudios } from './citasService';
+import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba } from './citasService';
 import FormularioCita from './FormularioCita';
 import ModalConfirmacion from './ModalConfirmacion'; 
 import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
     const [citas, setCitas] = useState([]);
-    const [medicos, setMedicos] = useState([]);
-    const [estudios, setEstudios] = useState([]);
     const [citaSeleccionada, setCitaSeleccionada] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
@@ -21,19 +19,13 @@ const GestionCitas = () => {
     const inicializarCitas = useCallback(async () => {
         try {
             setCargando(true);
-            const [citasData, medicosData, estudiosData] = await Promise.all([
-                getCitas(),
-                getMedicos(),
-                getEstudios()
-            ]);
-            citasData.sort((a, b) => a.id_cita - b.id_cita); 
-            setCitas(citasData);
-            setMedicos(medicosData);
-            setEstudios(estudiosData);
+            const data = await getPacientesPrueba();
+            data.sort((a, b) => a.id - b.id); 
+            setCitas(data);
             setError(null);
         } catch (error) {
-            console.error("Error al inicializar datos:", error);
-            setError("Hubo un problema al cargar los datos. Por favor, intente de nuevo.");
+            console.error("Error al inicializar citas:", error);
+            setError("Hubo un problema al cargar las citas. Por favor, intente de nuevo.");
         } finally {
             setCargando(false);
         }
@@ -46,8 +38,8 @@ const GestionCitas = () => {
     const cargarCitas = async () => {
         try {
             setCargando(true);
-            const data = await getCitas();
-            data.sort((a, b) => a.id_cita - b.id_cita); 
+            const data = await getPacientesPrueba();
+            data.sort((a, b) => a.id - b.id); 
             setCitas(data);
             setError(null);
         } catch (error) {
@@ -73,11 +65,11 @@ const GestionCitas = () => {
 
     const handleEditarCita = async (citaEditada) => {
         try {
-            if (!citaEditada.id_cita) {
+            if (!citaEditada.id) {
                 throw new Error("El ID de la cita no está definido");
             }
-            console.log("Editando cita con ID:", citaEditada.id_cita); 
-            await updateCita(citaEditada.id_cita, citaEditada);
+            console.log("Editando cita con ID:", citaEditada.id); 
+            await updatePacientePrueba(citaEditada.id, citaEditada);
             await cargarCitas();
             setCitaSeleccionada(null);
             setVista('ver'); 
@@ -90,18 +82,18 @@ const GestionCitas = () => {
     };
 
     const handleEliminarCita = (id) => {
-        const cita = citas.find(e => e.id_cita === id);
+        const cita = citas.find(e => e.id === id);
         if (cita) {
             setCitaSeleccionada(cita);
             setMostrarModal(true);
-            console.log("Seleccionado para eliminar:", cita.id_cita);
+            console.log("Seleccionado para eliminar:", cita.id);
         }
     };
 
     const confirmarEliminarCita = async () => {
         try {
-            console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id_cita);
-            await deleteCita(citaSeleccionada.id_cita);
+            console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id);
+            await deletePacientePrueba(citaSeleccionada.id);
             await cargarCitas();
             setMostrarModal(false);
             setCitaSeleccionada(null);
@@ -141,7 +133,7 @@ const GestionCitas = () => {
                 <div className="hamburger">
                     <div className="line"></div>
                     <div className="line"></div>
-                    <div classica="line"></div>
+                    <div className="line"></div>
                 </div>
             </nav>
             {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}      
@@ -150,8 +142,6 @@ const GestionCitas = () => {
                 {vista === 'crear' && (
                     <FormularioCita
                         modo="crear"
-                        medicos={medicos}
-                        estudios={estudios}
                         onSubmit={handleCrearCita}
                         onCancel={() => setVista('')}
                     />
@@ -172,12 +162,12 @@ const GestionCitas = () => {
                             </thead>
                             <tbody>
                                 {citas.map((cita) => (
-                                    <tr key={cita.id_cita}>
-                                        <td>{cita.id_cita}</td>
-                                        <td>{cita.fecha_hora_cita}</td>
-                                        <td>{cita.nss_paciente}</td>
-                                        <td>{cita.id_medico_refiere}</td>
-                                        <td>{cita.id_estudio_radiologico}</td>
+                                    <tr key={cita.id}>
+                                        <td>{cita.id}</td>
+                                        <td>{cita.fecha_hora_estudio}</td>
+                                        <td>{cita.nss}</td>
+                                        <td>{cita.nombre_completo_medico}</td>
+                                        <td>{cita.estudio_solicitado}</td>
                                         <td>
                                             <div className="botones-acciones">
                                                 <button 
@@ -190,7 +180,7 @@ const GestionCitas = () => {
                                                     Editar
                                                 </button>
                                                 <button 
-                                                  onClick={() => handleEliminarCita(cita.id_cita)} 
+                                                  onClick={() => handleEliminarCita(cita.id)} 
                                                   className="eliminar-button"
                                                 >
                                                     Eliminar
@@ -207,8 +197,6 @@ const GestionCitas = () => {
                     <FormularioCita
                         modo="editar"
                         citaInicial={citaSeleccionada}
-                        medicos={medicos}
-                        estudios={estudios}
                         onSubmit={handleEditarCita}
                         onCancel={() => setVista('')}
                     />
@@ -226,6 +214,7 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
+
 
 
 

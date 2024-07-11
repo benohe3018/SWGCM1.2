@@ -10,10 +10,9 @@ pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['POST'])
 def create_paciente_prueba():
     data = request.get_json()
-    print(data)  # Añade este print para verificar los datos recibidos
     key = os.getenv('ENCRYPTION_KEY', 'mysecretkey12345').encode()
 
-    fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%d %H:%M:%S')
+    fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
     encrypted_nss = encrypt_data(data['nss'], key)
     encrypted_nombre_paciente = encrypt_data(data['nombre_paciente'], key)
     encrypted_apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)
@@ -41,4 +40,5 @@ def create_paciente_prueba():
     db.session.commit()
 
     return jsonify({"message": "Paciente prueba creado exitosamente"}), 201
+
 

@@ -50,9 +50,9 @@ const GestionCitas = () => {
         }
     };
 
-    const handleCrearCita = async (encryptedData) => {
+    const handleCrearCita = async (datosPaciente) => {
         try {
-            await createPacientePrueba(encryptedData);
+            await createPacientePrueba(datosPaciente);
             await cargarCitas();
             setVista(''); 
             setMensaje('Cita creada exitosamente.');
@@ -214,6 +214,7 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
+
 
 
 

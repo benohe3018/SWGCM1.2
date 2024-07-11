@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CryptoJS from 'crypto-js';
 import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
@@ -49,8 +48,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(formData), 'your-secret-key').toString();
-    onSubmit(encryptedData);
+    onSubmit(formData); // Enviar formData sin encriptar
   };
 
   return (
@@ -118,3 +116,4 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
+

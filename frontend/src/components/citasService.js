@@ -45,7 +45,7 @@ export const deleteCita = async (id) => {
 // Nuevas funciones para manejar la tabla pacientes_prueba
 export const createPacientePrueba = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/api/pacientes_prueba`, { data });
+    const response = await axios.post(`${API_URL}/api/pacientes_prueba`, data);
     return response.data;
   } catch (error) {
     console.error('Error creating paciente_prueba:', error);

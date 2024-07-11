@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
-    fecha_hora_estudio: '', // Nuevo campo para la fecha y hora del estudio
+    fecha_hora_estudio: '',
     nss_paciente: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
@@ -26,12 +27,12 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   useEffect(() => {
     const fetchMedicos = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/medicos/list`);
       setMedicos(response.data);
     };
 
     const fetchEstudios = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/estudios/list`);
       setEstudios(response.data);
     };
 
@@ -48,7 +49,8 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData); // Enviar formData sin encriptar
+    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(formData), 'your-secret-key').toString();
+    onSubmit(encryptedData);
   };
 
   return (
@@ -116,4 +118,5 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
+
 

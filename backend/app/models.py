@@ -124,7 +124,9 @@ class Operador(db.Model):
 #Modelo para la encriptacion en AES + CBC    
 class PacientePrueba(Base):
     __tablename__ = 'pacientes_prueba'
+    
     id = Column(Integer, primary_key=True)
+    fecha_hora_estudio = db.Column(db.DateTime, nullable=False)
     nss = Column(LargeBinary, nullable=False)
     nombre_paciente = Column(LargeBinary, nullable=False)
     apellido_paterno_paciente = Column(LargeBinary, nullable=False)
@@ -135,9 +137,10 @@ class PacientePrueba(Base):
     unidad_medica_procedencia = Column(LargeBinary, nullable=False)
     diagnostico_presuntivo = Column(LargeBinary, nullable=False)
 
-    def __init__(self, nss, nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente,
+    def __init__(self, fecha_hora_estudio, nss, nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente,
                  especialidad_medica, nombre_completo_medico, estudio_solicitado, 
                  unidad_medica_procedencia, diagnostico_presuntivo):
+        self.fecha_hora_estudio = fecha_hora_estudio
         self.nss = nss
         self.nombre_paciente = nombre_paciente
         self.apellido_paterno_paciente = apellido_paterno_paciente

@@ -14,7 +14,8 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     id_estudio_radiologico: '',
     unidad_medica_procedencia: '',
     diagnostico_presuntivo: '',
-    nombre_completo_medico: '' // Añadido
+    nombre_completo_medico: '', // Añadido
+    estudio_solicitado: '' // Añadido
   });
 
   const [medicos, setMedicos] = useState([]);
@@ -54,6 +55,15 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
       ...formData,
       id_medico_refiere: e.target.value,
       nombre_completo_medico: `${selectedMedico.nombre} ${selectedMedico.apellido_paterno} ${selectedMedico.apellido_materno}`
+    });
+  };
+
+  const handleEstudioChange = (e) => {
+    const selectedEstudio = estudios.find(estudio => estudio.id_estudio === parseInt(e.target.value));
+    setFormData({
+      ...formData,
+      id_estudio_radiologico: e.target.value,
+      estudio_solicitado: selectedEstudio.nombre_estudio
     });
   };
 
@@ -101,7 +111,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
       </div>
       <div className="form-group">
         <label htmlFor="id_estudio_radiologico">Estudio Solicitado:</label>
-        <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleChange} required>
+        <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleEstudioChange} required>
           <option value="">Seleccione un Estudio</option>
           {estudios.map((estudio) => (
             <option key={estudio.id_estudio} value={estudio.id_estudio}>
@@ -127,6 +137,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
+
 
 
 

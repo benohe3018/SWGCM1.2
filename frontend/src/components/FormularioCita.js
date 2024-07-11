@@ -27,12 +27,12 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   useEffect(() => {
     const fetchMedicos = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/medicos/list`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}api/medicos/list`);
       setMedicos(response.data);
     };
 
     const fetchEstudios = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/estudios/list`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}api/estudios/list`);
       setEstudios(response.data);
     };
 

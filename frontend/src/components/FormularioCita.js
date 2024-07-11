@@ -4,11 +4,11 @@ import './FormularioCita.css';
 const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudios }) => {
   const [formData, setFormData] = useState({
     fecha_hora_estudio: '',
-    nss_paciente: '',
+    nss: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
     apellido_materno_paciente: '',
-    especialidad_medica_envia: '',
+    especialidad_medica: '',
     id_medico_refiere: '',
     id_estudio_radiologico: '',
     unidad_medica_procedencia: '',
@@ -40,8 +40,8 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
         <input type="datetime-local" id="fecha_hora_estudio" name="fecha_hora_estudio" value={formData.fecha_hora_estudio} onChange={handleChange} required />
       </div>
       <div className="form-group">
-        <label htmlFor="nss_paciente">NSS del Paciente:</label>
-        <input type="text" id="nss_paciente" name="nss_paciente" value={formData.nss_paciente} onChange={handleChange} required />
+        <label htmlFor="nss">NSS del Paciente:</label> {/* Cambio aquí */}
+        <input type="text" id="nss" name="nss" value={formData.nss} onChange={handleChange} required /> {/* Cambio aquí */}
       </div>
       <div className="form-group">
         <label htmlFor="nombre_paciente">Nombre del Paciente:</label>
@@ -56,8 +56,8 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
         <input type="text" id="apellido_materno_paciente" name="apellido_materno_paciente" value={formData.apellido_materno_paciente} onChange={handleChange} required />
       </div>
       <div className="form-group">
-        <label htmlFor="especialidad_medica_envia">Especialidad Médica que Envía:</label>
-        <input type="text" id="especialidad_medica_envia" name="especialidad_medica_envia" value={formData.especialidad_medica_envia} onChange={handleChange} required />
+        <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label> {/* Cambio aquí */}
+        <input type="text" id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required /> {/* Cambio aquí */}
       </div>
       <div className="form-group">
         <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
@@ -94,7 +94,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel, medicos, estudi
         <button type="button" onClick={onCancel}>Cancelar</button>
       </div>
     </form>
-  );  
+  );
 };
 
 export default FormularioCita;

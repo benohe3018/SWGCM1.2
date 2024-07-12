@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './FormularioCita.css';
 
-const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
+const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
-    id_cita: '',
     fecha_hora_estudio: '',
     nss: '',
     nombre_paciente: '',
@@ -19,29 +17,11 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     estudio_solicitado: ''
   });
 
-  const [medicos, setMedicos] = useState([]);
-  const [estudios, setEstudios] = useState([]);
-
   useEffect(() => {
     if (modo === 'editar' && citaInicial) {
       setFormData(citaInicial);
     }
   }, [modo, citaInicial]);
-
-  useEffect(() => {
-    const fetchMedicos = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`);
-      setMedicos(response.data);
-    };
-
-    const fetchEstudios = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`);
-      setEstudios(response.data);
-    };
-
-    fetchMedicos();
-    fetchEstudios();
-  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -55,7 +35,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     setFormData({
       ...formData,
       id_medico_refiere: e.target.value,
-      nombre_completo_medico: `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}`
+      nombre_completo_medico: selectedMedico ? `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}` : ''
     });
   };
 
@@ -64,15 +44,12 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     setFormData({
       ...formData,
       id_estudio_radiologico: e.target.value,
-      estudio_solicitado: selectedEstudio.nombre_estudio
+      estudio_solicitado: selectedEstudio ? selectedEstudio.nombre_estudio : ''
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (modo === 'editar' && !formData.id_cita) {
-      return alert('El ID de la cita no está definido');
-    }
     onSubmit(formData);
   };
 
@@ -141,7 +118,6 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
-
 
 
 

@@ -92,6 +92,7 @@ export const getEstudios = async () => {
 };
 
 // Función para obtener la lista de pacientes de prueba
+// Función para obtener la lista de pacientes de prueba
 export const getPacientesPrueba = async () => {
   try {
     const response = await axios.get(`${API_URL}/api/pacientes_prueba`);

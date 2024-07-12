@@ -37,14 +37,14 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
       id_medico_refiere: e.target.value,
       nombre_completo_medico: selectedMedico ? `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}` : ''
     });
-};
+  };
 
   const handleEstudioChange = (e) => {
     const selectedEstudio = estudios.find(estudio => estudio.id_estudio === parseInt(e.target.value));
     setFormData({
       ...formData,
       id_estudio_radiologico: e.target.value,
-      estudio_solicitado: selectedEstudio.nombre_estudio
+      estudio_solicitado: selectedEstudio ? selectedEstudio.nombre_estudio : ''
     });
   };
 
@@ -118,6 +118,7 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
 };
 
 export default FormularioCita;
+
 
 
 

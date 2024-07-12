@@ -122,20 +122,21 @@ class Operador(db.Model):
     citas = db.relationship('Cita', backref='operador', lazy=True)
     
 #Modelo para la encriptacion en AES + CBC    
-class PacientePrueba(Base):
+#Modelo para la encriptacion en AES + CBC    
+class PacientePrueba(db.Model):  # Cambiar a db.Model
     __tablename__ = 'pacientes_prueba'
     
-    id = Column(Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     fecha_hora_estudio = db.Column(db.DateTime, nullable=False)
-    nss = Column(LargeBinary, nullable=False)
-    nombre_paciente = Column(LargeBinary, nullable=False)
-    apellido_paterno_paciente = Column(LargeBinary, nullable=False)
-    apellido_materno_paciente = Column(LargeBinary, nullable=False)
-    especialidad_medica = Column(LargeBinary, nullable=False)
-    nombre_completo_medico = Column(LargeBinary, nullable=False)
-    estudio_solicitado = Column(LargeBinary, nullable=False)
-    unidad_medica_procedencia = Column(LargeBinary, nullable=False)
-    diagnostico_presuntivo = Column(LargeBinary, nullable=False)
+    nss = db.Column(db.LargeBinary, nullable=False)
+    nombre_paciente = db.Column(db.LargeBinary, nullable=False)
+    apellido_paterno_paciente = db.Column(db.LargeBinary, nullable=False)
+    apellido_materno_paciente = db.Column(db.LargeBinary, nullable=False)
+    especialidad_medica = db.Column(db.LargeBinary, nullable=False)
+    nombre_completo_medico = db.Column(db.LargeBinary, nullable=False)
+    estudio_solicitado = db.Column(db.LargeBinary, nullable=False)
+    unidad_medica_procedencia = db.Column(db.LargeBinary, nullable=False)
+    diagnostico_presuntivo = db.Column(db.LargeBinary, nullable=False)
 
     def __init__(self, fecha_hora_estudio, nss, nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente,
                  especialidad_medica, nombre_completo_medico, estudio_solicitado, 

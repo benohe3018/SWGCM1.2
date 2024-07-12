@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './FormularioCita.css';
 
-const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
+const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     fecha_hora_estudio: '',
     nss: '',
@@ -14,33 +14,15 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     id_estudio_radiologico: '',
     unidad_medica_procedencia: '',
     diagnostico_presuntivo: '',
-    nombre_completo_medico: '', // Añadido
-    estudio_solicitado: '' // Añadido
+    nombre_completo_medico: '',
+    estudio_solicitado: ''
   });
-
-  const [medicos, setMedicos] = useState([]);
-  const [estudios, setEstudios] = useState([]);
 
   useEffect(() => {
     if (modo === 'editar' && citaInicial) {
       setFormData(citaInicial);
     }
   }, [modo, citaInicial]);
-
-  useEffect(() => {
-    const fetchMedicos = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/medicos/list`);
-      setMedicos(response.data);
-    };
-
-    const fetchEstudios = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/estudios/list`);
-      setEstudios(response.data);
-    };
-
-    fetchMedicos();
-    fetchEstudios();
-  }, []);
 
   const handleChange = (e) => {
     setFormData({

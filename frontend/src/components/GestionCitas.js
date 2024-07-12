@@ -11,7 +11,7 @@ const GestionCitas = () => {
     const [citas, setCitas] = useState([]);
     const [medicos, setMedicos] = useState([]);
     const [estudios, setEstudios] = useState([]);
-    const [pacientesPrueba, setPacientesPrueba] = useState([]);
+    const [pacientesPrueba, setPacientesPrueba] = useState([]); // Aquí está el estado que mencionas
     const [citaSeleccionada, setCitaSeleccionada] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
@@ -26,13 +26,13 @@ const GestionCitas = () => {
                 getCitas(),
                 getMedicos(),
                 getEstudios(),
-                getPacientesPrueba()
+                getPacientesPrueba() // Obtener datos de pacientes de prueba
             ]);
             citasData.sort((a, b) => a.id_cita - b.id_cita); 
             setCitas(citasData);
             setMedicos(medicosData);
             setEstudios(estudiosData);
-            setPacientesPrueba(pacientesPruebaData);
+            setPacientesPrueba(pacientesPruebaData); // Asignar datos obtenidos al estado
             setError(null);
         } catch (error) {
             console.error("Error al inicializar datos:", error);
@@ -144,7 +144,7 @@ const GestionCitas = () => {
                 <div className="hamburger">
                     <div className="line"></div>
                     <div className="line"></div>
-                    <div classica="line"></div>
+                    <div className="line"></div>
                 </div>
             </nav>
             {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}      
@@ -174,18 +174,18 @@ const GestionCitas = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {citas.map((cita) => (
-                                    <tr key={cita.id_cita}>
-                                        <td>{cita.id_cita}</td>
-                                        <td>{cita.fecha_hora_cita}</td>
-                                        <td>{cita.nss_paciente}</td>
-                                        <td>{cita.id_medico_refiere}</td>
-                                        <td>{cita.id_estudio_radiologico}</td>
+                                {pacientesPrueba.map((paciente) => (
+                                    <tr key={paciente.id}>
+                                        <td>{paciente.id}</td>
+                                        <td>{paciente.fecha_hora_estudio}</td>
+                                        <td>{paciente.nombre_paciente}</td>
+                                        <td>{paciente.nombre_completo_medico}</td>
+                                        <td>{paciente.estudio_solicitado}</td>
                                         <td>
                                             <div className="botones-acciones">
                                                 <button 
                                                   onClick={() => {
-                                                      setCitaSeleccionada(cita);
+                                                      setCitaSeleccionada(paciente);
                                                       setVista('editar');
                                                   }} 
                                                   className="editar-button"
@@ -193,7 +193,7 @@ const GestionCitas = () => {
                                                     Editar
                                                 </button>
                                                 <button 
-                                                  onClick={() => handleEliminarCita(cita.id_cita)} 
+                                                  onClick={() => handleEliminarCita(paciente.id)} 
                                                   className="eliminar-button"
                                                 >
                                                     Eliminar
@@ -229,6 +229,7 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
+
 
 
 

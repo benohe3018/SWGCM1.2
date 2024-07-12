@@ -28,7 +28,7 @@ const GestionCitas = () => {
                 getEstudios(),
                 getPacientesPrueba() // Obtener datos de pacientes de prueba
             ]);
-            citasData.sort((a, b) => a.id_cita - b.id_cita); 
+            citasData.sort((a, b) => a.id - b.id); 
             setCitas(citasData);
             setMedicos(medicosData);
             setEstudios(estudiosData);
@@ -50,7 +50,7 @@ const GestionCitas = () => {
         try {
             setCargando(true);
             const data = await getCitas();
-            data.sort((a, b) => a.id_cita - b.id_cita); 
+            data.sort((a, b) => a.id - b.id); 
             setCitas(data);
             setError(null);
         } catch (error) {
@@ -76,11 +76,11 @@ const GestionCitas = () => {
 
     const handleEditarCita = async (citaEditada) => {
         try {
-            if (!citaEditada.id_cita) {
+            if (!citaEditada.id) {
                 throw new Error("El ID de la cita no está definido");
             }
-            console.log("Editando cita con ID:", citaEditada.id_cita); 
-            await updateCita(citaEditada.id_cita, citaEditada);
+            console.log("Editando cita con ID:", citaEditada.id); 
+            await updateCita(citaEditada.id, citaEditada);
             await cargarCitas();
             setCitaSeleccionada(null);
             setVista('ver'); 
@@ -93,18 +93,18 @@ const GestionCitas = () => {
     };
 
     const handleEliminarCita = (id) => {
-        const cita = citas.find(e => e.id_cita === id);
+        const cita = citas.find(e => e.id === id);
         if (cita) {
             setCitaSeleccionada(cita);
             setMostrarModal(true);
-            console.log("Seleccionado para eliminar:", cita.id_cita);
+            console.log("Seleccionado para eliminar:", cita.id);
         }
     };
 
     const confirmarEliminarCita = async () => {
         try {
-            console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id_cita);
-            await deleteCita(citaSeleccionada.id_cita);
+            console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id);
+            await deleteCita(citaSeleccionada.id);
             await cargarCitas();
             setMostrarModal(false);
             setCitaSeleccionada(null);

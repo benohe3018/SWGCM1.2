@@ -35,9 +35,9 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
     setFormData({
       ...formData,
       id_medico_refiere: e.target.value,
-      nombre_completo_medico: `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}`
+      nombre_completo_medico: selectedMedico ? `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}` : ''
     });
-  };
+};
 
   const handleEstudioChange = (e) => {
     const selectedEstudio = estudios.find(estudio => estudio.id_estudio === parseInt(e.target.value));

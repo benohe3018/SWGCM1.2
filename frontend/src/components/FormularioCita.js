@@ -3,7 +3,7 @@ import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
-    id_cita: '',
+    id: '',
     fecha_hora_estudio: '',
     nss: '',
     nombre_paciente: '',
@@ -22,7 +22,7 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
     if (modo === 'editar' && citaInicial) {
       setFormData({
         ...citaInicial,
-        id_cita: citaInicial.id_cita || '' // Asegurar que id_cita esté en el estado
+        id: citaInicial.id || '' // Asegurar que id esté en el estado
       });
     }
   }, [modo, citaInicial]);

@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
-    id_cita: citaInicial ? citaInicial.id_cita : null,
-    fecha_hora_estudio: citaInicial ? citaInicial.fecha_hora_estudio : '',
-    nss: citaInicial ? citaInicial.nss : '',
-    nombre_paciente: citaInicial ? citaInicial.nombre_paciente : '',
-    apellido_paterno_paciente: citaInicial ? citaInicial.apellido_paterno_paciente : '',
-    apellido_materno_paciente: citaInicial ? citaInicial.apellido_materno_paciente : '',
-    especialidad_medica: citaInicial ? citaInicial.especialidad_medica : '',
-    id_medico_refiere: citaInicial ? citaInicial.id_medico_refiere : '',
-    id_estudio_radiologico: citaInicial ? citaInicial.id_estudio_radiologico : '',
-    unidad_medica_procedencia: citaInicial ? citaInicial.unidad_medica_procedencia : '',
-    diagnostico_presuntivo: citaInicial ? citaInicial.diagnostico_presuntivo : '',
-    nombre_completo_medico: citaInicial ? citaInicial.nombre_completo_medico : '', // Añadido
-    estudio_solicitado: citaInicial ? citaInicial.estudio_solicitado : '' // Añadido
+    fecha_hora_estudio: '',
+    nss: '',
+    nombre_paciente: '',
+    apellido_paterno_paciente: '',
+    apellido_materno_paciente: '',
+    especialidad_medica: '',
+    id_medico_refiere: '',
+    id_estudio_radiologico: '',
+    unidad_medica_procedencia: '',
+    diagnostico_presuntivo: '',
+    nombre_completo_medico: '',
+    estudio_solicitado: ''
   });
 
   useEffect(() => {
@@ -120,7 +118,6 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
 };
 
 export default FormularioCita;
-
 
 
 

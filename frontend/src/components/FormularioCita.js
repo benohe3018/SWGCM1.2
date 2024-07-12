@@ -3,6 +3,7 @@ import './FormularioCita.css';
 
 const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
+    id_cita: '',
     fecha_hora_estudio: '',
     nss: '',
     nombre_paciente: '',
@@ -50,6 +51,9 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (modo === 'editar' && !formData.id_cita) {
+      return alert('El ID de la cita no está definido');
+    }
     onSubmit(formData);
   };
 
@@ -118,9 +122,3 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
 };
 
 export default FormularioCita;
-
-
-
-
-
-

@@ -20,7 +20,10 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
 
   useEffect(() => {
     if (modo === 'editar' && citaInicial) {
-      setFormData(citaInicial);
+      setFormData({
+        ...citaInicial,
+        id_cita: citaInicial.id_cita || '' // Asegurar que id_cita esté en el estado
+      });
     }
   }, [modo, citaInicial]);
 
@@ -51,9 +54,6 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (modo === 'editar' && !formData.id_cita) {
-      return alert('El ID de la cita no está definido');
-    }
     onSubmit(formData);
   };
 

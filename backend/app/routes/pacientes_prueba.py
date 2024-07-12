@@ -57,14 +57,14 @@ def create_paciente_prueba():
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():
+    key = os.getenv('ENCRYPTION_KEY').encode()
     try:
         pacientes_prueba = PacientePrueba.query.all()
-        key = os.getenv('ENCRYPTION_KEY').encode()
-        result = []
+        pacientes_list = []
         for paciente in pacientes_prueba:
-            result.append({
+            pacientes_list.append({
                 'id': paciente.id,
-                'fecha_hora_estudio': paciente.fecha_hora_estudio,
+                'fecha_hora_estudio': paciente.fecha_hora_estudio.isoformat(),
                 'nss': decrypt_data(paciente.nss, key),
                 'nombre_paciente': decrypt_data(paciente.nombre_paciente, key),
                 'apellido_paterno_paciente': decrypt_data(paciente.apellido_paterno_paciente, key),
@@ -75,10 +75,10 @@ def get_pacientes_prueba():
                 'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
                 'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key)
             })
-        return jsonify(result), 200
+        return jsonify(pacientes_list), 200
     except SQLAlchemyError as e:
-        logging.error("Error al recuperar pacientes prueba: %s", str(e))
-        return jsonify({"error": "Error al recuperar pacientes prueba"}), 500
+        logging.error("Error al recuperar pacientes de prueba: %s", str(e))
+        return jsonify({"error": "Error al recuperar pacientes de prueba"}), 500
 
 
 

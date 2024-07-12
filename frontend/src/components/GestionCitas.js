@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getCitas, createPacientePrueba, updateCita, deleteCita, getMedicos, getEstudios } from './citasService';
+import { getCitas, createPacientePrueba, updateCita, deleteCita, getMedicos, getEstudios, getPacientesPrueba } from './citasService';
 import FormularioCita from './FormularioCita';
 import ModalConfirmacion from './ModalConfirmacion'; 
 import mrMachine from '../images/MRMachine.jpg';
@@ -11,6 +11,7 @@ const GestionCitas = () => {
     const [citas, setCitas] = useState([]);
     const [medicos, setMedicos] = useState([]);
     const [estudios, setEstudios] = useState([]);
+    const [pacientesPrueba, setPacientesPrueba] = useState([]);
     const [citaSeleccionada, setCitaSeleccionada] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
@@ -21,15 +22,17 @@ const GestionCitas = () => {
     const inicializarCitas = useCallback(async () => {
         try {
             setCargando(true);
-            const [citasData, medicosData, estudiosData] = await Promise.all([
+            const [citasData, medicosData, estudiosData, pacientesPruebaData] = await Promise.all([
                 getCitas(),
                 getMedicos(),
-                getEstudios()
+                getEstudios(),
+                getPacientesPrueba()
             ]);
             citasData.sort((a, b) => a.id_cita - b.id_cita); 
             setCitas(citasData);
             setMedicos(medicosData);
             setEstudios(estudiosData);
+            setPacientesPrueba(pacientesPruebaData);
             setError(null);
         } catch (error) {
             console.error("Error al inicializar datos:", error);
@@ -226,6 +229,7 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
+
 
 
 

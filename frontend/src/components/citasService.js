@@ -69,7 +69,6 @@ export const createPacientePrueba = async (data) => {
   }
 };
 
-
 // Función para obtener la lista de médicos
 export const getMedicos = async () => {
   try {
@@ -91,6 +90,18 @@ export const getEstudios = async () => {
     throw error;
   }
 };
+
+// Función para obtener la lista de pacientes de prueba
+export const getPacientesPrueba = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/pacientes_prueba`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching pacientes_prueba:', error);
+    throw error;
+  }
+};
+
 
 
 

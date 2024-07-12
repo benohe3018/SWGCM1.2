@@ -54,7 +54,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
     setFormData({
       ...formData,
       id_medico_refiere: e.target.value,
-      nombre_completo_medico: `${selectedMedico.nombre} ${selectedMedico.apellido_paterno} ${selectedMedico.apellido_materno}`
+      nombre_completo_medico: `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}`
     });
   };
 
@@ -69,7 +69,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);  // Enviar datos sin encriptar en el frontend
+    onSubmit(formData);
   };
 
   return (
@@ -104,7 +104,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
           <option value="">Seleccione un Médico</option>
           {medicos.map((medico) => (
             <option key={medico.id_medico} value={medico.id_medico}>
-              {`${medico.nombre} ${medico.apellido_paterno} ${medico.apellido_materno}`}
+              {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
             </option>
           ))}
         </select>
@@ -137,6 +137,7 @@ const FormularioCita = ({ modo, citaInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioCita;
+
 
 
 

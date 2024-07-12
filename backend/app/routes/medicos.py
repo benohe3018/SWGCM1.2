@@ -64,9 +64,9 @@ def list_medicos():
         medicos = Medico.query.all()
         return jsonify([{
             'id_medico': medico.id_medico,
-            'nombre': medico.nombre_medico,
-            'apellido_paterno': medico.apellido_paterno_medico,
-            'apellido_materno': medico.apellido_materno_medico
+            'nombre_medico': medico.nombre_medico,
+            'apellido_paterno_medico': medico.apellido_paterno_medico,
+            'apellido_materno_medico': medico.apellido_materno_medico
         } for medico in medicos]), 200
     except SQLAlchemyError as e:
         logging.error("Error al recuperar médicos: %s", str(e))

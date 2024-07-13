@@ -107,6 +107,22 @@ def update_paciente_prueba(id):
         db.session.rollback()
         logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+    
+@pacientes_prueba_bp.route('/api/pacientes_prueba/<int:id>', methods=['DELETE'])
+def delete_paciente_prueba(id):
+    try:
+        paciente = PacientePrueba.query.get(id)
+        if not paciente:
+            return jsonify({"error": "Paciente no encontrado"}), 404
+            
+        db.session.delete(paciente)
+        db.session.commit()
+        return jsonify({"message": "Paciente eliminado exitosamente"}), 200
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        logging.error("Error en la base de datos al eliminar paciente: %s", str(e))
+        return jsonify({"error": "Error en la base de datos"}), 500
+
 
 
 

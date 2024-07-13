@@ -80,6 +80,33 @@ def get_pacientes_prueba():
         logging.error("Error al recuperar pacientes de prueba: %s", str(e))
         return jsonify({"error": "Error al recuperar pacientes de prueba"}), 500
 
+@pacientes_prueba_bp.route('/api/pacientes_prueba/<int:id>', methods=['PUT'])
+def update_paciente_prueba(id):
+    data = request.get_json()
+    key = os.getenv('ENCRYPTION_KEY').encode()
+    
+    try:
+        paciente = PacientePrueba.query.get(id)
+        if not paciente:
+            return jsonify({"error": "Paciente no encontrado"}), 404
+        
+        paciente.fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
+        paciente.nss = encrypt_data(data['nss'], key)
+        paciente.nombre_paciente = encrypt_data(data['nombre_paciente'], key)
+        paciente.apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)
+        paciente.apellido_materno_paciente = encrypt_data(data['apellido_materno_paciente'], key)
+        paciente.especialidad_medica = encrypt_data(data['especialidad_medica'], key)
+        paciente.nombre_completo_medico = encrypt_data(data['nombre_completo_medico'], key)
+        paciente.estudio_solicitado = encrypt_data(data['estudio_solicitado'], key)
+        paciente.unidad_medica_procedencia = encrypt_data(data['unidad_medica_procedencia'], key)
+        paciente.diagnostico_presuntivo = encrypt_data(data['diagnostico_presuntivo'], key)
+
+        db.session.commit()
+        return jsonify({"message": "Paciente actualizado exitosamente"}), 200
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
+        return jsonify({"error": "Error en la base de datos"}), 500
 
 
 

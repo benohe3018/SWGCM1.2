@@ -11,7 +11,7 @@ const GestionCitas = () => {
     const [citas, setCitas] = useState([]);
     const [medicos, setMedicos] = useState([]);
     const [estudios, setEstudios] = useState([]);
-    const [pacientesPrueba, setPacientesPrueba] = useState([]); // Aquí está el estado que mencionas
+    const [pacientesPrueba, setPacientesPrueba] = useState([]);
     const [citaSeleccionada, setCitaSeleccionada] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
@@ -26,13 +26,13 @@ const GestionCitas = () => {
                 getCitas(),
                 getMedicos(),
                 getEstudios(),
-                getPacientesPrueba() // Obtener datos de pacientes de prueba
+                getPacientesPrueba()
             ]);
             citasData.sort((a, b) => a.id - b.id); 
             setCitas(citasData);
             setMedicos(medicosData);
             setEstudios(estudiosData);
-            setPacientesPrueba(pacientesPruebaData); // Asignar datos obtenidos al estado
+            setPacientesPrueba(pacientesPruebaData);
             setError(null);
         } catch (error) {
             console.error("Error al inicializar datos:", error);
@@ -229,6 +229,7 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
+
 
 
 

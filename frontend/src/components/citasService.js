@@ -43,8 +43,7 @@ export const updateCita = async (id, citaData) => {
   }
 };
 
-
-
+// Función para eliminar una cita existente
 export const deleteCita = async (id) => {
   try {
     const response = await axios.delete(`${API_URL}/api/pacientes_prueba/${id}`);
@@ -54,7 +53,6 @@ export const deleteCita = async (id) => {
     throw error;
   }
 };
-
 
 // Función para crear un nuevo paciente de prueba
 export const createPacientePrueba = async (data) => {
@@ -103,7 +101,6 @@ export const getPacientesPrueba = async () => {
     throw error;
   }
 };
-
 
 
 

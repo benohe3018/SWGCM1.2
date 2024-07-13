@@ -65,7 +65,7 @@ const GestionCitas = () => {
         try {
             await createPacientePrueba(datosPaciente);
             await cargarCitas();
-            setVista(''); 
+            setVista('ver'); 
             setMensaje('Cita creada exitosamente.');
             setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
@@ -156,7 +156,7 @@ const GestionCitas = () => {
                         medicos={medicos}
                         estudios={estudios}
                         onSubmit={handleCrearCita}
-                        onCancel={() => setVista('')}
+                        onCancel={() => setVista('ver')}
                     />
                 )}
 
@@ -213,7 +213,7 @@ const GestionCitas = () => {
                         medicos={medicos}
                         estudios={estudios}
                         onSubmit={handleEditarCita}
-                        onCancel={() => setVista('')}
+                        onCancel={() => setVista('ver')}
                     />
                 )}
             </div>

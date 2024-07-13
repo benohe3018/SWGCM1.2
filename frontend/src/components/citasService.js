@@ -31,7 +31,7 @@ export const createCita = async (citaData) => {
 // Función para actualizar una cita existente
 export const updateCita = async (id, citaData) => {
   try {
-    const response = await axios.put(`${API_URL}/api/citas/${id}`, citaData, {
+    const response = await axios.put(`${API_URL}/api/pacientes_prueba/${id}`, citaData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -42,6 +42,7 @@ export const updateCita = async (id, citaData) => {
     throw error;
   }
 };
+
 
 // Función para eliminar una cita existente
 export const deleteCita = async (id) => {
@@ -91,7 +92,6 @@ export const getEstudios = async () => {
   }
 };
 
-// Función para obtener la lista de pacientes de prueba
 // Función para obtener la lista de pacientes de prueba
 export const getPacientesPrueba = async () => {
   try {

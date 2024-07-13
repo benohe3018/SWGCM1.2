@@ -80,7 +80,7 @@ def get_pacientes_prueba():
         logging.error("Error al recuperar pacientes de prueba: %s", str(e))
         return jsonify({"error": "Error al recuperar pacientes de prueba"}), 500
 
-@pacientes_prueba_bp.route('/api/pacientes_prueba/<int:id>', methods=['PUT'])
+@pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['PUT'])
 def update_paciente_prueba(id):
     data = request.get_json()
     key = os.getenv('ENCRYPTION_KEY').encode()

@@ -108,6 +108,7 @@ def update_paciente_prueba(id):
         logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
     
+# Eliminar un paciente de prueba existente
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
     try:

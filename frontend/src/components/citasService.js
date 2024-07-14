@@ -45,14 +45,24 @@ export const updateCita = async (id, citaData) => {
 
 // Función para eliminar una cita existente
 export const deletePacientePrueba = async (id) => {
+  const url = `${API_URL}/api/pacientes_prueba/${id}`;
+  console.log('URL de eliminación:', url);
   try {
-    const response = await axios.delete(`${API_URL}/api/pacientes_prueba/${id}`);
+    console.log('Intentando eliminar paciente con ID:', id);
+    const response = await axios.delete(url);
+    console.log('Respuesta de eliminación:', response.data);
     if (response.status !== 200) {
       throw new Error('No se pudo eliminar el paciente de prueba');
     }
     return response.data;
   } catch (error) {
-    console.error('Error deleting paciente de prueba:', error);
+    console.error('Error completo al eliminar paciente:', error);
+    console.error('Mensaje de error:', error.message);
+    if (error.response) {
+      console.error('Datos de respuesta de error:', error.response.data);
+      console.error('Estado de respuesta de error:', error.response.status);
+      console.error('Cabeceras de respuesta de error:', error.response.headers);
+    }
     throw error;
   }
 };

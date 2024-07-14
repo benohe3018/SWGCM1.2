@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
 from ..models import Cita
+from ..models import PacientePrueba
 from .. import db
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 import logging
 
 citas_bp = Blueprint('citas', __name__)
+pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
 
 @citas_bp.route('/citas', methods=['GET'])
 def get_citas():
@@ -96,16 +98,19 @@ def update_cita(id):
         logging.error("Error al actualizar la cita: %s", str(e))
         return jsonify({"error": "Error al actualizar la cita"}), 500
 
-@citas_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
-def delete_cita(id):
+@pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
+def delete_paciente_prueba(id):
+    print(f"Solicitud DELETE recibida para el ID: {id}")
     try:
-        cita = Cita.query.get_or_404(id)
-        db.session.delete(cita)
+        paciente = PacientePrueba.query.get(id)
+        if not paciente:
+            return jsonify({"error": "Paciente no encontrado"}), 404
+            
+        db.session.delete(paciente)
         db.session.commit()
-        return jsonify({'message': 'La cita ha sido eliminada correctamente.'}), 200
+        return jsonify({"message": "Paciente eliminado exitosamente"}), 200
     except SQLAlchemyError as e:
         db.session.rollback()
-        logging.error("Error al eliminar cita: %s", str(e))
-        return jsonify({"error": "Error al eliminar la cita"}), 500
-
+        logging.error("Error en la base de datos al eliminar paciente: %s", str(e))
+        return jsonify({"error": "Error en la base de datos"}), 500
 

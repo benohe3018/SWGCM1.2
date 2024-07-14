@@ -39,6 +39,7 @@ function App() {
         <Route path="/delete-medico" element={<DeleteMedico/>} />
         <Route path="/crud-usuarios" element={<CRUDUsuarios/>} />
         <Route path="/create-usuario" element={<CreateUsuario/>} />
+        <Route path="/gestion-citas" element={<GestionCitas />} />
         <Route path="/informes-medicos" element={<InformeMedicos />} />
         <Route path="/usuarios" element={<Usuarios />} />
         <Route path="/estudios-radiologicos" element={<EstudiosRadiologicos />} />

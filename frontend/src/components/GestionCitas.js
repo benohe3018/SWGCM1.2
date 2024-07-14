@@ -93,28 +93,32 @@ const GestionCitas = () => {
     };
 
     const handleEliminarCita = (id) => {
+        console.log("Iniciando proceso de eliminación para ID:", id);
         const cita = citas.find(e => e.id === id);
         if (cita) {
-            setCitaSeleccionada(cita);
-            setMostrarModal(true);
-            console.log("Seleccionado para eliminar:", cita.id);
+          console.log("Cita encontrada:", cita);
+          setCitaSeleccionada(cita);
+          setMostrarModal(true);
+        } else {
+          console.log("No se encontró la cita con ID:", id);
         }
-    };
+      };
 
     const confirmarEliminarCita = async () => {
         try {
-            console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id);
-            await deletePacientePrueba(citaSeleccionada.id);
-            await cargarCitas();
-            setMostrarModal(false);
-            setCitaSeleccionada(null);
-            setMensaje('Cita eliminada exitosamente.');
-            setTimeout(() => setMensaje(null), 3000);
+          console.log("Intentando eliminar cita con ID:", citaSeleccionada.id);
+          await deletePacientePrueba(citaSeleccionada.id);
+          console.log("Cita eliminada exitosamente");
+          await cargarCitas();
+          setMostrarModal(false);
+          setCitaSeleccionada(null);
+          setMensaje('Cita eliminada exitosamente.');
+          setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
-            console.error("Error al eliminar cita:", error);
-            setError("No se pudo eliminar la cita. Por favor, intente de nuevo.");
+          console.error("Error al eliminar cita:", error);
+          setError("No se pudo eliminar la cita. Por favor, intente de nuevo.");
         }
-    };
+      };
 
     if (cargando) {
         return <div>Cargando citas...</div>;

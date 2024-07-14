@@ -96,7 +96,7 @@ def update_cita(id):
         logging.error("Error al actualizar la cita: %s", str(e))
         return jsonify({"error": "Error al actualizar la cita"}), 500
 
-@citas_bp.route('/api/pacientes_prueba/<int:id>', methods=['DELETE'])
+@citas_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_cita(id):
     try:
         cita = Cita.query.get_or_404(id)

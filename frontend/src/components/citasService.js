@@ -45,13 +45,13 @@ export const updateCita = async (id, citaData) => {
 
 // Función para eliminar una cita existente
 export const deleteCita = async (id) => {
-  const response = await fetch(`/api/pacientes_prueba/${id}`, {
-    method: 'DELETE'
-});
-if (!response.ok) {
-    throw new Error('No se pudo eliminar el estudio');
-}
-return response.json();
+  try {
+    const response = await axios.delete(`${API_URL}/api/citas/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting cita:', error);
+    throw error;
+  }
 };
 
 

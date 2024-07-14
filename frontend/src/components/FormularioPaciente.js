@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './FormularioCita.css';
+import './FormularioPaciente.css';
 
-const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCancel }) => {
+const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
-    id: '', // Asegúrate de incluir el campo 'id'
+    id: '',
     fecha_hora_estudio: '',
     nss: '',
     nombre_paciente: '',
@@ -19,13 +19,13 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
   });
 
   useEffect(() => {
-    if (modo === 'editar' && citaInicial) {
+    if (modo === 'editar' && pacienteInicial) {
       setFormData({
-        ...citaInicial,
-        id: citaInicial.id || '' // Asegurar que id esté en el estado
+        ...pacienteInicial,
+        id: pacienteInicial.id || ''
       });
     }
-  }, [modo, citaInicial]);
+  }, [modo, pacienteInicial]);
 
   const handleChange = (e) => {
     setFormData({
@@ -58,7 +58,7 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
   };
 
   return (
-    <form className="form-cita" onSubmit={handleSubmit}>
+    <form className="form-paciente" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="fecha_hora_estudio">Fecha y Hora del Estudio:</label>
         <input type="datetime-local" id="fecha_hora_estudio" name="fecha_hora_estudio" value={formData.fecha_hora_estudio} onChange={handleChange} required />
@@ -121,4 +121,4 @@ const FormularioCita = ({ modo, citaInicial, medicos, estudios, onSubmit, onCanc
   );
 };
 
-export default FormularioCita;
+export default FormularioPaciente;

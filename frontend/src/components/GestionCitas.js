@@ -2,37 +2,34 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getCitas, createPacientePrueba, updateCita, deletePacientePrueba, getMedicos, getEstudios, getPacientesPrueba } from './citasService';
-import FormularioCita from './FormularioCita';
+import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios } from './citasService';
+import FormularioPaciente from './FormularioPaciente';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
-    const [citas, setCitas] = useState([]);
+    const [pacientesPrueba, setPacientesPrueba] = useState([]);
     const [medicos, setMedicos] = useState([]);
     const [estudios, setEstudios] = useState([]);
-    const [pacientesPrueba, setPacientesPrueba] = useState([]);
-    const [citaSeleccionada, setCitaSeleccionada] = useState(null);
+    const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
     const [mensaje, setMensaje] = useState(null); 
     const [cargando, setCargando] = useState(true);
     const [vista, setVista] = useState('');
 
-    const inicializarCitas = useCallback(async () => {
+    const inicializarDatos = useCallback(async () => {
         try {
             setCargando(true);
-            const [citasData, medicosData, estudiosData, pacientesPruebaData] = await Promise.all([
-                getCitas(),
+            const [pacientesData, medicosData, estudiosData] = await Promise.all([
+                getPacientesPrueba(),
                 getMedicos(),
-                getEstudios(),
-                getPacientesPrueba()
+                getEstudios()
             ]);
-            citasData.sort((a, b) => a.id - b.id); 
-            setCitas(citasData);
+            pacientesData.sort((a, b) => a.id - b.id); 
+            setPacientesPrueba(pacientesData);
             setMedicos(medicosData);
             setEstudios(estudiosData);
-            setPacientesPrueba(pacientesPruebaData);
             setError(null);
         } catch (error) {
             console.error("Error al inicializar datos:", error);
@@ -43,85 +40,89 @@ const GestionCitas = () => {
     }, []);
 
     useEffect(() => {
-        inicializarCitas();
-    }, [inicializarCitas]);
+        inicializarDatos();
+    }, [inicializarDatos]);
 
-    const cargarCitas = async () => {
+    const cargarPacientesPrueba = async () => {
         try {
             setCargando(true);
-            const data = await getCitas();
+            const data = await getPacientesPrueba();
+            console.log("Pacientes de prueba cargados:", data);
             data.sort((a, b) => a.id - b.id); 
-            setCitas(data);
+            setPacientesPrueba(data);
             setError(null);
         } catch (error) {
-            console.error("Error al cargar citas:", error);
-            setError("Hubo un problema al cargar las citas. Por favor, intente de nuevo.");
+            console.error("Error al cargar pacientes de prueba:", error);
+            setError("Hubo un problema al cargar los pacientes de prueba. Por favor, intente de nuevo.");
         } finally {
             setCargando(false);
         }
     };
 
-    const handleCrearCita = async (datosPaciente) => {
+    const handleCrearPaciente = async (datosPaciente) => {
         try {
             await createPacientePrueba(datosPaciente);
-            await cargarCitas();
+            await cargarPacientesPrueba();
             setVista('ver'); 
-            setMensaje('Cita creada exitosamente.');
+            setMensaje('Paciente de prueba creado exitosamente.');
             setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
-            console.error("Error al crear cita:", error);
-            setError("No se pudo crear la cita. Por favor, intente de nuevo.");
+            console.error("Error al crear paciente de prueba:", error);
+            setError("No se pudo crear el paciente de prueba. Por favor, intente de nuevo.");
         }
     };
 
-    const handleEditarCita = async (citaEditada) => {
+    const handleEditarPaciente = async (pacienteEditado) => {
         try {
-            if (!citaEditada.id) {
-                throw new Error("El ID de la cita no está definido");
+            if (!pacienteEditado.id) {
+                throw new Error("El ID del paciente no está definido");
             }
-            console.log("Editando cita con ID:", citaEditada.id); 
-            await updateCita(citaEditada.id, citaEditada);
-            await cargarCitas();
-            setCitaSeleccionada(null);
+            console.log("Editando paciente con ID:", pacienteEditado.id); 
+            await updatePacientePrueba(pacienteEditado.id, pacienteEditado);
+            await cargarPacientesPrueba();
+            setPacienteSeleccionado(null);
             setVista('ver'); 
-            setMensaje('Cita actualizada exitosamente.'); 
+            setMensaje('Paciente actualizado exitosamente.'); 
             setTimeout(() => setMensaje(null), 3000); 
         } catch (error) {
-            console.error("Error al editar cita:", error);
-            setError("No se pudo editar la cita. Por favor, intente de nuevo.");
+            console.error("Error al editar paciente:", error);
+            setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
         }
     };
 
-    const handleEliminarCita = (id) => {
-        console.log("Iniciando proceso de eliminación para ID:", id);
-        const cita = citas.find(e => e.id === id);
-        if (cita) {
-          console.log("Cita encontrada:", cita);
-          setCitaSeleccionada(cita);
-          setMostrarModal(true);
+    const handleEliminarPaciente = (id) => {
+        const numericId = Number(id);
+        console.log("Iniciando proceso de eliminación para ID:", numericId);
+        console.log("Todos los pacientes de prueba:", pacientesPrueba);
+        const paciente = pacientesPrueba.find(p => p.id === numericId);
+        if (paciente) {
+            console.log("Paciente encontrado:", paciente);
+            setPacienteSeleccionado(paciente);
+            setMostrarModal(true);
         } else {
-          console.log("No se encontró la cita con ID:", id);
+            console.log("No se encontró el paciente con ID:", numericId);
+            console.log("IDs de pacientes disponibles:", pacientesPrueba.map(p => p.id));
         }
-      };
+    };
 
-    const confirmarEliminarCita = async () => {
+    const confirmarEliminarPaciente = async () => {
         try {
-          console.log("Intentando eliminar cita con ID:", citaSeleccionada.id);
-          await deletePacientePrueba(citaSeleccionada.id);
-          console.log("Cita eliminada exitosamente");
-          await cargarCitas();
-          setMostrarModal(false);
-          setCitaSeleccionada(null);
-          setMensaje('Cita eliminada exitosamente.');
-          setTimeout(() => setMensaje(null), 3000);
+            console.log("Intentando eliminar paciente con ID:", pacienteSeleccionado.id);
+            await deletePacientePrueba(pacienteSeleccionado.id);
+            console.log("Paciente eliminado exitosamente");
+            await cargarPacientesPrueba();
+            setMostrarModal(false);
+            setPacienteSeleccionado(null);
+            setMensaje('Paciente eliminado exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
-          console.error("Error al eliminar cita:", error);
-          setError("No se pudo eliminar la cita. Por favor, intente de nuevo.");
+            console.error("Error al eliminar paciente:", error);
+            setError("No se pudo eliminar el paciente. Por favor, intente de nuevo.");
         }
-      };
+    };
 
     if (cargando) {
-        return <div>Cargando citas...</div>;
+        return <div>Cargando datos...</div>;
     }
 
     if (error) {
@@ -141,8 +142,8 @@ const GestionCitas = () => {
             <nav className="navbar">
                 <ul className="nav-links">
                     <li><Link to="/" onClick={() => setVista('')}>Cambiar Sesión</Link></li>
-                    <li><Link to="#" onClick={() => setVista('crear')}>Capturar Nueva Cita Médica</Link></li>
-                    <li><Link to="#" onClick={() => setVista('ver')}>Ver Citas Capturadas</Link></li>
+                    <li><Link to="#" onClick={() => setVista('crear')}>Capturar Nuevo Paciente de Prueba</Link></li>
+                    <li><Link to="#" onClick={() => setVista('ver')}>Ver Pacientes de Prueba</Link></li>
                     <li><Link to="/dashboard-root">Página de Inicio</Link></li>
                 </ul>
                 <div className="hamburger">
@@ -155,11 +156,11 @@ const GestionCitas = () => {
             <div className="gestion-citas-content">
                 {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
                 {vista === 'crear' && (
-                    <FormularioCita
+                    <FormularioPaciente
                         modo="crear"
                         medicos={medicos}
                         estudios={estudios}
-                        onSubmit={handleCrearCita}
+                        onSubmit={handleCrearPaciente}
                         onCancel={() => setVista('ver')}
                     />
                 )}
@@ -189,7 +190,7 @@ const GestionCitas = () => {
                                             <div className="botones-acciones">
                                                 <button 
                                                   onClick={() => {
-                                                      setCitaSeleccionada(paciente);
+                                                      setPacienteSeleccionado(paciente);
                                                       setVista('editar');
                                                   }} 
                                                   className="editar-button"
@@ -197,7 +198,7 @@ const GestionCitas = () => {
                                                     Editar
                                                 </button>
                                                 <button 
-                                                  onClick={() => handleEliminarCita(paciente.id)} 
+                                                  onClick={() => handleEliminarPaciente(paciente.id)} 
                                                   className="eliminar-button"
                                                 >
                                                     Eliminar
@@ -210,21 +211,21 @@ const GestionCitas = () => {
                         </table>
                     </div>
                 )}
-                {vista === 'editar' && citaSeleccionada && (
-                    <FormularioCita
+                {vista === 'editar' && pacienteSeleccionado && (
+                    <FormularioPaciente
                         modo="editar"
-                        citaInicial={citaSeleccionada}
+                        pacienteInicial={pacienteSeleccionado}
                         medicos={medicos}
                         estudios={estudios}
-                        onSubmit={handleEditarCita}
+                        onSubmit={handleEditarPaciente}
                         onCancel={() => setVista('ver')}
                     />
                 )}
             </div>
             {mostrarModal && (
                 <ModalConfirmacion
-                    mensaje="¿Estás seguro de que deseas eliminar esta cita?"
-                    onConfirm={confirmarEliminarCita}
+                    mensaje="¿Estás seguro de que deseas eliminar este paciente de prueba?"
+                    onConfirm={confirmarEliminarPaciente}
                     onCancel={() => setMostrarModal(false)}
                 />
             )}

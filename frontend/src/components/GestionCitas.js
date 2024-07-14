@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getCitas, createPacientePrueba, updateCita, deleteCita, getMedicos, getEstudios, getPacientesPrueba } from './citasService';
+import { getCitas, createPacientePrueba, updateCita, deletePacientePrueba, getMedicos, getEstudios, getPacientesPrueba } from './citasService';
 import FormularioCita from './FormularioCita';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
@@ -104,7 +104,7 @@ const GestionCitas = () => {
     const confirmarEliminarCita = async () => {
         try {
             console.log("Confirmando eliminación de cita con ID:", citaSeleccionada.id);
-            await deleteCita(citaSeleccionada.id);
+            await deletePacientePrueba(citaSeleccionada.id);
             await cargarCitas();
             setMostrarModal(false);
             setCitaSeleccionada(null);

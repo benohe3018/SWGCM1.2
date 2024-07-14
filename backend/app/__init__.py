@@ -16,7 +16,6 @@ from .routes.auth import auth_bp
 from .routes.medicos import medicos_bp
 from .routes.usuarios import usuarios_bp
 from .routes.estudios import estudios_bp
-from .routes.citas import citas_bp
 from .routes.unidades_medicas import unidades_medicas_bp  # Nuevo import
 from .routes.hospitales import hospitales_bp  # Nuevo import
 from .routes.pacientes_prueba import pacientes_prueba_bp 
@@ -40,7 +39,6 @@ def create_app():
     app.register_blueprint(medicos_bp, url_prefix='/api')
     app.register_blueprint(usuarios_bp, url_prefix='/api')
     app.register_blueprint(estudios_bp, url_prefix='/api')
-    app.register_blueprint(citas_bp, url_prefix='/api')
     app.register_blueprint(unidades_medicas_bp, url_prefix='/api')  # Registro nuevo
     app.register_blueprint(hospitales_bp, url_prefix='/api')  # Registro nuevo
     app.register_blueprint(pacientes_prueba_bp, url_prefix='/api')

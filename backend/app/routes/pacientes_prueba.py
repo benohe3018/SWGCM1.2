@@ -109,7 +109,7 @@ def update_paciente_prueba(id):
         return jsonify({"error": "Error en la base de datos"}), 500
     
 # Eliminar un paciente de prueba existente
-@pacientes_prueba_bp.route('api/citas/<int:id>', methods=['DELETE'])
+@pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
     try:
         paciente = PacientePrueba.query.get(id)

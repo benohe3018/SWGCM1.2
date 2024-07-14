@@ -45,7 +45,7 @@ export const updateCita = async (id, citaData) => {
 
 // Función para eliminar una cita existente
 export const deletePacientePrueba = async (id) => {
-  const url = `${API_URL}/api/pacientes_prueba/${id}`;
+  const url = `${API_URL}api/citas/${id}`;
   console.log('URL de eliminación:', url);
   try {
     console.log('Intentando eliminar paciente con ID:', id);

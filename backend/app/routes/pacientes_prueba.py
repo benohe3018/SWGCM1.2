@@ -22,7 +22,7 @@ def create_paciente_prueba():
     key = os.getenv('ENCRYPTION_KEY').encode()
     
     try:
-        fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M:%S')  # Asegúrate de que el formato sea consistente
+        fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
         encrypted_nss = encrypt_data(data['nss'], key)
         encrypted_nombre_paciente = encrypt_data(data['nombre_paciente'], key)
         encrypted_apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)
@@ -90,7 +90,7 @@ def update_paciente_prueba(id):
         if not paciente:
             return jsonify({"error": "Paciente no encontrado"}), 404
         
-        paciente.fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M:%S')
+        paciente.fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
         paciente.nss = encrypt_data(data['nss'], key)
         paciente.nombre_paciente = encrypt_data(data['nombre_paciente'], key)
         paciente.apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)
@@ -107,10 +107,8 @@ def update_paciente_prueba(id):
         db.session.rollback()
         logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
-    except ValueError as e:
-        logging.error("Error en el formato de la fecha y hora: %s", str(e))
-        return jsonify({"error": "Error en el formato de la fecha y hora"}), 400
     
+# Eliminar un paciente de prueba existente
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
     try:

@@ -4,7 +4,7 @@ import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getCitas, createPacientePrueba, updateCita, deleteCita, getMedicos, getEstudios, getPacientesPrueba } from './citasService';
 import FormularioCita from './FormularioCita';
-import ModalConfirmacion from './ModalConfirmacion'; 
+import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {

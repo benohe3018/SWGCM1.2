@@ -46,7 +46,7 @@ export const updatePacientePrueba = async (id, pacienteData) => {
 // Función para eliminar un paciente de prueba existente
 export const deletePacientePrueba = async (id) => {
   const url = `${API_URL}/api/pacientes_prueba/${id}`;
-  console.log('URL de eliminación:', url);  // Agrega este log
+  console.log('La URL de eliminación del registro es:', url);  // Agrega este log
   try {
     const response = await axios.delete(url);
     console.log('Respuesta del servidor:', response);  // Agrega este log

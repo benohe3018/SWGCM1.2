@@ -45,11 +45,14 @@ export const updatePacientePrueba = async (id, pacienteData) => {
 
 // Función para eliminar un paciente de prueba existente
 export const deletePacientePrueba = async (id) => {
+  const url = `${API_URL}/api/pacientes_prueba/${id}`;
+  console.log('URL de eliminación:', url);  // Agrega este log
   try {
-    const response = await axios.delete(`${API_URL}/api/pacientes_prueba/${id}`);
+    const response = await axios.delete(url);
+    console.log('Respuesta del servidor:', response);  // Agrega este log
     return response.data;
   } catch (error) {
-    console.error('Error deleting paciente_prueba:', error);
+    console.error('Error completo:', error);  // Modifica este log
     throw error;
   }
 };
@@ -60,6 +63,7 @@ export const getMedicos = async () => {
     const response = await axios.get(`${API_URL}/api/medicos/list`);
     return response.data;
   } catch (error) {
+    
     console.error('Error fetching medicos:', error);
     throw error;
   }

@@ -62,13 +62,12 @@ def get_pacientes_prueba():
         pacientes_prueba = PacientePrueba.query.all()
         pacientes_list = []
         for paciente in pacientes_prueba:
+            nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
             pacientes_list.append({
                 'id': paciente.id,
                 'fecha_hora_estudio': paciente.fecha_hora_estudio.isoformat(),
+                'nombre_completo': nombre_completo,
                 'nss': decrypt_data(paciente.nss, key),
-                'nombre_paciente': decrypt_data(paciente.nombre_paciente, key),
-                'apellido_paterno_paciente': decrypt_data(paciente.apellido_paterno_paciente, key),
-                'apellido_materno_paciente': decrypt_data(paciente.apellido_materno_paciente, key),
                 'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
                 'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
                 'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
@@ -108,7 +107,6 @@ def update_paciente_prueba(id):
         logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
     
-# Eliminar un paciente de prueba existente
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
     print(f"Recibida solicitud DELETE para paciente con ID: {id}")

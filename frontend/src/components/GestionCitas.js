@@ -183,7 +183,7 @@ const GestionCitas = () => {
                                     <tr key={paciente.id}>
                                         <td>{paciente.id}</td>
                                         <td>{paciente.fecha_hora_estudio}</td>
-                                        <td>{paciente.nombre_paciente}</td>
+                                        <td>{paciente.nombre_completo}</td>
                                         <td>{paciente.nombre_completo_medico}</td>
                                         <td>{paciente.estudio_solicitado}</td>
                                         <td>
@@ -234,13 +234,3 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
-
-
-
-
-
-
-
-
-
-

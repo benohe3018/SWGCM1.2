@@ -9,6 +9,7 @@ from .config import ph
 from ..models import Usuario, db
 from argon2.exceptions import HashingError
 
+# Obtención de variables de entorno para reCAPTCHA
 api_key = os.getenv('RECAPTCHA_API_KEY')
 site_key = os.getenv('RECAPTCHA_SITE_KEY')
 project_id = os.getenv('RECAPTCHA_PROJECT_ID')
@@ -16,11 +17,33 @@ project_id = os.getenv('RECAPTCHA_PROJECT_ID')
 auth_bp = Blueprint('auth', __name__)
 
 def generate_token(identity, role):
+    """
+    Genera un token JWT para el usuario autenticado.
+    
+    Args:
+        identity (str): Identidad del usuario (generalmente el ID).
+        role (str): Rol del usuario (por ejemplo, 'admin', 'user').
+    
+    Returns:
+        str: Token JWT.
+    """
     expires = timedelta(hours=24)
     additional_claims = {"role": role}
     return create_access_token(identity=identity, expires_delta=expires, additional_claims=additional_claims)
 
 def hash_password(password):
+    """
+    Genera un hash seguro para una contraseña utilizando Argon2.
+    
+    Args:
+        password (str): La contraseña a hashear.
+    
+    Returns:
+        str: El hash de la contraseña.
+    
+    Raises:
+        ValueError: Si hay un error al generar el hash.
+    """
     try:
         return ph.hash(password)
     except HashingError as e:
@@ -28,6 +51,16 @@ def hash_password(password):
         raise ValueError("Error al procesar la contraseña")
 
 def check_password_hash(stored_hash, password):
+    """
+    Verifica una contraseña comparándola con su hash almacenado.
+    
+    Args:
+        stored_hash (str): El hash de la contraseña almacenada.
+        password (str): La contraseña a verificar.
+    
+    Returns:
+        bool: True si la contraseña es correcta, False en caso contrario.
+    """
     try:
         if stored_hash.startswith('$2b$'):  # Es un hash bcrypt
             return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
@@ -38,6 +71,15 @@ def check_password_hash(stored_hash, password):
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
+    """
+    Maneja el proceso de inicio de sesión del usuario.
+    
+    Se espera un JSON con 'nombre_usuario', 'password' y 'captcha'.
+    Verifica el CAPTCHA, valida las credenciales del usuario y genera un token JWT.
+    
+    Returns:
+        json: Respuesta JSON con mensaje de éxito y token JWT o mensaje de error.
+    """
     data = request.get_json()
     username = data.get('nombre_usuario')
     password = data.get('password')
@@ -71,6 +113,15 @@ def login():
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
+    """
+    Maneja el proceso de registro de un nuevo usuario.
+    
+    Se espera un JSON con 'nombre_usuario', 'password', 'rol', 'nombre_real', 'apellido_paterno', 'apellido_materno' y 'matricula'.
+    Hashea la contraseña y almacena el nuevo usuario en la base de datos.
+    
+    Returns:
+        json: Respuesta JSON con mensaje de éxito o error.
+    """
     data = request.get_json()
     username = data.get('nombre_usuario')
     password = data.get('password')

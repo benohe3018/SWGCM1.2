@@ -22,39 +22,47 @@ const Login = () => {
     window.grecaptcha.enterprise.ready(async () => {
       const token = await window.grecaptcha.enterprise.execute('6LdTV84pAAAAAFx9i_tznOQS4J1wRyo3NEuP2gSn', {action: 'LOGIN'});
 
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
-        nombre_usuario: username,
-        password: password,
-        captcha: token
-      });
-      console.log("Response from server:", response.data); 
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('role', response.data.role);
-
-      // Redirige según el rol
-      switch (response.data.role) {
-        case 'Admin':
-          navigate('/dashboard-admin');
-          break;
-        case 'root':
-          navigate('/dashboard-root');
-          break;
-        case 'Usuario_administrador':
-          navigate('/dashboard-user-admin');
-          break;
-        case 'Usuario_de_Campo':
-          navigate('/dashboard-field-user');
-          break;
-        default:
-          // En caso de que el rol no esté definido o sea diferente
-          setError('Rol no reconocido. Acceso no permitido.');
-          break;
+      try {
+        // Realiza una petición POST al servidor para autenticar al usuario
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
+          nombre_usuario: username,
+          password: password,
+          captcha: token
+        });
+      
+        // Imprime la respuesta del servidor en la consola para depuración
+        console.log("Response from server:", response.data);
+      
+        // Almacena el token JWT en el almacenamiento local del navegador para mantener la sesión del usuario
+        localStorage.setItem('token', response.data.token);
+      
+        // Almacena el rol del usuario en el almacenamiento local para controlar el acceso basado en roles
+        localStorage.setItem('role', response.data.role);
+      
+        // Redirige al usuario según su rol
+        switch (response.data.role) {
+          case 'Admin':
+            navigate('/dashboard-admin');
+            break;
+          case 'root':
+            navigate('/dashboard-root');
+            break;
+          case 'Usuario_administrador':
+            navigate('/dashboard-user-admin');
+            break;
+          case 'Usuario_de_Campo':
+            navigate('/dashboard-field-user');
+            break;
+          default:
+            // En caso de que el rol no esté definido o sea diferente
+            setError('Rol no reconocido. Acceso no permitido.');
+            break;
+        }
+      } catch (error) {
+        // Maneja cualquier error que ocurra durante el proceso de inicio de sesión
+        setError('Error al iniciar sesión. Por favor intente de nuevo');
+        console.error('Error de login:', error.response);
       }
-    } catch (error) {
-      setError('Error al iniciar sesión. Por favor intente de nuevo');
-      console.error('Error de login:', error.response);
-    }
   });
   };
 

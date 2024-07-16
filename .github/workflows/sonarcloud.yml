@@ -1,6 +1,14 @@
 name: Build and analyze
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+      - test-build
+  pull_request:
+    branches:
+      - main
+      - test-build
 
 jobs:
   build:
@@ -53,5 +61,3 @@ jobs:
           -Dsonar.organization=benohe3018 \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
-

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from ..models import PacientePrueba
 from .. import db
-from .encryption import encrypt_data, decrypt_data
+from .encryption import encrypt_data, decrypt_data, decrypt_data_old
 from datetime import datetime
 import os
 from sqlalchemy.exc import SQLAlchemyError
@@ -62,18 +62,22 @@ def get_pacientes_prueba():
         pacientes_prueba = PacientePrueba.query.all()
         pacientes_list = []
         for paciente in pacientes_prueba:
-            nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
-            pacientes_list.append({
-                'id': paciente.id,
-                'fecha_hora_estudio': paciente.fecha_hora_estudio.isoformat(),
-                'nombre_completo': nombre_completo,
-                'nss': decrypt_data(paciente.nss, key),
-                'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
-                'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
-                'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
-                'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
-                'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key)
-            })
+            try:
+                nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
+                pacientes_list.append({
+                    'id': paciente.id,
+                    'fecha_hora_estudio': paciente.fecha_hora_estudio.isoformat(),
+                    'nombre_completo': nombre_completo,
+                    'nss': decrypt_data(paciente.nss, key),
+                    'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
+                    'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
+                    'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
+                    'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
+                    'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key)
+                })
+            except Exception as e:
+                logging.error("Error al descifrar datos para el paciente con ID %s: %s", paciente.id, str(e))
+                continue
         return jsonify(pacientes_list), 200
     except SQLAlchemyError as e:
         logging.error("Error al recuperar pacientes de prueba: %s", str(e))

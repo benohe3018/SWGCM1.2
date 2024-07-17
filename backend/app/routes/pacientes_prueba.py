@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from ..models import PacientePrueba
 from .. import db
-from .encryption import encrypt_data, decrypt_data, decrypt_data_old
+from .encryption import encrypt_data, decrypt_data
 from datetime import datetime
 import os
 from sqlalchemy.exc import SQLAlchemyError
@@ -58,41 +58,21 @@ def create_paciente_prueba():
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():
     key = os.getenv('ENCRYPTION_KEY').encode()
-    old_key = os.getenv('OLD_ENCRYPTION_KEY').encode()
     try:
         pacientes_prueba = PacientePrueba.query.all()
         pacientes_list = []
         for paciente in pacientes_prueba:
-            try:
-                nombre_paciente = decrypt_data(paciente.nombre_paciente, key)
-                apellido_paterno_paciente = decrypt_data(paciente.apellido_paterno_paciente, key)
-                apellido_materno_paciente = decrypt_data(paciente.apellido_materno_paciente, key)
-                especialidad_medica = decrypt_data(paciente.especialidad_medica, key)
-                nombre_completo_medico = decrypt_data(paciente.nombre_completo_medico, key)
-                estudio_solicitado = decrypt_data(paciente.estudio_solicitado, key)
-                unidad_medica_procedencia = decrypt_data(paciente.unidad_medica_procedencia, key)
-                diagnostico_presuntivo = decrypt_data(paciente.diagnostico_presuntivo, key)
-            except Exception:
-                nombre_paciente = decrypt_data_old(paciente.nombre_paciente, old_key)
-                apellido_paterno_paciente = decrypt_data_old(paciente.apellido_paterno_paciente, old_key)
-                apellido_materno_paciente = decrypt_data_old(paciente.apellido_materno_paciente, old_key)
-                especialidad_medica = decrypt_data_old(paciente.especialidad_medica, old_key)
-                nombre_completo_medico = decrypt_data_old(paciente.nombre_completo_medico, old_key)
-                estudio_solicitado = decrypt_data_old(paciente.estudio_solicitado, old_key)
-                unidad_medica_procedencia = decrypt_data_old(paciente.unidad_medica_procedencia, old_key)
-                diagnostico_presuntivo = decrypt_data_old(paciente.diagnostico_presuntivo, old_key)
-                
-            nombre_completo = f"{nombre_paciente} {apellido_paterno_paciente} {apellido_materno_paciente}"
+            nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
             pacientes_list.append({
                 'id': paciente.id,
                 'fecha_hora_estudio': paciente.fecha_hora_estudio.isoformat(),
                 'nombre_completo': nombre_completo,
                 'nss': decrypt_data(paciente.nss, key),
-                'especialidad_medica': especialidad_medica,
-                'nombre_completo_medico': nombre_completo_medico,
-                'estudio_solicitado': estudio_solicitado,
-                'unidad_medica_procedencia': unidad_medica_procedencia,
-                'diagnostico_presuntivo': diagnostico_presuntivo
+                'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
+                'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
+                'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
+                'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
+                'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key)
             })
         return jsonify(pacientes_list), 200
     except SQLAlchemyError as e:
@@ -147,7 +127,6 @@ def delete_paciente_prueba(id):
         print(error_msg)
         logging.error(error_msg)
         return jsonify({"error": "Error en la base de datos"}), 500
-
 
 
 

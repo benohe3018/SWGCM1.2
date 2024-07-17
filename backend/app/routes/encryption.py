@@ -20,3 +20,12 @@ def decrypt_data(encrypted_data, key):
     unpadder = padding.PKCS7(128).unpadder()
     unpadded_data = unpadder.update(decrypted_data) + unpadder.finalize()
     return unpadded_data.decode()
+
+def decrypt_data_old(encrypted_data, key):
+    iv = encrypted_data[:16]
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    decryptor = cipher.decryptor()
+    decrypted_data = decryptor.update(encrypted_data[16:]) + decryptor.finalize()
+    unpadder = padding.PKCS7(128).unpadder()
+    unpadded_data = unpadder.update(decrypted_data) + unpadder.finalize()
+    return unpadded_data.decode()

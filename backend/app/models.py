@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, LargeBinary
 from . import db
-from encryption import encrypt_data, decrypt_data, decrypt_data_old
+from .routes.encryption import encrypt_data, decrypt_data, decrypt_data_old
 import os
 
 db = SQLAlchemy()

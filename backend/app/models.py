@@ -3,6 +3,8 @@ from werkzeug.security import generate_password_hash
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, LargeBinary
 from . import db
+from encryption import encrypt_data, decrypt_data, decrypt_data_old
+import os
 
 db = SQLAlchemy()
 Base = declarative_base()
@@ -121,9 +123,7 @@ class Operador(db.Model):
     numero_telefonico = db.Column(db.String(20), nullable=True)
     citas = db.relationship('Cita', backref='operador', lazy=True)
     
-#Modelo para la encriptacion en AES + CBC  +PDKF7
-#Modelo para la encriptacion en AES + CBC  + PDKF7  
-class PacientePrueba(db.Model):  # Cambiar a db.Model
+class PacientePrueba(db.Model):  
     __tablename__ = 'pacientes_prueba'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -151,6 +151,13 @@ class PacientePrueba(db.Model):  # Cambiar a db.Model
         self.estudio_solicitado = estudio_solicitado
         self.unidad_medica_procedencia = unidad_medica_procedencia
         self.diagnostico_presuntivo = diagnostico_presuntivo
+
+def update_user_password_in_db(user_id, new_encrypted_password):
+    user = Usuario.query.get(user_id)
+    user.contrasena = new_encrypted_password
+    db.session.commit()
+
+
 
     
 

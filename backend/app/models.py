@@ -3,8 +3,6 @@ from werkzeug.security import generate_password_hash
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, LargeBinary
 from . import db
-from encryption import encrypt_data, decrypt_data, decrypt_data_old
-import os
 
 db = SQLAlchemy()
 Base = declarative_base()
@@ -22,6 +20,7 @@ class Medico(db.Model):
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+     
     @property
     def serialize(self):
         return {
@@ -71,6 +70,8 @@ class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_usuario = db.Column(db.String(50), nullable=False)
     contrasena = db.Column(db.String(128), nullable=False)
+    def set_password(self, password):
+        self.contraseña = generate_password_hash(password)
     matricula = db.Column(db.BigInteger, unique=True, nullable=False)
     rol = db.Column(db.String(50), nullable=False)
     nombre_real = db.Column(db.String(50), nullable=False)
@@ -78,13 +79,11 @@ class Usuario(db.Model):
     apellido_materno = db.Column(db.String(50), nullable=False)
     citas_registra = db.relationship('Cita', backref='usuario_registra', lazy=True)
 
-    def set_password(self, password):
-        self.contrasena = generate_password_hash(password)
-
     def serialize(self):
         return {
             'id': self.id,
             'nombre_usuario': self.nombre_usuario,
+            'contraseña': self.contraseña,
             'rol': self.rol,
             'nombre_real': self.nombre_real,
             'apellido_paterno': self.apellido_paterno,
@@ -103,6 +102,7 @@ class Cita(db.Model):
     id_unidad_medica_origen = db.Column(db.Integer, db.ForeignKey('unidades_medicina_familiar.id'))
     id_hospital_origen = db.Column(db.Integer, db.ForeignKey('hospitales.id'))
     id_operador = db.Column(db.Integer, db.ForeignKey('operador.id'))
+    
 
 class Informe(db.Model):
     __tablename__ = 'informes'
@@ -120,8 +120,10 @@ class Operador(db.Model):
     apellido_materno = db.Column(db.String(50), nullable=False)
     numero_telefonico = db.Column(db.String(20), nullable=True)
     citas = db.relationship('Cita', backref='operador', lazy=True)
-
-class PacientePrueba(db.Model):
+    
+#Modelo para la encriptacion en AES + CBC  +PDKF7
+#Modelo para la encriptacion en AES + CBC  + PDKF7  
+class PacientePrueba(db.Model):  # Cambiar a db.Model
     __tablename__ = 'pacientes_prueba'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -149,7 +151,6 @@ class PacientePrueba(db.Model):
         self.estudio_solicitado = estudio_solicitado
         self.unidad_medica_procedencia = unidad_medica_procedencia
         self.diagnostico_presuntivo = diagnostico_presuntivo
-
 
     
 

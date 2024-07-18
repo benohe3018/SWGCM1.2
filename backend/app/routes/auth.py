@@ -54,9 +54,8 @@ def hash_password(password):
 def check_password_hash(stored_hash, password):
     try:
         print(f"Verificando el hash almacenado: {stored_hash} con la contraseña: {password}")
-        result = ph.verify(stored_hash, password)
-        print(f"Resultado de verificación: {result}")
-        return result
+        ph.verify(stored_hash, password)
+        return True
     except (VerifyMismatchError, ValueError) as e:
         print(f"Error al verificar el hash de la contraseña: {str(e)}")
         return False
@@ -103,17 +102,17 @@ def login():
         print(f"Usuario encontrado en la base de datos: {user is not None}")
         if user:
             print(f"Contraseña almacenada en la base de datos para {username}: {user.contrasena}")
-            # Verificar la contraseña desencriptada con el hash almacenado
-            if check_password_hash(user.contrasena, password):
+            try:
+                check_password_hash(user.contrasena, password)
                 token = generate_token(user.id, user.rol)
                 print(f"Token generado: {token}")
                 return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
-            else:
+            except VerifyMismatchError:
                 print("Credenciales inválidas")
                 return jsonify({"message": "Credenciales inválidas"}), 401
         else:
             print("Usuario no encontrado")
-            return jsonify({"message": "Usuario no encontrado"}), 404
+            return jsonify({"message": "Credenciales inválidas"}), 401
     except Exception as e:
         print(f"Error durante el proceso de login: {str(e)}")
         return jsonify({"message": "Error durante el proceso de login"}), 500

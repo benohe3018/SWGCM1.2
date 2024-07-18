@@ -10,9 +10,6 @@ import mrMachine from '../images/MRMachine.jpg';
 const key = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_SECRET_KEY);
 const iv = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_IV_KEY);
 
-console.log('Clave de encriptación (frontend):', key.toString());
-console.log('IV de encriptación (frontend):', iv.toString());
-
 const encryptPassword = (password) => {
   console.log('Padding utilizado en el frontend:', CryptoJS.pad.Pkcs7);
   return CryptoJS.AES.encrypt(password, key, { iv: iv, padding: CryptoJS.pad.Pkcs7 }).toString();
@@ -103,6 +100,5 @@ const Login = () => {
 };
 
 export default Login;
-
 
 

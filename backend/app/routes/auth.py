@@ -44,17 +44,22 @@ def generate_token(identity, role):
 
 def hash_password(password):
     try:
-        return ph.hash(password)
+        hashed = ph.hash(password)
+        print(f"Contraseña hasheada: {hashed}")
+        return hashed
     except HashingError as e:
         print(f"Error al generar el hash de la contraseña: {str(e)}")
         raise ValueError("Error al procesar la contraseña")
 
 def check_password_hash(stored_hash, password):
     try:
+        print(f"Hash almacenado: {stored_hash}")
         if stored_hash.startswith('$2b$'):  # Es un hash bcrypt
-            return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
+            result = bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
         else:  # Es un hash Argon2
-            return ph.verify(stored_hash, password)
+            result = ph.verify(stored_hash, password)
+        print(f"Resultado de verificación: {result}")
+        return result
     except (VerifyMismatchError, ValueError) as e:
         print(f"Error al verificar el hash de la contraseña: {str(e)}")
         return False
@@ -99,17 +104,22 @@ def login():
     try:
         user = Usuario.query.filter_by(nombre_usuario=username).first()
         print(f"Usuario encontrado en la base de datos: {user is not None}")
-        if user and check_password_hash(user.contrasena, password):
-            if user.contrasena.startswith('$2b$'):  # Es un hash bcrypt, actualizar a Argon2
-                new_hash = hash_password(password)
-                user.contrasena = new_hash
-                db.session.commit()
-            token = generate_token(user.id, user.rol)
-            print(f"Token generado: {token}")
-            return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
+        if user:
+            print(f"Contraseña almacenada en la base de datos para {username}: {user.contrasena}")
+            if check_password_hash(user.contrasena, password):
+                if user.contrasena.startswith('$2b$'):  # Es un hash bcrypt, actualizar a Argon2
+                    new_hash = hash_password(password)
+                    user.contrasena = new_hash
+                    db.session.commit()
+                token = generate_token(user.id, user.rol)
+                print(f"Token generado: {token}")
+                return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
+            else:
+                print("Credenciales inválidas")
+                return jsonify({"message": "Credenciales inválidas"}), 401
         else:
-            print("Credenciales inválidas")
-            return jsonify({"message": "Credenciales inválidas"}), 401
+            print("Usuario no encontrado")
+            return jsonify({"message": "Usuario no encontrado"}), 404
     except Exception as e:
         print(f"Error durante el proceso de login: {str(e)}")
         return jsonify({"message": "Error durante el proceso de login"}), 500
@@ -143,6 +153,7 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+
 
 
 

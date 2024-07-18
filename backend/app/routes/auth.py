@@ -25,6 +25,7 @@ iv = os.getenv('IV_KEY').encode()
 
 def decrypt_password(encrypted_password):
     try:
+        print('Padding utilizado en el backend:', 'pkcs7')
         encrypted_password_bytes = base64.b64decode(encrypted_password)
         cipher = AES.new(key, AES.MODE_CBC, iv)
         decrypted_password = unpad(cipher.decrypt(encrypted_password_bytes), AES.block_size, style='pkcs7')
@@ -139,4 +140,5 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+
 

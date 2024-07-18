@@ -4,10 +4,10 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
 import os
-from argon2.exceptions import VerifyMismatchError
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError, HashingError
 from .config import ph
 from ..models import Usuario, db
-from argon2.exceptions import HashingError
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 import base64
@@ -143,6 +143,7 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+
 
 
 

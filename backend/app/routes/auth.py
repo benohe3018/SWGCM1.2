@@ -6,7 +6,7 @@ from datetime import timedelta
 import os
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, HashingError
-from .config import ph
+from .config import ph, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
 from ..models import Usuario, db
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
@@ -103,8 +103,7 @@ def login():
         print(f"Usuario encontrado en la base de datos: {user is not None}")
         if user:
             print(f"Contraseña almacenada en la base de datos para {username}: {user.contrasena}")
-            # En lugar de comparar directamente la contraseña desencriptada con el hash almacenado, hasheamos la contraseña desencriptada
-            hashed_password = hash_password(password)
+            # Verificar la contraseña desencriptada con el hash almacenado
             if check_password_hash(user.contrasena, password):
                 token = generate_token(user.id, user.rol)
                 print(f"Token generado: {token}")
@@ -148,6 +147,7 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+
 
 
 

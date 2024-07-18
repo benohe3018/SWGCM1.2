@@ -20,20 +20,18 @@ project_id = os.getenv('RECAPTCHA_PROJECT_ID')
 auth_bp = Blueprint('auth', __name__)
 
 # Cargar las claves de encriptación desde las variables de entorno
-key = os.getenv('SECRET_KEY')
-iv = os.getenv('IV_KEY')
-
-if not key or not iv:
-    raise ValueError("Environment variables SECRET_KEY and IV_KEY must be set")
-
-key = key.encode()
-iv = iv.encode()
+key = os.getenv('SECRET_KEY').encode()
+iv = os.getenv('IV_KEY').encode()
 
 def decrypt_password(encrypted_password):
-    encrypted_password_bytes = base64.b64decode(encrypted_password)
-    cipher = AES.new(key, AES.MODE_CBC, iv)
-    decrypted_password = unpad(cipher.decrypt(encrypted_password_bytes), AES.block_size)
-    return decrypted_password.decode('utf-8')
+    try:
+        encrypted_password_bytes = base64.b64decode(encrypted_password)
+        cipher = AES.new(key, AES.MODE_CBC, iv)
+        decrypted_password = unpad(cipher.decrypt(encrypted_password_bytes), AES.block_size)
+        return decrypted_password.decode('utf-8')
+    except Exception as e:
+        print(f"Error al desencriptar la contraseña: {str(e)}")
+        raise
 
 def generate_token(identity, role):
     expires = timedelta(hours=24)
@@ -53,7 +51,8 @@ def check_password_hash(stored_hash, password):
             return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
         else:  # Es un hash Argon2
             return ph.verify(stored_hash, password)
-    except (VerifyMismatchError, ValueError):
+    except (VerifyMismatchError, ValueError) as e:
+        print(f"Error al verificar el hash de la contraseña: {str(e)}")
         return False
 
 @auth_bp.route('/login', methods=['POST'])
@@ -63,6 +62,12 @@ def login():
     encrypted_password = data.get('password')
     captcha = data.get('captcha')
 
+    print("Datos recibidos del frontend")
+    print(f"Usuario: {username}")
+    print(f"Contraseña cifrada: {encrypted_password}")
+    print(f"Captcha: {captcha}")
+
+    # Verifica el CAPTCHA
     recaptcha_response = requests.post(f'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments?key={api_key}', json={
         'event': {
             'token': captcha,
@@ -71,6 +76,8 @@ def login():
         }
     })
     recaptcha_data = recaptcha_response.json()
+    print("Respuesta de reCAPTCHA:", recaptcha_data)
+
     if 'event' not in recaptcha_data or 'riskAnalysis' not in recaptcha_data:
         return jsonify({"message": "Invalid CAPTCHA"}), 401
     if recaptcha_data['event']['expectedAction'] != 'LOGIN' or recaptcha_data['riskAnalysis']['score'] < 0.5:
@@ -80,18 +87,28 @@ def login():
 
     try:
         password = decrypt_password(encrypted_password)
+        print(f"Contraseña desencriptada: {password}")
     except Exception as e:
+        print(f"Error al desencriptar la contraseña: {str(e)}")
         return jsonify({"message": "Error al desencriptar la contraseña"}), 500
 
-    user = Usuario.query.filter_by(nombre_usuario=username).first()
-    if user and check_password_hash(user.contrasena, password):
-        if user.contrasena.startswith('$2b$'):  # Es un hash bcrypt, actualizar a Argon2
-            new_hash = hash_password(password)
-            user.contrasena = new_hash
-            db.session.commit()
-        token = generate_token(user.id, user.rol)
-        return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
-    return jsonify({"message": "Credenciales inválidas"}), 401
+    try:
+        user = Usuario.query.filter_by(nombre_usuario=username).first()
+        print(f"Usuario encontrado en la base de datos: {user is not None}")
+        if user and check_password_hash(user.contrasena, password):
+            if user.contrasena.startswith('$2b$'):  # Es un hash bcrypt, actualizar a Argon2
+                new_hash = hash_password(password)
+                user.contrasena = new_hash
+                db.session.commit()
+            token = generate_token(user.id, user.rol)
+            print(f"Token generado: {token}")
+            return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
+        else:
+            print("Credenciales inválidas")
+            return jsonify({"message": "Credenciales inválidas"}), 401
+    except Exception as e:
+        print(f"Error durante el proceso de login: {str(e)}")
+        return jsonify({"message": "Error durante el proceso de login"}), 500
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
@@ -122,3 +139,4 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+

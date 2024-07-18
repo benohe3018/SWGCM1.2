@@ -86,7 +86,7 @@ def login():
 
     if 'event' not in recaptcha_data or 'riskAnalysis' not in recaptcha_data:
         return jsonify({"message": "Invalid CAPTCHA"}), 401
-    if recaptcha_data['event']['expectedAction'] != 'LOGIN' || recaptcha_data['riskAnalysis']['score'] < 0.5:
+    if recaptcha_data['event']['expectedAction'] != 'LOGIN' or recaptcha_data['riskAnalysis']['score'] < 0.5:
         return jsonify({"message": "Invalid CAPTCHA"}), 401
 
     print(f"Intento de login para usuario: {username}")

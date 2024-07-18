@@ -1,11 +1,18 @@
-// Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import CryptoJS from 'crypto-js';
 import './Login.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import mrMachine from '../images/MRMachine.jpg';
 
+// Obtener las claves de las variables de entorno
+const key = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_SECRET_KEY);
+const iv = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_IV_KEY);
+
+const encryptPassword = (password) => {
+  return CryptoJS.AES.encrypt(password, key, { iv: iv }).toString();
+};
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -23,23 +30,18 @@ const Login = () => {
       const token = await window.grecaptcha.enterprise.execute('6LdTV84pAAAAAFx9i_tznOQS4J1wRyo3NEuP2gSn', {action: 'LOGIN'});
 
       try {
+        const encryptedPassword = encryptPassword(password);
+
         // Realiza una petición POST al servidor para autenticar al usuario
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
           nombre_usuario: username,
-          password: password,
+          password: encryptedPassword,
           captcha: token
         });
       
-        // Imprime la respuesta del servidor en la consola para depuración
         console.log("Response from server:", response.data);
-      
-        // Almacena el token JWT en el almacenamiento local del navegador para mantener la sesión del usuario
         localStorage.setItem('token', response.data.token);
-      
-        // Almacena el rol del usuario en el almacenamiento local para controlar el acceso basado en roles
         localStorage.setItem('role', response.data.role);
-      
-        // Redirige al usuario según su rol
         switch (response.data.role) {
           case 'Admin':
             navigate('/dashboard-admin');
@@ -54,12 +56,10 @@ const Login = () => {
             navigate('/dashboard-field-user');
             break;
           default:
-            // En caso de que el rol no esté definido o sea diferente
             setError('Rol no reconocido. Acceso no permitido.');
             break;
         }
       } catch (error) {
-        // Maneja cualquier error que ocurra durante el proceso de inicio de sesión
         setError('Error al iniciar sesión. Por favor intente de nuevo');
         console.error('Error de login:', error.response);
       }
@@ -99,4 +99,3 @@ const Login = () => {
 };
 
 export default Login;
-

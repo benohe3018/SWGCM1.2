@@ -54,10 +54,7 @@ def hash_password(password):
 def check_password_hash(stored_hash, password):
     try:
         print(f"Verificando el hash almacenado: {stored_hash} con la contraseña: {password}")
-        if stored_hash.startswith('$2b$'):  # Es un hash bcrypt
-            result = bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
-        else:  # Es un hash Argon2
-            result = ph.verify(stored_hash, password)
+        result = ph.verify(stored_hash, password)
         print(f"Resultado de verificación: {result}")
         return result
     except (VerifyMismatchError, ValueError) as e:
@@ -89,7 +86,7 @@ def login():
 
     if 'event' not in recaptcha_data or 'riskAnalysis' not in recaptcha_data:
         return jsonify({"message": "Invalid CAPTCHA"}), 401
-    if recaptcha_data['event']['expectedAction'] != 'LOGIN' or recaptcha_data['riskAnalysis']['score'] < 0.5:
+    if recaptcha_data['event']['expectedAction'] != 'LOGIN' || recaptcha_data['riskAnalysis']['score'] < 0.5:
         return jsonify({"message": "Invalid CAPTCHA"}), 401
 
     print(f"Intento de login para usuario: {username}")
@@ -106,11 +103,9 @@ def login():
         print(f"Usuario encontrado en la base de datos: {user is not None}")
         if user:
             print(f"Contraseña almacenada en la base de datos para {username}: {user.contrasena}")
+            # En lugar de comparar directamente la contraseña desencriptada con el hash almacenado, hasheamos la contraseña desencriptada
+            hashed_password = hash_password(password)
             if check_password_hash(user.contrasena, password):
-                if user.contrasena.startswith('$2b$'):  # Es un hash bcrypt, actualizar a Argon2
-                    new_hash = hash_password(password)
-                    user.contrasena = new_hash
-                    db.session.commit()
                 token = generate_token(user.id, user.rol)
                 print(f"Token generado: {token}")
                 return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200

@@ -11,6 +11,7 @@ const key = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_SECRET_KEY);
 const iv = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_IV_KEY);
 
 const encryptPassword = (password) => {
+  console.log('Padding utilizado en el frontend:', CryptoJS.pad.Pkcs7);
   return CryptoJS.AES.encrypt(password, key, { iv: iv, padding: CryptoJS.pad.Pkcs7 }).toString();
 };
 
@@ -18,11 +19,11 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!username || !password ) {
+    if (!username || !password) {
       setError('Por favor ingresa tu nombre de usuario y contraseña.');
       return;
     }
@@ -38,7 +39,7 @@ const Login = () => {
           password: encryptedPassword,
           captcha: token
         });
-      
+
         console.log("Response from server:", response.data);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('role', response.data.role);
@@ -63,7 +64,7 @@ const Login = () => {
         setError('Error al iniciar sesión. Por favor intente de nuevo');
         console.error('Error de login:', error.response);
       }
-  });
+    });
   };
 
   return (
@@ -99,4 +100,5 @@ const Login = () => {
 };
 
 export default Login;
+
 

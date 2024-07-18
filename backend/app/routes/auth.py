@@ -23,6 +23,9 @@ auth_bp = Blueprint('auth', __name__)
 key = os.getenv('SECRET_KEY').encode()
 iv = os.getenv('IV_KEY').encode()
 
+print('Clave de encriptación (backend):', key)
+print('IV de encriptación (backend):', iv)
+
 def decrypt_password(encrypted_password):
     try:
         print('Padding utilizado en el backend:', 'pkcs7')
@@ -140,5 +143,6 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+
 
 

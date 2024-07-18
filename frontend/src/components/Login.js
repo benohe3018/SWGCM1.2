@@ -11,7 +11,7 @@ const key = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_SECRET_KEY);
 const iv = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_IV_KEY);
 
 const encryptPassword = (password) => {
-  return CryptoJS.AES.encrypt(password, key, { iv: iv }).toString();
+  return CryptoJS.AES.encrypt(password, key, { iv: iv, padding: CryptoJS.pad.Pkcs7 }).toString();
 };
 
 const Login = () => {
@@ -99,3 +99,4 @@ const Login = () => {
 };
 
 export default Login;
+

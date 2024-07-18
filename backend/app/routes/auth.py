@@ -53,7 +53,7 @@ def hash_password(password):
 
 def check_password_hash(stored_hash, password):
     try:
-        print(f"Hash almacenado: {stored_hash}")
+        print(f"Verificando el hash almacenado: {stored_hash} con la contraseña: {password}")
         if stored_hash.startswith('$2b$'):  # Es un hash bcrypt
             result = bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
         else:  # Es un hash Argon2
@@ -153,6 +153,7 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+
 
 
 

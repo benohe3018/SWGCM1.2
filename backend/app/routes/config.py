@@ -1,4 +1,11 @@
+from dotenv import load_dotenv
+import os
 from argon2 import PasswordHasher
+
+load_dotenv()  # Carga las variables de entorno desde el archivo .env
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+IV_KEY = os.getenv('IV_KEY')
 
 ARGON2_TIME_COST = 5
 ARGON2_MEMORY_COST = 102400

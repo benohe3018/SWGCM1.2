@@ -20,8 +20,14 @@ project_id = os.getenv('RECAPTCHA_PROJECT_ID')
 auth_bp = Blueprint('auth', __name__)
 
 # Cargar las claves de encriptación desde las variables de entorno
-key = os.getenv('SECRET_KEY').encode()
-iv = os.getenv('IV_KEY').encode()
+key = os.getenv('SECRET_KEY')
+iv = os.getenv('IV_KEY')
+
+if not key or not iv:
+    raise ValueError("Environment variables SECRET_KEY and IV_KEY must be set")
+
+key = key.encode()
+iv = iv.encode()
 
 def decrypt_password(encrypted_password):
     encrypted_password_bytes = base64.b64decode(encrypted_password)

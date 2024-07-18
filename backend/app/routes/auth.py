@@ -27,7 +27,7 @@ def decrypt_password(encrypted_password):
     try:
         encrypted_password_bytes = base64.b64decode(encrypted_password)
         cipher = AES.new(key, AES.MODE_CBC, iv)
-        decrypted_password = unpad(cipher.decrypt(encrypted_password_bytes), AES.block_size)
+        decrypted_password = unpad(cipher.decrypt(encrypted_password_bytes), AES.block_size, style='pkcs7')
         return decrypted_password.decode('utf-8')
     except Exception as e:
         print(f"Error al desencriptar la contraseña: {str(e)}")

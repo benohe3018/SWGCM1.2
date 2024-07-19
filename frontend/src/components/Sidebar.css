@@ -1,15 +1,19 @@
-/* src/components/Sidebar.css */
+/* Sidebar.css */
+
 .sidebar {
+    position: fixed;
+    height: 100vh;
     width: 250px;
     background-color: #12322B;
+    padding: 20px;
     color: white;
-    height: 100vh;
-    position: fixed;
-    padding-top: 20px;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: left;
+    z-index: 1000; /* Asegurar que esté encima del contenido */
   }
   
   .sidebar h2 {
-    text-align: center;
+    color: white;
     margin-bottom: 20px;
   }
   
@@ -19,42 +23,44 @@
   }
   
   .sidebar ul li {
-    padding: 10px;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .sidebar ul li:hover {
-    background-color: #0C231E;
+    margin: 10px 0;
+    position: relative; /* Necesario para el posicionamiento absoluto del submenú */
   }
   
   .sidebar ul li a {
     color: white;
     text-decoration: none;
+    font-size: 1em;
   }
   
-  .submenu {
-    list-style-type: none;
-    padding: 0;
+  .sidebar ul li a:hover {
+    color: #f0f0f0;
+  }
+  
+  .sidebar ul li ul {
+    display: none;
     position: absolute;
     top: 0;
-    left: 250px;
-    background-color: #12322B;
-    width: 250px;
-    display: none;
+    left: 100%;
+    background-color: #165B47; /* Cambiado a un verde diferente */
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px;
   }
   
-  .sidebar ul li:hover .submenu {
+  .sidebar ul li:hover ul {
     display: block;
   }
   
-  .submenu li {
-    padding: 10px;
-    cursor: pointer;
+  .sidebar ul li ul li a {
+    color: white;
+    font-size: 0.9em;
   }
   
-  .submenu li:hover {
-    background-color: #0C231E;
+  .sidebar ul li ul li a:hover {
+    color: #c0c0c0;
   }
+  
+  
   
   

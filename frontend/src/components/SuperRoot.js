@@ -1,4 +1,3 @@
-// src/components/SuperRoot.js
 import React from 'react';
 import Sidebar from './Sidebar';
 import './SuperRoot.css';
@@ -9,7 +8,7 @@ const SuperRoot = () => {
   return (
     <div className="super-root-page">
       <Sidebar />
-      <div className="main-content">
+      <div className="content-area">
         <header className="super-root-header">
           <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
           <div className="header-texts">
@@ -23,7 +22,7 @@ const SuperRoot = () => {
       </div>
     </div>
   );
-}
+};
 
 export default SuperRoot;
 

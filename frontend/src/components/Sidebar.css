@@ -42,7 +42,7 @@
     position: absolute;
     top: 0;
     left: 100%;
-    margin-left: -20px; /* Ajuste para acercar el submenú a la barra lateral */
+    margin-left: -40px; /* Ajuste para acercar el submenú a la barra lateral */
     background-color: #165B47; /* Cambiado a un verde diferente */
     padding: 10px;
     border-radius: 5px;

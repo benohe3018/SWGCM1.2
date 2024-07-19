@@ -51,13 +51,12 @@
   
   .submenu li {
     padding: 5px;
-    color: blue;
-    font-size: 0.5em;
+    font-size: 0.7em;
 
   }
       
   .arrow {
-    margin-left: 20px;
+    margin-left: 40px;
     transform: rotate(90deg);
   }
   

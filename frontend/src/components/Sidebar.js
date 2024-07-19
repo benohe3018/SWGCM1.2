@@ -21,7 +21,7 @@ const Sidebar = () => {
         <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
         <li><Link to="/gestion-citas">Módulo de Citas</Link></li>
         <li><Link to="/estudios-radiologicos">Modulo de Estudios Radiológicos</Link></li>
-        <li><Link to="/admin">Modulo de Administración</Link></li>
+        <li><Link to="/admin">Administración</Link></li>
       </ul>
     </div>
   );

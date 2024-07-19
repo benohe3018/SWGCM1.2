@@ -31,7 +31,7 @@
   }
    
   .sidebar ul li a {
-    color: whitesmoke;
+    color: white;
     text-decoration: none;
     display: block;
   }
@@ -50,12 +50,14 @@
   }
   
   .submenu li {
-    padding: 10px;
+    padding: 5px;
+    color: blue;
+    font-size: 0.5em;
+
   }
-  
-    
+      
   .arrow {
-    margin-left: 10px;
+    margin-left: 20px;
     transform: rotate(90deg);
   }
   

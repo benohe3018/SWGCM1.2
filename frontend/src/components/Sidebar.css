@@ -1,75 +1,75 @@
 /* Sidebar.css */
 
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #12322B;
-    color: white;
-    padding: 15px;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-  }
-  
-  .sidebar h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 10px;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .sidebar ul li:hover {
-    background-color: #0A1F1B;
-  }
-  
-  .sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .submenu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 250px; /* Adjust according to sidebar width */
-    top: 0;
-    background-color: #0A1F1B;
-    width: 250px; /* Adjust according to desired submenu width */
-    z-index: 1000;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .submenu li {
-    padding: 10px;
-  }
-  
-  .submenu li:hover {
-    background-color: #164C38;
-  }
-  
-  .arrow {
-    margin-left: 10px;
-    transform: rotate(90deg);
-  }
-  
-  .arrow.open {
-    transform: rotate(-90deg);
-  }
-  
+  width: 250px;
+  height: 100vh;
+  background-color: #12322B;
+  color: white;
+  padding: 15px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.sidebar ul li:hover {
+  background-color: #0A1F1B;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 250px; /* Adjust according to sidebar width */
+  top: 0;
+  background-color: #12322B;
+  width: 250px; /* Adjust according to desired submenu width */
+  z-index: 1000;
+  padding: 0;
+  list-style: none;
+}
+
+.submenu li {
+  padding: 10px;
+}
+
+.submenu li:hover {
+  background-color: #164C38;
+}
+
+.arrow {
+  margin-left: 10px;
+  transform: rotate(90deg);
+}
+
+.arrow.open {
+  transform: rotate(-90deg);
+}
+
   
   
   

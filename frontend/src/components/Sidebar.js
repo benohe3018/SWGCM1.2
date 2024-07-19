@@ -27,7 +27,7 @@ const Sidebar = () => {
           )}
         </li>
         <li><Link to="/crud-usuarios">Módulo de Usuarios</Link></li>
-        <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
+                <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
         <li><Link to="/gestion-citas">Módulo de Citas</Link></li>
         <li><Link to="/estudios-radiologicos">Modulo de Estudios Radiológicos</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>

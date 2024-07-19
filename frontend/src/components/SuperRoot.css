@@ -1,21 +1,11 @@
 /* SuperRoot.css */
-
 .super-root-page {
   display: flex;
 }
 
-.content-area {
-  margin-left: 250px; /* Ajusta según el ancho de tu sidebar */
+.content {
+  margin-left: 250px; /* Same width as the sidebar */
   width: calc(100% - 250px);
-  background-color: whitesmoke;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #0C231E;
 }
 
 .super-root-header {
@@ -53,7 +43,7 @@
 }
 
 .super-root-content {
-  margin-top: 150px; /* Ajusta según el tamaño del encabezado */
+  margin-top: 100px; /* Adjust according to the header height */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,6 +56,7 @@
   max-width: 300px;
   margin-top: 20px;
 }
+
 
 
 

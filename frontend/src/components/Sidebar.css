@@ -1,76 +1,75 @@
 /* Sidebar.css */
 
 .sidebar {
-    position: fixed;
-    height: 100vh;
     width: 250px;
+    height: 100vh;
     background-color: #12322B;
-    padding: 20px;
     color: white;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: left;
-    z-index: 1000;
+    padding: 15px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
   }
   
   .sidebar h2 {
-    color: white;
+    text-align: center;
     margin-bottom: 20px;
   }
   
   .sidebar ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin: 0;
   }
   
   .sidebar ul li {
-    margin: 10px 0;
+    padding: 10px;
+    cursor: pointer;
     position: relative;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #0A1F1B;
   }
   
   .sidebar ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1em;
+    display: block;
   }
   
-  .sidebar ul li a:hover {
-    color: #f0f0f0;
-  }
-  
-  .menu-item {
+  .submenu {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
+    flex-direction: column;
+    position: absolute;
+    left: 250px; /* Adjust according to sidebar width */
+    top: 0;
+    background-color: #0A1F1B;
+    width: 250px; /* Adjust according to desired submenu width */
+    z-index: 1000;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .submenu li {
+    padding: 10px;
+  }
+  
+  .submenu li:hover {
+    background-color: #164C38;
   }
   
   .arrow {
     margin-left: 10px;
-    transition: transform 0.3s;
+    transform: rotate(90deg);
   }
   
   .arrow.open {
-    transform: rotate(180deg);
+    transform: rotate(-90deg);
   }
   
-  .submenu {
-    list-style-type: none;
-    padding-left: 20px;
-    margin: 10px 0;
-    background-color: #165B47;
-    border-radius: 5px;
-  }
-  
-  .submenu li a {
-    color: white;
-    font-size: 0.9em;
-    display: block;
-    padding: 5px 0;
-  }
-  
-  .submenu li a:hover {
-    color: #c0c0c0;
-  }
   
   
   

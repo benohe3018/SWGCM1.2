@@ -3,22 +3,20 @@ import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = () => {
-  const [isMedicoSubmenuOpen, setMedicoSubmenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState(false);
 
-  const toggleMedicoSubmenu = () => {
-    setMedicoSubmenuOpen(!isMedicoSubmenuOpen);
+  const handleSubmenuToggle = () => {
+    setOpenSubmenu(!openSubmenu);
   };
 
   return (
     <div className="sidebar">
       <h2>Gestión de Citas</h2>
       <ul>
-        <li>
-          <div className="menu-item" onClick={toggleMedicoSubmenu}>
-            Módulo de Médicos
-            <span className={`arrow ${isMedicoSubmenuOpen ? 'open' : ''}`}>&#9662;</span>
-          </div>
-          {isMedicoSubmenuOpen && (
+        <li onClick={handleSubmenuToggle}>
+          <span>Bienvenido</span>
+          <span className={`arrow ${openSubmenu ? 'open' : ''}`}>&#9660;</span>
+          {openSubmenu && (
             <ul className="submenu">
               <li><Link to="/create-medico">Capturar Nuevo Médico</Link></li>
               <li><Link to="/read-medico">Ver Médicos</Link></li>
@@ -39,6 +37,7 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
 
 
 

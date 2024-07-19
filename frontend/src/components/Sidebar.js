@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h2>Gestión de Citas</h2>
+      <h2>Bienvenido</h2>
       <ul>
         <li onClick={() => handleSubmenuToggle('medicos')}>
           <span>Módulo de Médicos</span>

@@ -29,11 +29,7 @@
     cursor: pointer;
     position: relative;
   }
-  
-  .sidebar ul li:hover {
-    background-color: #0A1F1B;
-  }
-  
+   
   .sidebar ul li a {
     color: white;
     text-decoration: none;

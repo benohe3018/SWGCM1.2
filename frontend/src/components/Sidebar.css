@@ -57,10 +57,7 @@
     padding: 10px;
   }
   
-  .submenu li:hover {
-    background-color: #164C38;
-  }
-  
+    
   .arrow {
     margin-left: 10px;
     transform: rotate(90deg);

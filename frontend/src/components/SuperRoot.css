@@ -19,10 +19,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
   top: 0;
   z-index: 100;
-  margin-top: 100px;
+  
 }
 
 .header-logo {
@@ -89,7 +88,6 @@
 .mr-machine {
   width: 100%;
   max-width: 300px;
-  margin-top: 20px;
 }
 
 

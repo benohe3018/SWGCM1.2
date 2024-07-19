@@ -9,7 +9,7 @@
     color: white;
     font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: left;
-    z-index: 1000; /* Asegurar que esté encima del contenido */
+    z-index: 1000;
   }
   
   .sidebar h2 {
@@ -24,7 +24,7 @@
   
   .sidebar ul li {
     margin: 10px 0;
-    position: relative; /* Necesario para el posicionamiento absoluto del submenú */
+    position: relative;
   }
   
   .sidebar ul li a {
@@ -37,30 +37,41 @@
     color: #f0f0f0;
   }
   
-  .sidebar ul li ul {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    margin-left: -60px; /* Ajuste para acercar el submenú a la barra lateral */
-    background-color: #12322B; /* Cambiado a un verde diferente */
-    padding: 10px;
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .arrow {
+    margin-left: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .arrow.open {
+    transform: rotate(180deg);
+  }
+  
+  .submenu {
+    list-style-type: none;
+    padding-left: 20px;
+    margin: 10px 0;
+    background-color: #165B47;
     border-radius: 5px;
-    min-width: 200px;
   }
   
-  .sidebar ul li:hover ul {
-    display: block;
-  }
-  
-  .sidebar ul li ul li a {
+  .submenu li a {
     color: white;
     font-size: 0.9em;
+    display: block;
+    padding: 5px 0;
   }
   
-  .sidebar ul li ul li a:hover {
+  .submenu li a:hover {
     color: #c0c0c0;
   }
+  
   
   
   

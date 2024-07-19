@@ -11,11 +11,11 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h2>Gestión de Citas</h2>
+      <h2>Bienvenidos</h2>
       <ul>
         <li onClick={handleSubmenuToggle}>
           <span>Bienvenidos</span>
-          <span className={`arrow ${openSubmenu ? 'open' : ''}`}>&#9660;</span>
+          <span className={`arrow ${openSubmenu ? 'open' : ''}`}>&12322B;</span>
           {openSubmenu && (
             <ul className="submenu">
               <li><Link to="/create-medico">Capturar Nuevo Médico</Link></li>

@@ -11,11 +11,13 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h2>Bienvenido</h2>
+      <h2>Gestión de Citas</h2>
       <ul>
-        <li className="menu-item" onClick={toggleMedicoSubmenu}>
-          Módulo de Médicos
-          <span className={`arrow ${isMedicoSubmenuOpen ? 'open' : ''}`}>&#9654;</span>
+        <li>
+          <div className="menu-item" onClick={toggleMedicoSubmenu}>
+            Módulo de Médicos
+            <span className={`arrow ${isMedicoSubmenuOpen ? 'open' : ''}`}>&#9662;</span>
+          </div>
           {isMedicoSubmenuOpen && (
             <ul className="submenu">
               <li><Link to="/create-medico">Capturar Nuevo Médico</Link></li>
@@ -27,7 +29,7 @@ const Sidebar = () => {
           )}
         </li>
         <li><Link to="/crud-usuarios">Módulo de Usuarios</Link></li>
-                <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
+        <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
         <li><Link to="/gestion-citas">Módulo de Citas</Link></li>
         <li><Link to="/estudios-radiologicos">Modulo de Estudios Radiológicos</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>
@@ -37,6 +39,7 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
 
 
 

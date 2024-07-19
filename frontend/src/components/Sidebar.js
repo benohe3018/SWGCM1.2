@@ -14,7 +14,7 @@ const Sidebar = () => {
       <h2>Gestión de Citas</h2>
       <ul>
         <li onClick={handleSubmenuToggle}>
-          <span>Bienvenido</span>
+          <span>Bienvenidos</span>
           <span className={`arrow ${openSubmenu ? 'open' : ''}`}>&#9660;</span>
           {openSubmenu && (
             <ul className="submenu">

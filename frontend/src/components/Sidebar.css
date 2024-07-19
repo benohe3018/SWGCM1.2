@@ -45,7 +45,7 @@
     flex-direction: column;
     position: relative; /* Cambiado de absolute a relative */
     top: 0;
-    background-color: #1E5444;
+    background-color: #12322B;
     width: 100%; /* Ajustado al 100% del ancho del sidebar */
     z-index: 1000;
     padding: 0;

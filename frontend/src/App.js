@@ -21,6 +21,7 @@ import UpdateUsuario from './components/UpdateUsuario';
 import DeleteUsuario from './components/DeleteUsuario';
 import Admin from './components/Admin';
 import UsuarioDeCampo from './components/UsuarioDeCampo';
+import ActiveUser from './components/ActiveUser';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -32,6 +33,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="main-layout">
+        <ActiveUser />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/dashboard-root" element={<PrivateRoute><Sidebar /><SuperRoot /></PrivateRoute>} />

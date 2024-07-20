@@ -1,6 +1,6 @@
 // CreateUsuario.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 import './CreateUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';  // Asegúrate de que la ruta al logo es correcta
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importa los iconos de ojo
@@ -137,52 +137,62 @@ const CreateUsuario = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/create-usuario">Capturar Nuevo Usuario</Link></li>
-          <li><Link to="/read-usuario">Ver usuarios</Link></li>
-          <li><Link to="/update-usuario">Actualizar Registro de Usuario</Link></li>
-          <li><Link to="/delete-usuario">Borrar Registro de Usuario</Link></li>
-          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
-        </ul>
-        <div className="hamburger">
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
+      <div className="main-layout">
+        <Sidebar />
+        <div className="create-usuario-content">
+          <form onSubmit={handleSubmit}>
+            <h3 className="form-description">Capture los datos del Usuario</h3>
+            <div className="form-group">
+              <label htmlFor="nombreUsuario">Nombre de Usuario:</label>
+              <input type="text" id="nombreUsuario" value={nombreUsuario} onChange={e => setNombreUsuario(e.target.value)} placeholder="Nombre de Usuario" />
+            </div>
+            <div className="form-group password-container">
+              <label htmlFor="contraseña">Contraseña:</label>
+              <input type={showPassword ? "text" : "password"} id="contraseña" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Contraseña" />
+              <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+            <div className="form-group password-container">
+              <label htmlFor="confirmContraseña">Confirmar Contraseña:</label>
+              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Confirmar Contraseña" />
+              <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+            <div className="form-group">
+              <label htmlFor="nombreReal">Nombre Real:</label>
+              <input type="text" id="nombreReal" value={nombreReal} onChange={e => setNombreReal(e.target.value)} placeholder="Nombre Real" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
+              <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoMaterno">Apellido Materno:</label>
+              <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="matricula">Matrícula del Usuario:</label>
+              <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Usuario" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="rol">Rol:</label>
+              <select id="rol" value={rol} onChange={e => setRol(e.target.value)}>
+                <option value="">Seleccione un rol</option>
+                {/* Asegúrate de tener una lista de roles */}
+                {['Admin', 'Usuario', 'Root'].map(rol => (
+                  <option key={rol} value={rol}>{rol}</option>
+                ))}
+              </select>
+            </div>
+            <button className="create-usuario-button" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Guardando...' : 'Guardar'}
+            </button>
+            {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
+            {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
+          </form>
         </div>
-      </nav>
-      <div className="create-usuario-content">
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={nombreUsuario} onChange={e => setNombreUsuario(e.target.value)} placeholder="Nombre de Usuario" />
-          <div className="password-container">
-            <input type={showPassword ? "text" : "password"} value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Contraseña" />
-            <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-          </div>
-          <div className="password-container">
-            <input type={showPassword ? "text" : "password"} value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Confirmar Contraseña" />
-            <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-          </div>
-          <input type="text" value={nombreReal} onChange={e => setNombreReal(e.target.value)} placeholder="Nombre Real" />
-          <input type="text" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
-          <input type="text" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
-          <input type="text" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Usuario" />
-          <select value={rol} onChange={e => setRol(e.target.value)}>
-            <option value="">Seleccione un rol</option>
-            {roles.map(rol => (
-              <option key={rol} value={rol}>{rol}</option>
-            ))}
-          </select>
-          <button className="create-usuario-button" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar'}
-          </button>
-          {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
-          {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
-        </form>
       </div>
     </div>
   );

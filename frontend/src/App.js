@@ -20,10 +20,6 @@ import UpdateUsuario from './components/UpdateUsuario';
 import DeleteUsuario from './components/DeleteUsuario';
 import Admin from './components/Admin';
 import UsuarioDeCampo from './components/UsuarioDeCampo';
-import CreateEstudio from './components/CreateEstudio'; 
-import ReadEstudio from './components/ReadEstudio';
-import UpdateEstudio from './components/UpdateEstudio';
-import DeleteEstudio from './components/DeleteEstudio';
 
 function App() {
   return (
@@ -44,17 +40,14 @@ function App() {
         <Route path="/ver-citas" element={<GestionCitas />} />
         <Route path="/informes-medicos" element={<InformeMedicos />} />
         <Route path="/usuarios" element={<Usuarios />} />
-        <Route path="/crear" element={<EstudiosRadiologicos/>} />
-        <Route path="/ver" element={<EstudiosRadiologicos/>} />
+        <Route path="/crear" element={<EstudiosRadiologicos />} />
+        <Route path="/ver" element={<EstudiosRadiologicos />} />
         <Route path="/read-usuario" element={<ReadUsuario/>} />
         <Route path="/update-usuario" element={<UpdateUsuario/>} />
         <Route path="/delete-usuario" element={<DeleteUsuario/>} />
         <Route path="/dashboard-user-admin" element={<Admin />} />
         <Route path="/dashboard-field-user" element={<UsuarioDeCampo />} />
-        <Route path="/create-estudio" element={<CreateEstudio/>} />  
-        <Route path="/read-estudio" element={<ReadEstudio/>} />
-        <Route path="/update-Estudio" element={<UpdateEstudio/>} />
-        <Route path="/delete-estudio" element={<DeleteEstudio/>} />
+        
       </Routes>
     </Router>
   );

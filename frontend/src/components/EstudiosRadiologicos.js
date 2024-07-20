@@ -12,7 +12,7 @@ const EstudiosRadiologicos = () => {
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
-    const [mensaje, setMensaje] = useState(null); // Estado para el mensaje de confirmación
+    const [mensaje, setMensaje] = useState(null);
     const [cargando, setCargando] = useState(true);
     const [vista, setVista] = useState(''); 
 
@@ -20,8 +20,8 @@ const EstudiosRadiologicos = () => {
         try {
             setCargando(true);
             const data = await getEstudios();
-                data.sort((a, b) => a.id_estudio - b.id_estudio); // Ordenar estudios por ID
-                setEstudios(data);
+            data.sort((a, b) => a.id_estudio - b.id_estudio);
+            setEstudios(data);
             setError(null);
         } catch (error) {
             console.error("Error al inicializar estudios:", error);
@@ -35,13 +35,11 @@ const EstudiosRadiologicos = () => {
         inicializarEstudios();
     }, [inicializarEstudios]);
 
-    
-
     const cargarEstudios = async () => {
         try {
             setCargando(true);
             const data = await getEstudios();
-            data.sort((a, b) => a.id_estudio - b.id_estudio); // Ordenar estudios por ID
+            data.sort((a, b) => a.id_estudio - b.id_estudio);
             setEstudios(data);
             setError(null);
         } catch (error) {
@@ -51,14 +49,14 @@ const EstudiosRadiologicos = () => {
             setCargando(false);
         }
     };
-    
+
     const handleCrearEstudio = async (nuevoEstudio) => {
         try {
             await createEstudio(nuevoEstudio);
             await cargarEstudios();
-            setVista(''); // Cierra el formulario y muestra la vista principal
-            setMensaje('Estudio creado exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setVista('ver');
+            setMensaje('Estudio creado exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
             console.error("Error al crear estudio:", error);
             setError("No se pudo crear el estudio. Por favor, intente de nuevo.");
@@ -70,13 +68,12 @@ const EstudiosRadiologicos = () => {
             if (!estudioEditado.id_estudio) {
                 throw new Error("El ID del estudio no está definido");
             }
-            console.log("Editando estudio con ID:", estudioEditado.id_estudio); // Log para ver el ID del estudio
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
             setEstudioSeleccionado(null);
-            setVista('ver'); // Cambiar a la vista de estudios capturados
-            setMensaje('Estudio actualizado exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setVista('ver');
+            setMensaje('Estudio actualizado exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
             console.error("Error al editar estudio:", error);
             setError("No se pudo editar el estudio. Por favor, intente de nuevo.");
@@ -88,19 +85,18 @@ const EstudiosRadiologicos = () => {
         if (estudio) {
             setEstudioSeleccionado(estudio);
             setMostrarModal(true);
-            console.log("Seleccionado para eliminar:", estudio.id_estudio); // Log para ver el ID del estudio a eliminar
         }
     };
 
     const confirmarEliminarEstudio = async () => {
         try {
-            console.log("Confirmando eliminación de estudio con ID:", estudioSeleccionado.id_estudio); // Log para ver el ID del estudio antes de eliminar
             await deleteEstudio(estudioSeleccionado.id_estudio);
             await cargarEstudios();
             setMostrarModal(false);
             setEstudioSeleccionado(null);
-            setMensaje('Estudio eliminado exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setVista('ver');
+            setMensaje('Estudio eliminado exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
             console.error("Error al eliminar estudio:", error);
             setError("No se pudo eliminar el estudio. Por favor, intente de nuevo.");
@@ -124,7 +120,6 @@ const EstudiosRadiologicos = () => {
                     <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
                 </div>
             </header>
-
             <nav className="navbar">
                 <ul className="nav-links">
                     <li><Link to="/" onClick={() => setVista('')}>Cambiar Sesión</Link></li>
@@ -138,7 +133,7 @@ const EstudiosRadiologicos = () => {
                     <div className="line"></div>
                 </div>
             </nav>
-            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}      
+            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
             <div className="estudios-radiologicos-content">
                 {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
                 {vista === 'crear' && (
@@ -148,7 +143,6 @@ const EstudiosRadiologicos = () => {
                         onCancel={() => setVista('')}
                     />
                 )}
-
                 {vista === 'ver' && (
                     <div className="tabla-estudios-container">
                         <table className="tabla-estudios">
@@ -212,6 +206,7 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+
 
 
 

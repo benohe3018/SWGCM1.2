@@ -36,6 +36,9 @@
   text-decoration: none;
   display: block;
 }
+.sidebar ul li:hover {
+  background-color: #4a8b7f; /* Cambia este color al que prefieras */
+}
 
 .submenu {
   display: flex;

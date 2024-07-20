@@ -58,7 +58,6 @@
   background-color: white; /* Color del encabezado */
   padding: 10px 20px;
   box-sizing: border-box;
-  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
   top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
   z-index: 100; 
 }
@@ -85,8 +84,8 @@
 }
 
 .read-medico-content {
-  margin-top: 220px;
-  width: 100%;
+  margin-top: 20px;
+  width: 150%;
   display: flex;
   flex-direction: column;
   align-items: center;

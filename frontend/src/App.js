@@ -33,7 +33,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="main-layout">
-        <ActiveUser />
+          <ActiveUser />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/dashboard-root" element={<PrivateRoute><Sidebar /><SuperRoot /></PrivateRoute>} />

@@ -45,7 +45,7 @@ const Login = () => {
         console.log("Response from server:", response.data);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('role', response.data.role);
-        login(response.data.role); // Iniciar sesión con el rol del usuario
+        login(username, response.data.role); // Iniciar sesión con el rol del usuario
 
         switch (response.data.role) {
           case 'Admin':

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
+import { useAuth } from './AuthContext'; // Importar el contexto de autenticación
 import './Login.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import mrMachine from '../images/MRMachine.jpg';
@@ -20,6 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth(); // Usar el contexto de autenticación
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +45,8 @@ const Login = () => {
         console.log("Response from server:", response.data);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('role', response.data.role);
+        login(response.data.role); // Iniciar sesión con el rol del usuario
+
         switch (response.data.role) {
           case 'Admin':
             navigate('/dashboard-admin');
@@ -100,5 +104,6 @@ const Login = () => {
 };
 
 export default Login;
+
 
 

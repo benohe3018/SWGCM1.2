@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './CreateMedicos.css';
-import logoIMSS from '../images/LogoIMSS.jpg'; // Asegúrate de que la ruta al logo es correcta
+import logoIMSS from '../images/LogoIMSS.jpg'; 
+import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 
 const CreateMedico = () => {
   const [nombre, setNombre] = useState('');
@@ -112,21 +112,8 @@ const CreateMedico = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/create-medico">Capturar nuevo Medico</Link></li>
-          <li><Link to="/read-medico">Ver Medicos</Link></li>
-          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
-          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
-          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
-        </ul>
-        <div className="hamburger">
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
-      </nav>
+      <div className="main-layout">
+      <Sidebar />
       <div className="create-medico-content">
         <form onSubmit={handleSubmit}>
           <h3 className="form-description">Capture los datos del Médico</h3>
@@ -151,6 +138,7 @@ const CreateMedico = () => {
           {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
           {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
         </form>
+      </div>  
       </div>
     </div>
   );

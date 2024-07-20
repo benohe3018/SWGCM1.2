@@ -63,6 +63,16 @@
   transform: rotate(180deg);
 }
 
+.main-layout .content {
+  margin-left: 250px; /* Ajustar esto al ancho de tu barra lateral */
+  padding: 20px;
+}
+
+/* Ajustes adicionales para el encabezado */
+.login-header {
+  padding-left: 250px; /* Ajustar esto al ancho de tu barra lateral */
+}
+
   
   
   

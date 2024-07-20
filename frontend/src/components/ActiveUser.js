@@ -10,7 +10,7 @@ const ActiveUser = () => {
 
   return (
     <div className="active-user">
-      <p>{activeUser.username} ({activeUser.role})</p>
+      <p>{activeUser.username} ({})</p>
     </div>
   );
 };

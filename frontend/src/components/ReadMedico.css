@@ -61,7 +61,6 @@
   position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
   top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
   z-index: 100; 
-  margin-top: 70px;/* Para asegurarse de que esté por encima de otros elementos */
 }
 
 .header-logo {

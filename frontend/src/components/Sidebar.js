@@ -89,7 +89,6 @@ const Sidebar = () => {
         <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>
         <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
-        <li><button onClick={handleLogout} className="sidebar-button">Salir del Sistema</button></li>
         <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
       </ul>
       {user && (

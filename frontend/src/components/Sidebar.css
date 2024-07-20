@@ -62,6 +62,10 @@
   font-size: 0.8em;
 }
 
+.sidebar-button{
+  font-size: 0.8em;
+}
+
 .arrow {
   margin-left: 40px;
   transform: rotate(90deg);

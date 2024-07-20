@@ -4,18 +4,7 @@ body {
   padding: 0;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #004d40;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
+
 
 .header-logo {
   height: 60px;

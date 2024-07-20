@@ -6,7 +6,8 @@ const Sidebar = () => {
   const [openSubmenu, setOpenSubmenu] = useState({
     medicos: false,
     usuarios: false,
-    citas: false
+    citas: false,
+    estudios: false
   });
 
   const handleSubmenuToggle = (menu) => {
@@ -59,8 +60,20 @@ const Sidebar = () => {
             </ul>
           )}
         </li>
+        <li onClick={() => handleSubmenuToggle('estudios')}>
+          <span>Módulo de Estudios Radiológicos</span>
+          <span className={`arrow ${openSubmenu.estudios ? 'open' : ''}`}>&#9660;</span>
+          {openSubmenu.estudios && (
+            <ul className="submenu">
+              <li><Link to="/crear-estudio">Capturar Nuevo Estudio</Link></li>
+              <li><Link to="/ver-estudios">Ver Estudios</Link></li>
+              <li><Link to="/ver-estudios">Editar Estudio</Link></li>
+              <li><Link to="/ver-estudios">Eliminar Estudio</Link></li>
+              <li><Link to="/">Salir</Link></li>
+            </ul>
+          )}
+        </li>
         <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
-        <li><Link to="/estudios-radiologicos">Modulo de Estudios Radiológicos</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>
       </ul>
     </div>
@@ -68,6 +81,7 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
 
 
 

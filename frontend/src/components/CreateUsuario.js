@@ -180,8 +180,7 @@ const CreateUsuario = () => {
               <label htmlFor="rol">Rol:</label>
               <select id="rol" value={rol} onChange={e => setRol(e.target.value)}>
                 <option value="">Seleccione un rol</option>
-                {/* Asegúrate de tener una lista de roles */}
-                {['Admin', 'Usuario', 'Root'].map(rol => (
+                {['root', 'Admin', 'Usuario_administrador', 'Usuario_de_Campo',].map(rol => (
                   <option key={rol} value={rol}>{rol}</option>
                 ))}
               </select>

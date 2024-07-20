@@ -1,3 +1,11 @@
+/* ReadUsuario.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .read-usuario-page {
   background-color: whitesmoke;
   height: 100vh;
@@ -6,88 +14,18 @@
   align-items: center;
   justify-content: flex-start;
   font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #004d40;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: #004d40;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .hamburger {
-    display: flex;
-  }
+  color: #0C231E;
 }
 
 .read-usuario-header {
-  display: flex;
-  flex-direction: inline-flex;
   width: 100%;
   background-color: white;
-  padding: 10px 20px;
+  padding: 20px;
   box-sizing: border-box;
-  position: fixed;
   top: 0;
   z-index: 100;
-  margin-top: 70px; /* Ajustado para que quede debajo del menú */
+  display: flex;
+  align-items: center;
 }
 
 .header-logo {
@@ -111,8 +49,15 @@
   color: #0C231E;
 }
 
+.main-layout {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .read-usuario-content {
-  margin-top: 220px;
+  margin-top: 100px;
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -120,22 +65,25 @@
 }
 
 .search-container {
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  align-items: center;
 }
 
 .search-container input {
   padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  border: 1px solid #ccc;
   margin-right: 10px;
 }
 
 .search-container select {
   padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
 .usuario-table-container {
@@ -146,41 +94,34 @@
 .usuario-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
 }
 
 .usuario-table th, .usuario-table td {
   border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
+  padding: 8px;
+  text-align: left;
 }
 
 .usuario-table th {
-  background-color: #f4f4f4;
+  background-color: #f2f2f2;
+  color: #333;
 }
 
 .pagination-read-usuario {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .pagination-read-usuario button {
-  padding: 10px 15px;
   margin: 0 5px;
+  padding: 10px;
+  border: none;
   background-color: #12322B;
   color: white;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .pagination-read-usuario button.active {
-  background-color: #0C231E;
-}
-
-.pagination-read-usuario button:hover {
   background-color: #0C231E;
 }
 

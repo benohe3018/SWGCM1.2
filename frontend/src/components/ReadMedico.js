@@ -58,21 +58,7 @@ const ReadMedico = () => {
           <h2 className="department-name">Médicos Registrados en la base de datos</h2>
         </div>
       </header>
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
-          <li><Link to="/read-medico">Ver Médicos</Link></li>
-          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
-          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
-          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
-        </ul>
-        <div className="hamburger">
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
-      </nav>
+      
       <div className="read-medico-content">
         <div className="search-container">
           <input

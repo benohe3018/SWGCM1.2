@@ -4,62 +4,6 @@ body {
   padding: 0;
 }
 
-
-
-.header-logo {
-  height: 60px;
-  margin-right: 20px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: #004d40;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-}
-
 .create-medico-page {
   background-color: whitesmoke;
   height: 100vh;
@@ -100,6 +44,24 @@ body {
 form {
   width: 100%;
   margin-top: -50px;
+}
+
+.header-logo {
+  height: 60px;
+  margin-right: 20px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
 }
 
 label {

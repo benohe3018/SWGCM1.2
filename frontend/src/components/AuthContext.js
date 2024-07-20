@@ -1,28 +1,30 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const AuthContext = createContext();
+// Crea el contexto
+export const AuthContext = createContext();
 
+// Hook personalizado para usar el contexto de autenticación
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
+// Proveedor de contexto
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [role, setRole] = useState('');
+  const [user, setUser] = useState(null);
 
-  const login = (userRole) => {
-    setIsAuthenticated(true);
-    setRole(userRole);
+  const login = (username, role) => {
+    setUser({ username, role });
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
-    setRole('');
+    setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, role, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+

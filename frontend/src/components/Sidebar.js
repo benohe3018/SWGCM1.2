@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import './Sidebar.css';
 
 const Sidebar = () => {
+  const { user } = useAuth();
   const [openSubmenu, setOpenSubmenu] = useState({
     medicos: false,
     usuarios: false,
@@ -76,6 +78,11 @@ const Sidebar = () => {
         <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>
       </ul>
+      {user && (
+        <div className="active-user">
+          <p>Usuario activo: {user.username} ({user.role})</p>
+        </div>
+      )}
     </div>
   );
 };

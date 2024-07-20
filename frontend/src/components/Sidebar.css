@@ -1,17 +1,17 @@
 /* Sidebar.css */
 
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #12322B;
-    color: white;
-    padding: 15px;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-  }
+  width: 250px;
+  height: 100vh;
+  background-color: #12322B;
+  color: white;
+  padding: 15px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
   
   .sidebar h2 {
     text-align: center;
@@ -65,6 +65,11 @@
   }
   .main-layout {
     display: flex;
+  }
+  .content {
+    margin-left: 250px; /* Igual al ancho del sidebar */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ancho total menos el ancho del sidebar */
   }
   
   

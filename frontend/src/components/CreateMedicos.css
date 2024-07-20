@@ -41,8 +41,10 @@ body {
 
 .main-layout {
   display: flex;
+  margin-top: 100px;
   width: 100%;
-  margin-top: 100px; /* Ajustar para compensar la altura del header */
+  justify-content: center;
+  align-items: center;
 }
 
 .create-medico-content {

@@ -70,6 +70,7 @@
 .arrow {
   margin-left: 40px;
   transform: rotate(90deg);
+  display: none;
 }
 
 .arrow.open {

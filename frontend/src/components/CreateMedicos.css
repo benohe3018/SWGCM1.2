@@ -1,3 +1,5 @@
+/* CreateMedico.css */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -14,7 +16,6 @@ body {
   font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   color: white;
-  margin-top: 60px; /* Ajustado para dar espacio al menú fijo */
 }
 
 .create-medico-header {
@@ -23,58 +24,59 @@ body {
   padding: 20px;
   box-sizing: border-box;
   position: fixed;
-  top: 50px; /* Ajustado para que quede debajo del menú */
+  top: 0; /* Ajustado para que quede debajo del menú */
   z-index: 100;
-  display:flex;
+  display: flex;
+  align-items: center;
+}
+
+.header-texts {
+  margin-left: 20px;
+  text-align: left;
 }
 
 .form-description {
   color: #12322B;
 }
 
+.main-layout {
+  display: flex;
+  width: 100%;
+  margin-top: 100px; /* Ajustar para compensar la altura del header */
+}
+
 .create-medico-content {
-  margin-top: 200px;
+  margin-top: 50px;
   width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Cambiado de flex-start a center */
+  align-items: flex-start;
   justify-content: flex-start;
+  padding-left: 250px; /* Ajustar para compensar la barra lateral */
 }
 
 form {
   width: 100%;
-  margin-top: -50px;
-}
-
-.header-logo {
-  height: 60px;
-  margin-right: 20px;
-}
-
-.hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
-  cursor: pointer;
 }
 
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 label {
-  display: block;
-  margin-bottom: 8px;
+  width: 150px;
+  margin-right: 10px;
   font-weight: bold;
   color: #12322B;
 }
 
 input, select {
-  width: calc(100% - 20px);
+  flex: 1;
   padding: 10px;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -82,9 +84,7 @@ input, select {
 }
 
 .create-medico-button {
-  display: inline-block;
   padding: 10px 20px;
-  margin: 10px; /* Añadido margen para separación */
   background-color: #12322B;
   color: white;
   border: none;
@@ -98,12 +98,6 @@ input, select {
   background-color: #0C231E;
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 .message-POST-success {
   color: green;
   font-weight: bold;
@@ -112,6 +106,10 @@ input, select {
 
 .message-POST-failed {
   color: red;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.header-logo {
+  height: 60px;
 }

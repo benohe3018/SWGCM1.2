@@ -113,32 +113,42 @@ const CreateMedico = () => {
         </div>
       </header>
       <div className="main-layout">
-      <Sidebar />
-      <div className="create-medico-content">
-        <form onSubmit={handleSubmit}>
-          <h3 className="form-description">Capture los datos del Médico</h3>
-          <label htmlFor="nombre">Nombre del Médico:</label>
-          <input type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre del Médico" />
-          <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
-          <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
-          <label htmlFor="apellidoMaterno">Apellido Materno:</label>
-          <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
-          <label htmlFor="matricula">Matrícula del Médico:</label>
-          <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" />
-          <label htmlFor="especialidad">Especialidad:</label>
-          <select id="especialidad" value={especialidad} onChange={e => setEspecialidad(e.target.value)}>
-            <option value="">Seleccione una especialidad</option>
-            {especialidades.map(especialidad => (
-              <option key={especialidad} value={especialidad}>{especialidad}</option>
-            ))}
-          </select>
-          <button className="create-medico-button" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar'}
-          </button>
-          {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
-          {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
-        </form>
-      </div>  
+        <Sidebar />
+        <div className="create-medico-content">
+          <form onSubmit={handleSubmit}>
+            <h3 className="form-description">Capture los datos del Médico</h3>
+            <div className="form-group">
+              <label htmlFor="nombre">Nombre del Médico:</label>
+              <input type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre del Médico" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
+              <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoMaterno">Apellido Materno:</label>
+              <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="matricula">Matrícula del Médico:</label>
+              <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="especialidad">Especialidad:</label>
+              <select id="especialidad" value={especialidad} onChange={e => setEspecialidad(e.target.value)}>
+                <option value="">Seleccione una especialidad</option>
+                {especialidades.map(especialidad => (
+                  <option key={especialidad} value={especialidad}>{especialidad}</option>
+                ))}
+              </select>
+            </div>
+            <button className="create-medico-button" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Guardando...' : 'Guardar'}
+            </button>
+            {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
+            {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
+          </form>
+        </div>
       </div>
     </div>
   );

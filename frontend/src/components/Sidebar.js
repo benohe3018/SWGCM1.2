@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
 import { useAuth } from './AuthContext';
 import './Sidebar.css';
 
 const Sidebar = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [openSubmenu, setOpenSubmenu] = useState({
     medicos: false,
     usuarios: false,
@@ -12,11 +12,26 @@ const Sidebar = () => {
     estudios: false
   });
 
+  const navigate = useNavigate();
+
   const handleSubmenuToggle = (menu) => {
     setOpenSubmenu(prevState => ({
       ...prevState,
       [menu]: !prevState[menu]
     }));
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  const handleChangeSession = () => {
+    navigate('/');
+  };
+
+  const handleExitSystem = () => {
+    window.close();
   };
 
   return (
@@ -32,7 +47,6 @@ const Sidebar = () => {
               <li><Link to="/read-medico">Ver Médicos</Link></li>
               <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
               <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
-              <li><Link to="/">Salir</Link></li>
             </ul>
           )}
         </li>
@@ -45,7 +59,6 @@ const Sidebar = () => {
               <li><Link to="/read-usuario">Ver Usuarios</Link></li>
               <li><Link to="/update-usuario">Actualizar Registro de Usuario</Link></li>
               <li><Link to="/delete-usuario">Borrar Registro de Usuario</Link></li>
-              <li><Link to="/">Salir</Link></li>
             </ul>
           )}
         </li>
@@ -58,7 +71,6 @@ const Sidebar = () => {
               <li><Link to="/ver-citas">Ver Citas</Link></li>
               <li><Link to="/ver-citas">Editar Cita</Link></li>
               <li><Link to="/ver-citas">Eliminar Cita</Link></li>
-              <li><Link to="/">Salir</Link></li>
             </ul>
           )}
         </li>
@@ -71,12 +83,14 @@ const Sidebar = () => {
               <li><Link to="/ver">Ver Estudios</Link></li>
               <li><Link to="/ver">Editar Estudio</Link></li>
               <li><Link to="/ver">Eliminar Estudio</Link></li>
-              <li><Link to="/">Salir</Link></li>
             </ul>
           )}
         </li>
         <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>
+        <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
+        <li><button onClick={handleLogout} className="sidebar-button">Salir del Sistema</button></li>
+        <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
       </ul>
       {user && (
         <div className="active-user">

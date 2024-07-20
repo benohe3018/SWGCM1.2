@@ -20,6 +20,7 @@ import UpdateUsuario from './components/UpdateUsuario';
 import DeleteUsuario from './components/DeleteUsuario';
 import Admin from './components/Admin';
 import UsuarioDeCampo from './components/UsuarioDeCampo';
+import './App.css';
 
 function App() {
   return (
@@ -58,3 +59,4 @@ function App() {
 }
 
 export default App;
+

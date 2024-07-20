@@ -1,5 +1,4 @@
-// CreateUsuario.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 import './CreateUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';  // Asegúrate de que la ruta al logo es correcta
@@ -88,7 +87,7 @@ const CreateUsuario = () => {
         },
         body: JSON.stringify({
           nombre_usuario: nombreUsuario,
-          contraseña: contraseña, // Enviar la contraseña en texto plano
+          contraseña: contraseña, 
           rol,
           nombre_real: nombreReal,
           apellido_paterno: apellidoPaterno,
@@ -116,6 +115,16 @@ const CreateUsuario = () => {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (submitSuccess !== null) {
+      const timer = setTimeout(() => {
+        setSubmitSuccess(null);
+      }, 5000); // Oculta el mensaje después de 5 segundos
+
+      return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta o si submitSuccess cambia
+    }
+  }, [submitSuccess]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword); 
@@ -198,3 +207,4 @@ const CreateUsuario = () => {
 };
 
 export default CreateUsuario;
+

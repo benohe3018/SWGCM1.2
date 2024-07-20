@@ -44,8 +44,8 @@ function App() {
         <Route path="/ver-citas" element={<GestionCitas />} />
         <Route path="/informes-medicos" element={<InformeMedicos />} />
         <Route path="/usuarios" element={<Usuarios />} />
-        <Route path="/crear-estudio" component={EstudiosRadiologicos} />
-        <Route path="/ver-estudios" component={EstudiosRadiologicos} />
+        <Route path="/crear" element={<EstudiosRadiologicos/>} />
+        <Route path="/ver" element={<EstudiosRadiologicos/>} />
         <Route path="/read-usuario" element={<ReadUsuario/>} />
         <Route path="/update-usuario" element={<UpdateUsuario/>} />
         <Route path="/delete-usuario" element={<DeleteUsuario/>} />

@@ -1,74 +1,9 @@
+/* DeleteUsuario.css */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #004d40;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: #004d40;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .hamburger {
-    display: flex;
-  }
 }
 
 .delete-usuario-page {
@@ -84,51 +19,68 @@ body {
 }
 
 .delete-usuario-header {
+  display: flex;
   width: 100%;
   background-color: white;
   padding: 10px 20px;
   box-sizing: border-box;
-  position: fixed;
-  top: 70px; /* Ajustado para que quede debajo del menú */
+  top: 0;
   z-index: 100;
-  display:flex;
+}
+
+.header-logo {
+  height: 60px;
+}
+
+.header-texts {
+  margin-left: 20px;
+  text-align: left;
+}
+
+.welcome-message {
+  font-size: 24px;
+  margin: 0;
+  color: #0C231E;
+}
+
+.department-name {
+  font-size: 18px;
+  margin: 0;
+  color: #0C231E;
+}
+
+.main-layout {
+  display: flex;
+  width: 100%;
 }
 
 .delete-usuario-content {
-  margin-top: 220px;
-  width: 90%;
+  margin-top: 100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-
-.success-message {
-  color: green;
-  margin-bottom: 20px;
+  justify-content: flex-start;
 }
 
 .search-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
+  gap: 10px;
 }
 
-.search-container input {
+.search-container input, .search-container select {
   padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-}
-
-.search-container select {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
 .usuario-table-container {
   width: 100%;
+  overflow-x: auto;
 }
 
 .usuario-table {
@@ -140,7 +92,7 @@ body {
 .usuario-table th, .usuario-table td {
   border: 1px solid #ddd;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 .usuario-table th {
@@ -177,5 +129,6 @@ body {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
+
 
   

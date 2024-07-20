@@ -5,7 +5,8 @@ import './Sidebar.css';
 const Sidebar = () => {
   const [openSubmenu, setOpenSubmenu] = useState({
     medicos: false,
-    usuarios: false
+    usuarios: false,
+    citas: false
   });
 
   const handleSubmenuToggle = (menu) => {
@@ -45,8 +46,18 @@ const Sidebar = () => {
             </ul>
           )}
         </li>
+        <li onClick={() => handleSubmenuToggle('citas')}>
+          <span>Módulo de Citas</span>
+          <span className={`arrow ${openSubmenu.citas ? 'open' : ''}`}>&#9660;</span>
+          {openSubmenu.citas && (
+            <ul className="submenu">
+              <li><Link to="/crear-cita">Capturar Nueva Cita</Link></li>
+              <li><Link to="/ver-citas">Ver Citas</Link></li>
+              <li><Link to="/">Salir</Link></li>
+            </ul>
+          )}
+        </li>
         <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
-        <li><Link to="/gestion-citas">Módulo de Citas</Link></li>
         <li><Link to="/estudios-radiologicos">Modulo de Estudios Radiológicos</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>
       </ul>
@@ -55,6 +66,7 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
 
 
 

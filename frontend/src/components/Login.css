@@ -17,9 +17,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centra verticalmente */
   min-height: 100vh;
   width: 100%;
+  justify-content: center;
 }
 
 .login-header {
@@ -29,13 +29,11 @@ body {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: center; /* Centra horizontalmente */
-  text-align: center;
+  justify-content: center; 
 }
 
 .header-left {
   flex: 0 0 auto;
-  margin-right: 20px; /* Espacio entre el logo y el texto */
 }
 
 .header-right {
@@ -46,6 +44,7 @@ body {
   height: 60px;
 }
 
+
 .welcome-message {
   font-size: 1.5em;
   color: #12322B;
@@ -55,7 +54,6 @@ body {
   font-size: 1.2em;
   color: #12322B;
 }
-
 
 .login-container {
   background-color: white;

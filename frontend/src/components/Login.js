@@ -72,42 +72,42 @@ const Login = () => {
   };
 
   return (
-    <div className="main-layout">
-      <div className="login-page">
-        <header className="login-header">
-          <div className="header-left">
-            <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-          </div>
-          <div className="header-right">
-            <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
-            <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
-          </div>
-        </header>
-        <div className="login-container">
-          <form className="login-form" onSubmit={handleSubmit}>
-            <label htmlFor="username">Nombre de usuario:</label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label htmlFor="password">Contraseña:</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {error && <div className="error-message">{error}</div>}
-            <button type="submit">Iniciar sesión</button>
-          </form>
-          <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />
+  <div className="main-layout">
+    <div className="login-page">
+      <header className="login-header">
+        <div className="header-left">
+          <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
         </div>
+        <div className="header-right">
+          <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
+          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        </div>
+      </header>
+      <div className="login-container">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label htmlFor="username">Nombre de usuario:</label>
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <label htmlFor="password">Contraseña:</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {error && <div className="error-message">{error}</div>}
+          <button type="submit">Iniciar sesión</button>
+        </form>
+        <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />
       </div>
     </div>
-  );
-  
+  </div>
+);
+
 };
 
 export default Login;

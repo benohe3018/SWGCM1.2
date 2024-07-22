@@ -19,7 +19,6 @@ body {
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  justify-content: center;
 }
 
 .login-header {
@@ -28,22 +27,14 @@ body {
   padding: 20px;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center; 
-}
-
-.header-left {
-  flex: 0 0 auto;
-}
-
-.header-right {
-  flex: 1 1 auto;
+  text-align: center;
 }
 
 .header-logo {
   height: 60px;
 }
-
 
 .welcome-message {
   font-size: 1.5em;
@@ -112,5 +103,4 @@ button:hover {
   max-width: 300px;
   margin-top: 20px;
   border-radius: 10px;
-  margin-left: 40px;
 }

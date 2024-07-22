@@ -135,14 +135,6 @@ const GestionCitas = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/crear-cita">Capturar Nuevo Paciente de Prueba</Link></li>
-          <li><Link to="/ver-citas">Ver Pacientes de Prueba</Link></li>
-        </ul>
-      </nav>
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
       <div className="gestion-citas-content">
         {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}

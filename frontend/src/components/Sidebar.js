@@ -21,11 +21,6 @@ const Sidebar = () => {
     }));
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
-
   const handleChangeSession = () => {
     navigate('/');
   };

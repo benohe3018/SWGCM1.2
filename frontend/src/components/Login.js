@@ -75,9 +75,13 @@ const Login = () => {
     <div className="main-layout">
       <div className="login-page">
         <header className="login-header">
-          <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-          <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+          <div className="header-left">
+            <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
+          </div>
+          <div className="header-right">
+            <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
+            <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+          </div>
         </header>
         <div className="login-container">
           <form className="login-form" onSubmit={handleSubmit}>

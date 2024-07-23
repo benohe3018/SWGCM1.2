@@ -17,6 +17,12 @@ const CreateMedico = () => {
     return regex.test(name) && name.length >= 2 && name.length <= 50;
   };
 
+  const isValidApellido = (apellido) => {
+    if (apellido === '') return true; // Permite cadenas vacías
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/; // Nota el asterisco (*) que permite cadenas de longitud cero
+    return regex.test(apellido) && apellido.length <= 50;
+  };
+
   const isValidMatricula = (matricula) => {
     const regex = /^[0-9]{1,12}$/; // La matrícula debe ser un número de hasta 12 dígitos
     return regex.test(matricula);
@@ -24,18 +30,18 @@ const CreateMedico = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Valida los campos de entrada
+  
+    // Valida los campos de entrada usando las funciones modificadas/creadas
     if (!isValidName(nombre)) {
       alert('Por favor, introduce un nombre válido (2-50 caracteres).');
       return;
     }
-    if (!isValidName(apellidoPaterno)) {
-      alert('Por favor, introduce un apellido paterno válido (2-50 caracteres).');
+    if (!isValidApellido(apellidoPaterno)) {
+      alert('Por favor, introduce un apellido paterno válido (puede estar vacío).');
       return;
     }
-    if (!isValidName(apellidoMaterno)) {
-      alert('Por favor, introduce un apellido materno válido (2-50 caracteres).');
+    if (!isValidApellido(apellidoMaterno)) {
+      alert('Por favor, introduce un apellido materno válido (puede estar vacío).');
       return;
     }
     if (!isValidMatricula(matricula)) {

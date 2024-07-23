@@ -21,11 +21,12 @@ body {
 .update-usuario-header {
   display: flex;
   width: 100%;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
   top: 0;
   z-index: 100;
+  margin-left: 300px
 }
 
 .header-logo {
@@ -61,6 +62,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  margin-left: 200px;
 }
 
 .success-message {

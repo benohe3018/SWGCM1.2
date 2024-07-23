@@ -1,11 +1,5 @@
 /* ReadUsuario.css */
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 .read-usuario-page {
   background-color: whitesmoke; /* Color de fondo */
   height: 100vh; /* Altura completa de la ventana del navegador */

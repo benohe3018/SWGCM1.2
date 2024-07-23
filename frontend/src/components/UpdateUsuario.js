@@ -26,28 +26,44 @@ const UpdateUsuario = () => {
   const handleInputChange = (event, id) => {
     const { name, value } = event.target;
     let errorMessage = "";
-  
-    // Validaciones para detectar errores específicos
-    if (/^\d+$/.test(value)) {
-      errorMessage = "Error: No se permiten solo números";
-    } else if (/^P3 \[0+\]$/.test(value)) {
-      errorMessage = "Error: No se permiten códigos con solo ceros después de P3";
-    } else if (/^\s+$/.test(value) || value.trim() === "") {
-      errorMessage = "Error: No se permiten espacios en blanco";
-    } else if (/\[.*\d.*\]/.test(value)) {
-      errorMessage = "Error: No se permiten números dentro de corchetes";
-    } else if (value.includes("…")) {
-      errorMessage = "Error: No se permiten puntos suspensivos";
+
+    if (name === "nombre_usuario") {
+      if (/^\d+$/.test(value)) {
+        errorMessage = "Error: No se permiten solo números";
+      } else if (/^\d.*$/.test(value)) {
+        errorMessage = "Error: No se permite que comience con números";
+      } else if (/^\s+$/.test(value) || value.trim() === "") {
+        errorMessage = "Error: No se permiten espacios en blanco";
+      } else if (value.includes("…")) {
+        errorMessage = "Error: No se permiten puntos suspensivos";
+      } else if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ][a-zA-ZÁÉÍÓÚáéíóúñÑ0-9]*$/.test(value)) {
+        errorMessage = "Error: Nombre de usuario no válido";
+      }
+    } else if (name === "nombre_real" || name === "apellido_paterno" || name === "apellido_materno") {
+      if (/^\d+$/.test(value)) {
+        errorMessage = "Error: No se permiten solo números";
+      } else if (/^\d.*$/.test(value)) {
+        errorMessage = "Error: No se permite que comience con números";
+      } else if (/^\s+$/.test(value) || value.trim() === "") {
+        errorMessage = "Error: No se permiten espacios en blanco";
+      } else if (value.includes("…")) {
+        errorMessage = "Error: No se permiten puntos suspensivos";
+      } else if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(value)) {
+        errorMessage = "Error: Nombre no válido";
+      }
+    } else if (name === "matricula") {
+      if (!/^\d{1,12}$/.test(value)) {
+        errorMessage = "Error: Matrícula no válida (debe ser un número de hasta 12 dígitos)";
+      }
     }
-  
+
     if (errorMessage) {
       setErrorMessages({ ...errorMessages, [id]: errorMessage });
       return;
     } else {
       setErrorMessages({ ...errorMessages, [id]: "" });
     }
-  
-    // Actualización del usuario si no hay errores
+
     setUsuarios(usuarios.map(usuario => {
       if (usuario.id === id) {
         return { ...usuario, [name]: value };
@@ -59,6 +75,17 @@ const UpdateUsuario = () => {
 
   const handleSave = async (id) => {
     const usuarioToUpdate = usuarios.find(usuario => usuario.id === id);
+
+    // Verifica si la matrícula ya existe
+    if (usuarioToUpdate.matricula) {
+      const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/matricula/${usuarioToUpdate.matricula}`);
+      const dataCheck = await responseCheck.json();
+      if (responseCheck.ok && dataCheck.id !== id) {
+        setErrorMessages({ ...errorMessages, [id]: "Error: La matrícula ya existe en la base de datos." });
+        return;
+      }
+    }
+
     await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/${id}`, {
       method: 'PUT',
       headers: {
@@ -155,7 +182,10 @@ const UpdateUsuario = () => {
                     <td>{usuario.id}</td>
                     <td>
                       {editingId === usuario.id ? (
-                        <input type="text" name="nombre_usuario" value={usuario.nombre_usuario} onChange={event => handleInputChange(event, usuario.id)} />
+                        <div>
+                          <input type="text" name="nombre_usuario" value={usuario.nombre_usuario} onChange={event => handleInputChange(event, usuario.id)} />
+                          {errorMessages[usuario.id] && <p className="error-message">{errorMessages[usuario.id]}</p>}
+                        </div>
                       ) : (
                         usuario.nombre_usuario
                       )}
@@ -195,7 +225,10 @@ const UpdateUsuario = () => {
                     </td>
                     <td>
                       {editingId === usuario.id ? (
-                        <input type="text" name="matricula" value={usuario.matricula} onChange={event => handleInputChange(event, usuario.id)} />
+                        <div>
+                          <input type="text" name="matricula" value={usuario.matricula} onChange={event => handleInputChange(event, usuario.id)} />
+                          {errorMessages[usuario.id] && <p className="error-message">{errorMessages[usuario.id]}</p>}
+                        </div>
                       ) : (
                         usuario.matricula
                       )}

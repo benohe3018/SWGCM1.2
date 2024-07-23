@@ -21,23 +21,36 @@ const UpdateUsuario = () => {
     fetchUsuarios();
   }, []);
 
+  const [errorMessages, setErrorMessages] = useState({});
+
   const handleInputChange = (event, id) => {
     const { name, value } = event.target;
-
-    // Validaciones para evitar caracteres inválidos
-    if (name === 'nombre_usuario' || name === 'nombre_real' || name === 'apellido_paterno' || name === 'apellido_materno') {
-      if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/.test(value) || value.trim() === "") {
-        return;
-      }
-    } else if (name === 'matricula') {
-      if (!/^\d*$/.test(value) || value.trim() === "") {
-        return;
-      }
+    let errorMessage = "";
+  
+    // Validaciones para detectar errores específicos
+    if (/^\d+$/.test(value)) {
+      errorMessage = "Error: No se permiten solo números";
+    } else if (/^P3 \[0+\]$/.test(value)) {
+      errorMessage = "Error: No se permiten códigos con solo ceros después de P3";
+    } else if (/^\s+$/.test(value) || value.trim() === "") {
+      errorMessage = "Error: No se permiten espacios en blanco";
+    } else if (/\[.*\d.*\]/.test(value)) {
+      errorMessage = "Error: No se permiten números dentro de corchetes";
+    } else if (value.includes("…")) {
+      errorMessage = "Error: No se permiten puntos suspensivos";
     }
-
+  
+    if (errorMessage) {
+      setErrorMessages({ ...errorMessages, [id]: errorMessage });
+      return;
+    } else {
+      setErrorMessages({ ...errorMessages, [id]: "" });
+    }
+  
+    // Actualización del usuario si no hay errores
     setUsuarios(usuarios.map(usuario => {
       if (usuario.id === id) {
-        return { ...usuario, [name]: value.trim() };
+        return { ...usuario, [name]: value };
       } else {
         return usuario;
       }

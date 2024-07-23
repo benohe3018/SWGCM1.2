@@ -7,13 +7,14 @@ body {
 }
 
 .read-usuario-page {
-  background-color: whitesmoke;
-  height: 100vh;
+  background-color: whitesmoke; /* Color de fondo */
+  height: 100vh; /* Altura completa de la ventana del navegador */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
   color: #0C231E;
 }
 

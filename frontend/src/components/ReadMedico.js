@@ -7,7 +7,7 @@ const ReadMedico = () => {
   const [medicos, setMedicos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const medicosPerPage = 5;
+  const medicosPerPage = 10;
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre');
 

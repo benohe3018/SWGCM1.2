@@ -9,7 +9,7 @@ const ReadUsuario = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre_usuario');
-  const usuariosPerPage = 5;
+  const usuariosPerPage = 10;
 
   const fetchUsuarios = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`);

@@ -65,9 +65,10 @@
 }
 
 .search-container {
-  margin-bottom: 20px;
-  justify-content: center;
-  align-items: center;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .search-container input {

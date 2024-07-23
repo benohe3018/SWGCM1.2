@@ -10,7 +10,7 @@ const UpdateMedico = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre');
-  const medicosPerPage = 5;
+  const medicosPerPage = 10;
 
   useEffect(() => {
     const fetchMedicos = async () => {

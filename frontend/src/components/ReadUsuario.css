@@ -49,19 +49,15 @@ body {
   color: #0C231E;
 }
 
-.main-layout {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .read-usuario-content {
-  margin-top: 100px;
-  width: 100%;
+  margin-top: 20px;
+  width: 150%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .search-container {

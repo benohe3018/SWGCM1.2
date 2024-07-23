@@ -21,47 +21,28 @@ const UpdateUsuario = () => {
     fetchUsuarios();
   }, []);
 
-  const [errorMessages, setErrorMessages] = useState({});
-
   const handleInputChange = (event, id) => {
     const { name, value } = event.target;
-    let errorMessage = "";
-
-    if (name === "nombre_usuario") {
+    
+    if (name === 'nombre_usuario') {
       if (/^\d+$/.test(value)) {
-        errorMessage = "Error: No se permiten solo números";
-      } else if (/^\d.*$/.test(value)) {
-        errorMessage = "Error: No se permite que comience con números";
+        alert('Error: No se permiten solo números');
+        return;
       } else if (/^\s+$/.test(value) || value.trim() === "") {
-        errorMessage = "Error: No se permiten espacios en blanco";
+        alert('Error: No se permiten espacios en blanco');
+        return;
       } else if (value.includes("…")) {
-        errorMessage = "Error: No se permiten puntos suspensivos";
-      } else if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ][a-zA-ZÁÉÍÓÚáéíóúñÑ0-9]*$/.test(value)) {
-        errorMessage = "Error: Nombre de usuario no válido";
-      }
-    } else if (name === "nombre_real" || name === "apellido_paterno" || name === "apellido_materno") {
-      if (/^\d+$/.test(value)) {
-        errorMessage = "Error: No se permiten solo números";
-      } else if (/^\d.*$/.test(value)) {
-        errorMessage = "Error: No se permite que comience con números";
-      } else if (/^\s+$/.test(value) || value.trim() === "") {
-        errorMessage = "Error: No se permiten espacios en blanco";
-      } else if (value.includes("…")) {
-        errorMessage = "Error: No se permiten puntos suspensivos";
-      } else if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(value)) {
-        errorMessage = "Error: Nombre no válido";
-      }
-    } else if (name === "matricula") {
-      if (!/^\d{1,12}$/.test(value)) {
-        errorMessage = "Error: Matrícula no válida (debe ser un número de hasta 12 dígitos)";
+        alert('Error: No se permiten puntos suspensivos');
+        return;
+      } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
+        alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres alfanuméricos).');
+        return;
       }
     }
 
-    if (errorMessage) {
-      setErrorMessages({ ...errorMessages, [id]: errorMessage });
+    if (name === 'matricula' && (!/^\d+$/.test(value) || value.length > 12)) {
+      alert('Por favor, introduce una matrícula válida (solo números, máximo 12 dígitos).');
       return;
-    } else {
-      setErrorMessages({ ...errorMessages, [id]: "" });
     }
 
     setUsuarios(usuarios.map(usuario => {
@@ -76,14 +57,21 @@ const UpdateUsuario = () => {
   const handleSave = async (id) => {
     const usuarioToUpdate = usuarios.find(usuario => usuario.id === id);
 
-    // Verifica si la matrícula ya existe
-    if (usuarioToUpdate.matricula) {
-      const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/matricula/${usuarioToUpdate.matricula}`);
-      const dataCheck = await responseCheck.json();
-      if (responseCheck.ok && dataCheck.id !== id) {
-        setErrorMessages({ ...errorMessages, [id]: "Error: La matrícula ya existe en la base de datos." });
-        return;
-      }
+    if (!usuarioToUpdate.nombre_usuario || !/^[a-zA-Z0-9]+$/.test(usuarioToUpdate.nombre_usuario)) {
+      alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres alfanuméricos).');
+      return;
+    }
+
+    if (usuarioToUpdate.matricula && (!/^\d+$/.test(usuarioToUpdate.matricula) || usuarioToUpdate.matricula.length > 12)) {
+      alert('Por favor, introduce una matrícula válida (solo números, máximo 12 dígitos).');
+      return;
+    }
+
+    const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/matricula/${usuarioToUpdate.matricula}`);
+    const dataCheck = await responseCheck.json();
+    if (responseCheck.ok && Object.keys(dataCheck).length > 0 && dataCheck.id !== id) {
+      alert('El usuario con esta matrícula ya existe en la base de datos. Intente con un nuevo registro');
+      return;
     }
 
     await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/${id}`, {
@@ -182,10 +170,7 @@ const UpdateUsuario = () => {
                     <td>{usuario.id}</td>
                     <td>
                       {editingId === usuario.id ? (
-                        <div>
-                          <input type="text" name="nombre_usuario" value={usuario.nombre_usuario} onChange={event => handleInputChange(event, usuario.id)} />
-                          {errorMessages[usuario.id] && <p className="error-message">{errorMessages[usuario.id]}</p>}
-                        </div>
+                        <input type="text" name="nombre_usuario" value={usuario.nombre_usuario} onChange={event => handleInputChange(event, usuario.id)} />
                       ) : (
                         usuario.nombre_usuario
                       )}
@@ -225,10 +210,7 @@ const UpdateUsuario = () => {
                     </td>
                     <td>
                       {editingId === usuario.id ? (
-                        <div>
-                          <input type="text" name="matricula" value={usuario.matricula} onChange={event => handleInputChange(event, usuario.id)} />
-                          {errorMessages[usuario.id] && <p className="error-message">{errorMessages[usuario.id]}</p>}
-                        </div>
+                        <input type="text" name="matricula" value={usuario.matricula} onChange={event => handleInputChange(event, usuario.id)} />
                       ) : (
                         usuario.matricula
                       )}
@@ -263,3 +245,4 @@ const UpdateUsuario = () => {
 };
 
 export default UpdateUsuario;
+

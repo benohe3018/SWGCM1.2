@@ -23,7 +23,9 @@ const UpdateUsuario = () => {
 
   const handleInputChange = (event, id) => {
     const { name, value } = event.target;
-    
+
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 2 && name.length <= 50;
+
     if (name === 'nombre_usuario') {
       if (/^\d+$/.test(value)) {
         alert('Error: No se permiten solo números');
@@ -38,11 +40,16 @@ const UpdateUsuario = () => {
         alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres alfanuméricos).');
         return;
       }
-    }
-
-    if (name === 'matricula' && (!/^\d+$/.test(value) || value.length > 12)) {
-      alert('Por favor, introduce una matrícula válida (solo números, máximo 12 dígitos).');
-      return;
+    } else if (name === 'nombre_real' || name === 'apellido_paterno' || name === 'apellido_materno') {
+      if (!isValidName(value)) {
+        alert('Por favor, introduce un nombre/apellido válido (solo letras, 2-50 caracteres).');
+        return;
+      }
+    } else if (name === 'matricula') {
+      if (!/^\d+$/.test(value) || value.length > 12) {
+        alert('Por favor, introduce una matrícula válida (solo números, máximo 12 dígitos).');
+        return;
+      }
     }
 
     setUsuarios(usuarios.map(usuario => {
@@ -57,11 +64,24 @@ const UpdateUsuario = () => {
   const handleSave = async (id) => {
     const usuarioToUpdate = usuarios.find(usuario => usuario.id === id);
 
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 2 && name.length <= 50;
+
     if (!usuarioToUpdate.nombre_usuario || !/^[a-zA-Z0-9]+$/.test(usuarioToUpdate.nombre_usuario)) {
       alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres alfanuméricos).');
       return;
     }
-
+    if (!isValidName(usuarioToUpdate.nombre_real)) {
+      alert('Por favor, introduce un nombre real válido (solo letras, 2-50 caracteres).');
+      return;
+    }
+    if (!isValidName(usuarioToUpdate.apellido_paterno)) {
+      alert('Por favor, introduce un apellido paterno válido (solo letras, 2-50 caracteres).');
+      return;
+    }
+    if (!isValidName(usuarioToUpdate.apellido_materno)) {
+      alert('Por favor, introduce un apellido materno válido (solo letras, 2-50 caracteres).');
+      return;
+    }
     if (usuarioToUpdate.matricula && (!/^\d+$/.test(usuarioToUpdate.matricula) || usuarioToUpdate.matricula.length > 12)) {
       alert('Por favor, introduce una matrícula válida (solo números, máximo 12 dígitos).');
       return;
@@ -245,4 +265,5 @@ const UpdateUsuario = () => {
 };
 
 export default UpdateUsuario;
+
 

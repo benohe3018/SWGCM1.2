@@ -175,8 +175,8 @@ const UpdateUsuario = () => {
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Nombre de Usuario</th>
-                  <th>Nombre Real</th>
+                  <th>UserName</th>
+                  <th>Nombre del Usuario</th>
                   <th>Apellido Paterno</th>
                   <th>Apellido Materno</th>
                   <th>Rol</th>

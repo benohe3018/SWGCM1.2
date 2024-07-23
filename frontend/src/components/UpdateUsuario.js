@@ -174,7 +174,6 @@ const UpdateUsuario = () => {
             <table className="usuario-table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>UserName</th>
                   <th>Nombre del Usuario</th>
                   <th>Apellido Paterno</th>
@@ -187,7 +186,6 @@ const UpdateUsuario = () => {
               <tbody>
                 {currentUsuarios.map(usuario => (
                   <tr key={usuario.id}>
-                    <td>{usuario.id}</td>
                     <td>
                       {editingId === usuario.id ? (
                         <input type="text" name="nombre_usuario" value={usuario.nombre_usuario} onChange={event => handleInputChange(event, usuario.id)} />

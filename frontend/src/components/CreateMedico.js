@@ -1,23 +1,96 @@
 import React, { useState } from 'react';
-import './CreateMedico.css';
-import logoIMSS from '../images/LogoIMSS.jpg';
+import './CreateMedicos.css';
+import logoIMSS from '../images/LogoIMSS.jpg'; 
+import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 
 const CreateMedico = () => {
-  const [nombreMedico, setNombreMedico] = useState('');
+  const [nombre, setNombre] = useState('');
   const [apellidoPaterno, setApellidoPaterno] = useState('');
   const [apellidoMaterno, setApellidoMaterno] = useState('');
   const [especialidad, setEspecialidad] = useState('');
   const [matricula, setMatricula] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [submitSuccess, setSubmitSuccess] = useState(null);
+
+  const isValidName = (name) => {
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/;
+    return regex.test(name) && name.length >= 2 && name.length <= 50;
+  };
+
+  const isValidMatricula = (matricula) => {
+    const regex = /^[0-9]{1,12}$/; // La matrícula debe ser un número de hasta 12 dígitos
+    return regex.test(matricula);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Valida los campos de entrada
+    if (!isValidName(nombre)) {
+      alert('Por favor, introduce un nombre válido (2-50 caracteres).');
+      return;
+    }
+    if (!isValidName(apellidoPaterno)) {
+      alert('Por favor, introduce un apellido paterno válido (2-50 caracteres).');
+      return;
+    }
+    if (!isValidName(apellidoMaterno)) {
+      alert('Por favor, introduce un apellido materno válido (2-50 caracteres).');
+      return;
+    }
+    if (!isValidMatricula(matricula)) {
+      alert('Por favor, introduce una matrícula válida.');
+      return;
+    }
+
+    // Verifica si la matrícula ya existe
+    const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/matricula/${matricula}`);
+    const dataCheck = await responseCheck.json();
+    if (responseCheck.ok && Object.keys(dataCheck).length > 0) {
+      alert('El médico ya existe en la base de datos. Intente con un nuevo registro');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre,
+          apellido_paterno: apellidoPaterno,
+          apellido_materno: apellidoMaterno,
+          especialidad,
+          matricula,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setSubmitSuccess(true);
+        // Limpia los campos del formulario
+        setNombre('');
+        setApellidoPaterno('');
+        setApellidoMaterno('');
+        setEspecialidad('');
+        setMatricula('');
+      } else {
+        setSubmitSuccess(false);
+      }
+    } catch (error) {
+      setSubmitSuccess(false);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const especialidades = [
-    'Seleccione una especialidad',
     'Traumatología',
     'Cardiología',
-    'Cirugía',
+    'Cirugia',
     'Endocrinología',
-    'Neurocirugía',
+    'Neurocirugia',
     'Medicina interna',
     'Nefrología',
     'Neurología',
@@ -27,127 +100,58 @@ const CreateMedico = () => {
     'Salud en el trabajo',
     'Medicina de Urgencias',
     'Radiología'
+    // Agrega más especialidades según sea necesario
   ];
-
-  const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
-
-  const isValidMatricula = (matricula) => /^\d+$/.test(matricula) && matricula.length <= 12;
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!isValidName(nombreMedico)) {
-      alert('Por favor, introduce un nombre válido (solo letras, 1-50 caracteres).');
-      return;
-    }
-
-    if (!isValidName(apellidoPaterno)) {
-      alert('Por favor, introduce un apellido paterno válido (solo letras, 1-50 caracteres).');
-      return;
-    }
-
-    if (!isValidName(apellidoMaterno)) {
-      alert('Por favor, introduce un apellido materno válido (solo letras, 1-50 caracteres).');
-      return;
-    }
-
-    if (!isValidMatricula(matricula)) {
-      alert('Por favor, introduce una matrícula válida (solo números, máximo 12 dígitos).');
-      return;
-    }
-
-    if (especialidad === 'Seleccione una especialidad') {
-      alert('Por favor, selecciona una especialidad válida.');
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    // Verifica si la matrícula ya existe
-    const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/matricula/${matricula}`);
-    const dataCheck = await responseCheck.json();
-    if (responseCheck.ok && Object.keys(dataCheck).length > 0) {
-      alert('El médico con esta matrícula ya existe en la base de datos. Intente con un nuevo registro');
-      setIsSubmitting(false);
-      return;
-    }
-
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        nombre_medico: nombreMedico,
-        apellido_paterno_medico: apellidoPaterno,
-        apellido_materno_medico: apellidoMaterno,
-        especialidad: especialidad,
-        matricula: matricula
-      })
-    });
-
-    if (response.ok) {
-      setSuccessMessage('El registro se ha creado exitosamente');
-      setNombreMedico('');
-      setApellidoPaterno('');
-      setApellidoMaterno('');
-      setEspecialidad('');
-      setMatricula('');
-    } else {
-      setSuccessMessage('Hubo un problema al crear el registro');
-    }
-
-    setIsSubmitting(false);
-    setTimeout(() => {
-      setSuccessMessage('');
-    }, 3000);
-  };
 
   return (
     <div className="create-medico-page">
       <header className="create-medico-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
         <div className="header-texts">
-          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
-          <h2 className="department-name">Crear Nuevos Registros de Médicos</h2>
+          <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
+          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-
-      <div className="create-medico-content">
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Nombre del Médico:</label>
-            <input type="text" value={nombreMedico} onChange={(e) => setNombreMedico(e.target.value)} />
-          </div>
-          <div className="form-group">
-            <label>Apellido Paterno:</label>
-            <input type="text" value={apellidoPaterno} onChange={(e) => setApellidoPaterno(e.target.value)} />
-          </div>
-          <div className="form-group">
-            <label>Apellido Materno:</label>
-            <input type="text" value={apellidoMaterno} onChange={(e) => setApellidoMaterno(e.target.value)} />
-          </div>
-          <div className="form-group">
-            <label>Especialidad:</label>
-            <select value={especialidad} onChange={(e) => setEspecialidad(e.target.value)}>
-              {especialidades.map((esp, index) => (
-                <option key={index} value={esp}>{esp}</option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Matrícula:</label>
-            <input type="text" value={matricula} onChange={(e) => setMatricula(e.target.value)} />
-          </div>
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar'}
-          </button>
-          {successMessage && <p className='message-create-success'>{successMessage}</p>}
-        </form>
+      <div className="main-layout">
+        <Sidebar />
+        <div className="create-medico-content">
+          <form onSubmit={handleSubmit}>
+            <h3 className="form-description">Capture los datos del Médico</h3>
+            <div className="form-group">
+              <label htmlFor="nombre">Nombre del Médico:</label>
+              <input type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre del Médico" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
+              <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoMaterno">Apellido Materno:</label>
+              <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="matricula">Matrícula del Médico:</label>
+              <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="especialidad">Especialidad:</label>
+              <select id="especialidad" value={especialidad} onChange={e => setEspecialidad(e.target.value)}>
+                <option value="">Seleccione una especialidad</option>
+                {especialidades.map(especialidad => (
+                  <option key={especialidad} value={especialidad}>{especialidad}</option>
+                ))}
+              </select>
+            </div>
+            <button className="create-medico-button" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Guardando...' : 'Guardar'}
+            </button>
+            {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
+            {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
 export default CreateMedico;
-

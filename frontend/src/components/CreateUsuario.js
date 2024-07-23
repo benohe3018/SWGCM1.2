@@ -57,7 +57,32 @@ const CreateUsuario = () => {
   };
 
   const isValidPassword = (password) => {
-    return password.length >= 8 && password.length <= 50;
+    // Verifica la longitud de la contraseña
+    if (password.length < 8 || password.length > 50) {
+      return false;
+    }
+  
+    // Verifica que la contraseña no sea solo números
+    if (/^\d+$/.test(password)) {
+      return false;
+    }
+  
+    // Verifica que la contraseña no contenga solo caracteres especiales o espacios
+    if (/^[^a-zA-Z0-9]+$/.test(password)) {
+      return false;
+    }
+  
+    // Verifica que la contraseña contenga al menos una letra
+    if (!/[a-zA-Z]/.test(password)) {
+      return false;
+    }
+  
+    // Verifica que la contraseña contenga al menos un número
+    if (!/\d/.test(password)) {
+      return false;
+    }
+  
+    return true;
   };
 
   const handleSubmit = async (event) => {
@@ -71,7 +96,7 @@ const CreateUsuario = () => {
 
     // Valida los campos de entrada
     if (!isValidUsername(nombreUsuario)) {
-      alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres).');
+      alert('Por favor, introduce un nombre de usuario válido deben ser caracteres alfanumericos (4-20 caracteres).');
       return;
     }
     if (!isValidPassword(contraseña)) {

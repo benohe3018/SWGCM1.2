@@ -26,18 +26,18 @@ const UpdateUsuario = () => {
 
     // Validaciones para evitar caracteres inválidos
     if (name === 'nombre_usuario' || name === 'nombre_real' || name === 'apellido_paterno' || name === 'apellido_materno') {
-      if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/.test(value)) {
+      if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/.test(value) || value.trim() === "") {
         return;
       }
     } else if (name === 'matricula') {
-      if (!/^\d*$/.test(value)) {
+      if (!/^\d*$/.test(value) || value.trim() === "") {
         return;
       }
     }
 
     setUsuarios(usuarios.map(usuario => {
       if (usuario.id === id) {
-        return { ...usuario, [name]: value };
+        return { ...usuario, [name]: value.trim() };
       } else {
         return usuario;
       }

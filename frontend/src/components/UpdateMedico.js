@@ -24,7 +24,7 @@ const UpdateMedico = () => {
   const handleInputChange = (event, id_medico) => {
     const { name, value } = event.target;
 
-    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(name) && name.length >= 2 && name.length <= 50;
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(name) && name.length >= 1 && name.length <= 50;
 
     if (name === 'nombre_medico' || name === 'apellido_paterno_medico' || name === 'apellido_materno_medico') {
       if (!isValidName(value)) {
@@ -50,7 +50,7 @@ const UpdateMedico = () => {
   const handleSave = async (id_medico) => {
     const medicoToUpdate = medicos.find(medico => medico.id_medico === id_medico);
 
-    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(name) && name.length >= 2 && name.length <= 50;
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(name) && name.length >= 1 && name.length <= 50;
 
     if (!isValidName(medicoToUpdate.nombre_medico)) {
       alert('Por favor, introduce un nombre válido (solo letras, 2-50 caracteres).');

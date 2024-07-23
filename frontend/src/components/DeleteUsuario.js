@@ -21,11 +21,14 @@ const DeleteUsuario = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/${id}`, {
-      method: 'DELETE',
-    });
-    setUsuarios(usuarios.filter(usuario => usuario.id !== id));
-    setMessage('El registro se ha borrado exitosamente');
+    const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este usuario?');
+    if (confirmDelete) {
+      await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios/${id}`, {
+        method: 'DELETE',
+      });
+      setUsuarios(usuarios.filter(usuario => usuario.id !== id));
+      setMessage('El registro se ha borrado exitosamente');
+    }
   };
 
   const handleSearch = (event) => {
@@ -87,7 +90,6 @@ const DeleteUsuario = () => {
             <table className="usuario-table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Nombre Usuario</th>
                   <th>Nombre Real</th>
                   <th>Apellido Paterno</th>
@@ -99,7 +101,6 @@ const DeleteUsuario = () => {
               <tbody>
                 {currentUsuarios.map(usuario => (
                   <tr key={usuario.id}>
-                    <td>{usuario.id}</td>
                     <td>{usuario.nombre_usuario}</td>
                     <td>{usuario.nombre_real}</td>
                     <td>{usuario.apellido_paterno}</td>

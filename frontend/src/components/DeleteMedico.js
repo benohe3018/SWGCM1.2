@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';
 import './DeleteMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
@@ -21,11 +21,14 @@ const DeleteMedico = () => {
   }, []);
 
   const handleDelete = async (id_medico) => {
-    await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/${id_medico}`, {
-      method: 'DELETE',
-    });
-    setMedicos(medicos.filter(medico => medico.id_medico !== id_medico));
-    setMessage('El registro se ha borrado exitosamente');
+    const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este médico?');
+    if (confirmDelete) {
+      await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/${id_medico}`, {
+        method: 'DELETE',
+      });
+      setMedicos(medicos.filter(medico => medico.id_medico !== id_medico));
+      setMessage('El registro se ha borrado exitosamente');
+    }
   };
 
   const handleSearch = (event) => {
@@ -66,6 +69,7 @@ const DeleteMedico = () => {
       </header>
       
       <div className="delete-medico-content">
+        <Sidebar />
         <div className="search-container">
           <input
             type="text"
@@ -84,7 +88,6 @@ const DeleteMedico = () => {
           <table className="medico-table">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
@@ -96,7 +99,6 @@ const DeleteMedico = () => {
             <tbody>
               {currentMedicos.map(medico => (
                 <tr key={medico.id_medico}>
-                  <td>{medico.id_medico}</td>
                   <td>{medico.nombre_medico}</td>
                   <td>{medico.apellido_paterno_medico}</td>
                   <td>{medico.apellido_materno_medico}</td>
@@ -123,9 +125,9 @@ const DeleteMedico = () => {
         </div>
         {message && <p className='message-delete-success'>{message}</p>}
       </div>
-      <script src="script.js"></script>
     </div>
   );
 };
 
 export default DeleteMedico;
+

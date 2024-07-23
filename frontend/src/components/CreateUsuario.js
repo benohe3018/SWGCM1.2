@@ -28,7 +28,32 @@ const CreateUsuario = () => {
   };
 
   const isValidUsername = (username) => {
-    return username.length >= 4 && username.length <= 20;
+    // Verifica la longitud del nombre de usuario
+    if (username.length < 4 || username.length > 20) {
+      return false;
+    }
+  
+    // Verifica que el nombre de usuario no sea solo números
+    if (/^\d+$/.test(username)) {
+      return false;
+    }
+  
+    // Verifica que el nombre de usuario no contenga una secuencia de caracteres especiales
+    if (/^[.,]+$/.test(username)) {
+      return false;
+    }
+  
+    // Verifica que el nombre de usuario no sea solo espacios en blanco
+    if (/^\s+$/.test(username)) {
+      return false;
+    }
+  
+    // Verifica que el nombre de usuario contenga solo caracteres alfanuméricos y algunos caracteres especiales permitidos (por ejemplo, guiones y guiones bajos)
+    if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
+      return false;
+    }
+  
+    return true;
   };
 
   const isValidPassword = (password) => {
@@ -54,7 +79,7 @@ const CreateUsuario = () => {
       return;
     }
     if (!isValidName(nombreReal)) {
-      alert('Por favor, introduce un nombre real válido (2-50 caracteres).');
+      alert('Error, Por favor introduce un nombre válido solo Letras y espacios (2-50 caracteres).');
       return;
     }
     if (!isValidName(apellidoPaterno)) {

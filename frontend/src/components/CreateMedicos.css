@@ -28,12 +28,6 @@ body {
   display: flex;
   align-items: center;
 }
-
-.header-texts {
-  margin-left: 20px;
-  text-align: left;
-}
-
 .form-description {
   color: #12322B;
 }

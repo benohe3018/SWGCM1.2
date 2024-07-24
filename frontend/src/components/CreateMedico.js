@@ -48,6 +48,10 @@ const CreateMedico = () => {
       alert('Por favor, introduce una matrícula válida.');
       return;
     }
+    if (!especialidad || especialidad === "Seleccione una especialidad") {
+      alert('Por favor, selecciona una especialidad.');
+      return; // Detiene la ejecución de la función si no se ha seleccionado una especialidad
+    }
 
     // Verifica si la matrícula ya existe
     const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/matricula/${matricula}`);

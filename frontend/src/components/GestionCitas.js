@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios } from './citasService';
+import FormularioPaciente from './FormularioPaciente';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
-import FormularioPaciente from './FormularioPaciente';
 
 const GestionCitas = () => {
   const location = useLocation();
@@ -27,7 +27,6 @@ const GestionCitas = () => {
   const [error, setError] = useState(null);
   const [mensaje, setMensaje] = useState(null);
   const [cargando, setCargando] = useState(true);
-  const [editando, setEditando] = useState(null);
 
   const inicializarDatos = useCallback(async () => {
     try {
@@ -91,7 +90,6 @@ const GestionCitas = () => {
       setVista('ver');
       setMensaje('Paciente actualizado exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
-      setEditando(null);
     } catch (error) {
       setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
     }
@@ -117,13 +115,6 @@ const GestionCitas = () => {
     } catch (error) {
       setError("No se pudo eliminar el paciente. Por favor, intente de nuevo.");
     }
-  };
-
-  const handleInputChange = (e, field, id) => {
-    const { value } = e.target;
-    setPacientesPrueba(pacientesPrueba.map(paciente => 
-      paciente.id === id ? { ...paciente, [field]: value } : paciente
-    ));
   };
 
   if (cargando) {
@@ -155,6 +146,7 @@ const GestionCitas = () => {
             onCancel={() => setVista('ver')}
           />
         )}
+
         {vista === 'ver' && (
           <div className="tabla-citas-container">
             <table className="tabla-citas">
@@ -172,83 +164,27 @@ const GestionCitas = () => {
                 {pacientesPrueba.map((paciente) => (
                   <tr key={paciente.id}>
                     <td>{paciente.id}</td>
-                    <td>
-                      {editando === paciente.id ? (
-                        <input
-                          type="datetime-local"
-                          value={paciente.fecha_hora_estudio}
-                          onChange={(e) => handleInputChange(e, "fecha_hora_estudio", paciente.id)}
-                        />
-                      ) : (
-                        paciente.fecha_hora_estudio
-                      )}
-                    </td>
-                    <td>
-                      {editando === paciente.id ? (
-                        <input
-                          type="text"
-                          value={paciente.nombre_completo}
-                          onChange={(e) => handleInputChange(e, "nombre_completo", paciente.id)}
-                        />
-                      ) : (
-                        paciente.nombre_completo
-                      )}
-                    </td>
-                    <td>
-                      {editando === paciente.id ? (
-                        <input
-                          type="text"
-                          value={paciente.nombre_completo_medico}
-                          onChange={(e) => handleInputChange(e, "nombre_completo_medico", paciente.id)}
-                        />
-                      ) : (
-                        paciente.nombre_completo_medico
-                      )}
-                    </td>
-                    <td>
-                      {editando === paciente.id ? (
-                        <input
-                          type="text"
-                          value={paciente.estudio_solicitado}
-                          onChange={(e) => handleInputChange(e, "estudio_solicitado", paciente.id)}
-                        />
-                      ) : (
-                        paciente.estudio_solicitado
-                      )}
-                    </td>
+                    <td>{paciente.fecha_hora_estudio}</td>
+                    <td>{paciente.nombre_completo}</td>
+                    <td>{paciente.nombre_completo_medico}</td>
+                    <td>{paciente.estudio_solicitado}</td>
                     <td>
                       <div className="botones-acciones">
-                        {editando === paciente.id ? (
-                          <>
-                            <button
-                              onClick={() => handleEditarPaciente(paciente)}
-                              className="guardar-button"
-                            >
-                              Guardar
-                            </button>
-                            <button
-                              onClick={() => setEditando(null)}
-                              className="cancelar-button"
-                            >
-                              Cancelar
-                            </button>
-                          </>
-                        ) : (
-                          <>
-                            <button
-                              onClick={() => setEditando(paciente.id)}
-                              className="editar-button"
-                            >
-                              Editar
-                            </button>
-                            <button
-                              onClick={() => handleEliminarPaciente(paciente.id)}
-                              className="eliminar-button"
-                            >
-                              Eliminar
-                            </button>
-                          </>
-                        )}
+                        <button
+                          onClick={() => {
+                            setPacienteSeleccionado(paciente);
+                            setVista('editar');
+                          }}
+                          className="editar-button"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => handleEliminarPaciente(paciente.id)}
+                          className="eliminar-button"
+                        >
+                          Eliminar
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -256,6 +192,16 @@ const GestionCitas = () => {
               </tbody>
             </table>
           </div>
+        )}
+        {vista === 'editar' && pacienteSeleccionado && (
+          <FormularioPaciente
+            modo="editar"
+            pacienteInicial={pacienteSeleccionado}
+            medicos={medicos}
+            estudios={estudios}
+            onSubmit={handleEditarPaciente}
+            onCancel={() => setVista('ver')}
+          />
         )}
       </div>
       {mostrarModal && (

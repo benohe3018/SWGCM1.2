@@ -18,8 +18,6 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     estudio_solicitado: ''
   });
 
-  const [errors, setErrors] = useState({});
-
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
       setFormData({
@@ -54,65 +52,62 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     });
   };
 
-  const validateFields = () => {
-    let newErrors = {};
-
-    // NSS del Paciente
-    if (!/^\d{11}$/.test(formData.nss)) {
-      newErrors.nss = 'El NSS debe ser un número de 11 dígitos.';
-    }
-
-    // Nombre del Paciente
-    if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(formData.nombre_paciente)) {
-      newErrors.nombre_paciente = 'El nombre del paciente debe contener solo letras y espacios.';
-    }
-
-    // Apellido Paterno del Paciente
-    if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(formData.apellido_paterno_paciente)) {
-      newErrors.apellido_paterno_paciente = 'El apellido paterno del paciente debe contener solo letras y espacios.';
-    }
-
-    // Apellido Materno del Paciente
-    if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(formData.apellido_materno_paciente)) {
-      newErrors.apellido_materno_paciente = 'El apellido materno del paciente debe contener solo letras y espacios.';
-    }
-
-    // Especialidad Médica que Envía
-    if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(formData.especialidad_medica)) {
-      newErrors.especialidad_medica = 'La especialidad médica debe contener solo letras y espacios.';
-    }
-
-    // Médico que Refiere
-    if (formData.id_medico_refiere === '') {
-      newErrors.id_medico_refiere = 'Debe seleccionar un médico que refiere.';
-    }
-
-    // Estudio Solicitado
-    if (formData.id_estudio_radiologico === '') {
-      newErrors.id_estudio_radiologico = 'Debe seleccionar un estudio solicitado.';
-    }
-
-    // Unidad Médica de Procedencia
-    if (!/^\d+$/.test(formData.unidad_medica_procedencia)) {
-      newErrors.unidad_medica_procedencia = 'La unidad médica de procedencia debe contener solo números.';
-    }
-
-    // Diagnóstico Presuntivo
-    if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(formData.diagnostico_presuntivo)) {
-      newErrors.diagnostico_presuntivo = 'El diagnóstico presuntivo debe contener solo letras y espacios.';
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validateFields()) {
-      onSubmit(formData);
+    // Validaciones
+    const isValidNSS = (nss) => /^\d{11}$/.test(nss);
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
+    const isValidSpeciality = (speciality) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(speciality) && speciality.length >= 1 && speciality.length <= 50;
+    const isValidUnidadMedica = (unidad) => /^\d+$/.test(unidad);
+    const isValidDiagnostico = (diagnostico) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(diagnostico) && diagnostico.length >= 1 && diagnostico.length <= 50;
+
+    if (!isValidNSS(formData.nss)) {
+      alert('El NSS debe ser un número de 11 dígitos.');
+      return;
     }
+
+    if (!isValidName(formData.nombre_paciente)) {
+      alert('El nombre del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidName(formData.apellido_paterno_paciente)) {
+      alert('El apellido paterno del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidName(formData.apellido_materno_paciente)) {
+      alert('El apellido materno del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidSpeciality(formData.especialidad_medica)) {
+      alert('La especialidad médica debe contener solo letras.');
+      return;
+    }
+
+    if (!formData.id_medico_refiere) {
+      alert('Debe seleccionar un médico que refiere.');
+      return;
+    }
+
+    if (!formData.id_estudio_radiologico) {
+      alert('Debe seleccionar un estudio solicitado.');
+      return;
+    }
+
+    if (!isValidUnidadMedica(formData.unidad_medica_procedencia)) {
+      alert('La unidad médica de procedencia debe contener solo números.');
+      return;
+    }
+
+    if (!isValidDiagnostico(formData.diagnostico_presuntivo)) {
+      alert('El diagnóstico presuntivo debe contener solo letras y espacios.');
+      return;
+    }
+
+    onSubmit(formData);
   };
 
   return (
@@ -124,27 +119,22 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       <div className="form-group">
         <label htmlFor="nss">NSS del Paciente:</label>
         <input type="text" id="nss" name="nss" value={formData.nss} onChange={handleChange} required />
-        {errors.nss && <span className="error">{errors.nss}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="nombre_paciente">Nombre del Paciente:</label>
         <input type="text" id="nombre_paciente" name="nombre_paciente" value={formData.nombre_paciente} onChange={handleChange} required />
-        {errors.nombre_paciente && <span className="error">{errors.nombre_paciente}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="apellido_paterno_paciente">Apellido Paterno del Paciente:</label>
         <input type="text" id="apellido_paterno_paciente" name="apellido_paterno_paciente" value={formData.apellido_paterno_paciente} onChange={handleChange} required />
-        {errors.apellido_paterno_paciente && <span className="error">{errors.apellido_paterno_paciente}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="apellido_materno_paciente">Apellido Materno del Paciente:</label>
         <input type="text" id="apellido_materno_paciente" name="apellido_materno_paciente" value={formData.apellido_materno_paciente} onChange={handleChange} required />
-        {errors.apellido_materno_paciente && <span className="error">{errors.apellido_materno_paciente}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label>
         <input type="text" id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required />
-        {errors.especialidad_medica && <span className="error">{errors.especialidad_medica}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
@@ -156,7 +146,6 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
             </option>
           ))}
         </select>
-        {errors.id_medico_refiere && <span className="error">{errors.id_medico_refiere}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="id_estudio_radiologico">Estudio Solicitado:</label>
@@ -168,17 +157,14 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
             </option>
           ))}
         </select>
-        {errors.id_estudio_radiologico && <span className="error">{errors.id_estudio_radiologico}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="unidad_medica_procedencia">Unidad Médica de Procedencia:</label>
         <input type="text" id="unidad_medica_procedencia" name="unidad_medica_procedencia" value={formData.unidad_medica_procedencia} onChange={handleChange} required />
-        {errors.unidad_medica_procedencia && <span className="error">{errors.unidad_medica_procedencia}</span>}
       </div>
       <div className="form-group">
         <label htmlFor="diagnostico_presuntivo">Diagnóstico Presuntivo:</label>
         <input type="text" id="diagnostico_presuntivo" name="diagnostico_presuntivo" value={formData.diagnostico_presuntivo} onChange={handleChange} required />
-        {errors.diagnostico_presuntivo && <span className="error">{errors.diagnostico_presuntivo}</span>}
       </div>
       <div className="form-actions">
         <button type="submit">Enviar</button>
@@ -189,4 +175,5 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 };
 
 export default FormularioPaciente;
+
 

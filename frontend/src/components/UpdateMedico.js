@@ -30,6 +30,11 @@ const UpdateMedico = () => {
       alert('Por favor, introduce un nombre válido.');
       return;
     }
+
+    if (name === 'especialidad' && value === '') { // Asumiendo que '' representa ninguna selección
+      alert('Por favor, selecciona una especialidad.');
+      return;
+    }
   
     // Actualiza el estado con el nuevo valor si pasa la validación
     setMedicos(medicos.map(medico => {

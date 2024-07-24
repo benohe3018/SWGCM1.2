@@ -175,3 +175,4 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 };
 
 export default FormularioPaciente;
+

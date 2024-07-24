@@ -66,7 +66,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       alert('El NSS debe ser un número de 11 dígitos.');
       return;
     }
-
+   
     if (!isValidName(formData.nombre_paciente)) {
       alert('El nombre del paciente debe contener solo letras.');
       return;
@@ -108,6 +108,24 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     }
 
     onSubmit(formData);
+  };
+
+  const handleCancel = () => {
+    setFormData({
+      id: '',
+      fecha_hora_estudio: '',
+      nss: '',
+      nombre_paciente: '',
+      apellido_paterno_paciente: '',
+      apellido_materno_paciente: '',
+      especialidad_medica: '',
+      id_medico_refiere: '',
+      id_estudio_radiologico: '',
+      unidad_medica_procedencia: '',
+      diagnostico_presuntivo: '',
+      nombre_completo_medico: '',
+      estudio_solicitado: ''
+    });
   };
 
   return (
@@ -168,7 +186,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-actions">
         <button type="submit">Enviar</button>
-        <button type="button" onClick={onCancel}>Cancelar</button>
+        <button type="button" onClick={handleCancel}>Cancelar</button>
       </div>
     </form>
   );

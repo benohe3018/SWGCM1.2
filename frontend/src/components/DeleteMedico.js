@@ -27,7 +27,7 @@ const DeleteMedico = () => {
         method: 'DELETE',
       });
       setMedicos(medicos.filter(medico => medico.id_medico !== id_medico));
-      setMessage('El registro se ha borrado exitosamente');
+      setMessage('El registro del médico se ha borrado exitosamente');
     }
   };
 

@@ -26,18 +26,12 @@ const UpdateMedico = () => {
 
     const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(name) && name.length >= 1 && name.length <= 50;
 
-    if (name === 'nombre_medico' || name === 'apellido_paterno_medico' || name === 'apellido_materno_medico') {
-      if (!isValidName(value)) {
-        alert('Por favor, introduce un nombre/apellido válido (solo letras, 2-50 caracteres).');
-        return;
-      }
-    } else if (name === 'matricula') {
-      if (!/^\d+$/.test(value) || value.length > 12) {
-        alert('Por favor, introduce una matrícula válida (solo números, máximo 12 dígitos).');
-        return;
-      }
+    if (name === 'nombre_medico' && !isValidName(value)) {
+      alert('Por favor, introduce un nombre válido.');
+      return;
     }
-
+  
+    // Actualiza el estado con el nuevo valor si pasa la validación
     setMedicos(medicos.map(medico => {
       if (medico.id_medico === id_medico) {
         return { ...medico, [name]: value };

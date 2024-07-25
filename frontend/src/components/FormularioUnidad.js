@@ -1,7 +1,7 @@
 // src/components/FormularioUnidad.js
 
 import React, { useState, useEffect } from 'react';
-import './FormularioUnidad.css';
+import './UnidadesMedicinaFamiliar.css';
 
 const FormularioUnidad = ({ modo, unidadInicial, onSubmit, onCancel }) => {
   const [nombre, setNombre] = useState('');

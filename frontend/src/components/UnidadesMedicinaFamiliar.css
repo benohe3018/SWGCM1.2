@@ -1,0 +1,131 @@
+/* src/components/UnidadesMedicinaFamiliar.css */
+.unidades-medicina-familiar-page {
+    padding: 20px;
+  }
+  
+  .unidades-medicina-familiar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: whitesmoke;
+  }
+  
+  .header-logo {
+    width: 100px;
+  }
+  
+  .header-texts {
+    text-align: left;
+  }
+  
+  .welcome-message {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .department-name {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .unidades-medicina-familiar-content {
+    margin-top: 20px;
+  }
+  
+  .tabla-unidades {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tabla-unidades th, .tabla-unidades td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .tabla-unidades th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .botones-acciones {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .editar-button, .eliminar-button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .mensaje-confirmacion {
+    color: green;
+    font-weight: bold;
+  }
+  
+  /* src/components/FormularioUnidad.css */
+  .formulario-unidad-container {
+    margin-top: 20px;
+  }
+  
+  .titulo-formulario {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .boton-crear, .boton-cancelar {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* src/components/ModalConfirmacion.css */
+  .modal-confirmacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .modal-acciones {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .boton-confirmar, .boton-cancelar {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  

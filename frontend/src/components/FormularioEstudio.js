@@ -71,7 +71,6 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
             id="nombre"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            placeholder="Nombre del estudio (solo letras y espacios)"
             required
           />
         </div>
@@ -81,7 +80,6 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
             id="descripcion"
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
-            placeholder="Descripción del estudio (solo letras y espacios)"
             required
           />
         </div>

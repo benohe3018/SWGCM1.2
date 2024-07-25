@@ -16,6 +16,7 @@ import GestionCitas from './components/GestionCitas';
 import InformeMedicos from './components/InformesMedicos';
 import Usuarios from './components/Usuarios';
 import EstudiosRadiologicos from './components/EstudiosRadiologicos';
+import UnidadesMedicinaFamiliar from './components/UnidadesMedicinaFamiliar';
 import ReadUsuario from './components/ReadUsuario';
 import UpdateUsuario from './components/UpdateUsuario';
 import DeleteUsuario from './components/DeleteUsuario';
@@ -52,6 +53,8 @@ function App() {
             <Route path="/usuarios" element={<PrivateRoute><Sidebar /><Usuarios /></PrivateRoute>} />
             <Route path="/crear-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="crear" /></PrivateRoute>} />
             <Route path="/ver-estudios" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="ver" /></PrivateRoute>} />
+            <Route path="/crear-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar /></PrivateRoute>} />
+            <Route path="/ver-unidades" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar /></PrivateRoute>} />
             <Route path="/read-usuario" element={<PrivateRoute><Sidebar /><ReadUsuario /></PrivateRoute>} />
             <Route path="/update-usuario" element={<PrivateRoute><Sidebar /><UpdateUsuario /></PrivateRoute>} />
             <Route path="/delete-usuario" element={<PrivateRoute><Sidebar /><DeleteUsuario /></PrivateRoute>} />

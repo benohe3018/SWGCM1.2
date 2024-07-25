@@ -61,7 +61,7 @@ const GestionCitas = () => {
       setPacientesPrueba(data);
       setError(null);
     } catch (error) {
-      setError("Hubo un problema al cargar los pacientes de prueba. Por favor, intente de nuevo.");
+      setError("Hubo un problema al cargar las citas. Por favor, intente de nuevo.");
     } finally {
       setCargando(false);
     }
@@ -72,10 +72,10 @@ const GestionCitas = () => {
       await createPacientePrueba(datosPaciente);
       await cargarPacientesPrueba();
       setVista('ver');
-      setMensaje('Paciente de prueba creado exitosamente.');
+      setMensaje('La cita se ha creado exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
     } catch (error) {
-      setError("No se pudo crear el paciente de prueba. Por favor, intente de nuevo.");
+      setError("No se pudo crear la cita. Por favor, intente de nuevo.");
     }
   };
 
@@ -110,10 +110,10 @@ const GestionCitas = () => {
       await cargarPacientesPrueba();
       setMostrarModal(false);
       setPacienteSeleccionado(null);
-      setMensaje('Paciente eliminado exitosamente.');
+      setMensaje('Cita eliminada exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
     } catch (error) {
-      setError("No se pudo eliminar el paciente. Por favor, intente de nuevo.");
+      setError("No se pudo eliminar la cita. Por favor, intente de nuevo.");
     }
   };
 
@@ -206,7 +206,7 @@ const GestionCitas = () => {
       </div>
       {mostrarModal && (
         <ModalConfirmacion
-          mensaje="¿Estás seguro de que deseas eliminar este paciente de prueba?"
+          mensaje="¿Estás seguro de que deseas eliminar esta cita?"
           onConfirm={confirmarEliminarPaciente}
           onCancel={() => setMostrarModal(false)}
         />

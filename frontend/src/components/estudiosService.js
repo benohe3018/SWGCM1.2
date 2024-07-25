@@ -4,7 +4,7 @@ const API_URL = '/api';
 
 export const getEstudios = async () => {
   try {
-    const response = await axios.get(`${API_URL}/estudios`);
+    const response = await axios.get(`${API_URL}/api/estudios`);
     return response.data;
   } catch (error) {
     console.error('Error fetching estudios:', error);
@@ -14,7 +14,7 @@ export const getEstudios = async () => {
 
 export const createEstudio = async (estudioData) => {
   try {
-    const response = await axios.post(`${API_URL}/estudios`, estudioData);
+    const response = await axios.post(`${API_URL}/api/estudios`, estudioData);
     return response.data;
   } catch (error) {
     console.error('Error creating estudio:', error);
@@ -24,7 +24,7 @@ export const createEstudio = async (estudioData) => {
 
 export const updateEstudio = async (id, estudioData) => {
   try {
-    const response = await axios.put(`${API_URL}/estudios/${id}`, estudioData);
+    const response = await axios.put(`${API_URL}/api/estudios/${id}`, estudioData);
     return response.data;
   } catch (error) {
     console.error('Error updating estudio:', error);

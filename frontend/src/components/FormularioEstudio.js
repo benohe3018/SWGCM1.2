@@ -6,6 +6,14 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
   const [descripcion, setDescripcion] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const isValidNombre = (nombre) => {
+    return typeof nombre === 'string' && nombre.length >= 2 && nombre.length <= 100;
+  };
+  
+  const isValidDescripcion = (descripcion) => {
+    return typeof descripcion === 'string' && descripcion.length <= 500;
+  };
+
   useEffect(() => {
     if (modo === 'editar' && estudioInicial) {
       setNombre(estudioInicial.nombre_estudio);
@@ -44,45 +52,29 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     }
   };
 
-  const isValidNombre = (nombre) => {
-    return nombre.length >= 2 && nombre.length <= 100;
-  };
-
-  const isValidDescripcion = (descripcion) => {
-    return descripcion.length <= 500;
-  };
-
   return (
-    <div className="formulario-estudio-container">
-      <h2 className="titulo-formulario">{modo === 'crear' ? 'Crear Nuevo Estudio' : 'Editar Estudio'}</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="nombre">Nombre del Estudio:</label>
-          <input
-            type="text"
-            id="nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="descripcion">Descripción del Estudio:</label>
-          <textarea
-            id="descripcion"
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-actions">
-          <button type="submit" className="boton-crear" disabled={isSubmitting}>
-            {isSubmitting ? 'Enviando...' : (modo === 'crear' ? 'Crear Estudio' : 'Actualizar Estudio')}
-          </button>
-          <button type="button" className="boton-cancelar" onClick={onCancel}>Cancelar</button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="nombre">Nombre del Estudio:</label>
+        <input
+          id="nombre"
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="descripcion">Descripción:</label>
+        <textarea
+          id="descripcion"
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
+        />
+      </div>
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Enviando...' : 'Enviar'}
+      </button>
+    </form>
   );
 };
 

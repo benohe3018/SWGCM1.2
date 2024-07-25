@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link } from 'react-router-dom';
 import './EstudiosRadiologicos.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';

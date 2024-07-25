@@ -50,8 +50,8 @@ function App() {
             <Route path="/ver-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/informes-medicos" element={<PrivateRoute><Sidebar /><InformeMedicos /></PrivateRoute>} />
             <Route path="/usuarios" element={<PrivateRoute><Sidebar /><Usuarios /></PrivateRoute>} />
-            <Route path="/crear" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos /></PrivateRoute>} />
-            <Route path="/ver" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos /></PrivateRoute>} />
+            <Route path="/crear-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos /></PrivateRoute>} />
+            <Route path="/ver-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos /></PrivateRoute>} />
             <Route path="/read-usuario" element={<PrivateRoute><Sidebar /><ReadUsuario /></PrivateRoute>} />
             <Route path="/update-usuario" element={<PrivateRoute><Sidebar /><UpdateUsuario /></PrivateRoute>} />
             <Route path="/delete-usuario" element={<PrivateRoute><Sidebar /><DeleteUsuario /></PrivateRoute>} />

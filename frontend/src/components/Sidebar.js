@@ -74,10 +74,10 @@ const Sidebar = () => {
           <span className={`arrow ${openSubmenu.estudios ? 'open' : ''}`}>&#9660;</span>
           {openSubmenu.estudios && (
             <ul className="submenu">
-              <li><Link to="/crear">Capturar Nuevo Estudio</Link></li>
-              <li><Link to="/ver">Ver Estudios</Link></li>
-              <li><Link to="/ver">Editar Estudio</Link></li>
-              <li><Link to="/ver">Eliminar Estudio</Link></li>
+              <li><Link to="/crear-estudio">Capturar Nuevo Estudio</Link></li>
+              <li><Link to="/ver-estudios">Ver Estudios</Link></li>
+              <li><Link to="/ver-estudios">Editar Estudio</Link></li>
+              <li><Link to="/ver-estudios">Eliminar Estudio</Link></li>
             </ul>
           )}
         </li>

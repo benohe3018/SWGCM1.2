@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './EstudiosRadiologicos.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
@@ -7,8 +7,7 @@ import FormularioEstudio from './FormularioEstudio';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
-const EstudiosRadiologicos = () => {
-    const location = useLocation();
+const EstudiosRadiologicos = ({ vista }) => {
     const navigate = useNavigate();
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
@@ -16,15 +15,7 @@ const EstudiosRadiologicos = () => {
     const [error, setError] = useState(null);
     const [mensaje, setMensaje] = useState(null);
     const [cargando, setCargando] = useState(true);
-    const [vista, setVista] = useState(''); 
-
-    useEffect(() => {
-        if (location.pathname === '/crear-estudio') {
-            setVista('crear');
-        } else if (location.pathname === '/ver-estudios') {
-            setVista('ver');
-        }
-    }, [location.pathname]);
+    const [vistaActual, setVistaActual] = useState(vista || ''); 
 
     const inicializarEstudios = useCallback(async () => {
         try {
@@ -129,17 +120,17 @@ const EstudiosRadiologicos = () => {
                     <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
                 </div>
             </header>
-            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
+            {vistaActual === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
             <div className="estudios-radiologicos-content">
                 {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
-                {vista === 'crear' && (
+                {vistaActual === 'crear' && (
                     <FormularioEstudio
                         modo="crear"
                         onSubmit={handleCrearEstudio}
                         onCancel={() => navigate('/ver-estudios')}
                     />
                 )}
-                {vista === 'ver' && (
+                {vistaActual === 'ver' && (
                     <div className="tabla-estudios-container">
                         <table className="tabla-estudios">
                             <thead>
@@ -161,7 +152,7 @@ const EstudiosRadiologicos = () => {
                                                 <button 
                                                   onClick={() => {
                                                       setEstudioSeleccionado(estudio);
-                                                      setVista('editar');
+                                                      setVistaActual('editar');
                                                   }} 
                                                   className="editar-button"
                                                 >
@@ -181,7 +172,7 @@ const EstudiosRadiologicos = () => {
                         </table>
                     </div>
                 )}
-                {vista === 'editar' && estudioSeleccionado && (
+                {vistaActual === 'editar' && estudioSeleccionado && (
                     <FormularioEstudio
                         modo="editar"
                         estudioInicial={estudioSeleccionado}
@@ -202,6 +193,7 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+
 
 
 

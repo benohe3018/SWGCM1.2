@@ -120,19 +120,6 @@ const EstudiosRadiologicos = () => {
                     <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
                 </div>
             </header>
-            <nav className="navbar">
-                <ul className="nav-links">
-                    <li><Link to="/" onClick={() => setVista('')}>Cambiar Sesión</Link></li>
-                    <li><Link to="#" onClick={() => setVista('crear')}>Capturar Nuevo Estudio Radiológico</Link></li>
-                    <li><Link to="#" onClick={() => setVista('ver')}>Ver Estudios Capturados</Link></li>
-                    <li><Link to="/dashboard-root">Página de Inicio</Link></li>
-                </ul>
-                <div className="hamburger">
-                    <div className="line"></div>
-                    <div className="line"></div>
-                    <div className="line"></div>
-                </div>
-            </nav>
             {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
             <div className="estudios-radiologicos-content">
                 {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}

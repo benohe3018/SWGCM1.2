@@ -10,51 +10,11 @@
   color: black;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #004d40;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
 .logo {
   font-size: 1.5em;
   font-weight: bold;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
-}
 .botones-acciones {
   display: flex;
   gap: 10px;
@@ -160,7 +120,7 @@
 .estudios-radiologicos-header {
   display: flex;
   width: 100%;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
   margin-top: 70px;

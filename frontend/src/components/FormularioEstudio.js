@@ -25,11 +25,11 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     event.preventDefault();
     
     if (!isValidNombre(nombre)) {
-        alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
+        alert('Por favor, introduce un nombre de estudio válido, solo letras.');
         return;
     }
     if (!isValidDescripcion(descripcion)) {
-        alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
+        alert('Por favor, introduce una descripción válida, solo letras.');
         return;
     }
 

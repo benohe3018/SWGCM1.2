@@ -111,21 +111,28 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   };
 
   const handleCancel = () => {
-    setFormData({
-      id: '',
-      fecha_hora_estudio: '',
-      nss: '',
-      nombre_paciente: '',
-      apellido_paterno_paciente: '',
-      apellido_materno_paciente: '',
-      especialidad_medica: '',
-      id_medico_refiere: '',
-      id_estudio_radiologico: '',
-      unidad_medica_procedencia: '',
-      diagnostico_presuntivo: '',
-      nombre_completo_medico: '',
-      estudio_solicitado: ''
-    });
+    // Paso 1: Mostrar diálogo de confirmación
+    const isConfirmed = window.confirm("¿Está seguro que desea cancelar? Los cambios no guardados se perderán.");
+  
+    // Paso 2: Verificar la confirmación del usuario
+    if (isConfirmed) {
+      // Resetear el formulario si el usuario confirma
+      setFormData({
+        id: '',
+        fecha_hora_estudio: '',
+        nss: '',
+        nombre_paciente: '',
+        apellido_paterno_paciente: '',
+        apellido_materno_paciente: '',
+        especialidad_medica: '',
+        id_medico_refiere: '',
+        id_estudio_radiologico: '',
+        unidad_medica_procedencia: '',
+        diagnostico_presuntivo: '',
+        nombre_completo_medico: '',
+        estudio_solicitado: ''
+      });
+    }
   };
 
   return (

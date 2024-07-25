@@ -54,6 +54,12 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     }
   };
 
+  const handleCancel = () => {
+    setNombre('');
+    setDescripcion('');
+    onCancel();
+  };
+
   return (
     <div className="formulario-estudio-container">
       <h2 className="titulo-formulario">{modo === 'crear' ? 'Crear Nuevo Estudio' : 'Editar Estudio'}</h2>
@@ -83,7 +89,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
           <button type="submit" className="boton-crear" disabled={isSubmitting}>
             {isSubmitting ? 'Enviando...' : (modo === 'crear' ? 'Crear Estudio' : 'Actualizar Estudio')}
           </button>
-          <button type="button" className="boton-cancelar" onClick={onCancel}>Cancelar</button>
+          <button type="button" className="boton-cancelar" onClick={handleCancel}>Cancelar</button>
         </div>
       </form>
     </div>
@@ -91,6 +97,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioEstudio;
+
 
 
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 import './EstudiosRadiologicos.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
@@ -7,6 +8,8 @@ import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
 const EstudiosRadiologicos = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
@@ -14,6 +17,14 @@ const EstudiosRadiologicos = () => {
     const [mensaje, setMensaje] = useState(null);
     const [cargando, setCargando] = useState(true);
     const [vista, setVista] = useState(''); 
+
+    useEffect(() => {
+        if (location.pathname === '/crear-estudio') {
+            setVista('crear');
+        } else if (location.pathname === '/ver-estudios') {
+            setVista('ver');
+        }
+    }, [location.pathname]);
 
     const inicializarEstudios = useCallback(async () => {
         try {
@@ -53,7 +64,7 @@ const EstudiosRadiologicos = () => {
         try {
             await createEstudio(nuevoEstudio);
             await cargarEstudios();
-            setVista('ver');
+            navigate('/ver-estudios');
             setMensaje('Estudio creado exitosamente.');
             setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
@@ -70,7 +81,7 @@ const EstudiosRadiologicos = () => {
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
             setEstudioSeleccionado(null);
-            setVista('ver');
+            navigate('/ver-estudios');
             setMensaje('Estudio actualizado exitosamente.');
             setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
@@ -93,7 +104,6 @@ const EstudiosRadiologicos = () => {
             await cargarEstudios();
             setMostrarModal(false);
             setEstudioSeleccionado(null);
-            setVista('ver');
             setMensaje('Estudio eliminado exitosamente.');
             setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
@@ -126,7 +136,7 @@ const EstudiosRadiologicos = () => {
                     <FormularioEstudio
                         modo="crear"
                         onSubmit={handleCrearEstudio}
-                        onCancel={() => setVista('')}
+                        onCancel={() => navigate('/ver-estudios')}
                     />
                 )}
                 {vista === 'ver' && (
@@ -176,7 +186,7 @@ const EstudiosRadiologicos = () => {
                         modo="editar"
                         estudioInicial={estudioSeleccionado}
                         onSubmit={handleEditarEstudio}
-                        onCancel={() => setVista('')}
+                        onCancel={() => navigate('/ver-estudios')}
                     />
                 )}
             </div>
@@ -192,6 +202,7 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
+
 
 
 

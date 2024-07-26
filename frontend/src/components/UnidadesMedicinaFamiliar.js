@@ -66,8 +66,6 @@ const UnidadesMedicinaFamiliar = () => {
     console.log('Creating unit:', nuevaUnidad); // Añadir log para verificar la unidad a crear
     try {
       await createUnidad(nuevaUnidad);
-      await cargarUnidades();
-      navigate('/ver-unidades');
       setMensaje('Unidad creada exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
     } catch (error) {
@@ -84,7 +82,6 @@ const UnidadesMedicinaFamiliar = () => {
       await updateUnidad(unidadEditada.id_unidad_medica, unidadEditada);
       await cargarUnidades();
       setUnidadSeleccionada(null);
-      navigate('/ver-unidades');
       setMensaje('Unidad actualizada exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
     } catch (error) {

@@ -89,22 +89,22 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
     }
     return null;
   };
-  
+
   const handleCrearUnidad = async (nuevaUnidad) => {
     console.log('Creating unit:', nuevaUnidad); // Añadir log para verificar la unidad a crear
-  
+
     const errorNombre = validarNombreUnidad(nuevaUnidad.nombre_unidad_medica);
     if (errorNombre) {
-      setError(errorNombre);
+      alert(errorNombre);
       return;
     }
-  
-    const errorDescripcion = validarDescripcionUnidad(nuevaUnidad.descripcion_unidad_medica);
+
+    const errorDescripcion = validarDescripcionUnidad(nuevaUnidad.direccion_unidad_medica);
     if (errorDescripcion) {
-      setError(errorDescripcion);
+      alert(errorDescripcion);
       return;
     }
-  
+
     try {
       await createUnidad(nuevaUnidad);
       setMensaje('Unidad creada exitosamente.');
@@ -119,6 +119,18 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   };
 
   const handleEditarUnidad = async (unidadEditada) => {
+    const errorNombre = validarNombreUnidad(unidadEditada.nombre_unidad_medica);
+    if (errorNombre) {
+      alert(errorNombre);
+      return;
+    }
+
+    const errorDescripcion = validarDescripcionUnidad(unidadEditada.direccion_unidad_medica);
+    if (errorDescripcion) {
+      alert(errorDescripcion);
+      return;
+    }
+
     try {
       if (!unidadEditada.id_unidad_medica) {
         throw new Error("El ID de la unidad no está definido");
@@ -240,20 +252,41 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                 {unidades.map((unidad) => (
                   <tr key={unidad.id_unidad_medica}>
                     <td>{unidad.id_unidad_medica}</td>
-                    <td>{unidad.nombre_unidad_medica}</td>
-                    <td>{unidad.direccion_unidad_medica}</td>
                     <td>
-                      <div className="botones-acciones">
-                        <button
-                          onClick={() => {
-                            setUnidadSeleccionada(unidad);
-                            setVista('editar');
-                          }}
-                          className="editar-button"
-                        >
-                          Editar
-                        </button>
-                      </div>
+                      <input
+                        type="text"
+                        value={unidad.nombre_unidad_medica}
+                        onChange={(e) => {
+                          const nuevasUnidades = unidades.map((u) =>
+                            u.id_unidad_medica === unidad.id_unidad_medica
+                              ? { ...u, nombre_unidad_medica: e.target.value }
+                              : u
+                          );
+                          setUnidades(nuevasUnidades);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={unidad.direccion_unidad_medica}
+                        onChange={(e) => {
+                          const nuevasUnidades = unidades.map((u) =>
+                            u.id_unidad_medica === unidad.id_unidad_medica
+                              ? { ...u, direccion_unidad_medica: e.target.value }
+                              : u
+                          );
+                          setUnidades(nuevasUnidades);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleEditarUnidad(unidad)}
+                        className="guardar-button"
+                      >
+                        Guardar
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -279,14 +312,12 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                     <td>{unidad.nombre_unidad_medica}</td>
                     <td>{unidad.direccion_unidad_medica}</td>
                     <td>
-                      <div className="botones-acciones">
-                        <button
-                          onClick={() => handleEliminarUnidad(unidad.id_unidad_medica)}
-                          className="eliminar-button"
-                        >
-                          Eliminar
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => handleEliminarUnidad(unidad.id_unidad_medica)}
+                        className="eliminar-button"
+                      >
+                        Eliminar
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -307,5 +338,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
 };
 
 export default UnidadesMedicinaFamiliar;
+
 
 

@@ -88,8 +88,8 @@ const Sidebar = () => {
             <ul className="submenu">
               <li><Link to="/crear-unidad">Capturar Nueva Unidad</Link></li>
               <li><Link to="/ver-unidades">Ver Unidades</Link></li>
-              <li><Link to="/ver-unidades">Actualizar Unidad</Link></li>
-              <li><Link to="/ver-unidades">Eliminar Unidad</Link></li>
+              <li><Link to="/update-unidad">Actualizar Unidad</Link></li>
+              <li><Link to="/delete-unidad">Eliminar Unidad</Link></li>
             </ul>
           )}
         </li>

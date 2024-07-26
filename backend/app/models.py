@@ -35,7 +35,7 @@ class Medico(db.Model):
         }
 
 class UnidadesMedicinaFamiliar(db.Model):
-    __tablename__ = 'unidadesmedicinafamiliar'
+    __tablename__ = 'unidades_medicina_familiar'
     id = db.Column(db.Integer, primary_key=True)
     nombre_unidad_medica = db.Column(db.String(100), nullable=False)
     direccion_unidad_medica = db.Column(db.String(255), nullable=False)

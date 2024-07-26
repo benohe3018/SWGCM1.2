@@ -66,8 +66,45 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
     }
   };
 
+  const validarNombreUnidad = (nombre) => {
+    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    if (!nombre) {
+      return 'El nombre de la unidad es obligatorio';
+    } else if (!nombreRegex.test(nombre)) {
+      return 'El nombre de la unidad debe comenzar con letras y puede incluir números y espacios';
+    } else if (nombre.length < 2 || nombre.length > 100) {
+      return 'El nombre de la unidad debe tener entre 2 y 100 caracteres';
+    }
+    return null;
+  };
+
+  const validarDescripcionUnidad = (descripcion) => {
+    const descripcionRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    if (!descripcion) {
+      return 'La descripción de la unidad es obligatoria';
+    } else if (!descripcionRegex.test(descripcion)) {
+      return 'La descripción de la unidad debe comenzar con letras y puede incluir números y espacios';
+    } else if (descripcion.length < 2 || descripcion.length > 100) {
+      return 'La descripción de la unidad debe tener entre 2 y 100 caracteres';
+    }
+    return null;
+  };
+  
   const handleCrearUnidad = async (nuevaUnidad) => {
     console.log('Creating unit:', nuevaUnidad); // Añadir log para verificar la unidad a crear
+  
+    const errorNombre = validarNombreUnidad(nuevaUnidad.nombre_unidad_medica);
+    if (errorNombre) {
+      setError(errorNombre);
+      return;
+    }
+  
+    const errorDescripcion = validarDescripcionUnidad(nuevaUnidad.descripcion_unidad_medica);
+    if (errorDescripcion) {
+      setError(errorDescripcion);
+      return;
+    }
+  
     try {
       await createUnidad(nuevaUnidad);
       setMensaje('Unidad creada exitosamente.');

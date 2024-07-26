@@ -1,5 +1,3 @@
-// src/components/FormularioUnidad.js
-
 import React, { useState, useEffect } from 'react';
 import './UnidadesMedicinaFamiliar.css';
 
@@ -18,7 +16,6 @@ const FormularioUnidad = ({ modo, unidadInicial, onSubmit, onCancel }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validaciones
     if (!nombre || nombre.length < 2 || nombre.length > 100) {
       alert('Por favor, introduce un nombre válido (2-100 caracteres).');
       return;
@@ -82,3 +79,4 @@ const FormularioUnidad = ({ modo, unidadInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioUnidad;
+

@@ -9,7 +9,7 @@ import ModalConfirmacion from './ModalConfirmacion';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import mrMachine from '../images/MRMachine.jpg';
 
-const UnidadesMedicinaFamiliar = () => {
+const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [unidades, setUnidades] = useState([]);
@@ -18,13 +18,17 @@ const UnidadesMedicinaFamiliar = () => {
   const [error, setError] = useState(null);
   const [mensaje, setMensaje] = useState(null);
   const [cargando, setCargando] = useState(true);
-  const [vista, setVista] = useState('');
+  const [vista, setVista] = useState(vistaInicial || 'ver');
 
   useEffect(() => {
     if (location.pathname === '/crear-unidad') {
       setVista('crear');
     } else if (location.pathname === '/ver-unidades') {
       setVista('ver');
+    } else if (location.pathname === '/update-unidad') {
+      setVista('editar');
+    } else if (location.pathname === '/delete-unidad') {
+      setVista('eliminar');
     }
   }, [location.pathname]);
 
@@ -76,7 +80,7 @@ const UnidadesMedicinaFamiliar = () => {
       setError("No se pudo crear la unidad. Por favor, intente de nuevo.");
     }
   };
-  
+
   const handleEditarUnidad = async (unidadEditada) => {
     try {
       if (!unidadEditada.id_unidad_medica) {
@@ -184,13 +188,74 @@ const UnidadesMedicinaFamiliar = () => {
             </table>
           </div>
         )}
-        {vista === 'editar' && unidadSeleccionada && (
-          <FormularioUnidad
-            modo="editar"
-            unidadInicial={unidadSeleccionada}
-            onSubmit={handleEditarUnidad}
-            onCancel={() => navigate('/ver-unidades')}
-          />
+        {vista === 'editar' && (
+          <div className="tabla-unidades-container">
+            <table className="tabla-unidades">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre de la Unidad</th>
+                  <th>Dirección de la Unidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {unidades.map((unidad) => (
+                  <tr key={unidad.id_unidad_medica}>
+                    <td>{unidad.id_unidad_medica}</td>
+                    <td>{unidad.nombre_unidad_medica}</td>
+                    <td>{unidad.direccion_unidad_medica}</td>
+                    <td>
+                      <div className="botones-acciones">
+                        <button
+                          onClick={() => {
+                            setUnidadSeleccionada(unidad);
+                            setVista('editar');
+                          }}
+                          className="editar-button"
+                        >
+                          Editar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {vista === 'eliminar' && (
+          <div className="tabla-unidades-container">
+            <table className="tabla-unidades">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre de la Unidad</th>
+                  <th>Dirección de la Unidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {unidades.map((unidad) => (
+                  <tr key={unidad.id_unidad_medica}>
+                    <td>{unidad.id_unidad_medica}</td>
+                    <td>{unidad.nombre_unidad_medica}</td>
+                    <td>{unidad.direccion_unidad_medica}</td>
+                    <td>
+                      <div className="botones-acciones">
+                        <button
+                          onClick={() => handleEliminarUnidad(unidad.id_unidad_medica)}
+                          className="eliminar-button"
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
       {mostrarModal && (
@@ -205,4 +270,5 @@ const UnidadesMedicinaFamiliar = () => {
 };
 
 export default UnidadesMedicinaFamiliar;
+
 

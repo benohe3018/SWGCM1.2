@@ -66,7 +66,7 @@ const Hospitales = ({ vistaInicial }) => {
   };
 
   const validarNombreHospital = (nombre) => {
-    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s#]*$/;
     if (!nombre) {
       return 'El nombre del hospital es obligatorio';
     } else if (!nombreRegex.test(nombre)) {

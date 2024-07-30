@@ -1,4 +1,3 @@
-// Hospitales.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Hospitales.css'; 
@@ -224,13 +223,93 @@ const Hospitales = ({ vistaInicial }) => {
             </table>
           </div>
         )}
-        {vista === 'editar' && hospitalSeleccionado && (
-          <FormularioHospital
-            modo="editar"
-            hospitalInicial={hospitalSeleccionado}
-            onSubmit={handleEditarHospital}
-            onCancel={() => navigate('/ver-hospitales')}
-          />
+        {vista === 'editar' && (
+          <div className="tabla-hospitales-container">
+            <table className="tabla-hospitales">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre del Hospital</th>
+                  <th>Ciudad del Hospital</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {hospitales.map((hospital) => (
+                  <tr key={hospital.id}>
+                    <td>{hospital.id}</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={hospital.nombre_hospital}
+                        onChange={(e) => {
+                          const nuevoNombre = e.target.value;
+                          setHospitales(prevState => prevState.map(h => 
+                            h.id === hospital.id ? { ...h, nombre_hospital: nuevoNombre } : h
+                          ));
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={hospital.ciudad_hospital}
+                        onChange={(e) => {
+                          const nuevaCiudad = e.target.value;
+                          setHospitales(prevState => prevState.map(h => 
+                            h.id === hospital.id ? { ...h, ciudad_hospital: nuevaCiudad } : h
+                          ));
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <div className="botones-acciones">
+                        <button
+                          onClick={() => handleEditarHospital(hospital)}
+                          className="guardar-button"
+                        >
+                          Guardar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {vista === 'eliminar' && (
+          <div className="tabla-hospitales-container">
+            <table className="tabla-hospitales">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre del Hospital</th>
+                  <th>Ciudad del Hospital</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {hospitales.map((hospital) => (
+                  <tr key={hospital.id}>
+                    <td>{hospital.id}</td>
+                    <td>{hospital.nombre_hospital}</td>
+                    <td>{hospital.ciudad_hospital}</td>
+                    <td>
+                      <div className="botones-acciones">
+                        <button
+                          onClick={() => handleEliminarHospital(hospital.id)}
+                          className="eliminar-button"
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
       {mostrarModal && (
@@ -245,4 +324,5 @@ const Hospitales = ({ vistaInicial }) => {
 };
 
 export default Hospitales;
+
 

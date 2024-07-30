@@ -13,9 +13,8 @@
   }
   
   .hospitales-header img {
-    width: 100px;
+    width: 40px;
     height: auto;
-    margin-right: 20px;
   }
   
   .header-texts {
@@ -58,8 +57,8 @@
   }
   
   .tabla-hospitales th {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #f2f2f2;
+    text-align: left;
   }
   
   .tabla-hospitales tr:nth-child(even) {

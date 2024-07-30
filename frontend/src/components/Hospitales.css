@@ -57,8 +57,8 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: whitesmoke;
-    color: white;
+    background-color: #f2f2f2;
+    color: #12322B;
   }
 
   .tabla-hospitales td input[type="text"] {

@@ -21,7 +21,7 @@ const FormularioHospital = ({ modo, hospitalInicial, onSubmit, onCancel }) => {
     if (!nombre) {
       return 'El nombre del hospital es obligatorio';
     } else if (!nombreRegex.test(nombre)) {
-      return 'El nombre del hospital debe comenzar con letras y puede incluir números y espacios';
+      return 'Formato de ejemplo HGR#46';
     } else if (nombre.length < 2 || nombre.length > 100) {
       return 'El nombre del hospital debe tener entre 2 y 100 caracteres';
     }
@@ -29,7 +29,7 @@ const FormularioHospital = ({ modo, hospitalInicial, onSubmit, onCancel }) => {
   };
 
   const validarCiudadHospital = (ciudad) => {
-    const ciudadRegex = /^[a-zA-Z][a-zA-Z0-9\s#,.]*$/;
+    const ciudadRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ][a-zA-Z0-9\s#,.]*$/;
     if (!ciudad) {
       return 'La ciudad del hospital es obligatoria';
     } else if (!ciudadRegex.test(ciudad)) {
@@ -59,7 +59,7 @@ const FormularioHospital = ({ modo, hospitalInicial, onSubmit, onCancel }) => {
     setError(null);
 
     const hospital = {
-      id_hospital: hospitalInicial ? hospitalInicial.id_hospital : undefined,
+      id: hospitalInicial ? hospitalInicial.id : undefined,
       nombre_hospital: nombre,
       ciudad_hospital: ciudad,
     };

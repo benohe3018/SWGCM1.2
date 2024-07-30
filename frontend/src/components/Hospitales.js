@@ -78,7 +78,7 @@ const Hospitales = ({ vistaInicial }) => {
   };
 
   const validarCiudadHospital = (ciudad) => {
-    const ciudadRegex = /^[a-zA-Z][a-zA-Z0-9\s#,.]*$/;
+    const ciudadRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ][a-zA-Z0-9\s#,.]*$/;
     if (!ciudad) {
       return 'La ciudad del hospital es obligatoria';
     } else if (!ciudadRegex.test(ciudad)) {
@@ -224,74 +224,13 @@ const Hospitales = ({ vistaInicial }) => {
             </table>
           </div>
         )}
-        {vista === 'editar' && (
-          <div className="tabla-hospitales-container">
-            <table className="tabla-hospitales">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {hospitales.map((hospital) => (
-                  <tr key={hospital.id}>
-                    <td>{hospital.id}</td>
-                    <td>{hospital.nombre_hospital}</td>
-                    <td>{hospital.ciudad_hospital}</td>
-                    <td>
-                      <div className="botones-acciones">
-                        <button
-                          onClick={() => {
-                            setHospitalSeleccionado(hospital);
-                            setVista('editar');
-                          }}
-                          className="editar-button"
-                        >
-                          Editar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-        {vista === 'eliminar' && (
-          <div className="tabla-hospitales-container">
-            <table className="tabla-hospitales">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {hospitales.map((hospital) => (
-                  <tr key={hospital.id}>
-                    <td>{hospital.id}</td>
-                    <td>{hospital.nombre_hospital}</td>
-                    <td>{hospital.ciudad_hospital}</td>
-                    <td>
-                      <div className="botones-acciones">
-                        <button
-                          onClick={() => handleEliminarHospital(hospital.id)}
-                          className="eliminar-button"
-                        >
-                          Eliminar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        {vista === 'editar' && hospitalSeleccionado && (
+          <FormularioHospital
+            modo="editar"
+            hospitalInicial={hospitalSeleccionado}
+            onSubmit={handleEditarHospital}
+            onCancel={() => navigate('/ver-hospitales')}
+          />
         )}
       </div>
       {mostrarModal && (
@@ -306,3 +245,4 @@ const Hospitales = ({ vistaInicial }) => {
 };
 
 export default Hospitales;
+

@@ -93,6 +93,16 @@ const Sidebar = () => {
             </ul>
           )}
         </li>
+        <li onClick={() => handleSubmenuToggle('hospitales')}> 
+          <span>Módulo de Hospitales</span>  
+          <span className={`arrow ${openSubmenu.hospitales ? 'open' : ''}`}>&#9660;</span>  
+          {openSubmenu.hospitales && (
+            <ul className="submenu">
+              <li><Link to="/crear-hospital">Capturar Nuevo Hospital</Link></li>
+              <li><Link to="/ver-hospitales">Ver Hospitales</Link></li>
+            </ul>
+          )}
+        </li>
         <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
         <li><Link to="/admin">Modulo de Administración</Link></li>
         <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>

@@ -17,7 +17,7 @@ const FormularioHospital = ({ modo, hospitalInicial, onSubmit, onCancel }) => {
   }, [modo, hospitalInicial]);
 
   const validarNombreHospital = (nombre) => {
-    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s#]*$/;
     if (!nombre) {
       return 'El nombre del hospital es obligatorio';
     } else if (!nombreRegex.test(nombre)) {
@@ -78,7 +78,7 @@ const FormularioHospital = ({ modo, hospitalInicial, onSubmit, onCancel }) => {
 
   return (
     <div className="formulario-hospital-container">
-      <h2 className="titulo-formulario">{modo === 'crear' ? 'Crear Nuevo Hospital' : 'Editar Hospital'}</h2>
+      <h2 className="titulo-formulario">{modo === 'crear' ? 'Capturar Nuevo Hospital' : 'Editar Hospital'}</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">

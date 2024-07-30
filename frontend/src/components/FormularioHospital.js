@@ -29,7 +29,7 @@ const FormularioHospital = ({ modo, hospitalInicial, onSubmit, onCancel }) => {
   };
 
   const validarCiudadHospital = (ciudad) => {
-    const ciudadRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const ciudadRegex = /^[a-zA-Z][a-zA-Z0-9\s#,.]*$/;
     if (!ciudad) {
       return 'La ciudad del hospital es obligatoria';
     } else if (!ciudadRegex.test(ciudad)) {

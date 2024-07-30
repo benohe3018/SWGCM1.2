@@ -79,7 +79,7 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   };
 
   const validarDescripcionUnidad = (descripcion) => {
-    const descripcionRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const descripcionRegex = /^[a-zA-Z][a-zA-Z0-9\s#,.]*$/;
     if (!descripcion) {
       return 'La descripción de la unidad es obligatoria';
     } else if (!descripcionRegex.test(descripcion)) {

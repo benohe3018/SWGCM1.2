@@ -188,7 +188,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Dirección del Hospital</th>
+                  <th>Ciudad del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -197,17 +197,25 @@ const Hospitales = ({ vistaInicial }) => {
                   <tr key={hospital.id}>
                     <td>{hospital.id}</td>
                     <td>{hospital.nombre_hospital}</td>
-                    <td>{hospital.ciudad_hospital}</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={hospital.ciudad_hospital}
+                        onChange={(e) => {
+                          const newHospitales = [...hospitales];
+                          const index = newHospitales.findIndex(h => h.id === hospital.id);
+                          newHospitales[index].ciudad_hospital = e.target.value;
+                          setHospitales(newHospitales);
+                        }}
+                      />
+                    </td>
                     <td>
                       <div className="botones-acciones">
                         <button
-                          onClick={() => {
-                            setHospitalSeleccionado(hospital);
-                            setVista('editar');
-                          }}
+                          onClick={() => handleEditarHospital(hospital)}
                           className="editar-button"
                         >
-                          Editar
+                          Guardar
                         </button>
                         <button
                           onClick={() => handleEliminarHospital(hospital.id)}
@@ -230,7 +238,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Dirección del Hospital</th>
+                  <th>Ciudad del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -238,27 +246,16 @@ const Hospitales = ({ vistaInicial }) => {
                 {hospitales.map((hospital) => (
                   <tr key={hospital.id}>
                     <td>{hospital.id}</td>
-                    <td>
-                      <input
-                        type="text"
-                        value={hospital.nombre_hospital}
-                        onChange={(e) => {
-                          const nuevoNombre = e.target.value;
-                          setHospitales(prevState => prevState.map(h => 
-                            h.id === hospital.id ? { ...h, nombre_hospital: nuevoNombre } : h
-                          ));
-                        }}
-                      />
-                    </td>
+                    <td>{hospital.nombre_hospital}</td>
                     <td>
                       <input
                         type="text"
                         value={hospital.ciudad_hospital}
                         onChange={(e) => {
-                          const nuevaCiudad = e.target.value;
-                          setHospitales(prevState => prevState.map(h => 
-                            h.id === hospital.id ? { ...h, ciudad_hospital: nuevaCiudad } : h
-                          ));
+                          const newHospitales = [...hospitales];
+                          const index = newHospitales.findIndex(h => h.id === hospital.id);
+                          newHospitales[index].ciudad_hospital = e.target.value;
+                          setHospitales(newHospitales);
                         }}
                       />
                     </td>
@@ -266,7 +263,7 @@ const Hospitales = ({ vistaInicial }) => {
                       <div className="botones-acciones">
                         <button
                           onClick={() => handleEditarHospital(hospital)}
-                          className="guardar-button"
+                          className="editar-button"
                         >
                           Guardar
                         </button>
@@ -285,7 +282,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Dirección del Hospital</th>
+                  <th>Ciudad del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -324,5 +321,6 @@ const Hospitales = ({ vistaInicial }) => {
 };
 
 export default Hospitales;
+
 
 

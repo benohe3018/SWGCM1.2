@@ -188,7 +188,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
+                  <th>Dirección del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -238,7 +238,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
+                  <th>Dirección del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -282,7 +282,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
+                  <th>Dirección del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>

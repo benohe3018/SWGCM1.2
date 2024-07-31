@@ -15,7 +15,6 @@ import CreateUsuario from './components/CreateUsuario';
 import GestionCitas from './components/GestionCitas';
 import InformeMedicos from './components/InformesMedicos';
 import Hospitales from './components/Hospitales';
-import FormularioHospital from './components/FormularioHospital';
 import Usuarios from './components/Usuarios';
 import EstudiosRadiologicos from './components/EstudiosRadiologicos';
 import UnidadesMedicinaFamiliar from './components/UnidadesMedicinaFamiliar';
@@ -55,6 +54,8 @@ function App() {
             <Route path="/usuarios" element={<PrivateRoute><Sidebar /><Usuarios /></PrivateRoute>} />
             <Route path="/crear-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="crear" /></PrivateRoute>} />
             <Route path="/ver-estudios" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="ver" /></PrivateRoute>} />
+            <Route path="/update-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="editar" /></PrivateRoute>} />
+            <Route path="/delete-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="eliminar" /></PrivateRoute>} />
             <Route path="/crear-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="crear" /></PrivateRoute>} />
             <Route path="/ver-unidades" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="ver" /></PrivateRoute>} />
             <Route path="/update-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="editar" /></PrivateRoute>} />

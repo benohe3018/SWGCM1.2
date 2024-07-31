@@ -131,55 +131,37 @@ const EstudiosRadiologicos = ({ vista }) => {
                     />
                 )}
                 {vistaActual === 'ver' && (
-                    <div className="tabla-estudios-container">
-                        <table className="tabla-estudios">
+                        <div className="tabla-estudios-container">
+                            <table className="tabla-estudios">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre del Estudio</th>
-                                    <th>Descripción</th>
-                                    <th>Acciones</th>
+                                <th>ID</th>
+                                <th>Nombre del Estudio</th>
+                                <th>Descripción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {estudios.map((estudio) => (
-                                    <tr key={estudio.id_estudio}>
-                                        <td>{estudio.id_estudio}</td>
-                                        <td>{estudio.nombre_estudio}</td>
-                                        <td>{estudio.descripcion_estudio}</td>
-                                        <td>
-                                            <div className="botones-acciones">
-                                                <button 
-                                                  onClick={() => {
-                                                      setEstudioSeleccionado(estudio);
-                                                      setVistaActual('editar');
-                                                  }} 
-                                                  className="editar-button"
-                                                >
-                                                    Editar
-                                                </button>
-                                                <button 
-                                                  onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
-                                                  className="eliminar-button"
-                                                >
-                                                    Eliminar
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tr key={estudio.id_estudio}>
+                                    <td>{estudio.id_estudio}</td>
+                                    <td>{estudio.nombre_estudio}</td>
+                                    <td>{estudio.descripcion_estudio}</td>
+                                </tr>
                                 ))}
                             </tbody>
-                        </table>
-                    </div>
-                )}
-                {vistaActual === 'editar' && estudioSeleccionado && (
-                    <FormularioEstudio
-                        modo="editar"
-                        estudioInicial={estudioSeleccionado}
-                        onSubmit={handleEditarEstudio}
-                        onCancel={() => navigate('/ver-estudios')}
-                    />
-                )}
+                            </table>
+                        </div>
+                        )}
+
+                        {vistaActual === 'editar' && estudioSeleccionado && (
+                            <FormularioEstudio
+                                modo="editar"
+                                estudioInicial={estudioSeleccionado}
+                                onSubmit={handleEditarEstudio}
+                                onCancel={() => navigate('/ver-estudios')}
+                            />
+                            )}
+
             </div>
             {mostrarModal && (
                 <ModalConfirmacion

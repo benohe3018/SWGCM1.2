@@ -86,12 +86,13 @@
 .tabla-unidades {
   width: 100%;
   border-collapse: collapse;
+  display: inline;
 }
 
 .tabla-unidades th, .tabla-unidades td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
+  text-align: center;
 }
 
 .tabla-unidades th {

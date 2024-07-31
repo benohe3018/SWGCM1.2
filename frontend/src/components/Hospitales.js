@@ -114,8 +114,7 @@ const Hospitales = ({ vistaInicial }) => {
       setMensaje('Hospital creado exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-        navigate('/ver-hospitales'); // Navega a 'Ver Hospitales' después de un tiempo
-      }, 3000); // Espera 3 segundos antes de navegar
+      }); 
     } catch (error) {
       console.error("Error al crear hospital:", error);
       setError("No se pudo crear el hospital. Por favor, intente de nuevo.");

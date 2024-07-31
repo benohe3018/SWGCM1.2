@@ -114,8 +114,7 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
       setMensaje('Unidad creada exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-        navigate('/ver-unidades'); // Navega a 'Ver Unidades' después de un tiempo
-      }, 3000); // Espera 3 segundos antes de navegar
+      }); 
     } catch (error) {
       console.error("Error al crear unidad:", error);
       setError("No se pudo crear la unidad. Por favor, intente de nuevo.");

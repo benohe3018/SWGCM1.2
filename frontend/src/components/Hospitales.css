@@ -94,7 +94,6 @@
 .tabla-hospitales th, .tabla-hospitales td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
 }
 
 .tabla-hospitales th {

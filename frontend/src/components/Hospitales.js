@@ -182,55 +182,27 @@ const Hospitales = ({ vistaInicial }) => {
           />
         )}
         {vista === 'ver' && (
-          <div className="tabla-hospitales-container">
-            <table className="tabla-hospitales">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre del Hospital</th>
-                  <th>Dirección del Hospital</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {hospitales.map((hospital) => (
-                  <tr key={hospital.id}>
-                    <td>{hospital.id}</td>
-                    <td>{hospital.nombre_hospital}</td>
-                    <td>
-                      <input
-                        type="text"
-                        value={hospital.ciudad_hospital}
-                        onChange={(e) => {
-                          const newHospitales = [...hospitales];
-                          const index = newHospitales.findIndex(h => h.id === hospital.id);
-                          newHospitales[index].ciudad_hospital = e.target.value;
-                          setHospitales(newHospitales);
-                        }}
-                      />
-                    </td>
-                    <td>
-                      <div className="botones-acciones">
-                        <button
-                          onClick={() => handleEditarHospital(hospital)}
-                          className="editar-button"
-                        >
-                          Guardar
-                        </button>
-                        <button
-                          onClick={() => handleEliminarHospital(hospital.id)}
-                          className="eliminar-button"
-                        >
-                          Eliminar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+  <div className="tabla-hospitales-container">
+    <table className="tabla-hospitales">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre del Hospital</th>
+          <th>Dirección del Hospital</th>
+        </tr>
+      </thead>
+      <tbody>
+        {hospitales.map((hospital) => (
+          <tr key={hospital.id}>
+            <td>{hospital.id}</td>
+            <td>{hospital.nombre_hospital}</td>
+            <td>{hospital.ciudad_hospital}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
         {vista === 'editar' && (
           <div className="tabla-hospitales-container">
             <table className="tabla-hospitales">

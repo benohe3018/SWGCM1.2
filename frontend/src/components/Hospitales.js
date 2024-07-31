@@ -284,7 +284,18 @@ const Hospitales = ({ vistaInicial }) => {
                   {currentHospitales.map((hospital) => (
                     <tr key={hospital.id}>
                       <td>{hospital.id}</td>
-                      <td>{hospital.nombre_hospital}</td>
+                      <td>
+                        <input
+                          type="text"
+                          value={hospital.nombre_hospital}
+                          onChange={(e) => {
+                            const newHospitales = [...hospitales];
+                            const index = newHospitales.findIndex(h => h.id === hospital.id);
+                            newHospitales[index].nombre_hospital = e.target.value;
+                            setHospitales(newHospitales);
+                          }}
+                        />
+                      </td>
                       <td>
                         <input
                           type="text"

@@ -76,8 +76,8 @@ const Sidebar = () => {
             <ul className="submenu">
               <li><Link to="/crear-estudio">Capturar Nuevo Estudio</Link></li>
               <li><Link to="/ver-estudios">Ver Estudios</Link></li>
-              <li><Link to="/ver-estudios">Editar Estudio</Link></li>
-              <li><Link to="/ver-estudios">Eliminar Estudio</Link></li>
+              <li><Link to="/update-estudio">Editar Estudio</Link></li>
+              <li><Link to="/delete-estudio">Eliminar Estudio</Link></li>
             </ul>
           )}
         </li>

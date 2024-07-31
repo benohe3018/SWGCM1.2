@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './EstudiosRadiologicos.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
@@ -7,7 +7,8 @@ import FormularioEstudio from './FormularioEstudio';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
-const EstudiosRadiologicos = ({ vista }) => {
+const EstudiosRadiologicos = ({ vistaInicial }) => {
+    const location = useLocation();
     const navigate = useNavigate();
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
@@ -15,7 +16,19 @@ const EstudiosRadiologicos = ({ vista }) => {
     const [error, setError] = useState(null);
     const [mensaje, setMensaje] = useState(null);
     const [cargando, setCargando] = useState(true);
-    const [vistaActual, setVistaActual] = useState(vista || ''); 
+    const [vista, setVista] = useState(vistaInicial || 'ver'); 
+
+    useEffect(() => {
+        if (location.pathname === '/crear-estudio') {
+            setVista('crear');
+        } else if (location.pathname === '/ver-estudios') {
+            setVista('ver');
+        } else if (location.pathname === '/update-estudio') {
+            setVista('editar');
+        } else if (location.pathname === '/delete-estudio') {
+            setVista('eliminar');
+        }
+    }, [location.pathname]);
 
     const inicializarEstudios = useCallback(async () => {
         try {
@@ -54,10 +67,11 @@ const EstudiosRadiologicos = ({ vista }) => {
     const handleCrearEstudio = async (nuevoEstudio) => {
         try {
             await createEstudio(nuevoEstudio);
-            await cargarEstudios();
-            navigate('/ver-estudios');
             setMensaje('Estudio creado exitosamente.');
-            setTimeout(() => setMensaje(null), 3000);
+            setTimeout(() => {
+                setMensaje(null);
+                navigate('/ver-estudios'); 
+            }, 3000); 
         } catch (error) {
             console.error("Error al crear estudio:", error);
             setError("No se pudo crear el estudio. Por favor, intente de nuevo.");
@@ -72,7 +86,6 @@ const EstudiosRadiologicos = ({ vista }) => {
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
             setEstudioSeleccionado(null);
-            navigate('/ver-estudios');
             setMensaje('Estudio actualizado exitosamente.');
             setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
@@ -120,48 +133,115 @@ const EstudiosRadiologicos = ({ vista }) => {
                     <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
                 </div>
             </header>
-            {vistaActual === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
+            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
             <div className="estudios-radiologicos-content">
                 {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
-                {vistaActual === 'crear' && (
+                {vista === 'crear' && (
                     <FormularioEstudio
                         modo="crear"
                         onSubmit={handleCrearEstudio}
                         onCancel={() => navigate('/ver-estudios')}
                     />
                 )}
-                {vistaActual === 'ver' && (
-                        <div className="tabla-estudios-container">
-                            <table className="tabla-estudios">
+                {vista === 'ver' && (
+                    <div className="tabla-estudios-container">
+                        <table className="tabla-estudios">
                             <thead>
                                 <tr>
-                                <th>ID</th>
-                                <th>Nombre del Estudio</th>
-                                <th>Descripción</th>
+                                    <th>ID</th>
+                                    <th>Nombre del Estudio</th>
+                                    <th>Descripción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {estudios.map((estudio) => (
-                                <tr key={estudio.id_estudio}>
-                                    <td>{estudio.id_estudio}</td>
-                                    <td>{estudio.nombre_estudio}</td>
-                                    <td>{estudio.descripcion_estudio}</td>
-                                </tr>
+                                    <tr key={estudio.id_estudio}>
+                                        <td>{estudio.id_estudio}</td>
+                                        <td>{estudio.nombre_estudio}</td>
+                                        <td>{estudio.descripcion_estudio}</td>
+                                    </tr>
                                 ))}
                             </tbody>
-                            </table>
-                        </div>
-                        )}
-
-                        {vistaActual === 'editar' && estudioSeleccionado && (
-                            <FormularioEstudio
-                                modo="editar"
-                                estudioInicial={estudioSeleccionado}
-                                onSubmit={handleEditarEstudio}
-                                onCancel={() => navigate('/ver-estudios')}
-                            />
-                            )}
-
+                        </table>
+                    </div>
+                )}
+                {vista === 'editar' && (
+                    <div className="tabla-estudios-container">
+                        <table className="tabla-estudios">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre del Estudio</th>
+                                    <th>Descripción</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {estudios.map((estudio) => (
+                                    <tr key={estudio.id_estudio}>
+                                        <td>{estudio.id_estudio}</td>
+                                        <td>{estudio.nombre_estudio}</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                value={estudio.descripcion_estudio}
+                                                onChange={(e) => {
+                                                    const newEstudios = [...estudios];
+                                                    const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
+                                                    newEstudios[index].descripcion_estudio = e.target.value;
+                                                    setEstudios(newEstudios);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>
+                                            <div className="botones-acciones">
+                                                <button
+                                                    onClick={() => handleEditarEstudio(estudio)}
+                                                    className="editar-button"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+                {vista === 'eliminar' && (
+                    <div className="tabla-estudios-container">
+                        <table className="tabla-estudios">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre del Estudio</th>
+                                    <th>Descripción</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {estudios.map((estudio) => (
+                                    <tr key={estudio.id_estudio}>
+                                        <td>{estudio.id_estudio}</td>
+                                        <td>{estudio.nombre_estudio}</td>
+                                        <td>{estudio.descripcion_estudio}</td>
+                                        <td>
+                                            <div className="botones-acciones">
+                                                <button
+                                                    onClick={() => handleEliminarEstudio(estudio.id_estudio)}
+                                                    className="eliminar-button"
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
             {mostrarModal && (
                 <ModalConfirmacion
@@ -175,6 +255,7 @@ const EstudiosRadiologicos = ({ vista }) => {
 };
 
 export default EstudiosRadiologicos;
+
 
 
 

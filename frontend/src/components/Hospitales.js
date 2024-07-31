@@ -11,12 +11,17 @@ const Hospitales = ({ vistaInicial }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [hospitales, setHospitales] = useState([]);
+  const [hospitalesFiltrados, setHospitalesFiltrados] = useState([]);
   const [hospitalSeleccionado, setHospitalSeleccionado] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [error, setError] = useState(null);
   const [mensaje, setMensaje] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [vista, setVista] = useState(vistaInicial || 'ver');
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [hospitalesPorPagina] = useState(5);
+  const [criterioBusqueda, setCriterioBusqueda] = useState('nombre_hospital');
+  const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
   useEffect(() => {
     if (location.pathname === '/crear-hospital') {
@@ -36,6 +41,7 @@ const Hospitales = ({ vistaInicial }) => {
       const data = await getHospitales();
       data.sort((a, b) => a.id - b.id);
       setHospitales(data);
+      setHospitalesFiltrados(data);
       setError(null);
     } catch (error) {
       console.error("Error al inicializar hospitales:", error);
@@ -55,6 +61,7 @@ const Hospitales = ({ vistaInicial }) => {
       const data = await getHospitales();
       data.sort((a, b) => a.id - b.id);
       setHospitales(data);
+      setHospitalesFiltrados(data);
       setError(null);
     } catch (error) {
       console.error("Error al cargar hospitales:", error);
@@ -83,26 +90,26 @@ const Hospitales = ({ vistaInicial }) => {
     } else if (!ciudadRegex.test(ciudad)) {
       return 'La ciudad del hospital debe comenzar con letras y puede incluir números y espacios';
     } else if (ciudad.length < 2 || ciudad.length > 100) {
-      return 'La ciudad del hospital debe tener entre 2 y 100 caracteres no mas';
+      return 'La ciudad del hospital debe tener entre 2 y 100 caracteres';
     }
     return null;
   };
-  
+
   const handleCrearHospital = async (nuevoHospital) => {
     console.log('Creating hospital:', nuevoHospital); // Añadir log para verificar el hospital a crear
-  
+
     const errorNombre = validarNombreHospital(nuevoHospital.nombre_hospital);
     if (errorNombre) {
       setError(errorNombre);
       return;
     }
-  
+
     const errorCiudad = validarCiudadHospital(nuevoHospital.ciudad_hospital);
     if (errorCiudad) {
       setError(errorCiudad);
       return;
     }
-  
+
     try {
       await createHospital(nuevoHospital);
       setMensaje('Hospital creado exitosamente.');
@@ -154,6 +161,28 @@ const Hospitales = ({ vistaInicial }) => {
     }
   };
 
+  const handleSearch = (e) => {
+    setTerminoBusqueda(e.target.value);
+    if (e.target.value === '') {
+      setHospitalesFiltrados(hospitales);
+    } else {
+      const filtrados = hospitales.filter((hospital) =>
+        hospital[criterioBusqueda].toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setHospitalesFiltrados(filtrados);
+    }
+  };
+
+  const handleCriterioBusqueda = (e) => {
+    setCriterioBusqueda(e.target.value);
+  };
+
+  const indiceUltimoHospital = paginaActual * hospitalesPorPagina;
+  const indicePrimerHospital = indiceUltimoHospital - hospitalesPorPagina;
+  const hospitalesPaginaActual = hospitalesFiltrados.slice(indicePrimerHospital, indiceUltimoHospital);
+
+  const cambiarPagina = (numeroPagina) => setPaginaActual(numeroPagina);
+
   if (cargando) {
     return <div>Cargando hospitales...</div>;
   }
@@ -182,27 +211,48 @@ const Hospitales = ({ vistaInicial }) => {
           />
         )}
         {vista === 'ver' && (
-  <div className="tabla-hospitales-container">
-    <table className="tabla-hospitales">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre del Hospital</th>
-          <th>Dirección del Hospital</th>
-        </tr>
-      </thead>
-      <tbody>
-        {hospitales.map((hospital) => (
-          <tr key={hospital.id}>
-            <td>{hospital.id}</td>
-            <td>{hospital.nombre_hospital}</td>
-            <td>{hospital.ciudad_hospital}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
+          <>
+            <div className="busqueda-hospital">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={terminoBusqueda}
+                onChange={handleSearch}
+              />
+              <select onChange={handleCriterioBusqueda} value={criterioBusqueda}>
+                <option value="nombre_hospital">Nombre del Hospital</option>
+                <option value="ciudad_hospital">Ciudad del Hospital</option>
+              </select>
+            </div>
+            <div className="tabla-hospitales-container">
+              <table className="tabla-hospitales">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre del Hospital</th>
+                    <th>Dirección del Hospital</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {hospitalesPaginaActual.map((hospital) => (
+                    <tr key={hospital.id}>
+                      <td>{hospital.id}</td>
+                      <td>{hospital.nombre_hospital}</td>
+                      <td>{hospital.ciudad_hospital}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="paginacion">
+                {Array.from({ length: Math.ceil(hospitalesFiltrados.length / hospitalesPorPagina) }, (_, i) => (
+                  <button key={i + 1} onClick={() => cambiarPagina(i + 1)}>
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
         {vista === 'editar' && (
           <div className="tabla-hospitales-container">
             <table className="tabla-hospitales">
@@ -215,7 +265,7 @@ const Hospitales = ({ vistaInicial }) => {
                 </tr>
               </thead>
               <tbody>
-                {hospitales.map((hospital) => (
+                {hospitalesPaginaActual.map((hospital) => (
                   <tr key={hospital.id}>
                     <td>{hospital.id}</td>
                     <td>{hospital.nombre_hospital}</td>
@@ -245,6 +295,13 @@ const Hospitales = ({ vistaInicial }) => {
                 ))}
               </tbody>
             </table>
+            <div className="paginacion">
+              {Array.from({ length: Math.ceil(hospitalesFiltrados.length / hospitalesPorPagina) }, (_, i) => (
+                <button key={i + 1} onClick={() => cambiarPagina(i + 1)}>
+                  {i + 1}
+                </button>
+              ))}
+            </div>
           </div>
         )}
         {vista === 'eliminar' && (
@@ -259,7 +316,7 @@ const Hospitales = ({ vistaInicial }) => {
                 </tr>
               </thead>
               <tbody>
-                {hospitales.map((hospital) => (
+                {hospitalesPaginaActual.map((hospital) => (
                   <tr key={hospital.id}>
                     <td>{hospital.id}</td>
                     <td>{hospital.nombre_hospital}</td>
@@ -278,6 +335,13 @@ const Hospitales = ({ vistaInicial }) => {
                 ))}
               </tbody>
             </table>
+            <div className="paginacion">
+              {Array.from({ length: Math.ceil(hospitalesFiltrados.length / hospitalesPorPagina) }, (_, i) => (
+                <button key={i + 1} onClick={() => cambiarPagina(i + 1)}>
+                  {i + 1}
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -293,6 +357,3 @@ const Hospitales = ({ vistaInicial }) => {
 };
 
 export default Hospitales;
-
-
-

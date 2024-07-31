@@ -59,8 +59,7 @@ function App() {
             <Route path="/ver-unidades" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="ver" /></PrivateRoute>} />
             <Route path="/update-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="editar" /></PrivateRoute>} />
             <Route path="/delete-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="eliminar" /></PrivateRoute>} />
-            <Route path="/crear-hospital" element={<PrivateRoute><Sidebar /><FormularioHospital modo="crear" /></PrivateRoute>} />
-            <Route path="/ver-hospitales" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="ver" /></PrivateRoute>} />
+            <Route path="/crear-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="crear" /></PrivateRoute>} />            <Route path="/ver-hospitales" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="ver" /></PrivateRoute>} />
             <Route path="/update-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="editar" /></PrivateRoute>} />
             <Route path="/delete-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="eliminar" /></PrivateRoute>} />
             <Route path="/read-usuario" element={<PrivateRoute><Sidebar /><ReadUsuario /></PrivateRoute>} />

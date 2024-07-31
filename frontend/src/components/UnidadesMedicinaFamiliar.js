@@ -1,4 +1,4 @@
-// En UnidadesMedicinaFamiliar.js
+// src/components/UnidadesMedicinaFamiliar.js
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -19,6 +19,10 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   const [mensaje, setMensaje] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [vista, setVista] = useState(vistaInicial || 'ver');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchField, setSearchField] = useState('nombre_unidad_medica');
+  const unidadesPerPage = 10;
 
   useEffect(() => {
     if (location.pathname === '/crear-unidad') {
@@ -168,6 +172,29 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
     }
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFieldChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
+  const filteredUnidades = unidades.filter((unidad) => {
+    if (searchField === 'nombre_unidad_medica') {
+      return unidad.nombre_unidad_medica.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'direccion_unidad_medica') {
+      return unidad.direccion_unidad_medica.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    return unidad;
+  });
+
+  const indexOfLastUnidad = currentPage * unidadesPerPage;
+  const indexOfFirstUnidad = indexOfLastUnidad - unidadesPerPage;
+  const currentUnidades = filteredUnidades.slice(indexOfFirstUnidad, indexOfLastUnidad);
+
+  const totalPages = Math.ceil(filteredUnidades.length / unidadesPerPage);
+
   if (cargando) {
     return <div>Cargando unidades...</div>;
   }
@@ -196,114 +223,193 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
           />
         )}
         {vista === 'ver' && (
-  <div className="tabla-unidades-container">
-    <table className="tabla-unidades">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre de la Unidad</th>
-          <th>Dirección de la Unidad</th>
-        </tr>
-      </thead>
-      <tbody>
-        {unidades.map((unidad) => (
-          <tr key={unidad.id_unidad_medica}>
-            <td>{unidad.id_unidad_medica}</td>
-            <td>{unidad.nombre_unidad_medica}</td>
-            <td>{unidad.direccion_unidad_medica}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
-        {vista === 'editar' && (
-          <div className="tabla-unidades-container">
-            <table className="tabla-unidades">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre de la Unidad</th>
-                  <th>Dirección de la Unidad</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {unidades.map((unidad) => (
-                  <tr key={unidad.id_unidad_medica}>
-                    <td>{unidad.id_unidad_medica}</td>
-                    <td>
-                      <input
-                        type="text"
-                        value={unidad.nombre_unidad_medica}
-                        onChange={(e) => {
-                          const nuevasUnidades = unidades.map((u) =>
-                            u.id_unidad_medica === unidad.id_unidad_medica
-                              ? { ...u, nombre_unidad_medica: e.target.value }
-                              : u
-                          );
-                          setUnidades(nuevasUnidades);
-                        }}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={unidad.direccion_unidad_medica}
-                        onChange={(e) => {
-                          const nuevasUnidades = unidades.map((u) =>
-                            u.id_unidad_medica === unidad.id_unidad_medica
-                              ? { ...u, direccion_unidad_medica: e.target.value }
-                              : u
-                          );
-                          setUnidades(nuevasUnidades);
-                        }}
-                      />
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => handleEditarUnidad(unidad)}
-                        className="guardar-button"
-                      >
-                        Guardar
-                      </button>
-                    </td>
+          <>
+            <div className="busqueda-unidad">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <select value={searchField} onChange={handleFieldChange}>
+                <option value="nombre_unidad_medica">Nombre de la Unidad</option>
+                <option value="direccion_unidad_medica">Dirección de la Unidad</option>
+              </select>
+            </div>
+            <div className="tabla-unidades-container">
+              <table className="tabla-unidades">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre de la Unidad</th>
+                    <th>Dirección de la Unidad</th>
                   </tr>
+                </thead>
+                <tbody>
+                  {currentUnidades.map((unidad) => (
+                    <tr key={unidad.id_unidad_medica}>
+                      <td>{unidad.id_unidad_medica}</td>
+                      <td>{unidad.nombre_unidad_medica}</td>
+                      <td>{unidad.direccion_unidad_medica}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="pagination-read-usuario">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={page === currentPage ? 'active' : ''}
+                  >
+                    {page}
+                  </button>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </div>
+            </div>
+          </>
+        )}
+        {vista === 'editar' && (
+          <>
+            <div className="busqueda-unidad">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <select value={searchField} onChange={handleFieldChange}>
+                <option value="nombre_unidad_medica">Nombre de la Unidad</option>
+                <option value="direccion_unidad_medica">Dirección de la Unidad</option>
+              </select>
+            </div>
+            <div className="tabla-unidades-container">
+              <table className="tabla-unidades">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre de la Unidad</th>
+                    <th>Dirección de la Unidad</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentUnidades.map((unidad) => (
+                    <tr key={unidad.id_unidad_medica}>
+                      <td>{unidad.id_unidad_medica}</td>
+                      <td>
+                        <input
+                          type="text"
+                          value={unidad.nombre_unidad_medica}
+                          onChange={(e) => {
+                            const nuevasUnidades = unidades.map((u) =>
+                              u.id_unidad_medica === unidad.id_unidad_medica
+                                ? { ...u, nombre_unidad_medica: e.target.value }
+                                : u
+                            );
+                            setUnidades(nuevasUnidades);
+                          }}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          value={unidad.direccion_unidad_medica}
+                          onChange={(e) => {
+                            const nuevasUnidades = unidades.map((u) =>
+                              u.id_unidad_medica === unidad.id_unidad_medica
+                                ? { ...u, direccion_unidad_medica: e.target.value }
+                                : u
+                            );
+                            setUnidades(nuevasUnidades);
+                          }}
+                        />
+                      </td>
+                      <td>
+                        <div className="botones-acciones">
+                          <button
+                            onClick={() => handleEditarUnidad(unidad)}
+                            className="guardar-button"
+                          >
+                            Guardar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="pagination-read-usuario">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={page === currentPage ? 'active' : ''}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
         )}
         {vista === 'eliminar' && (
-          <div className="tabla-unidades-container">
-            <table className="tabla-unidades">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre de la Unidad</th>
-                  <th>Dirección de la Unidad</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {unidades.map((unidad) => (
-                  <tr key={unidad.id_unidad_medica}>
-                    <td>{unidad.id_unidad_medica}</td>
-                    <td>{unidad.nombre_unidad_medica}</td>
-                    <td>{unidad.direccion_unidad_medica}</td>
-                    <td>
-                      <button
-                        onClick={() => handleEliminarUnidad(unidad.id_unidad_medica)}
-                        className="eliminar-button"
-                      >
-                        Eliminar
-                      </button>
-                    </td>
+          <>
+            <div className="busqueda-unidad">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <select value={searchField} onChange={handleFieldChange}>
+                <option value="nombre_unidad_medica">Nombre de la Unidad</option>
+                <option value="direccion_unidad_medica">Dirección de la Unidad</option>
+              </select>
+            </div>
+            <div className="tabla-unidades-container">
+              <table className="tabla-unidades">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre de la Unidad</th>
+                    <th>Dirección de la Unidad</th>
+                    <th>Acciones</th>
                   </tr>
+                </thead>
+                <tbody>
+                  {currentUnidades.map((unidad) => (
+                    <tr key={unidad.id_unidad_medica}>
+                      <td>{unidad.id_unidad_medica}</td>
+                      <td>{unidad.nombre_unidad_medica}</td>
+                      <td>{unidad.direccion_unidad_medica}</td>
+                      <td>
+                        <div className="botones-acciones">
+                          <button
+                            onClick={() => handleEliminarUnidad(unidad.id_unidad_medica)}
+                            className="eliminar-button"
+                          >
+                            Eliminar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="pagination-read-usuario">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={page === currentPage ? 'active' : ''}
+                  >
+                    {page}
+                  </button>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </div>
+            </div>
+          </>
         )}
       </div>
       {mostrarModal && (
@@ -318,6 +424,3 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
 };
 
 export default UnidadesMedicinaFamiliar;
-
-
-

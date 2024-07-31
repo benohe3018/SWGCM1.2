@@ -196,47 +196,27 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
           />
         )}
         {vista === 'ver' && (
-          <div className="tabla-unidades-container">
-            <table className="tabla-unidades">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre de la Unidad</th>
-                  <th>Dirección de la Unidad</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {unidades.map((unidad) => (
-                  <tr key={unidad.id_unidad_medica}>
-                    <td>{unidad.id_unidad_medica}</td>
-                    <td>{unidad.nombre_unidad_medica}</td>
-                    <td>{unidad.direccion_unidad_medica}</td>
-                    <td>
-                      <div className="botones-acciones">
-                        <button
-                          onClick={() => {
-                            setUnidadSeleccionada(unidad);
-                            setVista('editar');
-                          }}
-                          className="editar-button"
-                        >
-                          Editar
-                        </button>
-                        <button
-                          onClick={() => handleEliminarUnidad(unidad.id_unidad_medica)}
-                          className="eliminar-button"
-                        >
-                          Eliminar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+  <div className="tabla-unidades-container">
+    <table className="tabla-unidades">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre de la Unidad</th>
+          <th>Dirección de la Unidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        {unidades.map((unidad) => (
+          <tr key={unidad.id_unidad_medica}>
+            <td>{unidad.id_unidad_medica}</td>
+            <td>{unidad.nombre_unidad_medica}</td>
+            <td>{unidad.direccion_unidad_medica}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
         {vista === 'editar' && (
           <div className="tabla-unidades-container">
             <table className="tabla-unidades">

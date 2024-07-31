@@ -1,4 +1,3 @@
-// Hospitales.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Hospitales.css'; 
@@ -66,7 +65,7 @@ const Hospitales = ({ vistaInicial }) => {
   };
 
   const validarNombreHospital = (nombre) => {
-    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s#]*$/;
     if (!nombre) {
       return 'El nombre del hospital es obligatorio';
     } else if (!nombreRegex.test(nombre)) {
@@ -78,7 +77,7 @@ const Hospitales = ({ vistaInicial }) => {
   };
 
   const validarCiudadHospital = (ciudad) => {
-    const ciudadRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const ciudadRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ][a-zA-Z0-9\s#,.]*$/;
     if (!ciudad) {
       return 'La ciudad del hospital es obligatoria';
     } else if (!ciudadRegex.test(ciudad)) {
@@ -189,7 +188,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
+                  <th>Dirección del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -198,17 +197,25 @@ const Hospitales = ({ vistaInicial }) => {
                   <tr key={hospital.id}>
                     <td>{hospital.id}</td>
                     <td>{hospital.nombre_hospital}</td>
-                    <td>{hospital.ciudad_hospital}</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={hospital.ciudad_hospital}
+                        onChange={(e) => {
+                          const newHospitales = [...hospitales];
+                          const index = newHospitales.findIndex(h => h.id === hospital.id);
+                          newHospitales[index].ciudad_hospital = e.target.value;
+                          setHospitales(newHospitales);
+                        }}
+                      />
+                    </td>
                     <td>
                       <div className="botones-acciones">
                         <button
-                          onClick={() => {
-                            setHospitalSeleccionado(hospital);
-                            setVista('editar');
-                          }}
+                          onClick={() => handleEditarHospital(hospital)}
                           className="editar-button"
                         >
-                          Editar
+                          Guardar
                         </button>
                         <button
                           onClick={() => handleEliminarHospital(hospital.id)}
@@ -231,7 +238,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
+                  <th>Dirección del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -240,17 +247,25 @@ const Hospitales = ({ vistaInicial }) => {
                   <tr key={hospital.id}>
                     <td>{hospital.id}</td>
                     <td>{hospital.nombre_hospital}</td>
-                    <td>{hospital.ciudad_hospital}</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={hospital.ciudad_hospital}
+                        onChange={(e) => {
+                          const newHospitales = [...hospitales];
+                          const index = newHospitales.findIndex(h => h.id === hospital.id);
+                          newHospitales[index].ciudad_hospital = e.target.value;
+                          setHospitales(newHospitales);
+                        }}
+                      />
+                    </td>
                     <td>
                       <div className="botones-acciones">
                         <button
-                          onClick={() => {
-                            setHospitalSeleccionado(hospital);
-                            setVista('editar');
-                          }}
+                          onClick={() => handleEditarHospital(hospital)}
                           className="editar-button"
                         >
-                          Editar
+                          Guardar
                         </button>
                       </div>
                     </td>
@@ -267,7 +282,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Ciudad del Hospital</th>
+                  <th>Dirección del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -306,3 +321,6 @@ const Hospitales = ({ vistaInicial }) => {
 };
 
 export default Hospitales;
+
+
+

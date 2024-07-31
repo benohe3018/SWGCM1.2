@@ -45,7 +45,7 @@ const FormularioUnidad = ({ modo, unidadInicial, onSubmit, onCancel }) => {
 
   return (
     <div className="formulario-unidad-container">
-      <h2 className="titulo-formulario">{modo === 'crear' ? 'Crear Nueva Unidad' : 'Editar Unidad'}</h2>
+      <h2 className="titulo-formulario">{modo === 'crear' ? 'Capturar Nueva UMF' : 'Editar Unidad'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nombre">Nombre de la Unidad:</label>

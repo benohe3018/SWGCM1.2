@@ -67,7 +67,7 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   };
 
   const validarNombreUnidad = (nombre) => {
-    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const nombreRegex = /^[a-zA-Z][a-zA-Z0-9\s#]*$/;
     if (!nombre) {
       return 'El nombre de la unidad es obligatorio';
     } else if (!nombreRegex.test(nombre)) {
@@ -79,7 +79,7 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   };
 
   const validarDescripcionUnidad = (descripcion) => {
-    const descripcionRegex = /^[a-zA-Z][a-zA-Z0-9\s]*$/;
+    const descripcionRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ][a-zA-Z0-9\s#,.]*$/;
     if (!descripcion) {
       return 'La descripción de la unidad es obligatoria';
     } else if (!descripcionRegex.test(descripcion)) {

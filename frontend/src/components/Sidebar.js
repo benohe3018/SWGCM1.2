@@ -100,6 +100,8 @@ const Sidebar = () => {
             <ul className="submenu">
               <li><Link to="/crear-hospital">Capturar Nuevo Hospital</Link></li>
               <li><Link to="/ver-hospitales">Ver Hospitales</Link></li>
+              <li><Link to="/update-hospital">Actualizar Hospital</Link></li>
+              <li><Link to="/delete-hospital">Eliminar Hospital</Link></li>
             </ul>
           )}
         </li>

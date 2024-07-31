@@ -15,7 +15,6 @@
   .hospitales-header img {
     width: 40px;
     height: auto;
-    margin-right: 20px;
   }
   
   .header-texts {
@@ -41,25 +40,32 @@
   }
   
   .tabla-hospitales-container {
-    margin-top: 20px;
+    width: 100%;
   }
   
   .tabla-hospitales {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
   }
   
-  .tabla-hospitales th,
-  .tabla-hospitales td {
+  .tabla-hospitales th, .tabla-hospitales td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
   }
   
   .tabla-hospitales th {
-    background-color: #4CAF50;
-    color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #f2f2f2;
+    color: #12322B;
+  }
+
+  .tabla-hospitales td input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-right: 200px;
   }
   
   .tabla-hospitales tr:nth-child(even) {

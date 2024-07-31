@@ -1,6 +1,8 @@
+// src/components/Hospitales.js
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './Hospitales.css'; 
+import './Hospitales.css';
 import { getHospitales, createHospital, updateHospital, deleteHospital } from './hospitalesService';
 import FormularioHospital from './FormularioHospital';
 import ModalConfirmacion from './ModalConfirmacion';
@@ -83,7 +85,7 @@ const Hospitales = ({ vistaInicial }) => {
     } else if (!ciudadRegex.test(ciudad)) {
       return 'La ciudad del hospital debe comenzar con letras y puede incluir números y espacios';
     } else if (ciudad.length < 2 || ciudad.length > 100) {
-      return 'La ciudad del hospital debe tener entre 2 y 100 caracteres no mas';
+      return 'La ciudad del hospital debe tener entre 2 y 100 caracteres';
     }
     return null;
   };
@@ -182,27 +184,47 @@ const Hospitales = ({ vistaInicial }) => {
           />
         )}
         {vista === 'ver' && (
-  <div className="tabla-hospitales-container">
-    <table className="tabla-hospitales">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre del Hospital</th>
-          <th>Dirección del Hospital</th>
-        </tr>
-      </thead>
-      <tbody>
-        {hospitales.map((hospital) => (
-          <tr key={hospital.id}>
-            <td>{hospital.id}</td>
-            <td>{hospital.nombre_hospital}</td>
-            <td>{hospital.ciudad_hospital}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
+          <div className="tabla-hospitales-container">
+            <table className="tabla-hospitales">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre del Hospital</th>
+                  <th>Ciudad del Hospital</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {hospitales.map((hospital) => (
+                  <tr key={hospital.id}>
+                    <td>{hospital.id}</td>
+                    <td>{hospital.nombre_hospital}</td>
+                    <td>{hospital.ciudad_hospital}</td>
+                    <td>
+                      <div className="botones-acciones">
+                        <button
+                          onClick={() => {
+                            setHospitalSeleccionado(hospital);
+                            setVista('editar');
+                          }}
+                          className="editar-button"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => handleEliminarHospital(hospital.id)}
+                          className="eliminar-button"
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
         {vista === 'editar' && (
           <div className="tabla-hospitales-container">
             <table className="tabla-hospitales">
@@ -210,7 +232,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Dirección del Hospital</th>
+                  <th>Ciudad del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -254,7 +276,7 @@ const Hospitales = ({ vistaInicial }) => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre del Hospital</th>
-                  <th>Dirección del Hospital</th>
+                  <th>Ciudad del Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -293,6 +315,3 @@ const Hospitales = ({ vistaInicial }) => {
 };
 
 export default Hospitales;
-
-
-

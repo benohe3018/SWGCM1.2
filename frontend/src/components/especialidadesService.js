@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://your-api-url.com/api'; // Reemplaza con la URL de tu API
+const API_URL = process.env.REACT_APP_API_URL; 
 
 export const getEspecialidades = async () => {
     try {

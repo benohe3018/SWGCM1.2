@@ -1,5 +1,3 @@
-// src/components/EspecialidadesMedicas.js
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './EspecialidadesMedicas.css'; 
@@ -75,7 +73,8 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
       setMensaje('Especialidad creada exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-      }); 
+      }, 3000);
+      cargarEspecialidades();
     } catch (error) {
       console.error("Error al crear especialidad:", error);
       setError("No se pudo crear la especialidad. Por favor, intente de nuevo.");
@@ -165,6 +164,8 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
             modo="crear"
             onSubmit={handleCrearEspecialidad}
             onCancel={() => navigate('/ver-especialidades')}
+            mensaje={mensaje}
+            error={error}
           />
         )}
         {vista === 'ver' && (

@@ -20,6 +20,7 @@ from .routes.citas import citas_bp
 from .routes.unidades_medicas import unidades_medicas_bp  # Nuevo import
 from .routes.hospitales import hospitales_bp  # Nuevo import
 from .routes.pacientes_prueba import pacientes_prueba_bp 
+from .routes.especialidades import especialidades_bp
 
 def create_app():
     relative_static_folder_path = '../../frontend/build'
@@ -51,6 +52,8 @@ def create_app():
     app.register_blueprint(unidades_medicas_bp, url_prefix='/api')  # Registro nuevo
     app.register_blueprint(hospitales_bp, url_prefix='/api')  # Registro nuevo
     app.register_blueprint(pacientes_prueba_bp, url_prefix='/api')
+    app.register_blueprint(especialidades_bp, url_prefix='/api')
+    
 
     @app.route('/', defaults={'path': ''})
     @app.route('/<path:path>')

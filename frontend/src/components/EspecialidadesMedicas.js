@@ -75,8 +75,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
       setMensaje('Especialidad creada exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-        navigate('/ver-especialidades'); 
-      }, 3000); 
+      }); 
     } catch (error) {
       console.error("Error al crear especialidad:", error);
       setError("No se pudo crear la especialidad. Por favor, intente de nuevo.");

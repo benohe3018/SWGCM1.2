@@ -51,6 +51,7 @@
   .tabla-especialidades-container {
     width: 100%;
     overflow-x: auto;
+    margin-top: 40px;
   }
   
   .tabla-especialidades {

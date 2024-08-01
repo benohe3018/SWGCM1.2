@@ -81,6 +81,18 @@ const Sidebar = () => {
             </ul>
           )}
         </li>
+        <li onClick={() => handleSubmenuToggle('especialidades')}>
+          <span>Módulo de Especialidades Médicas</span>
+          <span className={`arrow ${openSubmenu.especialidades ? 'open' : ''}`}>&#9660;</span>
+          {openSubmenu.especialidades && (
+            <ul className="submenu">
+              <li><Link to="/crear-especialidad">Capturar Nueva Especialidad</Link></li>
+              <li><Link to="/ver-especialidades">Ver Especialidades</Link></li>
+              <li><Link to="/update-especialidad">Editar Especialidad</Link></li>
+              <li><Link to="/delete-especialidad">Eliminar Especialidad</Link></li>
+            </ul>
+          )}
+        </li>
         <li onClick={() => handleSubmenuToggle('unidades')}>
           <span>Módulo de Unidades de Medicina Familiar</span>
           <span className={`arrow ${openSubmenu.unidades ? 'open' : ''}`}>&#9660;</span>

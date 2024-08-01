@@ -24,6 +24,7 @@ import DeleteUsuario from './components/DeleteUsuario';
 import Admin from './components/Admin';
 import UsuarioDeCampo from './components/UsuarioDeCampo';
 import ActiveUser from './components/ActiveUser';
+import EspecialidadesMedicas from './components/EspecialidadesMedicas';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -66,6 +67,10 @@ function App() {
             <Route path="/read-usuario" element={<PrivateRoute><Sidebar /><ReadUsuario /></PrivateRoute>} />
             <Route path="/update-usuario" element={<PrivateRoute><Sidebar /><UpdateUsuario /></PrivateRoute>} />
             <Route path="/delete-usuario" element={<PrivateRoute><Sidebar /><DeleteUsuario /></PrivateRoute>} />
+            <Route path="/crear-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="crear" /></PrivateRoute>} />
+            <Route path="/ver-especialidades" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="ver" /></PrivateRoute>} />
+            <Route path="/update-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="editar" /></PrivateRoute>} />
+            <Route path="/delete-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="eliminar" /></PrivateRoute>} />
             <Route path="/dashboard-user-admin" element={<PrivateRoute><Sidebar /><Admin /></PrivateRoute>} />
             <Route path="/dashboard-field-user" element={<PrivateRoute><Sidebar /><UsuarioDeCampo /></PrivateRoute>} />
           </Routes>

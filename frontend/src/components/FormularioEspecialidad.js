@@ -11,13 +11,32 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
     }
   }, [mensaje]);
 
+  const validarNombreEspecialidad = (nombre) => {
+    const regex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]*$/;
+    return regex.test(nombre);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!nombreEspecialidad) {
       setFormError('El nombre de la especialidad es obligatorio');
       return;
     }
+    if (!validarNombreEspecialidad(nombreEspecialidad)) {
+      setFormError('El nombre de la especialidad no es válido, ejemplo, capture "Cirugía"');
+      return;
+    }
     onSubmit({ nombre_especialidad: nombreEspecialidad });
+  };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    if (validarNombreEspecialidad(value) || value === '') {
+      setNombreEspecialidad(value);
+      setFormError('');
+    } else {
+      setFormError('El nombre de la especialidad no es válido');
+    }
   };
 
   return (
@@ -32,10 +51,7 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
             type="text"
             id="nombre_especialidad"
             value={nombreEspecialidad}
-            onChange={(e) => {
-              setNombreEspecialidad(e.target.value);
-              setFormError('');
-            }}
+            onChange={handleChange}
             required
           />
           {formError && <div className="mensaje-error">{formError}</div>}

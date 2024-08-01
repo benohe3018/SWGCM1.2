@@ -25,7 +25,7 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
       return;
     }
     if (!validarNombreEspecialidad(nombreEspecialidad)) {
-      alert('El nombre de la especialidad no es válido');
+      alert('El nombre de la especialidad no es válido, por ejemplo capture "Cirugía"');
       return;
     }
     onSubmit({ nombre_especialidad: nombreEspecialidad });
@@ -39,8 +39,6 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
   return (
     <div className="formulario-especialidad-container">
       <h2 className="titulo-formulario">{modo === 'crear' ? 'Capturar Nueva Especialidad' : 'Editar Especialidad'}</h2>
-      {mensaje && <div className="mensaje-exitoso">{mensaje}</div>}
-      {error && <div className="mensaje-error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nombre_especialidad">Nombre de la Especialidad:</label>

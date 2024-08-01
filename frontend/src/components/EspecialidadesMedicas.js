@@ -67,14 +67,26 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
     }
   };
 
+  const validarNombreEspecialidad = (nombre) => {
+    const regex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]*$/;
+    return regex.test(nombre);
+  };
+
   const handleCrearEspecialidad = async (nuevaEspecialidad) => {
     try {
+      if (!nuevaEspecialidad.nombre_especialidad) {
+        alert('El nombre de la especialidad es obligatorio');
+        return;
+      }
+      if (!validarNombreEspecialidad(nuevaEspecialidad.nombre_especialidad)) {
+        alert('El nombre de la especialidad no es válido');
+        return;
+      }
       await createEspecialidad(nuevaEspecialidad);
       setMensaje('Especialidad creada exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-      }, 3000);
-      cargarEspecialidades();
+      }); 
     } catch (error) {
       console.error("Error al crear especialidad:", error);
       setError("No se pudo crear la especialidad. Por favor, intente de nuevo.");
@@ -85,6 +97,14 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
     try {
       if (!especialidadEditada.id) {
         throw new Error("El ID de la especialidad no está definido");
+      }
+      if (!especialidadEditada.nombre_especialidad) {
+        alert('El nombre de la especialidad es obligatorio');
+        return;
+      }
+      if (!validarNombreEspecialidad(especialidadEditada.nombre_especialidad)) {
+        alert('El nombre de la especialidad no es válido');
+        return;
       }
       await updateEspecialidad(especialidadEditada.id, especialidadEditada);
       await cargarEspecialidades();
@@ -164,8 +184,6 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
             modo="crear"
             onSubmit={handleCrearEspecialidad}
             onCancel={() => navigate('/ver-especialidades')}
-            mensaje={mensaje}
-            error={error}
           />
         )}
         {vista === 'ver' && (

@@ -30,13 +30,7 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
   };
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    if (validarNombreEspecialidad(value) || value === '') {
-      setNombreEspecialidad(value);
-      alert('');
-    } else {
-      alert('El nombre de la especialidad no es válido');
-    }
+    setNombreEspecialidad(e.target.value);    
   };
 
   return (

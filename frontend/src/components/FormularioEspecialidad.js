@@ -3,19 +3,21 @@ import './FormularioEspecialidad.css';
 
 const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaje, error }) => {
   const [nombreEspecialidad, setNombreEspecialidad] = useState(especialidad ? especialidad.nombre_especialidad : '');
-  const [formError, alert] = useState('');
 
+  // Este efecto se asegura de que el campo se vacíe cuando se cambia a modo "crear"
   useEffect(() => {
     if (modo === 'crear') {
       setNombreEspecialidad('');
     }
   }, [mensaje]);
 
+  // Función de validación utilizando una expresión regular
   const validarNombreEspecialidad = (nombre) => {
     const regex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]*$/;
     return regex.test(nombre);
   };
 
+  // Función que maneja el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!nombreEspecialidad) {
@@ -23,14 +25,15 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
       return;
     }
     if (!validarNombreEspecialidad(nombreEspecialidad)) {
-      alert('El nombre de la especialidad no es válido, ejemplo, capture "Cirugía"');
+      alert('El nombre de la especialidad no es válido');
       return;
     }
     onSubmit({ nombre_especialidad: nombreEspecialidad });
   };
 
+  // Función que maneja los cambios en el campo de entrada
   const handleChange = (e) => {
-    setNombreEspecialidad(e.target.value);    
+    setNombreEspecialidad(e.target.value);
   };
 
   return (
@@ -48,7 +51,6 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
             onChange={handleChange}
             required
           />
-          {formError && <div className="mensaje-error">{formError}</div>}
         </div>
         <div className="form-actions">
           <button type="submit" className="crear-button">{modo === 'crear' ? 'Crear' : 'Guardar'}</button>

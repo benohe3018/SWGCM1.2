@@ -105,6 +105,18 @@ const Sidebar = () => {
             </ul>
           )}
         </li>
+        <li onClick={() => handleSubmenuToggle('diagnosticos')}>
+          <span>Módulo de Diagnósticos Presuntivos</span>
+          <span className={`arrow ${openSubmenu.diagnosticos ? 'open' : ''}`}>&#9660;</span>
+          {openSubmenu.diagnosticos && (
+            <ul className="submenu">
+              <li><Link to="/crear-diagnostico">Capturar Nuevo Diagnóstico</Link></li>
+              <li><Link to="/ver-diagnosticos">Ver Diagnósticos</Link></li>
+              <li><Link to="/update-diagnostico">Editar Diagnóstico</Link></li>
+              <li><Link to="/delete-diagnostico">Eliminar Diagnóstico</Link></li>
+            </ul>
+          )}
+        </li>
         <li onClick={() => handleSubmenuToggle('hospitales')}> 
           <span>Módulo de Hospitales</span>  
           <span className={`arrow ${openSubmenu.hospitales ? 'open' : ''}`}>&#9660;</span>  

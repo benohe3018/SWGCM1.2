@@ -5,7 +5,7 @@ const FormularioDiagnostico = ({ modo, diagnostico, onSubmit, onCancel }) => {
   const [nombreDiagnostico, setNombreDiagnostico] = useState(diagnostico ? diagnostico.nombre_diagnostico : '');
 
   const validarNombreDiagnostico = (nombre) => {
-    const regex = /^[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÑáéíóúñ\s,.'-]+$/;
+    const regex = /^[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÑáéíóúñ\s,.']*$/;
     if (!regex.test(nombre)) {
       return false;
     }

@@ -74,7 +74,6 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
       setTimeout(() => {
         setMensaje(null);
       },3000); 
-      document.getElementById('nombre_diagnostico').value = '';
     } catch (error) {
       console.error("Error al crear diagnóstico:", error);
       setError("No se pudo crear el diagnóstico. Por favor, intente de nuevo.");
@@ -235,7 +234,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 type="text"
                 placeholder="Buscar..."
                 value={searchTerm}
-                onChange={handleSearch}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <select value={searchField} onChange={handleFieldChange}>
                 <option value="nombre_diagnostico">Nombre del Diagnóstico</option>

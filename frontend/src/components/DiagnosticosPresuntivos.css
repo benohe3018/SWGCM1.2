@@ -50,7 +50,7 @@
   }
   
   .busqueda-diagnostico select {
-    width: 28%;
+    width: 45%;
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -58,6 +58,7 @@
   
   .tabla-diagnosticos-container {
     overflow-x: auto;
+    width: 100%;
   }
   
   .tabla-diagnosticos {

@@ -26,6 +26,7 @@ const FormularioDiagnostico = ({ modo, diagnostico, onSubmit, onCancel }) => {
       return;
     }
     onSubmit({ nombre_diagnostico: nombreDiagnostico });
+    setNombreDiagnostico(''); 
   };
 
   return (

@@ -73,7 +73,8 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
       setMensaje('Diagnóstico creado exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-      }); 
+      },3000); 
+      document.getElementById('nombre_diagnostico').value = '';
     } catch (error) {
       console.error("Error al crear diagnóstico:", error);
       setError("No se pudo crear el diagnóstico. Por favor, intente de nuevo.");

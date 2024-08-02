@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios } from './citasService';
@@ -9,16 +9,8 @@ import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [vista, setVista] = useState('');
-
-  useEffect(() => {
-    if (location.pathname === '/crear-cita') {
-      setVista('crear');
-    } else if (location.pathname === '/ver-citas') {
-      setVista('ver');
-    }
-  }, [location.pathname]);
-
   const [pacientesPrueba, setPacientesPrueba] = useState([]);
   const [medicos, setMedicos] = useState([]);
   const [estudios, setEstudios] = useState([]);
@@ -27,6 +19,21 @@ const GestionCitas = () => {
   const [error, setError] = useState(null);
   const [mensaje, setMensaje] = useState(null);
   const [cargando, setCargando] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const pacientesPerPage = 10;
+
+  useEffect(() => {
+    if (location.pathname === '/crear-cita') {
+      setVista('crear');
+    } else if (location.pathname === '/ver-citas') {
+      setVista('ver');
+    } else if (location.pathname === '/editar-citas') {
+      setVista('editar');
+    } else if (location.pathname === '/eliminar-citas') {
+      setVista('eliminar');
+    }
+  }, [location.pathname]);
 
   const inicializarDatos = useCallback(async () => {
     try {
@@ -117,6 +124,20 @@ const GestionCitas = () => {
     }
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredPacientes = pacientesPrueba.filter((paciente) => {
+    return paciente.nombre_completo.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  const indexOfLastPaciente = currentPage * pacientesPerPage;
+  const indexOfFirstPaciente = indexOfLastPaciente - pacientesPerPage;
+  const currentPacientes = filteredPacientes.slice(indexOfFirstPaciente, indexOfLastPaciente);
+
+  const totalPages = Math.ceil(filteredPacientes.length / pacientesPerPage);
+
   if (cargando) {
     return <div>Cargando datos...</div>;
   }
@@ -161,7 +182,7 @@ const GestionCitas = () => {
                 </tr>
               </thead>
               <tbody>
-                {pacientesPrueba.map((paciente) => (
+                {currentPacientes.map((paciente) => (
                   <tr key={paciente.id}>
                     <td>{paciente.id}</td>
                     <td>{paciente.fecha_hora_estudio}</td>
@@ -191,17 +212,125 @@ const GestionCitas = () => {
                 ))}
               </tbody>
             </table>
+            <div className="pagination-read-usuario">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
           </div>
         )}
-        {vista === 'editar' && pacienteSeleccionado && (
-          <FormularioPaciente
-            modo="editar"
-            pacienteInicial={pacienteSeleccionado}
-            medicos={medicos}
-            estudios={estudios}
-            onSubmit={handleEditarPaciente}
-            onCancel={() => setVista('ver')}
-          />
+        {vista === 'editar' && (
+          <div className="tabla-citas-container">
+            <table className="tabla-citas">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha y Hora</th>
+                  <th>Paciente</th>
+                  <th>Médico</th>
+                  <th>Estudio</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentPacientes.map((paciente) => (
+                  <tr key={paciente.id}>
+                    <td>{paciente.id}</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={paciente.fecha_hora_estudio}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].fecha_hora_estudio = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>{paciente.nombre_completo}</td>
+                    <td>{paciente.nombre_completo_medico}</td>
+                    <td>{paciente.estudio_solicitado}</td>
+                    <td>
+                      <div className="botones-acciones">
+                        <button
+                          onClick={() => handleEditarPaciente(paciente)}
+                          className="guardar-button"
+                        >
+                          Guardar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="pagination-read-usuario">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {vista === 'eliminar' && (
+          <div className="tabla-citas-container">
+            <table className="tabla-citas">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha y Hora</th>
+                  <th>Paciente</th>
+                  <th>Médico</th>
+                  <th>Estudio</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentPacientes.map((paciente) => (
+                  <tr key={paciente.id}>
+                    <td>{paciente.id}</td>
+                    <td>{paciente.fecha_hora_estudio}</td>
+                    <td>{paciente.nombre_completo}</td>
+                    <td>{paciente.nombre_completo_medico}</td>
+                    <td>{paciente.estudio_solicitado}</td>
+                    <td>
+                      <div className="botones-acciones">
+                        <button
+                          onClick={() => handleEliminarPaciente(paciente.id)}
+                          className="eliminar-button"
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="pagination-read-usuario">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
       </div>
       {mostrarModal && (
@@ -216,4 +345,3 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
-

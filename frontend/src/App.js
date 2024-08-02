@@ -52,6 +52,8 @@ function App() {
             <Route path="/gestion-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/crear-cita" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/ver-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
+            <Route path="/editar-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
+            <Route path="/eliminar-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/informes-medicos" element={<PrivateRoute><Sidebar /><InformeMedicos /></PrivateRoute>} />
             <Route path="/usuarios" element={<PrivateRoute><Sidebar /><Usuarios /></PrivateRoute>} />
             <Route path="/crear-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="crear" /></PrivateRoute>} />

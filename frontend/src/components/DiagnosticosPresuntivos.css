@@ -9,11 +9,7 @@
     margin-bottom: 20px;
   }
   
-  .header-logo {
-    width: 80px;
-    margin-right: 20px;
-  }
-  
+   
   .header-texts {
     text-align: center;
   }
@@ -25,7 +21,6 @@
   
   .department-name {
     font-size: 18px;
-    color: #00796b;
   }
   
   .diagnosticos-presuntivos-content {
@@ -40,9 +35,11 @@
   }
   
   .busqueda-diagnostico {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        align-items: center;
+        flex-direction: column;
   }
   
   .busqueda-diagnostico input {

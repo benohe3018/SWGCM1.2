@@ -19,7 +19,7 @@ body {
 
 .create-usuario-header {
   width: 100%;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 20px;
   box-sizing: border-box;
   top: 0; /* Ajustado para que quede debajo del menú */
@@ -91,10 +91,11 @@ input, select {
 
 .toggle-show-password {
   position: absolute;
-  right: 10px;
+  right: 0px;
   background: none;
   border: none;
   cursor: pointer;
+  color:#12322B
 }
 
 .create-usuario-button {

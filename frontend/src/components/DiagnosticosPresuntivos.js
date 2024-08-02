@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './DiagnosticosPresuntivos.css'; 
 import { getDiagnosticos, createDiagnostico, updateDiagnostico, deleteDiagnostico } from './diagnosticosService';
-import FormularioDiagnostico from './FormularioDiagnostico';
+import FormularioDiagnosticoPresuntivo from './FormularioDiagnostico';
 import ModalConfirmacion from './ModalConfirmacion';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
@@ -32,11 +32,6 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
       setVista('eliminar');
     }
   }, [location.pathname]);
-
-  const validarNombreDiagnostico = (nombre) => {
-    const regex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]*$/;
-    return regex.test(nombre);
-  };
 
   const inicializarDiagnosticos = useCallback(async () => {
     try {
@@ -74,15 +69,12 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
 
   const handleCrearDiagnostico = async (nuevoDiagnostico) => {
     try {
-      if (!validarNombreDiagnostico(nuevoDiagnostico.nombre_diagnostico)) {
-        alert('El nombre del diagnóstico no es válido');
-        return;
-      }
       await createDiagnostico(nuevoDiagnostico);
       setMensaje('Diagnóstico creado exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-      }); 
+        navigate('/ver-diagnosticos');
+      }, 3000); 
     } catch (error) {
       console.error("Error al crear diagnóstico:", error);
       setError("No se pudo crear el diagnóstico. Por favor, intente de nuevo.");
@@ -94,8 +86,8 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
       if (!diagnosticoEditado.id) {
         throw new Error("El ID del diagnóstico no está definido");
       }
-      if (!validarNombreDiagnostico(diagnosticoEditado.nombre_diagnostico)) {
-        alert('El nombre del diagnóstico no es válido');
+      if (!validarNombre(diagnosticoEditado.nombre_diagnostico)) {
+        alert('El nombre del diagnóstico no es válido.');
         return;
       }
       await updateDiagnostico(diagnosticoEditado.id, diagnosticoEditado);
@@ -139,6 +131,20 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
     setSearchField(event.target.value);
   };
 
+  const validarNombre = (nombre) => {
+    const regex = /^[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÑáéíóúñ\s,.'-]+$/;
+    if (!regex.test(nombre)) {
+      return false;
+    }
+    const invalidPatterns = [/^[\s,.]+$/, /^[\s,.]/, /[\s,.]$/];
+    for (const pattern of invalidPatterns) {
+      if (pattern.test(nombre)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const filteredDiagnosticos = diagnosticos.filter((diagnostico) => {
     if (searchField === 'nombre_diagnostico') {
       return diagnostico.nombre_diagnostico.toLowerCase().includes(searchTerm.toLowerCase());
@@ -172,7 +178,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
       <div className="diagnosticos-presuntivos-content">
         {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
         {vista === 'crear' && (
-          <FormularioDiagnostico
+          <FormularioDiagnosticoPresuntivo
             modo="crear"
             onSubmit={handleCrearDiagnostico}
             onCancel={() => navigate('/ver-diagnosticos')}
@@ -254,7 +260,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                           value={diagnostico.nombre_diagnostico}
                           onChange={(e) => {
                             const newDiagnosticos = [...diagnosticos];
-                            const index = newDiagnosticos.findIndex(esp => esp.id === diagnostico.id);
+                            const index = newDiagnosticos.findIndex(diag => diag.id === diagnostico.id);
                             newDiagnosticos[index].nombre_diagnostico = e.target.value;
                             setDiagnosticos(newDiagnosticos);
                           }}

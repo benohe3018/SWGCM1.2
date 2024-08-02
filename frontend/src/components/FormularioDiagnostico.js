@@ -5,8 +5,18 @@ const FormularioDiagnostico = ({ modo, diagnostico, onSubmit, onCancel }) => {
   const [nombreDiagnostico, setNombreDiagnostico] = useState(diagnostico ? diagnostico.nombre_diagnostico : '');
 
   const validarNombreDiagnostico = (nombre) => {
-    const regex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]*$/;
-    return regex.test(nombre);
+    const regex = /^[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÑáéíóúñ\s,.'-]+$/;
+    if (!regex.test(nombre)) {
+      return false;
+    }
+    // Verificar que no sea solo espacios, comas, puntos, etc.
+    const invalidPatterns = [/^[\s,.]+$/, /^[\s,.]/, /[\s,.]$/];
+    for (const pattern of invalidPatterns) {
+      if (pattern.test(nombre)) {
+        return false;
+      }
+    }
+    return true;
   };
 
   const handleSubmit = (e) => {

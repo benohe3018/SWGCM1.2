@@ -162,6 +162,16 @@ class EspecialidadesMedicas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_especialidad = db.Column(db.String(100), unique=True, nullable=False)
 
+class DiagnosticoPresuntivo(db.Model):
+    __tablename__ = 'diagnostico_presuntivo'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_diagnostico = db.Column(db.String(100), nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nombre_diagnostico': self.nombre_diagnostico
+        }
 
     
 

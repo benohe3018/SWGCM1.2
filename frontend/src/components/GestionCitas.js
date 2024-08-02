@@ -178,7 +178,6 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -189,25 +188,6 @@ const GestionCitas = () => {
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
-                    <td>
-                      <div className="botones-acciones">
-                        <button
-                          onClick={() => {
-                            setPacienteSeleccionado(paciente);
-                            setVista('editar');
-                          }}
-                          className="editar-button"
-                        >
-                          Editar
-                        </button>
-                        <button
-                          onClick={() => handleEliminarPaciente(paciente.id)}
-                          className="eliminar-button"
-                        >
-                          Eliminar
-                        </button>
-                      </div>
-                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -254,9 +234,42 @@ const GestionCitas = () => {
                         }}
                       />
                     </td>
-                    <td>{paciente.nombre_completo}</td>
-                    <td>{paciente.nombre_completo_medico}</td>
-                    <td>{paciente.estudio_solicitado}</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={paciente.nombre_completo}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].nombre_completo = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={paciente.nombre_completo_medico}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].nombre_completo_medico = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={paciente.estudio_solicitado}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].estudio_solicitado = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
                     <td>
                       <div className="botones-acciones">
                         <button

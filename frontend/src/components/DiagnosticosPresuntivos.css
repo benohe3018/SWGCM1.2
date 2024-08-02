@@ -70,8 +70,8 @@
   .tabla-diagnosticos th,
   .tabla-diagnosticos td {
     border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
+    padding: 5px;
+    text-align: center;
   }
   
   .pagination-read-diagnostico {
@@ -87,7 +87,7 @@
   }
   
   .pagination-read-diagnostico .active {
-    background-color: #004d40;
+    background-color: #0C231E;
     color: white;
   }
   
@@ -97,7 +97,7 @@
   }
   
   .editar-button {
-    background-color: #00796b;
+    background-color: #0C231E;
     color: white;
     padding: 5px 10px;
     border: none;

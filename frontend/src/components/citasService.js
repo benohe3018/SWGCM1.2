@@ -1,3 +1,5 @@
+// citasService.js
+
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -46,13 +48,11 @@ export const updatePacientePrueba = async (id, pacienteData) => {
 // Función para eliminar un paciente de prueba existente
 export const deletePacientePrueba = async (id) => {
   const url = `${API_URL}/api/pacientes_prueba/${id}`;
-  console.log('La URL de eliminación del registro es:', url);  // Agrega este log
   try {
     const response = await axios.delete(url);
-    console.log('Respuesta del servidor:', response);  // Agrega este log
     return response.data;
   } catch (error) {
-    console.error('Error completo:', error);  // Modifica este log
+    console.error('Error deleting paciente_prueba:', error);
     throw error;
   }
 };
@@ -63,7 +63,6 @@ export const getMedicos = async () => {
     const response = await axios.get(`${API_URL}/api/medicos/list`);
     return response.data;
   } catch (error) {
-    
     console.error('Error fetching medicos:', error);
     throw error;
   }
@@ -79,13 +78,14 @@ export const getEstudios = async () => {
     throw error;
   }
 };
-// Función para obtener la lista de especialidades médicas
-export const getEspecialidadesMedicas = async () => {
+
+// Función para obtener la lista de especialidades
+export const getEspecialidades = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/especialidades_medicas/list`);
+    const response = await axios.get(`${API_URL}/api/especialidades`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching especialidades_medicas:', error);
+    console.error('Error fetching especialidades:', error);
     throw error;
   }
 };
@@ -93,7 +93,7 @@ export const getEspecialidadesMedicas = async () => {
 // Función para obtener la lista de unidades médicas
 export const getUnidadesMedicas = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/unidades_medicas/list`);
+    const response = await axios.get(`${API_URL}/api/unidades_medicas`);
     return response.data;
   } catch (error) {
     console.error('Error fetching unidades_medicas:', error);
@@ -104,15 +104,10 @@ export const getUnidadesMedicas = async () => {
 // Función para obtener la lista de diagnósticos presuntivos
 export const getDiagnosticosPresuntivos = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/diagnosticos_presuntivos/list`);
+    const response = await axios.get(`${API_URL}/api/diagnosticos_presuntivos`);
     return response.data;
   } catch (error) {
     console.error('Error fetching diagnosticos_presuntivos:', error);
     throw error;
   }
 };
-
-
-
-
-

@@ -1,10 +1,8 @@
-// GestionCitas.js
-
 import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getEspecialidades, getUnidadesMedicas, getDiagnosticosPresuntivos } from './citasService';
+import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios } from './citasService';
 import FormularioPaciente from './FormularioPaciente';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
@@ -16,9 +14,6 @@ const GestionCitas = () => {
   const [pacientesPrueba, setPacientesPrueba] = useState([]);
   const [medicos, setMedicos] = useState([]);
   const [estudios, setEstudios] = useState([]);
-  const [especialidades, setEspecialidades] = useState([]);
-  const [unidadesMedicas, setUnidadesMedicas] = useState([]);
-  const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
   const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [error, setError] = useState(null);
@@ -43,21 +38,15 @@ const GestionCitas = () => {
   const inicializarDatos = useCallback(async () => {
     try {
       setCargando(true);
-      const [pacientesData, medicosData, estudiosData, especialidadesData, unidadesMedicasData, diagnosticosPresuntivosData] = await Promise.all([
+      const [pacientesData, medicosData, estudiosData] = await Promise.all([
         getPacientesPrueba(),
         getMedicos(),
-        getEstudios(),
-        getEspecialidades(),
-        getUnidadesMedicas(),
-        getDiagnosticosPresuntivos()
+        getEstudios()
       ]);
       pacientesData.sort((a, b) => a.id - b.id);
       setPacientesPrueba(pacientesData);
       setMedicos(medicosData);
       setEstudios(estudiosData);
-      setEspecialidades(especialidadesData);
-      setUnidadesMedicas(unidadesMedicasData);
-      setDiagnosticosPresuntivos(diagnosticosPresuntivosData);
       setError(null);
     } catch (error) {
       console.error("Error al inicializar datos:", error);
@@ -102,7 +91,22 @@ const GestionCitas = () => {
       if (!pacienteEditado.id) {
         throw new Error("El ID del paciente no está definido");
       }
-      await updatePacientePrueba(pacienteEditado.id, pacienteEditado);
+  
+      const pacienteData = {
+        id: pacienteEditado.id,
+        fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
+        nss: pacienteEditado.nss,
+        nombre_paciente: pacienteEditado.nombre_completo.split(' ')[0], // Assuming first word is the first name
+        apellido_paterno_paciente: pacienteEditado.nombre_completo.split(' ')[1], // Assuming second word is the paternal surname
+        apellido_materno_paciente: pacienteEditado.nombre_completo.split(' ')[2], // Assuming third word is the maternal surname
+        especialidad_medica: pacienteEditado.especialidad_medica,
+        nombre_completo_medico: pacienteEditado.nombre_completo_medico,
+        estudio_solicitado: pacienteEditado.estudio_solicitado,
+        unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
+        diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo
+      };
+  
+      await updatePacientePrueba(pacienteEditado.id, pacienteData);
       await cargarPacientesPrueba();
       setPacienteSeleccionado(null);
       setVista('ver');
@@ -174,9 +178,6 @@ const GestionCitas = () => {
             modo="crear"
             medicos={medicos}
             estudios={estudios}
-            especialidades={especialidades}
-            unidadesMedicas={unidadesMedicas}
-            diagnosticosPresuntivos={diagnosticosPresuntivos}
             onSubmit={handleCrearPaciente}
             onCancel={() => setVista('ver')}
           />

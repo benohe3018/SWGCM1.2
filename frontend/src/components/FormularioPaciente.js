@@ -1,9 +1,8 @@
-// FormularioPaciente.js
-
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
+import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos } from './citasService';
 
-const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especialidades, unidadesMedicas, diagnosticosPresuntivos, onSubmit, onCancel }) => {
+const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     id: '',
     fecha_hora_estudio: '',
@@ -20,6 +19,10 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especial
     estudio_solicitado: ''
   });
 
+  const [especialidades, setEspecialidades] = useState([]);
+  const [unidadesMedicas, setUnidadesMedicas] = useState([]);
+  const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
+
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
       setFormData({
@@ -28,6 +31,24 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especial
       });
     }
   }, [modo, pacienteInicial]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [especialidadesData, unidadesMedicasData, diagnosticosPresuntivosData] = await Promise.all([
+          getEspecialidadesMedicas(),
+          getUnidadesMedicas(),
+          getDiagnosticosPresuntivos()
+        ]);
+        setEspecialidades(especialidadesData);
+        setUnidadesMedicas(unidadesMedicasData);
+        setDiagnosticosPresuntivos(diagnosticosPresuntivosData);
+      } catch (error) {
+        console.error('Error fetching dropdown data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -68,7 +89,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especial
       alert('El NSS debe ser un número de 11 dígitos.');
       return;
     }
-   
+
     if (!isValidName(formData.nombre_paciente)) {
       alert('El nombre del paciente debe contener solo letras.');
       return;
@@ -113,8 +134,12 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especial
   };
 
   const handleCancel = () => {
+    // Paso 1: Mostrar diálogo de confirmación
     const isConfirmed = window.confirm("¿Está seguro que desea cancelar? Los cambios no guardados se perderán.");
+
+    // Paso 2: Verificar la confirmación del usuario
     if (isConfirmed) {
+      // Resetear el formulario si el usuario confirma
       setFormData({
         id: '',
         fecha_hora_estudio: '',
@@ -160,8 +185,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especial
         <select id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required>
           <option value="">Seleccione una Especialidad</option>
           {especialidades.map((especialidad) => (
-            <option key={especialidad.id} value={especialidad.nombre}>
-              {especialidad.nombre}
+            <option key={especialidad.id_especialidad} value={especialidad.nombre_especialidad}>
+              {especialidad.nombre_especialidad}
             </option>
           ))}
         </select>
@@ -193,8 +218,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especial
         <select id="unidad_medica_procedencia" name="unidad_medica_procedencia" value={formData.unidad_medica_procedencia} onChange={handleChange} required>
           <option value="">Seleccione una Unidad Médica</option>
           {unidadesMedicas.map((unidad) => (
-            <option key={unidad.id} value={unidad.nombre}>
-              {unidad.nombre}
+            <option key={unidad.id_unidad} value={unidad.nombre_unidad}>
+              {unidad.nombre_unidad}
             </option>
           ))}
         </select>
@@ -204,8 +229,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, especial
         <select id="diagnostico_presuntivo" name="diagnostico_presuntivo" value={formData.diagnostico_presuntivo} onChange={handleChange} required>
           <option value="">Seleccione un Diagnóstico</option>
           {diagnosticosPresuntivos.map((diagnostico) => (
-            <option key={diagnostico.id} value={diagnostico.nombre}>
-              {diagnostico.nombre}
+            <option key={diagnostico.id_diagnostico} value={diagnostico.nombre_diagnostico}>
+              {diagnostico.nombre_diagnostico}
             </option>
           ))}
         </select>

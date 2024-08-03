@@ -66,7 +66,7 @@ def get_pacientes_prueba():
                 nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
                 pacientes_list.append({
                     'id': paciente.id,
-                    'fecha_hora_estudio': paciente.fecha_hora_estudio.isoformat(),
+                    'fecha_hora_estudio': paciente.fecha_hora_estudio.strftime('%Y-%m-%dT%H:%M'),
                     'nombre_completo': nombre_completo,
                     'nss': decrypt_data(paciente.nss, key),
                     'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
@@ -131,6 +131,7 @@ def delete_paciente_prueba(id):
         print(error_msg)
         logging.error(error_msg)
         return jsonify({"error": "Error en la base de datos"}), 500
+
 
 
 

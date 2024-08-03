@@ -86,6 +86,19 @@ def get_pacientes_prueba():
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['PUT'])
 def update_paciente_prueba(id):
     data = request.get_json()
+    logging.info(f"Datos recibidos para actualización: {data}")
+    
+    required_fields = [
+        'fecha_hora_estudio', 'nss', 'nombre_paciente', 'apellido_paterno_paciente',
+        'apellido_materno_paciente', 'especialidad_medica', 'nombre_completo_medico',
+        'estudio_solicitado', 'unidad_medica_procedencia', 'diagnostico_presuntivo'
+    ]
+    
+    for field in required_fields:
+        if field not in data:
+            logging.error(f"Campo faltante en la solicitud PUT: {field}")
+            return jsonify({"error": f"Falta el campo requerido: {field}"}), 400
+
     key = os.getenv('ENCRYPTION_KEY').encode()
     
     try:
@@ -110,6 +123,10 @@ def update_paciente_prueba(id):
         db.session.rollback()
         logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+    except Exception as e:
+        logging.error("Error desconocido al actualizar paciente: %s", str(e))
+        return jsonify({"error": "Error desconocido"}), 500
+
     
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):

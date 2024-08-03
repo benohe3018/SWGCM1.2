@@ -96,9 +96,9 @@ const GestionCitas = () => {
         id: pacienteEditado.id,
         fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
         nss: pacienteEditado.nss,
-        nombre_paciente: pacienteEditado.nombre_paciente,
-        apellido_paterno_paciente: pacienteEditado.apellido_paterno_paciente,
-        apellido_materno_paciente: pacienteEditado.apellido_materno_paciente,
+        nombre_paciente: pacienteEditado.nombre_completo.split(' ')[0], // Assuming first word is the first name
+        apellido_paterno_paciente: pacienteEditado.nombre_completo.split(' ')[1], // Assuming second word is the paternal surname
+        apellido_materno_paciente: pacienteEditado.nombre_completo.split(' ')[2], // Assuming third word is the maternal surname
         especialidad_medica: pacienteEditado.especialidad_medica,
         nombre_completo_medico: pacienteEditado.nombre_completo_medico,
         estudio_solicitado: pacienteEditado.estudio_solicitado,
@@ -116,7 +116,6 @@ const GestionCitas = () => {
       setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
     }
   };
-  
 
   const handleEliminarPaciente = (id) => {
     const numericId = Number(id);

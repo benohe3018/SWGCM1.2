@@ -79,6 +79,39 @@ export const getEstudios = async () => {
     throw error;
   }
 };
+// Función para obtener la lista de especialidades médicas
+export const getEspecialidadesMedicas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/especialidades_medicas/list`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching especialidades_medicas:', error);
+    throw error;
+  }
+};
+
+// Función para obtener la lista de unidades médicas
+export const getUnidadesMedicas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/unidades_medicas/list`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching unidades_medicas:', error);
+    throw error;
+  }
+};
+
+// Función para obtener la lista de diagnósticos presuntivos
+export const getDiagnosticosPresuntivos = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/diagnosticos_presuntivos/list`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching diagnosticos_presuntivos:', error);
+    throw error;
+  }
+};
+
 
 
 

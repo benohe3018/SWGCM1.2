@@ -224,7 +224,7 @@ const GestionCitas = () => {
                     <td>{paciente.id}</td>
                     <td>
                       <input
-                        type="text"
+                        type="datetime-local"
                         value={paciente.fecha_hora_estudio}
                         onChange={(e) => {
                           const newPacientes = [...pacientesPrueba];

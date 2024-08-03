@@ -91,7 +91,22 @@ const GestionCitas = () => {
       if (!pacienteEditado.id) {
         throw new Error("El ID del paciente no está definido");
       }
-      await updatePacientePrueba(pacienteEditado.id, pacienteEditado);
+  
+      const pacienteData = {
+        id: pacienteEditado.id,
+        fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
+        nss: pacienteEditado.nss,
+        nombre_paciente: pacienteEditado.nombre_paciente,
+        apellido_paterno_paciente: pacienteEditado.apellido_paterno_paciente,
+        apellido_materno_paciente: pacienteEditado.apellido_materno_paciente,
+        especialidad_medica: pacienteEditado.especialidad_medica,
+        nombre_completo_medico: pacienteEditado.nombre_completo_medico,
+        estudio_solicitado: pacienteEditado.estudio_solicitado,
+        unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
+        diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo
+      };
+  
+      await updatePacientePrueba(pacienteEditado.id, pacienteData);
       await cargarPacientesPrueba();
       setPacienteSeleccionado(null);
       setVista('ver');
@@ -101,6 +116,7 @@ const GestionCitas = () => {
       setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
     }
   };
+  
 
   const handleEliminarPaciente = (id) => {
     const numericId = Number(id);

@@ -78,5 +78,16 @@ def delete_unidad(id):
         logging.error("Error al eliminar unidad médica: %s", str(e))
         return jsonify({"error": "Error al eliminar la unidad médica"}), 500
 
+@unidades_medicas_bp.route('/unidades/list', methods=['GET'])
+def get_unidades():
+    try:
+        unidades = UnidadesMedicinaFamiliar.query.all()
+        return jsonify([{
+            'id': unidad.id,
+            'nombre_unidad': unidad.nombre_unidad
+        } for unidad in unidades]), 200
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
+
 
 

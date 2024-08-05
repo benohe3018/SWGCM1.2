@@ -65,3 +65,14 @@ def delete_especialidad(id):
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
+@especialidades_bp.route('/especialidades/list', methods=['GET'])
+def get_especialidades():
+    try:
+        especialidades = EspecialidadesMedicas.query.all()
+        return jsonify([{
+            'id': especialidad.id,
+            'nombre_especialidad': especialidad.nombre_especialidad
+        } for especialidad in especialidades]), 200
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500

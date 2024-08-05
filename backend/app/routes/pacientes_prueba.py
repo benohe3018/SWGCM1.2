@@ -1,45 +1,11 @@
 from flask import Blueprint, request, jsonify
-from ..models import PacientePrueba, EspecialidadMedica, UnidadMedica, DiagnosticoPresuntivo
+from ..models import PacientePrueba
 from .. import db
 from .encryption import encrypt_data, decrypt_data, decrypt_data_old
 from datetime import datetime
 import os
 from sqlalchemy.exc import SQLAlchemyError
 import logging
-
-especialidades_medicas_bp = Blueprint('especialidades_medicas', __name__)
-unidades_medicas_bp = Blueprint('unidades_medicas', __name__)
-diagnosticos_presuntivos_bp = Blueprint('diagnosticos_presuntivos', __name__)
-
-@especialidades_medicas_bp.route('/especialidades_medicas/list', methods=['GET'])
-def get_especialidades_medicas():
-    try:
-        especialidades = EspecialidadMedica.query.all()
-        especialidades_list = [especialidad.nombre for especialidad in especialidades]
-        return jsonify(especialidades_list), 200
-    except SQLAlchemyError as e:
-        logging.error("Error al recuperar especialidades médicas: %s", str(e))
-        return jsonify({"error": "Error al recuperar especialidades médicas"}), 500
-
-@unidades_medicas_bp.route('/unidades_medicas/list', methods=['GET'])
-def get_unidades_medicas():
-    try:
-        unidades = UnidadMedica.query.all()
-        unidades_list = [unidad.nombre for unidad in unidades]
-        return jsonify(unidades_list), 200
-    except SQLAlchemyError as e:
-        logging.error("Error al recuperar unidades médicas: %s", str(e))
-        return jsonify({"error": "Error al recuperar unidades médicas"}), 500
-
-@diagnosticos_presuntivos_bp.route('/diagnosticos_presuntivos/list', methods=['GET'])
-def get_diagnosticos_presuntivos():
-    try:
-        diagnosticos = DiagnosticoPresuntivo.query.all()
-        diagnosticos_list = [diagnostico.nombre for diagnostico in diagnosticos]
-        return jsonify(diagnosticos_list), 200
-    except SQLAlchemyError as e:
-        logging.error("Error al recuperar diagnósticos presuntivos: %s", str(e))
-        return jsonify({"error": "Error al recuperar diagnósticos presuntivos"}), 500
 
 pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
 

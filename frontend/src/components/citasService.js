@@ -63,7 +63,6 @@ export const getMedicos = async () => {
     const response = await axios.get(`${API_URL}/api/medicos/list`);
     return response.data;
   } catch (error) {
-    
     console.error('Error fetching medicos:', error);
     throw error;
   }
@@ -79,6 +78,7 @@ export const getEstudios = async () => {
     throw error;
   }
 };
+
 // Función para obtener la lista de especialidades médicas
 export const getEspecialidadesMedicas = async () => {
   try {
@@ -111,8 +111,3 @@ export const getDiagnosticosPresuntivos = async () => {
     throw error;
   }
 };
-
-
-
-
-

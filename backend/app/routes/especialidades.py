@@ -1,5 +1,3 @@
-# src/routes/especialidades.py
-
 from flask import Blueprint, request, jsonify
 from ..models import EspecialidadesMedicas
 from .. import db
@@ -25,7 +23,7 @@ def create_especialidad():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
-@especialidades_bp.route('/especialidades', methods=['GET'])
+@especialidades_bp.route('/especialidades/list', methods=['GET'])
 def get_especialidades():
     try:
         especialidades = EspecialidadesMedicas.query.all()
@@ -65,4 +63,3 @@ def delete_especialidad(id):
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
-

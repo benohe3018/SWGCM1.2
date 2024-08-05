@@ -82,7 +82,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     const isValidNSS = (nss) => /^\d{11}$/.test(nss);
     const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
     const isValidSpeciality = (speciality) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(speciality) && speciality.length >= 1 && speciality.length <= 50;
-    const isValidUnidadMedica = (unidad) => /^UMF\d+$/.test(unidad);
+    const isValidUnidadMedica = (unidad) => /^UMF#\d+$/.test(unidad);
     const isValidDiagnostico = (diagnostico) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(diagnostico) && diagnostico.length >= 1 && diagnostico.length <= 50;
 
     if (!isValidNSS(formData.nss)) {

@@ -6,6 +6,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   const [formData, setFormData] = useState({
     id: '',
     fecha_hora_estudio: '',
+    fecha_estudio: '',
+    hora_estudio: '',
     nss: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
@@ -28,9 +30,12 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
+      const [fecha, hora] = pacienteInicial.fecha_hora_estudio.split('T');
       setFormData({
         ...pacienteInicial,
-        id: pacienteInicial.id || ''
+        id: pacienteInicial.id || '',
+        fecha_estudio: fecha,
+        hora_estudio: hora
       });
     }
   }, [modo, pacienteInicial]);
@@ -150,10 +155,11 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       return;
     }
 
-    console.log('Datos enviados:', formData); // Agrega este log para verificar los datos enviados
+    const fechaHoraEstudio = `${formData.fecha_estudio}T${formData.hora_estudio}`;
+    console.log('Datos enviados:', { ...formData, fecha_hora_estudio: fechaHoraEstudio }); // Agrega este log para verificar los datos enviados
 
     try {
-      await createPacientePrueba(formData);
+      await createPacientePrueba({ ...formData, fecha_hora_estudio: fechaHoraEstudio });
       onSubmit(formData);
     } catch (error) {
       console.error('Error al crear paciente prueba:', error);
@@ -168,6 +174,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       setFormData({
         id: '',
         fecha_hora_estudio: '',
+        fecha_estudio: '',
+        hora_estudio: '',
         nss: '',
         nombre_paciente: '',
         apellido_paterno_paciente: '',
@@ -188,12 +196,12 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   return (
     <form className="form-paciente" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="fecha_hora_estudio">Fecha del Estudio:</label>
+        <label htmlFor="fecha_estudio">Fecha del Estudio:</label>
         <input
           type="date"
-          id="fecha_hora_estudio"
-          name="fecha_hora_estudio"
-          value={formData.fecha_hora_estudio.split('T')[0]}
+          id="fecha_estudio"
+          name="fecha_estudio"
+          value={formData.fecha_estudio}
           onChange={handleChange}
           required
         />
@@ -203,7 +211,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         <select
           id="hora_estudio"
           name="hora_estudio"
-          value={formData.fecha_hora_estudio.split('T')[1]}
+          value={formData.hora_estudio}
           onChange={handleChange}
           required
         >

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios } from './citasService';
+import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
 import FormularioPaciente from './FormularioPaciente';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
@@ -14,6 +14,7 @@ const GestionCitas = () => {
   const [pacientesPrueba, setPacientesPrueba] = useState([]);
   const [medicos, setMedicos] = useState([]);
   const [estudios, setEstudios] = useState([]);
+  const [hospitales, setHospitales] = useState([]);
   const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [error, setError] = useState(null);
@@ -38,15 +39,17 @@ const GestionCitas = () => {
   const inicializarDatos = useCallback(async () => {
     try {
       setCargando(true);
-      const [pacientesData, medicosData, estudiosData] = await Promise.all([
+      const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
         getPacientesPrueba(),
         getMedicos(),
-        getEstudios()
+        getEstudios(),
+        getHospitales()
       ]);
       pacientesData.sort((a, b) => a.id - b.id);
       setPacientesPrueba(pacientesData);
       setMedicos(medicosData);
       setEstudios(estudiosData);
+      setHospitales(hospitalesData);
       setError(null);
     } catch (error) {
       console.error("Error al inicializar datos:", error);
@@ -91,7 +94,7 @@ const GestionCitas = () => {
       if (!pacienteEditado.id) {
         throw new Error("El ID del paciente no está definido");
       }
-  
+
       const pacienteData = {
         id: pacienteEditado.id,
         fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
@@ -103,9 +106,10 @@ const GestionCitas = () => {
         nombre_completo_medico: pacienteEditado.nombre_completo_medico,
         estudio_solicitado: pacienteEditado.estudio_solicitado,
         unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
-        diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo
+        diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
+        hospital_envia: pacienteEditado.hospital_envia  // Nueva línea
       };
-  
+
       await updatePacientePrueba(pacienteEditado.id, pacienteData);
       await cargarPacientesPrueba();
       setPacienteSeleccionado(null);
@@ -178,6 +182,7 @@ const GestionCitas = () => {
             modo="crear"
             medicos={medicos}
             estudios={estudios}
+            hospitales={hospitales}  // Nueva línea
             onSubmit={handleCrearPaciente}
             onCancel={() => setVista('ver')}
           />
@@ -193,6 +198,7 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
+                  <th>Hospital</th>  {/* Nueva columna */}
                 </tr>
               </thead>
               <tbody>
@@ -203,6 +209,7 @@ const GestionCitas = () => {
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
+                    <td>{paciente.hospital_envia}</td>  {/* Nueva columna */}
                   </tr>
                 ))}
               </tbody>
@@ -230,6 +237,7 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
+                  <th>Hospital</th>  {/* Nueva columna */}
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -285,6 +293,18 @@ const GestionCitas = () => {
                         }}
                       />
                     </td>
+                    <td>  {/* Nueva columna */}
+                      <input
+                        type="text"
+                        value={paciente.hospital_envia}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].hospital_envia = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
                     <td>
                       <div className="botones-acciones">
                         <button
@@ -322,6 +342,7 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
+                  <th>Hospital</th>  {/* Nueva columna */}
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -333,6 +354,7 @@ const GestionCitas = () => {
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
+                    <td>{paciente.hospital_envia}</td>  {/* Nueva columna */}
                     <td>
                       <div className="botones-acciones">
                         <button

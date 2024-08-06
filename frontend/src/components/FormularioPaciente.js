@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
-import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos } from './citasService';
+import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales } from './citasService';
 
 const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -16,12 +16,14 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     unidad_medica_procedencia: '',
     diagnostico_presuntivo: '',
     nombre_completo_medico: '',
-    estudio_solicitado: ''
+    estudio_solicitado: '',
+    hospital_envia: ''  // Nueva línea
   });
 
   const [especialidades, setEspecialidades] = useState([]);
   const [unidadesMedicas, setUnidadesMedicas] = useState([]);
   const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
+  const [hospitales, setHospitales] = useState([]);  // Nueva línea
 
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
@@ -35,14 +37,16 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [especialidadesData, unidadesMedicasData, diagnosticosPresuntivosData] = await Promise.all([
+        const [especialidadesData, unidadesMedicasData, diagnosticosPresuntivosData, hospitalesData] = await Promise.all([
           getEspecialidadesMedicas(),
           getUnidadesMedicas(),
-          getDiagnosticosPresuntivos()
+          getDiagnosticosPresuntivos(),
+          getHospitales()  // Nueva línea
         ]);
         setEspecialidades(especialidadesData);
         setUnidadesMedicas(unidadesMedicasData);
         setDiagnosticosPresuntivos(diagnosticosPresuntivosData);
+        setHospitales(hospitalesData);  // Nueva línea
       } catch (error) {
         console.error('Error fetching dropdown data:', error);
       }
@@ -134,12 +138,9 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   };
 
   const handleCancel = () => {
-    // Paso 1: Mostrar diálogo de confirmación
     const isConfirmed = window.confirm("¿Está seguro que desea cancelar? Los cambios no guardados se perderán.");
 
-    // Paso 2: Verificar la confirmación del usuario
     if (isConfirmed) {
-      // Resetear el formulario si el usuario confirma
       setFormData({
         id: '',
         fecha_hora_estudio: '',
@@ -153,7 +154,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         unidad_medica_procedencia: '',
         diagnostico_presuntivo: '',
         nombre_completo_medico: '',
-        estudio_solicitado: ''
+        estudio_solicitado: '',
+        hospital_envia: ''  // Nueva línea
       });
     }
   };
@@ -231,6 +233,17 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           {diagnosticosPresuntivos.map((diagnostico) => (
             <option key={diagnostico.id_diagnostico} value={diagnostico.nombre_diagnostico}>
               {diagnostico.nombre_diagnostico}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group"> {/* Nueva sección para hospital_envia */}
+        <label htmlFor="hospital_envia">Hospital que Envía:</label>
+        <select id="hospital_envia" name="hospital_envia" value={formData.hospital_envia} onChange={handleChange} required>
+          <option value="">Seleccione un Hospital</option>
+          {hospitales.map((hospital) => (
+            <option key={hospital.id_hospital} value={hospital.nombre_hospital}>
+              {hospital.nombre_hospital}
             </option>
           ))}
         </select>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
-import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales, getPacientesPrueba } from './citasService';
+import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales } from './citasService';
 
 const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     id: '',
     fecha_hora_estudio: '',
-    hora_estudio: '',
     nss: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
@@ -18,16 +17,15 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     diagnostico_presuntivo: '',
     nombre_completo_medico: '',
     estudio_solicitado: '',
-    hospital_envia: ''  // Nueva línea
+    hospital_envia: ''
   });
 
   const [especialidades, setEspecialidades] = useState([]);
   const [unidadesMedicas, setUnidadesMedicas] = useState([]);
   const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
-  const [hospitales, setHospitales] = useState([]);  // Nueva línea
+  const [hospitales, setHospitales] = useState([]);
   const [horariosDisponibles, setHorariosDisponibles] = useState([]);
-  const [horariosOcupados, setHorariosOcupados] = useState([]);
-
+  
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
       setFormData({
@@ -44,12 +42,12 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           getEspecialidadesMedicas(),
           getUnidadesMedicas(),
           getDiagnosticosPresuntivos(),
-          getHospitales()  // Nueva línea
+          getHospitales()
         ]);
         setEspecialidades(especialidadesData);
         setUnidadesMedicas(unidadesMedicasData);
         setDiagnosticosPresuntivos(diagnosticosPresuntivosData);
-        setHospitales(hospitalesData);  // Nueva línea
+        setHospitales(hospitalesData);
       } catch (error) {
         console.error('Error fetching dropdown data:', error);
       }
@@ -58,39 +56,15 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   }, []);
 
   useEffect(() => {
-    const fetchHorariosOcupados = async (fecha) => {
-      try {
-        const data = await getPacientesPrueba();
-        const horarios = data
-          .filter(paciente => paciente.fecha_hora_estudio.startsWith(fecha))
-          .map(paciente => paciente.fecha_hora_estudio.split('T')[1]);
-        setHorariosOcupados(horarios);
-      } catch (error) {
-        console.error('Error fetching horarios ocupados:', error);
-      }
+    const generarHorariosDisponibles = () => {
+      const horarios = [
+        '07:15', '07:45', '08:25', '09:05', '09:45', '10:25', '11:05', '11:45', '12:25',
+        '14:00', '14:40', '15:20', '16:00', '16:40', '17:20', '18:00', '18:40', '19:20'
+      ];
+      setHorariosDisponibles(horarios);
     };
-
-    if (formData.fecha_hora_estudio) {
-      const fechaSeleccionada = formData.fecha_hora_estudio.split('T')[0];
-      fetchHorariosOcupados(fechaSeleccionada);
-    }
-  }, [formData.fecha_hora_estudio]);
-
-  const handleFechaChange = (e) => {
-    const fechaSeleccionada = new Date(e.target.value);
-    const dia = fechaSeleccionada.getDay();
-    if (dia >= 1 && dia <= 5) { // Lunes a Viernes
-      const hora = fechaSeleccionada.getHours();
-      if (hora < 12) {
-        setHorariosDisponibles(horariosManana);
-      } else {
-        setHorariosDisponibles(horariosTarde);
-      }
-    } else {
-      setHorariosDisponibles([]);
-    }
-    handleChange(e);
-  };
+    generarHorariosDisponibles();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -120,7 +94,6 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validaciones
     const isValidNSS = (nss) => /^\d{11}$/.test(nss);
     const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
     const isValidSpeciality = (speciality) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(speciality) && speciality.length >= 1 && speciality.length <= 50;
@@ -182,7 +155,6 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       setFormData({
         id: '',
         fecha_hora_estudio: '',
-        hora_estudio: '',
         nss: '',
         nombre_paciente: '',
         apellido_paterno_paciente: '',
@@ -194,8 +166,9 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         diagnostico_presuntivo: '',
         nombre_completo_medico: '',
         estudio_solicitado: '',
-        hospital_envia: ''  // Nueva línea
+        hospital_envia: ''
       });
+      onCancel();
     }
   };
 
@@ -203,14 +176,27 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     <form className="form-paciente" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="fecha_hora_estudio">Fecha del Estudio:</label>
-        <input type="date" id="fecha_hora_estudio" name="fecha_hora_estudio" value={formData.fecha_hora_estudio} onChange={handleFechaChange} required />
+        <input
+          type="date"
+          id="fecha_hora_estudio"
+          name="fecha_hora_estudio"
+          value={formData.fecha_hora_estudio.split('T')[0]}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div className="form-group">
         <label htmlFor="hora_estudio">Hora del Estudio:</label>
-        <select id="hora_estudio" name="hora_estudio" value={formData.hora_estudio} onChange={handleChange} required>
+        <select
+          id="hora_estudio"
+          name="hora_estudio"
+          value={formData.fecha_hora_estudio.split('T')[1]}
+          onChange={handleChange}
+          required
+        >
           <option value="">Seleccione una hora</option>
-          {horariosDisponibles.map((hora, index) => (
-            <option key={index} value={hora} disabled={horariosOcupados.includes(hora)}>
+          {horariosDisponibles.map((hora) => (
+            <option key={hora} value={hora}>
               {hora}
             </option>
           ))}
@@ -287,7 +273,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           ))}
         </select>
       </div>
-      <div className="form-group"> {/* Nueva sección para hospital_envia */}
+      <div className="form-group">
         <label htmlFor="hospital_envia">Hospital que Envía:</label>
         <select id="hospital_envia" name="hospital_envia" value={formData.hospital_envia} onChange={handleChange} required>
           <option value="">Seleccione un Hospital</option>
@@ -305,13 +291,5 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     </form>
   );
 };
-
-const horariosManana = [
-  "07:15", "07:45", "08:25", "09:05", "09:45", "10:25", "11:05", "11:45", "12:25"
-];
-
-const horariosTarde = [
-  "14:00", "14:40", "15:20", "16:00", "16:40", "17:20", "18:00", "18:40", "19:20"
-];
 
 export default FormularioPaciente;

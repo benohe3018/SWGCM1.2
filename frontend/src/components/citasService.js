@@ -8,6 +8,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 export const getPacientesPrueba = async () => {
   try {
     const response = await axios.get(`${API_URL}/api/pacientes_prueba`);
+    console.log('Datos recibidos:', response.data); // Agrega este log para verificar los datos recibidos
     return response.data;
   } catch (error) {
     console.error('Error fetching pacientes_prueba:', error);

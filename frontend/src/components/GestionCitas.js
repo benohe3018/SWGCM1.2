@@ -99,15 +99,15 @@ const GestionCitas = () => {
         id: pacienteEditado.id,
         fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
         nss: pacienteEditado.nss,
-        nombre_paciente: pacienteEditado.nombre_completo.split(' ')[0], // Assuming first word is the first name
-        apellido_paterno_paciente: pacienteEditado.nombre_completo.split(' ')[1], // Assuming second word is the paternal surname
-        apellido_materno_paciente: pacienteEditado.nombre_completo.split(' ')[2], // Assuming third word is the maternal surname
+        nombre_paciente: pacienteEditado.nombre_completo.split(' ')[0],
+        apellido_paterno_paciente: pacienteEditado.nombre_completo.split(' ')[1],
+        apellido_materno_paciente: pacienteEditado.nombre_completo.split(' ')[2],
         especialidad_medica: pacienteEditado.especialidad_medica,
         nombre_completo_medico: pacienteEditado.nombre_completo_medico,
         estudio_solicitado: pacienteEditado.estudio_solicitado,
         unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
         diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
-        hospital_envia: pacienteEditado.hospital_envia  // Nueva línea
+        hospital_envia: pacienteEditado.hospital_envia
       };
 
       await updatePacientePrueba(pacienteEditado.id, pacienteData);
@@ -182,7 +182,7 @@ const GestionCitas = () => {
             modo="crear"
             medicos={medicos}
             estudios={estudios}
-            hospitales={hospitales}  // Nueva línea
+            hospitales={hospitales}
             onSubmit={handleCrearPaciente}
             onCancel={() => setVista('ver')}
           />
@@ -198,7 +198,7 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
-                  <th>Hospital</th>  {/* Nueva columna */}
+                  <th>Hospital</th>
                 </tr>
               </thead>
               <tbody>
@@ -209,7 +209,7 @@ const GestionCitas = () => {
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
-                    <td>{paciente.hospital_envia}</td>  {/* Nueva columna */}
+                    <td>{paciente.hospital_envia}</td>
                   </tr>
                 ))}
               </tbody>
@@ -237,7 +237,7 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
-                  <th>Hospital</th>  {/* Nueva columna */}
+                  <th>Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -293,7 +293,7 @@ const GestionCitas = () => {
                         }}
                       />
                     </td>
-                    <td>  {/* Nueva columna */}
+                    <td>
                       <input
                         type="text"
                         value={paciente.hospital_envia}
@@ -342,7 +342,7 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
-                  <th>Hospital</th>  {/* Nueva columna */}
+                  <th>Hospital</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -354,7 +354,7 @@ const GestionCitas = () => {
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
-                    <td>{paciente.hospital_envia}</td>  {/* Nueva columna */}
+                    <td>{paciente.hospital_envia}</td>
                     <td>
                       <div className="botones-acciones">
                         <button

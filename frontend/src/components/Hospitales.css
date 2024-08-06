@@ -11,11 +11,11 @@
   font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   color: #0C231E;
+  margin-left: 100px;
 }
 
 /* Encabezado */
 .hospitales-header {
-  width: 100%;
   background-color: whitesmoke;
   padding: 20px;
   box-sizing: border-box;

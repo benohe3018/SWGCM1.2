@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
+import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales } from './citasService';
 
 const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -15,8 +16,14 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     unidad_medica_procedencia: '',
     diagnostico_presuntivo: '',
     nombre_completo_medico: '',
-    estudio_solicitado: ''
+    estudio_solicitado: '',
+    hospital_envia: ''  // Nueva línea
   });
+
+  const [especialidades, setEspecialidades] = useState([]);
+  const [unidadesMedicas, setUnidadesMedicas] = useState([]);
+  const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
+  const [hospitales, setHospitales] = useState([]);  // Nueva línea
 
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
@@ -26,6 +33,26 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       });
     }
   }, [modo, pacienteInicial]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [especialidadesData, unidadesMedicasData, diagnosticosPresuntivosData, hospitalesData] = await Promise.all([
+          getEspecialidadesMedicas(),
+          getUnidadesMedicas(),
+          getDiagnosticosPresuntivos(),
+          getHospitales()  // Nueva línea
+        ]);
+        setEspecialidades(especialidadesData);
+        setUnidadesMedicas(unidadesMedicasData);
+        setDiagnosticosPresuntivos(diagnosticosPresuntivosData);
+        setHospitales(hospitalesData);  // Nueva línea
+      } catch (error) {
+        console.error('Error fetching dropdown data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -59,14 +86,14 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     const isValidNSS = (nss) => /^\d{11}$/.test(nss);
     const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
     const isValidSpeciality = (speciality) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(speciality) && speciality.length >= 1 && speciality.length <= 50;
-    const isValidUnidadMedica = (unidad) => /^\d+$/.test(unidad);
+    const isValidUnidadMedica = (unidad) => /^UMF#\d+$/.test(unidad);
     const isValidDiagnostico = (diagnostico) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(diagnostico) && diagnostico.length >= 1 && diagnostico.length <= 50;
 
     if (!isValidNSS(formData.nss)) {
       alert('El NSS debe ser un número de 11 dígitos.');
       return;
     }
-   
+
     if (!isValidName(formData.nombre_paciente)) {
       alert('El nombre del paciente debe contener solo letras.');
       return;
@@ -111,12 +138,9 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   };
 
   const handleCancel = () => {
-    // Paso 1: Mostrar diálogo de confirmación
     const isConfirmed = window.confirm("¿Está seguro que desea cancelar? Los cambios no guardados se perderán.");
-  
-    // Paso 2: Verificar la confirmación del usuario
+
     if (isConfirmed) {
-      // Resetear el formulario si el usuario confirma
       setFormData({
         id: '',
         fecha_hora_estudio: '',
@@ -130,7 +154,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         unidad_medica_procedencia: '',
         diagnostico_presuntivo: '',
         nombre_completo_medico: '',
-        estudio_solicitado: ''
+        estudio_solicitado: '',
+        hospital_envia: ''  // Nueva línea
       });
     }
   };
@@ -159,7 +184,14 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-group">
         <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label>
-        <input type="text" id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required />
+        <select id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required>
+          <option value="">Seleccione una Especialidad</option>
+          {especialidades.map((especialidad) => (
+            <option key={especialidad.id_especialidad} value={especialidad.nombre_especialidad}>
+              {especialidad.nombre_especialidad}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-group">
         <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
@@ -185,11 +217,36 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-group">
         <label htmlFor="unidad_medica_procedencia">Unidad Médica de Procedencia:</label>
-        <input type="text" id="unidad_medica_procedencia" name="unidad_medica_procedencia" value={formData.unidad_medica_procedencia} onChange={handleChange} required />
+        <select id="unidad_medica_procedencia" name="unidad_medica_procedencia" value={formData.unidad_medica_procedencia} onChange={handleChange} required>
+          <option value="">Seleccione una Unidad Médica</option>
+          {unidadesMedicas.map((unidad) => (
+            <option key={unidad.id_unidad} value={unidad.nombre_unidad}>
+              {unidad.nombre_unidad}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-group">
         <label htmlFor="diagnostico_presuntivo">Diagnóstico Presuntivo:</label>
-        <input type="text" id="diagnostico_presuntivo" name="diagnostico_presuntivo" value={formData.diagnostico_presuntivo} onChange={handleChange} required />
+        <select id="diagnostico_presuntivo" name="diagnostico_presuntivo" value={formData.diagnostico_presuntivo} onChange={handleChange} required>
+          <option value="">Seleccione un Diagnóstico</option>
+          {diagnosticosPresuntivos.map((diagnostico) => (
+            <option key={diagnostico.id_diagnostico} value={diagnostico.nombre_diagnostico}>
+              {diagnostico.nombre_diagnostico}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group"> {/* Nueva sección para hospital_envia */}
+        <label htmlFor="hospital_envia">Hospital que Envía:</label>
+        <select id="hospital_envia" name="hospital_envia" value={formData.hospital_envia} onChange={handleChange} required>
+          <option value="">Seleccione un Hospital</option>
+          {hospitales.map((hospital) => (
+            <option key={hospital.id_hospital} value={hospital.nombre_hospital}>
+              {hospital.nombre_hospital}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-actions">
         <button type="submit">Enviar</button>
@@ -200,5 +257,3 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 };
 
 export default FormularioPaciente;
-
-

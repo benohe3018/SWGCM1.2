@@ -12,15 +12,15 @@ pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['POST'])
 def create_paciente_prueba():
     data = request.get_json()
-    required_fields = ['fecha_hora_estudio', 'nss', 'nombre_paciente', 'apellido_paterno_paciente', 'apellido_materno_paciente', 'especialidad_medica', 'nombre_completo_medico', 'estudio_solicitado', 'unidad_medica_procedencia', 'diagnostico_presuntivo']
-    
+    required_fields = ['fecha_hora_estudio', 'nss', 'nombre_paciente', 'apellido_paterno_paciente', 'apellido_materno_paciente', 'especialidad_medica', 'nombre_completo_medico', 'estudio_solicitado', 'unidad_medica_procedencia', 'diagnostico_presuntivo', 'hospital_envia']
+
     for field in required_fields:
         if field not in data:
             logging.error("Campo faltante en la solicitud POST: %s", field)
             return jsonify({"error": f"Falta el campo requerido: {field}"}), 400
-    
+
     key = os.getenv('ENCRYPTION_KEY').encode()
-    
+
     try:
         fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
         encrypted_nss = encrypt_data(data['nss'], key)
@@ -32,6 +32,7 @@ def create_paciente_prueba():
         encrypted_estudio_solicitado = encrypt_data(data['estudio_solicitado'], key)
         encrypted_unidad_medica_procedencia = encrypt_data(data['unidad_medica_procedencia'], key)
         encrypted_diagnostico_presuntivo = encrypt_data(data['diagnostico_presuntivo'], key)
+        encrypted_hospital_envia = encrypt_data(data['hospital_envia'], key)  # Nueva línea
 
         new_paciente_prueba = PacientePrueba(
             fecha_hora_estudio=fecha_hora_estudio,
@@ -43,7 +44,8 @@ def create_paciente_prueba():
             nombre_completo_medico=encrypted_nombre_completo_medico,
             estudio_solicitado=encrypted_estudio_solicitado,
             unidad_medica_procedencia=encrypted_unidad_medica_procedencia,
-            diagnostico_presuntivo=encrypted_diagnostico_presuntivo        
+            diagnostico_presuntivo=encrypted_diagnostico_presuntivo,
+            hospital_envia=encrypted_hospital_envia 
         )
 
         db.session.add(new_paciente_prueba)
@@ -54,6 +56,7 @@ def create_paciente_prueba():
         db.session.rollback()
         logging.error("Error en la base de datos al crear paciente prueba: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():
@@ -66,7 +69,7 @@ def get_pacientes_prueba():
                 nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
                 pacientes_list.append({
                     'id': paciente.id,
-                    'fecha_hora_estudio': paciente.fecha_hora_estudio.isoformat(),
+                    'fecha_hora_estudio': paciente.fecha_hora_estudio.strftime('%Y-%m-%dT%H:%M'),
                     'nombre_completo': nombre_completo,
                     'nss': decrypt_data(paciente.nss, key),
                     'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
@@ -86,13 +89,22 @@ def get_pacientes_prueba():
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['PUT'])
 def update_paciente_prueba(id):
     data = request.get_json()
+    logging.info(f"Datos recibidos para actualización: {data}")
+
+    required_fields = ['fecha_hora_estudio', 'nss', 'nombre_paciente', 'apellido_paterno_paciente', 'apellido_materno_paciente', 'especialidad_medica', 'nombre_completo_medico', 'estudio_solicitado', 'unidad_medica_procedencia', 'diagnostico_presuntivo', 'hospital_envia']
+
+    for field in required_fields:
+        if field not in data:
+            logging.error(f"Campo faltante en la solicitud PUT: {field}")
+            return jsonify({"error": f"Falta el campo requerido: {field}"}), 400
+
     key = os.getenv('ENCRYPTION_KEY').encode()
-    
+
     try:
         paciente = PacientePrueba.query.get(id)
         if not paciente:
             return jsonify({"error": "Paciente no encontrado"}), 404
-        
+
         paciente.fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
         paciente.nss = encrypt_data(data['nss'], key)
         paciente.nombre_paciente = encrypt_data(data['nombre_paciente'], key)
@@ -103,6 +115,7 @@ def update_paciente_prueba(id):
         paciente.estudio_solicitado = encrypt_data(data['estudio_solicitado'], key)
         paciente.unidad_medica_procedencia = encrypt_data(data['unidad_medica_procedencia'], key)
         paciente.diagnostico_presuntivo = encrypt_data(data['diagnostico_presuntivo'], key)
+        paciente.hospital_envia = encrypt_data(data['hospital_envia'], key)  # Nueva línea
 
         db.session.commit()
         return jsonify({"message": "Paciente actualizado exitosamente"}), 200
@@ -110,6 +123,11 @@ def update_paciente_prueba(id):
         db.session.rollback()
         logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+    except Exception as e:
+        logging.error("Error desconocido al actualizar paciente: %s", str(e))
+        return jsonify({"error": "Error desconocido"}), 500
+
+
     
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
@@ -131,6 +149,7 @@ def delete_paciente_prueba(id):
         print(error_msg)
         logging.error(error_msg)
         return jsonify({"error": "Error en la base de datos"}), 500
+
 
 
 

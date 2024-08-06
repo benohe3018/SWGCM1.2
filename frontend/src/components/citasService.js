@@ -1,3 +1,5 @@
+// citasService.js
+
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -63,7 +65,6 @@ export const getMedicos = async () => {
     const response = await axios.get(`${API_URL}/api/medicos/list`);
     return response.data;
   } catch (error) {
-    
     console.error('Error fetching medicos:', error);
     throw error;
   }
@@ -80,6 +81,46 @@ export const getEstudios = async () => {
   }
 };
 
+// Función para obtener la lista de especialidades médicas
+export const getEspecialidadesMedicas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/especialidades/list`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching especialidades_medicas:', error);
+    throw error;
+  }
+};
 
+// Función para obtener la lista de unidades médicas
+export const getUnidadesMedicas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/unidades/list`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching unidades_medicas:', error);
+    throw error;
+  }
+};
 
+// Función para obtener la lista de diagnósticos presuntivos
+export const getDiagnosticosPresuntivos = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/diagnosticos/list`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching diagnosticos_presuntivos:', error);
+    throw error;
+  }
+};
 
+// Función para obtener la lista de hospitales
+export const getHospitales = async () => {
+  try {
+      const response = await axios.get(`${API_URL}/api/hospitales`); // Verifica que la ruta sea correcta
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching hospitals:', error);
+      throw error;
+  }
+};

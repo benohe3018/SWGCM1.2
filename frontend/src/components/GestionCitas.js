@@ -1,45 +1,55 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios } from './citasService';
+import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
 import FormularioPaciente from './FormularioPaciente';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [vista, setVista] = useState('');
+  const [pacientesPrueba, setPacientesPrueba] = useState([]);
+  const [medicos, setMedicos] = useState([]);
+  const [estudios, setEstudios] = useState([]);
+  const [hospitales, setHospitales] = useState([]);
+  const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [error, setError] = useState(null);
+  const [mensaje, setMensaje] = useState(null);
+  const [cargando, setCargando] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const pacientesPerPage = 10;
 
   useEffect(() => {
     if (location.pathname === '/crear-cita') {
       setVista('crear');
     } else if (location.pathname === '/ver-citas') {
       setVista('ver');
+    } else if (location.pathname === '/editar-citas') {
+      setVista('editar');
+    } else if (location.pathname === '/eliminar-citas') {
+      setVista('eliminar');
     }
   }, [location.pathname]);
-
-  const [pacientesPrueba, setPacientesPrueba] = useState([]);
-  const [medicos, setMedicos] = useState([]);
-  const [estudios, setEstudios] = useState([]);
-  const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
-  const [mostrarModal, setMostrarModal] = useState(false);
-  const [error, setError] = useState(null);
-  const [mensaje, setMensaje] = useState(null);
-  const [cargando, setCargando] = useState(true);
 
   const inicializarDatos = useCallback(async () => {
     try {
       setCargando(true);
-      const [pacientesData, medicosData, estudiosData] = await Promise.all([
+      const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
         getPacientesPrueba(),
         getMedicos(),
-        getEstudios()
+        getEstudios(),
+        getHospitales()
       ]);
       pacientesData.sort((a, b) => a.id - b.id);
       setPacientesPrueba(pacientesData);
       setMedicos(medicosData);
       setEstudios(estudiosData);
+      setHospitales(hospitalesData);
       setError(null);
     } catch (error) {
       console.error("Error al inicializar datos:", error);
@@ -84,7 +94,23 @@ const GestionCitas = () => {
       if (!pacienteEditado.id) {
         throw new Error("El ID del paciente no está definido");
       }
-      await updatePacientePrueba(pacienteEditado.id, pacienteEditado);
+
+      const pacienteData = {
+        id: pacienteEditado.id,
+        fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
+        nss: pacienteEditado.nss,
+        nombre_paciente: pacienteEditado.nombre_completo.split(' ')[0], // Assuming first word is the first name
+        apellido_paterno_paciente: pacienteEditado.nombre_completo.split(' ')[1], // Assuming second word is the paternal surname
+        apellido_materno_paciente: pacienteEditado.nombre_completo.split(' ')[2], // Assuming third word is the maternal surname
+        especialidad_medica: pacienteEditado.especialidad_medica,
+        nombre_completo_medico: pacienteEditado.nombre_completo_medico,
+        estudio_solicitado: pacienteEditado.estudio_solicitado,
+        unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
+        diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
+        hospital_envia: pacienteEditado.hospital_envia  // Nueva línea
+      };
+
+      await updatePacientePrueba(pacienteEditado.id, pacienteData);
       await cargarPacientesPrueba();
       setPacienteSeleccionado(null);
       setVista('ver');
@@ -117,6 +143,20 @@ const GestionCitas = () => {
     }
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredPacientes = pacientesPrueba.filter((paciente) => {
+    return paciente.nombre_completo.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  const indexOfLastPaciente = currentPage * pacientesPerPage;
+  const indexOfFirstPaciente = indexOfLastPaciente - pacientesPerPage;
+  const currentPacientes = filteredPacientes.slice(indexOfFirstPaciente, indexOfLastPaciente);
+
+  const totalPages = Math.ceil(filteredPacientes.length / pacientesPerPage);
+
   if (cargando) {
     return <div>Cargando datos...</div>;
   }
@@ -142,6 +182,7 @@ const GestionCitas = () => {
             modo="crear"
             medicos={medicos}
             estudios={estudios}
+            hospitales={hospitales}  // Nueva línea
             onSubmit={handleCrearPaciente}
             onCancel={() => setVista('ver')}
           />
@@ -157,28 +198,165 @@ const GestionCitas = () => {
                   <th>Paciente</th>
                   <th>Médico</th>
                   <th>Estudio</th>
-                  <th>Acciones</th>
+                  <th>Hospital</th>  {/* Nueva columna */}
                 </tr>
               </thead>
               <tbody>
-                {pacientesPrueba.map((paciente) => (
+                {currentPacientes.map((paciente) => (
                   <tr key={paciente.id}>
                     <td>{paciente.id}</td>
                     <td>{paciente.fecha_hora_estudio}</td>
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
+                    <td>{paciente.hospital_envia}</td>  {/* Nueva columna */}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="pagination-read-usuario">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {vista === 'editar' && (
+          <div className="tabla-citas-container">
+            <table className="tabla-citas">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha y Hora</th>
+                  <th>Paciente</th>
+                  <th>Médico</th>
+                  <th>Estudio</th>
+                  <th>Hospital</th>  {/* Nueva columna */}
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentPacientes.map((paciente) => (
+                  <tr key={paciente.id}>
+                    <td>{paciente.id}</td>
+                    <td>
+                      <input
+                        type="datetime-local"
+                        value={paciente.fecha_hora_estudio}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].fecha_hora_estudio = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={paciente.nombre_completo}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].nombre_completo = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={paciente.nombre_completo_medico}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].nombre_completo_medico = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={paciente.estudio_solicitado}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].estudio_solicitado = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>  {/* Nueva columna */}
+                      <input
+                        type="text"
+                        value={paciente.hospital_envia}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].hospital_envia = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
                     <td>
                       <div className="botones-acciones">
                         <button
-                          onClick={() => {
-                            setPacienteSeleccionado(paciente);
-                            setVista('editar');
-                          }}
-                          className="editar-button"
+                          onClick={() => handleEditarPaciente(paciente)}
+                          className="guardar-button"
                         >
-                          Editar
+                          Guardar
                         </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="pagination-read-usuario">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {vista === 'eliminar' && (
+          <div className="tabla-citas-container">
+            <table className="tabla-citas">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha y Hora</th>
+                  <th>Paciente</th>
+                  <th>Médico</th>
+                  <th>Estudio</th>
+                  <th>Hospital</th>  {/* Nueva columna */}
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentPacientes.map((paciente) => (
+                  <tr key={paciente.id}>
+                    <td>{paciente.id}</td>
+                    <td>{paciente.fecha_hora_estudio}</td>
+                    <td>{paciente.nombre_completo}</td>
+                    <td>{paciente.nombre_completo_medico}</td>
+                    <td>{paciente.estudio_solicitado}</td>
+                    <td>{paciente.hospital_envia}</td>  {/* Nueva columna */}
+                    <td>
+                      <div className="botones-acciones">
                         <button
                           onClick={() => handleEliminarPaciente(paciente.id)}
                           className="eliminar-button"
@@ -191,17 +369,18 @@ const GestionCitas = () => {
                 ))}
               </tbody>
             </table>
+            <div className="pagination-read-usuario">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
           </div>
-        )}
-        {vista === 'editar' && pacienteSeleccionado && (
-          <FormularioPaciente
-            modo="editar"
-            pacienteInicial={pacienteSeleccionado}
-            medicos={medicos}
-            estudios={estudios}
-            onSubmit={handleEditarPaciente}
-            onCancel={() => setVista('ver')}
-          />
         )}
       </div>
       {mostrarModal && (
@@ -216,4 +395,3 @@ const GestionCitas = () => {
 };
 
 export default GestionCitas;
-

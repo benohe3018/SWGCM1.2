@@ -12,8 +12,7 @@ pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['POST'])
 def create_paciente_prueba():
     data = request.get_json()
-    logging.info(f"Datos recibidos en el servidor para crear paciente_prueba: {data}")
-
+    logging.info(f"Datos recibidos para creación: {data}")
     required_fields = ['fecha_hora_estudio', 'nss', 'nombre_paciente', 'apellido_paterno_paciente', 'apellido_materno_paciente', 'especialidad_medica', 'nombre_completo_medico', 'estudio_solicitado', 'unidad_medica_procedencia', 'diagnostico_presuntivo', 'hospital_envia']
 
     for field in required_fields:
@@ -34,7 +33,7 @@ def create_paciente_prueba():
         encrypted_estudio_solicitado = encrypt_data(data['estudio_solicitado'], key)
         encrypted_unidad_medica_procedencia = encrypt_data(data['unidad_medica_procedencia'], key)
         encrypted_diagnostico_presuntivo = encrypt_data(data['diagnostico_presuntivo'], key)
-        encrypted_hospital_envia = encrypt_data(data['hospital_envia'], key)  # Nueva línea
+        encrypted_hospital_envia = encrypt_data(data['hospital_envia'], key)
 
         new_paciente_prueba = PacientePrueba(
             fecha_hora_estudio=fecha_hora_estudio,
@@ -58,6 +57,9 @@ def create_paciente_prueba():
         db.session.rollback()
         logging.error("Error en la base de datos al crear paciente prueba: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+    except Exception as e:
+        logging.error("Error desconocido al crear paciente: %s", str(e))
+        return jsonify({"error": "Error desconocido"}), 500
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():

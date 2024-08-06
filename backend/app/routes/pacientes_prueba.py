@@ -22,14 +22,7 @@ def create_paciente_prueba():
     key = os.getenv('ENCRYPTION_KEY').encode()
 
     try:
-        fecha_hora_estudio_str = data['fecha_hora_estudio']
-        logging.info(f"Fecha y hora recibida: {fecha_hora_estudio_str}")
-        
-        if 'T' not in fecha_hora_estudio_str:
-            return jsonify({"error": "Fecha y hora deben estar en el formato '%Y-%m-%dT%H:%M'"}), 400
-
-        fecha_hora_estudio = datetime.strptime(fecha_hora_estudio_str, '%Y-%m-%dT%H:%M')
-
+        fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
         encrypted_nss = encrypt_data(data['nss'], key)
         encrypted_nombre_paciente = encrypt_data(data['nombre_paciente'], key)
         encrypted_apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)
@@ -63,9 +56,7 @@ def create_paciente_prueba():
         db.session.rollback()
         logging.error("Error en la base de datos al crear paciente prueba: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
-    except ValueError as ve:
-        logging.error("Error en el formato de fecha: %s", str(ve))
-        return jsonify({"error": "Error en el formato de fecha"}), 400
+
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():
@@ -85,8 +76,7 @@ def get_pacientes_prueba():
                     'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
                     'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
                     'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
-                    'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key),
-                    'hospital_envia': decrypt_data(paciente.hospital_envia, key)  # Nueva línea
+                    'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key)
                 })
             except Exception as e:
                 logging.error("Error al descifrar datos para el paciente con ID %s: %s", paciente.id, str(e))
@@ -137,6 +127,8 @@ def update_paciente_prueba(id):
         logging.error("Error desconocido al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error desconocido"}), 500
 
+
+    
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
     print(f"Recibida solicitud DELETE para paciente con ID: {id}")
@@ -158,36 +150,9 @@ def delete_paciente_prueba(id):
         logging.error(error_msg)
         return jsonify({"error": "Error en la base de datos"}), 500
 
-# Agregar una nueva ruta para obtener citas por fecha
-@pacientes_prueba_bp.route('/citas', methods=['GET'])
-def get_citas_por_fecha():
-    fecha = request.args.get('fecha')
-    if not fecha:
-        return jsonify({"error": "Fecha no proporcionada"}), 400
-    
-    key = os.getenv('ENCRYPTION_KEY').encode()
-    try:
-        pacientes_prueba = PacientePrueba.query.filter(PacientePrueba.fecha_hora_estudio.like(f"{fecha}%")).all()
-        pacientes_list = []
-        for paciente in pacientes_prueba:
-            try:
-                nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
-                pacientes_list.append({
-                    'id': paciente.id,
-                    'fecha_hora_estudio': paciente.fecha_hora_estudio.strftime('%Y-%m-%dT%H:%M'),
-                    'nombre_completo': nombre_completo,
-                    'nss': decrypt_data(paciente.nss, key),
-                    'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
-                    'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
-                    'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
-                    'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
-                    'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key),
-                    'hospital_envia': decrypt_data(paciente.hospital_envia, key)  # Nueva línea
-                })
-            except Exception as e:
-                logging.error("Error al descifrar datos para el paciente con ID %s: %s", paciente.id, str(e))
-                continue
-        return jsonify(pacientes_list), 200
-    except SQLAlchemyError as e:
-        logging.error("Error al recuperar citas de prueba: %s", str(e))
-        return jsonify({"error": "Error al recuperar citas de prueba"}), 500
+
+
+
+
+
+

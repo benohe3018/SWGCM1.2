@@ -24,6 +24,7 @@ def create_paciente_prueba():
 
     try:
         fecha_hora_estudio = data['fecha_hora_estudio']
+        logging.info(f"Fecha y hora recibida: {fecha_hora_estudio}")
         # Verificar el formato de la fecha y la hora
         try:
             datetime.strptime(fecha_hora_estudio, '%Y-%m-%dT%H:%M')
@@ -55,6 +56,8 @@ def create_paciente_prueba():
             diagnostico_presuntivo=encrypted_diagnostico_presuntivo,
             hospital_envia=encrypted_hospital_envia 
         )
+
+        logging.info(f"Datos para almacenamiento en BD: {new_paciente_prueba}")
 
         db.session.add(new_paciente_prueba)
         db.session.commit()

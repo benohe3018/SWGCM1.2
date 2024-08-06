@@ -6,8 +6,6 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   const [formData, setFormData] = useState({
     id: '',
     fecha_hora_estudio: '',
-    fecha_estudio: '',
-    hora_estudio: '',
     nss: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
@@ -30,12 +28,9 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
-      const [fecha, hora] = pacienteInicial.fecha_hora_estudio.split('T');
       setFormData({
         ...pacienteInicial,
-        id: pacienteInicial.id || '',
-        fecha_estudio: fecha,
-        hora_estudio: hora
+        id: pacienteInicial.id || ''
       });
     }
   }, [modo, pacienteInicial]);
@@ -150,20 +145,14 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       return;
     }
 
-    if (!formData.hospital_envia) {
-      alert('Debe seleccionar un hospital que envía.');
-      return;
-    }
-
-    const fechaHoraEstudio = `${formData.fecha_estudio}T${formData.hora_estudio}`;
-    console.log('Datos enviados:', { ...formData, fecha_hora_estudio: fechaHoraEstudio }); // Agrega este log para verificar los datos enviados
+    console.log('Datos enviados al backend:', formData);  // Agrega este log
 
     try {
-      await createPacientePrueba({ ...formData, fecha_hora_estudio: fechaHoraEstudio });
-      onSubmit(formData);
+      const response = await createPacientePrueba(formData);
+      onSubmit(response);
     } catch (error) {
-      console.error('Error al crear paciente prueba:', error);
-      alert('Error al crear paciente prueba. Por favor, intente de nuevo.');
+      console.error('Error al crear paciente:', error);
+      alert('Error al crear paciente. Verifica los datos e intenta nuevamente.');
     }
   };
 
@@ -174,8 +163,6 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       setFormData({
         id: '',
         fecha_hora_estudio: '',
-        fecha_estudio: '',
-        hora_estudio: '',
         nss: '',
         nombre_paciente: '',
         apellido_paterno_paciente: '',
@@ -196,12 +183,12 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   return (
     <form className="form-paciente" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="fecha_estudio">Fecha del Estudio:</label>
+        <label htmlFor="fecha_hora_estudio">Fecha del Estudio:</label>
         <input
           type="date"
-          id="fecha_estudio"
-          name="fecha_estudio"
-          value={formData.fecha_estudio}
+          id="fecha_hora_estudio"
+          name="fecha_hora_estudio"
+          value={formData.fecha_hora_estudio.split('T')[0]}
           onChange={handleChange}
           required
         />
@@ -211,7 +198,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         <select
           id="hora_estudio"
           name="hora_estudio"
-          value={formData.hora_estudio}
+          value={formData.fecha_hora_estudio.split('T')[1]}
           onChange={handleChange}
           required
         >

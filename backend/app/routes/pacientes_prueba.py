@@ -23,7 +23,14 @@ def create_paciente_prueba():
     key = os.getenv('ENCRYPTION_KEY').encode()
 
     try:
-        fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
+        fecha_hora_estudio = data['fecha_hora_estudio']
+        # Verificar el formato de la fecha y la hora
+        try:
+            datetime.strptime(fecha_hora_estudio, '%Y-%m-%dT%H:%M')
+        except ValueError:
+            logging.error("Formato de fecha y hora inválido: %s", fecha_hora_estudio)
+            return jsonify({"error": "Formato de fecha y hora inválido"}), 400
+
         encrypted_nss = encrypt_data(data['nss'], key)
         encrypted_nombre_paciente = encrypt_data(data['nombre_paciente'], key)
         encrypted_apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)

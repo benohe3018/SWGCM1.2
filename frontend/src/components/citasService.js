@@ -117,10 +117,10 @@ export const getDiagnosticosPresuntivos = async () => {
 // Función para obtener la lista de hospitales
 export const getHospitales = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/hospitales/list`); // Nueva línea
-    return response.data;
+      const response = await axios.get(`${API_URL}/api/hospitales`); // Verifica que la ruta sea correcta
+      return response.data;
   } catch (error) {
-    console.error('Error fetching hospitales:', error); // Nueva línea
-    throw error;
+      console.error('Error fetching hospitals:', error);
+      throw error;
   }
 };

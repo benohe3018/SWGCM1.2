@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
-import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales } from './citasService';
+import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales, createPacientePrueba } from './citasService';
 
 const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
   const [hospitales, setHospitales] = useState([]);
   const [horariosDisponibles, setHorariosDisponibles] = useState([]);
-  
+
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
       setFormData({
@@ -91,7 +91,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const isValidNSS = (nss) => /^\d{11}$/.test(nss);
@@ -145,10 +145,20 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       return;
     }
 
-    // Log formData to check values before submission
-    console.log('Form Data:', formData);
+    if (!formData.hospital_envia) {
+      alert('Debe seleccionar un hospital que envía.');
+      return;
+    }
 
-    onSubmit(formData);
+    console.log('Datos enviados:', formData); // Agrega este log para verificar los datos enviados
+
+    try {
+      await createPacientePrueba(formData);
+      onSubmit(formData);
+    } catch (error) {
+      console.error('Error al crear paciente prueba:', error);
+      alert('Error al crear paciente prueba. Por favor, intente de nuevo.');
+    }
   };
 
   const handleCancel = () => {

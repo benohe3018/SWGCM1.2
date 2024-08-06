@@ -25,14 +25,12 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
   const [hospitales, setHospitales] = useState([]);
   const [horariosDisponibles, setHorariosDisponibles] = useState([]);
-
+  
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
       setFormData({
         ...pacienteInicial,
-        id: pacienteInicial.id || '',
-        fecha_hora_estudio: pacienteInicial.fecha_hora_estudio.split('T')[0],
-        hora_estudio: pacienteInicial.fecha_hora_estudio.split('T')[1]
+        id: pacienteInicial.id || ''
       });
     }
   }, [modo, pacienteInicial]);
@@ -147,20 +145,10 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       return;
     }
 
-    const formattedDateTime = `${formData.fecha_hora_estudio}T${formData.hora_estudio}`;
-    console.log('Fecha y hora formateadas:', formattedDateTime);
+    // Log formData to check values before submission
+    console.log('Form Data:', formData);
 
-    const pacienteData = {
-      ...formData,
-      fecha_hora_estudio: formattedDateTime
-    };
-
-    try {
-      console.log('Datos del paciente enviados:', pacienteData);
-      onSubmit(pacienteData);
-    } catch (error) {
-      console.error('Error al enviar los datos:', error);
-    }
+    onSubmit(formData);
   };
 
   const handleCancel = () => {
@@ -195,7 +183,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           type="date"
           id="fecha_hora_estudio"
           name="fecha_hora_estudio"
-          value={formData.fecha_hora_estudio}
+          value={formData.fecha_hora_estudio.split('T')[0]}
           onChange={handleChange}
           required
         />
@@ -205,7 +193,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         <select
           id="hora_estudio"
           name="hora_estudio"
-          value={formData.hora_estudio}
+          value={formData.fecha_hora_estudio.split('T')[1]}
           onChange={handleChange}
           required
         >

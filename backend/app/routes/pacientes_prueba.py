@@ -23,6 +23,8 @@ def create_paciente_prueba():
 
     try:
         fecha_hora_estudio_str = data['fecha_hora_estudio']
+        logging.info(f"Fecha y hora recibida: {fecha_hora_estudio_str}")
+        
         if 'T' not in fecha_hora_estudio_str:
             return jsonify({"error": "Fecha y hora deben estar en el formato '%Y-%m-%dT%H:%M'"}), 400
 
@@ -64,8 +66,6 @@ def create_paciente_prueba():
     except ValueError as ve:
         logging.error("Error en el formato de fecha: %s", str(ve))
         return jsonify({"error": "Error en el formato de fecha"}), 400
-
-
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():

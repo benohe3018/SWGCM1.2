@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './CreateMedicos.css';
-import logoIMSS from '../images/LogoIMSS.jpg'; // Asegúrate de que la ruta al logo es correcta
+import logoIMSS from '../images/LogoIMSS.jpg'; 
+import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 
 const CreateMedico = () => {
   const [nombre, setNombre] = useState('');
@@ -17,6 +17,12 @@ const CreateMedico = () => {
     return regex.test(name) && name.length >= 2 && name.length <= 50;
   };
 
+  const isValidApellido = (apellido) => {
+    if (apellido === '') return true; // Permite cadenas vacías
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/; // Nota el asterisco (*) que permite cadenas de longitud cero
+    return regex.test(apellido) && apellido.length <= 50;
+  };
+
   const isValidMatricula = (matricula) => {
     const regex = /^[0-9]{1,12}$/; // La matrícula debe ser un número de hasta 12 dígitos
     return regex.test(matricula);
@@ -24,23 +30,27 @@ const CreateMedico = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Valida los campos de entrada
+  
+    // Valida los campos de entrada usando las funciones modificadas/creadas
     if (!isValidName(nombre)) {
       alert('Por favor, introduce un nombre válido (2-50 caracteres).');
       return;
     }
-    if (!isValidName(apellidoPaterno)) {
-      alert('Por favor, introduce un apellido paterno válido (2-50 caracteres).');
+    if (!isValidApellido(apellidoPaterno)) {
+      alert('Por favor, introduce un apellido paterno válido (puede estar vacío).');
       return;
     }
-    if (!isValidName(apellidoMaterno)) {
-      alert('Por favor, introduce un apellido materno válido (2-50 caracteres).');
+    if (!isValidApellido(apellidoMaterno)) {
+      alert('Por favor, introduce un apellido materno válido (puede estar vacío).');
       return;
     }
     if (!isValidMatricula(matricula)) {
       alert('Por favor, introduce una matrícula válida.');
       return;
+    }
+    if (!especialidad || especialidad === "Seleccione una especialidad") {
+      alert('Por favor, selecciona una especialidad.');
+      return; // Detiene la ejecución de la función si no se ha seleccionado una especialidad
     }
 
     // Verifica si la matrícula ya existe
@@ -112,45 +122,43 @@ const CreateMedico = () => {
           <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/create-medico">Capturar nuevo Medico</Link></li>
-          <li><Link to="/read-medico">Ver Medicos</Link></li>
-          <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
-          <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>
-          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
-        </ul>
-        <div className="hamburger">
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
+      <div className="main-layout">
+        <Sidebar />
+        <div className="create-medico-content">
+          <form onSubmit={handleSubmit}>
+            <h3 className="form-description">Capture los datos del Médico</h3>
+            <div className="form-group">
+              <label htmlFor="nombre">Nombre del Médico:</label>
+              <input type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre del Médico" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
+              <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="apellidoMaterno">Apellido Materno:</label>
+              <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="matricula">Matrícula del Médico:</label>
+              <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="especialidad">Especialidad:</label>
+              <select id="especialidad" value={especialidad} onChange={e => setEspecialidad(e.target.value)}>
+                <option value="">Seleccione una especialidad</option>
+                {especialidades.map(especialidad => (
+                  <option key={especialidad} value={especialidad}>{especialidad}</option>
+                ))}
+              </select>
+            </div>
+            <button className="create-medico-button" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Guardando...' : 'Guardar'}
+            </button>
+            {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
+            {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
+          </form>
         </div>
-      </nav>
-      <div className="create-medico-content">
-        <form onSubmit={handleSubmit}>
-          <h3 className="form-description">Capture los datos del Médico</h3>
-          <label htmlFor="nombre">Nombre del Médico:</label>
-          <input type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre del Médico" />
-          <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
-          <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
-          <label htmlFor="apellidoMaterno">Apellido Materno:</label>
-          <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
-          <label htmlFor="matricula">Matrícula del Médico:</label>
-          <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" />
-          <label htmlFor="especialidad">Especialidad:</label>
-          <select id="especialidad" value={especialidad} onChange={e => setEspecialidad(e.target.value)}>
-            <option value="">Seleccione una especialidad</option>
-            {especialidades.map(especialidad => (
-              <option key={especialidad} value={especialidad}>{especialidad}</option>
-            ))}
-          </select>
-          <button className="create-medico-button" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar'}
-          </button>
-          {submitSuccess === true && <p className='message-POST-success'>El registro ha sido exitoso.</p>}
-          {submitSuccess === false && <p className='message-POST-failed'>El registro no ha sido exitoso.</p>}
-        </form>
       </div>
     </div>
   );

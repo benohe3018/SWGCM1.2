@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './EstudiosRadiologicos.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios, createEstudio, updateEstudio, deleteEstudio } from './estudiosService';
@@ -7,21 +7,39 @@ import FormularioEstudio from './FormularioEstudio';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
 
-const EstudiosRadiologicos = () => {
+const EstudiosRadiologicos = ({ vistaInicial }) => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [estudios, setEstudios] = useState([]);
     const [estudioSeleccionado, setEstudioSeleccionado] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [error, setError] = useState(null);
-    const [mensaje, setMensaje] = useState(null); // Estado para el mensaje de confirmación
+    const [mensaje, setMensaje] = useState(null);
     const [cargando, setCargando] = useState(true);
-    const [vista, setVista] = useState(''); 
+    const [vista, setVista] = useState(vistaInicial || 'ver'); 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchField, setSearchField] = useState('nombre_estudio');
+    const estudiosPerPage = 10;
+
+    useEffect(() => {
+        if (location.pathname === '/crear-estudio') {
+            setVista('crear');
+        } else if (location.pathname === '/ver-estudios') {
+            setVista('ver');
+        } else if (location.pathname === '/update-estudio') {
+            setVista('editar');
+        } else if (location.pathname === '/delete-estudio') {
+            setVista('eliminar');
+        }
+    }, [location.pathname]);
 
     const inicializarEstudios = useCallback(async () => {
         try {
             setCargando(true);
             const data = await getEstudios();
-                data.sort((a, b) => a.id_estudio - b.id_estudio); // Ordenar estudios por ID
-                setEstudios(data);
+            data.sort((a, b) => a.id_estudio - b.id_estudio);
+            setEstudios(data);
             setError(null);
         } catch (error) {
             console.error("Error al inicializar estudios:", error);
@@ -35,13 +53,11 @@ const EstudiosRadiologicos = () => {
         inicializarEstudios();
     }, [inicializarEstudios]);
 
-    
-
     const cargarEstudios = async () => {
         try {
             setCargando(true);
             const data = await getEstudios();
-            data.sort((a, b) => a.id_estudio - b.id_estudio); // Ordenar estudios por ID
+            data.sort((a, b) => a.id_estudio - b.id_estudio);
             setEstudios(data);
             setError(null);
         } catch (error) {
@@ -51,14 +67,15 @@ const EstudiosRadiologicos = () => {
             setCargando(false);
         }
     };
-    
+
     const handleCrearEstudio = async (nuevoEstudio) => {
         try {
             await createEstudio(nuevoEstudio);
-            await cargarEstudios();
-            setVista(''); // Cierra el formulario y muestra la vista principal
-            setMensaje('Estudio creado exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setMensaje('Estudio creado exitosamente.');
+            setTimeout(() => {
+                setMensaje(null);
+                navigate('/ver-estudios'); 
+            }, 3000); 
         } catch (error) {
             console.error("Error al crear estudio:", error);
             setError("No se pudo crear el estudio. Por favor, intente de nuevo.");
@@ -70,13 +87,11 @@ const EstudiosRadiologicos = () => {
             if (!estudioEditado.id_estudio) {
                 throw new Error("El ID del estudio no está definido");
             }
-            console.log("Editando estudio con ID:", estudioEditado.id_estudio); // Log para ver el ID del estudio
             await updateEstudio(estudioEditado.id_estudio, estudioEditado);
             await cargarEstudios();
             setEstudioSeleccionado(null);
-            setVista('ver'); // Cambiar a la vista de estudios capturados
-            setMensaje('Estudio actualizado exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setMensaje('Estudio actualizado exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
             console.error("Error al editar estudio:", error);
             setError("No se pudo editar el estudio. Por favor, intente de nuevo.");
@@ -88,24 +103,45 @@ const EstudiosRadiologicos = () => {
         if (estudio) {
             setEstudioSeleccionado(estudio);
             setMostrarModal(true);
-            console.log("Seleccionado para eliminar:", estudio.id_estudio); // Log para ver el ID del estudio a eliminar
         }
     };
 
     const confirmarEliminarEstudio = async () => {
         try {
-            console.log("Confirmando eliminación de estudio con ID:", estudioSeleccionado.id_estudio); // Log para ver el ID del estudio antes de eliminar
             await deleteEstudio(estudioSeleccionado.id_estudio);
             await cargarEstudios();
             setMostrarModal(false);
             setEstudioSeleccionado(null);
-            setMensaje('Estudio eliminado exitosamente.'); // Mostrar mensaje de éxito
-            setTimeout(() => setMensaje(null), 3000); // Ocultar mensaje después de 3 segundos
+            setMensaje('Estudio eliminado exitosamente.');
+            setTimeout(() => setMensaje(null), 3000);
         } catch (error) {
             console.error("Error al eliminar estudio:", error);
             setError("No se pudo eliminar el estudio. Por favor, intente de nuevo.");
         }
     };
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleFieldChange = (event) => {
+        setSearchField(event.target.value);
+    };
+
+    const filteredEstudios = estudios.filter((estudio) => {
+        if (searchField === 'nombre_estudio') {
+            return estudio.nombre_estudio.toLowerCase().includes(searchTerm.toLowerCase());
+        } else if (searchField === 'descripcion_estudio') {
+            return estudio.descripcion_estudio.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return estudio;
+    });
+
+    const indexOfLastEstudio = currentPage * estudiosPerPage;
+    const indexOfFirstEstudio = indexOfLastEstudio - estudiosPerPage;
+    const currentEstudios = filteredEstudios.slice(indexOfFirstEstudio, indexOfLastEstudio);
+
+    const totalPages = Math.ceil(filteredEstudios.length / estudiosPerPage);
 
     if (cargando) {
         return <div>Cargando estudios...</div>;
@@ -124,80 +160,200 @@ const EstudiosRadiologicos = () => {
                     <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
                 </div>
             </header>
-
-            <nav className="navbar">
-                <ul className="nav-links">
-                    <li><Link to="/" onClick={() => setVista('')}>Cambiar Sesión</Link></li>
-                    <li><Link to="#" onClick={() => setVista('crear')}>Capturar Nuevo Estudio Radiológico</Link></li>
-                    <li><Link to="#" onClick={() => setVista('ver')}>Ver Estudios Capturados</Link></li>
-                    <li><Link to="/dashboard-root">Página de Inicio</Link></li>
-                </ul>
-                <div className="hamburger">
-                    <div className="line"></div>
-                    <div className="line"></div>
-                    <div className="line"></div>
-                </div>
-            </nav>
-            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}      
+            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
             <div className="estudios-radiologicos-content">
                 {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
                 {vista === 'crear' && (
                     <FormularioEstudio
                         modo="crear"
                         onSubmit={handleCrearEstudio}
-                        onCancel={() => setVista('')}
+                        onCancel={() => navigate('/ver-estudios')}
                     />
                 )}
-
                 {vista === 'ver' && (
-                    <div className="tabla-estudios-container">
-                        <table className="tabla-estudios">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre del Estudio</th>
-                                    <th>Descripción</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {estudios.map((estudio) => (
-                                    <tr key={estudio.id_estudio}>
-                                        <td>{estudio.id_estudio}</td>
-                                        <td>{estudio.nombre_estudio}</td>
-                                        <td>{estudio.descripcion_estudio}</td>
-                                        <td>
-                                            <div className="botones-acciones">
-                                                <button 
-                                                  onClick={() => {
-                                                      setEstudioSeleccionado(estudio);
-                                                      setVista('editar');
-                                                  }} 
-                                                  className="editar-button"
-                                                >
-                                                    Editar
-                                                </button>
-                                                <button 
-                                                  onClick={() => handleEliminarEstudio(estudio.id_estudio)} 
-                                                  className="eliminar-button"
-                                                >
-                                                    Eliminar
-                                                </button>
-                                            </div>
-                                        </td>
+                    <>
+                        <div className="busqueda-estudio">
+                            <input
+                                type="text"
+                                placeholder="Buscar..."
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                            <select value={searchField} onChange={handleFieldChange}>
+                                <option value="nombre_estudio">Nombre del Estudio</option>
+                                <option value="descripcion_estudio">Descripción del Estudio</option>
+                            </select>
+                        </div>
+                        <div className="tabla-estudios-container">
+                            <table className="tabla-estudios">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre del Estudio</th>
+                                        <th>Descripción</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    {currentEstudios.map((estudio) => (
+                                        <tr key={estudio.id_estudio}>
+                                            <td>{estudio.id_estudio}</td>
+                                            <td>{estudio.nombre_estudio}</td>
+                                            <td>{estudio.descripcion_estudio}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="pagination-read-usuario">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                    <button
+                                        key={page}
+                                        onClick={() => setCurrentPage(page)}
+                                        className={page === currentPage ? 'active' : ''}
+                                    >
+                                        {page}
+                                    </button>
                                 ))}
-                            </tbody>
-                        </table>
-                    </div>
+                            </div>
+                        </div>
+                    </>
                 )}
-                {vista === 'editar' && estudioSeleccionado && (
-                    <FormularioEstudio
-                        modo="editar"
-                        estudioInicial={estudioSeleccionado}
-                        onSubmit={handleEditarEstudio}
-                        onCancel={() => setVista('')}
-                    />
+                {vista === 'editar' && (
+                    <>
+                        <div className="busqueda-estudio">
+                            <input
+                                type="text"
+                                placeholder="Buscar..."
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                            <select value={searchField} onChange={handleFieldChange}>
+                                <option value="nombre_estudio">Nombre del Estudio</option>
+                                <option value="descripcion_estudio">Descripción del Estudio</option>
+                            </select>
+                        </div>
+                        <div className="tabla-estudios-container">
+                            <table className="tabla-estudios">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre del Estudio</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentEstudios.map((estudio) => (
+                                        <tr key={estudio.id_estudio}>
+                                            <td>{estudio.id_estudio}</td>
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={estudio.nombre_estudio}
+                                                    onChange={(e) => {
+                                                        const newEstudios = [...estudios];
+                                                        const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
+                                                        newEstudios[index].nombre_estudio = e.target.value;
+                                                        setEstudios(newEstudios);
+                                                    }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={estudio.descripcion_estudio}
+                                                    onChange={(e) => {
+                                                        const newEstudios = [...estudios];
+                                                        const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
+                                                        newEstudios[index].descripcion_estudio = e.target.value;
+                                                        setEstudios(newEstudios);
+                                                    }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <div className="botones-acciones">
+                                                    <button
+                                                        onClick={() => handleEditarEstudio(estudio)}
+                                                        className="editar-button"
+                                                    >
+                                                        Guardar
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="pagination-read-usuario">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                    <button
+                                        key={page}
+                                        onClick={() => setCurrentPage(page)}
+                                        className={page === currentPage ? 'active' : ''}
+                                    >
+                                        {page}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </>
+                )}
+                {vista === 'eliminar' && (
+                    <>
+                        <div className="busqueda-estudio">
+                            <input
+                                type="text"
+                                placeholder="Buscar..."
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                            <select value={searchField} onChange={handleFieldChange}>
+                                <option value="nombre_estudio">Nombre del Estudio</option>
+                                <option value="descripcion_estudio">Descripción del Estudio</option>
+                            </select>
+                        </div>
+                        <div className="tabla-estudios-container">
+                            <table className="tabla-estudios">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre del Estudio</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentEstudios.map((estudio) => (
+                                        <tr key={estudio.id_estudio}>
+                                            <td>{estudio.id_estudio}</td>
+                                            <td>{estudio.nombre_estudio}</td>
+                                            <td>{estudio.descripcion_estudio}</td>
+                                            <td>
+                                                <div className="botones-acciones">
+                                                    <button
+                                                        onClick={() => handleEliminarEstudio(estudio.id_estudio)}
+                                                        className="eliminar-button"
+                                                    >
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="pagination-read-usuario">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                    <button
+                                        key={page}
+                                        onClick={() => setCurrentPage(page)}
+                                        className={page === currentPage ? 'active' : ''}
+                                    >
+                                        {page}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </>
                 )}
             </div>
             {mostrarModal && (
@@ -212,8 +368,3 @@ const EstudiosRadiologicos = () => {
 };
 
 export default EstudiosRadiologicos;
-
-
-
-
-

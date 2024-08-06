@@ -157,7 +157,21 @@ def update_user_password_in_db(user_id, new_encrypted_password):
     user.contrasena = new_encrypted_password
     db.session.commit()
 
+class EspecialidadesMedicas(db.Model):
+    __tablename__ = 'especialidades_medicas'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_especialidad = db.Column(db.String(100), unique=True, nullable=False)
 
+class DiagnosticoPresuntivo(db.Model):
+    __tablename__ = 'diagnostico_presuntivo'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_diagnostico = db.Column(db.String(100), nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nombre_diagnostico': self.nombre_diagnostico
+        }
 
     
 

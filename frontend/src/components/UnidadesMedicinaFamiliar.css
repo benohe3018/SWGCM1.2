@@ -1,0 +1,120 @@
+/* src/components/UnidadesMedicinaFamiliar.css */
+
+.unidades-medicina-familiar-page {
+  background-color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #0C231E;
+}
+
+.unidades-medicina-familiar-header {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  margin-left: 100px;
+}
+
+.header-texts {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.welcome-message {
+  font-size: 24px;
+  margin: 0;
+  color: #0C231E;
+}
+
+.department-name {
+  font-size: 18px;
+  margin: 0;
+  color: #0C231E;
+}
+
+.unidades-medicina-familiar-content {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilo para la barra de búsqueda */
+.busqueda-unidad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.busqueda-unidad input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 60%;
+}
+
+.busqueda-unidad select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Contenedor de la tabla */
+.tabla-unidades-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-unidades {
+  width: 100%;
+  border-collapse: collapse;
+  display: inline;
+}
+
+.tabla-unidades th, .tabla-unidades td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.tabla-unidades th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+/* Paginación */
+.pagination-read-usuario {
+  margin-top: 20px;
+}
+
+.pagination-read-usuario button {
+  margin: 0 5px;
+  padding: 10px;
+  border: none;
+  background-color: #12322B;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-read-usuario button.active {
+  background-color: #0C231E;
+}

@@ -54,7 +54,85 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validaciones
+    const isValidNSS = (nss) => /^\d{11}$/.test(nss);
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
+    const isValidSpeciality = (speciality) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(speciality) && speciality.length >= 1 && speciality.length <= 50;
+    const isValidUnidadMedica = (unidad) => /^\d+$/.test(unidad);
+    const isValidDiagnostico = (diagnostico) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(diagnostico) && diagnostico.length >= 1 && diagnostico.length <= 50;
+
+    if (!isValidNSS(formData.nss)) {
+      alert('El NSS debe ser un número de 11 dígitos.');
+      return;
+    }
+   
+    if (!isValidName(formData.nombre_paciente)) {
+      alert('El nombre del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidName(formData.apellido_paterno_paciente)) {
+      alert('El apellido paterno del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidName(formData.apellido_materno_paciente)) {
+      alert('El apellido materno del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidSpeciality(formData.especialidad_medica)) {
+      alert('La especialidad médica debe contener solo letras.');
+      return;
+    }
+
+    if (!formData.id_medico_refiere) {
+      alert('Debe seleccionar un médico que refiere.');
+      return;
+    }
+
+    if (!formData.id_estudio_radiologico) {
+      alert('Debe seleccionar un estudio solicitado.');
+      return;
+    }
+
+    if (!isValidUnidadMedica(formData.unidad_medica_procedencia)) {
+      alert('La unidad médica de procedencia debe contener solo números.');
+      return;
+    }
+
+    if (!isValidDiagnostico(formData.diagnostico_presuntivo)) {
+      alert('El diagnóstico presuntivo debe contener solo letras y espacios.');
+      return;
+    }
+
     onSubmit(formData);
+  };
+
+  const handleCancel = () => {
+    // Paso 1: Mostrar diálogo de confirmación
+    const isConfirmed = window.confirm("¿Está seguro que desea cancelar? Los cambios no guardados se perderán.");
+  
+    // Paso 2: Verificar la confirmación del usuario
+    if (isConfirmed) {
+      // Resetear el formulario si el usuario confirma
+      setFormData({
+        id: '',
+        fecha_hora_estudio: '',
+        nss: '',
+        nombre_paciente: '',
+        apellido_paterno_paciente: '',
+        apellido_materno_paciente: '',
+        especialidad_medica: '',
+        id_medico_refiere: '',
+        id_estudio_radiologico: '',
+        unidad_medica_procedencia: '',
+        diagnostico_presuntivo: '',
+        nombre_completo_medico: '',
+        estudio_solicitado: ''
+      });
+    }
   };
 
   return (
@@ -115,10 +193,12 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-actions">
         <button type="submit">Enviar</button>
-        <button type="button" onClick={onCancel}>Cancelar</button>
+        <button type="button" onClick={handleCancel}>Cancelar</button>
       </div>
     </form>
   );
 };
 
 export default FormularioPaciente;
+
+

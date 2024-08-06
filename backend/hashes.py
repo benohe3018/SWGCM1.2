@@ -1,9 +1,20 @@
-import bcrypt
+import os
+from argon2 import PasswordHasher
+from dotenv import load_dotenv
+
+load_dotenv()
 
 password = "HalaMadrid3018?"
-new_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-print(f"Nuevo hash generado: {new_hash.decode('utf-8')}")
 
-# Ahora verifica este nuevo hash
-result = bcrypt.checkpw(password.encode('utf-8'), new_hash)
-print(f"¿La contraseña es correcta con el nuevo hash? {result}")
+ph = PasswordHasher()
+hashed_password = ph.hash(password)
+
+print(f"Contraseña original: {password}")
+print(f"Contraseña hasheada: {hashed_password}")
+
+# Verificación
+try:
+    ph.verify(hashed_password, password)
+    print("Verificación exitosa: el hash coincide con la contraseña")
+except Exception as e:
+    print(f"Error en la verificación: {str(e)}")

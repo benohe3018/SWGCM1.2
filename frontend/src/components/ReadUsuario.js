@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 import './ReadUsuario.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
@@ -9,7 +9,7 @@ const ReadUsuario = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre_usuario');
-  const usuariosPerPage = 5;
+  const usuariosPerPage = 10;
 
   const fetchUsuarios = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`);
@@ -60,81 +60,68 @@ const ReadUsuario = () => {
           <h2 className="department-name">Usuarios Registrados en la base de datos</h2>
         </div>
       </header>
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/create-usuario">Capturar Nuevo Usuario</Link></li>
-          <li><Link to="/read-usuario">Ver Usuario</Link></li>
-          <li><Link to="/update-usuario">Actualizar Registro de Usuarios</Link></li>
-          <li><Link to="/delete-usuario">Borrar Registro de Usuarios</Link></li>
-          <li><Link to="/dashboard-root">Página de Inicio</Link></li>
-        </ul>
-        <div className="hamburger">
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
-      </nav>
-      <div className="read-usuario-content">
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Buscar..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-          <select value={searchField} onChange={handleFieldChange}>
-            <option value="nombre_usuario">Nombre de Usuario</option>
-            <option value="nombre_real">Nombre Real</option>
-            <option value="apellido_paterno">Apellido Paterno</option>
-            <option value="apellido_materno">Apellido Materno</option>
-          </select>
-        </div>
-        <div className="usuario-table-container">
-          {isLoading ? (
-            <p>Cargando...</p>
-          ) : (
-            <>
-              <table className="usuario-table">
-                <thead>
-                  <tr>
-                    <th>Nombre de Usuario</th>
-                    <th>Nombre Real</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>Rol</th>
-                    <th>Matrícula</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentUsuarios.map(usuario => (
-                    <tr key={usuario.id}>
-                      <td>{usuario.nombre_usuario}</td>
-                      <td>{usuario.nombre_real}</td>
-                      <td>{usuario.apellido_paterno}</td>
-                      <td>{usuario.apellido_materno}</td>
-                      <td>{usuario.rol}</td>
-                      <td>{usuario.matricula}</td>
+      <div className="main-layout">
+        <Sidebar />
+        <div className="read-usuario-content">
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+            <select value={searchField} onChange={handleFieldChange}>
+              <option value="nombre_usuario">Nombre de Usuario</option>
+              <option value="nombre_real">Nombre Real</option>
+              <option value="apellido_paterno">Apellido Paterno</option>
+              <option value="apellido_materno">Apellido Materno</option>
+            </select>
+          </div>
+          <div className="usuario-table-container">
+            {isLoading ? (
+              <p>Cargando...</p>
+            ) : (
+              <>
+                <table className="usuario-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre de Usuario</th>
+                      <th>Nombre Real</th>
+                      <th>Apellido Paterno</th>
+                      <th>Apellido Materno</th>
+                      <th>Rol</th>
+                      <th>Matrícula</th>
                     </tr>
+                  </thead>
+                  <tbody>
+                    {currentUsuarios.map(usuario => (
+                      <tr key={usuario.id}>
+                        <td>{usuario.nombre_usuario}</td>
+                        <td>{usuario.nombre_real}</td>
+                        <td>{usuario.apellido_paterno}</td>
+                        <td>{usuario.apellido_materno}</td>
+                        <td>{usuario.rol}</td>
+                        <td>{usuario.matricula}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="pagination-read-usuario">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={page === currentPage ? 'active' : ''}
+                    >
+                      {page}
+                    </button>
                   ))}
-                </tbody>
-              </table>
-              <div className="pagination-read-usuario">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                  <button
-                    key={page}
-                    onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
-      <script src="script.js"></script>
     </div>
   );
 };

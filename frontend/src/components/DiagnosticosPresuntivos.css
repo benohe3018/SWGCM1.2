@@ -1,0 +1,120 @@
+.diagnosticos-presuntivos-page {
+    padding: 20px;
+  }
+  
+  .diagnosticos-presuntivos-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+   
+  .header-texts {
+    text-align: center;
+  }
+  
+  .welcome-message {
+    font-size: 24px;
+    color: #004d40;
+  }
+  
+  .department-name {
+    font-size: 18px;
+  }
+  
+  .diagnosticos-presuntivos-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .mensaje-confirmacion {
+    text-align: center;
+    color: green;
+    margin-bottom: 20px;
+  }
+  
+  .busqueda-diagnostico {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        align-items: center;
+        flex-direction: column;
+  }
+  
+  .busqueda-diagnostico input {
+    width: 70%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .busqueda-diagnostico select {
+    width: 45%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .tabla-diagnosticos-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  .tabla-diagnosticos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .tabla-diagnosticos th,
+  .tabla-diagnosticos td {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .pagination-read-diagnostico {
+    text-align: center;
+  }
+  
+  .pagination-read-diagnostico button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination-read-diagnostico .active {
+    background-color: #0C231E;
+    color: white;
+  }
+  
+  .botones-acciones {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .editar-button {
+    background-color: #0C231E;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .eliminar-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .editar-button:hover, .eliminar-button:hover {
+    opacity: 0.8;
+  }
+  

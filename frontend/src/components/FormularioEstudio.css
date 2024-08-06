@@ -1,8 +1,6 @@
 .formulario-estudio-container {
-  background-color: white;
+  background-color: whitesmoke;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   max-width: 400px;
   margin: 10px auto;
   text-align: left;
@@ -51,7 +49,6 @@
 }
 .titulo-formulario {
   font-size: 24px;
-  margin-bottom: 80px;
   text-align: center;
   color: #004d40;
 }

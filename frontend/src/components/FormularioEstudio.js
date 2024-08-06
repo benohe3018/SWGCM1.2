@@ -6,6 +6,16 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
   const [descripcion, setDescripcion] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const isValidNombre = (nombre) => {
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/;
+    return typeof nombre === 'string' && nombre.length >= 2 && nombre.length <= 100 && regex.test(nombre);
+  };
+  
+  const isValidDescripcion = (descripcion) => {
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/;
+    return typeof descripcion === 'string' && descripcion.length <= 500 && regex.test(descripcion);
+  };
+
   useEffect(() => {
     if (modo === 'editar' && estudioInicial) {
       setNombre(estudioInicial.nombre_estudio);
@@ -17,11 +27,11 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     event.preventDefault();
     
     if (!isValidNombre(nombre)) {
-        alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres).');
+        alert('Por favor, introduce un nombre de estudio válido (2-100 caracteres, solo letras y espacios).');
         return;
     }
     if (!isValidDescripcion(descripcion)) {
-        alert('Por favor, introduce una descripción válida (máximo 500 caracteres).');
+        alert('Por favor, introduce una descripción válida (máximo 500 caracteres, solo letras y espacios).');
         return;
     }
 
@@ -44,12 +54,10 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
     }
   };
 
-  const isValidNombre = (nombre) => {
-    return nombre.length >= 2 && nombre.length <= 100;
-  };
-
-  const isValidDescripcion = (descripcion) => {
-    return descripcion.length <= 500;
+  const handleCancel = () => {
+    setNombre('');
+    setDescripcion('');
+    onCancel();
   };
 
   return (
@@ -63,17 +71,15 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
             id="nombre"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            placeholder="Nombre del estudio"
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="descripcion">Descripción:</label>
+          <label htmlFor="descripcion">Descripción del Estudio:</label>
           <textarea
             id="descripcion"
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
-            placeholder="Descripción del estudio"
             required
           />
         </div>
@@ -81,7 +87,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
           <button type="submit" className="boton-crear" disabled={isSubmitting}>
             {isSubmitting ? 'Enviando...' : (modo === 'crear' ? 'Crear Estudio' : 'Actualizar Estudio')}
           </button>
-          <button type="button" className="boton-cancelar" onClick={onCancel}>Cancelar</button>
+          <button type="button" className="boton-cancelar" onClick={handleCancel}>Cancelar</button>
         </div>
       </form>
     </div>
@@ -89,5 +95,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
 };
 
 export default FormularioEstudio;
+
+
 
 

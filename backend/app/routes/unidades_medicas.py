@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 unidades_medicas_bp = Blueprint('unidades_medicas', __name__)
 
-@unidades_medicas_bp.route('/unidades', methods=['GET'])
+@unidades_medicas_bp.route('/unidades_medicina_familiar', methods=['GET'])
 def get_unidades():
     try:
         unidades = UnidadesMedicinaFamiliar.query.all()
@@ -19,7 +19,7 @@ def get_unidades():
         logging.error("Error al recuperar unidades médicas: %s", str(e))
         return jsonify({"error": "Error al recuperar unidades médicas"}), 500
 
-@unidades_medicas_bp.route('/unidades', methods=['POST'])
+@unidades_medicas_bp.route('/unidades_medicina_familiar', methods=['POST'])
 def create_unidad():
     data = request.get_json()
     logging.info("Datos recibidos: %s", data)
@@ -48,7 +48,7 @@ def create_unidad():
         logging.error("Error en la base de datos al crear unidad médica: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
 
-@unidades_medicas_bp.route('/unidades/<int:id>', methods=['PUT'])
+@unidades_medicas_bp.route('/unidades_medicina_familiar/<int:id>', methods=['PUT'])
 def update_unidad(id):
     data = request.get_json()
     try:
@@ -66,7 +66,7 @@ def update_unidad(id):
         logging.error("Error al actualizar unidad médica: %s", str(e))
         return jsonify({"error": "Error al actualizar la unidad médica"}), 500
 
-@unidades_medicas_bp.route('/unidades/<int:id>', methods=['DELETE'])
+@unidades_medicas_bp.route('/unidades_medicina_familiar/<int:id>', methods=['DELETE'])
 def delete_unidad(id):
     try:
         unidad = UnidadesMedicinaFamiliar.query.get_or_404(id)
@@ -78,5 +78,5 @@ def delete_unidad(id):
         logging.error("Error al eliminar unidad médica: %s", str(e))
         return jsonify({"error": "Error al eliminar la unidad médica"}), 500
 
-# Nuevo endpoint para listar unidades médicas
+
 

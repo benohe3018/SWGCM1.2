@@ -17,7 +17,7 @@ const CRUDMedicos = () => {
       <nav className="navbar">
         <ul className="nav-links">
           <li><Link to="/">Cambiar Sesión</Link></li>
-          <li><Link to="/create-medico">Capturar Nuevo Medico</Link></li>
+          <li><Link to="/create-medico">Capturar Nuevo Médico</Link></li>
           <li><Link to="/read-medico">Ver Medicos</Link></li>
           <li><Link to="/update-medico">Actualizar Registro de Médico</Link></li>
           <li><Link to="/delete-medico">Borrar Registro de Médico</Link></li>

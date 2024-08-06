@@ -1,74 +1,47 @@
+/* UpdateUsuario.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .update-usuario-page {
-  background-color: whitesmoke; /* Color de fondo */
-  height: 100vh; /* Altura completa de la ventana del navegador */
+  background-color: whitesmoke;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
-  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  justify-content: flex-start;
+  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: center;
   color: #0C231E;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #004d40;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
 .update-usuario-header {
   display: flex;
-  flex-direction: inline-flex;
   width: 100%;
-  background-color: white; /* Color del encabezado */
+  background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
-  position: fixed; /* Cambio realizado aquí para fijar el encabezado en la parte superior */
-  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
-  z-index: 100; 
-  margin-top: 70px;/* Para asegurarse de que esté por encima de otros elementos */
+  top: 0;
+  z-index: 100;
+  margin-left: 300px
 }
 
 .header-logo {
-  margin-left: 10px; /* Agrega margen a la izquierda del logo */
+  height: 60px;
 }
 
 .header-texts {
-  text-align: center;
-  flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
+  margin-left: 20px;
+  text-align: left;
 }
 
 .welcome-message {
   font-size: 24px;
   margin: 0;
-  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
+  color: #0C231E;
 }
 
 .department-name {
@@ -77,12 +50,18 @@
   color: #0C231E;
 }
 
+.main-layout {
+  display: flex;
+  width: 100%;
+}
+
 .update-usuario-content {
-  margin-top: 220px; /* Ajusta este valor si es necesario */
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  margin-left: 200px;
 }
 
 .success-message {
@@ -91,26 +70,22 @@
 }
 
 .search-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.search-container input {
+.search-container input, .search-container select {
   padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-}
-
-.search-container select {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
 .usuario-table-container {
   width: 100%;
+  overflow-x: auto;
 }
 
 .usuario-table {
@@ -122,7 +97,7 @@
 .usuario-table th, .usuario-table td {
   border: 1px solid #ddd;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 .usuario-table th {
@@ -153,3 +128,4 @@
 .pagination-update-usuario button:hover {
   background-color: #0C231E;
 }
+

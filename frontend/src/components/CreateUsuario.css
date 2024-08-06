@@ -1,74 +1,9 @@
+/* CreateUsuario.css */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #004d40;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: #004d40;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .hamburger {
-    display: flex;
-  }
 }
 
 .create-usuario-page {
@@ -78,56 +13,93 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
 }
 
 .create-usuario-header {
   width: 100%;
-  background-color: white;
-  padding: 10px 20px;
+  background-color: whitesmoke;
+  padding: 20px;
   box-sizing: border-box;
-  position: fixed;
-  top: 70px; /* Ajustado para que quede debajo del menú */
+  top: 0; /* Ajustado para que quede debajo del menú */
   z-index: 100;
   display: flex;
+  align-items: center;
+}
+
+.header-texts {
+  margin-left: 20px;
+  text-align: left;
+}
+
+.form-description {
+  color: #12322B;
+}
+
+.main-layout {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-usuario-content {
-  margin-top: 280px;
+  margin-top: 100px;
   width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
 }
 
 form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 label {
-  display: block;
-  margin-bottom: 8px;
+  width: 150px;
+  margin-right: 15px;
   font-weight: bold;
   color: #12322B;
 }
 
 input, select {
-  width: calc(100% - 20px);
+  flex: 1;
   padding: 10px;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   color: #12322B;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.toggle-show-password {
+  position: absolute;
+  right: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color:#12322B
 }
 
 .create-usuario-button {
-  display: inline-block;
   padding: 10px 20px;
-  margin: 10px; /* Añadido margen para separación */
   background-color: #12322B;
   color: white;
   border: none;
@@ -149,20 +121,12 @@ input, select {
 
 .message-POST-failed {
   color: red;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-weight: bold;
+  margin-top: 20px;
 }
 
-.password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+.header-logo {
+  height: 60px;
 }
 
-.toggle-show-password {
-  position: absolute;
-  right: 5px;
-  background: none;
-  border: none;
-}
   

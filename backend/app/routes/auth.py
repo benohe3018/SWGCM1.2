@@ -4,88 +4,67 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
 import os
-from argon2.exceptions import VerifyMismatchError
-from .config import ph
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError, HashingError
+from .config import ph, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
 from ..models import Usuario, db
-from argon2.exceptions import HashingError
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+import base64
 
 # Obtención de variables de entorno para reCAPTCHA
 api_key = os.getenv('RECAPTCHA_API_KEY')
 site_key = os.getenv('RECAPTCHA_SITE_KEY')
 project_id = os.getenv('RECAPTCHA_PROJECT_ID')
 
+# Creación del blueprint de autenticación
 auth_bp = Blueprint('auth', __name__)
 
+# Cargar las claves de encriptación desde las variables de entorno
+key = os.getenv('SECRET_KEY').encode()
+iv = os.getenv('IV_KEY').encode()
+
+# Función para desencriptar la contraseña
+def decrypt_password(encrypted_password):
+    try:
+        encrypted_password_bytes = base64.b64decode(encrypted_password)
+        cipher = AES.new(key, AES.MODE_CBC, iv)
+        decrypted_password = unpad(cipher.decrypt(encrypted_password_bytes), AES.block_size, style='pkcs7')
+        return decrypted_password.decode('utf-8')
+    except Exception as e:
+        raise Exception(f"Error al desencriptar la contraseña: {str(e)}")
+
+# Función para generar el token JWT
 def generate_token(identity, role):
-    """
-    Genera un token JWT para el usuario autenticado.
-    
-    Args:
-        identity (str): Identidad del usuario (generalmente el ID).
-        role (str): Rol del usuario (por ejemplo, 'admin', 'user').
-    
-    Returns:
-        str: Token JWT.
-    """
     expires = timedelta(hours=24)
     additional_claims = {"role": role}
     return create_access_token(identity=identity, expires_delta=expires, additional_claims=additional_claims)
 
+# Función para hashear la contraseña usando Argon2
 def hash_password(password):
-    """
-    Genera un hash seguro para una contraseña utilizando Argon2.
-    
-    Args:
-        password (str): La contraseña a hashear.
-    
-    Returns:
-        str: El hash de la contraseña.
-    
-    Raises:
-        ValueError: Si hay un error al generar el hash.
-    """
     try:
-        return ph.hash(password)
+        hashed = ph.hash(password)
+        return hashed
     except HashingError as e:
-        print(f"Error al generar el hash de la contraseña: {str(e)}")
-        raise ValueError("Error al procesar la contraseña")
+        raise ValueError(f"Error al generar el hash de la contraseña: {str(e)}")
 
+# Función para verificar el hash de la contraseña
 def check_password_hash(stored_hash, password):
-    """
-    Verifica una contraseña comparándola con su hash almacenado.
-    
-    Args:
-        stored_hash (str): El hash de la contraseña almacenada.
-        password (str): La contraseña a verificar.
-    
-    Returns:
-        bool: True si la contraseña es correcta, False en caso contrario.
-    """
     try:
-        if stored_hash.startswith('$2b$'):  # Es un hash bcrypt
-            return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
-        else:  # Es un hash Argon2
-            return ph.verify(stored_hash, password)
-    except (VerifyMismatchError, ValueError):
+        ph.verify(stored_hash, password)
+        return True
+    except (VerifyMismatchError, ValueError) as e:
         return False
 
+# Ruta para el login de usuarios
 @auth_bp.route('/login', methods=['POST'])
 def login():
-    """
-    Maneja el proceso de inicio de sesión del usuario.
-    
-    Se espera un JSON con 'nombre_usuario', 'password' y 'captcha'.
-    Verifica el CAPTCHA, valida las credenciales del usuario y genera un token JWT.
-    
-    Returns:
-        json: Respuesta JSON con mensaje de éxito y token JWT o mensaje de error.
-    """
     data = request.get_json()
     username = data.get('nombre_usuario')
-    password = data.get('password')
+    encrypted_password = data.get('password')
     captcha = data.get('captcha')
 
-    # Verifica el CAPTCHA
+    # Verificación del CAPTCHA
     recaptcha_response = requests.post(f'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments?key={api_key}', json={
         'event': {
             'token': captcha,
@@ -94,34 +73,34 @@ def login():
         }
     })
     recaptcha_data = recaptcha_response.json()
+
     if 'event' not in recaptcha_data or 'riskAnalysis' not in recaptcha_data:
-        return jsonify({"message": "Invalid CAPTCHA"}), 401
+        return jsonify({"message": "CAPTCHA inválido"}), 401
     if recaptcha_data['event']['expectedAction'] != 'LOGIN' or recaptcha_data['riskAnalysis']['score'] < 0.5:
-        return jsonify({"message": "Invalid CAPTCHA"}), 401
-    
-    print(f"Intento de login para usuario: {username}")
+        return jsonify({"message": "CAPTCHA inválido"}), 401
 
-    user = Usuario.query.filter_by(nombre_usuario=username).first()
-    if user and check_password_hash(user.contrasena, password):
-        if user.contrasena.startswith('$2b$'):  # Es un hash bcrypt, actualizar a Argon2
-            new_hash = hash_password(password)
-            user.contrasena = new_hash
-            db.session.commit()
-        token = generate_token(user.id, user.rol)
-        return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
-    return jsonify({"message": "Credenciales inválidas"}), 401
+    # Intento de login
+    try:
+        password = decrypt_password(encrypted_password)
+    except Exception as e:
+        return jsonify({"message": f"Error al desencriptar la contraseña: {str(e)}"}), 500
 
+    try:
+        user = Usuario.query.filter_by(nombre_usuario=username).first()
+        if user:
+            if check_password_hash(user.contrasena, password):
+                token = generate_token(user.id, user.rol)
+                return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
+            else:
+                return jsonify({"message": "Credenciales inválidas"}), 401
+        else:
+            return jsonify({"message": "Credenciales inválidas"}), 401
+    except Exception as e:
+        return jsonify({"message": f"Error durante el proceso de login: {str(e)}"}), 500
+
+# Ruta para el registro de usuarios
 @auth_bp.route('/register', methods=['POST'])
 def register():
-    """
-    Maneja el proceso de registro de un nuevo usuario.
-    
-    Se espera un JSON con 'nombre_usuario', 'password', 'rol', 'nombre_real', 'apellido_paterno', 'apellido_materno' y 'matricula'.
-    Hashea la contraseña y almacena el nuevo usuario en la base de datos.
-    
-    Returns:
-        json: Respuesta JSON con mensaje de éxito o error.
-    """
     data = request.get_json()
     username = data.get('nombre_usuario')
     password = data.get('password')
@@ -130,14 +109,14 @@ def register():
     apellido_paterno = data.get('apellido_paterno')
     apellido_materno = data.get('apellido_materno')
     matricula = data.get('matricula')
-    
+
     if Usuario.query.filter_by(nombre_usuario=username).first():
         return jsonify({"message": "El nombre de usuario ya existe"}), 400
-    
+
     hashed_password = hash_password(password)
-    
+
     new_user = Usuario(
-        nombre_usuario=username, 
+        nombre_usuario=username,
         contrasena=hashed_password,
         rol=role,
         nombre_real=nombre_real,
@@ -147,5 +126,14 @@ def register():
     )
     db.session.add(new_user)
     db.session.commit()
-    
+
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
+
+
+
+
+
+
+
+
+

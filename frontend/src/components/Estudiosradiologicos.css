@@ -10,160 +10,12 @@
   color: black;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #004d40;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
-}
-.botones-acciones {
-  display: flex;
-  gap: 10px;
-}
-.editar-button{
-  background-color: #0C231E;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.editar-button:hover{
-  background-color: whitesmoke;
-  color: black;
-}
-.eliminar-button{
-  background-color: #dc3545;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.eliminar-button:hover{
-  background-color: whitesmoke;
-  color: black
-}
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1001;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-.modal-actions button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.modal-actions .confirmar-button {
-  background-color: #dc3545;
-  color: white;
-}
-
-.modal-actions .cancelar-button {
-  background-color: #6c757d;
-  color: white;
-}
-.mensaje-confirmacion {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: #004d40;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-}
-
 .estudios-radiologicos-header {
   display: flex;
   width: 100%;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
-  margin-top: 70px;
 }
 
 .header-logo {
@@ -188,7 +40,6 @@
 }
 
 .estudios-radiologicos-content {
-  margin-top: 100px;
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -215,10 +66,94 @@
 .tabla-estudios th {
   background-color: #f4f4f4;
 }
+
+.busqueda-estudio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.busqueda-estudio input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 60%;
+}
+
+.busqueda-estudio select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.pagination-read-usuario {
+  margin-top: 20px;
+}
+
+.pagination-read-usuario button {
+  margin: 0 5px;
+  padding: 10px;
+  border: none;
+  background-color: #12322B;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-read-usuario button.active {
+  background-color: #0C231E;
+}
+
+.mensaje-confirmacion {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.botones-acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.editar-button {
+  background-color: #0C231E;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editar-button:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.eliminar-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.eliminar-button:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
 .mr-machine {
   width: 100%;
   max-width: 300px;
   margin-top: 2rem;
   display: flex;
 }
-  

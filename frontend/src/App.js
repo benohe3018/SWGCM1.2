@@ -1,11 +1,12 @@
-// App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './components/AuthContext'; // Importar el contexto de autenticación
+import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import SuperRoot from './components/SuperRoot';
 import Administrador from './components/Administrador';
 import CRUDMedicos from './components/CRUDMedicos';
-import CreateMedico from './components/CreateMedico'; 
+import CreateMedico from './components/CreateMedico';
 import ReadMedico from './components/ReadMedico';
 import UpdateMedico from './components/UpdateMedico';
 import DeleteMedico from './components/DeleteMedico';
@@ -13,48 +14,76 @@ import CRUDUsuarios from './components/CRUDUsuarios';
 import CreateUsuario from './components/CreateUsuario';
 import GestionCitas from './components/GestionCitas';
 import InformeMedicos from './components/InformesMedicos';
+import Hospitales from './components/Hospitales';
 import Usuarios from './components/Usuarios';
 import EstudiosRadiologicos from './components/EstudiosRadiologicos';
+import UnidadesMedicinaFamiliar from './components/UnidadesMedicinaFamiliar';
 import ReadUsuario from './components/ReadUsuario';
 import UpdateUsuario from './components/UpdateUsuario';
 import DeleteUsuario from './components/DeleteUsuario';
 import Admin from './components/Admin';
 import UsuarioDeCampo from './components/UsuarioDeCampo';
-import CreateEstudio from './components/CreateEstudio'; 
-import ReadEstudio from './components/ReadEstudio';
-import UpdateEstudio from './components/UpdateEstudio';
-import DeleteEstudio from './components/DeleteEstudio';
+import ActiveUser from './components/ActiveUser';
+import EspecialidadesMedicas from './components/EspecialidadesMedicas';
+import DiagnosticosPresuntivos from './components/DiagnosticosPresuntivos';
+
+const PrivateRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/" />;
+};
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard-root" element={<SuperRoot />} />
-        <Route path="/dashboard-admin" element={<Administrador />} />
-        <Route path="/crud-medicos" element={<CRUDMedicos/>} />
-        <Route path="/create-medico" element={<CreateMedico/>} />  
-        <Route path="/read-medico" element={<ReadMedico/>} />
-        <Route path="/update-medico" element={<UpdateMedico/>} />
-        <Route path="/delete-medico" element={<DeleteMedico/>} />
-        <Route path="/crud-usuarios" element={<CRUDUsuarios/>} />
-        <Route path="/create-usuario" element={<CreateUsuario/>} />
-        <Route path="/gestion-citas" element={<GestionCitas />} />
-        <Route path="/informes-medicos" element={<InformeMedicos />} />
-        <Route path="/usuarios" element={<Usuarios />} />
-        <Route path="/estudios-radiologicos" element={<EstudiosRadiologicos />} />
-        <Route path="/read-usuario" element={<ReadUsuario/>} />
-        <Route path="/update-usuario" element={<UpdateUsuario/>} />
-        <Route path="/delete-usuario" element={<DeleteUsuario/>} />
-        <Route path="/dashboard-user-admin" element={<Admin />} />
-        <Route path="/dashboard-field-user" element={<UsuarioDeCampo />} />
-        <Route path="/create-estudio" element={<CreateEstudio/>} />  
-        <Route path="/read-estudio" element={<ReadEstudio/>} />
-        <Route path="/update-Estudio" element={<UpdateEstudio/>} />
-        <Route path="/delete-estudio" element={<DeleteEstudio/>} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="main-layout">
+          <ActiveUser />
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard-root" element={<PrivateRoute><Sidebar /><SuperRoot /></PrivateRoute>} />
+            <Route path="/dashboard-admin" element={<PrivateRoute><Sidebar /><Administrador /></PrivateRoute>} />
+            <Route path="/crud-medicos" element={<PrivateRoute><Sidebar /><CRUDMedicos /></PrivateRoute>} />
+            <Route path="/create-medico" element={<PrivateRoute><Sidebar /><CreateMedico /></PrivateRoute>} />
+            <Route path="/read-medico" element={<PrivateRoute><Sidebar /><ReadMedico /></PrivateRoute>} />
+            <Route path="/update-medico" element={<PrivateRoute><Sidebar /><UpdateMedico /></PrivateRoute>} />
+            <Route path="/delete-medico" element={<PrivateRoute><Sidebar /><DeleteMedico /></PrivateRoute>} />
+            <Route path="/crud-usuarios" element={<PrivateRoute><Sidebar /><CRUDUsuarios /></PrivateRoute>} />
+            <Route path="/create-usuario" element={<PrivateRoute><Sidebar /><CreateUsuario /></PrivateRoute>} />
+            <Route path="/gestion-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
+            <Route path="/crear-cita" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
+            <Route path="/ver-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
+            <Route path="/informes-medicos" element={<PrivateRoute><Sidebar /><InformeMedicos /></PrivateRoute>} />
+            <Route path="/usuarios" element={<PrivateRoute><Sidebar /><Usuarios /></PrivateRoute>} />
+            <Route path="/crear-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="crear" /></PrivateRoute>} />
+            <Route path="/ver-estudios" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="ver" /></PrivateRoute>} />
+            <Route path="/update-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="editar" /></PrivateRoute>} />
+            <Route path="/delete-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="eliminar" /></PrivateRoute>} />
+            <Route path="/crear-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="crear" /></PrivateRoute>} />
+            <Route path="/ver-unidades" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="ver" /></PrivateRoute>} />
+            <Route path="/update-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="editar" /></PrivateRoute>} />
+            <Route path="/delete-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="eliminar" /></PrivateRoute>} />
+            <Route path="/crear-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="crear" /></PrivateRoute>} />            <Route path="/ver-hospitales" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="ver" /></PrivateRoute>} />
+            <Route path="/update-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="editar" /></PrivateRoute>} />
+            <Route path="/delete-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="eliminar" /></PrivateRoute>} />
+            <Route path="/read-usuario" element={<PrivateRoute><Sidebar /><ReadUsuario /></PrivateRoute>} />
+            <Route path="/update-usuario" element={<PrivateRoute><Sidebar /><UpdateUsuario /></PrivateRoute>} />
+            <Route path="/delete-usuario" element={<PrivateRoute><Sidebar /><DeleteUsuario /></PrivateRoute>} />
+            <Route path="/crear-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="crear" /></PrivateRoute>} />
+            <Route path="/ver-especialidades" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="ver" /></PrivateRoute>} />
+            <Route path="/update-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="editar" /></PrivateRoute>} />
+            <Route path="/delete-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="eliminar" /></PrivateRoute>} />
+            <Route path="/dashboard-user-admin" element={<PrivateRoute><Sidebar /><Admin /></PrivateRoute>} />
+            <Route path="/dashboard-field-user" element={<PrivateRoute><Sidebar /><UsuarioDeCampo /></PrivateRoute>} />
+            <Route path="/crear-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="crear" /></PrivateRoute>} />
+            <Route path="/ver-diagnosticos" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="ver" /></PrivateRoute>} />
+            <Route path="/update-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="editar" /></PrivateRoute>} />
+            <Route path="/delete-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="eliminar" /></PrivateRoute>} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
 export default App;
+

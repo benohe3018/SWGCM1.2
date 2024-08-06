@@ -1,10 +1,16 @@
 /* SuperRoot.css */
+
 .super-root-page {
+  display: flex;
+}
+
+.content-area {
+  margin-left: 250px; /* Ajusta según el ancho de tu sidebar */
+  width: calc(100% - 250px);
   background-color: whitesmoke;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
   font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
@@ -13,16 +19,14 @@
 
 .super-root-header {
   width: 100%;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
   top: 0;
   z-index: 100;
-  margin-top: 100px;
 }
 
 .header-logo {
@@ -46,39 +50,8 @@
   color: #0C231E;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #12322B;
-  color: white;
-  width: 100%;
-  top: 90px; /* Para asegurarse de que esté debajo del encabezado */
-  z-index: 1000;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-
 .super-root-content {
-  margin-top: 250px; /* Ajusta según el tamaño del encabezado y la barra de navegación */
+  margin-top: 150px; /* Ajusta según el tamaño del encabezado */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,5 +64,7 @@
   max-width: 300px;
   margin-top: 20px;
 }
+
+
 
 

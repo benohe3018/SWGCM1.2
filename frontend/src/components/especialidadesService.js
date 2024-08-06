@@ -1,12 +1,12 @@
-//especialidadesService.js
+// especialidadesService.js
 
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL; 
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const getEspecialidades = async () => {
     try {
-        const response = await axios.get(`${API_URL}/api/especialidades`);
+        const response = await axios.get(`${API_URL}/api/especialidades/list`); // Cambiado a /list
         return response.data;
     } catch (error) {
         console.error("Error al obtener las especialidades médicas:", error);

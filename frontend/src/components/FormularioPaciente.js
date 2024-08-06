@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
-import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales, createPacientePrueba } from './citasService';
+import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales } from './citasService';
 
 const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -30,7 +30,9 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     if (modo === 'editar' && pacienteInicial) {
       setFormData({
         ...pacienteInicial,
-        id: pacienteInicial.id || ''
+        id: pacienteInicial.id || '',
+        fecha_hora_estudio: pacienteInicial.fecha_hora_estudio.split('T')[0],
+        hora_estudio: pacienteInicial.fecha_hora_estudio.split('T')[1]
       });
     }
   }, [modo, pacienteInicial]);
@@ -91,23 +93,73 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const fecha_hora_estudio = `${formData.fecha_hora_estudio}T${formData.hora_estudio}`;
-    const finalFormData = {
+    const isValidNSS = (nss) => /^\d{11}$/.test(nss);
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
+    const isValidSpeciality = (speciality) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(speciality) && speciality.length >= 1 && speciality.length <= 50;
+    const isValidUnidadMedica = (unidad) => /^UMF#\d+$/.test(unidad);
+    const isValidDiagnostico = (diagnostico) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(diagnostico) && diagnostico.length >= 1 && diagnostico.length <= 50;
+
+    if (!isValidNSS(formData.nss)) {
+      alert('El NSS debe ser un número de 11 dígitos.');
+      return;
+    }
+
+    if (!isValidName(formData.nombre_paciente)) {
+      alert('El nombre del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidName(formData.apellido_paterno_paciente)) {
+      alert('El apellido paterno del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidName(formData.apellido_materno_paciente)) {
+      alert('El apellido materno del paciente debe contener solo letras.');
+      return;
+    }
+
+    if (!isValidSpeciality(formData.especialidad_medica)) {
+      alert('La especialidad médica debe contener solo letras.');
+      return;
+    }
+
+    if (!formData.id_medico_refiere) {
+      alert('Debe seleccionar un médico que refiere.');
+      return;
+    }
+
+    if (!formData.id_estudio_radiologico) {
+      alert('Debe seleccionar un estudio solicitado.');
+      return;
+    }
+
+    if (!isValidUnidadMedica(formData.unidad_medica_procedencia)) {
+      alert('La unidad médica de procedencia debe contener solo números.');
+      return;
+    }
+
+    if (!isValidDiagnostico(formData.diagnostico_presuntivo)) {
+      alert('El diagnóstico presuntivo debe contener solo letras y espacios.');
+      return;
+    }
+
+    const formattedDateTime = `${formData.fecha_hora_estudio}T${formData.hora_estudio}`;
+    console.log('Fecha y hora formateadas:', formattedDateTime);
+
+    const pacienteData = {
       ...formData,
-      fecha_hora_estudio
+      fecha_hora_estudio: formattedDateTime
     };
 
-    console.log('Datos enviados al backend:', finalFormData);
-
     try {
-      const response = await createPacientePrueba(finalFormData);
-      onSubmit(response);
+      console.log('Datos del paciente enviados:', pacienteData);
+      onSubmit(pacienteData);
     } catch (error) {
-      console.error('Error al crear paciente:', error);
-      alert('Error al crear paciente. Verifica los datos e intenta nuevamente.');
+      console.error('Error al enviar los datos:', error);
     }
   };
 
@@ -143,7 +195,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           type="date"
           id="fecha_hora_estudio"
           name="fecha_hora_estudio"
-          value={formData.fecha_hora_estudio.split('T')[0]}
+          value={formData.fecha_hora_estudio}
           onChange={handleChange}
           required
         />

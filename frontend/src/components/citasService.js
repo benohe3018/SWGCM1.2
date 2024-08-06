@@ -124,3 +124,27 @@ export const getHospitales = async () => {
       throw error;
   }
 };
+export const getCitasPorFecha = async (fecha) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/citas`, {
+      params: { fecha },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching citas:', error);
+    throw error;
+  }
+};
+
+// Función para verificar disponibilidad de horario
+export const verificarDisponibilidadHorario = async (fecha, hora) => {
+  try {
+    const citas = await getCitasPorFecha(fecha);
+    const horariosOcupados = citas.map(cita => cita.fecha_hora_estudio);
+    const horarioSeleccionado = `${fecha}T${hora}`;
+    return !horariosOcupados.includes(horarioSeleccionado);
+  } catch (error) {
+    console.error('Error verifying availability:', error);
+    throw error;
+  }
+};

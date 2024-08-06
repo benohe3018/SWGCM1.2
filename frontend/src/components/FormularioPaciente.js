@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
-import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales } from './citasService';
+import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales, getPacientesPrueba } from './citasService';
 
 const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     id: '',
     fecha_hora_estudio: '',
+    hora_estudio: '',
     nss: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
@@ -24,6 +25,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   const [unidadesMedicas, setUnidadesMedicas] = useState([]);
   const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
   const [hospitales, setHospitales] = useState([]);  // Nueva línea
+  const [horariosDisponibles, setHorariosDisponibles] = useState([]);
+  const [horariosOcupados, setHorariosOcupados] = useState([]);
 
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
@@ -53,6 +56,41 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchHorariosOcupados = async (fecha) => {
+      try {
+        const data = await getPacientesPrueba();
+        const horarios = data
+          .filter(paciente => paciente.fecha_hora_estudio.startsWith(fecha))
+          .map(paciente => paciente.fecha_hora_estudio.split('T')[1]);
+        setHorariosOcupados(horarios);
+      } catch (error) {
+        console.error('Error fetching horarios ocupados:', error);
+      }
+    };
+
+    if (formData.fecha_hora_estudio) {
+      const fechaSeleccionada = formData.fecha_hora_estudio.split('T')[0];
+      fetchHorariosOcupados(fechaSeleccionada);
+    }
+  }, [formData.fecha_hora_estudio]);
+
+  const handleFechaChange = (e) => {
+    const fechaSeleccionada = new Date(e.target.value);
+    const dia = fechaSeleccionada.getDay();
+    if (dia >= 1 && dia <= 5) { // Lunes a Viernes
+      const hora = fechaSeleccionada.getHours();
+      if (hora < 12) {
+        setHorariosDisponibles(horariosManana);
+      } else {
+        setHorariosDisponibles(horariosTarde);
+      }
+    } else {
+      setHorariosDisponibles([]);
+    }
+    handleChange(e);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -144,6 +182,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       setFormData({
         id: '',
         fecha_hora_estudio: '',
+        hora_estudio: '',
         nss: '',
         nombre_paciente: '',
         apellido_paterno_paciente: '',
@@ -163,8 +202,19 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   return (
     <form className="form-paciente" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="fecha_hora_estudio">Fecha y Hora del Estudio:</label>
-        <input type="datetime-local" id="fecha_hora_estudio" name="fecha_hora_estudio" value={formData.fecha_hora_estudio} onChange={handleChange} required />
+        <label htmlFor="fecha_hora_estudio">Fecha del Estudio:</label>
+        <input type="date" id="fecha_hora_estudio" name="fecha_hora_estudio" value={formData.fecha_hora_estudio} onChange={handleFechaChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="hora_estudio">Hora del Estudio:</label>
+        <select id="hora_estudio" name="hora_estudio" value={formData.hora_estudio} onChange={handleChange} required>
+          <option value="">Seleccione una hora</option>
+          {horariosDisponibles.map((hora, index) => (
+            <option key={index} value={hora} disabled={horariosOcupados.includes(hora)}>
+              {hora}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-group">
         <label htmlFor="nss">NSS del Paciente:</label>
@@ -255,5 +305,13 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     </form>
   );
 };
+
+const horariosManana = [
+  "07:15", "07:45", "08:25", "09:05", "09:45", "10:25", "11:05", "11:45", "12:25"
+];
+
+const horariosTarde = [
+  "14:00", "14:40", "15:20", "16:00", "16:40", "17:20", "18:00", "18:40", "19:20"
+];
 
 export default FormularioPaciente;

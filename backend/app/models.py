@@ -137,10 +137,11 @@ class PacientePrueba(db.Model):
     estudio_solicitado = db.Column(db.LargeBinary, nullable=False)
     unidad_medica_procedencia = db.Column(db.LargeBinary, nullable=False)
     diagnostico_presuntivo = db.Column(db.LargeBinary, nullable=False)
+    hospital_envia = db.Column(db.String(255), nullable=True)
 
     def __init__(self, fecha_hora_estudio, nss, nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente,
                  especialidad_medica, nombre_completo_medico, estudio_solicitado, 
-                 unidad_medica_procedencia, diagnostico_presuntivo):
+                 unidad_medica_procedencia, diagnostico_presuntivo, hospital_envia):
         self.fecha_hora_estudio = fecha_hora_estudio
         self.nss = nss
         self.nombre_paciente = nombre_paciente
@@ -151,6 +152,7 @@ class PacientePrueba(db.Model):
         self.estudio_solicitado = estudio_solicitado
         self.unidad_medica_procedencia = unidad_medica_procedencia
         self.diagnostico_presuntivo = diagnostico_presuntivo
+        self.hospital_envia = hospital_envia
 
 def update_user_password_in_db(user_id, new_encrypted_password):
     user = Usuario.query.get(user_id)

@@ -79,6 +79,7 @@ input, select {
   font-size: 16px;
   color: #12322B;
   text-align: center;
+  text-overflow: ellipsis;
 }
 
 .password-container {
@@ -89,10 +90,11 @@ input, select {
 
 .toggle-show-password {
   position: absolute;
-  right: 10px;
+  right: 0px;
   background: none;
   border: none;
   cursor: pointer;
+  color:#12322B
 }
 
 .create-usuario-button {

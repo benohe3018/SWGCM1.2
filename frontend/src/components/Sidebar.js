@@ -64,8 +64,8 @@ const Sidebar = () => {
             <ul className="submenu">
               <li><Link to="/crear-cita">Capturar Nueva Cita</Link></li>
               <li><Link to="/ver-citas">Ver Citas</Link></li>
-              <li><Link to="/ver-citas">Editar Cita</Link></li>
-              <li><Link to="/ver-citas">Eliminar Cita</Link></li>
+              <li><Link to="/editar-citas">Editar Cita</Link></li>
+              <li><Link to="/eliminar-citas">Eliminar Cita</Link></li>
             </ul>
           )}
         </li>

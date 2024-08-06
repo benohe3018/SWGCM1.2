@@ -27,7 +27,10 @@ def create_diagnostico():
 def get_diagnosticos():
     try:
         diagnosticos = DiagnosticoPresuntivo.query.all()
-        return jsonify([diagnostico.to_dict() for diagnostico in diagnosticos]), 200
+        return jsonify([{
+            'id': diagnostico.id,
+            'nombre_diagnostico': diagnostico.nombre_diagnostico
+        } for diagnostico in diagnosticos]), 200
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
@@ -61,4 +64,15 @@ def delete_diagnostico(id):
         return jsonify({"message": "Diagnóstico eliminado exitosamente"}), 200
     except SQLAlchemyError as e:
         db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+@diagnosticos_bp.route('/diagnosticos/list', methods=['GET'])
+def get_diagnosticos_list():
+    try:
+        diagnosticos = DiagnosticoPresuntivo.query.all()
+        return jsonify([{
+            'id': diagnostico.id,
+            'nombre_diagnostico': diagnostico.nombre_diagnostico
+        } for diagnostico in diagnosticos]), 200
+    except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500

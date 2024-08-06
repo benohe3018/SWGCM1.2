@@ -69,5 +69,3 @@ def delete_hospital(id):
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
-
-# Nuevo endpoint para listar hospitales

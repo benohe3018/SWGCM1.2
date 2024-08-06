@@ -22,7 +22,12 @@ def create_paciente_prueba():
     key = os.getenv('ENCRYPTION_KEY').encode()
 
     try:
-        fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
+        fecha_hora_estudio_str = data['fecha_hora_estudio']
+        if 'T' not in fecha_hora_estudio_str:
+            return jsonify({"error": "Fecha y hora deben estar en el formato '%Y-%m-%dT%H:%M'"}), 400
+
+        fecha_hora_estudio = datetime.strptime(fecha_hora_estudio_str, '%Y-%m-%dT%H:%M')
+
         encrypted_nss = encrypt_data(data['nss'], key)
         encrypted_nombre_paciente = encrypt_data(data['nombre_paciente'], key)
         encrypted_apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)
@@ -56,6 +61,10 @@ def create_paciente_prueba():
         db.session.rollback()
         logging.error("Error en la base de datos al crear paciente prueba: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
+    except ValueError as ve:
+        logging.error("Error en el formato de fecha: %s", str(ve))
+        return jsonify({"error": "Error en el formato de fecha"}), 400
+
 
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])

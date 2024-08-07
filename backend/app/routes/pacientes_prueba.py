@@ -32,7 +32,7 @@ def create_paciente_prueba():
         encrypted_estudio_solicitado = encrypt_data(data['estudio_solicitado'], key)
         encrypted_unidad_medica_procedencia = encrypt_data(data['unidad_medica_procedencia'], key)
         encrypted_diagnostico_presuntivo = encrypt_data(data['diagnostico_presuntivo'], key)
-        encrypted_hospital_envia = encrypt_data(data['hospital_envia'], key)  # Nueva línea
+        encrypted_hospital_envia = encrypt_data(data['hospital_envia'], key)
 
         new_paciente_prueba = PacientePrueba(
             fecha_hora_estudio=fecha_hora_estudio,
@@ -45,18 +45,19 @@ def create_paciente_prueba():
             estudio_solicitado=encrypted_estudio_solicitado,
             unidad_medica_procedencia=encrypted_unidad_medica_procedencia,
             diagnostico_presuntivo=encrypted_diagnostico_presuntivo,
-            hospital_envia=encrypted_hospital_envia 
+            hospital_envia=encrypted_hospital_envia
         )
 
         db.session.add(new_paciente_prueba)
         db.session.commit()
+        
+        logging.info("Paciente prueba creado exitosamente con hospital_envia: %s", data['hospital_envia'])
 
         return jsonify({"message": "Paciente prueba creado exitosamente"}), 201
     except SQLAlchemyError as e:
         db.session.rollback()
         logging.error("Error en la base de datos al crear paciente prueba: %s", str(e))
         return jsonify({"error": "Error en la base de datos"}), 500
-
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():
@@ -76,7 +77,8 @@ def get_pacientes_prueba():
                     'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
                     'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
                     'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
-                    'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key)
+                    'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key),
+                    'hospital_envia': decrypt_data(paciente.hospital_envia, key)  # Añadir esta línea
                 })
             except Exception as e:
                 logging.error("Error al descifrar datos para el paciente con ID %s: %s", paciente.id, str(e))
@@ -85,6 +87,7 @@ def get_pacientes_prueba():
     except SQLAlchemyError as e:
         logging.error("Error al recuperar pacientes de prueba: %s", str(e))
         return jsonify({"error": "Error al recuperar pacientes de prueba"}), 500
+
 
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['PUT'])
 def update_paciente_prueba(id):

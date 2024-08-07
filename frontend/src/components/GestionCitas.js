@@ -108,7 +108,7 @@ const GestionCitas = () => {
         estudio_solicitado: pacienteEditado.estudio_solicitado,
         unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
         diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
-        nombre_hospital: pacienteEditado.nombre_hospital
+        hospital_envia: pacienteEditado.hospital_envia
       };
 
       await updatePacientePrueba(pacienteEditado.id, pacienteData);
@@ -210,7 +210,7 @@ const GestionCitas = () => {
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
-                    <td>{paciente.nombre_hospital}</td>
+                    <td>{paciente.hospital_envia}</td>
                   </tr>
                 ))}
               </tbody>
@@ -297,11 +297,11 @@ const GestionCitas = () => {
                     <td>
                       <input
                         type="text"
-                        value={paciente.nombre_hospital}
+                        value={paciente.hospital_envia}
                         onChange={(e) => {
                           const newPacientes = [...pacientesPrueba];
                           const index = newPacientes.findIndex(p => p.id === paciente.id);
-                          newPacientes[index].nombre_hospital = e.target.value;
+                          newPacientes[index].hospital_envia = e.target.value;
                           setPacientesPrueba(newPacientes);
                         }}
                       />
@@ -355,7 +355,7 @@ const GestionCitas = () => {
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
                     <td>{paciente.estudio_solicitado}</td>
-                    <td>{paciente.nombre_hospital}</td>
+                    <td>{paciente.hospital_envia}</td>
                     <td>
                       <div className="botones-acciones">
                         <button

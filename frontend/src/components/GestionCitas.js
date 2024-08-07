@@ -38,26 +38,27 @@ const GestionCitas = () => {
 
   const inicializarDatos = useCallback(async () => {
     try {
-      setCargando(true);
-      const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
-        getPacientesPrueba(),
-        getMedicos(),
-        getEstudios(),
-        getHospitales()
-      ]);
-      pacientesData.sort((a, b) => a.id - b.id);
-      setPacientesPrueba(pacientesData);
-      setMedicos(medicosData);
-      setEstudios(estudiosData);
-      setHospitales(hospitalesData);
-      setError(null);
+        setCargando(true);
+        const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
+            getPacientesPrueba(),
+            getMedicos(),
+            getEstudios(),
+            getHospitales()
+        ]);
+        console.log('Hospitales Data:', hospitalesData); // Agrega este log para verificar los datos de hospitales
+        pacientesData.sort((a, b) => a.id - b.id);
+        setPacientesPrueba(pacientesData);
+        setMedicos(medicosData);
+        setEstudios(estudiosData);
+        setHospitales(hospitalesData);
+        setError(null);
     } catch (error) {
-      console.error("Error al inicializar datos:", error);
-      setError("Hubo un problema al cargar los datos. Por favor, intente de nuevo.");
+        console.error("Error al inicializar datos:", error);
+        setError("Hubo un problema al cargar los datos. Por favor, intente de nuevo.");
     } finally {
-      setCargando(false);
+        setCargando(false);
     }
-  }, []);
+}, []);
 
   useEffect(() => {
     inicializarDatos();

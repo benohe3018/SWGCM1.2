@@ -1,5 +1,3 @@
-// citasService.js
-
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -8,6 +6,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 export const getPacientesPrueba = async () => {
   try {
     const response = await axios.get(`${API_URL}/api/pacientes_prueba`);
+    console.log('Datos recibidos:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching pacientes_prueba:', error);
@@ -48,13 +47,13 @@ export const updatePacientePrueba = async (id, pacienteData) => {
 // Función para eliminar un paciente de prueba existente
 export const deletePacientePrueba = async (id) => {
   const url = `${API_URL}/api/pacientes_prueba/${id}`;
-  console.log('La URL de eliminación del registro es:', url);  // Agrega este log
+  console.log('La URL de eliminación del registro es:', url);
   try {
     const response = await axios.delete(url);
-    console.log('Respuesta del servidor:', response);  // Agrega este log
+    console.log('Respuesta del servidor:', response);
     return response.data;
   } catch (error) {
-    console.error('Error completo:', error);  // Modifica este log
+    console.error('Error completo:', error);
     throw error;
   }
 };
@@ -117,10 +116,35 @@ export const getDiagnosticosPresuntivos = async () => {
 // Función para obtener la lista de hospitales
 export const getHospitales = async () => {
   try {
-      const response = await axios.get(`${API_URL}/api/hospitales`); // Verifica que la ruta sea correcta
-      return response.data;
+    const response = await axios.get(`${API_URL}/api/hospitales`);
+    return response.data;
   } catch (error) {
-      console.error('Error fetching hospitals:', error);
-      throw error;
+    console.error('Error fetching hospitals:', error);
+    throw error;
+  }
+};
+
+export const getCitasPorFecha = async (fecha) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/citas`, {
+      params: { fecha },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching citas:', error);
+    throw error;
+  }
+};
+
+// Función para verificar disponibilidad de horario
+export const verificarDisponibilidadHorario = async (fecha, hora) => {
+  try {
+    const citas = await getCitasPorFecha(fecha);
+    const horariosOcupados = citas.map(cita => cita.fecha_hora_estudio);
+    const horarioSeleccionado = `${fecha}T${hora}`;
+    return !horariosOcupados.includes(horarioSeleccionado);
+  } catch (error) {
+    console.error('Error verifying availability:', error);
+    throw error;
   }
 };

@@ -6,10 +6,10 @@ from datetime import timedelta
 import os
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, HashingError
-from models import Usuario, db
-from encryption import decrypt_password
-from auth_middleware import token_required, role_required
-from config import ph, SECRET_KEY, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
+from backend.app.models import Usuario, db  # Cambiado a importación absoluta
+from backend.app.encryption import decrypt_password  # Cambiado a importación absoluta
+from backend.app.auth_middleware import token_required, role_required  # Cambiado a importación absoluta
+from backend.app.config import ph, SECRET_KEY, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 import base64

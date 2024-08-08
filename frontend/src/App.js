@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './components/AuthContext'; // Importar el contexto de autenticación
+import { AuthProvider, useAuth } from './components/AuthContext';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import SuperRoot from './components/SuperRoot';
@@ -13,7 +13,7 @@ import DeleteMedico from './components/DeleteMedico';
 import CRUDUsuarios from './components/CRUDUsuarios';
 import CreateUsuario from './components/CreateUsuario';
 import GestionCitas from './components/GestionCitas';
-import InformeMedicos from './components/InformesMedicos';
+import InformesMedicos from './components/InformesMedicos';
 import Hospitales from './components/Hospitales';
 import Usuarios from './components/Usuarios';
 import EstudiosRadiologicos from './components/EstudiosRadiologicos';
@@ -32,6 +32,11 @@ const PrivateRoute = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/" />;
 };
 
+const RoleBasedRoute = ({ roles, children }) => {
+  const { user } = useAuth();
+  return roles.includes(user.role) ? children : <Navigate to="/" />;
+};
+
 function App() {
   return (
     <AuthProvider>
@@ -48,14 +53,14 @@ function App() {
             <Route path="/update-medico" element={<PrivateRoute><Sidebar /><UpdateMedico /></PrivateRoute>} />
             <Route path="/delete-medico" element={<PrivateRoute><Sidebar /><DeleteMedico /></PrivateRoute>} />
             <Route path="/crud-usuarios" element={<PrivateRoute><Sidebar /><CRUDUsuarios /></PrivateRoute>} />
-            <Route path="/create-usuario" element={<PrivateRoute><Sidebar /><CreateUsuario /></PrivateRoute>} />
+            <Route path="/create-usuario" element={<RoleBasedRoute roles={['root']}><Sidebar /><CreateUsuario /></RoleBasedRoute>} />
             <Route path="/gestion-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/crear-cita" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/ver-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/editar-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
             <Route path="/eliminar-citas" element={<PrivateRoute><Sidebar /><GestionCitas /></PrivateRoute>} />
-            <Route path="/informes-medicos" element={<PrivateRoute><Sidebar /><InformeMedicos /></PrivateRoute>} />
-            <Route path="/usuarios" element={<PrivateRoute><Sidebar /><Usuarios /></PrivateRoute>} />
+            <Route path="/informes-medicos" element={<PrivateRoute><Sidebar /><InformesMedicos /></PrivateRoute>} />
+            <Route path="/usuarios" element={<RoleBasedRoute roles={['root', 'Admin']}><Sidebar /><Usuarios /></RoleBasedRoute>} />
             <Route path="/crear-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="crear" /></PrivateRoute>} />
             <Route path="/ver-estudios" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="ver" /></PrivateRoute>} />
             <Route path="/update-estudio" element={<PrivateRoute><Sidebar /><EstudiosRadiologicos vista="editar" /></PrivateRoute>} />
@@ -64,19 +69,19 @@ function App() {
             <Route path="/ver-unidades" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="ver" /></PrivateRoute>} />
             <Route path="/update-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="editar" /></PrivateRoute>} />
             <Route path="/delete-unidad" element={<PrivateRoute><Sidebar /><UnidadesMedicinaFamiliar vista="eliminar" /></PrivateRoute>} />
-            <Route path="/crear-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="crear" /></PrivateRoute>} />            
+            <Route path="/crear-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="crear" /></PrivateRoute>} />
             <Route path="/ver-hospitales" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="ver" /></PrivateRoute>} />
             <Route path="/update-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="editar" /></PrivateRoute>} />
             <Route path="/delete-hospital" element={<PrivateRoute><Sidebar /><Hospitales vistaInicial="eliminar" /></PrivateRoute>} />
-            <Route path="/read-usuario" element={<PrivateRoute><Sidebar /><ReadUsuario /></PrivateRoute>} />
-            <Route path="/update-usuario" element={<PrivateRoute><Sidebar /><UpdateUsuario /></PrivateRoute>} />
-            <Route path="/delete-usuario" element={<PrivateRoute><Sidebar /><DeleteUsuario /></PrivateRoute>} />
+            <Route path="/read-usuario" element={<RoleBasedRoute roles={['root', 'Admin']}><Sidebar /><ReadUsuario /></RoleBasedRoute>} />
+            <Route path="/update-usuario" element={<RoleBasedRoute roles={['root']}><Sidebar /><UpdateUsuario /></RoleBasedRoute>} />
+            <Route path="/delete-usuario" element={<RoleBasedRoute roles={['root']}><Sidebar /><DeleteUsuario /></RoleBasedRoute>} />
             <Route path="/crear-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="crear" /></PrivateRoute>} />
             <Route path="/ver-especialidades" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="ver" /></PrivateRoute>} />
             <Route path="/update-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="editar" /></PrivateRoute>} />
             <Route path="/delete-especialidad" element={<PrivateRoute><Sidebar /><EspecialidadesMedicas vista="eliminar" /></PrivateRoute>} />
-            <Route path="/dashboard-user-admin" element={<PrivateRoute><Sidebar /><Admin /></PrivateRoute>} />
-            <Route path="/dashboard-field-user" element={<PrivateRoute><Sidebar /><UsuarioDeCampo /></PrivateRoute>} />
+            <Route path="/dashboard-user-admin" element={<RoleBasedRoute roles={['Usuario_administrador']}><Sidebar /><Admin /></RoleBasedRoute>} />
+            <Route path="/dashboard-field-user" element={<RoleBasedRoute roles={['Usuario_de_Campo']}><Sidebar /><UsuarioDeCampo /></RoleBasedRoute>} />
             <Route path="/crear-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="crear" /></PrivateRoute>} />
             <Route path="/ver-diagnosticos" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="ver" /></PrivateRoute>} />
             <Route path="/update-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="editar" /></PrivateRoute>} />

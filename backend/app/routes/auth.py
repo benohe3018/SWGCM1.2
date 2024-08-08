@@ -7,9 +7,9 @@ import os
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, HashingError
 from ..models import Usuario, db
-from encryption import decrypt_password
-from auth_middleware import token_required, role_required
-from config import ph, SECRET_KEY, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
+from .encryption import decrypt_password
+from .auth_middleware import token_required, role_required
+from .config import ph, SECRET_KEY, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 import base64

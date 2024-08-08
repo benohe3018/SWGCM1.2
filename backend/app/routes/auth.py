@@ -14,12 +14,19 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 import base64
 
+# Obtención de variables de entorno para reCAPTCHA
+api_key = os.getenv('RECAPTCHA_API_KEY')
+site_key = os.getenv('RECAPTCHA_SITE_KEY')
+project_id = os.getenv('RECAPTCHA_PROJECT_ID')
+
+# Creación del blueprint de autenticación
 auth_bp = Blueprint('auth', __name__)
 
 # Cargar las claves de encriptación desde las variables de entorno
 key = os.getenv('SECRET_KEY').encode()
 iv = os.getenv('IV_KEY').encode()
 
+# Función para desencriptar la contraseña
 def decrypt_password(encrypted_password):
     try:
         encrypted_password_bytes = base64.b64decode(encrypted_password)
@@ -29,11 +36,13 @@ def decrypt_password(encrypted_password):
     except Exception as e:
         raise Exception(f"Error al desencriptar la contraseña: {str(e)}")
 
+# Función para generar el token JWT
 def generate_token(identity, role):
     expires = timedelta(hours=24)
     additional_claims = {"role": role}
     return create_access_token(identity=identity, expires_delta=expires, additional_claims=additional_claims)
 
+# Función para hashear la contraseña usando Argon2
 def hash_password(password):
     try:
         hashed = ph.hash(password)
@@ -41,6 +50,7 @@ def hash_password(password):
     except HashingError as e:
         raise ValueError(f"Error al generar el hash de la contraseña: {str(e)}")
 
+# Función para verificar el hash de la contraseña
 def check_password_hash(stored_hash, password):
     try:
         ph.verify(stored_hash, password)
@@ -48,6 +58,7 @@ def check_password_hash(stored_hash, password):
     except (VerifyMismatchError, ValueError) as e:
         return False
 
+# Ruta para el login de usuarios
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -55,6 +66,7 @@ def login():
     encrypted_password = data.get('password')
     captcha = data.get('captcha')
 
+    # Verificación del CAPTCHA
     recaptcha_response = requests.post(f'https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments?key={api_key}', json={
         'event': {
             'token': captcha,
@@ -69,6 +81,7 @@ def login():
     if recaptcha_data['event']['expectedAction'] != 'LOGIN' or recaptcha_data['riskAnalysis']['score'] < 0.5:
         return jsonify({"message": "CAPTCHA inválido"}), 401
 
+    # Intento de login
     try:
         password = decrypt_password(encrypted_password)
     except Exception as e:
@@ -84,6 +97,7 @@ def login():
     except Exception as e:
         return jsonify({"message": f"Error durante el proceso de login: {str(e)}"}), 500
 
+# Ruta para el registro de usuarios
 @auth_bp.route('/register', methods=['POST'])
 @token_required
 @role_required(['root'])
@@ -116,6 +130,7 @@ def register():
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
 
+# Ruta protegida de ejemplo
 @auth_bp.route('/ruta_protegida', methods=['GET'])
 @token_required
 @role_required(['Admin', 'root'])

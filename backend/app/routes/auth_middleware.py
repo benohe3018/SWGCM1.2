@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import request, jsonify
 import jwt
-from models import Usuario
+from ..models import Usuario
 from config import SECRET_KEY
 
 def token_required(f):

@@ -13,7 +13,6 @@
     align-items: center;
     background-color: whitesmoke;
     padding: 10px;
-    width: 100%;
 }
 
 .header-logo {
@@ -69,7 +68,13 @@
 }
 
 .gestion-citas-content {
-    padding: 20px;
+  width: 150%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 150px;
+  padding: 20px;
 }
 
 .tabla-citas {

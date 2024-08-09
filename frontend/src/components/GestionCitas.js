@@ -194,7 +194,6 @@ const GestionCitas = () => {
             <table className="tabla-citas">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Fecha y Hora</th>
                   <th>Paciente</th>
                   <th>Médico</th>
@@ -233,7 +232,6 @@ const GestionCitas = () => {
             <table className="tabla-citas">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Fecha y Hora</th>
                   <th>Paciente</th>
                   <th>Médico</th>
@@ -338,7 +336,6 @@ const GestionCitas = () => {
             <table className="tabla-citas">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Fecha y Hora</th>
                   <th>Paciente</th>
                   <th>Médico</th>

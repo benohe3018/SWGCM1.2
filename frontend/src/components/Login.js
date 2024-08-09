@@ -45,16 +45,16 @@ const Login = () => {
 
         switch (response.data.role) {
           case 'Admin':
-            navigate('/dashboard-admin');
+            navigate('/dashboard-root');
             break;
           case 'root':
             navigate('/dashboard-root');
             break;
           case 'Usuario_administrador':
-            navigate('/dashboard-user-admin');
+            navigate('/dashboard-root');
             break;
           case 'Usuario_de_Campo':
-            navigate('/dashboard-field-user');
+            navigate('/dashboard-root');
             break;
           default:
             setError('Rol no reconocido. Acceso no permitido.');

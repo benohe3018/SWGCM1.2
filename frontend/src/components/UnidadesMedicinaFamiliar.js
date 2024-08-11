@@ -95,26 +95,25 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   };
 
   const handleCrearUnidad = async (nuevaUnidad) => {
-    console.log('Creating unit:', nuevaUnidad); // Añadir log para verificar la unidad a crear
-
     const errorNombre = validarNombreUnidad(nuevaUnidad.nombre_unidad_medica);
     if (errorNombre) {
       alert(errorNombre);
       return;
     }
-
+  
     const errorDescripcion = validarDescripcionUnidad(nuevaUnidad.direccion_unidad_medica);
     if (errorDescripcion) {
       alert(errorDescripcion);
       return;
     }
-
+  
     try {
-      await createUnidad(nuevaUnidad);
+      const unidadCreada = await createUnidad(nuevaUnidad);
+      setUnidades([...unidades, unidadCreada]); // Agregar la nueva unidad al estado
       setMensaje('Unidad creada exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-      }); 
+      }, 3000); // Mostrar el mensaje por 3 segundos
     } catch (error) {
       console.error("Error al crear unidad:", error);
       setError("No se pudo crear la unidad. Por favor, intente de nuevo.");
@@ -127,27 +126,30 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
       alert(errorNombre);
       return;
     }
-
+  
     const errorDescripcion = validarDescripcionUnidad(unidadEditada.direccion_unidad_medica);
     if (errorDescripcion) {
       alert(errorDescripcion);
       return;
     }
-
+  
     try {
       if (!unidadEditada.id_unidad_medica) {
         throw new Error("El ID de la unidad no está definido");
       }
-      await updateUnidad(unidadEditada.id_unidad_medica, unidadEditada);
-      await cargarUnidades();
+      const unidadActualizada = await updateUnidad(unidadEditada.id_unidad_medica, unidadEditada);
+      setUnidades(unidades.map((unidad) =>
+        unidad.id_unidad_medica === unidadActualizada.id_unidad_medica ? unidadActualizada : unidad
+      )); // Actualizar la unidad en el estado
       setUnidadSeleccionada(null);
       setMensaje('Unidad actualizada exitosamente.');
-      setTimeout(() => setMensaje(null), 3000);
+      setTimeout(() => setMensaje(null), 3000); // Mostrar el mensaje por 3 segundos
     } catch (error) {
       console.error("Error al editar unidad:", error);
       setError("No se pudo editar la unidad. Por favor, intente de nuevo.");
     }
   };
+  
 
   const handleEliminarUnidad = (id) => {
     const unidad = unidades.find(u => u.id_unidad_medica === id);

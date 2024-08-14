@@ -95,39 +95,40 @@ const Hospitales = ({ vistaInicial }) => {
   };
   
   const handleCrearHospital = async (nuevoHospital) => {
-    console.log('Creating hospital:', nuevoHospital); // Añadir log para verificar el hospital a crear
-  
+    console.log('Creating hospital:', nuevoHospital);
+
     const errorNombre = validarNombreHospital(nuevoHospital.nombre_hospital);
     if (errorNombre) {
       setError(errorNombre);
       return;
     }
-  
+
     const errorCiudad = validarCiudadHospital(nuevoHospital.ciudad_hospital);
     if (errorCiudad) {
       setError(errorCiudad);
       return;
     }
-  
+
     try {
       await createHospital(nuevoHospital);
       setMensaje('Hospital creado exitosamente.');
+      await cargarHospitales(); // Recargar la lista después de crear el hospital
       setTimeout(() => {
         setMensaje(null);
-      }); 
+      }, 3000); 
     } catch (error) {
       console.error("Error al crear hospital:", error);
       setError("No se pudo crear el hospital. Por favor, intente de nuevo.");
     }
   };
 
-  const handleEditarHospital = async (hospitalEditado) => {
+const handleEditarHospital = async (hospitalEditado) => {
     try {
       if (!hospitalEditado.id) {
         throw new Error("El ID del hospital no está definido");
       }
       await updateHospital(hospitalEditado.id, hospitalEditado);
-      await cargarHospitales();
+      await cargarHospitales(); // Recargar la lista después de actualizar el hospital
       setHospitalSeleccionado(null);
       setMensaje('Hospital actualizado exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
@@ -148,7 +149,7 @@ const Hospitales = ({ vistaInicial }) => {
   const confirmarEliminarHospital = async () => {
     try {
       await deleteHospital(hospitalSeleccionado.id);
-      await cargarHospitales();
+      await cargarHospitales(); // Recargar la lista después de eliminar el hospital
       setMostrarModal(false);
       setHospitalSeleccionado(null);
       setMensaje('Hospital eliminado exitosamente.');

@@ -47,6 +47,10 @@ body {
 }
 
 .login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Asegura que todos los elementos dentro del contenedor estén centrados verticalmente */
   background-color: white;
   padding: 30px;
   border-radius: 10px;
@@ -99,10 +103,25 @@ button:hover {
 }
 
 .mr-machine {
-  width: 100%;
-  max-width: 300px;
-  margin-top: 20px;
-  border-radius: 10px;
+  max-width: 100%; /* Hacer que la imagen ocupe el ancho máximo disponible en el contenedor */
+  margin: 20px auto 0; /* Ajustar el margen superior e inferior */
+  display: block;
+}
+
+@media (max-width: 400px) {
+  .login-container {
+    max-width: 90%; /* Hacer que el contenedor ocupe el 90% del ancho de la pantalla */
+    padding: 20px; /* Reducir el padding interno */
+  }
+
+  input {
+    font-size: 10px; /* Disminuir el tamaño de la fuente en los campos de entrada */
+  }
+
+  button {
+    padding: 8px; /* Reducir el padding del botón */
+    font-size: 10px; /* Disminuir el tamaño de la fuente del botón */
+  }
 }
 
 /* Ajustes para pantallas medianas (tabletas) */

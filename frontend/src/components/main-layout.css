@@ -1,0 +1,62 @@
+/* main-layout.css */
+.main-layout {
+    display: flex;
+    flex-direction: row; /* Asegura que los elementos estén alineados horizontalmente */
+    width: 100%;
+    height: 100vh;
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    align-items: flex-start; /* Alinea los elementos al principio del contenedor */
+  }
+  
+  .sidebar {
+    width: 250px; /* Ancho fijo para la barra lateral */
+    background-color: #12322B;
+    color: white;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .content {
+    flex: 1; /* El contenido principal ocupa todo el espacio disponible */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: whitesmoke;
+  }
+
+  /* main-layout.css */
+
+/* Ajustes para pantallas medianas (tabletas) */
+@media (max-width: 768px) {
+    .main-layout {
+      flex-direction: column; /* Cambia la dirección a columna para pantallas pequeñas */
+      align-items: center; /* Centra los elementos */
+    }
+  
+    .sidebar {
+      width: 100%; /* La barra lateral ocupa todo el ancho de la pantalla */
+      text-align: center; /* Alinea el texto al centro */
+    }
+  
+    .content {
+      width: 100%; /* El contenido principal también ocupa todo el ancho de la pantalla */
+      padding: 10px; /* Reduce el padding */
+    }
+  }
+  
+  /* Ajustes para pantallas pequeñas (móviles) */
+  @media (max-width: 480px) {
+    .main-layout {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      padding: 10px; /* Ajusta el padding para pantallas pequeñas */
+    }
+  
+    .content {
+      padding: 5px; /* Reduce aún más el padding */
+    }
+  }
+  
+  

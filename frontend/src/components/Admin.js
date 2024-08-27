@@ -1,6 +1,7 @@
 //Admin.js
 import React from "react";
 import './Admin.css';
+import './main-layout.css';
 import { Link } from 'react-router-dom';
 import logoIMSS from '../images/LogoIMSS.jpg';
 

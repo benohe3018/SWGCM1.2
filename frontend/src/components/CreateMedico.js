@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreateMedicos.css';
+import './main-layout.css';
 import logoIMSS from '../images/LogoIMSS.jpg'; 
 import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 

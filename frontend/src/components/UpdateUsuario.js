@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import './UpdateUsuario.css';
+import './main-layout.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const UpdateUsuario = () => {

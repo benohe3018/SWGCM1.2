@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';// Asegúrate de que la ruta al logo es correcta
 import './CreateUsuario.css';
+import './main-layout.css';
 import logoIMSS from '../images/LogoIMSS.jpg';  // Asegúrate de que la ruta al logo es correcta
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importa los iconos de ojo
 

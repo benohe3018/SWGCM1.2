@@ -37,12 +37,12 @@ body {
   color: #12322B;
 }
 
-.main-layout {
+/*.main-layout {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-}
+}*/
 
 .create-usuario-content {
   width: 50%;

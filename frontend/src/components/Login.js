@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
 import { useAuth } from './AuthContext';
 import './Login.css';
+import './main-layout.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import mrMachine from '../images/MRMachine.jpg';
 

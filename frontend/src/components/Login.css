@@ -104,3 +104,30 @@ button:hover {
   margin-top: 20px;
   border-radius: 10px;
 }
+
+/* Ajustes para pantallas medianas (tabletas) */
+@media (min-width: 768px) {
+  .login-container {
+    max-width: 500px; /* Aumentar el ancho máximo en pantallas medianas */
+  }
+
+  .welcome-message {
+    font-size: 2em; /* Aumentar el tamaño del texto de bienvenida */
+  }
+
+  .department-name {
+    font-size: 1.5em; /* Aumentar el tamaño del nombre del departamento */
+  }
+}
+
+/* Ajustes para pantallas grandes (escritorios) */
+@media (min-width: 1024px) {
+  .login-container {
+    max-width: 600px; /* Aumentar el ancho máximo en pantallas grandes */
+  }
+
+  .mr-machine {
+    max-width: 400px; /* Aumentar el tamaño de la imagen */
+  }
+}
+/*Hasta aquí la primera fase de responsividad*/

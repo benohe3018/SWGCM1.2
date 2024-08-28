@@ -101,6 +101,11 @@ input, select {
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 480px) {
 
+.header-logo-medico{
+    height: 50px; /* Ajusta el tamaño del logo para pantallas pequeñas */
+    margin-left: 10px;
+}
+
   .create-medico-header{
     margin-left: 115px;
     width: 50%;
@@ -110,13 +115,13 @@ input, select {
     width: 50%;
   }
   .welcome-message-medico{
-    color: chocolate;
-    font-size: 14px;
+    color: #12322b;
+    font-size: 18px;
   }
 
   .department-name-medico{
-    color: crimson;
-    font-size: 10;
+    color: black;
+    font-size: 14;
   }
 
   .create-medico-page {

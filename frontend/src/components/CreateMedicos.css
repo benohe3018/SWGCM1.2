@@ -121,15 +121,17 @@ input, select {
 
   .welcome-message-medico {
     color: #12322b;
-    font-size: 1.2em; /* Ajusta el tamaño del texto para una mejor visualización */
-    margin: 5px 0; /* Añade un pequeño margen superior e inferior */
-  }
+    font-size: 0.8em;
+    margin: 5px;
+    margin-left: 110px;
+}
 
-  .department-name-medico {
-    color: #12322b;
-    font-size: 1em; /* Ajusta el tamaño del texto para pantallas pequeñas */
-    margin: 0;
-  }
+.department-name-medico {
+  color: black;
+  font-size: 0.7em;
+  margin: 0;
+  margin-left: 110px;
+}
 
   .create-medico-page {
     padding: 10px;

@@ -68,7 +68,7 @@
 @media (max-width: 480px) {
 
   .content-area {
-    margin-left: 250px; /* Ajusta según el ancho de tu sidebar */
+    margin-left: 200px; /* Ajusta según el ancho de tu sidebar */
     background-color: blueviolet;
     height: 100vh;
     display: flex;

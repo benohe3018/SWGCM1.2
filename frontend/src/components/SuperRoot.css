@@ -78,6 +78,23 @@
     color: #0C231E;
   }
 }
+@media (max-width: 768px) {
+  .content-area {
+    margin-left: 135px; /* Ajusta el ancho del sidebar */
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #0C231E;
+  }
+  
+  .super-root-header {
+    margin-bottom: 20px; /* Aumenta la distancia del header */
+  }
+}
 
 @media (max-width: 480px) {
 
@@ -105,6 +122,18 @@
     z-index: 100;
     margin-top: 15px;
   }  
+
+  .header-texts {
+    font-size: 18px; /* Reduce el tamaño de la fuente para el header */
+  }
+
+  .welcome-message {
+    font-size: 16px; /* Reduce el tamaño de la fuente del mensaje de bienvenida */
+  }
+
+  .department-name {
+    font-size: 14px; /* Reduce el tamaño de la fuente del nombre del departamento */
+  }
 
   .mr-machine {
     width: 100%;

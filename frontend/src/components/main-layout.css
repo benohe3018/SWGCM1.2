@@ -63,6 +63,25 @@
       padding: 2px;
       box-sizing: border-box;
     }
+    .header-texts {
+      font-size: 18px; /* Reduce el tamaño de la fuente para el header */
+      margin-bottom: 10px;
+    }
+  
+    .welcome-message {
+      font-size: 16px; /* Reduce el tamaño de la fuente del mensaje de bienvenida */
+    }
+  
+    .department-name {
+      font-size: 14px; /* Reduce el tamaño de la fuente del nombre del departamento */
+    }
+  
+    .mr-machine {
+      width: 100%;
+      max-width: 400px; /* Aumenta el tamaño de la imagen para un mejor ajuste */
+      margin-top: 15px;
+      margin-left: 75px;
+    }
   }
   
   

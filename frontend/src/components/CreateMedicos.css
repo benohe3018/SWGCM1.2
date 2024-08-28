@@ -100,6 +100,12 @@ input, select {
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 480px) {
+
+  .create-medico-header{
+    margin-left: 115px;
+    width: 50%;
+  }
+
   .create-medico-page {
     padding: 10px;
   }

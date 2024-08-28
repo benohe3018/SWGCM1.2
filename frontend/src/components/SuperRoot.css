@@ -59,7 +59,7 @@
   width: 100%;
 }
 
-.mr-machine {
+.mr-machine-superRoot {
   width: 100%;
   max-width: 300px;
   margin-top: 20px;
@@ -82,6 +82,11 @@
     margin-bottom: 20px; /* Aumenta la distancia del header */
     margin-left: 25px;
   }
+  .mr-machine-superRoot {
+    margin-left: 300px;
+    margin-top: 5px;
+    width: 100%;
+    }
 }
 
 @media (max-width: 479px) {
@@ -125,10 +130,10 @@
   }
 
   .mr-machine-superRoot {
+    margin-left: 250px;
+    margin-top: 5px;
     width: 100%;
-    margin-top: 15px;
-    margin-left: 10px;
-  }
+    }
  
 }
 

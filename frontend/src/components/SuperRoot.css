@@ -68,8 +68,8 @@
 @media (max-width: 480px) {
 
   .content-area {
-    margin-left: 200px; /* Ajusta según el ancho de tu sidebar */
-    background-color: blueviolet;
+    margin-left: 175px; /* Ajusta según el ancho de tu sidebar */
+    background-color: whitesmoke;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -81,7 +81,7 @@
 
   .super-root-header {
     width: 100%;
-    background-color: green;
+    background-color: whitesmoke;
     padding: 5px 10px;
     box-sizing: border-box;
     display: flex;

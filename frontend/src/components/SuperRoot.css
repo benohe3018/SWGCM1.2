@@ -68,8 +68,8 @@
 @media (max-width: 480px) {
   .super-root-header {
     width: 100%;
-    background-color: blue;
-    padding: 10px 20px;
+    background-color: green;
+    padding: 5px 10px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -79,7 +79,7 @@
   }
   
   .header-logo {
-    height: 40px;
+    height: 10px;
   }
   
   .header-texts {
@@ -97,6 +97,11 @@
     font-size: 8px;
     margin: 0;
     color: blue;
+  }
+  .mr-machine {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 15px;
   }
 }
 

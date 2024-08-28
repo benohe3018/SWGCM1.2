@@ -102,9 +102,10 @@
   }
   
   .welcome-message {
-    font-size: 10px;
-    margin: 0;
-    color: blue;
+    font-size: 100px;
+  }
+  .department-name{
+    font-size: 5px;
   }
   
   .mr-machine {
@@ -113,12 +114,7 @@
     margin-top: 15px;
     margin-left: 75px;
   }
-  .header-texts h1{
-    font-size: 5px;
-  }
-  .header-texts h2 {
-    font-size: 2px;
-}
+ 
 }
 
 

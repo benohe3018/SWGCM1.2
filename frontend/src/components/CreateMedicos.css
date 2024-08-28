@@ -108,14 +108,18 @@ input, select {
   .create-medico-header {
     padding: 10px;
     justify-content: center;
+    width: 50%;
+    margin-left: 50px;
   }
 
   .form-description {
-    font-size: 1.2em; /* Reduce aún más el tamaño del texto */
+    font-size: 1em; /* Reduce aún más el tamaño del texto */
+    margin-left: 100px;
   }
 
   .create-medico-content {
     width: 100%; /* Asegura que ocupe todo el ancho en pantallas pequeñas */
+    margin-left: 120px;
   }
 
   input, select {

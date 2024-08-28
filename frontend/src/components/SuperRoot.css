@@ -111,13 +111,13 @@
     width: 100%;
     max-width: 400px;
     margin-top: 15px;
-    margin-left: 50px;
+    margin-left: 75px;
   }
   .header-texts h1{
-    font-size: 14px;
+    font-size: 5px;
   }
   .header-texts h2 {
-    font-size: 10px;
+    font-size: 2px;
 }
 }
 

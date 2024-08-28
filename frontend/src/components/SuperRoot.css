@@ -93,10 +93,11 @@
   
   .super-root-header {
     margin-bottom: 20px; /* Aumenta la distancia del header */
+    margin-left: 25px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 479px) {
 
   .content-area {
     margin-left: 135px; /* Ajusta según el ancho de tu sidebar */
@@ -121,14 +122,15 @@
     top: 0;
     z-index: 100;
     margin-top: 15px;
+    margin-left: 70px;
   }  
 
-  .header-texts {
-    font-size: 18px; /* Reduce el tamaño de la fuente para el header */
+  .header-texts h1 {
+    font-size: 14px; /* Reduce el tamaño de la fuente para el header */
   }
 
-  .welcome-message {
-    font-size: 16px; /* Reduce el tamaño de la fuente del mensaje de bienvenida */
+  .header-texts h2 {
+    font-size: 10px; /* Reduce el tamaño de la fuente para el header */
   }
 
   .department-name {
@@ -138,7 +140,7 @@
   .mr-machine {
     width: 100%;
     margin-top: 15px;
-    margin-left: 75px;
+    margin-left: 120px;
   }
  
 }

@@ -111,10 +111,11 @@ input, select {
   }
 
   .header-texts-medico {
-    width: 100%; /* Asegura que el contenedor de texto ocupe todo el ancho */
     margin: 0 auto;
-    text-align: center; /* Centra el texto */
-  }
+    text-align: center;
+    width: 90%;
+    margin-left: 35px;
+}
 
   .welcome-message-medico {
     color: #12322b;

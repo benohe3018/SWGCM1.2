@@ -58,7 +58,7 @@
     }
     .sidebar {
       width: 125px; /* Ancho fijo para la barra lateral */
-      background-color: white;
+      background-color: #12322B;
       color: black;
       padding: 2px;
       box-sizing: border-box;

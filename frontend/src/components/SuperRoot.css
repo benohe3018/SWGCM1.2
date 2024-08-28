@@ -89,25 +89,9 @@
     justify-content: space-between;
     top: 0;
     z-index: 100;
-    margin-top: 5px;
-  }
-  
-  .header-logo {
-    height: 10px;
-  }
-  
-  .header-texts {
-    text-align: center;
-    flex-grow: 1;
-  }
-  
-  .welcome-message {
-    font-size: 100px;
-  }
-  .department-name{
-    font-size: 5px;
-  }
-  
+    margin-top: 15px;
+  }  
+
   .mr-machine {
     width: 100%;
     max-width: 400px;

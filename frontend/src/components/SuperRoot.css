@@ -111,7 +111,14 @@
     width: 100%;
     max-width: 400px;
     margin-top: 15px;
+    margin-left: 50px;
   }
+  .header-texts h1{
+    font-size: 14px;
+  }
+  .header-texts h2 {
+    font-size: 10px;
+}
 }
 
 

@@ -66,6 +66,20 @@
 }
 
 @media (max-width: 480px) {
+
+  .content-area {
+    margin-left: 5px; /* Ajusta según el ancho de tu sidebar */
+    width: calc(100% - 250px);
+    background-color: blueviolet;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #0C231E;
+  }
+
   .super-root-header {
     width: 100%;
     background-color: green;

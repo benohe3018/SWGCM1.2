@@ -67,19 +67,6 @@
 
 @media (max-width: 768px) {
   .content-area {
-    margin-left: 300px; /* Ajusta según el ancho de tu sidebar */
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #0C231E;
-  }
-}
-@media (max-width: 768px) {
-  .content-area {
     margin-left: 135px; /* Ajusta el ancho del sidebar */
     background-color: whitesmoke;
     height: 100vh;
@@ -100,7 +87,7 @@
 @media (max-width: 479px) {
 
   .content-area {
-    margin-left: 135px; /* Ajusta según el ancho de tu sidebar */
+    margin-left: 75px; /* Ajusta según el ancho de tu sidebar */
     background-color: whitesmoke;
     height: 100vh;
     display: flex;

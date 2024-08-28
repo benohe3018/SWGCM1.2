@@ -101,10 +101,7 @@ input, select {
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 480px) {
   .header-logo-medico {
-    height: 40px; /* Ajusta el tamaño del logo para pantallas pequeñas */
-    margin-left: 0; /* Centra el logo horizontalmente */
-    display: block;
-    margin: 0 auto; /* Asegura que el logo esté centrado */
+    display: none;
   }
 
   .create-medico-header {
@@ -142,15 +139,15 @@ input, select {
   }
 
   .form-description-medico {
-    font-size: 1.0em; /* Mantén el tamaño del texto para el formulario */
+    font-size: 0.8em; /* Mantén el tamaño del texto para el formulario */
     color: black;
   }
 
   .form-medico {
-    width: 90%; /* Asegura que el formulario ocupe casi todo el ancho */
-    margin-left: 5%;
-    padding: 0 10px; /* Añade padding lateral para mejor presentación */
-  }
+    margin-left: 35%;
+    padding: 0 10px;
+    width: 50%;
+}
 
   .form-group-medico {
     align-items: flex-start; /* Alinea el texto a la izquierda */

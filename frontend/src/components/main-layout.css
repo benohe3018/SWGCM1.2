@@ -52,12 +52,12 @@
     .main-layout {
       flex-direction: column;
     }
-    
+   
     .content {
       padding: 5px; /* Reduce aún más el padding */
     }
     .sidebar {
-      width: 100%; /* Ancho fijo para la barra lateral */
+      width: 100px; /* Ancho fijo para la barra lateral */
       background-color: white;
       color: black;
       padding: 2px;

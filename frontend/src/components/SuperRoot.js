@@ -17,7 +17,7 @@ const SuperRoot = () => {
           </div>
         </header>
         <main className="super-root-content">
-          <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />
+          <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine-superRoot" />
         </main>
       </div>
     </div>

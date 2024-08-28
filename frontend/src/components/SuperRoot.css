@@ -65,6 +65,20 @@
   margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+  .content-area {
+    margin-left: 300px; /* Ajusta según el ancho de tu sidebar */
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #0C231E;
+  }
+}
+
 @media (max-width: 480px) {
 
   .content-area {
@@ -94,7 +108,6 @@
 
   .mr-machine {
     width: 100%;
-    max-width: 500px;
     margin-top: 15px;
     margin-left: 75px;
   }

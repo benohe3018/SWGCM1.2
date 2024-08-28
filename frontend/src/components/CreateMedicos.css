@@ -100,28 +100,35 @@ input, select {
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 480px) {
-
-.header-logo-medico{
-    height: 50px; /* Ajusta el tamaño del logo para pantallas pequeñas */
-    margin-left: 100px;
-}
-
-  .create-medico-header{
-    margin-left: 20px;
-    width: 50%;
+  .header-logo-medico {
+    height: 40px; /* Ajusta el tamaño del logo para pantallas pequeñas */
+    margin-left: 0; /* Centra el logo horizontalmente */
+    display: block;
+    margin: 0 auto; /* Asegura que el logo esté centrado */
   }
-  .header-texts-medico{
-    margin-left: 50px;
-    width: 50%;
+
+  .create-medico-header {
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    padding: 10px;
+    text-align: center; /* Centra el texto del header */
   }
-  .welcome-message-medico{
+
+  .header-texts-medico {
+    width: 100%; /* Asegura que el contenedor de texto ocupe todo el ancho */
+    margin: 0 auto;
+    text-align: center; /* Centra el texto */
+  }
+
+  .welcome-message-medico {
     color: #12322b;
-    font-size: 18px;
+    font-size: 1.2em; /* Ajusta el tamaño del texto para una mejor visualización */
+    margin: 5px 0; /* Añade un pequeño margen superior e inferior */
   }
 
-  .department-name-medico{
-    color: black;
-    font-size: 14px;
+  .department-name-medico {
+    color: #12322b;
+    font-size: 1em; /* Ajusta el tamaño del texto para pantallas pequeñas */
+    margin: 0;
   }
 
   .create-medico-page {
@@ -132,14 +139,14 @@ input, select {
     align-items: center; /* Centra el contenido */
   }
 
-  .form-description-medico{
-    font-size: 1.0em; /* Reduce el tamaño del texto para pantallas pequeñas */
+  .form-description-medico {
+    font-size: 1.0em; /* Mantén el tamaño del texto para el formulario */
     color: black;
   }
 
   .form-medico {
-    width: 50%; /* Asegura que el formulario ocupe todo el ancho */
-    margin-left: 115px;
+    width: 90%; /* Asegura que el formulario ocupe casi todo el ancho */
+    margin-left: 5%;
     padding: 0 10px; /* Añade padding lateral para mejor presentación */
   }
 
@@ -164,3 +171,4 @@ input, select {
     padding: 10px; /* Ajusta el padding para una mejor experiencia táctil */
   }
 }
+

@@ -103,11 +103,11 @@ input, select {
 
 .header-logo-medico{
     height: 50px; /* Ajusta el tamaño del logo para pantallas pequeñas */
-    margin-left: 10px;
+    margin-left: 50px;
 }
 
   .create-medico-header{
-    margin-left: 115px;
+    margin-left: 20px;
     width: 50%;
   }
   .header-texts-medico{
@@ -121,7 +121,7 @@ input, select {
 
   .department-name-medico{
     color: black;
-    font-size: 14;
+    font-size: 14px;
   }
 
   .create-medico-page {

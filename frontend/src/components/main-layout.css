@@ -56,17 +56,17 @@
     .sidebar {
       width: 100%;
       padding: 10px; /* Ajusta el padding para pantallas pequeñas */
+      font-size: 0.9em; /* Reduce el tamaño de la fuente */
+
     }
   
     .content {
       padding: 5px; /* Reduce aún más el padding */
     }
-    .sidebar {
-      width: 250px; /* Ancho fijo para la barra lateral */
-      background-color: white;
-      color: black;
-      padding: 15px;
-      box-sizing: border-box;
+       
+    .mr-machine {
+      max-width: 200px; /* Reduce el tamaño máximo de la imagen */
+      margin: 5px auto;
     }
   }
   

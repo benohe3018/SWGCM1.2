@@ -126,25 +126,25 @@ const CreateMedico = () => {
       <div className="main-layout">
         <Sidebar />
         <div className="create-medico-content">
-          <form onSubmit={handleSubmit}>
-            <h3 className="form-description">Capture los datos del Médico</h3>
-            <div className="form-group">
+          <form className = "form-medico" onSubmit={handleSubmit}>
+            <h3 className="form-description-medico">Capture los datos del Médico</h3>
+            <div className="form-group-medico">
               <label htmlFor="nombre">Nombre del Médico:</label>
               <input type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre del Médico" />
             </div>
-            <div className="form-group">
+            <div className="form-group-medico">
               <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
               <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
             </div>
-            <div className="form-group">
+            <div className="form-group-medico">
               <label htmlFor="apellidoMaterno">Apellido Materno:</label>
               <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
             </div>
-            <div className="form-group">
+            <div className="form-group-medico">
               <label htmlFor="matricula">Matrícula del Médico:</label>
               <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" />
             </div>
-            <div className="form-group">
+            <div className="form-group-medico">
               <label htmlFor="especialidad">Especialidad:</label>
               <select id="especialidad" value={especialidad} onChange={e => setEspecialidad(e.target.value)}>
                 <option value="">Seleccione una especialidad</option>

@@ -99,38 +99,38 @@ input, select {
 }
 
 /* Media Queries para pantallas pequeñas */
-@media (max-width: 480px) {
+@media (max-width: 479px) {
   .create-medico-page {
-    width: 100%; /* Asegura que ocupe todo el ancho en pantallas pequeñas */
-    padding: 10px; /* Agrega padding para mejor visualización */
-  }
-
-  .create-medico-header {
     padding: 10px;
-    justify-content: center;
-    width: 50%;
-    margin-left: 50px;
-  }
-
-  .form-description {
-    font-size: 1em; /* Reduce aún más el tamaño del texto */
-    margin-left: 100px;
   }
 
   .create-medico-content {
-    width: 100%; /* Asegura que ocupe todo el ancho en pantallas pequeñas */
-    margin-left: 120px;
+    align-items: center; /* Centra el contenido */
+  }
+
+  form {
+    width: 100%; /* Asegura que el formulario ocupe todo el ancho */
+    padding: 0 10px; /* Añade padding lateral para mejor presentación */
+  }
+
+  .form-group {
+    align-items: flex-start; /* Alinea el texto a la izquierda */
+    margin-bottom: 15px; /* Reduce el margen inferior */
+    width: 100%;
+  }
+
+  label {
+    font-size: 14px; /* Reduce el tamaño de la fuente para las etiquetas */
   }
 
   input, select {
-    font-size: 14px; /* Ajusta el tamaño del texto en los inputs */
+    width: 100%; /* Asegura que los inputs y selects ocupen todo el ancho */
+    font-size: 14px;
   }
 
   .create-medico-button {
-    font-size: 1em; /* Ajusta el tamaño del texto del botón */
-  }
-
-  .header-logo {
-    height: 40px; /* Reduce aún más el tamaño del logo */
+    width: 100%; /* Asegura que el botón ocupe todo el ancho */
+    font-size: 14px;
+    padding: 10px; /* Ajusta el padding para una mejor experiencia táctil */
   }
 }

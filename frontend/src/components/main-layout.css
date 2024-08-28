@@ -52,20 +52,15 @@
     .main-layout {
       flex-direction: column;
     }
-  
-    .sidebar {
-      width: 100%;
-      padding: 10px; /* Ajusta el padding para pantallas pequeñas */
-    }
-  
+    
     .content {
       padding: 5px; /* Reduce aún más el padding */
     }
     .sidebar {
-      width: 150px; /* Ancho fijo para la barra lateral */
+      width: 100%; /* Ancho fijo para la barra lateral */
       background-color: white;
       color: black;
-      padding: 5px;
+      padding: 2px;
       box-sizing: border-box;
     }
   }

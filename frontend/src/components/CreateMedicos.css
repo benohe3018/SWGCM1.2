@@ -105,6 +105,19 @@ input, select {
     margin-left: 115px;
     width: 50%;
   }
+  .header-texts-medico{
+    margin-left: 115px;
+    width: 50%;
+  }
+  .welcome-message-medico{
+    color: chocolate;
+    font-size: 14px;
+  }
+
+  .department-name-medico{
+    color: crimson;
+    font-size: 10;
+  }
 
   .create-medico-page {
     padding: 10px;

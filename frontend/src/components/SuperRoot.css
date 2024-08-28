@@ -68,7 +68,7 @@
 @media (max-width: 480px) {
 
   .content-area {
-    margin-left: 150px; /* Ajusta según el ancho de tu sidebar */
+    margin-left: 125px; /* Ajusta según el ancho de tu sidebar */
     background-color: whitesmoke;
     height: 100vh;
     display: flex;
@@ -89,6 +89,7 @@
     justify-content: space-between;
     top: 0;
     z-index: 100;
+    margin-top: 5px;
   }
   
   .header-logo {
@@ -101,19 +102,14 @@
   }
   
   .welcome-message {
-    font-size: 14px;
+    font-size: 10px;
     margin: 0;
     color: blue;
   }
   
-  .department-name {
-    font-size: 8px;
-    margin: 0;
-    color: blue;
-  }
   .mr-machine {
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
     margin-top: 15px;
   }
 }

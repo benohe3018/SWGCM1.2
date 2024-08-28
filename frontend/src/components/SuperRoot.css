@@ -68,7 +68,7 @@
 @media (max-width: 480px) {
 
   .content-area {
-    margin-left: 125px; /* Ajusta según el ancho de tu sidebar */
+    margin-left: 135px; /* Ajusta según el ancho de tu sidebar */
     background-color: whitesmoke;
     height: 100vh;
     display: flex;
@@ -94,7 +94,7 @@
 
   .mr-machine {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin-top: 15px;
     margin-left: 75px;
   }

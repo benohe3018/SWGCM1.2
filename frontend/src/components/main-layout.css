@@ -57,7 +57,7 @@
       padding: 5px; /* Reduce aún más el padding */
     }
     .sidebar {
-      width: 125px; /* Ancho fijo para la barra lateral */
+      width: 135px; /* Ancho fijo para la barra lateral */
       background-color: #12322B;
       color: white;
       padding: 2px;

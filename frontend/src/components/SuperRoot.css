@@ -65,7 +65,7 @@
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .content-area {
     margin-left: 135px; /* Ajusta el ancho del sidebar */
     background-color: whitesmoke;

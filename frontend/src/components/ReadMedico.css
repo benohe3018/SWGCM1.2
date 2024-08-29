@@ -1,3 +1,23 @@
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #12322B;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* ReadMedico.css - Continuación */
 .read-medico-page {
   background-color: whitesmoke; /* Color de fondo */
   height: 100vh; /* Altura completa de la ventana del navegador */
@@ -123,4 +143,121 @@
 
 .pagination-read-medico button.active {
   background-color: #002d20;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex; /* Muestra el menú hamburguesa en pantallas pequeñas */
+  }
+
+  .sidebar {
+    transform: translateX(-100%); /* Oculta la sidebar por defecto */
+  }
+
+  .sidebar.open {
+    transform: translateX(0); /* Muestra la sidebar cuando está abierta */
+  }
+
+  .read-medico-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .header-logo {
+    margin: 0;
+    height: 50px;
+  }
+
+  .header-texts {
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .welcome-message {
+    font-size: 20px;
+  }
+
+  .department-name {
+    font-size: 16px;
+  }
+
+  .read-medico-content {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .medico-table th, .medico-table td {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .search-container {
+    flex-direction: column;
+    gap: 5px;
+    align-items: stretch;
+  }
+
+  .search-container input, .search-container select {
+    width: 100%;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .pagination-read-medico {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .pagination-read-medico button {
+    padding: 8px;
+    font-size: 14px;
+    margin: 2px;
+  }
+}
+
+/* Media Query para pantallas extra pequeñas */
+@media (max-width: 480px) {
+  .read-medico-header {
+    padding: 5px;
+  }
+
+  .header-logo {
+    display: none; /* Oculta el logo en pantallas muy pequeñas */
+  }
+
+  .welcome-message {
+    font-size: 18px;
+  }
+
+  .department-name {
+    font-size: 14px;
+  }
+
+  .read-medico-content {
+    padding: 5px;
+  }
+
+  .search-container input, .search-container select {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .medico-table th, .medico-table td {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .pagination-read-medico button {
+    font-size: 12px;
+    padding: 5px;
+  }
 }

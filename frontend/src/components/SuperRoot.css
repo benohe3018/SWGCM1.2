@@ -83,13 +83,17 @@
     margin-left: 25px;
   }
   .mr-machine-superRoot {
-    margin-left: 300px;
+    margin-left: 250px;
     margin-top: 5px;
     width: 100%;
     }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 480px) {
+
+  .header-logo-medico {
+    display: none;
+  }
 
   .content-area {
     margin-left: 75px; /* Ajusta según el ancho de tu sidebar */
@@ -104,29 +108,30 @@
   }
 
   .super-root-header {
-    width: 100%;
-    background-color: whitesmoke;
-    padding: 5px 10px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    top: 0;
-    z-index: 100;
-    margin-top: 15px;
-    margin-left: 70px;
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    padding: 10px;
+    text-align: center; /* Centra el texto del header */
   }  
 
-  .header-texts h1 {
-    font-size: 14px; /* Reduce el tamaño de la fuente para el header */
+  .header-texts-superRoot {
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    margin-left: 35px;
   }
 
-  .header-texts h2 {
-    font-size: 10px; /* Reduce el tamaño de la fuente para el header */
+  .welcome-message-superRoot {
+    color: #12322b;
+    font-size: 0.8em;
+    margin: 5px;
+    margin-left: 110px;
   }
 
-  .department-name {
-    font-size: 14px; /* Reduce el tamaño de la fuente del nombre del departamento */
+  .department-name-superRoot {
+  color: black;
+  font-size: 0.7em;
+  margin: 0;
+  margin-left: 110px;
   }
 
   .mr-machine-superRoot {

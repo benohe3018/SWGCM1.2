@@ -11,9 +11,9 @@ const SuperRoot = () => {
       <div className="content-area">
         <header className="super-root-header">
           <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-          <div className="header-texts">
-            <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
-            <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+          <div className="header-texts-superRoot">
+            <h1 className="welcome-message-superRoot">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
+            <h2 className="department-name-superRoot">Departamento de Resonancia Magnética - HGR #46</h2>
           </div>
         </header>
         <main className="super-root-content">

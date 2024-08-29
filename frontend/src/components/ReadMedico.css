@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
+  justify-content: flex-start;
   font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   color: #0C231E;
@@ -25,17 +25,16 @@
 
 .read-medico-header {
   display: flex;
-  flex-direction: inline-flex;
   width: 100%;
   background-color: whitesmoke; /* Color del encabezado */
   padding: 10px 20px;
   box-sizing: border-box;
-  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
-  z-index: 100; 
+  top: 0;
+  z-index: 100;
 }
 
 .header-logo {
-  margin-left: 10px; /* Agrega margen a la izquierda del logo */
+  margin-left: 10px;
 }
 
 .header-texts {
@@ -46,13 +45,40 @@
 .welcome-message {
   font-size: 24px;
   margin: 0;
-  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
+  color: #0C231E;
 }
 
 .department-name {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Ocultamos la sidebar inicialmente */
+  width: 250px;
+  height: 100vh;
+  background-color: #12322B;
+  color: white;
+  transition: left 0.3s ease;
+  z-index: 200;
+}
+
+.sidebar.open {
+  left: 0; /* Deslizamos la sidebar desde la izquierda cuando está abierta */
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #0C231E;
 }
 
 .read-medico-content {
@@ -65,10 +91,10 @@
 }
 
 .search-container {
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .search-container input {
@@ -124,8 +150,6 @@
 .pagination-read-medico button.active {
   background-color: #002d20;
 }
-
-/* ReadMedico.css - Continuación */
 
 /* Media Query para pantallas pequeñas */
 @media (max-width: 768px) {
@@ -196,8 +220,17 @@
 
 /* Media Query para pantallas extra pequeñas */
 @media (max-width: 480px) {
+  .hamburger {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
   .read-medico-header {
     padding: 5px;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .header-logo {
@@ -214,6 +247,7 @@
 
   .read-medico-content {
     padding: 5px;
+    margin-top: 40px; /* Asegura que el contenido no quede detrás del menú */
   }
 
   .search-container input, .search-container select {

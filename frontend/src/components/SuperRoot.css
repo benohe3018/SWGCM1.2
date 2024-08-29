@@ -90,7 +90,6 @@
   }  
 
   .header-texts-superRoot {
-    margin: 0 auto;
     text-align: center;
     width: 90%;
     margin-left: 35px;
@@ -99,15 +98,11 @@
   .welcome-message-superRoot {
     color: #12322b;
     font-size: 0.8em;
-    margin: 5px;
-    margin-left: 110px;
   }
 
   .department-name-superRoot {
   color: black;
   font-size: 0.7em;
-  margin: 0;
-  margin-left: 110px;
   }
 
   .mr-machine-superRoot {

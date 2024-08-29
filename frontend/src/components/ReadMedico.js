@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
+import { Link } from 'react-router-dom';
 import './ReadMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
@@ -10,7 +10,6 @@ const ReadMedico = () => {
   const medicosPerPage = 10;
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const fetchMedicos = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
@@ -51,82 +50,71 @@ const ReadMedico = () => {
   const totalPages = Math.ceil(filteredMedicos.length / medicosPerPage);
 
   return (
-    <div className="main-layout">
-      {/* Sidebar with toggle button */}
-      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <Sidebar />
-      </div>
-      <div className="content">
-        <header className="read-medico-header">
-          <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-          <div className="header-texts">
-            <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
-            <h2 className="department-name">Médicos Registrados en la base de datos</h2>
-          </div>
-          <div className="hamburger" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
-          </div>
-        </header>
+    <div className="read-medico-page">
+      <header className="read-medico-header">
+        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
+        <div className="header-texts">
+          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="department-name">Médicos Registrados en la base de datos</h2>
+        </div>
+      </header>
       
-        <div className="read-medico-content">
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Buscar..."
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-            <select value={searchField} onChange={handleFieldChange}>
-              <option value="nombre">Nombre</option>
-              <option value="apellidoPaterno">Apellido Paterno</option>
-              <option value="apellidoMaterno">Apellido Materno</option>
-            </select>
-          </div>
-          <div className="table-container">
-            {isLoading ? (
-              <p>Cargando...</p>
-            ) : (
-              <>
-                <div className="medico-table-container">
-                  <table className="medico-table">
-                    <thead>
-                      <tr>
-                        <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-                        <th>Especialidad</th>
-                        <th>Matrícula</th>
+      <div className="read-medico-content">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <select value={searchField} onChange={handleFieldChange}>
+            <option value="nombre">Nombre</option>
+            <option value="apellidoPaterno">Apellido Paterno</option>
+            <option value="apellidoMaterno">Apellido Materno</option>
+          </select>
+        </div>
+        <div className="table-container">
+          {isLoading ? (
+            <p>Cargando...</p>
+          ) : (
+            <>
+              <div className="medico-table-container">
+                <table className="medico-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Apellido Paterno</th>
+                      <th>Apellido Materno</th>
+                      <th>Especialidad</th>
+                      <th>Matrícula</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentMedicos.map(medico => (
+                      <tr key={medico.id_medico}>
+                        <td>{medico.nombre_medico}</td>
+                        <td>{medico.apellido_paterno_medico}</td>
+                        <td>{medico.apellido_materno_medico}</td>
+                        <td>{medico.especialidad}</td>
+                        <td>{medico.matricula}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {currentMedicos.map(medico => (
-                        <tr key={medico.id_medico}>
-                          <td>{medico.nombre_medico}</td>
-                          <td>{medico.apellido_paterno_medico}</td>
-                          <td>{medico.apellido_materno_medico}</td>
-                          <td>{medico.especialidad}</td>
-                          <td>{medico.matricula}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="pagination-read-medico">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                      className={page === currentPage ? 'active' : ''}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="pagination-read-medico">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={page === currentPage ? 'active' : ''}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -134,3 +122,4 @@ const ReadMedico = () => {
 };
 
 export default ReadMedico;
+

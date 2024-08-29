@@ -65,30 +65,6 @@
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-  .content-area {
-    margin-left: 135px; /* Ajusta el ancho del sidebar */
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #0C231E;
-  }
-  
-  .super-root-header {
-    margin-bottom: 20px; /* Aumenta la distancia del header */
-    margin-left: 25px;
-  }
-  .mr-machine-superRoot {
-    margin-left: 250px;
-    margin-top: 5px;
-    width: 100%;
-    }
-}
-
 @media (max-width: 480px) {
 
   .header-logo {

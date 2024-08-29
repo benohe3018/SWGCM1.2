@@ -10,7 +10,6 @@ const ReadMedico = () => {
   const medicosPerPage = 10;
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const fetchMedicos = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
@@ -29,10 +28,6 @@ const ReadMedico = () => {
 
   const handleFieldChange = (event) => {
     setSearchField(event.target.value);
-  };
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
   };
 
   const filteredMedicos = medicos.filter((medico) => {
@@ -62,26 +57,7 @@ const ReadMedico = () => {
           <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
           <h2 className="department-name">Médicos Registrados en la base de datos</h2>
         </div>
-        <div className="hamburger" onClick={toggleSidebar}>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
       </header>
-
-      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <Link to="/medicos">Módulo de Médicos</Link>
-        <Link to="/usuarios">Módulo de Usuarios</Link>
-        <Link to="/citas">Módulo de Citas</Link>
-        <Link to="/estudios">Módulo de Estudios Radiológicos</Link>
-        <Link to="/especialidades">Módulo de Especialidades Médicas</Link>
-        <Link to="/unidades">Módulo de Unidades de Medicina Familiar</Link>
-        <Link to="/diagnosticos">Módulo de Diagnósticos Presuntivos</Link>
-        <Link to="/hospitales">Módulo de Hospitales</Link>
-        <Link to="/informes">Módulo de Informes</Link>
-        <Link to="/administracion">Módulo de Administración</Link>
-        <Link to="/logout">Cerrar Página</Link>
-      </div>
       
       <div className="read-medico-content">
         <div className="search-container">
@@ -95,7 +71,6 @@ const ReadMedico = () => {
             <option value="nombre">Nombre</option>
             <option value="apellidoPaterno">Apellido Paterno</option>
             <option value="apellidoMaterno">Apellido Materno</option>
-            <option value="matricula">Matrícula</option>
           </select>
         </div>
         <div className="table-container">
@@ -147,3 +122,4 @@ const ReadMedico = () => {
 };
 
 export default ReadMedico;
+

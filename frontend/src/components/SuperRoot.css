@@ -65,7 +65,7 @@
   margin-top: 20px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .content-area {
     margin-left: 135px; /* Ajusta el ancho del sidebar */
     background-color: whitesmoke;
@@ -91,7 +91,7 @@
 
 @media (max-width: 480px) {
 
-  .header-logo-medico {
+  .header-logo {
     display: none;
   }
 

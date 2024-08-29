@@ -52,6 +52,7 @@ const ReadMedico = () => {
 
   return (
     <div className="main-layout">
+      {/* Sidebar with toggle button */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <Sidebar />
       </div>

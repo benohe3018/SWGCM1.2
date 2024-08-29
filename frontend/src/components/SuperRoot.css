@@ -92,17 +92,17 @@
   .header-texts-superRoot {
     text-align: center;
     width: 90%;
-    margin-left: 170px;
+    margin-left: 140px;
   }
 
   .welcome-message-superRoot {
     color: #12322b;
-    font-size: 0.8em;
+    font-size: 1.2em;
   }
 
   .department-name-superRoot {
   color: black;
-  font-size: 0.7em;
+  font-size: 1.0em;
   }
 
   .mr-machine-superRoot {

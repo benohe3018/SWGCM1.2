@@ -95,7 +95,7 @@ input, select {
 
 .header-logo-medico {
   height: 50px; /* Ajusta el tamaño del logo para pantallas pequeñas */
-  margin-left: -20px;
+  margin-left: 10px;
 }
 
 .create-medico-header {
@@ -107,7 +107,7 @@ input, select {
 .header-texts-medico {
   margin: 0 auto;
   text-align: center;
-  margin-left: -100px;
+  margin-left: 110px;
 }
 
 .welcome-message-medico {

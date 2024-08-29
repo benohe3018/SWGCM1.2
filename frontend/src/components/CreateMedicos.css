@@ -113,16 +113,21 @@ input, select {
 
 .welcome-message-medico {
   color: #12322b;
-  font-size: 0.8em;
+  font-size: 24px;
   margin: 5px;
   margin-left: 110px;
 }
 
 .department-name-medico {
 color: black;
-font-size: 0.7em;
+font-size: 16px;
 margin: 0;
 margin-left: 110px;
+}
+
+.form-description-medico {
+  font-size: 14px; /* Mantén el tamaño del texto para el formulario */
+  color: black;
 }
 
 /* Media Queries para pantallas pequeñas */

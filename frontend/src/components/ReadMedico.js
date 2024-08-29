@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Sidebar from './Sidebar'; // Asegúrate de importar el componente Sidebar
 import './ReadMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
@@ -11,7 +10,6 @@ const ReadMedico = () => {
   const medicosPerPage = 10;
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre');
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Estado para el menú hamburguesa
 
   const fetchMedicos = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
@@ -51,28 +49,15 @@ const ReadMedico = () => {
 
   const totalPages = Math.ceil(filteredMedicos.length / medicosPerPage);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
   return (
     <div className="read-medico-page">
       <header className="read-medico-header">
-        <div className="hamburger" onClick={toggleSidebar}>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
         <div className="header-texts">
           <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
           <h2 className="department-name">Médicos Registrados en la base de datos</h2>
         </div>
       </header>
-      
-      <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <Sidebar />
-      </div>
       
       <div className="read-medico-content">
         <div className="search-container">
@@ -137,3 +122,4 @@ const ReadMedico = () => {
 };
 
 export default ReadMedico;
+

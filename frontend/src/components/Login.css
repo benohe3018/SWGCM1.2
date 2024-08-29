@@ -55,7 +55,7 @@ body {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   text-align: center;
   margin-top: 100px;
@@ -64,7 +64,7 @@ body {
 .login-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
 }
 
 label {

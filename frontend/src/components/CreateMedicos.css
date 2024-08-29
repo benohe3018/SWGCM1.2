@@ -98,6 +98,33 @@ input, select {
   margin-left: 10px;
 }
 
+.create-medico-header {
+  width: 100%; /* Asegura que el header ocupe todo el ancho */
+  padding: 10px;
+  text-align: center; /* Centra el texto del header */
+}
+
+.header-texts-medico {
+  margin: 0 auto;
+  text-align: center;
+  width: 90%;
+  margin-left: 35px;
+}
+
+.welcome-message-medico {
+  color: #12322b;
+  font-size: 0.8em;
+  margin: 5px;
+  margin-left: 110px;
+}
+
+.department-name-medico {
+color: black;
+font-size: 0.7em;
+margin: 0;
+margin-left: 110px;
+}
+
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 480px) {
   .header-logo-medico {

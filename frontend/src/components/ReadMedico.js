@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';
 import './ReadMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
@@ -51,6 +52,7 @@ const ReadMedico = () => {
 
   return (
     <div className="read-medico-page">
+      <Sidebar />
       <header className="read-medico-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
         <div className="header-texts">
@@ -122,4 +124,3 @@ const ReadMedico = () => {
 };
 
 export default ReadMedico;
-

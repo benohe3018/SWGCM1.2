@@ -102,6 +102,28 @@
     border-radius: 5px;
   }
 
+  .hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .hamburger-menu ul li {
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    color: white; /* Asegura que el texto sea visible */
+  }
+
+  .hamburger-menu ul li a {
+    color: white; /* Asegura que los enlaces sean visibles */
+    text-decoration: none;
+    display: block;
+  }
+
+  .hamburger-menu ul li:hover {
+    background-color: #4a8b7f; /* Cambia este color al que prefieras */
+  }
+
   .hamburger-menu.active + .sidebar {
     display: block;
   }
@@ -122,8 +144,8 @@
 .hamburger {
   cursor: pointer;
   position: fixed;
-  top: 150px;
-  left: 25px;
+  top: 15px;
+  left: 15px;
   z-index: 1001;
   background-color: #fff; /* Cambia el color de fondo */
   padding: 10px;
@@ -136,7 +158,6 @@
   background-color: #12322B; /* Cambia el color de las líneas */
   margin: 5px 0;
 }
-  
   
   
   

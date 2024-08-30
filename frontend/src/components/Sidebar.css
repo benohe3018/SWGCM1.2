@@ -144,8 +144,8 @@
 .hamburger {
   cursor: pointer;
   position: fixed;
-  top: 15px;
-  left: 15px;
+  top: 150px;
+  left: 25px;
   z-index: 1001;
   background-color: #fff; /* Cambia el color de fondo */
   padding: 10px;

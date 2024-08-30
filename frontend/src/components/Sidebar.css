@@ -21,8 +21,6 @@
 
 .sidebar ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .sidebar ul li {
@@ -85,6 +83,37 @@
 /* Ajustes adicionales para el encabezado */
 .login-header {
   padding-left: 250px; /* Ajustar esto al ancho de tu barra lateral */
+}
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+  }
+
+  .hamburger-menu.active + .sidebar {
+    display: block;
+  }
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-menu div {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
 }
 
   

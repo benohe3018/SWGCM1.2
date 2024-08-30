@@ -71,7 +71,7 @@
     background-color: #12322b;
     color: #fff;
     padding: 15px;
-    width: 250px;
+    width: 160px;
 }
 
   .header-logo {
@@ -79,7 +79,8 @@
   }
 
   .content-area {
-    margin-left: 75px; /* Ajusta según el ancho de tu sidebar */
+    margin-left: 0; /* Ajusta según el ancho de tu sidebar */
+    width: 100%;
     background-color: whitesmoke;
     height: 100vh;
     display: flex;
@@ -99,7 +100,7 @@
   .header-texts-superRoot {
     text-align: center;
     width: 90%;
-    margin-left: 140px;
+    margin-left: 0;
   }
 
   .welcome-message-superRoot {

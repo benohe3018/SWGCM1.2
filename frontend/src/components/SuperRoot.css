@@ -75,7 +75,7 @@
 }
 
   .header-logo {
-    display: none;
+    display: flex;
   }
 
   .content-area {

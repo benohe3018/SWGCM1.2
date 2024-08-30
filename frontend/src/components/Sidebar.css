@@ -94,14 +94,14 @@
   .hamburger-menu {
     display: block;
     position: fixed;
-    top: 150px;
+    top: 120px;
     left: 25px;
     z-index: 1001;
     background-color: #12322B; /* Cambia el color de fondo */
     padding: 5px;
     border-radius: 5px;
     color: white; /* Asegura que el texto sea visible */
-    font-size: 12px;
+    font-size: 14px;
     width: 120px;
   }
 
@@ -142,6 +142,10 @@
 
   .hamburger-menu .submenu li {
     font-size: 0.8em;
+  }
+  .sidebar-button{
+    font-size: 16px;
+    padding: 2px;
   }
 }
 

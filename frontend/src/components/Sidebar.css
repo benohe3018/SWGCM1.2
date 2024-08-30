@@ -94,8 +94,8 @@
   .hamburger-menu {
     display: block;
     position: fixed;
-    top: 120px;
-    left: 25px;
+    top: 150px;
+    left: 70px;
     z-index: 1001;
     background-color: #12322B; /* Cambia el color de fondo */
     padding: 5px;
@@ -143,10 +143,12 @@
   .hamburger-menu .submenu li {
     font-size: 0.8em;
   }
-  .sidebar-button{
-    font-size: 16px;
-    padding: 2px;
-  }
+  .sidebar-button {
+    font-size: 14px;
+    padding: 1px;
+    background: whitesmoke;
+    color: black;
+}
 }
 
 @media (max-width: 820px) {

@@ -124,3 +124,37 @@
 .pagination-read-medico button.active {
   background-color: #002d20;
 }
+
+/* Nuevos estilos para la responsividad */
+@media (max-width: 480px) {
+  .sidebar {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .hamburger-menu a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+  }
+
+  .hamburger-menu a:hover {
+    background-color: #444;
+  }
+}

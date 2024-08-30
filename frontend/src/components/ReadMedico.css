@@ -9,20 +9,6 @@
   text-align: center;
   color: #0C231E;
 }
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger .line {
-  width: 25px;
-  height: 3px;
-  background: white;
-  margin: 4px 0;
-}
-
 .read-medico-header {
   display: flex;
   flex-direction: inline-flex;

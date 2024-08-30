@@ -67,6 +67,13 @@
 
 @media (max-width: 480px) {
 
+  .sidebar {
+    background-color: #12322b;
+    color: #fff;
+    padding: 15px;
+    width: 250px;
+}
+
   .header-logo {
     display: none;
   }

@@ -108,7 +108,6 @@
 }
 
 .hamburger {
-  display: none;
   cursor: pointer;
   position: fixed;
   top: 15px;

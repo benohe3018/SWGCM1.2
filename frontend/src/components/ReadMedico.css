@@ -114,11 +114,7 @@
 /* Nuevos estilos para la responsividad */
 @media (max-width: 480px) {
   
-  .hamburger {
-    display: flex;
-  }
-
-  .hamburger-menu {
+    .hamburger-menu {
     display: none;
     flex-direction: column;
     background-color: #333;

@@ -98,9 +98,11 @@
     left: 25px;
     z-index: 1001;
     background-color: #12322B; /* Cambia el color de fondo */
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     color: white; /* Asegura que el texto sea visible */
+    font-size: 12px;
+    width: 120px;
   }
 
   .hamburger-menu ul {
@@ -109,7 +111,7 @@
   }
 
   .hamburger-menu ul li {
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     position: relative;
     color: white; /* Asegura que el texto sea visible */

@@ -15,7 +15,6 @@ const Sidebar = () => {
     diagnosticos: false,
     hospitales: false
   });
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,10 +32,6 @@ const Sidebar = () => {
 
   const handleExitSystem = () => {
     window.close();
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
   };
 
   const renderMenu = (role) => {
@@ -215,30 +210,16 @@ const Sidebar = () => {
   );
 
   return (
-    <div>
-      <div className="sidebar">
-        <h2>Bienvenido</h2>
-        <ul>
-          {renderMenu(user.role)}
-          <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
-          <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
-        </ul>
-        {user && (
-          <div className="active-user">
-            <p>Usuario activo: {user.username} ({user.role})</p>
-          </div>
-        )}
-      </div>
-      <div className="hamburger" onClick={toggleMenu}>
-        <div className="line"></div>
-        <div className="line"></div>
-        <div className="line"></div>
-      </div>
-      {isMenuOpen && (
-        <div className="hamburger-menu">
-          {renderMenu(user.role)}
-          <button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button>
-          <button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button>
+    <div className="sidebar">
+      <h2>Bienvenido</h2>
+      <ul>
+        {renderMenu(user.role)}
+        <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
+        <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
+      </ul>
+      {user && (
+        <div className="active-user">
+          <p>Usuario activo: {user.username} ({user.role})</p>
         </div>
       )}
     </div>

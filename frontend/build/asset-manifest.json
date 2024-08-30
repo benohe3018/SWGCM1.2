@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.cb5932f2.css",
-    "main.js": "/static/js/main.9f04a987.js",
+    "main.css": "/static/css/main.5e237fc1.css",
+    "main.js": "/static/js/main.fad7f50a.js",
     "static/js/453.8ab44547.chunk.js": "/static/js/453.8ab44547.chunk.js",
     "static/media/LogoIMSS.jpg": "/static/media/LogoIMSS.288a0e2c08e364e4c496.jpg",
     "static/media/MRMachine.jpg": "/static/media/MRMachine.c76547b3d57e82b89a66.jpg",
     "index.html": "/index.html",
-    "main.cb5932f2.css.map": "/static/css/main.cb5932f2.css.map",
-    "main.9f04a987.js.map": "/static/js/main.9f04a987.js.map",
+    "main.5e237fc1.css.map": "/static/css/main.5e237fc1.css.map",
+    "main.fad7f50a.js.map": "/static/js/main.fad7f50a.js.map",
     "453.8ab44547.chunk.js.map": "/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb5932f2.css",
-    "static/js/main.9f04a987.js"
+    "static/css/main.5e237fc1.css",
+    "static/js/main.fad7f50a.js"
   ]
 }

@@ -97,6 +97,9 @@
     top: 15px;
     left: 15px;
     z-index: 1001;
+    background-color: #12322B; /* Cambia el color de fondo */
+    padding: 10px;
+    border-radius: 5px;
   }
 
   .hamburger-menu.active + .sidebar {
@@ -104,15 +107,22 @@
   }
 }
 
-.hamburger-menu {
+.hamburger {
   display: none;
   cursor: pointer;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background-color: #fff; /* Cambia el color de fondo */
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.hamburger-menu div {
+.hamburger div {
   width: 30px;
   height: 3px;
-  background-color: white;
+  background-color: #12322B; /* Cambia el color de las líneas */
   margin: 5px 0;
 }
 

@@ -63,10 +63,6 @@
     display: flex;
   }
 
-.hamburger {
-    display: none;
-}
-
 .gestion-citas-content {
   width: 150%;
   display: flex;

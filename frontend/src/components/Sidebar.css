@@ -100,6 +100,7 @@
     background-color: #12322B; /* Cambia el color de fondo */
     padding: 10px;
     border-radius: 5px;
+    color: white; /* Asegura que el texto sea visible */
   }
 
   .hamburger-menu ul {
@@ -124,8 +125,21 @@
     background-color: #4a8b7f; /* Cambia este color al que prefieras */
   }
 
-  .hamburger-menu.active + .sidebar {
-    display: block;
+  .hamburger-menu .submenu {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    background-color: #12322B;
+    width: 100%;
+    z-index: 1000;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9em;
+  }
+
+  .hamburger-menu .submenu li {
+    font-size: 0.8em;
   }
 }
 

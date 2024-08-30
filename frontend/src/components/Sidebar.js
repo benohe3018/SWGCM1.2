@@ -236,9 +236,11 @@ const Sidebar = () => {
       </div>
       {isMenuOpen && (
         <div className="hamburger-menu">
-          {renderMenu(user.role)}
-          <button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button>
-          <button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button>
+          <ul>
+            {renderMenu(user.role)}
+            <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
+            <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
+          </ul>
         </div>
       )}
     </div>

@@ -113,9 +113,7 @@
 
 /* Nuevos estilos para la responsividad */
 @media (max-width: 480px) {
-  .sidebar {
-    display: none;
-  }
+  
 
   .hamburger {
     display: flex;

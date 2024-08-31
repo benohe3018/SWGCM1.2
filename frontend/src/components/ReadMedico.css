@@ -114,8 +114,7 @@
 /* Nuevos estilos para la responsividad */
 @media (max-width: 480px) {
   .read-medico-header {
-    width: 70%; /* Asegura que el header ocupe todo el ancho */
-    padding: 10px;
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
     text-align: center; /* Centra el texto del header */
   }
 
@@ -132,7 +131,7 @@
 
   .department-name-ReadMedico{
     color: #12322b;
-    font-size: 1.2em;
+    font-size: 1.0em;
   }
 
   .header-logo {
@@ -148,6 +147,7 @@
   .search-container {
     display: flex;
     width: 350px;
+    margin-top: 70px;
   }
 
   .search-container input,
@@ -162,9 +162,9 @@
   }
 
   .table-container {
-    width: 95%;
+    width: 130%;
     overflow-x: auto;
-    margin-top: 25px;
+    margin-top: 0px;
   }
   
   .medico-table {
@@ -174,7 +174,7 @@
   
   .medico-table th, .medico-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 5px;
     text-align: left;
   }
   

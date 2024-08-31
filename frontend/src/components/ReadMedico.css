@@ -114,7 +114,7 @@
 /* Nuevos estilos para la responsividad */
 @media (max-width: 480px) {
   .read-medico-header {
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    width: 70%; /* Asegura que el header ocupe todo el ancho */
     padding: 10px;
     text-align: center; /* Centra el texto del header */
   }
@@ -146,8 +146,8 @@
   }
 
   .search-container {
-    flex-direction: column;
-    gap: 5px;
+    display: flex;
+    width: 350px;
   }
 
   .search-container input,
@@ -180,6 +180,10 @@
   .medico-table th {
     background-color: #f2f2f2;
     color: #333;
+  }
+
+  .hamburger{
+    margin-top: 160px;
   }
 
   .hamburger-menu {

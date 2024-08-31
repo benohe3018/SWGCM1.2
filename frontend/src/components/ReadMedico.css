@@ -114,8 +114,25 @@
 /* Nuevos estilos para la responsividad */
 @media (max-width: 480px) {
   .read-medico-header {
-    flex-direction: column;
-    align-items: center;
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    padding: 10px;
+    text-align: center; /* Centra el texto del header */
+  }
+
+  .header-texts-ReadMedico{
+    text-align: center;
+    width: 90%;
+    margin-left: 0;
+  }
+
+  .welcome-message-ReadMedico{
+    color: #12322b;
+    font-size: 1.2em;
+  }
+
+  .department-name-ReadMedico{
+    color: #12322b;
+    font-size: 1.2em;
   }
 
   .header-logo {

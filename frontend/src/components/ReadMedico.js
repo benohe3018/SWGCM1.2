@@ -55,9 +55,9 @@ const ReadMedico = () => {
       <Sidebar />
       <header className="read-medico-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
-          <h2 className="department-name">Médicos Registrados en la base de datos</h2>
+        <div className="header-texts-ReadMedico">
+          <h1 className="welcome-message-ReadMedico">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="department-name-ReadMedico">Médicos Registrados en la base de datos</h2>
         </div>
       </header>
       
@@ -75,13 +75,13 @@ const ReadMedico = () => {
             <option value="apellidoMaterno">Apellido Materno</option>
           </select>
         </div>
-        <div className="table-container">
+        <div className="read-medico-table-container">
           {isLoading ? (
             <p>Cargando...</p>
           ) : (
             <>
               <div className="medico-table-container">
-                <table className="medico-table">
+                <table className="read-medico-table">
                   <thead>
                     <tr>
                       <th>Nombre</th>

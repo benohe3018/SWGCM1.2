@@ -129,7 +129,7 @@ margin-left: 110px;
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 480px) {
   .header-logo-medico {
-    display: none;
+    display: flex;
   }
 
   .create-medico-header {
@@ -141,8 +141,8 @@ margin-left: 110px;
   .header-texts-medico {
     margin: 0 auto;
     text-align: center;
-    width: 90%;
-    margin-left: 35px;
+    width: 100%;
+    margin-bottom: 45px;
 }
 
   .welcome-message-medico {
@@ -173,7 +173,6 @@ margin-left: 110px;
   }
 
   .form-medico {
-    margin-left: 35%;
     padding: 0 10px;
     width: 50%;
 }

@@ -113,6 +113,21 @@
 
 /* Nuevos estilos para la responsividad */
 @media (max-width: 480px) {
-  
+  .header-logo{
+    display: flex
+  }
+  .hamburger-menu {
+    display: block;
+    position: fixed;
+    top: 150px;
+    left: 70px;
+    z-index: 1001;
+    background-color: #12322B; /* Cambia el color de fondo */
+    padding: 5px;
+    border-radius: 5px;
+    color: white; /* Asegura que el texto sea visible */
+    font-size: 14px;
+    width: 120px;
+  }
     
 }

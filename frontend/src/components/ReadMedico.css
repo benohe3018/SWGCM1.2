@@ -142,7 +142,7 @@
 
     .read-medico-content {
     padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
-    width: 100%;
+    width: 70%;
   }
 
   .search-container {
@@ -153,11 +153,12 @@
   .search-container input,
   .search-container select {
     width: 100%; /* Asegura que ocupen todo el ancho disponible */
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .medico-table th, .medico-table td {
     padding: 6px; /* Reducir padding en pantallas pequeñas */
+    font-size: 9px;
   }
 
   .table-container {

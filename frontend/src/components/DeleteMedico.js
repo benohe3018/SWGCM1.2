@@ -61,10 +61,10 @@ const DeleteMedico = () => {
   return (
     <div className="delete-medico-page">
       <header className="delete-medico-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
-          <h2 className="department-name">Borrar Registros de Médicos</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="delete-header-logo" />
+        <div className="delete-header-texts">
+          <h1 className="delete-welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="delete-department-name">Borrar Registros de Médicos</h2>
         </div>
       </header>
       
@@ -105,7 +105,7 @@ const DeleteMedico = () => {
                   <td>{medico.especialidad}</td>
                   <td>{medico.matricula}</td>
                   <td>
-                    <button onClick={() => handleDelete(medico.id_medico)}>Eliminar</button>
+                    <button onClick={() => handleDelete(medico.id_medico)}>Borrar</button>
                   </td>
                 </tr>
               ))}

@@ -27,22 +27,22 @@
   z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
 }
 
-.header-logo {
+.delete-header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
 }
 
-.header-texts {
+.delete-header-texts {
   text-align: center;
   flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
 }
 
-.welcome-message {
+.delete-welcome-message {
   font-size: 24px;
   margin: 0;
   color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
 }
 
-.department-name {
+.delete-department-name {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
@@ -131,6 +131,36 @@
   color: green;
   font-weight: bold;
   margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .delete-medico-header {
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    text-align: center; /* Centra el texto del header */
+  }
+
+  .delete-header-texts{
+    text-align: center;
+    width: 90%;
+    margin-left: 50px;
+  }
+
+  .delete-welcome-message{
+    color: #12322b;
+    font-size: 1.0em;
+    margin-right: 60px;
+  }
+
+  .delete-department-name{
+    color: #12322b;
+    font-size: 1.0em;
+    margin-right: 60px;
+  }
+
+  .delete-header-logo {
+    height: 50px; /* Ajusta el tamaño del logo */
+    margin-left: 70px;
+  }
 }
 
 

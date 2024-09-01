@@ -24,23 +24,28 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Espacio entre el logo y el menú hamburguesa */
+  justify-content: flex-start; /* Alinea elementos al inicio */
   top: 0;
   z-index: 100;
 }
 
-.super-root__header-content { /* Nuevo contenedor para logo y textos */
+.super-root__header-content { 
   display: flex;
   align-items: center;
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+.super-root__hamburger-container {
+  margin-right: 20px; /* Espacio entre el menú y el logo */
 }
 
 .super-root__header-logo {
   height: 80px;
-  margin-right: 20px; /* Espacio entre el logo y los textos */
 }
 
 .super-root__header-texts {
-  text-align: left; /* Alinea los textos a la izquierda */
+  text-align: left; 
+  margin-left: 20px; /* Espacio entre el logo y los textos */
 }
 
 .super-root__welcome-message {
@@ -56,7 +61,7 @@
 }
 
 .super-root__main {
-  margin-top: 150px; /* Ajusta según el tamaño del encabezado */
+  margin-top: 150px; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,6 +92,7 @@
     padding: 10px;
     flex-direction: column; /* Logo y textos en columna */
     align-items: flex-start; /* Alinea a la izquierda */
+    margin-left: 40px;
   }
 
   .super-root__header-content {

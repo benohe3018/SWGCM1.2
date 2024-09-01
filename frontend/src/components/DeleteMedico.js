@@ -84,8 +84,8 @@ const DeleteMedico = () => {
             <option value="matricula">Matrícula</option>
           </select>
         </div>
-        <div className="medico-table-container">
-          <table className="medico-table">
+        <div className="delete-medico-table-container">
+          <table className="delete-medico-table">
             <thead>
               <tr>
                 <th>Nombre</th>

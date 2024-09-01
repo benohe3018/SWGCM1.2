@@ -93,7 +93,7 @@ const DeleteMedico = () => {
                 <th>Apellido Materno</th>
                 <th>Especialidad</th>
                 <th>Matrícula</th>
-                <th>borrar</th>
+                <th>Borrar</th>
               </tr>
             </thead>
             <tbody>

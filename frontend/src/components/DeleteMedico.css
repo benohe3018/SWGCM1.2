@@ -164,8 +164,8 @@
 
   .delete-search-container {
     width: 300px;
-    margin-top: 75px;
-    margin-right: 70px;
+    margin-top: 20px;
+    margin-left: 20px;
   }
 
   .delete-search-container input,

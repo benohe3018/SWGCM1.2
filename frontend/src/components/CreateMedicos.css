@@ -116,6 +116,23 @@ body {
   font-size: 1em; 
   margin-top: 10px;
 }
+.hamburger {
+  cursor: pointer;
+  position: absolute; /* Cambia de fixed a absolute */
+  top: 20px; /* Ajusta la posición vertical */
+  right: 20px; /* Alinea a la derecha */
+  z-index: 1001;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.hamburger div {
+  width: 30px;
+  height: 3px;
+  background-color: #12322B;
+  margin: 5px 0;
+}
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 768px) { 

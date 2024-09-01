@@ -134,7 +134,7 @@
 
   .super-root__header-logo {
     height: 60px; /* Ajusta el tamaño del logo */
-    margin-right: 0; /* Elimina el margen derecho */
+    margin-left: 140px; /* Elimina el margen derecho */
     margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
@@ -144,10 +144,14 @@
 
   .super-root__welcome-message {
     font-size: 1.2em;
+    text-align: center;
+    margin-right: 40px;
   }
 
   .super-root__department-name {
     font-size: 1.0em;
+    text-align: center;
+    margin-right: 40px;
   }
 
   .super-root__mr-machine {

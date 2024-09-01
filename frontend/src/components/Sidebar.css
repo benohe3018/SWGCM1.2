@@ -94,7 +94,7 @@
   .hamburger-menu {
     display: block;
     position: fixed;
-    top: 150px;
+    top: 20px;
     left: 70px;
     z-index: 1001;
     background-color: #12322B; /* Cambia el color de fondo */

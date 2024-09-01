@@ -135,3 +135,27 @@ body {
     font-size: 1.2em; 
   }
 }
+
+/* Media Queries para tabletas */
+@media (min-width: 481px) and (max-width: 768px) {
+  .create-medico__form {
+    width: 80%;
+    padding: 15px;
+  }
+
+  .create-medico__form-description {
+    font-size: 1.4em;
+  }
+}
+
+/* Media Queries para escritorios */
+@media (min-width: 769px) {
+  .create-medico__form {
+    width: 60%;
+    padding: 20px;
+  }
+
+  .create-medico__form-description {
+    font-size: 1.5em;
+  }
+}

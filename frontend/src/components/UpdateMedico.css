@@ -153,13 +153,13 @@
 
     .update-medico-content {
     padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
-    width: 70%;
+    width: 90%;
   }
 
   .search-container {
     display: flex;
     width: 350px;
-    margin-top: 70px;
+    margin-top: 100px;
   }
 
   .search-container input,
@@ -170,7 +170,7 @@
 
   .medico-table th, .medico-table td {
     padding: 6px; /* Reducir padding en pantallas pequeñas */
-    font-size: 9px;
+    font-size: 7px;
   }
 
   .table-container {

@@ -70,7 +70,7 @@ const DeleteMedico = () => {
       
       <div className="delete-medico-content">
         <Sidebar />
-        <div className="search-container">
+        <div className="delete-search-container">
           <input
             type="text"
             placeholder="Buscar..."

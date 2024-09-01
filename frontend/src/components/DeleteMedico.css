@@ -82,21 +82,21 @@
   margin-bottom: 20px;
 }
 
-.search-container {
+.delete-search-container {
   align-items: center;
   gap: 10px;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.search-container input {
+.delete-search-container input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
 }
 
-.search-container select {
+.delete-search-container select {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -161,6 +161,19 @@
     height: 50px; /* Ajusta el tamaño del logo */
     margin-left: 70px;
   }
+
+  .delete-search-container {
+    width: 300px;
+    margin-top: 75px;
+    margin-right: 70px;
+  }
+
+  .delete-search-container input,
+  .delete-search-container select {
+    width: 70%; /* Asegura que ocupen todo el ancho disponible */
+    margin-bottom: 15px;
+  }
+
 }
 
 

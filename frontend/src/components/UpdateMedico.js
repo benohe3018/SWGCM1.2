@@ -146,7 +146,7 @@ const UpdateMedico = () => {
         <Sidebar />
         <div className="update-medico-content">
           {successMessage && <p className="success-message">{successMessage}</p>}
-          <div className="search-container">
+          <div className="update-search-container">
             <input
               type="text"
               placeholder="Buscar..."

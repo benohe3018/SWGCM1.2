@@ -60,21 +60,21 @@
   margin-bottom: 20px;
 }
 
-.search-container {
+.update-search-container {
     align-items: center;
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.search-container input {
+.update-search-container input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
 }
 
-.search-container select {
+.update-search-container select {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -157,14 +157,14 @@
     width: 80%;
   }
 
-  .search-container {
+  .update-search-container {
     display: flex;
     width: 350px;
     margin-top: 120px;
   }
 
-  .search-container input,
-  .search-container select {
+  .update-search-container input,
+  .update-search-container select {
     width: 70%; /* Asegura que ocupen todo el ancho disponible */
     margin-bottom: 15px;
   }

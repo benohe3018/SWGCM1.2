@@ -201,8 +201,8 @@
   .hamburger-menu {
     display: block;
     position: fixed;
-    top: 150px;
-    left: 70px;
+    top: 70px;
+    left: 10px;
     z-index: 1001;
     background-color: #12322B;
     padding: 5px;

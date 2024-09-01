@@ -145,11 +145,12 @@
   .update-department-name{
     color: #12322b;
     font-size: 1.0em;
+    margin-right: 60px;
   }
 
   .update-header-logo {
     height: 50px; /* Ajusta el tamaño del logo */
-    margin-left: 50px;
+    margin-left: 70px;
   }
 
     .update-medico-content {
@@ -158,9 +159,9 @@
   }
 
   .update-search-container {
-    display: flex;
-    width: 350px;
-    margin-top: 120px;
+    width: 300px;
+    margin-top: 75px;
+    margin-right: 70px;
   }
 
   .update-search-container input,

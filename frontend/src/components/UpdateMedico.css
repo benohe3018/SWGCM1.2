@@ -139,7 +139,7 @@
   .update-welcome-message{
     color: #12322b;
     font-size: 1.0em;
-    margin-right: 50px;
+    margin-right: 60px;
   }
 
   .update-department-name{
@@ -148,8 +148,8 @@
   }
 
   .update-header-logo {
-    margin: 0;
-    margin-bottom: 10px; /* Espacio entre el logo y el texto */
+    height: 50px; /* Ajusta el tamaño del logo */
+    margin-left: 50px;
   }
 
     .update-medico-content {

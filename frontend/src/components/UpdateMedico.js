@@ -136,7 +136,7 @@ const UpdateMedico = () => {
   return (
     <div className="update-medico-page">
       <header className="update-medico-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
+        <img src={logoIMSS} alt="Logo IMSS" className="update-header-logo" />
         <div className="update-header-text">
           <h1 className="update-welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
           <h2 className="update-department-name">Actualizar Registros de Médicos</h2>

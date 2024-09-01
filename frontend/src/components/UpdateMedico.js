@@ -137,9 +137,9 @@ const UpdateMedico = () => {
     <div className="update-medico-page">
       <header className="update-medico-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
-          <h2 className="department-name">Actualizar Registros de Médicos</h2>
+        <div className="update-header-text">
+          <h1 className="update-welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="update-department-name">Actualizar Registros de Médicos</h2>
         </div>
       </header>
       <div className="main-layout">
@@ -159,8 +159,8 @@ const UpdateMedico = () => {
               <option value="apellido_materno_medico">Apellido Materno</option>
             </select>
           </div>
-          <div className="medico-table-container">
-            <table className="medico-table">
+          <div className="update-medico-table-container">
+            <table className="update-medico-table">
               <thead>
                 <tr>
                   <th>Nombre</th>

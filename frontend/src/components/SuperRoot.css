@@ -1,10 +1,10 @@
 /* SuperRoot.css */
 
-.super-root-page {
+.super-root {
   display: flex;
 }
 
-.content-area {
+.super-root__content-area {
   margin-left: 250px; /* Ajusta según el ancho de tu sidebar */
   width: calc(100% - 250px);
   background-color: whitesmoke;
@@ -17,40 +17,45 @@
   color: #0C231E;
 }
 
-.super-root-header {
+.super-root__header {
   width: 100%;
   background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Espacio entre el logo y el menú hamburguesa */
   top: 0;
   z-index: 100;
 }
 
-.header-logo {
+.super-root__header-content { /* Nuevo contenedor para logo y textos */
+  display: flex;
+  align-items: center;
+}
+
+.super-root__header-logo {
   height: 80px;
+  margin-right: 20px; /* Espacio entre el logo y los textos */
 }
 
-.header-texts {
-  text-align: center;
-  flex-grow: 1;
+.super-root__header-texts {
+  text-align: left; /* Alinea los textos a la izquierda */
 }
 
-.welcome-message {
+.super-root__welcome-message {
   font-size: 24px;
   margin: 0;
   color: #0C231E;
 }
 
-.department-name {
+.super-root__department-name {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
 }
 
-.super-root-content {
+.super-root__main {
   margin-top: 150px; /* Ajusta según el tamaño del encabezado */
   display: flex;
   flex-direction: column;
@@ -59,68 +64,56 @@
   width: 100%;
 }
 
-.mr-machine-superRoot {
+.super-root__mr-machine {
   width: 100%;
   max-width: 300px;
   margin-top: 20px;
 }
 
 @media (max-width: 480px) {
-
   .sidebar {
     background-color: #12322b;
     color: #fff;
     padding: 15px;
     width: 160px;
-}
-
-  .header-logo {
-    display: flex;
   }
 
-  .content-area {
-    margin-left: 0; /* Ajusta según el ancho de tu sidebar */
+  .super-root__content-area {
+    margin-left: 0; 
     width: 100%;
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #0C231E;
   }
 
-  .super-root-header {
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
+  .super-root__header {
     padding: 10px;
-    text-align: center; /* Centra el texto del header */
-  }  
-
-  .header-texts-superRoot {
-    text-align: center;
-    width: 90%;
-    margin-left: 0;
+    flex-direction: column; /* Logo y textos en columna */
+    align-items: flex-start; /* Alinea a la izquierda */
   }
 
-  .welcome-message-superRoot {
-    color: #12322b;
+  .super-root__header-content {
+    width: 100%; /* Ocupa todo el ancho disponible */
+  }
+
+  .super-root__header-logo {
+    height: 60px; /* Ajusta el tamaño del logo */
+    margin-right: 0; /* Elimina el margen derecho */
+    margin-bottom: 10px; /* Espacio entre el logo y los textos */
+  }
+
+  .super-root__header-texts {
+    text-align: left; /* Alinea los textos a la izquierda */
+  }
+
+  .super-root__welcome-message {
     font-size: 1.2em;
   }
 
-  .department-name-superRoot {
-  color: black;
-  font-size: 1.0em;
+  .super-root__department-name {
+    font-size: 1.0em;
   }
 
-  .mr-machine-superRoot {
+  .super-root__mr-machine {
     margin-left: 20px;
     margin-top: 70px;
     width: 100%;
+  }
 }
- 
-}
-
-
-
-

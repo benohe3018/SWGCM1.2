@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import './UpdateMedico.css';
-import './ReadMedico.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const UpdateMedico = () => {

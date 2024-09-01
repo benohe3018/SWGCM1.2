@@ -135,7 +135,7 @@
 
 @media (max-width: 480px) {
   .delete-medico-header {
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    width: 120%; /* Asegura que el header ocupe todo el ancho */
     text-align: center; /* Centra el texto del header */
   }
 
@@ -164,8 +164,8 @@
 
   .delete-search-container {
     width: 300px;
-    margin-top: 20px;
     margin-left: 20px;
+    margin-top: 40px;
   }
 
   .delete-search-container input,
@@ -177,7 +177,6 @@
     width: 90%;
     overflow-x: auto;
     margin-top: 0px;
-    margin-left: -140px;
   }
   .delete-medico-table{
     width: 100%;
@@ -188,6 +187,7 @@
     border: 1px solid #ddd;
     padding: 5px;
     text-align: left;
+    font-size: 9px;
   }
   .delete-medico-table th {
     background-color: #f2f2f2;

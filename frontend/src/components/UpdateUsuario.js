@@ -162,7 +162,7 @@ const UpdateUsuario = () => {
             </select>
           </div>
           <div className="update-usuario-table-container">
-            <table className="update-usuario-table">
+            <table className="usuario-table">
               <thead>
                 <tr>
                   <th>Nombre de Usuario</th>

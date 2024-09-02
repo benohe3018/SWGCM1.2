@@ -142,18 +142,18 @@
   .update-welcome-message{
     font-size: 1.2em;
     text-align: center;
-    margin-right: 40px;
+    margin-right: 90px;
   }
 
   .update-department-name{
     font-size: 1.0em;
     text-align: center;
-    margin-right: 40px;
+    margin-right: 90px;
   }
 
   .update-header-logo {
     height: 60px; /* Ajusta el tamaño del logo */
-    margin-left: 140px; /* Elimina el margen derecho */
+    margin-left: 210px; /* Elimina el margen derecho */
     margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 

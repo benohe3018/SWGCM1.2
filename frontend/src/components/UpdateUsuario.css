@@ -27,22 +27,22 @@ body {
   z-index: 100;
 }
 
-.header-logo {
+.header-logo-update-usuario {
   height: 60px;
 }
 
-.header-texts {
+.header-texts-update-usuario {
   margin-left: 20px;
   text-align: left;
 }
 
-.welcome-message {
+.welcome-message-update-usuario {
   font-size: 24px;
   margin: 0;
   color: #0C231E;
 }
 
-.department-name {
+.department-name-update-usuario {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
@@ -130,19 +130,19 @@ body {
     align-items: flex-start;
   }
 
-  .header-texts {
+  .header-texts-update-usuario {
     text-align: center;
     width: 90%;
     margin-left: 50px;
   }
 
-  .welcome-message {
+  .welcome-message-update-usuario {
     font-size: 1.2em;
     text-align: center;
     margin-right: 90px;
   }
 
-  .department-name {
+  .department-name-update-usuario {
     font-size: 1.0em;
     text-align: center;
     margin-right: 90px;
@@ -173,5 +173,9 @@ body {
     width: 90%;
     overflow-x: auto;
     margin-top: 0px;
+  }
+  .header-logo-update-usuario{
+    margin-left: 180px; 
+    height: 60px;
   }
 }

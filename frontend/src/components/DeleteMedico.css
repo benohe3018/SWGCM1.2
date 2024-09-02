@@ -149,20 +149,21 @@
   }
 
   .delete-welcome-message{
-    color: #12322b;
-    font-size: 1.0em;
-    margin-right: 60px;
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 90px;
   }
 
   .delete-department-name{
-    color: #12322b;
     font-size: 1.0em;
-    margin-right: 60px;
+    text-align: center;
+    margin-right: 90px;
   }
 
   .delete-header-logo {
-    height: 50px; /* Ajusta el tamaño del logo */
-    margin-left: 70px;
+    height: 60px; /* Ajusta el tamaño del logo */
+    margin-left: 150px; /* Elimina el margen derecho */
+    margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
   .delete-search-container {

@@ -201,7 +201,7 @@ const CreateUsuario = () => {
         <Sidebar />
         <div className="create-usuario-content">
           <form onSubmit={handleSubmit}>
-            <h3 className="form-description">Capture los datos del Usuario</h3>
+            <h3 className="form-description-create-usuario">Capture los datos del Usuario</h3>
             <div className="form-group">
               <label htmlFor="nombreUsuario">Nombre de Usuario:</label>
               <input type="text" id="nombreUsuario" value={nombreUsuario} onChange={e => setNombreUsuario(e.target.value)} placeholder="Nombre de Usuario" />

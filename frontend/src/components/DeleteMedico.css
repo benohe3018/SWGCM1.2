@@ -82,21 +82,21 @@
   margin-bottom: 20px;
 }
 
-.delete-search-container {
+.delete-medico-search-container {
   align-items: center;
   gap: 10px;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.delete-search-container input {
+.delete-medico-search-container input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
 }
 
-.delete-search-container select {
+.delete-medico-search-container select {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -166,14 +166,14 @@
     margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
-  .delete-search-container {
+  .delete-medico-search-container {
     width: 300px;
     margin-left: 20px;
-    margin-top: 40px;
+    margin-top: 10px;
   }
 
-  .delete-search-container input,
-  .delete-search-container select {
+  .delete-medico-search-container input,
+  .delete-medico-search-container select {
     width: 70%; /* Asegura que ocupen todo el ancho disponible */
     margin-bottom: 15px;
   }

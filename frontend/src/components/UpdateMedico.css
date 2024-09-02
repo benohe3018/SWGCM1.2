@@ -128,6 +128,9 @@
   .update-medico-header {
     width: 100%; /* Asegura que el header ocupe todo el ancho */
     text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    margin-left: 40px;
+    align-items: flex-start;
   }
 
   .update-header-text{
@@ -137,20 +140,21 @@
   }
 
   .update-welcome-message{
-    color: #12322b;
-    font-size: 1.0em;
-    margin-right: 60px;
+    height: 60px; /* Ajusta el tamaño del logo */
+    margin-left: 140px; /* Elimina el margen derecho */
+    margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
   .update-department-name{
-    color: #12322b;
     font-size: 1.0em;
-    margin-right: 60px;
+    text-align: center;
+    margin-right: 40px;
   }
 
   .update-header-logo {
-    height: 50px; /* Ajusta el tamaño del logo */
-    margin-left: 70px;
+    height: 60px; /* Ajusta el tamaño del logo */
+    margin-left: 140px; /* Elimina el margen derecho */
+    margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
     .update-medico-content {

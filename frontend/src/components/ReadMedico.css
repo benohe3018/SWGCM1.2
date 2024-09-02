@@ -118,28 +118,29 @@
     text-align: center; /* Centra el texto del header */
     flex-direction: column;
     margin-left: 40px;
+    align-items: flex-start;
   }
 
   .header-texts-ReadMedico{
-    text-align: center;
-    width: 90%;
-    margin-left: 0;
+    text-align: left; /* Alinea los textos a la izquierda */
   }
 
   .welcome-message-ReadMedico{
-    color: #12322b;
     font-size: 1.2em;
+    text-align: center;
+    margin-right: 40px;;
   }
 
   .department-name-ReadMedico{
-    color: #12322b;
     font-size: 1.0em;
+    text-align: center;
+    margin-right: 40px;
   }
 
   .read-medico__header-logo {
-    margin-bottom: 10px; /* Espacio entre el logo y el texto */
-    height: 60px;
-
+    height: 60px; /* Ajusta el tamaño del logo */
+    margin-left: 140px; /* Elimina el margen derecho */
+    margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
     .read-medico-content {

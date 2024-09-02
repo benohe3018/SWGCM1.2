@@ -135,12 +135,13 @@
 
   .read-usuario-content {
     padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
-    width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+    width: 100%; /* Ajusta el ancho para pantallas pequeñas */
   }
 
   .search-container {
     flex-direction: column; /* Apila el input y el select */
-    width: 100%; /* Asegura que ocupe todo el ancho */
+    width: 50%; /* Asegura que ocupe todo el ancho */
+    margin-top: -20px;
   }
 
   .search-container input,
@@ -151,7 +152,7 @@
 
   .usuario-table th, .usuario-table td {
     padding: 6px; /* Reducir padding en pantallas pequeñas */
-    font-size: 9px;
+    font-size: 6.5px;
   }
 }
 

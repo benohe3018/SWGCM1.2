@@ -21,22 +21,22 @@
   justify-content: center; /* Centra el contenido del header */
 }
 
-.header-logo {
+.read-usuario-header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
 }
 
-.header-texts {
+.read-usuarios-header-texts {
   text-align: center;
   flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
 }
 
-.welcome-message {
+.read-usuario-welcome-message {
   font-size: 24px;
   margin: 0;
   color: #0C231E;
 }
 
-.department-name {
+.read-usuario-department-name {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
@@ -51,7 +51,7 @@
   justify-content: center;
 }
 
-.search-container {
+.read-usuario-search-container {
   align-items: center;
   gap: 10px;
   justify-content: center;
@@ -59,7 +59,7 @@
   display: flex; /* Asegura que el contenedor de búsqueda use flexbox */
 }
 
-.search-container input {
+.read-usuario-search-container input {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -67,30 +67,30 @@
   margin-right: 10px;
 }
 
-.search-container select {
+.read-usuario-search-container select {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-.usuario-table-container {
+.read-usuario-table-container {
   width: 100%; /* Cambiado a 100% para mejor responsividad */
   overflow-x: auto;
 }
 
-.usuario-table {
+.read-usuario-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.usuario-table th, .usuario-table td {
+.read-usuario-table th, .read-usuario-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
-.usuario-table th {
+.read-usuario-table th {
   background-color: #f2f2f2;
   color: #333;
 }
@@ -120,16 +120,16 @@
     align-items: center; /* Centra el contenido */
   }
 
-  .header-logo {
+  .read-usuario-header-logo {
     height: 60px; /* Ajusta el tamaño del logo */
     margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
-  .welcome-message {
+  .read-usuario-welcome-message {
     font-size: 1.2em;
   }
 
-  .department-name {
+  .read-usuario-department-name {
     font-size: 1.0em;
   }
 
@@ -138,19 +138,19 @@
     width: 100%; /* Ajusta el ancho para pantallas pequeñas */
   }
 
-  .search-container {
+  .read-usuario-search-container {
     flex-direction: column; /* Apila el input y el select */
     width: 50%; /* Asegura que ocupe todo el ancho */
     margin-top: -20px;
   }
 
-  .search-container input,
-  .search-container select {
+  .read-usuario-search-container input,
+  .read-usuario-search-container select {
     width: 100%; /* Asegura que ocupen todo el ancho disponible */
     margin-bottom: 15px;
   }
 
-  .usuario-table th, .usuario-table td {
+  .read-usuario-table th, .read-usuario-table td {
     padding: 6px; /* Reducir padding en pantallas pequeñas */
     font-size: 6.5px;
   }

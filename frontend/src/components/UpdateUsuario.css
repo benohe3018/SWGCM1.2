@@ -25,7 +25,6 @@ body {
   box-sizing: border-box;
   top: 0;
   z-index: 100;
-  margin-left: 300px
 }
 
 .header-logo {
@@ -49,18 +48,12 @@ body {
   color: #0C231E;
 }
 
-/*.main-layout {
-  display: flex;
-  width: 100%;
-}*/
-
 .update-usuario-content {
-  width: 150%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left: 150px;
 }
 
 .success-message {
@@ -68,14 +61,14 @@ body {
   margin-bottom: 20px;
 }
 
-.search-container {
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
+.update-search-container {
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.search-container input, .search-container select {
+.update-search-container input, .update-search-container select {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -128,3 +121,57 @@ body {
   background-color: #0C231E;
 }
 
+/* Responsividad */
+@media (max-width: 480px) {
+  .update-usuario-header {
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-texts {
+    text-align: center;
+    width: 90%;
+    margin-left: 50px;
+  }
+
+  .welcome-message {
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .department-name {
+    font-size: 1.0em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .update-usuario-content {
+    padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
+    width: 80%;
+  }
+
+  .update-search-container {
+    width: 300px;
+    margin-top: 75px;
+  }
+
+  .update-search-container input,
+  .update-search-container select {
+    width: 70%; /* Asegura que ocupen todo el ancho disponible */
+    margin-bottom: 15px;
+  }
+
+  .usuario-table th, .usuario-table td {
+    padding: 6px; /* Reducir padding en pantallas pequeñas */
+    font-size: 9px;
+  }
+
+  .usuario-table-container {
+    width: 90%;
+    overflow-x: auto;
+    margin-top: 0px;
+  }
+}

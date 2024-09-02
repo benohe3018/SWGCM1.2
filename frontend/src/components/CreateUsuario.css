@@ -124,8 +124,9 @@ input, select {
     padding: 10px;
   }
 
-  .form-description {
+  .form-description-create-usuario {
     font-size: 1.2em;
+    color: black;
   }
 }
 
@@ -133,6 +134,7 @@ input, select {
   .create-usuario-content {
     width: 80%;
   }
+
 }
 
 @media (min-width: 769px) {

@@ -150,13 +150,13 @@ body {
 
   .update-usuario-content {
     padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
-    width: 100%;
+    width: 80%;
   }
 
   .update-search-container {
-    width: 300px;
+    width: 250px;
     margin-top: 10px;
-    margin-left: 90px;
+    margin-right: 10px;
   }
 
   .update-search-container input,
@@ -168,6 +168,11 @@ body {
   .usuario-table-update th, .usuario-table-update td {
     padding: 6px; /* Reducir padding en pantallas pequeñas */
     font-size: 6.5px;
+  }
+
+  .usuario-table-update {
+    width: 100%;
+    border-collapse: collapse;
   }
 
   .table-container-update-usuario {

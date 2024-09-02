@@ -140,9 +140,9 @@
   }
 
   .update-welcome-message{
-    height: 60px; /* Ajusta el tamaño del logo */
-    margin-left: 140px; /* Elimina el margen derecho */
-    margin-bottom: 10px; /* Espacio entre el logo y los textos */
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 40px;
   }
 
   .update-department-name{

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
@@ -9,7 +9,6 @@ import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [vista, setVista] = useState('');
   const [pacientesPrueba, setPacientesPrueba] = useState([]);
   const [medicos, setMedicos] = useState([]);

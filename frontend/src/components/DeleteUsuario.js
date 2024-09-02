@@ -63,7 +63,7 @@ const DeleteUsuario = () => {
   return (
     <div className="delete-usuario-page">
       <header className="delete-usuario-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
+        <img src={logoIMSS} alt="Logo IMSS" className="header-logo-delete-usuario" />
         <div className="header-texts">
           <h1 className="welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
           <h2 className="department-name">Borrar Registros de Usuarios</h2>

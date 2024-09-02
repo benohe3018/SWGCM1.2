@@ -60,21 +60,21 @@
   margin-bottom: 20px;
 }
 
-.update-search-container {
+.update-medico-search-container {
     align-items: center;
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.update-search-container input {
+.update-medico-search-container input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
 }
 
-.update-search-container select {
+.update-medico-search-container select {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -153,7 +153,7 @@
 
   .update-header-logo {
     height: 60px; /* Ajusta el tamaño del logo */
-    margin-left: 210px; /* Elimina el margen derecho */
+    margin-left: 250px; /* Elimina el margen derecho */
     margin-bottom: 10px; /* Espacio entre el logo y los textos */
   }
 
@@ -162,14 +162,14 @@
     width: 80%;
   }
 
-  .update-search-container {
+  .update-medico-search-container {
     width: 300px;
     margin-top: 75px;
     margin-right: 70px;
   }
 
-  .update-search-container input,
-  .update-search-container select {
+  .update-medico-search-container input,
+  .update-medico-search-container select {
     width: 70%; /* Asegura que ocupen todo el ancho disponible */
     margin-bottom: 15px;
   }

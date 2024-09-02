@@ -24,7 +24,7 @@
   height: 60px; /* Ajusta el tamaño del logo */
 }
 
-.header-texts {
+.header-texts-delete-usuario {
   margin-left: 20px;
   text-align: left;
 }
@@ -130,7 +130,7 @@
     height: 60px;
   }
 
-  .header-texts {
+  .header-texts-delete-usuario {
     text-align: center;
     width: 90%;
     margin-left: 50px;

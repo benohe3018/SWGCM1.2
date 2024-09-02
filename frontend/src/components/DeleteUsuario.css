@@ -29,13 +29,13 @@
   text-align: left;
 }
 
-.welcome-message {
+.welcome-message-delete-usuario {
   font-size: 24px;
   margin: 0;
   color: #0C231E;
 }
 
-.department-name {
+.department-name-delete-usuario {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
@@ -126,7 +126,9 @@
   }
 
   .header-logo-delete-usuario{
-    margin-left: 20px; }
+    margin-left: 100px; 
+    height: 60px;
+  }
 
   .header-texts {
     text-align: center;
@@ -134,13 +136,13 @@
     margin-left: 50px;
   }
 
-  .welcome-message {
+  .welcome-message-delete-usuario {
     font-size: 1.2em;
     text-align: center;
     margin-right: 90px;
   }
 
-  .department-name {
+  .department-name-delete-usuario {
     font-size: 1.0em;
     text-align: center;
     margin-right: 90px;

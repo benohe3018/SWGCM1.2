@@ -1,19 +1,11 @@
-/* DeleteUsuario.css */
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 .delete-usuario-page {
-  background-color: whitesmoke;
-  height: 100vh;
+  background-color: whitesmoke; /* Color de fondo */
+  height: 100vh; /* Altura completa de la ventana del navegador */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   color: #0C231E;
 }
@@ -21,15 +13,15 @@ body {
 .delete-usuario-header {
   display: flex;
   width: 100%;
-  background-color: whitesmoke;
+  background-color: whitesmoke; /* Color del encabezado */
   padding: 10px 20px;
   box-sizing: border-box;
-  top: 0;
-  z-index: 100;
+  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
+  z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
 }
 
 .header-logo {
-  height: 60px;
+  height: 60px; /* Ajusta el tamaño del logo */
 }
 
 .header-texts {
@@ -49,11 +41,6 @@ body {
   color: #0C231E;
 }
 
-/*.main-layout {
-  display: flex;
-  width: 100%;
-}*/
-
 .delete-usuario-content {
   width: 100%;
   display: flex;
@@ -62,14 +49,14 @@ body {
   justify-content: flex-start;
 }
 
-.search-container {
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
+.delete-search-container {
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.search-container input, .search-container select {
+.delete-search-container input, .delete-search-container select {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -128,5 +115,67 @@ body {
   margin-bottom: 20px;
 }
 
+/* Responsividad */
+@media (max-width: 480px) {
+  .delete-usuario-header {
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    margin-left: 40px;
+    align-items: flex-start;
+  }
 
-  
+  .header-texts {
+    text-align: center;
+    width: 90%;
+    margin-left: 50px;
+  }
+
+  .welcome-message {
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .department-name {
+    font-size: 1.0em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .delete-search-container {
+    width: 300px;
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+
+  .delete-search-container input,
+  .delete-search-container select {
+    width: 70%; /* Asegura que ocupen todo el ancho disponible */
+    margin-bottom: 15px;
+  }
+
+  .usuario-table-container {
+    width: 90%;
+    overflow-x: auto;
+    margin-top: 0px;
+  }
+
+  .usuario-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .usuario-table th,
+  .usuario-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+    font-size: 9px;
+  }
+
+  .usuario-table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+}

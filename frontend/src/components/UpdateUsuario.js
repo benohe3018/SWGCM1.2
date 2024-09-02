@@ -161,8 +161,8 @@ const UpdateUsuario = () => {
               <option value="apellido_materno">Apellido Materno</option>
             </select>
           </div>
-          <div className="update-usuario-table-container">
-            <table className="usuario-table">
+          <div className="table-container-update-usuario">
+            <table className="usuario-table-update">
               <thead>
                 <tr>
                   <th>Nombre de Usuario</th>

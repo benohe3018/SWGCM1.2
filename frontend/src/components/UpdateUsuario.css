@@ -75,7 +75,7 @@ body {
   border-radius: 5px;
 }
 
-.update-usuario-table-container {
+.table-container-update-usuario {
   width: 100%;
   overflow-x: auto;
 }
@@ -86,13 +86,13 @@ body {
   margin-bottom: 20px;
 }
 
-.update-usuario-table, .usuario-table td {
+.usuario-table-update, .usuario-table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
 }
 
-.update-usuario-table {
+.usuario-table-update {
   background-color: #f4f4f4;
 }
 
@@ -164,12 +164,12 @@ body {
     margin-bottom: 15px;
   }
 
-  .update-usuario-table, .usuario-table td {
+  .usuario-table-update, .usuario-table-update td {
     padding: 6px; /* Reducir padding en pantallas pequeñas */
     font-size: 6.5px;
   }
 
-  .update-usuario-table-container {
+  .table-container-update-usuario {
     width: 90%;
     overflow-x: auto;
     margin-top: 0px;

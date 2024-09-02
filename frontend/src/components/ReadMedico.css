@@ -20,7 +20,7 @@
   z-index: 100; 
 }
 
-.header-logo {
+.read-medico__header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
 }
 
@@ -116,6 +116,8 @@
   .read-medico-header {
     width: 100%; /* Asegura que el header ocupe todo el ancho */
     text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    margin-left: 40px;
   }
 
   .header-texts-ReadMedico{
@@ -134,9 +136,10 @@
     font-size: 1.0em;
   }
 
-  .header-logo {
-    margin: 0;
+  .read-medico__header-logo {
     margin-bottom: 10px; /* Espacio entre el logo y el texto */
+    height: 60px;
+
   }
 
     .read-medico-content {

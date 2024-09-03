@@ -159,3 +159,9 @@
   margin-top: 2rem;
   display: flex;
 }
+@media (max-width: 480px) {
+  .estudios-radiologicos-header-logo {
+    height: 50px;
+    margin-left: 50px;
+  }
+}

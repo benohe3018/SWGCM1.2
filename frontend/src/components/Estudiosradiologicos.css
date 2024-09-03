@@ -45,7 +45,7 @@
 
 .tabla-estudios-container {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
 }
 
 .tabla-estudios {
@@ -154,6 +154,7 @@
   margin-top: 2rem;
   display: flex;
 }
+
 @media (max-width: 480px) {
   .tabla-estudios-container {
     width: 100%;

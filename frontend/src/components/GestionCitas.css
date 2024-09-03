@@ -139,6 +139,9 @@
     .gestion-citas-content {
       padding: 15px; /* Ajusta el espaciado */
     }
+    input{
+        font-size: 10px;
+    }
   
     .tabla-citas th, .tabla-citas td {
       font-size: 14px; /* Ajusta el tamaño de fuente */

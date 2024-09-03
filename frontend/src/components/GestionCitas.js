@@ -247,7 +247,6 @@ const GestionCitas = () => {
                     <td>{paciente.id}</td>
                     <td>
                       <input
-                        className="input-update-cita"
                         type="datetime-local"
                         value={paciente.fecha_hora_estudio}
                         onChange={(e) => {
@@ -260,7 +259,6 @@ const GestionCitas = () => {
                     </td>
                     <td>
                       <input
-                        className="input-update-cita"
                         type="text"
                         value={paciente.nombre_completo}
                         onChange={(e) => {
@@ -273,7 +271,6 @@ const GestionCitas = () => {
                     </td>
                     <td>
                       <input
-                        className="input-update-cita"
                         type="text"
                         value={paciente.nombre_completo_medico}
                         onChange={(e) => {
@@ -286,7 +283,6 @@ const GestionCitas = () => {
                     </td>
                     <td>
                       <input
-                        className="input-update-cita"
                         type="text"
                         value={paciente.estudio_solicitado}
                         onChange={(e) => {
@@ -299,7 +295,6 @@ const GestionCitas = () => {
                     </td>
                     <td>
                       <input
-                        className="input-update-cita"
                         type="text"
                         value={paciente.hospital_envia}
                         onChange={(e) => {

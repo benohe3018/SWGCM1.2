@@ -168,10 +168,10 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
   return (
     <div className="diagnosticos-presuntivos-page">
       <header className="diagnosticos-presuntivos-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Sistema de Gestión de Diagnósticos Presuntivos</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="diagnosticos-presuntivos-header-logo" />
+        <div className="diagnosticos-presuntivos-header-texts">
+          <h1 className="diagnosticos presuntivos-welcome-page">Sistema de Gestión de Diagnósticos Presuntivos</h1>
+          <h2 className="diagnosticos-presuntivos-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       <div className="diagnosticos-presuntivos-content">
@@ -200,14 +200,14 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
               <table className="tabla-diagnosticos">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre del Diagnóstico</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentDiagnosticos.map((diagnostico) => (
                     <tr key={diagnostico.id}>
-                      <td>{diagnostico.id}</td>
+                      
                       <td>{diagnostico.nombre_diagnostico}</td>
                     </tr>
                   ))}
@@ -244,7 +244,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
               <table className="tabla-diagnosticos">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre del Diagnóstico</th>
                     <th>Acciones</th>
                   </tr>
@@ -252,7 +252,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <tbody>
                   {currentDiagnosticos.map((diagnostico) => (
                     <tr key={diagnostico.id}>
-                      <td>{diagnostico.id}</td>
+                      
                       <td>
                         <input
                           type="text"
@@ -310,7 +310,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
               <table className="tabla-diagnosticos">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre del Diagnóstico</th>
                     <th>Acciones</th>
                   </tr>
@@ -318,7 +318,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <tbody>
                   {currentDiagnosticos.map((diagnostico) => (
                     <tr key={diagnostico.id}>
-                      <td>{diagnostico.id}</td>
+                      
                       <td>{diagnostico.nombre_diagnostico}</td>
                       <td>
                         <div className="botones-acciones">

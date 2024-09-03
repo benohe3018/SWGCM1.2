@@ -16,9 +16,11 @@
   background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
+  flex-direction: column;
 }
 
 .header-logo {
+  height: 50px;
   margin-left: 10px;
 }
 

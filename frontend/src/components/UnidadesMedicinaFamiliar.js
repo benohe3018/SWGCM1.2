@@ -207,10 +207,10 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   return (
     <div className="unidades-medicina-familiar-page">
       <header className="unidades-medicina-familiar-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Sistema de Gestión de Unidades de Medicina Familiar</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="umf-header-logo" />
+        <div className="umf-header-texts">
+          <h1 className="umf-welcome-message">Sistema de Gestión de Unidades de Medicina Familiar</h1>
+          <h2 className="umf-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
@@ -241,7 +241,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
               <table className="tabla-unidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre de la Unidad</th>
                     <th>Dirección de la Unidad</th>
                   </tr>
@@ -249,7 +248,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                 <tbody>
                   {currentUnidades.map((unidad) => (
                     <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.id_unidad_medica}</td>
                       <td>{unidad.nombre_unidad_medica}</td>
                       <td>{unidad.direccion_unidad_medica}</td>
                     </tr>
@@ -288,7 +286,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
               <table className="tabla-unidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre de la Unidad</th>
                     <th>Dirección de la Unidad</th>
                     <th>Acciones</th>
@@ -297,7 +294,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                 <tbody>
                   {currentUnidades.map((unidad) => (
                     <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.id_unidad_medica}</td>
                       <td>
                         <input
                           type="text"
@@ -372,7 +368,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
               <table className="tabla-unidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre de la Unidad</th>
                     <th>Dirección de la Unidad</th>
                     <th>Acciones</th>
@@ -381,7 +376,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                 <tbody>
                   {currentUnidades.map((unidad) => (
                     <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.id_unidad_medica}</td>
                       <td>{unidad.nombre_unidad_medica}</td>
                       <td>{unidad.direccion_unidad_medica}</td>
                       <td>

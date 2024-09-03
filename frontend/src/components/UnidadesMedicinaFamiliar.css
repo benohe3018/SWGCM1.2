@@ -23,22 +23,22 @@
   align-items: center;
 }
 
-.header-logo {
+.umf-header-logo {
   margin-left: 100px;
 }
 
-.header-texts {
+.umf-header-texts {
   text-align: center;
   flex-grow: 1;
 }
 
-.welcome-message {
+.umf-welcome-message {
   font-size: 24px;
   margin: 0;
   color: #0C231E;
 }
 
-.department-name {
+.umf-department-name {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
@@ -117,4 +117,18 @@
 
 .pagination-read-usuario button.active {
   background-color: #0C231E;
+}
+@media (max-width: 480px) {
+  .unidades-medicina-familiar-header{
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .umf-header-logo {
+    height: 50px;
+    margin-left: 150px;
+    margin-bottom: 10px;
+  }
 }

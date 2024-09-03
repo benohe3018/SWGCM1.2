@@ -155,16 +155,34 @@
   display: flex;
 }
 @media (max-width: 480px) {
-  .estudios-radiologicos-header{
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
-    text-align: center; /* Centra el texto del header */
-    flex-direction: column;
-    align-items: flex-start;
+  .tabla-estudios-container {
+    width: 100%;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
   }
-
-  .estudios-radiologicos-header-logo {
-    height: 50px;
-    margin-left: 150px;
-    margin-bottom: 10px;
+  
+  .tabla-estudios {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tabla-estudios th, .tabla-estudios td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .busqueda-estudio input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 60%;
+  }
+  
+  .busqueda-estudio select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
   }
 }

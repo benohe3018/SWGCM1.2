@@ -154,7 +154,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
     return (
         <div className="estudios-radiologicos-page">
             <header className="estudios-radiologicos-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
+                <img src={logoIMSS} alt="Logo IMSS" className="estudios-radiologicos-header-logo" />
                 <div className="header-texts">
                     <h1 className="welcome-message">Sistema de Gestión de Estudios Radiológicos</h1>
                     <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>

@@ -218,85 +218,84 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                     </>
                 )}
                 {vista === 'editar' && (
-  <>
-    <div className="busqueda-estudio">
-      <input
-        type="text"
-        placeholder="Buscar..."
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      <select value={searchField} onChange={handleFieldChange}>
-        <option value="nombre_estudio">Nombre del Estudio</option>
-        <option value="descripcion_estudio">Descripción del Estudio</option>
-      </select>
-    </div>
-    <div className="tabla-estudios-container">
-      <table className="tabla-estudios">
-        <thead>
-          <tr>
-            <th>Nombre del Estudio</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentEstudios.map((estudio) => (
-            <tr key={estudio.id_estudio}>
-              <td>
-                <input
-                  type="text"
-                  value={estudio.nombre_estudio}
-                  onChange={(e) => {
-                    const newEstudios = [...estudios];
-                    const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
-                    newEstudios[index].nombre_estudio = e.target.value;
-                    setEstudios(newEstudios);
-                  }}
-                  style={{ width: '200px' }} // Ajusta el tamaño del input
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={estudio.descripcion_estudio}
-                  onChange={(e) => {
-                    const newEstudios = [...estudios];
-                    const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
-                    newEstudios[index].descripcion_estudio = e.target.value;
-                    setEstudios(newEstudios);
-                  }}
-                  style={{ width: '200px' }} // Ajusta el tamaño del input
-                />
-              </td>
-              <td>
-                <div className="botones-acciones">
-                  <button
-                    onClick={() => handleEditarEstudio(estudio)}
-                    className="editar-button"
-                  >
-                    Guardar
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination-read-usuario">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-          <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={page === currentPage ? 'active' : ''}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
-    </div>
-  </>
-)}
+                    <>
+                        <div className="busqueda-estudio">
+                            <input
+                                type="text"
+                                placeholder="Buscar..."
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                            <select value={searchField} onChange={handleFieldChange}>
+                                <option value="nombre_estudio">Nombre del Estudio</option>
+                                <option value="descripcion_estudio">Descripción del Estudio</option>
+                            </select>
+                        </div>
+                        <div className="tabla-estudios-container">
+                            <table className="tabla-estudios">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre del Estudio</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentEstudios.map((estudio) => (
+                                        <tr key={estudio.id_estudio}>
+                                            
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={estudio.nombre_estudio}
+                                                    onChange={(e) => {
+                                                        const newEstudios = [...estudios];
+                                                        const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
+                                                        newEstudios[index].nombre_estudio = e.target.value;
+                                                        setEstudios(newEstudios);
+                                                    }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={estudio.descripcion_estudio}
+                                                    onChange={(e) => {
+                                                        const newEstudios = [...estudios];
+                                                        const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
+                                                        newEstudios[index].descripcion_estudio = e.target.value;
+                                                        setEstudios(newEstudios);
+                                                    }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <div className="botones-acciones">
+                                                    <button
+                                                        onClick={() => handleEditarEstudio(estudio)}
+                                                        className="editar-button"
+                                                    >
+                                                        Guardar
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="pagination-read-usuario">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                    <button
+                                        key={page}
+                                        onClick={() => setCurrentPage(page)}
+                                        className={page === currentPage ? 'active' : ''}
+                                    >
+                                        {page}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </>
+                )}
                 {vista === 'eliminar' && (
                     <>
                         <div className="busqueda-estudio">

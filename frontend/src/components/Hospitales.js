@@ -194,10 +194,10 @@ const handleEditarHospital = async (hospitalEditado) => {
   return (
     <div className="hospitales-page">
       <header className="hospitales-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Sistema de Gestión de Hospitales</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="hg-header-logo" />
+        <div className="hg-header-texts">
+          <h1 className="hg-welcome-message">Sistema de Gestión de Hospitales</h1>
+          <h2 className="hg-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
@@ -228,7 +228,6 @@ const handleEditarHospital = async (hospitalEditado) => {
               <table className="tabla-hospitales">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre del Hospital</th>
                     <th>Dirección del Hospital</th>
                   </tr>
@@ -236,7 +235,6 @@ const handleEditarHospital = async (hospitalEditado) => {
                 <tbody>
                   {currentHospitales.map((hospital) => (
                     <tr key={hospital.id}>
-                      <td>{hospital.id}</td>
                       <td>{hospital.nombre_hospital}</td>
                       <td>{hospital.ciudad_hospital}</td>
                     </tr>
@@ -275,7 +273,6 @@ const handleEditarHospital = async (hospitalEditado) => {
               <table className="tabla-hospitales">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre del Hospital</th>
                     <th>Dirección del Hospital</th>
                     <th>Acciones</th>
@@ -284,7 +281,6 @@ const handleEditarHospital = async (hospitalEditado) => {
                 <tbody>
                   {currentHospitales.map((hospital) => (
                     <tr key={hospital.id}>
-                      <td>{hospital.id}</td>
                       <td>
                         <input
                           type="text"
@@ -355,7 +351,6 @@ const handleEditarHospital = async (hospitalEditado) => {
               <table className="tabla-hospitales">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre del Hospital</th>
                     <th>Dirección del Hospital</th>
                     <th>Acciones</th>
@@ -364,7 +359,6 @@ const handleEditarHospital = async (hospitalEditado) => {
                 <tbody>
                   {currentHospitales.map((hospital) => (
                     <tr key={hospital.id}>
-                      <td>{hospital.id}</td>
                       <td>{hospital.nombre_hospital}</td>
                       <td>{hospital.ciudad_hospital}</td>
                       <td>

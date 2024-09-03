@@ -350,7 +350,6 @@ const GestionCitas = () => {
               <tbody>
                 {currentPacientes.map((paciente) => (
                   <tr key={paciente.id}>
-                    <td>{paciente.id}</td>
                     <td>{paciente.fecha_hora_estudio}</td>
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>

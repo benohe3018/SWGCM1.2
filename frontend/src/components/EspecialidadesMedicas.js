@@ -203,14 +203,14 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
               <table className="tabla-especialidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre de la Especialidad</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
                     <tr key={especialidad.id}>
-                      <td>{especialidad.id}</td>
+                      
                       <td>{especialidad.nombre_especialidad}</td>
                     </tr>
                   ))}
@@ -247,7 +247,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
               <table className="tabla-especialidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre de la Especialidad</th>
                     <th>Acciones</th>
                   </tr>
@@ -255,7 +255,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
                     <tr key={especialidad.id}>
-                      <td>{especialidad.id}</td>
+                      
                       <td>
                         <input
                           type="text"
@@ -313,7 +313,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
               <table className="tabla-especialidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre de la Especialidad</th>
                     <th>Acciones</th>
                   </tr>
@@ -321,7 +321,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
                     <tr key={especialidad.id}>
-                      <td>{especialidad.id}</td>
+                      
                       <td>{especialidad.nombre_especialidad}</td>
                       <td>
                         <div className="botones-acciones">

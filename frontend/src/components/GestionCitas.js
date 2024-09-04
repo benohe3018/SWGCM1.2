@@ -193,7 +193,7 @@ const GestionCitas = () => {
             <table className="tabla-citas">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  
                   <th>Fecha y Hora</th>
                   <th>Paciente</th>
                   <th>Médico</th>
@@ -204,7 +204,7 @@ const GestionCitas = () => {
               <tbody>
                 {currentPacientes.map((paciente) => (
                   <tr key={paciente.id}>
-                    <td>{paciente.id}</td>
+                    
                     <td>{paciente.fecha_hora_estudio}</td>
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>

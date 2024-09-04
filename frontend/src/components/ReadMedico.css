@@ -22,6 +22,7 @@
 
 .read-medico__header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
+  height: 60px;
 }
 
 .header-texts {

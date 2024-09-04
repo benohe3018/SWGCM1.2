@@ -27,6 +27,7 @@
 
 .update-header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
+  height: 60px;
 }
 
 .update-header-text {

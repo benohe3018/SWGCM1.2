@@ -23,6 +23,8 @@
 
 .read-usuario-header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
+  margin-right:40px;
+  height:60px;
 }
 
 .read-usuarios-header-texts {

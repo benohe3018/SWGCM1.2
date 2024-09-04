@@ -32,6 +32,7 @@ body {
 
 .create-medico__header-logo { /* Elemento del logo */
   height: 50px;
+  margin-right:40px ;
 }
 
 .create-medico__header-texts { /* Elemento de textos del header */

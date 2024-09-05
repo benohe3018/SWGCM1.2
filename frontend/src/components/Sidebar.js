@@ -13,7 +13,8 @@ const Sidebar = () => {
     especialidades: false,
     unidades: false,
     diagnosticos: false,
-    hospitales: false
+    hospitales: false,
+    informes: false
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -52,7 +53,7 @@ const Sidebar = () => {
             {renderUnidadesSubmenu()}
             {renderDiagnosticosSubmenu()}
             {renderHospitalesSubmenu()}
-            <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
+            {renderInformesSubmenu()}
             <li><Link to="/admin">Modulo de Administración</Link></li>
           </>
         );
@@ -66,7 +67,7 @@ const Sidebar = () => {
             {renderUnidadesSubmenu()}
             {renderDiagnosticosSubmenu()}
             {renderHospitalesSubmenu()}
-            <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
+            {renderInformesSubmenu()}
             <li><Link to="/admin">Modulo de Administración</Link></li>
           </>
         );
@@ -80,7 +81,7 @@ const Sidebar = () => {
             {renderUnidadesSubmenu()}
             {renderDiagnosticosSubmenu()}
             {renderHospitalesSubmenu()}
-            <li><Link to="/informes-medicos">Módulo de Informes</Link></li>
+            {renderInformesSubmenu()}
           </>
         );
       case 'Usuario_de_Campo':
@@ -209,6 +210,25 @@ const Sidebar = () => {
           <li><Link to="/ver-hospitales">Ver Hospitales</Link></li>
           <li><Link to="/update-hospital">Actualizar Hospital</Link></li>
           <li><Link to="/delete-hospital">Eliminar Hospital</Link></li>
+        </ul>
+      )}
+    </li>
+  );
+
+  const renderInformesSubmenu = () => (
+    <li onClick={() => handleSubmenuToggle('informes')}>
+      <span>Módulo de Informes</span>
+      <span className={`arrow ${openSubmenu.informes ? 'open' : ''}`}>&#9660;</span>
+      {openSubmenu.informes && (
+        <ul className="submenu">
+          <li><Link to="/reporte-medicos">Reporte de Médicos</Link></li>
+          <li><Link to="/reporte-usuarios">Reporte de Usuarios</Link></li>
+          <li><Link to="/reporte-citas">Reporte de Citas</Link></li>
+          <li><Link to="/reporte-estudios">Reporte de Estudios Radiológicos</Link></li>
+          <li><Link to="/reporte-especialidades">Reporte de Especialidades Médicas</Link></li>
+          <li><Link to="/reporte-unidades">Reporte de Unidades de Medicina Familiar</Link></li>
+          <li><Link to="/reporte-diagnosticos">Reporte de Diagnósticos Presuntivos</Link></li>
+          <li><Link to="/reporte-hospitales">Reporte de Hospitales</Link></li>
         </ul>
       )}
     </li>

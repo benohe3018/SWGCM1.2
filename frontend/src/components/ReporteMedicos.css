@@ -112,6 +112,10 @@
   .pagination-read-medico button.active {
     background-color: #002d20;
   }
+
+  .pdf-button{
+    margin-bottom: 10px;
+  }
   
   /* Nuevos estilos para la responsividad */
   @media (max-width: 480px) {

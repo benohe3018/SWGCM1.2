@@ -92,7 +92,7 @@ const ReporteMedicos = () => {
             <option value="apellidoMaterno">Apellido Materno</option>
           </select>
         </div>
-        <button onClick={generatePDF} className="pdf-button">Generar PDF</button>
+        <button onClick={generatePDF} className="pdf-button">Imprimir Reporte en PDF</button>
         <div className="table-container">
           {isLoading ? (
             <p>Cargando...</p>

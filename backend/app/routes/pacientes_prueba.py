@@ -1,10 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify # type: ignore
 from ..models import PacientePrueba
 from .. import db
 from .encryption import encrypt_data, decrypt_data, decrypt_data_old
 from datetime import datetime
 import os
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError # type: ignore
 import logging
 
 pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)

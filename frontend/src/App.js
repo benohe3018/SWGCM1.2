@@ -89,8 +89,7 @@ function App() {
             <Route path="/update-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="editar" /></PrivateRoute>} />
             <Route path="/delete-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="eliminar" /></PrivateRoute>} />
             <Route path="/reporte-medicos" element={<PrivateRoute><Sidebar /><ReporteMedicos /></PrivateRoute>} />
-            <Route path="/reporte-usuarios" element={<PrivateRoute><Sidebar /><ReporteUsuarios /></PrivateRoute>} />
-          </Routes>
+            <Route path="/reporte-usuarios" element={<PrivateRoute><Sidebar /><ReporteUsuarios /></PrivateRoute>} />          </Routes>
         </div>
       </Router>
     </AuthProvider>

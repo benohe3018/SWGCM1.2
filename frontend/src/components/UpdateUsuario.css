@@ -86,13 +86,13 @@ body {
   margin-bottom: 20px;
 }
 
-.usuario-table-update td, .usuario-table-update th {
+.usuario-table-update th, .usuario-table-update td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
 }
 
-.usuario-table-update {
+.usuario-table-update th{
   background-color: #f4f4f4;
 }
 

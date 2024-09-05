@@ -28,12 +28,28 @@ const InformesMedicos = () => {
                 <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
             </header>
             <div>
-                {citas.map(cita => (
-                    <div key={cita.id}>
-                        <p>{cita.nombre_completo}</p>
-                        {/* Muestra más detalles de la cita aquí */}
-                    </div>
-                ))}
+                {citas.length > 0 ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <th>Fecha y Hora</th>
+                                {/* Añade más encabezados según sea necesario */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {citas.map(cita => (
+                                <tr key={cita.id}>
+                                    <td>{cita.nombre_completo}</td>
+                                    <td>{cita.fecha_hora_estudio}</td>
+                                    {/* Muestra más detalles de la cita aquí */}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>No hay citas disponibles para este hospital.</p>
+                )}
             </div>
         </div>
     );

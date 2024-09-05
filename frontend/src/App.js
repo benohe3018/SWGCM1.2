@@ -26,6 +26,7 @@ import UsuarioDeCampo from './components/UsuarioDeCampo';
 import ActiveUser from './components/ActiveUser';
 import EspecialidadesMedicas from './components/EspecialidadesMedicas';
 import DiagnosticosPresuntivos from './components/DiagnosticosPresuntivos';
+import ReporteMedicos from './components/ReporteMedicos';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -86,6 +87,7 @@ function App() {
             <Route path="/ver-diagnosticos" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="ver" /></PrivateRoute>} />
             <Route path="/update-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="editar" /></PrivateRoute>} />
             <Route path="/delete-diagnostico" element={<PrivateRoute><Sidebar /><DiagnosticosPresuntivos vista="eliminar" /></PrivateRoute>} />
+            <Route path="/reporte-medicos" element={<PrivateRoute><Sidebar /><ReporteMedicos /></PrivateRoute>} />
           </Routes>
         </div>
       </Router>

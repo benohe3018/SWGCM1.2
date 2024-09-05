@@ -1,0 +1,33 @@
+.reportes-estudios-page {
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.reportes-estudios-header {
+    display: flex;
+    align-items: center;
+}
+
+.reportes-estudios-header-logo {
+    height: 60px;
+    margin-right: 20px;
+}
+
+.busqueda-estudio {
+    margin: 20px 0;
+}
+
+.tabla-estudios {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-estudios th, .tabla-estudios td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabla-estudios th {
+    background-color: #f2f2f2;
+}

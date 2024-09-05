@@ -51,7 +51,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%; /* Cambia a 100% para que se ajuste al contenedor */
     padding: 10px; /* Reduce el espaciado alrededor del contenido */
   }
   

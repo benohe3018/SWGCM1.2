@@ -226,7 +226,7 @@ const Sidebar = () => {
           <li><Link to="/reporte-citas">Reporte de Citas</Link></li>
           <li><Link to="/reporte-estudios">Reporte de Estudios Radiológicos</Link></li>
           <li><Link to="/reporte-especialidades">Reporte de Especialidades Médicas</Link></li>
-          <li><Link to="/reporte-unidades">Reporte de Unidades de Medicina Familiar</Link></li>
+          <li><Link to="/reporte-umf">Reporte de Unidades de Medicina Familiar</Link></li>
           <li><Link to="/reporte-diagnosticos">Reporte de Diagnósticos Presuntivos</Link></li>
           <li><Link to="/reporte-hospitales">Reporte de Hospitales</Link></li>
         </ul>

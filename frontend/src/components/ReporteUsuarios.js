@@ -14,11 +14,18 @@ const ReporteUsuarios = () => {
   const [searchField, setSearchField] = useState('nombre');
 
   const fetchUsuarios = async () => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`);
-    const data = await response.json();
-    console.log(data);
-    setUsuarios(data);
-    setIsLoading(false);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`);
+      if (!response.ok) {
+        throw new Error('Error al obtener los usuarios');
+      }
+      const data = await response.json();
+      setUsuarios(data);
+    } catch (error) {
+      console.error('Error fetching usuarios:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -34,10 +41,10 @@ const ReporteUsuarios = () => {
   };
 
   const filteredUsuarios = usuarios.filter((usuario) => {
-    if (searchField === 'nombre' && usuario.nombre) {
-      return usuario.nombre.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchField === 'apellido' && usuario.apellido) {
-      return usuario.apellido.toLowerCase().includes(searchTerm.toLowerCase());
+    if (searchField === 'nombre' && usuario.nombre_real) {
+      return usuario.nombre_real.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchField === 'apellido' && usuario.apellido_paterno) {
+      return usuario.apellido_paterno.toLowerCase().includes(searchTerm.toLowerCase());
     }
     return false; // Cambia esto para que no incluya usuarios no válidos
   });

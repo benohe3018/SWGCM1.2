@@ -4,4 +4,4 @@ __pycahe__/
 instance/
 venv/
 .env
-.venv/
+.venv/.venv/

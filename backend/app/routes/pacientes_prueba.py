@@ -1,10 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify # type: ignore
 from ..models import PacientePrueba
 from .. import db
 from .encryption import encrypt_data, decrypt_data, decrypt_data_old
 from datetime import datetime
 import os
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError # type: ignore
 import logging
 
 pacientes_prueba_bp = Blueprint('pacientes_prueba', __name__)
@@ -61,34 +61,37 @@ def create_paciente_prueba():
 
 @pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
 def get_pacientes_prueba():
-    key = os.getenv('ENCRYPTION_KEY').encode()
-    try:
-        pacientes_prueba = PacientePrueba.query.all()
-        pacientes_list = []
-        for paciente in pacientes_prueba:
-            try:
-                nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
-                pacientes_list.append({
-                    'id': paciente.id,
-                    'fecha_hora_estudio': paciente.fecha_hora_estudio.strftime('%Y-%m-%dT%H:%M'),
-                    'nombre_completo': nombre_completo,
-                    'nss': decrypt_data(paciente.nss, key),
-                    'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
-                    'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
-                    'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
-                    'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
-                    'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key),
-                    'hospital_envia': paciente.hospital_envia  # No desencriptar este campo
-                })
-            except Exception as e:
-                logging.error("Error al descifrar datos para el paciente con ID %s: %s", paciente.id, str(e))
-                continue
-        return jsonify(pacientes_list), 200
-    except SQLAlchemyError as e:
-        logging.error("Error al recuperar pacientes de prueba: %s", str(e))
-        return jsonify({"error": "Error al recuperar pacientes de prueba"}), 500
-
-@pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['PUT'])
+  hospital_envia = request.args.get('hospital_envia')
+  key = os.getenv('ENCRYPTION_KEY').encode()
+  try:
+      query = PacientePrueba.query
+      if hospital_envia:
+          query = query.filter_by(hospital_envia=hospital_envia)
+      
+      pacientes_prueba = query.all()
+      pacientes_list = []
+      for paciente in pacientes_prueba:
+          try:
+              nombre_completo = f"{decrypt_data(paciente.nombre_paciente, key)} {decrypt_data(paciente.apellido_paterno_paciente, key)} {decrypt_data(paciente.apellido_materno_paciente, key)}"
+              pacientes_list.append({
+                  'id': paciente.id,
+                  'fecha_hora_estudio': paciente.fecha_hora_estudio.strftime('%Y-%m-%dT%H:%M'),
+                  'nombre_completo': nombre_completo,
+                  'nss': decrypt_data(paciente.nss, key),
+                  'especialidad_medica': decrypt_data(paciente.especialidad_medica, key),
+                  'nombre_completo_medico': decrypt_data(paciente.nombre_completo_medico, key),
+                  'estudio_solicitado': decrypt_data(paciente.estudio_solicitado, key),
+                  'unidad_medica_procedencia': decrypt_data(paciente.unidad_medica_procedencia, key),
+                  'diagnostico_presuntivo': decrypt_data(paciente.diagnostico_presuntivo, key),
+                  'hospital_envia': paciente.hospital_envia  # No desencriptar este campo
+              })
+          except Exception as e:
+              logging.error("Error al descifrar datos para el paciente con ID %s: %s", paciente.id, str(e))
+              continue
+      return jsonify(pacientes_list), 200
+  except SQLAlchemyError as e:
+      logging.error("Error al recuperar pacientes de prueba: %s", str(e))
+      return jsonify({"error": "Error al recuperar pacientes de prueba"}), 500@pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['PUT'])
 def update_paciente_prueba(id):
     data = request.get_json()
     logging.info(f"Datos recibidos para actualización: {data}")

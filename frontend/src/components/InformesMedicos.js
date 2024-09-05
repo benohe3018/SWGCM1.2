@@ -4,7 +4,18 @@ import logoIMSS from '../images/LogoIMSS.jpg';
 
 const InformesMedicos = () => {
     const [citas, setCitas] = useState([]);
+    const [hospitales, setHospitales] = useState([]);
     const [hospitalId, setHospitalId] = useState("");
+
+    const fetchHospitales = async () => {
+        try {
+            const response = await fetch('/api/hospitales'); // Asegúrate de que este endpoint exista
+            const data = await response.json();
+            setHospitales(data);
+        } catch (error) {
+            console.error("Error fetching hospitales:", error);
+        }
+    };
 
     const fetchCitas = async (hospitalId) => {
         try {
@@ -15,6 +26,10 @@ const InformesMedicos = () => {
             console.error("Error fetching citas:", error);
         }
     };
+
+    useEffect(() => {
+        fetchHospitales();
+    }, []);
 
     useEffect(() => {
         if (hospitalId) {
@@ -32,9 +47,11 @@ const InformesMedicos = () => {
             <div>
                 <select onChange={(e) => setHospitalId(e.target.value)}>
                     <option value="">Selecciona un hospital</option>
-                    <option value="hospital1">Hospital 1</option>
-                    <option value="hospital2">Hospital 2</option>
-                    {/* Añade más opciones según sea necesario */}
+                    {hospitales.map(hospital => (
+                        <option key={hospital.id} value={hospital.id}>
+                            {hospital.nombre}
+                        </option>
+                    ))}
                 </select>
                 {citas.length > 0 ? (
                     <table>

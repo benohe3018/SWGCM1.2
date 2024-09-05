@@ -20,8 +20,9 @@
   z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
 }
 
-.header-logo {
+.header-logo-delete-usuario {
   height: 60px; /* Ajusta el tamaño del logo */
+  margin-right: 40px;
 }
 
 .header-texts-delete-usuario {

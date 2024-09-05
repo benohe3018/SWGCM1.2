@@ -63,14 +63,17 @@ const ReporteUsuarios = () => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.text('Reporte de Usuarios', 20, 10);
+    doc.text('Reporte de los Usuarios del sistema', 20, 10);
     doc.autoTable({
-      head: [['Nombre', 'Apellido', 'Email', 'Rol']],
+      head: [['Usuario', 'Nombre', 'Apellido Paterno', 'Apellido Materno', 'Rol', 'Matricula']],
       body: currentUsuarios.map(usuario => [
-        usuario.nombre,
-        usuario.apellido,
-        usuario.email,
-        usuario.rol
+        usuario.nombre_usuario,
+        usuario.nombre_real,
+        usuario.apellido_paterno,
+        usuario.apellido_materno,
+        usuario.rol,
+        usuario.matricula
+
       ]),
     });
     doc.save('reporte_usuarios.pdf');
@@ -100,7 +103,7 @@ const ReporteUsuarios = () => {
             <option value="apellido">Apellido</option>
           </select>
         </div>
-        <button onClick={generatePDF} className="pdf-button">Generar PDF</button>
+        <button onClick={generatePDF} className="pdf-button">Imprimir PDF</button>
         <div className="table-container">
           {isLoading ? (
             <p>Cargando...</p>
@@ -109,20 +112,24 @@ const ReporteUsuarios = () => {
               <div className="usuario-table-container">
                 <table className="usuario-table">
                   <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Email</th>
+                  <tr>
+                      <th>Nombre de Usuario</th>
+                      <th>Nombre Real</th>
+                      <th>Apellido Paterno</th>
+                      <th>Apellido Materno</th>
                       <th>Rol</th>
+                      <th>Matrícula</th>
                     </tr>
                   </thead>
                   <tbody>
                     {currentUsuarios.map(usuario => (
                       <tr key={usuario.id}>
-                        <td>{usuario.nombre}</td>
-                        <td>{usuario.apellido}</td>
-                        <td>{usuario.email}</td>
+                        <td>{usuario.nombre_usuario}</td>
+                        <td>{usuario.nombre_real}</td>
+                        <td>{usuario.apellido_paterno}</td>
+                        <td>{usuario.apellido_materno}</td>
                         <td>{usuario.rol}</td>
+                        <td>{usuario.matricula}</td>
                       </tr>
                     ))}
                   </tbody>

@@ -16,6 +16,7 @@ const ReporteUsuarios = () => {
   const fetchUsuarios = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/usuarios`);
     const data = await response.json();
+    console.log(data);
     setUsuarios(data);
     setIsLoading(false);
   };
@@ -33,12 +34,12 @@ const ReporteUsuarios = () => {
   };
 
   const filteredUsuarios = usuarios.filter((usuario) => {
-    if (searchField === 'nombre') {
+    if (searchField === 'nombre' && usuario.nombre) {
       return usuario.nombre.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchField === 'apellido') {
+    } else if (searchField === 'apellido' && usuario.apellido) {
       return usuario.apellido.toLowerCase().includes(searchTerm.toLowerCase());
     }
-    return usuario;
+    return false; // Cambia esto para que no incluya usuarios no válidos
   });
 
   const indexOfLastUsuario = currentPage * usuariosPorPagina;

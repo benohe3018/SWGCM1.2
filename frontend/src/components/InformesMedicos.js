@@ -4,7 +4,7 @@ import logoIMSS from '../images/LogoIMSS.jpg';
 
 const InformesMedicos = () => {
     const [citas, setCitas] = useState([]);
-    const hospitalId = "ID_DEL_HOSPITAL"; // Reemplaza con el ID del hospital deseado
+    const [hospitalId, setHospitalId] = useState("");
 
     const fetchCitas = async (hospitalId) => {
         try {
@@ -17,7 +17,9 @@ const InformesMedicos = () => {
     };
 
     useEffect(() => {
-        fetchCitas(hospitalId);
+        if (hospitalId) {
+            fetchCitas(hospitalId);
+        }
     }, [hospitalId]);
 
     return (
@@ -28,6 +30,12 @@ const InformesMedicos = () => {
                 <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
             </header>
             <div>
+                <select onChange={(e) => setHospitalId(e.target.value)}>
+                    <option value="">Selecciona un hospital</option>
+                    <option value="hospital1">Hospital 1</option>
+                    <option value="hospital2">Hospital 2</option>
+                    {/* Añade más opciones según sea necesario */}
+                </select>
                 {citas.length > 0 ? (
                     <table>
                         <thead>

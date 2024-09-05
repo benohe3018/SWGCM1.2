@@ -1,7 +1,8 @@
 // Administrador.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Administrador.css'; // Asegúrate de crear este archivo CSS
+import './Administrador.css';
+import './main-layout.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 
 const Administrador = () => {

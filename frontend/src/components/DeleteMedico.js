@@ -61,16 +61,16 @@ const DeleteMedico = () => {
   return (
     <div className="delete-medico-page">
       <header className="delete-medico-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
-          <h2 className="department-name">Borrar Registros de Médicos</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="delete-header-logo" />
+        <div className="delete-header-texts">
+          <h1 className="delete-welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="delete-department-name">Borrar Registros de Médicos</h2>
         </div>
       </header>
       
       <div className="delete-medico-content">
         <Sidebar />
-        <div className="search-container">
+        <div className="delete-medico-search-container">
           <input
             type="text"
             placeholder="Buscar..."
@@ -84,8 +84,8 @@ const DeleteMedico = () => {
             <option value="matricula">Matrícula</option>
           </select>
         </div>
-        <div className="medico-table-container">
-          <table className="medico-table">
+        <div className="delete-medico-table-container">
+          <table className="delete-medico-table">
             <thead>
               <tr>
                 <th>Nombre</th>
@@ -93,7 +93,7 @@ const DeleteMedico = () => {
                 <th>Apellido Materno</th>
                 <th>Especialidad</th>
                 <th>Matrícula</th>
-                <th>Acciones</th>
+                <th>Borrar</th>
               </tr>
             </thead>
             <tbody>
@@ -105,7 +105,7 @@ const DeleteMedico = () => {
                   <td>{medico.especialidad}</td>
                   <td>{medico.matricula}</td>
                   <td>
-                    <button onClick={() => handleDelete(medico.id_medico)}>Eliminar</button>
+                    <button onClick={() => handleDelete(medico.id_medico)}>Borrar</button>
                   </td>
                 </tr>
               ))}

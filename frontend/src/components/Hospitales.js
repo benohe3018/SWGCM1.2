@@ -95,39 +95,40 @@ const Hospitales = ({ vistaInicial }) => {
   };
   
   const handleCrearHospital = async (nuevoHospital) => {
-    console.log('Creating hospital:', nuevoHospital); // Añadir log para verificar el hospital a crear
-  
+    console.log('Creating hospital:', nuevoHospital);
+
     const errorNombre = validarNombreHospital(nuevoHospital.nombre_hospital);
     if (errorNombre) {
       setError(errorNombre);
       return;
     }
-  
+
     const errorCiudad = validarCiudadHospital(nuevoHospital.ciudad_hospital);
     if (errorCiudad) {
       setError(errorCiudad);
       return;
     }
-  
+
     try {
       await createHospital(nuevoHospital);
       setMensaje('Hospital creado exitosamente.');
+      await cargarHospitales(); // Recargar la lista después de crear el hospital
       setTimeout(() => {
         setMensaje(null);
-      }); 
+      }, 3000); 
     } catch (error) {
       console.error("Error al crear hospital:", error);
       setError("No se pudo crear el hospital. Por favor, intente de nuevo.");
     }
   };
 
-  const handleEditarHospital = async (hospitalEditado) => {
+const handleEditarHospital = async (hospitalEditado) => {
     try {
       if (!hospitalEditado.id) {
         throw new Error("El ID del hospital no está definido");
       }
       await updateHospital(hospitalEditado.id, hospitalEditado);
-      await cargarHospitales();
+      await cargarHospitales(); // Recargar la lista después de actualizar el hospital
       setHospitalSeleccionado(null);
       setMensaje('Hospital actualizado exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
@@ -148,7 +149,7 @@ const Hospitales = ({ vistaInicial }) => {
   const confirmarEliminarHospital = async () => {
     try {
       await deleteHospital(hospitalSeleccionado.id);
-      await cargarHospitales();
+      await cargarHospitales(); // Recargar la lista después de eliminar el hospital
       setMostrarModal(false);
       setHospitalSeleccionado(null);
       setMensaje('Hospital eliminado exitosamente.');
@@ -193,10 +194,10 @@ const Hospitales = ({ vistaInicial }) => {
   return (
     <div className="hospitales-page">
       <header className="hospitales-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Sistema de Gestión de Hospitales</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="hg-header-logo" />
+        <div className="hg-header-texts">
+          <h1 className="hg-welcome-message">Sistema de Gestión de Hospitales</h1>
+          <h2 className="hg-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
@@ -227,7 +228,6 @@ const Hospitales = ({ vistaInicial }) => {
               <table className="tabla-hospitales">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre del Hospital</th>
                     <th>Dirección del Hospital</th>
                   </tr>
@@ -235,7 +235,6 @@ const Hospitales = ({ vistaInicial }) => {
                 <tbody>
                   {currentHospitales.map((hospital) => (
                     <tr key={hospital.id}>
-                      <td>{hospital.id}</td>
                       <td>{hospital.nombre_hospital}</td>
                       <td>{hospital.ciudad_hospital}</td>
                     </tr>
@@ -274,7 +273,6 @@ const Hospitales = ({ vistaInicial }) => {
               <table className="tabla-hospitales">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre del Hospital</th>
                     <th>Dirección del Hospital</th>
                     <th>Acciones</th>
@@ -283,7 +281,6 @@ const Hospitales = ({ vistaInicial }) => {
                 <tbody>
                   {currentHospitales.map((hospital) => (
                     <tr key={hospital.id}>
-                      <td>{hospital.id}</td>
                       <td>
                         <input
                           type="text"
@@ -354,7 +351,6 @@ const Hospitales = ({ vistaInicial }) => {
               <table className="tabla-hospitales">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre del Hospital</th>
                     <th>Dirección del Hospital</th>
                     <th>Acciones</th>
@@ -363,7 +359,6 @@ const Hospitales = ({ vistaInicial }) => {
                 <tbody>
                   {currentHospitales.map((hospital) => (
                     <tr key={hospital.id}>
-                      <td>{hospital.id}</td>
                       <td>{hospital.nombre_hospital}</td>
                       <td>{hospital.ciudad_hospital}</td>
                       <td>

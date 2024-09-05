@@ -24,23 +24,14 @@ const UpdateUsuario = () => {
   const handleInputChange = (event, id) => {
     const { name, value } = event.target;
 
-    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(name) && name.length >= 1 && name.length <= 50;
 
     if (name === 'nombre_usuario') {
-      if (/^\d+$/.test(value)) {
-        alert('Error: No se permiten solo números');
-        return;
-      } else if (/^\s+$/.test(value) || value.trim() === "") {
-        alert('Error: No se permiten espacios en blanco');
-        return;
-      } else if (value.includes("…")) {
-        alert('Error: No se permiten puntos suspensivos');
-        return;
-      } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
+      if (!/^[a-zA-Z0-9]+$/.test(value) || value.length < 4 || value.length > 20) {
         alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres alfanuméricos).');
         return;
       }
-    } else if (name === 'nombre_real' || name === 'apellido_paterno' || name === 'apellido_materno') {
+    } else if (['nombre_real', 'apellido_paterno', 'apellido_materno'].includes(name)) {
       if (!isValidName(value)) {
         alert('Por favor, introduce un nombre/apellido válido (solo letras, 1-50 caracteres).');
         return;
@@ -64,7 +55,7 @@ const UpdateUsuario = () => {
   const handleSave = async (id) => {
     const usuarioToUpdate = usuarios.find(usuario => usuario.id === id);
 
-    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
+    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/.test(name) && name.length >= 1 && name.length <= 50;
 
     if (!usuarioToUpdate.nombre_usuario || !/^[a-zA-Z0-9]+$/.test(usuarioToUpdate.nombre_usuario)) {
       alert('Por favor, introduce un nombre de usuario válido (4-20 caracteres alfanuméricos).');
@@ -146,17 +137,17 @@ const UpdateUsuario = () => {
   return (
     <div className="update-usuario-page">
       <header className="update-usuario-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
-          <h2 className="department-name">Actualizar Registros de Usuarios</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="header-logo-update-usuario" />
+        <div className="header-texts-update-usuario">
+          <h1 className="welcome-message-update-usuario">Bienvenido al Módulo de actualización de Usuarios</h1>
+          <h2 className="department-name-update-usuario">Actualizar Registros de Usuarios</h2>
         </div>
       </header>
       <div className="main-layout">
         <Sidebar />
         <div className="update-usuario-content">
           {successMessage && <p className="success-message">{successMessage}</p>}
-          <div className="search-container">
+          <div className="update-search-container">
             <input
               type="text"
               placeholder="Buscar..."
@@ -170,16 +161,16 @@ const UpdateUsuario = () => {
               <option value="apellido_materno">Apellido Materno</option>
             </select>
           </div>
-          <div className="usuario-table-container">
-            <table className="usuario-table">
+          <div className="table-container-update-usuario">
+            <table className="usuario-table-update">
               <thead>
                 <tr>
-                  <th>UserName</th>
-                  <th>Nombre del Usuario</th>
+                  <th>Nombre de Usuario</th>
+                  <th>Nombre Real</th>
                   <th>Apellido Paterno</th>
                   <th>Apellido Materno</th>
                   <th>Rol</th>
-                  <th>Matricula</th>
+                  <th>Matrícula</th>
                   <th>Editar</th>
                 </tr>
               </thead>
@@ -263,5 +254,3 @@ const UpdateUsuario = () => {
 };
 
 export default UpdateUsuario;
-
-

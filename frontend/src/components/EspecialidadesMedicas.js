@@ -171,10 +171,10 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
   return (
     <div className="especialidades-medicas-page">
       <header className="especialidades-medicas-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Sistema de Gestión de Especialidades Médicas</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="especialidades-header-logo" />
+        <div className="especialidades-header-texts">
+          <h1 className="especialidades-welcome-message">Sistema de Gestión de Especialidades Médicas</h1>
+          <h2 className="especialidades-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       <div className="especialidades-medicas-content">
@@ -203,14 +203,14 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
               <table className="tabla-especialidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre de la Especialidad</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
                     <tr key={especialidad.id}>
-                      <td>{especialidad.id}</td>
+                      
                       <td>{especialidad.nombre_especialidad}</td>
                     </tr>
                   ))}
@@ -247,7 +247,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
               <table className="tabla-especialidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre de la Especialidad</th>
                     <th>Acciones</th>
                   </tr>
@@ -255,7 +255,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
                     <tr key={especialidad.id}>
-                      <td>{especialidad.id}</td>
+                      
                       <td>
                         <input
                           type="text"
@@ -313,7 +313,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
               <table className="tabla-especialidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    
                     <th>Nombre de la Especialidad</th>
                     <th>Acciones</th>
                   </tr>
@@ -321,7 +321,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
                     <tr key={especialidad.id}>
-                      <td>{especialidad.id}</td>
+                      
                       <td>{especialidad.nombre_especialidad}</td>
                       <td>
                         <div className="botones-acciones">

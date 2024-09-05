@@ -154,7 +154,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
     return (
         <div className="estudios-radiologicos-page">
             <header className="estudios-radiologicos-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
+                <img src={logoIMSS} alt="Logo IMSS" className="estudios-radiologicos-header-logo" />
                 <div className="header-texts">
                     <h1 className="welcome-message">Sistema de Gestión de Estudios Radiológicos</h1>
                     <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
@@ -235,7 +235,6 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                             <table className="tabla-estudios">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Nombre del Estudio</th>
                                         <th>Descripción</th>
                                         <th>Acciones</th>
@@ -244,7 +243,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                 <tbody>
                                     {currentEstudios.map((estudio) => (
                                         <tr key={estudio.id_estudio}>
-                                            <td>{estudio.id_estudio}</td>
+                                            
                                             <td>
                                                 <input
                                                     type="text"
@@ -315,7 +314,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                             <table className="tabla-estudios">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Nombre del Estudio</th>
                                         <th>Descripción</th>
                                         <th>Acciones</th>
@@ -324,7 +323,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                 <tbody>
                                     {currentEstudios.map((estudio) => (
                                         <tr key={estudio.id_estudio}>
-                                            <td>{estudio.id_estudio}</td>
+                                            
                                             <td>{estudio.nombre_estudio}</td>
                                             <td>{estudio.descripcion_estudio}</td>
                                             <td>

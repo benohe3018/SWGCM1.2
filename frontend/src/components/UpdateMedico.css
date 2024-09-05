@@ -18,7 +18,6 @@
 .update-medico-header {
   display: flex;
   flex-direction: inline-flex;
-  width: 100%;
   background-color: whitesmoke; /* Color del encabezado */
   padding: 10px 20px;
   box-sizing: border-box;
@@ -26,22 +25,24 @@
   z-index: 100; 
 }
 
-.header-logo {
+.update-header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
+  height: 60px;
+  margin-right: 40px;
 }
 
-.header-texts {
+.update-header-text {
   text-align: center;
   flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
 }
 
-.welcome-message {
+.update-welcome-message {
   font-size: 24px;
   margin: 0;
   color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
 }
 
-.department-name {
+.update-department-name {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
@@ -53,6 +54,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-left: 150px;
 }
 
 .success-message {
@@ -60,43 +62,43 @@
   margin-bottom: 20px;
 }
 
-.search-container {
+.update-medico-search-container {
     align-items: center;
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.search-container input {
+.update-medico-search-container input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
 }
 
-.search-container select {
+.update-medico-search-container select {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-.medico-table-container {
+.update-medico-table-container {
   width: 100%;
 }
 
-.medico-table {
+.update-medico-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.medico-table th, .medico-table td {
+.update-medico-table th, .update-medico-table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 5px;
   text-align: left;
 }
 
-.medico-table th {
+.update-medico-table th {
   background-color: #f4f4f4;
 }
 
@@ -124,3 +126,123 @@
 .pagination-update-medico button:hover {
   background-color: #0C231E;
 }
+@media (max-width: 480px) {
+  .update-medico-header {
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    margin-left: 40px;
+    align-items: flex-start;
+  }
+
+  .update-header-text{
+    text-align: center;
+    width: 90%;
+    margin-left: 50px;
+  }
+
+  .update-welcome-message{
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .update-department-name{
+    font-size: 1.0em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .update-header-logo {
+    height: 60px; /* Ajusta el tamaño del logo */
+    margin-left: 200px; /* Elimina el margen derecho */
+    margin-bottom: 10px; /* Espacio entre el logo y los textos */
+  }
+
+    .update-medico-content {
+    padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
+    width: 80%;
+  }
+
+  .update-medico-search-container {
+    width: 250px;
+    margin-top: 10px;
+    margin-right: 120px;
+  }
+
+  .update-medico-search-container input,
+  .update-medico-search-container select {
+    width: 70%; /* Asegura que ocupen todo el ancho disponible */
+    margin-bottom: 15px;
+  }
+
+  .update-medico-table th, .update-medico-table td {
+    padding: 6px; /* Reducir padding en pantallas pequeñas */
+    font-size: 9px;
+  }
+
+  .update-medico-table-container {
+    width: 90%;
+    overflow-x: auto;
+    margin-top: 0px;
+    margin-left: -140px;
+  }
+  
+  .update-medico-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .update-medico-table th, .update-medico-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+  }
+  
+  .update-medico-table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+  .hamburger-menu {
+    display: block;
+    position: fixed;
+    top: 70px;
+    left: 10px;
+    z-index: 1001;
+    background-color: #12322B;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    width: 120px;
+  }
+  .pagination-update-medico{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-right: 140px;
+  }
+  .pagination-update-medico button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #12322B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 820px) {
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (min-width: 821px) {
+  .hamburger {
+    display: none;
+  }
+}  

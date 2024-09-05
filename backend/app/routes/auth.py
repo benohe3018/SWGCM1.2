@@ -6,8 +6,10 @@ from datetime import timedelta
 import os
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, HashingError
-from .config import ph, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
 from ..models import Usuario, db
+from .encryption import decrypt_data as decrypt_password
+from .auth_middleware import token_required, role_required
+from .config import ph, SECRET_KEY, ARGON2_TIME_COST, ARGON2_MEMORY_COST, ARGON2_PARALLELISM
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 import base64
@@ -87,12 +89,9 @@ def login():
 
     try:
         user = Usuario.query.filter_by(nombre_usuario=username).first()
-        if user:
-            if check_password_hash(user.contrasena, password):
-                token = generate_token(user.id, user.rol)
-                return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
-            else:
-                return jsonify({"message": "Credenciales inválidas"}), 401
+        if user and check_password_hash(user.contrasena, password):
+            token = generate_token(user.id, user.rol)
+            return jsonify({"message": "Acceso Correcto", "token": token, "role": user.rol}), 200
         else:
             return jsonify({"message": "Credenciales inválidas"}), 401
     except Exception as e:
@@ -100,6 +99,8 @@ def login():
 
 # Ruta para el registro de usuarios
 @auth_bp.route('/register', methods=['POST'])
+@token_required
+@role_required(['root'])
 def register():
     data = request.get_json()
     username = data.get('nombre_usuario')
@@ -129,11 +130,9 @@ def register():
 
     return jsonify({"message": "Usuario registrado exitosamente en la base de datos"}), 201
 
-
-
-
-
-
-
-
-
+# Ruta protegida de ejemplo
+@auth_bp.route('/ruta_protegida', methods=['GET'])
+@token_required
+@role_required(['Admin', 'root'])
+def ruta_protegida():
+    return jsonify({"message": "Acceso a ruta protegida concedido"}), 200

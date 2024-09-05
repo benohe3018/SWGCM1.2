@@ -2,6 +2,12 @@
     padding: 20px;
   }
   
+  .diagnosticos-presuntivos-header-logo{
+    margin-left: 10px;
+    height: 60px;
+    margin-right: 40px;
+  }
+
   .diagnosticos-presuntivos-header {
     display: flex;
     align-items: center;
@@ -10,16 +16,16 @@
   }
   
    
-  .header-texts {
+  .diagnosticos-presuntivos-header-texts {
     text-align: center;
   }
   
-  .welcome-message {
+  .diagnosticos-presuntivos-welcome-page {
     font-size: 24px;
     color: #004d40;
   }
   
-  .department-name {
+  .diagnosticos-presuntivos-department-name {
     font-size: 18px;
   }
   
@@ -116,5 +122,20 @@
   
   .editar-button:hover, .eliminar-button:hover {
     opacity: 0.8;
+  }
+
+  @media (max-width: 480px) {
+    .diagnosticos-presuntivos-header{
+      width: 100%; /* Asegura que el header ocupe todo el ancho */
+      text-align: center; /* Centra el texto del header */
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .diagnosticos-presuntivos-header-logo {
+      height: 50px;
+      margin-left: 150px;
+      margin-bottom: 10px;
+    }
   }
   

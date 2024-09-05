@@ -60,8 +60,8 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   useEffect(() => {
     const generarHorariosDisponibles = () => {
       const horarios = [
-        '07:15 AM', '07:45 AM', '08:25 AM', '09:05 AM', '09:45 AM', '10:25 AM', '11:05 AM', '11:45 AM', '12:25 Hrs',
-        '14:00 Hrs', '14:40 Hrs', '15:20 Hrs', '16:00 Hrs', '16:40 Hrs', '17:20 Hrs', '18:00 Hrs', '18:40 Hrs', '19:20 Hrs'
+        '07:15', '07:45', '08:25', '09:05', '09:45', '10:25', '11:05', '11:45', '12:25',
+        '14:00', '14:40', '15:20', '16:00', '16:40', '17:20', '18:00', '18:40', '19:20'
       ];
       setHorariosDisponibles(horarios);
     };

@@ -21,8 +21,6 @@
 
 .sidebar ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .sidebar ul li {
@@ -86,9 +84,102 @@
 .login-header {
   padding-left: 250px; /* Ajustar esto al ancho de tu barra lateral */
 }
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
 
-  
-  
+  .hamburger-menu {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 70px;
+    z-index: 1001;
+    background-color: #12322B; /* Cambia el color de fondo */
+    padding: 5px;
+    border-radius: 5px;
+    color: white; /* Asegura que el texto sea visible */
+    font-size: 14px;
+    width: 120px;
+  }
+
+  .hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .hamburger-menu ul li {
+    padding: 5px;
+    cursor: pointer;
+    position: relative;
+    color: white; /* Asegura que el texto sea visible */
+  }
+
+  .hamburger-menu ul li a {
+    color: white; /* Asegura que los enlaces sean visibles */
+    text-decoration: none;
+    display: block;
+  }
+
+  .hamburger-menu ul li:hover {
+    background-color: #4a8b7f; /* Cambia este color al que prefieras */
+  }
+
+  .hamburger-menu .submenu {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    background-color: #12322B;
+    width: 100%;
+    z-index: 1000;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9em;
+  }
+
+  .hamburger-menu .submenu li {
+    font-size: 0.8em;
+  }
+  .sidebar-button {
+    font-size: 14px;
+    padding: 1px;
+    background: whitesmoke;
+    color: black;
+}
+}
+
+@media (max-width: 819px) {
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (min-width: 820px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+.hamburger {
+  cursor: pointer;
+  position: fixed;
+  top: 150px;
+  left: 25px;
+  z-index: 1001;
+  background-color: #fff; /* Cambia el color de fondo */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.hamburger div {
+  width: 30px;
+  height: 3px;
+  background-color: #12322B; /* Cambia el color de las líneas */
+  margin: 5px 0;
+}
   
   
   

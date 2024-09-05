@@ -20,39 +20,32 @@ body {
 
 .update-usuario-header {
   display: flex;
-  width: 100%;
   background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
   top: 0;
   z-index: 100;
-  margin-left: 300px
 }
 
-.header-logo {
+.header-logo-update-usuario {
   height: 60px;
 }
 
-.header-texts {
+.header-texts-update-usuario {
   margin-left: 20px;
   text-align: left;
 }
 
-.welcome-message {
+.welcome-message-update-usuario {
   font-size: 24px;
   margin: 0;
   color: #0C231E;
 }
 
-.department-name {
+.department-name-update-usuario {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
-}
-
-.main-layout {
-  display: flex;
-  width: 100%;
 }
 
 .update-usuario-content {
@@ -60,7 +53,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .success-message {
@@ -68,38 +61,38 @@ body {
   margin-bottom: 20px;
 }
 
-.search-container {
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
+.update-search-container {
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.search-container input, .search-container select {
+.update-search-container input, .update-search-container select {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-.usuario-table-container {
+.table-container-update-usuario {
   width: 100%;
   overflow-x: auto;
 }
 
-.usuario-table {
+.usuario-table-update {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.usuario-table th, .usuario-table td {
+.usuario-table-update th, .usuario-table-update td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
 }
 
-.usuario-table th {
+.usuario-table-update th{
   background-color: #f4f4f4;
 }
 
@@ -128,3 +121,69 @@ body {
   background-color: #0C231E;
 }
 
+/* Responsividad */
+@media (max-width: 480px) {
+  .update-usuario-header {
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 40px;
+  }
+
+  .header-texts-update-usuario {
+    text-align: center;
+    width: 90%;
+    margin-left: 50px;
+  }
+
+  .welcome-message-update-usuario {
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .department-name-update-usuario {
+    font-size: 1.0em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .update-usuario-content {
+    padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
+    width: 100%;
+  }
+
+  .update-search-container {
+    width: 250px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  .update-search-container input,
+  .update-search-container select {
+    width: 70%; /* Asegura que ocupen todo el ancho disponible */
+    margin-bottom: 15px;
+  }
+
+  .usuario-table-update th, .usuario-table-update td {
+    padding: 6px; /* Reducir padding en pantallas pequeñas */
+    font-size: 7.0px;
+  }
+
+  .usuario-table-update {
+    width: 100%;
+    border-collapse: collapse;
+    margin-right: 40px;
+  }
+
+  .table-container-update-usuario {
+    width: 90%;
+    overflow-x: auto;
+    margin-top: 0px;
+  }
+  .header-logo-update-usuario{
+    margin-left: 180px; 
+    height: 60px;
+  }
+}

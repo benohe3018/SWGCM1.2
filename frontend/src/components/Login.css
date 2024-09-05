@@ -1,10 +1,10 @@
 /* Login.css */
-.main-layout {
+/*.main-layout {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-}
+}*/
 
 body {
   font-family: Arial, sans-serif;
@@ -47,11 +47,15 @@ body {
 }
 
 .login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Asegura que todos los elementos dentro del contenedor estén centrados verticalmente */
   background-color: white;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   text-align: center;
   margin-top: 100px;
@@ -60,7 +64,7 @@ body {
 .login-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
 }
 
 label {
@@ -99,8 +103,50 @@ button:hover {
 }
 
 .mr-machine {
-  width: 100%;
-  max-width: 300px;
-  margin-top: 20px;
-  border-radius: 10px;
+  max-width: 100%; /* Hacer que la imagen ocupe el ancho máximo disponible en el contenedor */
+  margin: 20px auto 0; /* Ajustar el margen superior e inferior */
+  display: block;
 }
+
+@media (max-width: 400px) {
+  .login-container {
+    max-width: 90%; /* Hacer que el contenedor ocupe el 90% del ancho de la pantalla */
+    padding: 20px; /* Reducir el padding interno */
+  }
+
+  input {
+    font-size: 10px; /* Disminuir el tamaño de la fuente en los campos de entrada */
+  }
+
+  button {
+    padding: 8px; /* Reducir el padding del botón */
+    font-size: 10px; /* Disminuir el tamaño de la fuente del botón */
+  }
+}
+
+/* Ajustes para pantallas medianas (tabletas) */
+@media (min-width: 768px) {
+  .login-container {
+    max-width: 500px; /* Aumentar el ancho máximo en pantallas medianas */
+  }
+
+  .welcome-message {
+    font-size: 2em; /* Aumentar el tamaño del texto de bienvenida */
+  }
+
+  .department-name {
+    font-size: 1.5em; /* Aumentar el tamaño del nombre del departamento */
+  }
+}
+
+/* Ajustes para pantallas grandes (escritorios) */
+@media (min-width: 1024px) {
+  .login-container {
+    max-width: 600px; /* Aumentar el ancho máximo en pantallas grandes */
+  }
+
+  .mr-machine {
+    max-width: 400px; /* Aumentar el tamaño de la imagen */
+  }
+}
+/*Hasta aquí la primera fase de responsividad*/

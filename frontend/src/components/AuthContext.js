@@ -1,32 +1,37 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
-// Crea el contexto
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-// Hook personalizado para usar el contexto de autenticación
 export const useAuth = () => {
-  return useContext(AuthContext);
+    return useContext(AuthContext);
 };
 
-// Proveedor de contexto
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            return { username: decodedToken.sub, role: decodedToken.role };
+        }
+        return null;
+    });
 
-  const login = (username, role) => {
-    setUser({ username, role });
-  };
+    const login = (username, role) => {
+        setUser({ username, role });
+    };
 
-  const logout = () => {
-    setUser(null);
-  };
+    const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        setUser(null);
+    };
 
-  const isAuthenticated = !!user;
+    const isAuthenticated = !!user;
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated  }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
-
-

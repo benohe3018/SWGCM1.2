@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './CRUDUsuarios.css';
+import './main-layout.css';
 import logoIMSS from '../images/LogoIMSS.jpg'; // Asegúrate de que la ruta al logo es correcta
 import mrMachine from '../images/MRMachine.jpg';
 

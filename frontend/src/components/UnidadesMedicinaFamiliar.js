@@ -95,26 +95,25 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   };
 
   const handleCrearUnidad = async (nuevaUnidad) => {
-    console.log('Creating unit:', nuevaUnidad); // Añadir log para verificar la unidad a crear
-
     const errorNombre = validarNombreUnidad(nuevaUnidad.nombre_unidad_medica);
     if (errorNombre) {
       alert(errorNombre);
       return;
     }
-
+  
     const errorDescripcion = validarDescripcionUnidad(nuevaUnidad.direccion_unidad_medica);
     if (errorDescripcion) {
       alert(errorDescripcion);
       return;
     }
-
+  
     try {
-      await createUnidad(nuevaUnidad);
+      const unidadCreada = await createUnidad(nuevaUnidad);
+      setUnidades([...unidades, unidadCreada]); // Agregar la nueva unidad al estado
       setMensaje('Unidad creada exitosamente.');
       setTimeout(() => {
         setMensaje(null);
-      }); 
+      }, 3000); // Mostrar el mensaje por 3 segundos
     } catch (error) {
       console.error("Error al crear unidad:", error);
       setError("No se pudo crear la unidad. Por favor, intente de nuevo.");
@@ -127,27 +126,30 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
       alert(errorNombre);
       return;
     }
-
+  
     const errorDescripcion = validarDescripcionUnidad(unidadEditada.direccion_unidad_medica);
     if (errorDescripcion) {
       alert(errorDescripcion);
       return;
     }
-
+  
     try {
       if (!unidadEditada.id_unidad_medica) {
         throw new Error("El ID de la unidad no está definido");
       }
-      await updateUnidad(unidadEditada.id_unidad_medica, unidadEditada);
-      await cargarUnidades();
+      const unidadActualizada = await updateUnidad(unidadEditada.id_unidad_medica, unidadEditada);
+      setUnidades(unidades.map((unidad) =>
+        unidad.id_unidad_medica === unidadActualizada.id_unidad_medica ? unidadActualizada : unidad
+      )); // Actualizar la unidad en el estado
       setUnidadSeleccionada(null);
       setMensaje('Unidad actualizada exitosamente.');
-      setTimeout(() => setMensaje(null), 3000);
+      setTimeout(() => setMensaje(null), 3000); // Mostrar el mensaje por 3 segundos
     } catch (error) {
       console.error("Error al editar unidad:", error);
       setError("No se pudo editar la unidad. Por favor, intente de nuevo.");
     }
   };
+  
 
   const handleEliminarUnidad = (id) => {
     const unidad = unidades.find(u => u.id_unidad_medica === id);
@@ -205,10 +207,10 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   return (
     <div className="unidades-medicina-familiar-page">
       <header className="unidades-medicina-familiar-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Sistema de Gestión de Unidades de Medicina Familiar</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="umf-header-logo" />
+        <div className="umf-header-texts">
+          <h1 className="umf-welcome-message">Sistema de Gestión de Unidades de Medicina Familiar</h1>
+          <h2 className="umf-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
@@ -239,7 +241,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
               <table className="tabla-unidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre de la Unidad</th>
                     <th>Dirección de la Unidad</th>
                   </tr>
@@ -247,7 +248,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                 <tbody>
                   {currentUnidades.map((unidad) => (
                     <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.id_unidad_medica}</td>
                       <td>{unidad.nombre_unidad_medica}</td>
                       <td>{unidad.direccion_unidad_medica}</td>
                     </tr>
@@ -286,7 +286,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
               <table className="tabla-unidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre de la Unidad</th>
                     <th>Dirección de la Unidad</th>
                     <th>Acciones</th>
@@ -295,7 +294,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                 <tbody>
                   {currentUnidades.map((unidad) => (
                     <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.id_unidad_medica}</td>
                       <td>
                         <input
                           type="text"
@@ -370,7 +368,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
               <table className="tabla-unidades">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre de la Unidad</th>
                     <th>Dirección de la Unidad</th>
                     <th>Acciones</th>
@@ -379,7 +376,6 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                 <tbody>
                   {currentUnidades.map((unidad) => (
                     <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.id_unidad_medica}</td>
                       <td>{unidad.nombre_unidad_medica}</td>
                       <td>{unidad.direccion_unidad_medica}</td>
                       <td>

@@ -1,119 +1,103 @@
 .gestion-citas-page {
-  background-color: whitesmoke;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: Arial, sans-serif;
-}
-
-.gestion-citas-header {
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: Arial, sans-serif;
+    width: 100%; /* Asegura que el contenedor principal ocupe el 100% del ancho */
+    padding: 0 10px; /* Agrega un poco de espaciado lateral */
+  }
+  
+  .gestion-citas-header {
     display: flex;
     align-items: center;
     background-color: whitesmoke;
-    padding: 10px;
-    width: 100%;
-}
-
-.header-logo {
+    padding: 10px; /* Reduce el espaciado */
+    width: 100%; /* Asegura que el encabezado ocupe el 100% del ancho */
+    flex-direction: column; /* Apila elementos en pantallas pequeñas */
+  }
+  
+  .header-logo {
     height: 60px;
-}
-
-.header-texts h1 {
+  }
+  
+  .header-texts h1 {
     margin: 0;
     font-size: 24px;
-}
-
-.header-texts h2 {
+    text-align: center; /* Centra el texto en pantallas pequeñas */
+  }
+  
+  .header-texts h2 {
     margin: 0;
     font-size: 16px;
-}
-
-.navbar {
-    background-color: #006AA7;
-    overflow: hidden;
-}
-
-.nav-links {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-}
-
-.nav-links li {
-    display: inline;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
-    display: block;
-}
-
-.nav-links a:hover {
-    background-color: #004481;
-}
-.mr-machine {
+  }
+  
+  .mr-machine {
     width: 100%;
     max-width: 300px;
     margin-top: 2rem;
     display: flex;
   }
 
-.hamburger {
-    display: none;
-}
-
-.gestion-citas-content {
-    padding: 20px;
-}
-
-.tabla-citas {
+  .tabla-citas-container {
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+  }
+  
+  .gestion-citas-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Reduce el espaciado alrededor del contenido */
+  }
+  
+  .tabla-citas {
     width: 100%;
     border-collapse: collapse;
-}
-
-.tabla-citas th, .tabla-citas td {
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+  }
+  
+  .tabla-citas th, .tabla-citas td {
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.tabla-citas th {
+    padding: 8px; /* Reduce el espaciado en celdas */
+    font-size: 12px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    text-align: left; /* Alinea el texto a la izquierda */
+  }
+  
+  .tabla-citas th {
     background-color: whitesmoke;
     color: black;
-}
-
-.botones-acciones {
+  }
+  
+  .botones-acciones {
     display: flex;
     gap: 10px;
-}
-
-.editar-button, .eliminar-button {
+  }
+  
+  .editar-button, .eliminar-button {
     background-color: #006AA7;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-}
-
-.editar-button:hover, .eliminar-button:hover {
+  }
+  
+  .editar-button:hover, .eliminar-button:hover {
     background-color: #004481;
-}
-
-.mensaje-confirmacion {
+  }
+  
+  .mensaje-confirmacion {
     background-color: #dff0d8;
     color: #3c763d;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
-}
-
-.modal-confirmacion {
+  }
+  
+  .modal-confirmacion {
     position: fixed;
     top: 0;
     left: 0;
@@ -123,12 +107,59 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
+  }
+  
+  .modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     text-align: center;
-}
+  }
+  
+  /* Media Queries para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .gestion-citas-content {
+      padding: 5px; /* Reduce el espaciado */
+    }
+  
+    .tabla-citas th, .tabla-citas td {
+        font-size: 10px; /* Reduce aún más el tamaño de fuente */
+        padding: 5px; /* Reduce el espaciado en celdas */
+    }
+  
+    .botones-acciones {
+        flex-direction: column; /* Apila botones en pantallas pequeñas */
+        align-items: center; /* Centra los botones */
+    }
 
+  }
+  
+  /* Media Queries para tabletas */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .gestion-citas-content {
+      padding: 15px; /* Ajusta el espaciado */
+    }
+    .input-update-cita{
+        font-size: 10px;
+    }
+  
+    .tabla-citas th, .tabla-citas td {
+      font-size: 14px; /* Ajusta el tamaño de fuente */
+    }
+    .tabla-citas-container {
+        overflow-x: auto; /* Permite desplazamiento horizontal */
+        width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+      }
+      
+      .tabla-citas {
+        min-width: 600px; /* Establece un ancho mínimo para la tabla */
+        border-collapse: collapse;
+      }
+      
+      .tabla-citas th, .tabla-citas td {
+        border: 1px solid #ddd;
+        padding: 8px; /* Reduce el espaciado en celdas */
+        font-size: 12px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+        text-align: left; /* Alinea el texto a la izquierda */
+      }
+  }

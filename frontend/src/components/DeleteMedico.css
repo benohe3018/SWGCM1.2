@@ -27,22 +27,24 @@
   z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
 }
 
-.header-logo {
+.delete-header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
+  margin-right: 40px;
+  height:60px
 }
 
-.header-texts {
+.delete-header-texts {
   text-align: center;
   flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
 }
 
-.welcome-message {
+.delete-welcome-message {
   font-size: 24px;
   margin: 0;
   color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
 }
 
-.department-name {
+.delete-department-name {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
@@ -56,24 +58,24 @@
   justify-content: center;
 }
 
-.medico-table-container {
+.delete-medico-table-container {
   width: 100%;
   overflow-x: auto;
 }
 
-.medico-table {
+.delete-medico-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.medico-table th, .medico-table td {
+.delete-medico-table th, .delete-medico-table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
 }
 
-.medico-table th {
+.delete-medico-table th {
   background-color: #f4f4f4;
 }
 
@@ -82,21 +84,21 @@
   margin-bottom: 20px;
 }
 
-.search-container {
+.delete-medico-search-container {
   align-items: center;
   gap: 10px;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.search-container input {
+.delete-medico-search-container input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
 }
 
-.search-container select {
+.delete-medico-search-container select {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -131,6 +133,73 @@
   color: green;
   font-weight: bold;
   margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .delete-medico-header {
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    text-align: center; /* Centra el texto del header */
+    flex-direction: column;
+    margin-left: 40px;
+    align-items: flex-start;
+  }
+
+  .delete-header-texts{
+    text-align: center;
+    width: 90%;
+    margin-left: 50px;;
+  }
+
+  .delete-welcome-message{
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .delete-department-name{
+    font-size: 1.0em;
+    text-align: center;
+    margin-right: 90px;
+  }
+
+  .delete-header-logo {
+    height: 60px; /* Ajusta el tamaño del logo */
+    margin-left: 150px; /* Elimina el margen derecho */
+    margin-bottom: 10px; /* Espacio entre el logo y los textos */
+  }
+
+  .delete-medico-search-container {
+    width: 300px;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .delete-medico-search-container input,
+  .delete-medico-search-container select {
+    width: 70%; /* Asegura que ocupen todo el ancho disponible */
+    margin-bottom: 15px;
+  }
+  .delete-medico-table-container{
+    width: 90%;
+    overflow-x: auto;
+    margin-top: 0px;
+  }
+  .delete-medico-table{
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .delete-medico-table th,
+  .delete-medico-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+    font-size: 9px;
+  }
+  .delete-medico-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    }
+
 }
 
 

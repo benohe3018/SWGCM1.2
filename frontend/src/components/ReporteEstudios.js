@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import './ReportesEstudios.css'; 
+import './ReporteEstudios.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getEstudios } from './estudiosService'; // Asegúrate de que esta función esté definida
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-const ReportesEstudios = () => {
+const ReporteEstudios = () => {
     const navigate = useNavigate();
     const [estudios, setEstudios] = useState([]);
     const [cargando, setCargando] = useState(true);
@@ -107,4 +107,4 @@ const ReportesEstudios = () => {
     );
 };
 
-export default ReportesEstudios;
+export default ReporteEstudios;

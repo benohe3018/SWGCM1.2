@@ -1,0 +1,33 @@
+.reportes-especialidades-page {
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.reportes-especialidades-header {
+    display: flex;
+    align-items: center;
+}
+
+.reportes-especialidades-header-logo {
+    height: 60px;
+    margin-right: 20px;
+}
+
+.busqueda-especialidad {
+    margin: 20px 0;
+}
+
+.tabla-especialidades {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-especialidades th, .tabla-especialidades td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabla-especialidades th {
+    background-color: #f2f2f2;
+}

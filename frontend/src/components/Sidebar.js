@@ -221,7 +221,7 @@ const Sidebar = () => {
       <span className={`arrow ${openSubmenu.informes ? 'open' : ''}`}>&#9660;</span>
       {openSubmenu.informes && (
         <ul className="submenu">
-          <li><Link to="/reporte-medicos">Reporte de Médicos</Link></li>
+          <li><Link to="/read-medico">Reporte de Médicos</Link></li>
           <li><Link to="/reporte-usuarios">Reporte de Usuarios</Link></li>
           <li><Link to="/reporte-citas">Reporte de Citas</Link></li>
           <li><Link to="/reporte-estudios">Reporte de Estudios Radiológicos</Link></li>

@@ -10,13 +10,18 @@
   color: black;
 }
 
+.estudios-radiologicos-header-logo{
+  height: 60px;
+  margin-right: 40px ;
+}
+
 .estudios-radiologicos-header {
   display: flex;
   width: 100%;
   background-color: whitesmoke;
   padding: 10px 20px;
   box-sizing: border-box;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .header-texts {

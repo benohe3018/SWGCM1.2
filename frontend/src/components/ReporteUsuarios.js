@@ -41,12 +41,18 @@ const ReporteUsuarios = () => {
   };
 
   const filteredUsuarios = usuarios.filter((usuario) => {
-    if (searchField === 'nombre' && usuario.nombre_real) {
-      return usuario.nombre_real.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchField === 'apellido' && usuario.apellido_paterno) {
-      return usuario.apellido_paterno.toLowerCase().includes(searchTerm.toLowerCase());
-    }
-    return false; // Cambia esto para que no incluya usuarios no válidos
+    if (searchField === 'nombre_usuario') {
+        return usuario.nombre_usuario.toLowerCase().includes(searchTerm.toLowerCase());
+      } else if (searchField === 'nombre_real') {
+        return usuario.nombre_real.toLowerCase().includes(searchTerm.toLowerCase());
+      } else if (searchField === 'apellido_paterno') {
+        return usuario.apellido_paterno.toLowerCase().includes(searchTerm.toLowerCase());
+      } else if (searchField === 'apellido_materno') {
+        return usuario.apellido_materno.toLowerCase().includes(searchTerm.toLowerCase());
+      } else if (searchField === 'matricula') {
+        return usuario.matricula.toLowerCase().includes(searchTerm.toLowerCase());
+      } 
+      return usuario;
   });
 
   const indexOfLastUsuario = currentPage * usuariosPorPagina;

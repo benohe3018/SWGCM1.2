@@ -24,7 +24,9 @@
 }
 
 .umf-header-logo {
-  margin-left: 100px;
+  margin-left: 10px;
+  margin-right: 40px;
+  height:60px
 }
 
 .umf-header-texts {

@@ -86,7 +86,7 @@ body {
   margin-bottom: 20px;
 }
 
-.usuario-table-update td, .usuario-table th {
+.usuario-table-update td, .usuario-table-update th {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;

@@ -1,33 +1,83 @@
 .reportes-especialidades-page {
-    padding: 20px;
-    font-family: 'Montserrat', sans-serif;
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: black;
 }
 
 .reportes-especialidades-header {
     display: flex;
-    align-items: center;
+    width: 100%;
+    background-color: whitesmoke;
+    padding: 10px 20px;
+    box-sizing: border-box;
 }
 
 .reportes-especialidades-header-logo {
+    margin-left: 10px;
     height: 60px;
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .busqueda-especialidad {
     margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.tabla-especialidades-container {
+    width: 80%;
+    overflow-x: auto;
+    margin-top: 40px;
 }
 
 .tabla-especialidades {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 .tabla-especialidades th, .tabla-especialidades td {
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+    padding: 10px;
+    text-align: center;
 }
 
 .tabla-especialidades th {
-    background-color: #f2f2f2;
+    background-color: #f4f4f4;
+}
+
+button {
+    background-color: #0C231E;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+@media (max-width: 480px) {
+    .reportes-especialidades-header {
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reportes-especialidades-header-logo {
+        height: 50px;
+        margin-left: 150px;
+        margin-bottom: 10px;
+    }
 }

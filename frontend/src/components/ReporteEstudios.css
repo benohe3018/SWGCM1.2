@@ -28,8 +28,9 @@
     margin: 20px;
 }
 
-.reporte-estudios-radiologicos{
-    margin-bottom: 10px;
+.reporte-estudios-radiologicos-boton{
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 .tabla-estudios {

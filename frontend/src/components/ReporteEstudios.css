@@ -6,6 +6,7 @@
 .reportes-estudios-header {
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .reportes-estudios-header-logo {
@@ -14,7 +15,7 @@
 }
 
 .busqueda-estudio {
-    margin: 20px 0;
+    margin: 20px;
 }
 
 .tabla-estudios {
@@ -30,4 +31,34 @@
 
 .tabla-estudios th {
     background-color: #f2f2f2;
+}
+@media (max-width:480px){
+    .reportes-estudios-page {
+        padding: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .reportes-estudios-header {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .reportes-estudios-header-logo {
+        height: 40px;
+        margin-right: 20px;
+    }
+    .busqueda-estudio {
+        margin-bottom: 10px;
+    }
+    .tabla-estudios {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .tabla-estudios th, .tabla-estudios td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    .tabla-estudios th {
+        background-color: #f2f2f2;
+    }
 }

@@ -50,9 +50,8 @@ const ReporteEstudios = () => {
         const doc = new jsPDF();
         doc.text('Reporte de Estudios Radiológicos', 20, 10);
         doc.autoTable({
-            head: [['ID', 'Nombre del Estudio', 'Descripción']],
+            head: [['Nombre del Estudio', 'Descripción']],
             body: filteredEstudios.map(estudio => [
-                estudio.id_estudio,
                 estudio.nombre_estudio,
                 estudio.descripcion_estudio
             ]),
@@ -87,7 +86,6 @@ const ReporteEstudios = () => {
                 <table className="tabla-estudios">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nombre del Estudio</th>
                             <th>Descripción</th>
                         </tr>
@@ -95,7 +93,6 @@ const ReporteEstudios = () => {
                     <tbody>
                         {filteredEstudios.map((estudio) => (
                             <tr key={estudio.id_estudio}>
-                                <td>{estudio.id_estudio}</td>
                                 <td>{estudio.nombre_estudio}</td>
                                 <td>{estudio.descripcion_estudio}</td>
                             </tr>

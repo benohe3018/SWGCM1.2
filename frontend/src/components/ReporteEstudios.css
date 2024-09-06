@@ -28,6 +28,10 @@
     margin: 20px;
 }
 
+.reporte-estudios-radiologicos{
+    margin-bottom: 10px;
+}
+
 .tabla-estudios {
     width: 100%;
     border-collapse: collapse;

@@ -167,8 +167,8 @@
     }
   
     .medico-table th, .medico-table td {
-      padding: 6px; /* Reducir padding en pantallas pequeñas */
-      font-size: 9px;
+      padding: 3.5px; /* Reducir padding en pantallas pequeñas */
+      font-size: 8px;
     }
   
     .table-container {

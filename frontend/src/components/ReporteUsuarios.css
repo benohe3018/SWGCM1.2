@@ -152,8 +152,9 @@
   
     .search-container {
       display: flex;
-      width: 350px;
-      margin-top: 70px;
+      flex-direction:column;
+      width: 200px;
+      margin-top: 5px;
     }
   
     .search-container input,

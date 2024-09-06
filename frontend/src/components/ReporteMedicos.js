@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
-import './ReadMedico.css';
+import './ReporteMedicos.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';

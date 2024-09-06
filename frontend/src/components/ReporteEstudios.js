@@ -79,7 +79,7 @@ const ReporteEstudios = () => {
                     <option value="nombre_estudio">Nombre del Estudio</option>
                     <option value="descripcion_estudio">Descripción del Estudio</option>
                 </select>
-                <button className="reporte-estudios-radiologicos" onClick={generatePDF}> Imprimir Reporte en PDF</button>
+                <button className="reporte-estudios-radiologicos-boton" onClick={generatePDF}> Imprimir Reporte en PDF</button>
             </div>
             <div className="tabla-estudios-container">
                 <table className="tabla-estudios">

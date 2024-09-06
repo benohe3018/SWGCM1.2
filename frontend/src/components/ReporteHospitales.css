@@ -1,0 +1,84 @@
+.reporte-hospitales-page {
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #0C231E;
+}
+
+.reporte-hospitales-header {
+    width: 100%;
+    background-color: whitesmoke;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.hg-header-logo {
+    margin-left: 10px;
+    margin-right: 40px;
+    height: 60px;
+}
+
+.busqueda-hospital {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.tabla-hospitales-container {
+    width: 80%;
+    overflow-x: auto;
+    margin-top: 40px;
+}
+
+.tabla-hospitales {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabla-hospitales th, .tabla-hospitales td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.tabla-hospitales th {
+    background-color: #f4f4f4;
+}
+
+button {
+    background-color: #0C231E;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+@media (max-width: 480px) {
+    .reporte-hospitales-header {
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hg-header-logo {
+        height: 50px;
+        margin-left: 150px;
+        margin-bottom: 10px;
+    }
+}

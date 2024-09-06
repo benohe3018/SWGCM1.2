@@ -130,6 +130,8 @@
 
   .super-root__header-content {
     width: 100%; /* Ocupa todo el ancho disponible */
+    display:flex;
+    flex-direction: column; /* Logo y textos en columna */
   }
 
   .super-root__header-logo {

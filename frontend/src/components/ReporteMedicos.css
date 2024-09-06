@@ -172,8 +172,18 @@
     }
   
     .table-container {
-      width: 130%;
+      width: 100%;
       overflow-x: auto;
-      margin-top: 0px;
+      margin-top: 10px;
+      margin-left: 40px;
     }
+    .medico-table-container {
+      margin-top: 0;
+      overflow-x: auto;
+      width: 100%;
+  }
+    .medico-table {
+      border-collapse: collapse;
+      width: 90%;
+  }
   }

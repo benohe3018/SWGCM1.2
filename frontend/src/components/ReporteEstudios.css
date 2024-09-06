@@ -13,6 +13,16 @@
     height: 60px;
     margin-right: 20px;
 }
+.welcome-reportes-estudios{
+    margin-top: 20px;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+.departamento-reportes-estudios{
+    margin-top: 10px;
+    font-size: 0.8em;
+}
 
 .busqueda-estudio {
     margin: 20px;

@@ -119,7 +119,6 @@
       width: 100%; /* Asegura que el header ocupe todo el ancho */
       text-align: center; /* Centra el texto del header */
       flex-direction: column;
-      margin-left: 40px;
       align-items: flex-start;
     }
   
@@ -141,7 +140,7 @@
   
     .reporte-usuario__header-logo {
       height: 60px; /* Ajusta el tamaño del logo */
-      margin-left: 140px; /* Elimina el margen derecho */
+      margin-left: 170px; /* Elimina el margen derecho */
       margin-bottom: 10px; /* Espacio entre el logo y los textos */
     }
   
@@ -172,6 +171,7 @@
       width: 100%;
       overflow-x: auto;
       margin-top: 10px;
+      margin-left: 40px;
     }
     .usuario-table-container {
       margin-top: 0;

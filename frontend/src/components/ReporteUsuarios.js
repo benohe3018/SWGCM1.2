@@ -103,7 +103,7 @@ const ReporteUsuarios = () => {
             <option value="apellido">Apellido</option>
           </select>
         </div>
-        <button onClick={generatePDF} className="pdf-button">Imprimir PDF</button>
+        <button onClick={generatePDF} className="pdf-button">Imprimir Reporte en PDF</button>
         <div className="table-container">
           {isLoading ? (
             <p>Cargando...</p>

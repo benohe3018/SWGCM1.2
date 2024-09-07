@@ -9,6 +9,7 @@ const ReportesEspecialidades = () => {
     const [especialidades, setEspecialidades] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchField, setSearchField] = useState('nombre_especialidad');
 
     useEffect(() => {
         const cargarEspecialidades = async () => {
@@ -30,9 +31,16 @@ const ReportesEspecialidades = () => {
         setSearchTerm(event.target.value);
     };
 
-    const filteredEspecialidades = especialidades.filter((especialidad) => 
-        especialidad.nombre_especialidad.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleFieldChange = (event) => {
+        setSearchField(event.target.value);
+    };
+
+    const filteredEspecialidades = especialidades.filter((especialidad) => {
+        if (searchField === 'nombre_especialidad') {
+            return especialidad.nombre_especialidad.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return especialidad;
+    });
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -63,6 +71,9 @@ const ReportesEspecialidades = () => {
                     value={searchTerm}
                     onChange={handleSearch}
                 />
+                <select value={searchField} onChange={handleFieldChange}>
+                    <option value="nombre_especialidad">Nombre de la Especialidad</option>
+                </select>
                 <button onClick={generatePDF}>Generar PDF</button>
             </div>
             <div className="tabla-especialidades-container">

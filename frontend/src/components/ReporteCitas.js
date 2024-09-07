@@ -146,7 +146,7 @@ const ReporteCitas = () => {
                         <option value="vespertino">Vespertino</option>
                         <option value="nocturno">Nocturno</option>
                     </select>
-                    <button onClick={generatePDF}>Imprimir Reporte PDF</button>
+                    <button className="generarPDF-Reporte-Citas" onClick={generatePDF}>Imprimir Reporte PDF</button>
                 </div>
             </div>
             <div className="tabla-citas-container">

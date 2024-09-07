@@ -70,7 +70,7 @@
     max-width: 300px; /* Limitar el ancho máximo para inputs */
 }
 
-button {
+.generarPDF-Reporte-Citas {
     background-color: #0C231E;
     color: white;
     padding: 10px 15px;
@@ -79,7 +79,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.generarPDF-Reporte-Citas:hover {
     background-color: whitesmoke;
     color: black;
 }
@@ -110,7 +110,7 @@ button:hover {
     margin-top: 20px;
 }
 
-.pagination-reporte-citas button {
+.pagination-reporte-citas  {
     margin: 0 5px;
     padding: 10px;
     border: none;
@@ -120,7 +120,7 @@ button:hover {
     cursor: pointer;
 }
 
-.pagination-reporte-citas button.active {
+.pagination-reporte-citas.active {
     background-color: #0C231E;
 }
 
@@ -170,7 +170,7 @@ button:hover {
         font-size: 8px;
     }
 
-    button {
+    .generarPDF-Reporte-Citas {
         background-color: #0c231e;
         border: none;
         border-radius: 4px;

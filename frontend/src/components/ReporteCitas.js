@@ -117,7 +117,7 @@ const ReporteCitas = () => {
                         onChange={handleSearch}
                     />
                     <select value={searchField} onChange={handleFieldChange}>
-                        <option value="">Seleccionar</option>
+                        <option value="Seleccionar">Seleccionar</option>
                         <option value="nombre_completo">Paciente</option>
                         <option value="nombre_completo_medico">Médico</option>
                         <option value="estudio_solicitado">Estudio</option>

@@ -178,6 +178,7 @@ button:hover {
         cursor: pointer;
         padding: 10px 15px;
         font-size: 8px;
+        width: 80%;
     }
 
     .tabla-citas-container {

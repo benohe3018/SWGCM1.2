@@ -74,7 +74,7 @@ const ReporteDiagnosticoPresuntivo = () => {
                 <select value={searchField} onChange={handleFieldChange}>
                     <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
                 </select>
-                <button onClick={generatePDF}>Generar PDF</button>
+                <button onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
             <div className="tabla-diagnosticos-container">
                 <table className="tabla-diagnosticos">

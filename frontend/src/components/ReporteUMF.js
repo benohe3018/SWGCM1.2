@@ -78,7 +78,7 @@ const ReporteUMF = () => {
                     <option value="nombre_unidad_medica">Nombre de la Unidad</option>
                     <option value="direccion_unidad_medica">Dirección de la Unidad</option>
                 </select>
-                <button onClick={generatePDF}>Generar PDF</button>
+                <button onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
             <div className="tabla-unidades-container">
                 <table className="tabla-unidades">

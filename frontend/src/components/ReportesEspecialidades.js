@@ -74,7 +74,7 @@ const ReportesEspecialidades = () => {
                 <select value={searchField} onChange={handleFieldChange}>
                     <option value="nombre_especialidad">Nombre de la Especialidad</option>
                 </select>
-                <button onClick={generatePDF}>Generar PDF</button>
+                <button onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
             <div className="tabla-especialidades-container">
                 <table className="tabla-especialidades">

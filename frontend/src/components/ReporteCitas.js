@@ -109,37 +109,43 @@ const ReporteCitas = () => {
                 <h2 className="departamento-reportes-citas">Generar Informe de citas Registradas</h2>
             </header>
             <div className="busqueda-cita">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-                <select value={searchField} onChange={handleFieldChange}>
-                    <option value="nombre_completo">Paciente</option>
-                    <option value="nombre_completo_medico">Médico</option>
-                    <option value="estudio_solicitado">Estudio</option>
-                    <option value="hospital_envia">Hospital</option>
-                </select>
-                <input
-                    type="date"
-                    value={fechaInicio}
-                    onChange={(e) => setFechaInicio(e.target.value)}
-                    placeholder="Fecha Inicio"
-                />
-                <input
-                    type="date"
-                    value={fechaFin}
-                    onChange={(e) => setFechaFin(e.target.value)}
-                    placeholder="Fecha Fin"
-                />
-                <select value={turno} onChange={(e) => setTurno(e.target.value)}>
-                    <option value="">Todos los Turnos</option>
-                    <option value="matutino">Matutino</option>
-                    <option value="vespertino">Vespertino</option>
-                    <option value="nocturno">Nocturno</option>
-                </select>
-                <button onClick={generatePDF}>Generar PDF</button>
+                <div className="fila">
+                    <input
+                        type="text"
+                        placeholder="Buscar..."
+                        value={searchTerm}
+                        onChange={handleSearch}
+                    />
+                    <select value={searchField} onChange={handleFieldChange}>
+                        <option value="nombre_completo">Paciente</option>
+                        <option value="nombre_completo_medico">Médico</option>
+                        <option value="estudio_solicitado">Estudio</option>
+                        <option value="hospital_envia">Hospital</option>
+                    </select>
+                </div>
+                <div className="fila">
+                    <input
+                        type="date"
+                        value={fechaInicio}
+                        onChange={(e) => setFechaInicio(e.target.value)}
+                        placeholder="Fecha Inicio"
+                    />
+                    <input
+                        type="date"
+                        value={fechaFin}
+                        onChange={(e) => setFechaFin(e.target.value)}
+                        placeholder="Fecha Fin"
+                    />
+                </div>
+                <div className="fila">
+                    <select value={turno} onChange={(e) => setTurno(e.target.value)}>
+                        <option value="">Todos los Turnos</option>
+                        <option value="matutino">Matutino</option>
+                        <option value="vespertino">Vespertino</option>
+                        <option value="nocturno">Nocturno</option>
+                    </select>
+                    <button onClick={generatePDF}>Generar PDF</button>
+                </div>
             </div>
             <div className="tabla-citas-container">
                 <table className="tabla-citas">

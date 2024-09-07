@@ -25,6 +25,8 @@
     margin-right: 40px;
 }
 
+
+
 .welcome-reportes-citas {
     font-size: 24px;
 }
@@ -40,6 +42,22 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+
+.busqueda-cita {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.fila {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px; /* Ajusta según sea necesario */
 }
 
 .busqueda-cita input,
@@ -137,6 +155,10 @@ button:hover {
         width: 90%;
         margin-top: 0px;
 
+    }
+    .fila {
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .busqueda-cita input,

@@ -16,6 +16,7 @@ const ReporteCitas = () => {
             try {
                 setCargando(true);
                 const data = await getCitas();
+                console.log('Datos de citas:', data);
                 setCitas(data);
             } catch (error) {
                 console.error("Error al cargar citas:", error);

@@ -1,0 +1,133 @@
+.reporte-citas-page {
+    background-color: whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #0C231E;
+}
+
+.reporte-citas-header {
+    display: flex;
+    width: 100%;
+    background-color: whitesmoke;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.citas-header-logo {
+    margin-left: 10px;
+    height: 60px;
+    margin-right: 40px;
+}
+
+.busqueda-cita {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.busqueda-cita input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 60%;
+}
+
+.busqueda-cita select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #0C231E;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.tabla-citas-container {
+    width: 80%;
+    overflow-x: auto;
+    margin-top: 40px;
+}
+
+.tabla-citas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabla-citas th, .tabla-citas td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.tabla-citas th {
+    background-color: #f4f4f4;
+}
+
+.pagination-read-usuario {
+    margin-top: 20px;
+}
+
+.pagination-read-usuario button {
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    background-color: #12322B;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination-read-usuario button.active {
+    background-color: #0C231E;
+}
+
+@media (max-width: 480px) {
+    .reporte-citas-header {
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .citas-header-logo {
+        height: 50px;
+        margin-left: 150px;
+        margin-bottom: 10px;
+    }
+
+    .busqueda-cita {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .busqueda-cita input,
+    .busqueda-cita select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .tabla-citas-container {
+        width: 100%;
+    }
+}

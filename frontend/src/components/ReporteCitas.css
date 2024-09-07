@@ -154,6 +154,8 @@ button:hover {
     .busqueda-cita {
         width: 90%;
         margin-top: 0px;
+        display: flex;
+        flex-direction: row;
 
     }
     .fila {
@@ -163,9 +165,19 @@ button:hover {
 
     .busqueda-cita input,
     .busqueda-cita select {
-        width: 40%;
+        width: 80%;
         margin-bottom: 0px;
-        font-size: 10px;
+        font-size: 8px;
+    }
+
+    button {
+        background-color: #0c231e;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        padding: 10px 15px;
+        font-size: 8px;
     }
 
     .tabla-citas-container {

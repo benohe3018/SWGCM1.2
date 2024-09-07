@@ -32,6 +32,7 @@ import ReporteEstudios from './components/ReporteEstudios';
 import ReportesEspecialidades from './components/ReportesEspecialidades';
 import ReporteUMF from './components/ReporteUMF';
 import ReporteDiagnosticoPresuntivo from './components/ReporteDiagnosticoPresuntivo';
+import ReporteCitas from './components/ReporteCitas';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -98,6 +99,7 @@ function App() {
             <Route path="/reporte-especialidades" element={<PrivateRoute><Sidebar /><ReportesEspecialidades /></PrivateRoute>} />
             <Route path="/reporte-umf" element={<PrivateRoute><Sidebar /><ReporteUMF /></PrivateRoute>} />
             <Route path="/reporte-diagnosticos" element={<PrivateRoute><Sidebar /><ReporteDiagnosticoPresuntivo /></PrivateRoute>} />
+            <Route path="/reporte-citas" element={<PrivateRoute><Sidebar /><ReporteCitas /></PrivateRoute>} />
           </Routes>  
         </div>
       </Router>

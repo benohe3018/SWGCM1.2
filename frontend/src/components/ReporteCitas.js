@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './ReporteCitas.css'; 
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getCitas } from './citasService'; // Asegúrate de que esta función esté definida
+import { getCitasPorFecha } from './citasService'; // Asegúrate de que esta función esté definida
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -15,7 +15,7 @@ const ReporteCitas = () => {
         const cargarCitas = async () => {
             try {
                 setCargando(true);
-                const data = await getCitas();
+                const data = await getCitasPorFecha();
                 setCitas(data);
             } catch (error) {
                 console.error("Error al cargar citas:", error);

@@ -12,6 +12,7 @@ const ReporteCitas = () => {
     const [searchField, setSearchField] = useState('nombre_completo');
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
+    const [turno, setTurno] = useState('');
 
     useEffect(() => {
         const cargarCitas = async () => {
@@ -55,7 +56,19 @@ const ReporteCitas = () => {
 
         const matchesDateRange = (!inicio || fechaCita >= inicio) && (!fin || fechaCita <= fin);
 
-        return matchesSearchField && matchesDateRange;
+        const matchesTurno = () => {
+            const horaCita = fechaCita.getHours() + fechaCita.getMinutes() / 60;
+            if (turno === 'matutino') {
+                return horaCita >= 6.5 && horaCita < 14;
+            } else if (turno === 'vespertino') {
+                return horaCita >= 14.01 && horaCita < 20.5;
+            } else if (turno === 'nocturno') {
+                return horaCita >= 20.51 || horaCita < 6.5;
+            }
+            return true; // Si no se selecciona ningún turno, mostrar todos
+        };
+
+        return matchesSearchField && matchesDateRange && matchesTurno();
     });
 
     const generatePDF = () => {
@@ -110,6 +123,12 @@ const ReporteCitas = () => {
                     onChange={(e) => setFechaFin(e.target.value)}
                     placeholder="Fecha Fin"
                 />
+                <select value={turno} onChange={(e) => setTurno(e.target.value)}>
+                    <option value="">Todos los Turnos</option>
+                    <option value="matutino">Matutino</option>
+                    <option value="vespertino">Vespertino</option>
+                    <option value="nocturno">Nocturno</option>
+                </select>
                 <button onClick={generatePDF}>Generar PDF</button>
             </div>
             <div className="tabla-citas-container">

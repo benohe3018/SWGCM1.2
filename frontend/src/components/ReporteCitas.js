@@ -147,8 +147,8 @@ const ReporteCitas = () => {
                         <option value="estudio_solicitado">Estudio</option>
                         <option value="hospital_envia">Hospital</option>
                     </select>
-                    <button className="generarPDF-Reporte-Citas" onClick={generatePDF}>Imprimir Reporte PDF</button>
                 </div>
+                <button className="generarPDF-Reporte-Citas" onClick={generatePDF}>Imprimir Reporte PDF</button>
             </div>
             <div className="tabla-citas-container">
                 <table className="tabla-citas">

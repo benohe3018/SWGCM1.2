@@ -9,6 +9,7 @@ const ReporteHospitales = () => {
     const [hospitales, setHospitales] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchField, setSearchField] = useState('nombre_hospital');
 
     useEffect(() => {
         const cargarHospitales = async () => {
@@ -30,10 +31,18 @@ const ReporteHospitales = () => {
         setSearchTerm(event.target.value);
     };
 
-    const filteredHospitales = hospitales.filter((hospital) => 
-        hospital.nombre_hospital.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        hospital.ciudad_hospital.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleFieldChange = (event) => {
+        setSearchField(event.target.value);
+    };
+
+    const filteredHospitales = hospitales.filter((hospital) => {
+        if (searchField === 'nombre_hospital') {
+            return hospital.nombre_hospital.toLowerCase().includes(searchTerm.toLowerCase());
+        } else if (searchField === 'ciudad_hospital') {
+            return hospital.ciudad_hospital.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return hospital;
+    });
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -65,6 +74,10 @@ const ReporteHospitales = () => {
                     value={searchTerm}
                     onChange={handleSearch}
                 />
+                <select value={searchField} onChange={handleFieldChange}>
+                    <option value="nombre_hospital">Nombre del Hospital</option>
+                    <option value="ciudad_hospital">Ciudad del Hospital</option>
+                </select>
                 <button onClick={generatePDF}>Generar PDF</button>
             </div>
             <div className="tabla-hospitales-container">

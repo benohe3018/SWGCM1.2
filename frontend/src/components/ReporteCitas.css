@@ -17,6 +17,7 @@
     padding: 10px 20px;
     box-sizing: border-box;
     align-items: center;
+    flex-direction: column;
 }
 
 .citas-header-logo {
@@ -29,10 +30,12 @@
 
 .welcome-reportes-citas {
     font-size: 24px;
+    margin-bottom: 0px;
 }
 
 .departamento-reportes-citas {
     font-size: 18px;
+    margin-top: 0px;
 }
 
 .busqueda-cita {
@@ -114,7 +117,7 @@
     margin: 0 5px;
     padding: 10px;
     border: none;
-    background-color: #12322B;
+    background-color: whitesmoke;
     color: white;
     border-radius: 5px;
     cursor: pointer;

@@ -9,6 +9,7 @@ const ReporteUMF = () => {
     const [unidades, setUnidades] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchField, setSearchField] = useState('nombre_unidad_medica');
 
     useEffect(() => {
         const cargarUnidades = async () => {
@@ -30,10 +31,18 @@ const ReporteUMF = () => {
         setSearchTerm(event.target.value);
     };
 
-    const filteredUnidades = unidades.filter((unidad) => 
-        unidad.nombre_unidad_medica.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        unidad.direccion_unidad_medica.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleFieldChange = (event) => {
+        setSearchField(event.target.value);
+    };
+
+    const filteredUnidades = unidades.filter((unidad) => {
+        if (searchField === 'nombre_unidad_medica') {
+            return unidad.nombre_unidad_medica.toLowerCase().includes(searchTerm.toLowerCase());
+        } else if (searchField === 'direccion_unidad_medica') {
+            return unidad.direccion_unidad_medica.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return unidad;
+    });
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -65,6 +74,10 @@ const ReporteUMF = () => {
                     value={searchTerm}
                     onChange={handleSearch}
                 />
+                <select value={searchField} onChange={handleFieldChange}>
+                    <option value="nombre_unidad_medica">Nombre de la Unidad</option>
+                    <option value="direccion_unidad_medica">Dirección de la Unidad</option>
+                </select>
                 <button onClick={generatePDF}>Generar PDF</button>
             </div>
             <div className="tabla-unidades-container">

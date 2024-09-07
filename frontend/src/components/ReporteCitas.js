@@ -116,13 +116,7 @@ const ReporteCitas = () => {
                         value={searchTerm}
                         onChange={handleSearch}
                     />
-                    <select value={searchField} onChange={handleFieldChange}>
-                        <option value="Seleccionar">Seleccionar</option>
-                        <option value="nombre_completo">Paciente</option>
-                        <option value="nombre_completo_medico">Médico</option>
-                        <option value="estudio_solicitado">Estudio</option>
-                        <option value="hospital_envia">Hospital</option>
-                    </select>
+                    
                 </div>
                 <div className="fila">
                     <input
@@ -145,6 +139,13 @@ const ReporteCitas = () => {
                         <option value="matutino">Matutino</option>
                         <option value="vespertino">Vespertino</option>
                         <option value="nocturno">Nocturno</option>
+                    </select>
+                    <select value={searchField} onChange={handleFieldChange}>
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="nombre_completo">Paciente</option>
+                        <option value="nombre_completo_medico">Médico</option>
+                        <option value="estudio_solicitado">Estudio</option>
+                        <option value="hospital_envia">Hospital</option>
                     </select>
                     <button className="generarPDF-Reporte-Citas" onClick={generatePDF}>Imprimir Reporte PDF</button>
                 </div>

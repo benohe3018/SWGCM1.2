@@ -135,21 +135,30 @@ button:hover {
 
     .busqueda-cita {
         width: 90%;
+        margin-top: 0px;
+
     }
 
     .busqueda-cita input,
     .busqueda-cita select {
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
     }
 
     .tabla-citas-container {
         width: 100%;
+        margin-top: 0px;
     }
     .tabla-citas {
         border-collapse: collapse;
         margin-bottom: 20px;
         width: 90%;
         margin-left: 20px;
+    }
+    .tabla-citas td, .tabla-citas th {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        font-size: 7px;
     }
 }

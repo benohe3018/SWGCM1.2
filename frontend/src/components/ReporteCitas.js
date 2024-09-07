@@ -13,6 +13,8 @@ const ReporteCitas = () => {
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
     const [turno, setTurno] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const citasPerPage = 5;
 
     useEffect(() => {
         const cargarCitas = async () => {
@@ -70,6 +72,14 @@ const ReporteCitas = () => {
 
         return matchesSearchField && matchesDateRange && matchesTurno();
     });
+
+    // Calcular las citas a mostrar en la página actual
+    const indexOfLastCita = currentPage * citasPerPage;
+    const indexOfFirstCita = indexOfLastCita - citasPerPage;
+    const currentCitas = filteredCitas.slice(indexOfFirstCita, indexOfLastCita);
+
+    // Cambiar de página
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -143,7 +153,7 @@ const ReporteCitas = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredCitas.map((cita) => (
+                        {currentCitas.map((cita) => (
                             <tr key={cita.id}>
                                 <td>{cita.fecha_hora_estudio}</td>
                                 <td>{cita.nombre_completo}</td>
@@ -154,6 +164,13 @@ const ReporteCitas = () => {
                         ))}
                     </tbody>
                 </table>
+                <div className="pagination">
+                    {Array.from({ length: Math.ceil(filteredCitas.length / citasPerPage) }, (_, i) => (
+                        <button key={i + 1} onClick={() => paginate(i + 1)} className={currentPage === i + 1 ? 'active' : ''}>
+                            {i + 1}
+                        </button>
+                    ))}
+                </div>
             </div>
         </div>
     );

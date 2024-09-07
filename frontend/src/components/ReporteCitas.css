@@ -141,8 +141,9 @@ button:hover {
 
     .busqueda-cita input,
     .busqueda-cita select {
-        width: 100%;
+        width: 40%;
         margin-bottom: 0px;
+        font-size: 10px;
     }
 
     .tabla-citas-container {
@@ -159,6 +160,6 @@ button:hover {
         border: 1px solid #ddd;
         padding: 10px;
         text-align: center;
-        font-size: 7px;
+        font-size: 9px;
     }
 }

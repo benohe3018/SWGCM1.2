@@ -62,7 +62,8 @@ const ReporteDiagnosticoPresuntivo = () => {
         <div className="reporte-diagnostico-presuntivo-page">
             <header className="reporte-diagnostico-presuntivo-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="diagnostico-presuntivo-header-logo" />
-                <h1>Reporte de Diagnósticos Presuntivos</h1>
+                <h1 className="welcome-reportes-Diagnosticos">Reporte de Estudios</h1>
+                <h2 className="departamento-reportes-Diagnosticos">Generar Informe de Diagnosticos Registrados</h2>
             </header>
             <div className="busqueda-diagnostico">
                 <input

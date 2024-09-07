@@ -25,6 +25,15 @@
     margin-right: 40px;
 }
 
+.welcome-reportes-citas{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.departamento-reportes-citas{
+    font-size: 18px;
+}
+
 .busqueda-cita {
     margin: 20px 0;
     display: flex;

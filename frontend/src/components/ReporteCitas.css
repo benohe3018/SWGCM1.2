@@ -146,4 +146,10 @@ button:hover {
     .tabla-citas-container {
         width: 100%;
     }
+    .tabla-citas {
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        width: 90%;
+        margin-left: 20px;
+    }
 }

@@ -121,7 +121,7 @@
 }
 
 .pagination-reporte-citas.active {
-    background-color: #0C231E;
+    background-color: whitesmoke;
 }
 
 @media (max-width: 480px) {

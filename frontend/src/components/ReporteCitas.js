@@ -172,7 +172,7 @@ const ReporteCitas = () => {
                         ))}
                     </tbody>
                 </table>
-                <div className="pagination">
+                <div className="pagination-reporte-citas">
                     {Array.from({ length: Math.ceil(filteredCitas.length / citasPerPage) }, (_, i) => (
                         <button key={i + 1} onClick={() => paginate(i + 1)} className={currentPage === i + 1 ? 'active' : ''}>
                             {i + 1}

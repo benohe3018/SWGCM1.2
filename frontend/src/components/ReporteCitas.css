@@ -115,12 +115,11 @@ button:hover {
         width: 100%;
         text-align: center;
         flex-direction: column;
-        align-items: flex-start;
     }
 
     .citas-header-logo {
         height: 50px;
-        margin-left: 150px;
+        margin-left: 50px;
         margin-bottom: 10px;
     }
 
@@ -128,12 +127,14 @@ button:hover {
         display: flex;
         flex-direction: column;
         font-size: 1.0em;
+        margin-bottom: 0px;
     }
     
     .departamento-reportes-citas{
         display:flex;
         flex-direction: column;
         font-size: 0.8em;
+        margin-top: 0px;
     }
 
     .busqueda-cita {

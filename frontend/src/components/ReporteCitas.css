@@ -26,8 +26,6 @@
     margin-right: 40px;
 }
 
-
-
 .welcome-reportes-citas {
     font-size: 24px;
     margin-bottom: 0px;
@@ -61,6 +59,7 @@
     justify-content: center;
     width: 100%;
     max-width: 600px; /* Ajusta según sea necesario */
+    flex-direction: row;
 }
 
 .busqueda-cita input,

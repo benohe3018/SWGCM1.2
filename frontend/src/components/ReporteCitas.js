@@ -10,6 +10,8 @@ const ReporteCitas = () => {
     const [cargando, setCargando] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchField, setSearchField] = useState('nombre_completo');
+    const [fechaInicio, setFechaInicio] = useState('');
+    const [fechaFin, setFechaFin] = useState('');
 
     useEffect(() => {
         const cargarCitas = async () => {
@@ -37,16 +39,23 @@ const ReporteCitas = () => {
     };
 
     const filteredCitas = citas.filter((cita) => {
-        if (searchField === 'nombre_completo') {
-            return cita.nombre_completo.toLowerCase().includes(searchTerm.toLowerCase());
-        } else if (searchField === 'nombre_completo_medico') {
-            return cita.nombre_completo_medico.toLowerCase().includes(searchTerm.toLowerCase());
-        } else if (searchField === 'estudio_solicitado') {
-            return cita.estudio_solicitado.toLowerCase().includes(searchTerm.toLowerCase());
-        } else if (searchField === 'hospital_envia') {
-            return cita.hospital_envia.toLowerCase().includes(searchTerm.toLowerCase());
-        }
-        return cita;
+        const fechaCita = new Date(cita.fecha_hora_estudio);
+        const inicio = fechaInicio ? new Date(fechaInicio) : null;
+        const fin = fechaFin ? new Date(fechaFin) : null;
+
+        const matchesSearchField = searchField === 'nombre_completo'
+            ? cita.nombre_completo.toLowerCase().includes(searchTerm.toLowerCase())
+            : searchField === 'nombre_completo_medico'
+            ? cita.nombre_completo_medico.toLowerCase().includes(searchTerm.toLowerCase())
+            : searchField === 'estudio_solicitado'
+            ? cita.estudio_solicitado.toLowerCase().includes(searchTerm.toLowerCase())
+            : searchField === 'hospital_envia'
+            ? cita.hospital_envia.toLowerCase().includes(searchTerm.toLowerCase())
+            : true;
+
+        const matchesDateRange = (!inicio || fechaCita >= inicio) && (!fin || fechaCita <= fin);
+
+        return matchesSearchField && matchesDateRange;
     });
 
     const generatePDF = () => {
@@ -89,6 +98,18 @@ const ReporteCitas = () => {
                     <option value="estudio_solicitado">Estudio</option>
                     <option value="hospital_envia">Hospital</option>
                 </select>
+                <input
+                    type="date"
+                    value={fechaInicio}
+                    onChange={(e) => setFechaInicio(e.target.value)}
+                    placeholder="Fecha Inicio"
+                />
+                <input
+                    type="date"
+                    value={fechaFin}
+                    onChange={(e) => setFechaFin(e.target.value)}
+                    placeholder="Fecha Fin"
+                />
                 <button onClick={generatePDF}>Generar PDF</button>
             </div>
             <div className="tabla-citas-container">

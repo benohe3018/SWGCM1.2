@@ -25,11 +25,11 @@
     margin-right: 40px;
 }
 
-.welcome-reportes-citas{
+.welcome-reportes-citas {
     font-size: 24px;
 }
 
-.departamento-reportes-citas{
+.departamento-reportes-citas {
     font-size: 18px;
 }
 
@@ -39,21 +39,17 @@
     gap: 10px;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
-.busqueda-cita input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 60%;
-}
-
+.busqueda-cita input,
 .busqueda-cita select {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    width: 60%;
+    max-width: 300px; /* Limitar el ancho máximo para inputs */
 }
 
 button {
@@ -123,22 +119,22 @@ button:hover {
         margin-bottom: 10px;
     }
 
-    .welcome-reportes-citas{
+    .welcome-reportes-citas {
         display: flex;
         flex-direction: column;
         font-size: 1.0em;
         margin-bottom: 0px;
     }
     
-    .departamento-reportes-citas{
-        display:flex;
+    .departamento-reportes-citas {
+        display: flex;
         flex-direction: column;
         font-size: 0.8em;
         margin-top: 0px;
     }
 
     .busqueda-cita {
-        width: 50%;
+        width: 90%;
     }
 
     .busqueda-cita input,
@@ -148,6 +144,6 @@ button:hover {
     }
 
     .tabla-citas-container {
-        width: 90%;
+        width: 100%;
     }
 }

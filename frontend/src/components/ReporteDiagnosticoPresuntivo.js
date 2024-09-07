@@ -9,6 +9,7 @@ const ReporteDiagnosticoPresuntivo = () => {
     const [diagnosticos, setDiagnosticos] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchField, setSearchField] = useState('nombre_diagnostico');
 
     useEffect(() => {
         const cargarDiagnosticos = async () => {
@@ -30,9 +31,16 @@ const ReporteDiagnosticoPresuntivo = () => {
         setSearchTerm(event.target.value);
     };
 
-    const filteredDiagnosticos = diagnosticos.filter((diagnostico) => 
-        diagnostico.nombre_diagnostico.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleFieldChange = (event) => {
+        setSearchField(event.target.value);
+    };
+
+    const filteredDiagnosticos = diagnosticos.filter((diagnostico) => {
+        if (searchField === 'nombre_diagnostico') {
+            return diagnostico.nombre_diagnostico.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return diagnostico;
+    });
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -63,6 +71,9 @@ const ReporteDiagnosticoPresuntivo = () => {
                     value={searchTerm}
                     onChange={handleSearch}
                 />
+                <select value={searchField} onChange={handleFieldChange}>
+                    <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
+                </select>
                 <button onClick={generatePDF}>Generar PDF</button>
             </div>
             <div className="tabla-diagnosticos-container">

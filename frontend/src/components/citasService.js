@@ -124,6 +124,17 @@ export const getHospitales = async () => {
   }
 };
 
+// Función para obtener todas las citas
+export const getCitas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/citas`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching citas:', error);
+    throw error;
+  }
+};
+
 export const getCitasPorFecha = async (fecha) => {
   try {
     const response = await axios.get(`${API_URL}/api/citas`, {

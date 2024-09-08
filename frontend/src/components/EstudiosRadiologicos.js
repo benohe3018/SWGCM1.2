@@ -265,7 +265,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                                     newEstudios[index].descripcion_estudio = e.target.value;
                                                     setEstudios(newEstudios);
                                                     }}
-                                                    style={{ width: '350px', height: '100px', resize: 'none' }} // Ajusta el tamaño y evita el redimensionamiento
+                                                    style={{ width: '150px', height: '50px', resize: 'none' }} // Ajusta el tamaño y evita el redimensionamiento
                                                 />
                                             </td>
                                             <td>

@@ -85,15 +85,14 @@
   }
 
   .gestion-citas-editar-tabla {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     overflow-x: auto; /* Permite desplazamiento horizontal */
-    margin-right: 100px;
   }
   
   .gestion-citas-editar-tabla th, .gestion-citas-editar-tabla td {
     border: 1px solid #ddd;
-    padding: 3.5px; /* Reduce el espaciado en celdas */
+    padding: 1.5px; /* Reduce el espaciado en celdas */
     font-size: 10px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
     text-align: left; /* Alinea el texto a la izquierda */
   }
@@ -104,16 +103,16 @@
   }
 
   .gestion-citas-eliminar-tabla {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     overflow-x: auto; /* Permite desplazamiento horizontal */
-    margin-right: 100px;
+    margin-right: 160px;
   }
   
   .gestion-citas-eliminar-tabla th, .gestion-citas-eliminar-tabla td {
     border: 1px solid #ddd;
-    padding: 3.5px; /* Reduce el espaciado en celdas */
-    font-size: 10px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    padding: 5px; /* Reduce el espaciado en celdas */
+    font-size: 12px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
     text-align: left; /* Alinea el texto a la izquierda */
   }
   

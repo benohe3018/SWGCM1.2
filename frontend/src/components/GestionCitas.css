@@ -58,6 +58,7 @@
     justify-content: center;
     padding: 3.5px; /* Reduce el espaciado alrededor del contenido */
     width: 80%;
+    margin-left: 200px;
   }
 
   .input-gestion-citas{
@@ -125,6 +126,11 @@
     padding: 20px;
     border-radius: 5px;
     text-align: center;
+  }
+  .gestion-citas-pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
   
   /* Media Queries para pantallas pequeñas */

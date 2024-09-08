@@ -94,8 +94,7 @@
 
 .update-medico-table th, .update-medico-table td {
   border: 1px solid #ddd;
-  padding: 5px;
-  text-align: left;
+  text-align: center;
 }
 
 .update-medico-table th {

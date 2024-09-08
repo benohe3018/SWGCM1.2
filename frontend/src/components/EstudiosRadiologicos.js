@@ -257,16 +257,15 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                                 />
                                             </td>
                                             <td>
-                                                <input
-                                                    type="text"
+                                                <textarea
                                                     value={estudio.descripcion_estudio}
                                                     onChange={(e) => {
-                                                        const newEstudios = [...estudios];
-                                                        const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
-                                                        newEstudios[index].descripcion_estudio = e.target.value;
-                                                        setEstudios(newEstudios);
+                                                    const newEstudios = [...estudios];
+                                                    const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
+                                                    newEstudios[index].descripcion_estudio = e.target.value;
+                                                    setEstudios(newEstudios);
                                                     }}
-                                                    style={{ width: '250px' }}
+                                                    style={{ width: '350px', height: '100px', resize: 'none' }} // Ajusta el tamaño y evita el redimensionamiento
                                                 />
                                             </td>
                                             <td>

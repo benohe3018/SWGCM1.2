@@ -67,6 +67,7 @@ body {
   gap: 10px;
   justify-content: center;
   margin-bottom: 20px;
+  display: flex;
 }
 
 .update-search-container input, .update-search-container select {

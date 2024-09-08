@@ -8,6 +8,7 @@
     font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
     color: #0C231E;
+    margin-left: 200px;
 }
 
 .reporte-hospitales-header {
@@ -26,9 +27,8 @@
 }
 
 .busqueda-hospital {
-    margin: 20px 0;
+    margin: 10px;
     display: flex;
-    gap: 10px;
     justify-content: center;
 }
 
@@ -54,16 +54,18 @@
     background-color: #f4f4f4;
 }
 
-button {
+imprimir-reporte-hospitales-boton {
     background-color: #0C231E;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-button:hover {
+imprimir-reporte-hospitales-boton:hover {
     background-color: whitesmoke;
     color: black;
 }

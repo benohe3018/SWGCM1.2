@@ -55,6 +55,7 @@
   gap: 10px;
   justify-content: center;
   margin-bottom: 20px;
+  display: flex;
 }
 
 .delete-search-container input, .delete-search-container select {
@@ -62,6 +63,7 @@
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin: 0px;
 }
 
 .usuario-table-container {

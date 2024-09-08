@@ -29,7 +29,8 @@
 
 .delete-header-logo {
   margin-left: 10px; /* Agrega margen a la izquierda del logo */
-  height:60px
+  height:60px;
+  margin-right: 40px;
 }
 
 .delete-header-texts {
@@ -55,6 +56,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-left: 150px;
 }
 
 .delete-medico-table-container {

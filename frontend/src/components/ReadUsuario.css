@@ -77,8 +77,9 @@
 }
 
 .read-usuario-table-container {
-  width: 100%; /* Cambiado a 100% para mejor responsividad */
+  width: 80%; /* Cambiado a 100% para mejor responsividad */
   overflow-x: auto;
+  margin-right: 10px;
 }
 
 .read-usuario-table {

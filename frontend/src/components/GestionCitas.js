@@ -244,7 +244,7 @@ const GestionCitas = () => {
         {currentPacientes.map((paciente) => (
           <tr key={paciente.id}>
             <td>
-              <input
+              <input className="input-gestion-citas"
                 type="datetime-local"
                 value={paciente.fecha_hora_estudio}
                 onChange={(e) => {
@@ -256,7 +256,7 @@ const GestionCitas = () => {
               />
             </td>
             <td>
-              <input
+              <input className="input-gestion-citas"
                 type="text"
                 value={paciente.nombre_completo}
                 onChange={(e) => {
@@ -269,7 +269,7 @@ const GestionCitas = () => {
               />
             </td>
             <td>
-              <input
+              <input className="input-gestion-citas"
                 type="text"
                 value={paciente.nombre_completo_medico}
                 onChange={(e) => {
@@ -282,7 +282,7 @@ const GestionCitas = () => {
               />
             </td>
             <td>
-              <input
+              <input className="input-gestion-citas"
                 type="text"
                 value={paciente.estudio_solicitado}
                 onChange={(e) => {
@@ -295,7 +295,7 @@ const GestionCitas = () => {
               />
             </td>
             <td>
-              <input
+              <input className="input-gestion-citas"
                 type="text"
                 value={paciente.hospital_envia}
                 onChange={(e) => {

@@ -265,7 +265,7 @@ const GestionCitas = () => {
                   newPacientes[index].nombre_completo = e.target.value;
                   setPacientesPrueba(newPacientes);
                 }}
-                style={{ width: '150px' }} // Ajusta el tamaño del input
+                style={{ width: '140px' }} // Ajusta el tamaño del input
               />
             </td>
             <td>
@@ -291,7 +291,7 @@ const GestionCitas = () => {
                   newPacientes[index].estudio_solicitado = e.target.value;
                   setPacientesPrueba(newPacientes);
                 }}
-                style={{ width: '150px' }} // Ajusta el tamaño del input
+                style={{ width: '100px' }} // Ajusta el tamaño del input
               />
             </td>
             <td>
@@ -304,7 +304,7 @@ const GestionCitas = () => {
                   newPacientes[index].hospital_envia = e.target.value;
                   setPacientesPrueba(newPacientes);
                 }}
-                style={{ width: '150px' }} // Ajusta el tamaño del input
+                style={{ width: '50px' }} // Ajusta el tamaño del input
               />
             </td>
             <td>

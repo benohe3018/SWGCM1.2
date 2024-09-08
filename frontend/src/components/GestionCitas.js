@@ -190,7 +190,7 @@ const GestionCitas = () => {
 
         {vista === 'ver' && (
           <div className="gestion-citas-tabla-container">
-            <table className="gestion-citas-tabla">
+            <table className="gestion-citas-ver-tabla">
               <thead>
                 <tr>
                   
@@ -229,7 +229,7 @@ const GestionCitas = () => {
         )}
         {vista === 'editar' && (
   <div className="gestion-citas-tabla-container">
-    <table className="gestion-citas-tabla">
+    <table className="gestion-citas-editar-tabla">
       <thead>
         <tr>
           <th>Fecha y Hora</th>
@@ -336,7 +336,7 @@ const GestionCitas = () => {
 )}
         {vista === 'eliminar' && (
           <div className="gestion-citas-tabla-container">
-            <table className="gestion-citas-tabla">
+            <table className="gestion-citas-eliminar-tabla">
               <thead>
                 <tr>
                   <th>Fecha y Hora</th>

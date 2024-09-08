@@ -66,20 +66,58 @@
     align-items: center;
   }
   
-  .gestion-citas-tabla {
+  .gestion-citas-ver-tabla {
     width: 90%;
     border-collapse: collapse;
     overflow-x: auto; /* Permite desplazamiento horizontal */
   }
   
-  .gestion-citas-tabla th, .gestion-citas-tabla td {
+  .gestion-citas-ver-tabla th, .gestion-citas-ver-tabla td {
     border: 1px solid #ddd;
     padding: 8px; /* Reduce el espaciado en celdas */
     font-size: 12px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
     text-align: left; /* Alinea el texto a la izquierda */
   }
   
-  .gestion-citas-tabla th {
+  .gestion-citas-ver-tabla th {
+    background-color: whitesmoke;
+    color: black;
+  }
+
+  .gestion-citas-editar-tabla {
+    width: 90%;
+    border-collapse: collapse;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    margin-right: 100px;
+  }
+  
+  .gestion-citas-editar-tabla th, .gestion-citas-editar-tabla td {
+    border: 1px solid #ddd;
+    padding: 3.5px; /* Reduce el espaciado en celdas */
+    font-size: 10px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    text-align: left; /* Alinea el texto a la izquierda */
+  }
+  
+  .gestion-citas-editar-tabla th {
+    background-color: whitesmoke;
+    color: black;
+  }
+
+  .gestion-citas-eliminar-tabla {
+    width: 90%;
+    border-collapse: collapse;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    margin-right: 100px;
+  }
+  
+  .gestion-citas-eliminar-tabla th, .gestion-citas-eliminar-tabla td {
+    border: 1px solid #ddd;
+    padding: 3.5px; /* Reduce el espaciado en celdas */
+    font-size: 10px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    text-align: left; /* Alinea el texto a la izquierda */
+  }
+  
+  .gestion-citas-eliminar-tabla th {
     background-color: whitesmoke;
     color: black;
   }

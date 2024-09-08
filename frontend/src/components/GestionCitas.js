@@ -168,10 +168,10 @@ const GestionCitas = () => {
   return (
     <div className="gestion-citas-page">
       <header className="gestion-citas-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message">Sistema de Gestión de Citas Médicas</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        <img src={logoIMSS} alt="Logo IMSS" className="gestion-citas-medicas-header-logo" />
+        <div className="gestion-citas-medicas-header-texts">
+          <h1 className="gestion-citas-medicas-welcome-message">Sistema de Gestión de Citas Médicas</h1>
+          <h2 className="gestion-citas-medicas-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
@@ -189,8 +189,8 @@ const GestionCitas = () => {
         )}
 
         {vista === 'ver' && (
-          <div className="tabla-citas-container">
-            <table className="tabla-citas">
+          <div className="gestion-citas-tabla-container">
+            <table className="gestion-citas-tabla">
               <thead>
                 <tr>
                   
@@ -214,7 +214,7 @@ const GestionCitas = () => {
                 ))}
               </tbody>
             </table>
-            <div className="pagination-read-usuario">
+            <div className="gestion-citas-pagination">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button
                   key={page}
@@ -228,8 +228,8 @@ const GestionCitas = () => {
           </div>
         )}
         {vista === 'editar' && (
-  <div className="tabla-citas-container">
-    <table className="tabla-citas">
+  <div className="gestion-citas-tabla-container">
+    <table className="gestion-citas-tabla">
       <thead>
         <tr>
           <th>Fecha y Hora</th>
@@ -308,10 +308,10 @@ const GestionCitas = () => {
               />
             </td>
             <td>
-              <div className="botones-acciones">
+              <div className="gestion-citas-botones-acciones">
                 <button
                   onClick={() => handleEditarPaciente(paciente)}
-                  className="guardar-button"
+                  className="gestion-citas-boton-guardar"
                 >
                   Guardar
                 </button>
@@ -321,7 +321,7 @@ const GestionCitas = () => {
         ))}
       </tbody>
     </table>
-    <div className="pagination-read-usuario">
+    <div className="gestion-citas-pagination">
       {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
         <button
           key={page}
@@ -335,8 +335,8 @@ const GestionCitas = () => {
   </div>
 )}
         {vista === 'eliminar' && (
-          <div className="tabla-citas-container">
-            <table className="tabla-citas">
+          <div className="gestion-citas-tabla-container">
+            <table className="gestion-citas-tabla">
               <thead>
                 <tr>
                   <th>Fecha y Hora</th>
@@ -356,10 +356,10 @@ const GestionCitas = () => {
                     <td>{paciente.estudio_solicitado}</td>
                     <td>{paciente.hospital_envia}</td>
                     <td>
-                      <div className="botones-acciones">
+                      <div className="gestion-citas-botones-acciones">
                         <button
                           onClick={() => handleEliminarPaciente(paciente.id)}
-                          className="eliminar-button"
+                          className="gestion-citas-eliminar-button"
                         >
                           Eliminar
                         </button>
@@ -369,7 +369,7 @@ const GestionCitas = () => {
                 ))}
               </tbody>
             </table>
-            <div className="pagination-read-usuario">
+            <div className="gestion-citas-pagination">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button
                   key={page}

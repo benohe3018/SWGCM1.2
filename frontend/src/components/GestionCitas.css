@@ -19,17 +19,23 @@
     flex-direction: column; /* Apila elementos en pantallas pequeñas */
   }
   
-  .header-logo {
+  .gestion-citas-medicas-header-logo {
     height: 60px;
   }
   
-  .header-texts h1 {
+  .gestion-citas-medicas-header-texts {
     margin: 0;
     font-size: 24px;
     text-align: center; /* Centra el texto en pantallas pequeñas */
   }
+
+  .gestion-citas-medicas-welcome-message{
+    margin: 0;
+    font-size: 16px;
+    text-align: center; /* Centra el texto en pantallas pequeñas */
+  }
   
-  .header-texts h2 {
+  .gestion-citas-medicas-department-name {
     margin: 0;
     font-size: 16px;
   }
@@ -41,7 +47,7 @@
     display: flex;
   }
 
-  .tabla-citas-container {
+  .gestion-citas-tabla-container {
     overflow-x: auto; /* Permite desplazamiento horizontal */
     width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
   }
@@ -60,25 +66,25 @@
     align-items: center;
   }
   
-  .tabla-citas {
-    width: 100%;
+  .gestion-citas-tabla {
+    width: 90%;
     border-collapse: collapse;
     overflow-x: auto; /* Permite desplazamiento horizontal */
   }
   
-  .tabla-citas th, .tabla-citas td {
+  .gestion-citas-tabla th, .gestion-citas-tabla td {
     border: 1px solid #ddd;
     padding: 8px; /* Reduce el espaciado en celdas */
     font-size: 12px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
     text-align: left; /* Alinea el texto a la izquierda */
   }
   
-  .tabla-citas th {
+  .gestion-citas-tabla th {
     background-color: whitesmoke;
     color: black;
   }
   
-  .botones-acciones {
+  .gestion-citas-botones-acciones {
     display: flex;
     gap: 10px;
   }
@@ -91,7 +97,7 @@
     cursor: pointer;
   }
   
-  .editar-button:hover, .eliminar-button:hover {
+  .gestion-citas-editar-button:hover, .gestion-citas-eliminar-button:hover {
     background-color: #004481;
   }
   
@@ -152,7 +158,7 @@
     .tabla-citas th, .tabla-citas td {
       font-size: 14px; /* Ajusta el tamaño de fuente */
     }
-    .tabla-citas-container {
+    .gestion-citas-tabla-container {
         overflow-x: auto; /* Permite desplazamiento horizontal */
         width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
       }

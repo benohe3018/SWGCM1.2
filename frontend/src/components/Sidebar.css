@@ -17,16 +17,19 @@
 .sidebar h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 18px;
 }
 
 .sidebar ul {
   list-style: none;
+  display: contents;
 }
 
 .sidebar ul li {
-  padding: 10px;
+  padding: 7px;
   cursor: pointer;
   position: relative;
+  text-align: left;
 }
 
 .sidebar ul li a {

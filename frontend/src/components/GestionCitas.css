@@ -64,6 +64,8 @@
   .input-gestion-citas{
     font-size: 11px;
     align-items: center;
+    justify-content: center;
+    margin-top: 20px;
   }
   
   .gestion-citas-ver-tabla {
@@ -93,8 +95,8 @@
   .gestion-citas-editar-tabla th, .gestion-citas-editar-tabla td {
     border: 1px solid #ddd;
     padding: 1px; /* Reduce el espaciado en celdas */
-    font-size: 9px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
-    text-align: left; /* Alinea el texto a la izquierda */
+    font-size: 12px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    text-align: center; /* Alinea el texto a la izquierda */
   }
   
   .gestion-citas-editar-tabla th {

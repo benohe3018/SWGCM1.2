@@ -30,6 +30,7 @@
   cursor: pointer;
   position: relative;
   text-align: left;
+  font-size: 14px;
 }
 
 .sidebar ul li a {
@@ -41,9 +42,8 @@
   background-color: #4a8b7f; /* Cambia este color al que prefieras */
 }
 .active-user {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #fff;
+  font-size: 12px;
+  color: black;
 }
 
 .submenu {
@@ -64,7 +64,7 @@
 }
 
 .sidebar-button{
-  font-size: 16px;
+  font-size: 12px;
   padding: 1px;
 }
 

@@ -51,14 +51,14 @@
   justify-content: center;
 }
 
-.search-container {
+.read-medico-search-container {
     align-items: center;
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.search-container input {
+.read-medico-search-container input {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -66,7 +66,7 @@
   margin-right: 10px;
 }
 
-.search-container select {
+.read-medico-search-container select {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -149,7 +149,7 @@
     width: 70%;
   }
 
-  .read-medico-search-container {
+  .read-medico-medico-search-container {
     display: flex;
     width: 350px;
   }

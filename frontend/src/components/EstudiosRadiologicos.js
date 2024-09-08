@@ -266,6 +266,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                                         newEstudios[index].descripcion_estudio = e.target.value;
                                                         setEstudios(newEstudios);
                                                     }}
+                                                    style={{ width: '250px' }}
                                                 />
                                             </td>
                                             <td>

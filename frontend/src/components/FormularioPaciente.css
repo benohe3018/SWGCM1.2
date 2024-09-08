@@ -8,18 +8,18 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
+.form-group-cita-medica {
     margin-bottom: 15px;
 }
 
-.form-group label {
+.form-group-cita-medica label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.form-group input,
-.form-group select {
+.form-group-cita-medica input,
+.form-group-cita-medica select {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;

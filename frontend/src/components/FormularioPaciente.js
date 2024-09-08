@@ -189,7 +189,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 
   return (
     <form className="form-paciente" onSubmit={handleSubmit}>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="fecha_hora_estudio">Fecha del Estudio:</label>
         <input
           type="date"
@@ -200,7 +200,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           required
         />
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="hora_estudio">Hora del Estudio:</label>
         <select
           id="hora_estudio"
@@ -217,23 +217,23 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           ))}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="nss">NSS del Paciente:</label>
         <input type="text" id="nss" name="nss" value={formData.nss} onChange={handleChange} required />
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="nombre_paciente">Nombre del Paciente:</label>
         <input type="text" id="nombre_paciente" name="nombre_paciente" value={formData.nombre_paciente} onChange={handleChange} required />
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="apellido_paterno_paciente">Apellido Paterno del Paciente:</label>
         <input type="text" id="apellido_paterno_paciente" name="apellido_paterno_paciente" value={formData.apellido_paterno_paciente} onChange={handleChange} required />
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="apellido_materno_paciente">Apellido Materno del Paciente:</label>
         <input type="text" id="apellido_materno_paciente" name="apellido_materno_paciente" value={formData.apellido_materno_paciente} onChange={handleChange} required />
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label>
         <select id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required>
           <option value="">Seleccione una Especialidad</option>
@@ -244,7 +244,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           ))}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
         <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleMedicoChange} required>
           <option value="">Seleccione un Médico</option>
@@ -255,7 +255,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           ))}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="id_estudio_radiologico">Estudio Solicitado:</label>
         <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleEstudioChange} required>
           <option value="">Seleccione un Estudio</option>
@@ -266,7 +266,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           ))}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="unidad_medica_procedencia">Unidad Médica de Procedencia:</label>
         <select id="unidad_medica_procedencia" name="unidad_medica_procedencia" value={formData.unidad_medica_procedencia} onChange={handleChange} required>
           <option value="">Seleccione una Unidad Médica</option>
@@ -277,7 +277,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           ))}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="diagnostico_presuntivo">Diagnóstico Presuntivo:</label>
         <select id="diagnostico_presuntivo" name="diagnostico_presuntivo" value={formData.diagnostico_presuntivo} onChange={handleChange} required>
           <option value="">Seleccione un Diagnóstico</option>
@@ -288,7 +288,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
           ))}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group-cita-medica">
         <label htmlFor="hospital_envia">Hospital que Envía:</label>
         <select id="hospital_envia" name="hospital_envia" value={formData.hospital_envia} onChange={handleChange} required>
           <option value="">Seleccione un Hospital</option>

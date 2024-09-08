@@ -62,7 +62,7 @@ const ReadMedico = () => {
       </header>
       
       <div className="read-medico-content">
-        <div className="search-container">
+        <div className="read-medico-search-container">
           <input
             type="text"
             placeholder="Buscar..."

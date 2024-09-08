@@ -202,41 +202,41 @@ const CreateUsuario = () => {
         <div className="create-usuario-content">
           <form onSubmit={handleSubmit}>
             <h3 className="form-description-create-usuario">Capture los datos del Usuario</h3>
-            <div className="form-group">
+            <div className="form-group-create-usuario">
               <label htmlFor="nombreUsuario">Nombre de Usuario:</label>
               <input type="text" id="nombreUsuario" value={nombreUsuario} onChange={e => setNombreUsuario(e.target.value)} placeholder="Nombre de Usuario" />
             </div>
-            <div className="form-group password-container">
+            <div className="password-container-form-group">
               <label htmlFor="contraseña">Contraseña:</label>
               <input type={showPassword ? "text" : "password"} id="contraseña" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Mayusculas, minusculas y numeros" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            <div className="form-group password-container">
+            <div className="password-container-form-group">
               <label htmlFor="confirmContraseña">Confirmar Contraseña:</label>
               <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Confirmar Contraseña" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            <div className="form-group">
+            <div className="form-group-create-usuario">
               <label htmlFor="nombreReal">Nombre Real:</label>
               <input type="text" id="nombreReal" value={nombreReal} onChange={e => setNombreReal(e.target.value)} placeholder="Nombre Real" />
             </div>
-            <div className="form-group">
+            <div className="form-group-create-usuario">
               <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
               <input type="text" id="apellidoPaterno" value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} placeholder="Apellido Paterno" />
             </div>
-            <div className="form-group">
+            <div className="form-group-create-usuario">
               <label htmlFor="apellidoMaterno">Apellido Materno:</label>
               <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" />
             </div>
-            <div className="form-group">
+            <div className="form-group-create-usuario">
               <label htmlFor="matricula">Matrícula del Usuario:</label>
               <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Usuario" />
             </div>
-            <div className="form-group">
+            <div className="form-group-create-usuario">
               <label htmlFor="rol">Rol:</label>
               <select id="rol" value={rol} onChange={e => setRol(e.target.value)}>
                 <option value="">Seleccione un rol</option>

@@ -16,11 +16,11 @@
     background-color: whitesmoke;
     padding: 10px; /* Reduce el espaciado */
     width: 100%; /* Asegura que el encabezado ocupe el 100% del ancho */
-    flex-direction: column; /* Apila elementos en pantallas pequeñas */
   }
   
   .gestion-citas-medicas-header-logo {
     height: 60px;
+    margin-right: 40px;
   }
   
   .gestion-citas-medicas-header-texts {

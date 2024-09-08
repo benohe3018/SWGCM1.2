@@ -92,8 +92,8 @@
   
   .gestion-citas-editar-tabla th, .gestion-citas-editar-tabla td {
     border: 1px solid #ddd;
-    padding: 1.5px; /* Reduce el espaciado en celdas */
-    font-size: 10px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    padding: 1px; /* Reduce el espaciado en celdas */
+    font-size: 9px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
     text-align: left; /* Alinea el texto a la izquierda */
   }
   
@@ -106,7 +106,6 @@
     width: 100%;
     border-collapse: collapse;
     overflow-x: auto; /* Permite desplazamiento horizontal */
-    margin-right: 160px;
   }
   
   .gestion-citas-eliminar-tabla th, .gestion-citas-eliminar-tabla td {

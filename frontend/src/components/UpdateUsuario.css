@@ -46,6 +46,7 @@ body {
   font-size: 18px;
   margin: 0;
   color: #0C231E;
+  margin-left:150px;
 }
 
 .update-usuario-content {
@@ -69,10 +70,13 @@ body {
 }
 
 .update-search-container input, .update-search-container select {
-  padding: 10px;
-  font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 16px;
+  padding: 5px;
+  line-height: normal;
+  margin: 0px;
+  vertical-align: middle;
 }
 
 .table-container-update-usuario {
@@ -81,9 +85,10 @@ body {
 }
 
 .usuario-table-update {
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  margin-left:120px;
 }
 
 .usuario-table-update th, .usuario-table-update td {

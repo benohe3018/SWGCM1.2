@@ -232,7 +232,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
         )}
         {vista === 'editar' && (
           <>
-            <div className="busqueda-especialidad">
+            <div className="busqueda-especialidad-medica">
               <input
                 type="text"
                 placeholder="Buscar..."

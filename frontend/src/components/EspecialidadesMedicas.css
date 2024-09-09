@@ -41,7 +41,7 @@
     color: #0C231E;
   }
 
-  .busqueda-especialidad{
+  .busqueda-especialidad-medica{
     display: flex;
   align-items: center;
   justify-content: center;
@@ -49,7 +49,7 @@
   flex-direction: row;
   }
 
-  .busqueda-especialidad input[type="text"] {
+  .busqueda-especialidad-medica input[type="text"] {
     padding: 10px;
     width: 50%;
     border: 1px solid #ccc;
@@ -57,7 +57,7 @@
     margin: 0px;
   }
   
-  .busqueda-especialidad select {
+  .busqueda-especialidad-medica select {
     padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;

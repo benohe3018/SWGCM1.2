@@ -188,7 +188,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
         )}
         {vista === 'ver' && (
           <>
-            <div className="busqueda-especialidad">
+            <div className="busqueda-especialidades-medicas">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -232,7 +232,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
         )}
         {vista === 'editar' && (
           <>
-            <div className="busqueda-especialidad-medica">
+            <div className="busqueda-especialidades-medicas">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -299,7 +299,7 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
         )}
         {vista === 'eliminar' && (
           <>
-            <div className="busqueda-especialidad">
+            <div className="busqueda-especialidades-medicas">
               <input
                 type="text"
                 placeholder="Buscar..."

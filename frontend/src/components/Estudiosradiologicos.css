@@ -84,6 +84,7 @@
   border-radius: 5px;
   width: 60%;
   margin:0px;
+  margin-right: 10px;
 }
 
 .busqueda-estudio select {

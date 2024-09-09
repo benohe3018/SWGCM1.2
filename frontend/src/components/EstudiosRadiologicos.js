@@ -156,8 +156,8 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
             <header className="estudios-radiologicos-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="estudios-radiologicos-header-logo" />
                 <div className="header-texts">
-                    <h1 className="welcome-message">Sistema de Gestión de Estudios Radiológicos</h1>
-                    <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+                    <h1 className="welcome-message-estudios-radiologicos">Sistema de Gestión de Estudios Radiológicos</h1>
+                    <h2 className="department-name-estudios-radiologicos">Departamento de Resonancia Magnética - HGR #46</h2>
                 </div>
             </header>
             {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}

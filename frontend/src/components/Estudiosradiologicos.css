@@ -10,11 +10,6 @@
   color: black;
 }
 
-.estudios-radiologicos-header-logo{
-  height: 60px;
-  margin-right: 40px ;
-}
-
 .estudios-radiologicos-header {
   display: flex;
   width: 100%;
@@ -29,13 +24,18 @@
   flex-grow: 1;
 }
 
-.welcome-message {
+.estudios-radiologicos-header-logo{
+  height: 60px;
+  margin-right: 40px ;
+}
+
+.welcome-message-estudios-radiologicos {
   font-size: 24px;
   margin: 0;
   color: #0C231E;
 }
 
-.department-name {
+.department-name-estudios-radiologicos {
   font-size: 18px;
   margin: 0;
   color: #0C231E;

@@ -266,7 +266,8 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
                             newEspecialidades[index].nombre_especialidad = e.target.value;
                             setEspecialidades(newEspecialidades);
                           }}
-                        />
+                          style={{ width: '100px' }} // Ajusta el tamaño del input
+                          />
                       </td>
                       <td>
                         <div className="botones-acciones">

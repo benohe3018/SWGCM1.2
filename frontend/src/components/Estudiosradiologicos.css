@@ -74,7 +74,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .busqueda-estudio input[type="text"] {
@@ -83,6 +83,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   width: 60%;
+  margin:0px;
 }
 
 .busqueda-estudio select {
@@ -90,6 +91,7 @@
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin:0px;
 }
 
 .pagination-read-usuario {

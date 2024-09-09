@@ -188,7 +188,6 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                             <table className="tabla-estudios">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Nombre del Estudio</th>
                                         <th>Descripción</th>
                                     </tr>
@@ -196,7 +195,6 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                 <tbody>
                                     {currentEstudios.map((estudio) => (
                                         <tr key={estudio.id_estudio}>
-                                            <td>{estudio.id_estudio}</td>
                                             <td>{estudio.nombre_estudio}</td>
                                             <td>{estudio.descripcion_estudio}</td>
                                         </tr>

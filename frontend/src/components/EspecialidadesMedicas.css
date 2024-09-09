@@ -14,14 +14,12 @@
   
   .especialidades-medicas-header {
     display: flex;
-    width: 100%;
     background-color: whitesmoke;
     padding: 10px 20px;
     box-sizing: border-box;
   }
   
   .especialidades-header-logo {
-    margin-left: 10px;
     height: 60px;
     margin-right: 40px
   }
@@ -41,6 +39,31 @@
     font-size: 18px;
     margin: 0;
     color: #0C231E;
+  }
+
+  .busqueda-especialidad{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-direction: row;
+  }
+
+  .busqueda-especialidad input[type="text"] {
+    padding: 10px;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0px;
+  }
+  
+  .busqueda-especialidad select {
+    padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin:0px;
+  margin-right: 10px;
   }
   
   .especialidades-medicas-content {

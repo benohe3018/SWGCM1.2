@@ -91,7 +91,7 @@ const ReporteUsuarios = () => {
       </header>
       
       <div className="reporte-usuario-content">
-        <div className="search-container">
+        <div className="reporte-usuario-busqueda">
           <input
             type="text"
             placeholder="Buscar..."

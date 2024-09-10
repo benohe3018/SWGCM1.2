@@ -54,9 +54,10 @@
   
   .busqueda-reporte-medico {
     align-items: center;
-    gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
   }
   
   .busqueda-reporte-medico input {
@@ -64,7 +65,7 @@
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-right: 10px;
+    margin:0px;
   }
   
   .busqueda-reporte-medico select {
@@ -72,6 +73,8 @@
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    margin-left: 10px;
+    margin: 0px;
   }
   
   .table-container {
@@ -156,16 +159,16 @@
   
     .busqueda-reporte-medico {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: 60px;
     }
   
     .busqueda-reporte-medico input,
     .busqueda-reporte-medico select {
       width: 100%; /* Asegura que ocupen todo el ancho disponible */
       margin-bottom: 15px;
-      margin:0px;
     }
   
     .medico-table th, .medico-table td {

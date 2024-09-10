@@ -30,13 +30,13 @@
   flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
 }
 
-.welcome-message {
+.welcome-message-ReadMedico {
   font-size: 24px;
   margin: 0;
   color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
 }
 
-.department-name {
+.department-name-ReadMedico {
   font-size: 18px;
   margin: 0;
   color: #0C231E;

@@ -137,13 +137,13 @@ const CreateMedico = () => {
               <input type="text" id="apellidoMaterno" value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} placeholder="Apellido Materno" className="create-medico__form-input" />
             </div>
             <div className="create-medico__form-group">
-              <label htmlFor="matricula" className="create-medico__form-label">Matrícula del Médico:</label>
+              <label htmlFor="matricula" className="create-medico__form-label">Matrícula:</label>
               <input type="text" id="matricula" value={matricula} onChange={e => setMatricula(e.target.value)} placeholder="Matrícula del Médico" className="create-medico__form-input" />
             </div>
             <div className="create-medico__form-group">
               <label htmlFor="especialidad" className="create-medico__form-label">Especialidad:</label>
               <select id="especialidad" value={especialidad} onChange={e => setEspecialidad(e.target.value)} className="create-medico__form-select">
-                <option value="">Seleccione una especialidad</option>
+                <option value="">Seleccione</option>
                 {especialidades.map(especialidad => (
                   <option key={especialidad} value={especialidad}>{especialidad}</option>
                 ))}

@@ -41,7 +41,7 @@
     margin: 0px;
 }
 
-.busqueda-unidad {
+.reporte-busqueda-unidad {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
@@ -49,7 +49,7 @@
     flex-direction: row;
 }
 
-.busqueda-unidad input {
+.reporte-busqueda-unidad input {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -58,7 +58,7 @@
     margin-right: 10px;
 }
 
-.busqueda-unidad select {
+.reporte-busqueda-unidad select {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;

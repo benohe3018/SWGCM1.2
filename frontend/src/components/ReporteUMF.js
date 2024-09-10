@@ -70,7 +70,7 @@ const ReporteUMF = () => {
                 <h2 className="departamento-reporte-umf">Generar Informe de Unidades de Medicina Familiar Registrados</h2>
                 </div>
             </header>
-            <div className="busqueda-unidad">
+            <div className="reporte-busqueda-unidad">
                 <input
                     type="text"
                     placeholder="Buscar..."

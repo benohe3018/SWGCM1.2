@@ -93,13 +93,13 @@ const ReporteMedicos = () => {
           </select>
         </div>
         <button onClick={generatePDF} className="pdf-button">Imprimir Reporte en PDF</button>
-        <div className="table-container-reporte">
+        <div className="table-container">
           {isLoading ? (
             <p>Cargando...</p>
           ) : (
             <>
-              <div className="reporte-medico-table-container">
-                <table className="medico-table-reporte">
+              <div className="medico-table-container">
+                <table className="medico-table">
                   <thead>
                     <tr>
                       <th>Nombre</th>

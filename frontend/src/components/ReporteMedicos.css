@@ -13,7 +13,6 @@
   .reporte-medico-header {
     display: flex;
     flex-direction: inline-flex;
-    width: 100%;
     background-color: whitesmoke; /* Color del encabezado */
     padding: 10px 20px;
     box-sizing: border-box;
@@ -22,7 +21,7 @@
   }
   
   .reporte-medico-header-logo {
-    margin-left: 10px; /* Margen a la izquierda del logo */
+    margin-right: 10px; /* Margen a la izquierda del logo */
     height: 60px;
   }
   

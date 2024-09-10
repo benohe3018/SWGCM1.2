@@ -61,11 +61,13 @@ const ReporteDiagnosticoPresuntivo = () => {
     return (
         <div className="reporte-diagnostico-presuntivo-page">
             <header className="reporte-diagnostico-presuntivo-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="diagnostico-presuntivo-header-logo" />
-                <h1 className="welcome-reportes-Diagnosticos">Reporte de Estudios</h1>
-                <h2 className="departamento-reportes-Diagnosticos">Generar Informe de Diagnosticos Registrados</h2>
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-diagnostico-presuntivo-header-logo" />
+                <div className="diagnostico-presuntivo-header-text">
+                    <h1 className="welcome-reportes-Diagnosticos">Reporte de Estudios</h1>
+                    <h2 className="departamento-reportes-Diagnosticos">Generar Informe de Diagnosticos Registrados</h2>
+                </div>
             </header>
-            <div className="busqueda-diagnostico">
+            <div className="reporte-busqueda-diagnostico">
                 <input
                     type="text"
                     placeholder="Buscar..."
@@ -75,10 +77,10 @@ const ReporteDiagnosticoPresuntivo = () => {
                 <select value={searchField} onChange={handleFieldChange}>
                     <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
                 </select>
-                <button onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
-            <div className="tabla-diagnosticos-container">
-                <table className="tabla-diagnosticos">
+            <button className="reporte-diagnostico-presuntivo-boton" onClick={generatePDF}>Imprimir Reporte en PDF</button>
+            <div className="tabla-reporte-diagnosticos-container">
+                <table className="tabla-reporte-diagnosticos">
                     <thead>
                         <tr>
                             <th>Nombre del Diagnóstico</th>

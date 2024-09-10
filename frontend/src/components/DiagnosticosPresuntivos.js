@@ -196,7 +196,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
               </select>
             </div>
-            <div className="tabla-diagnosticos-container">
+            <div className="tabla-diagnosticos-presuntivos-container">
               <table className="tabla-diagnosticos">
                 <thead>
                   <tr>
@@ -240,7 +240,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
               </select>
             </div>
-            <div className="tabla-diagnosticos-container">
+            <div className="tabla-diagnosticos-presuntivos-container">
               <table className="tabla-diagnosticos">
                 <thead>
                   <tr>
@@ -306,7 +306,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
               </select>
             </div>
-            <div className="tabla-diagnosticos-container">
+            <div className="tabla-diagnosticos-presuntivos-container">
               <table className="tabla-diagnosticos">
                 <thead>
                   <tr>

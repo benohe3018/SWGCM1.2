@@ -63,7 +63,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  flex-direction: column;
+  flex-direction: row;
+  width: 100%;
 }
 
 .busqueda-hospital input[type="text"] {
@@ -71,7 +72,7 @@
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 60%;
+  margin:0px;
 }
 
 .busqueda-hospital select {
@@ -79,6 +80,7 @@
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin:0px;
 }
 
 /* Contenedor de la tabla */

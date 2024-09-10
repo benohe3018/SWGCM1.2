@@ -72,6 +72,7 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             required
+            style={{ width: '200px' }}
           />
         </div>
         <div className="form-group">

@@ -36,7 +36,7 @@
     color: #0C231E; /* Color y tamaño */
 }
 
-.departamento-reportes-Diagnosticos{
+.departamento-reporte-hospitales{
     font-size: 18px;
     margin: 0;
     color: #0C231E; /* Color y tamaño */
@@ -48,6 +48,23 @@
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
+}
+
+.busqueda-reporte-hospital input{
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin:0;
+    margin-right: 10px;
+}
+
+.busqueda-reporte-hospital select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin:0px;
 }
 
 .imprimir-reporte-hospitales-boton {

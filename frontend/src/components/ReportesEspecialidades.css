@@ -70,7 +70,7 @@
 .tabla-reporte-especialidades-container {
     width: 80%;
     overflow-x: auto;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .reporte-especialidades-boton{
@@ -80,7 +80,6 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 10px;
 }
 
 .tabla-reporte-especialidades-container {
@@ -92,11 +91,10 @@
     border-collapse: collapse;
 }
 
-
 .tabla-reporte-especialidades th, .tabla-reporte-especialidades td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 .tabla-reporte-especialidades th {

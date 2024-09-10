@@ -64,10 +64,13 @@ const ReporteHospitales = () => {
     return (
         <div className="reporte-hospitales-page">
             <header className="reporte-hospitales-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="hg-header-logo" />
-                <h1>Reporte de Hospitales</h1>
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-hg-header-logo" />
+                <div className="reporte-hospitales-header-text">
+                    <h1 className="welcome-reporte-hospitales">Reporte de Hospitales</h1>
+                    <h2 className="departamento-reporte-hospitales">Generar Informe de hospitales Registrados</h2>
+                </div>
             </header>
-            <div className="busqueda-hospital">
+            <div className="busqueda-reporte-hospital">
                 <input
                     type="text"
                     placeholder="Buscar..."
@@ -80,8 +83,8 @@ const ReporteHospitales = () => {
                 </select>
                 <button className="imprimir-reporte-hospitales-boton" onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
-            <div className="tabla-hospitales-container">
-                <table className="tabla-hospitales">
+            <div className="tabla-reporte-hospitales-container">
+                <table className="tabla-reporte-hospitales">
                     <thead>
                         <tr>
                             <th>Nombre del Hospital</th>

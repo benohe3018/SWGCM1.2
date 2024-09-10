@@ -29,14 +29,15 @@
   }
 
   .gestion-citas-medicas-welcome-message{
-    margin: 0;
-    font-size: 16px;
-    text-align: center; /* Centra el texto en pantallas pequeñas */
+    font-size: 24px;
+  margin: 0;
+  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
   }
   
   .gestion-citas-medicas-department-name {
-    margin: 0;
-    font-size: 16px;
+    font-size: 18px;
+  margin: 0;
+  color: #0C231E;
   }
   
   .mr-machine {

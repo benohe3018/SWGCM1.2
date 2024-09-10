@@ -79,7 +79,7 @@ const ReporteMedicos = () => {
       </header>
       
       <div className="reporte-medico-content">
-        <div className="search-container">
+        <div className="busqueda-reporte-medico">
           <input
             type="text"
             placeholder="Buscar..."

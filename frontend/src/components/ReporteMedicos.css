@@ -52,14 +52,14 @@
     justify-content: center;
   }
   
-  .search-container {
+  .busqueda-reporte-medico {
     align-items: center;
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
   }
   
-  .search-container input {
+  .busqueda-reporte-medico input {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -67,7 +67,7 @@
     margin-right: 10px;
   }
   
-  .search-container select {
+  .busqueda-reporte-medico select {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -154,16 +154,18 @@
       width: 70%;
     }
   
-    .search-container {
+    .busqueda-reporte-medico {
       display: flex;
-      width: 350px;
-      margin-top: 70px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
     }
   
-    .search-container input,
-    .search-container select {
+    .busqueda-reporte-medico input,
+    .busqueda-reporte-medico select {
       width: 100%; /* Asegura que ocupen todo el ancho disponible */
       margin-bottom: 15px;
+      margin:0px;
     }
   
     .medico-table th, .medico-table td {

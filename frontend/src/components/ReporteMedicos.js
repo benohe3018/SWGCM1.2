@@ -68,13 +68,13 @@ const ReporteMedicos = () => {
   };
 
   return (
-    <div className="read-medico-page">
+    <div className="reporte-medico-page">
       <Sidebar />
-      <header className="read-medico-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="read-medico__header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message-ReadMedico">Reporte de Médicos</h1>
-          <h2 className="department-name-ReadMedico">Generar informe de médicos registrados</h2>
+      <header className="reporte-medico-header">
+        <img src={logoIMSS} alt="Logo IMSS" className="reporte-medico-header-logo" />
+        <div className="reporte-medico-header-texts">
+          <h1 className="welcome-message-reporte-medico">Reporte de Médicos</h1>
+          <h2 className="department-name-reporte-medico">Generar informe de médicos registrados</h2>
         </div>
       </header>
       
@@ -93,13 +93,13 @@ const ReporteMedicos = () => {
           </select>
         </div>
         <button onClick={generatePDF} className="pdf-button">Imprimir Reporte en PDF</button>
-        <div className="table-container">
+        <div className="table-container-reporte">
           {isLoading ? (
             <p>Cargando...</p>
           ) : (
             <>
-              <div className="medico-table-container">
-                <table className="medico-table">
+              <div className="reporte-medico-table-container">
+                <table className="medico-table-reporte">
                   <thead>
                     <tr>
                       <th>Nombre</th>

@@ -21,23 +21,23 @@
     z-index: 100; 
   }
   
-  .reporte-medico__header-logo {
+  .reporte-medico-header-logo {
     margin-left: 10px; /* Margen a la izquierda del logo */
     height: 60px;
   }
   
-  .header-texts {
+  .reporte-medico-header-texts {
     text-align: center;
     flex-grow: 1; /* Ocupa el espacio restante */
   }
   
-  .welcome-message {
+  .welcome-message-reporte-medico {
     font-size: 24px;
     margin: 0;
     color: #0C231E; /* Color y tamaño */
   }
   
-  .department-name {
+  .department-name-reporte-medico {
     font-size: 18px;
     margin: 0;
     color: #0C231E;
@@ -77,23 +77,23 @@
     margin: 0px;
   }
   
-  .table-container {
+  .table-container-reporte {
     width: 70%;
     overflow-x: auto;
   }
   
-  .medico-table {
+  .medico-table-reporte {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .medico-table th, .medico-table td {
+  .medico-table-reporte th, .mmedico-table-reporte td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   }
   
-  .medico-table th {
+  .medico-table-reporte th {
     background-color: #f2f2f2;
     color: #333;
   }

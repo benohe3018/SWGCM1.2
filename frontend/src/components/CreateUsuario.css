@@ -16,7 +16,6 @@ body {
 }
 
 .create-usuario-header {
-  width: 100%;
   background-color: whitesmoke;
   padding: 20px;
   box-sizing: border-box;
@@ -28,6 +27,18 @@ body {
 .header-texts {
   margin-left: 20px;
   text-align: left;
+}
+
+.welcome-message-create-usuario{
+  font-size: 24px;
+  margin: 0;
+  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
+}
+
+.department-name-create-usuario{
+  font-size: 18px;
+  margin: 0;
+  color: #0C231E;
 }
 
 .header-logo {

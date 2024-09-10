@@ -193,8 +193,8 @@ const CreateUsuario = () => {
       <header className="create-usuario-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
         <div className="header-texts">
-          <h1 className="welcome-message">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
-          <h2 className="department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+          <h1 className="welcome-message-create-usuario">Bienvenido al Sistema de Gestión de Citas Médicas</h1>
+          <h2 className="department-name-create-usuario">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
       <div className="main-layout">
@@ -215,7 +215,7 @@ const CreateUsuario = () => {
             </div>
             <div className="password-container-form-group">
               <label htmlFor="confirmContraseña">Confirmar Contraseña:</label>
-              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Confirmar Contraseña" />
+              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Confirmar" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>

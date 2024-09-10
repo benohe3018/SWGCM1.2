@@ -19,7 +19,6 @@
 .delete-medico-header {
   display: flex;
   flex-direction: inline-flex;
-  width: 100%;
   background-color: whitesmoke; /* Color del encabezado */
   padding: 10px 20px;
   box-sizing: border-box;
@@ -28,7 +27,7 @@
 }
 
 .delete-header-logo {
-  margin-left: 40px; /* Agrega margen a la izquierda del logo */
+  margin-right: 40px; /* Agrega margen a la izquierda del logo */
   height:60px;
 }
 

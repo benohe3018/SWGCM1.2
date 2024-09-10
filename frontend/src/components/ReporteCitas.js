@@ -105,8 +105,10 @@ const ReporteCitas = () => {
         <div className="reporte-citas-page">
             <header className="reporte-citas-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="citas-header-logo" />
-                <h1 className="welcome-reportes-citas">Reporte de las Citas</h1>
-                <h2 className="departamento-reportes-citas">Generar Informe de citas Registradas</h2>
+                <div className="reporte-citas-header-texts">
+                    <h1 className="welcome-reportes-citas">Reporte de las Citas</h1>
+                    <h2 className="departamento-reportes-citas">Generar Informe de citas Registradas</h2>
+                </div>
             </header>
             <div className="busqueda-cita">
                 <div className="fila">

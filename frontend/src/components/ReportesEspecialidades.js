@@ -62,9 +62,12 @@ const ReportesEspecialidades = () => {
         <div className="reportes-especialidades-page">
             <header className="reportes-especialidades-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="reportes-especialidades-header-logo" />
-                <h1>Reporte de Especialidades Médicas</h1>
+                <div className="reportes-especialidades-header-text">
+                    <h1 className="welcome-reporte-especialidades">Reporte de Especialidades Médicas</h1>
+                    <h2 className="departamento-reportes-especialidades">Generar Informe de Especialidades Registrados</h2>
+                </div>
             </header>
-            <div className="busqueda-especialidad">
+            <div className="reporte-busqueda-especialidad">
                 <input
                     type="text"
                     placeholder="Buscar..."
@@ -76,8 +79,8 @@ const ReportesEspecialidades = () => {
                 </select>
                 <button onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
-            <div className="tabla-especialidades-container">
-                <table className="tabla-especialidades">
+            <div className="tabla-reporte-especialidades-container">
+                <table className="tabla-reporte-especialidades">
                     <thead>
                         <tr>
                             <th>Nombre de la Especialidad</th>

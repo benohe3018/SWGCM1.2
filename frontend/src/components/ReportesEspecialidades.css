@@ -73,32 +73,33 @@
     margin-top: 40px;
 }
 
-.tabla-especialidades {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-.tabla-especialidades th, .tabla-especialidades td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-.tabla-especialidades th {
-    background-color: #f4f4f4;
-}
-
-button {
+.reporte-especialidades-boton{
     background-color: #0C231E;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
-button:hover {
+.tabla-reporte-especialidades-container {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabla-reporte-especialidadess th, .tabla-reporte-especialidadess td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.tabla-reporte-especialidadess th {
+    background-color: #f4f4f4;
+}
+
+reporte-especialidades-boton:hover {
     background-color: whitesmoke;
     color: black;
 }

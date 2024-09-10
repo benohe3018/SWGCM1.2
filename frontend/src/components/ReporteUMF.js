@@ -65,7 +65,10 @@ const ReporteUMF = () => {
         <div className="reporte-umf-page">
             <header className="reporte-umf-header">
                 <img src={logoIMSS} alt="Logo IMSS" className="umf-header-logo" />
-                <h1>Reporte de Unidades de Medicina Familiar</h1>
+                <div className="umf-header-text">
+                <h1 className="welcome-reporte-umf">Reporte de Unidades de Medicina Familiar</h1>
+                <h2 className="departamento-reporte-umf">Generar Informe de Unidades de Medicina Familiar Registrados</h2>
+                </div>
             </header>
             <div className="busqueda-unidad">
                 <input
@@ -78,10 +81,10 @@ const ReporteUMF = () => {
                     <option value="nombre_unidad_medica">Nombre de la Unidad</option>
                     <option value="direccion_unidad_medica">Dirección de la Unidad</option>
                 </select>
-                <button onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
-            <div className="tabla-unidades-container">
-                <table className="tabla-unidades">
+            <button className="reporte-umf-boton" onClick={generatePDF}>Imprimir Reporte en PDF</button>
+            <div className="tabla-reporte-unidades-container">
+                <table className="tabla-reporte-unidades">
                     <thead>
                         <tr>
                             <th>Nombre de la Unidad</th>

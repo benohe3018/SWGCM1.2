@@ -5,52 +5,99 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
     color: #0C231E;
 }
 
 .reporte-umf-header {
-    width: 100%;
-    background-color: whitesmoke;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
+    background-color: #f5f5f5;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: inline-flex;
+      padding: 10px 20px;
+      top: 0;
+      z-index: 100;
 }
 
 .umf-header-logo {
-    margin-left: 10px;
-    margin-right: 40px;
+    margin-right: 10px; /* Margen a la izquierda del logo */
     height: 60px;
+}
+.umf-header-text{
+    text-align: center;
+    flex-grow: 1; /* Ocupa el espacio restante */
+}
+
+.welcome-reporte-umf{
+    font-size: 24px;
+    color: #0C231E; /* Color y tamaño */
+    margin: 0px;
+}
+
+.departamento-reporte-umf{
+    font-size: 18px;
+    color: #0C231E;
+    margin: 0px;
 }
 
 .busqueda-unidad {
-    margin: 20px 0;
-    display: flex;
-    gap: 10px;
+    align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
-.tabla-unidades-container {
+.busqueda-unidad input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin:0;
+    margin-right: 10px;
+}
+
+.busqueda-unidad select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin:0px;
+}
+
+.reporte-umf-boton{
+    background-color: #0C231E;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.reporte-umf-boton:hover{
+    background-color: whitesmoke;
+    color: black;
+}
+
+.tabla-reporte-unidades-container {
     width: 80%;
     overflow-x: auto;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
-.tabla-unidades {
+.tabla-reporte-unidades{
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
 }
 
-.tabla-unidades th, .tabla-unidades td {
+.tabla-reporte-unidades th, .tabla-reporte-unidades td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 8px;
     text-align: center;
 }
 
-.tabla-unidades th {
+.tabla-reporte-unidades th {
     background-color: #f4f4f4;
 }
 

@@ -26,20 +26,18 @@
     height: 60px;
   }
   
-  .header-texts {
+  .reporte-usuario-header-texts {
     text-align: center;
     flex-grow: 1; /* Ocupa el espacio restante */
   }
   
   .welcome-message-ReporteUsuario {
     font-size: 24px;
-    margin: 0;
     color: #0C231E; /* Color y tamaño */
   }
   
   .department-name-ReporteUsuario {
     font-size: 18px;
-    margin: 0;
     color: #0C231E;
   }
   

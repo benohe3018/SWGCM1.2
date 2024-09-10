@@ -84,7 +84,7 @@ const ReporteUsuarios = () => {
       <Sidebar />
       <header className="reporte-usuario-header">
         <img src={logoIMSS} alt="Logo IMSS" className="reporte-usuario__header-logo" />
-        <div className="header-texts">
+        <div className="reporte-usuario-header-texts">
           <h1 className="welcome-message-ReporteUsuario">Reporte de Usuarios</h1>
           <h2 className="department-name-ReporteUsuario">Generar informe de usuarios registrados</h2>
         </div>

@@ -66,13 +66,12 @@ const FormularioEstudio = ({ modo, estudioInicial, onSubmit, onCancel }) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nombre">Nombre del Estudio:</label>
-          <input
+          <input className='input-nombre-del-estudio'
             type="text"
             id="nombre"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             required
-            style={{ width: '200px' }}
           />
         </div>
         <div className="form-group">

@@ -11,13 +11,14 @@
 }
 
 .reporte-citas-header {
-    display: flex;
-    width: 100%;
-    background-color: whitesmoke;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    align-items: center;
-    flex-direction: column;
+      background-color: #f5f5f5;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: inline-flex;
+      padding: 10px 20px;
+      top: 0;
+      width: 100%;
+      z-index: 100;
 }
 
 .citas-header-logo {

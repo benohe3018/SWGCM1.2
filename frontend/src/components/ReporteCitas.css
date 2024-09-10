@@ -21,24 +21,24 @@
       flex-direction: inline-flex;
       padding: 10px 20px;
       top: 0;
-      width: 100%;
       z-index: 100;
 }
 
 .citas-header-logo {
-    margin-left: 10px;
     height: 60px;
-    margin-right: 40px;
+    margin-right: 10px;
 }
 
 .welcome-reportes-citas {
     font-size: 24px;
-    margin-bottom: 0px;
+    margin: 0;
+    color: #0C231E; /* Color y tamaño */
 }
 
 .departamento-reportes-citas {
     font-size: 18px;
-    margin-top: 0px;
+    margin: 0;
+    color: #0C231E;
 }
 
 .busqueda-cita {

@@ -87,19 +87,19 @@
     width: 70%;
     overflow-x: auto;
 }
-.tabla-reporte-especialidadess{
+.tabla-reporte-especialidades{
     width: 100%;
     border-collapse: collapse;
 }
 
 
-.tabla-reporte-especialidadess th, .tabla-reporte-especialidadess td {
+.tabla-reporte-especialidades th, .tabla-reporte-especialidades td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.tabla-reporte-especialidadess th {
+.tabla-reporte-especialidades th {
     background-color: #f2f2f2;
 }
 

@@ -17,13 +17,11 @@
       flex-direction: inline-flex;
       padding: 10px 20px;
       top: 0;
-      width: 100%;
       z-index: 100;
-      margin-left: 70px;
 }
 
 .reportes-estudios-header-logo {
-    margin-left: 10px; /* Margen a la izquierda del logo */
+    margin-right: 10px; /* Margen a la izquierda del logo */
     height: 60px;
 }
 .reportes-estudios-header-text{

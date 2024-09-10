@@ -45,7 +45,7 @@
         justify-content: center;
         margin-bottom: 20px;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
   }
   
   .busqueda-diagnostico input {
@@ -53,6 +53,7 @@
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    margin: 0px;
   }
   
   .busqueda-diagnostico select {
@@ -60,6 +61,7 @@
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    margin: 0px;
   }
   
   .tabla-diagnosticos-container {

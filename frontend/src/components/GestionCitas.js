@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
 import { getPacientesPrueba, createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
@@ -37,27 +37,26 @@ const GestionCitas = () => {
 
   const inicializarDatos = useCallback(async () => {
     try {
-        setCargando(true);
-        const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
-            getPacientesPrueba(),
-            getMedicos(),
-            getEstudios(),
-            getHospitales()
-        ]);
-        console.log('Hospitales Data:', hospitalesData); // Agrega este log para verificar los datos de hospitales
-        pacientesData.sort((a, b) => a.id - b.id);
-        setPacientesPrueba(pacientesData);
-        setMedicos(medicosData);
-        setEstudios(estudiosData);
-        setHospitales(hospitalesData);
-        setError(null);
+      setCargando(true);
+      const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
+        getPacientesPrueba(),
+        getMedicos(),
+        getEstudios(),
+        getHospitales()
+      ]);
+      pacientesData.sort((a, b) => a.id - b.id);
+      setPacientesPrueba(pacientesData);
+      setMedicos(medicosData);
+      setEstudios(estudiosData);
+      setHospitales(hospitalesData);
+      setError(null);
     } catch (error) {
-        console.error("Error al inicializar datos:", error);
-        setError("Hubo un problema al cargar los datos. Por favor, intente de nuevo.");
+      console.error("Error al inicializar datos:", error);
+      setError("Hubo un problema al cargar los datos. Por favor, intente de nuevo.");
     } finally {
-        setCargando(false);
+      setCargando(false);
     }
-}, []);
+  }, []);
 
   useEffect(() => {
     inicializarDatos();
@@ -177,6 +176,17 @@ const GestionCitas = () => {
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
       <div className="gestion-citas-content">
         {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
+        
+        {/* Campo de búsqueda */}
+        <div className="gestion-citas-search-container">
+          <input
+            type="text"
+            placeholder="Buscar paciente..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </div>
+
         {vista === 'crear' && (
           <FormularioPaciente
             modo="crear"
@@ -193,7 +203,6 @@ const GestionCitas = () => {
             <table className="gestion-citas-ver-tabla">
               <thead>
                 <tr>
-                  
                   <th>Fecha y Hora</th>
                   <th>Paciente</th>
                   <th>Médico</th>
@@ -204,7 +213,6 @@ const GestionCitas = () => {
               <tbody>
                 {currentPacientes.map((paciente) => (
                   <tr key={paciente.id}>
-                    
                     <td>{paciente.fecha_hora_estudio}</td>
                     <td>{paciente.nombre_completo}</td>
                     <td>{paciente.nombre_completo_medico}</td>
@@ -227,113 +235,115 @@ const GestionCitas = () => {
             </div>
           </div>
         )}
+
         {vista === 'editar' && (
-  <div className="gestion-citas-tabla-container">
-    <table className="gestion-citas-editar-tabla">
-      <thead>
-        <tr>
-          <th>Fecha y Hora</th>
-          <th>Paciente</th>
-          <th>Médico</th>
-          <th>Estudio</th>
-          <th>Hospital</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {currentPacientes.map((paciente) => (
-          <tr key={paciente.id}>
-            <td>
-              <input className="input-gestion-citas"
-                type="datetime-local"
-                value={paciente.fecha_hora_estudio}
-                onChange={(e) => {
-                  const newPacientes = [...pacientesPrueba];
-                  const index = newPacientes.findIndex(p => p.id === paciente.id);
-                  newPacientes[index].fecha_hora_estudio = e.target.value;
-                  setPacientesPrueba(newPacientes);
-                }}
-              />
-            </td>
-            <td>
-              <input className="input-gestion-citas"
-                type="text"
-                value={paciente.nombre_completo}
-                onChange={(e) => {
-                  const newPacientes = [...pacientesPrueba];
-                  const index = newPacientes.findIndex(p => p.id === paciente.id);
-                  newPacientes[index].nombre_completo = e.target.value;
-                  setPacientesPrueba(newPacientes);
-                }}
-                style={{ width: '140px' }} // Ajusta el tamaño del input
-              />
-            </td>
-            <td>
-              <input className="input-gestion-citas"
-                type="text"
-                value={paciente.nombre_completo_medico}
-                onChange={(e) => {
-                  const newPacientes = [...pacientesPrueba];
-                  const index = newPacientes.findIndex(p => p.id === paciente.id);
-                  newPacientes[index].nombre_completo_medico = e.target.value;
-                  setPacientesPrueba(newPacientes);
-                }}
-                style={{ width: '150px' }} // Ajusta el tamaño del input
-              />
-            </td>
-            <td>
-              <input className="input-gestion-citas"
-                type="text"
-                value={paciente.estudio_solicitado}
-                onChange={(e) => {
-                  const newPacientes = [...pacientesPrueba];
-                  const index = newPacientes.findIndex(p => p.id === paciente.id);
-                  newPacientes[index].estudio_solicitado = e.target.value;
-                  setPacientesPrueba(newPacientes);
-                }}
-                style={{ width: '100px' }} // Ajusta el tamaño del input
-              />
-            </td>
-            <td>
-              <input className="input-gestion-citas"
-                type="text"
-                value={paciente.hospital_envia}
-                onChange={(e) => {
-                  const newPacientes = [...pacientesPrueba];
-                  const index = newPacientes.findIndex(p => p.id === paciente.id);
-                  newPacientes[index].hospital_envia = e.target.value;
-                  setPacientesPrueba(newPacientes);
-                }}
-                style={{ width: '50px' }} // Ajusta el tamaño del input
-              />
-            </td>
-            <td>
-              <div className="gestion-citas-botones-acciones">
+          <div className="gestion-citas-tabla-container">
+            <table className="gestion-citas-editar-tabla">
+              <thead>
+                <tr>
+                  <th>Fecha y Hora</th>
+                  <th>Paciente</th>
+                  <th>Médico</th>
+                  <th>Estudio</th>
+                  <th>Hospital</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentPacientes.map((paciente) => (
+                  <tr key={paciente.id}>
+                    <td>
+                      <input className="input-gestion-citas"
+                        type="datetime-local"
+                        value={paciente.fecha_hora_estudio}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].fecha_hora_estudio = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input className="input-gestion-citas"
+                        type="text"
+                        value={paciente.nombre_completo}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].nombre_completo = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                        style={{ width: '140px' }} // Ajusta el tamaño del input
+                      />
+                    </td>
+                    <td>
+                      <input className="input-gestion-citas"
+                        type="text"
+                        value={paciente.nombre_completo_medico}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].nombre_completo_medico = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                        style={{ width: '150px' }} // Ajusta el tamaño del input
+                      />
+                    </td>
+                    <td>
+                      <input className="input-gestion-citas"
+                        type="text"
+                        value={paciente.estudio_solicitado}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].estudio_solicitado = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                        style={{ width: '100px' }} // Ajusta el tamaño del input
+                      />
+                    </td>
+                    <td>
+                      <input className="input-gestion-citas"
+                        type="text"
+                        value={paciente.hospital_envia}
+                        onChange={(e) => {
+                          const newPacientes = [...pacientesPrueba];
+                          const index = newPacientes.findIndex(p => p.id === paciente.id);
+                          newPacientes[index].hospital_envia = e.target.value;
+                          setPacientesPrueba(newPacientes);
+                        }}
+                        style={{ width: '50px' }} // Ajusta el tamaño del input
+                      />
+                    </td>
+                    <td>
+                      <div className="gestion-citas-botones-acciones">
+                        <button
+                          onClick={() => handleEditarPaciente(paciente)}
+                          className="gestion-citas-boton-guardar"
+                        >
+                          Guardar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="gestion-citas-pagination">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button
-                  onClick={() => handleEditarPaciente(paciente)}
-                  className="gestion-citas-boton-guardar"
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
                 >
-                  Guardar
+                  {page}
                 </button>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <div className="gestion-citas-pagination">
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-        <button
-          key={page}
-          onClick={() => setCurrentPage(page)}
-          className={page === currentPage ? 'active' : ''}
-        >
-          {page}
-        </button>
-      ))}
-    </div>
-  </div>
-)}
+              ))}
+            </div>
+          </div>
+        )}
+
         {vista === 'eliminar' && (
           <div className="gestion-citas-tabla-container">
             <table className="gestion-citas-eliminar-tabla">

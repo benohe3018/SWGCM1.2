@@ -3,7 +3,6 @@ import './BackupRecovery.css';
 
 const BackupRecovery = () => {
   const [selectedModules, setSelectedModules] = useState([]);
-  const [schedule, setSchedule] = useState('');
   const [medicos, setMedicos] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [citas, setCitas] = useState([]);
@@ -85,8 +84,19 @@ const BackupRecovery = () => {
   const handleRestore = (event) => {
     const file = event.target.files[0];
     if (file) {
-      alert('Datos restaurados con éxito.');
-      // Logic to restore data from the backup file
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          // Aquí deberías enviar los datos al backend para restaurarlos
+          console.log('Datos a restaurar:', data);
+          alert('Datos restaurados con éxito.');
+        } catch (error) {
+          console.error('Error al restaurar los datos:', error);
+          alert('Error al restaurar los datos.');
+        }
+      };
+      reader.readAsText(file);
     }
   };
 
@@ -95,10 +105,6 @@ const BackupRecovery = () => {
     setSelectedModules(prevState =>
       checked ? [...prevState, value] : prevState.filter(module => module !== value)
     );
-  };
-
-  const handleScheduleChange = (event) => {
-    setSchedule(event.target.value);
   };
 
   return (
@@ -138,10 +144,6 @@ const BackupRecovery = () => {
           <input type="checkbox" value="hospitales" onChange={handleModuleSelection} />
           Hospitales
         </label>
-      </div>
-      <div>
-        <h2>Programar Backup:</h2>
-        <input type="datetime-local" value={schedule} onChange={handleScheduleChange} />
       </div>
       <button onClick={handleBackup}>Realizar Backup</button>
       <input type="file" onChange={handleRestore} />

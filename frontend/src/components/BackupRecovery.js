@@ -29,8 +29,14 @@ const BackupRecovery = () => {
     }
 
     if (selectedModules.includes('medicos')) {
-      console.log('Backing up medicos:', medicos);
-      // Logic to save medicos data to a backup file
+      const dataStr = JSON.stringify(medicos, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'backup_medicos.json';
+      a.click();
+      URL.revokeObjectURL(url);
     }
 
     alert('Backup realizado con éxito.');

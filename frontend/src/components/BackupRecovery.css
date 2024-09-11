@@ -1,0 +1,21 @@
+.backup-recovery-page {
+  padding: 20px;
+}
+
+.backup-recovery-page h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.backup-recovery-page button {
+  display: block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.backup-recovery-page input[type="file"] {
+  display: block;
+  margin-top: 20px;
+}

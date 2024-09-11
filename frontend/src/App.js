@@ -34,6 +34,7 @@ import ReporteUMF from './components/ReporteUMF';
 import ReporteDiagnosticoPresuntivo from './components/ReporteDiagnosticoPresuntivo';
 import ReporteHospitales from './components/ReporteHospitales';
 import ReporteCitas from './components/ReporteCitas';
+import BackupRecovery from './components/BackupRecovery';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -102,6 +103,7 @@ function App() {
             <Route path="/reporte-diagnosticos" element={<PrivateRoute><Sidebar /><ReporteDiagnosticoPresuntivo /></PrivateRoute>} />
             <Route path="/reporte-hospitales" element={<PrivateRoute><Sidebar /><ReporteHospitales /></PrivateRoute>} />
             <Route path="/reporte-citas" element={<PrivateRoute><Sidebar /><ReporteCitas /></PrivateRoute>} />
+            <Route path="/admin/backup-recovery" element={<BackupRecovery />} />
           </Routes>  
         </div>
       </Router>

@@ -14,7 +14,8 @@ const Sidebar = () => {
     unidades: false,
     diagnosticos: false,
     hospitales: false,
-    informes: false
+    informes: false,
+    admin: false
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -54,7 +55,7 @@ const Sidebar = () => {
             {renderDiagnosticosSubmenu()}
             {renderHospitalesSubmenu()}
             {renderInformesSubmenu()}
-            <li><Link to="/admin">Modulo de Administración</Link></li>
+            {renderAdminSubmenu()}
           </>
         );
       case 'Admin':
@@ -68,7 +69,7 @@ const Sidebar = () => {
             {renderDiagnosticosSubmenu()}
             {renderHospitalesSubmenu()}
             {renderInformesSubmenu()}
-            <li><Link to="/admin">Modulo de Administración</Link></li>
+            {renderAdminSubmenu()}
           </>
         );
       case 'Usuario_administrador':
@@ -229,6 +230,19 @@ const Sidebar = () => {
           <li><Link to="/reporte-umf">Reporte de Unidades de Medicina Familiar</Link></li>
           <li><Link to="/reporte-diagnosticos">Reporte de Diagnósticos Presuntivos</Link></li>
           <li><Link to="/reporte-hospitales">Reporte de Hospitales</Link></li>
+        </ul>
+      )}
+    </li>
+  );
+
+  const renderAdminSubmenu = () => (
+    <li onClick={() => handleSubmenuToggle('admin')}>
+      <span>Modulo de Administración</span>
+      <span className={`arrow ${openSubmenu.admin ? 'open' : ''}`}>&#9660;</span>
+      {openSubmenu.admin && (
+        <ul className="submenu">
+          <li><Link to="/admin/backup-recovery">Backup y Recuperación de Datos</Link></li>
+          {/* Aquí puedes añadir más opciones de administración */}
         </ul>
       )}
     </li>

@@ -71,3 +71,32 @@ def list_medicos():
     except SQLAlchemyError as e:
         logging.error("Error al recuperar médicos: %s", str(e))
         return jsonify({"error": "Error al recuperar médicos"}), 500
+  
+@medicos_bp.route('/medicos/restore', methods=['POST'])
+def restore_medicos():
+  try:
+      medicos = request.get_json()
+      for medico_data in medicos:
+          # Verifica si el médico ya existe y decide si actualizar o insertar
+          existing_medico = Medico.query.filter_by(matricula=medico_data['matricula']).first()
+          if existing_medico:
+              # Actualiza el médico existente
+              existing_medico.nombre_medico = medico_data['nombre_medico']
+              existing_medico.apellido_paterno_medico = medico_data['apellido_paterno_medico']
+              existing_medico.apellido_materno_medico = medico_data['apellido_materno_medico']
+              existing_medico.especialidad = medico_data['especialidad']
+          else:
+              # Crea un nuevo médico
+              new_medico = Medico(
+                  nombre_medico=medico_data['nombre_medico'],
+                  apellido_paterno_medico=medico_data['apellido_paterno_medico'],
+                  apellido_materno_medico=medico_data['apellido_materno_medico'],
+                  especialidad=medico_data['especialidad'],
+                  matricula=medico_data['matricula']
+              )
+              db.session.add(new_medico)
+      db.session.commit()
+      return jsonify({'message': 'Datos restaurados con éxito.'}), 200
+  except Exception as e:
+      logging.error("Error al restaurar los datos: %s", str(e))
+      return jsonify({'error': 'Error al restaurar los datos.'}), 500

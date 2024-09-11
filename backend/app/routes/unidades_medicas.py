@@ -88,3 +88,24 @@ def get_unidades_list():
         } for unidad in unidades]), 200
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
+    
+@unidades_medicas_bp.route('/unidades_medicina_familiar/restore', methods=['POST'])
+def restore_unidades():
+  try:
+      unidades = request.get_json()
+      for unidad_data in unidades:
+          existing_unidad = UnidadesMedicinaFamiliar.query.filter_by(id=unidad_data['id_unidad_medica']).first()
+          if existing_unidad:
+              existing_unidad.nombre_unidad_medica = unidad_data['nombre_unidad_medica']
+              existing_unidad.direccion_unidad_medica = unidad_data['direccion_unidad_medica']
+          else:
+              new_unidad = UnidadesMedicinaFamiliar(
+                  nombre_unidad_medica=unidad_data['nombre_unidad_medica'],
+                  direccion_unidad_medica=unidad_data['direccion_unidad_medica']
+              )
+              db.session.add(new_unidad)
+      db.session.commit()
+      return jsonify({'message': 'Datos restaurados con éxito.'}), 200
+  except Exception as e:
+      logging.error("Error al restaurar los datos: %s", str(e))
+      return jsonify({'error': 'Error al restaurar los datos.'}), 500

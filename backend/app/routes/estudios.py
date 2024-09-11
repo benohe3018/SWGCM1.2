@@ -91,4 +91,25 @@ def list_estudios():
     except SQLAlchemyError as e:
         logging.error("Error al recuperar estudios: %s", str(e))
         return jsonify({"error": "Error al recuperar estudios"}), 500
+    
+@estudios_bp.route('/estudios/restore', methods=['POST'])
+def restore_estudios():
+  try:
+      estudios = request.get_json()
+      for estudio_data in estudios:
+          existing_estudio = EstudiosRadiologicos.query.filter_by(id_estudio=estudio_data['id_estudio']).first()
+          if existing_estudio:
+              existing_estudio.nombre_estudio = estudio_data['nombre_estudio']
+              existing_estudio.descripcion_estudio = estudio_data['descripcion_estudio']
+          else:
+              new_estudio = EstudiosRadiologicos(
+                  nombre_estudio=estudio_data['nombre_estudio'],
+                  descripcion_estudio=estudio_data['descripcion_estudio']
+              )
+              db.session.add(new_estudio)
+      db.session.commit()
+      return jsonify({'message': 'Datos restaurados con éxito.'}), 200
+  except Exception as e:
+      logging.error("Error al restaurar los datos: %s", str(e))
+      return jsonify({'error': 'Error al restaurar los datos.'}), 500
 

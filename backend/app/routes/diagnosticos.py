@@ -76,3 +76,21 @@ def get_diagnosticos_list():
         } for diagnostico in diagnosticos]), 200
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
+
+@diagnosticos_bp.route('/diagnosticos/restore', methods=['POST'])
+def restore_diagnosticos():
+  try:
+      diagnosticos = request.get_json()
+      for diagnostico_data in diagnosticos:
+          existing_diagnostico = DiagnosticoPresuntivo.query.filter_by(id=diagnostico_data['id']).first()
+          if existing_diagnostico:
+              existing_diagnostico.nombre_diagnostico = diagnostico_data['nombre_diagnostico']
+          else:
+              nuevo_diagnostico = DiagnosticoPresuntivo(
+                  nombre_diagnostico=diagnostico_data['nombre_diagnostico']
+              )
+              db.session.add(nuevo_diagnostico)
+      db.session.commit()
+      return jsonify({'message': 'Datos restaurados con éxito.'}), 200
+  except Exception as e:
+      return jsonify({'error': 'Error al restaurar los datos.'}), 500

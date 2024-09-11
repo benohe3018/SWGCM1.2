@@ -65,3 +65,22 @@ def delete_especialidad(id):
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+    
+@especialidades_bp.route('/especialidades/restore', methods=['POST'])
+def restore_especialidades():
+    try:
+        especialidades = request.get_json()
+        for especialidad_data in especialidades:
+            existing_especialidad = EspecialidadesMedicas.query.filter_by(id=especialidad_data['id']).first()
+            if existing_especialidad:
+                existing_especialidad.nombre_especialidad = especialidad_data['nombre_especialidad']
+            else:
+                new_especialidad = EspecialidadesMedicas(
+                    nombre_especialidad=especialidad_data['nombre_especialidad']
+                )
+                db.session.add(new_especialidad)
+        db.session.commit()
+        return jsonify({'message': 'Datos restaurados con éxito.'}), 200
+    except Exception as e:
+        logging.error("Error al restaurar los datos: %s", str(e))
+        return jsonify({'error': 'Error al restaurar los datos.'}), 500

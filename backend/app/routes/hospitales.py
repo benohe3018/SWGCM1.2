@@ -69,3 +69,23 @@ def delete_hospital(id):
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
+@hospitales_bp.route('/hospitales/restore', methods=['POST'])
+def restore_hospitales():
+    try:
+        hospitales = request.get_json()
+        for hospital_data in hospitales:
+            existing_hospital = Hospital.query.filter_by(id=hospital_data['id']).first()
+            if existing_hospital:
+                existing_hospital.nombre_hospital = hospital_data['nombre_hospital']
+                existing_hospital.direccion_hospital = hospital_data['direccion_hospital']
+            else:
+                nuevo_hospital = Hospital(
+                    nombre_hospital=hospital_data['nombre_hospital'],
+                    direccion_hospital=hospital_data['direccion_hospital']
+                )
+                db.session.add(nuevo_hospital)
+        db.session.commit()
+        return jsonify({'message': 'Datos restaurados con éxito.'}), 200
+    except Exception as e:
+        return jsonify({'error': 'Error al restaurar los datos.'}), 500

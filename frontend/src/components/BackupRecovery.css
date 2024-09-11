@@ -61,9 +61,9 @@
 
 .backup-recovery__form-group {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   margin-bottom: 20px;
+  padding: inherit;
 }
 
 .backup-recovery__form-label {

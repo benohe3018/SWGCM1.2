@@ -1,20 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './BackupRecovery.css';
 
 const BackupRecovery = () => {
   const [selectedModules, setSelectedModules] = useState([]);
   const [schedule, setSchedule] = useState('');
+  const [medicos, setMedicos] = useState([]);
+
+  const fetchMedicos = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
+      const data = await response.json();
+      setMedicos(data);
+    } catch (error) {
+      console.error('Error fetching medicos:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedModules.includes('medicos')) {
+      fetchMedicos();
+    }
+  }, [selectedModules]);
 
   const handleBackup = () => {
     if (selectedModules.length === 0) {
       alert('Por favor, seleccione los módulos a respaldar.');
       return;
     }
-    // Lógica para realizar el backup de los módulos seleccionados
-    selectedModules.forEach(module => {
-      // Aquí llamas a las funciones de lectura de cada módulo
-      console.log(`Realizando backup de: ${module}`);
-    });
+
+    if (selectedModules.includes('medicos')) {
+      console.log('Backing up medicos:', medicos);
+      // Logic to save medicos data to a backup file
+    }
+
     alert('Backup realizado con éxito.');
   };
 
@@ -22,7 +40,7 @@ const BackupRecovery = () => {
     const file = event.target.files[0];
     if (file) {
       alert('Datos restaurados con éxito.');
-      // Lógica para restaurar los datos
+      // Logic to restore data from the backup file
     }
   };
 

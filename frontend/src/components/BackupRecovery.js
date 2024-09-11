@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './BackupRecovery.css';
+import logoIMSS from '../images/LogoIMSS.jpg'; 
+import Sidebar from './Sidebar';
 
 const BackupRecovery = () => {
   const [selectedModules, setSelectedModules] = useState([]);
@@ -138,41 +140,30 @@ const BackupRecovery = () => {
   };
 
   return (
-    <div className="backup-recovery-page">
-      <h1>Backup y Recuperación de Datos</h1>
-      <div>
-        <h2>Seleccione los módulos a respaldar:</h2>
-        <label>
-          <input type="checkbox" value="medicos" onChange={handleModuleSelection} />
-          Médicos
-        </label>
-        <label>
-          <input type="checkbox" value="citas" onChange={handleModuleSelection} />
-          Citas
-        </label>
-        <label>
-          <input type="checkbox" value="estudios" onChange={handleModuleSelection} />
-          Estudios Radiológicos
-        </label>
-        <label>
-          <input type="checkbox" value="especialidades" onChange={handleModuleSelection} />
-          Especialidades Médicas
-        </label>
-        <label>
-          <input type="checkbox" value="unidades" onChange={handleModuleSelection} />
-          Unidades de Medicina Familiar
-        </label>
-        <label>
-          <input type="checkbox" value="diagnosticos" onChange={handleModuleSelection} />
-          Diagnósticos Presuntivos
-        </label>
-        <label>
-          <input type="checkbox" value="hospitales" onChange={handleModuleSelection} />
-          Hospitales
-        </label>
+    <div className="backup-recovery">
+      <header className="backup-recovery__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="backup-recovery__header-logo" />
+        <div className="backup-recovery__header-texts">
+          <h1 className="backup-recovery__welcome-message">Backup y Recuperación de Datos</h1>
+          <h2 className="backup-recovery__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+        </div>
+      </header>
+      <div className="main-layout">
+        <Sidebar />
+        <div className="backup-recovery__content">
+          <h3 className="backup-recovery__form-description">Seleccione los módulos a respaldar:</h3>
+          <div className="backup-recovery__form-group">
+            {['medicos', 'usuarios', 'citas', 'estudios', 'especialidades', 'unidades', 'diagnosticos', 'hospitales'].map(module => (
+              <label key={module} className="backup-recovery__form-label">
+                <input type="checkbox" value={module} onChange={handleModuleSelection} />
+                {module.charAt(0).toUpperCase() + module.slice(1)}
+              </label>
+            ))}
+          </div>
+          <button className="backup-recovery__button" onClick={handleBackup}>Realizar Backup</button>
+          <input type="file" className="backup-recovery__file-input" onChange={handleRestore} />
+        </div>
       </div>
-      <button onClick={handleBackup}>Realizar Backup</button>
-      <input type="file" onChange={handleRestore} />
     </div>
   );
 };

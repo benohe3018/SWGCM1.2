@@ -5,21 +5,33 @@ const BackupRecovery = () => {
   const [selectedModules, setSelectedModules] = useState([]);
   const [schedule, setSchedule] = useState('');
   const [medicos, setMedicos] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [citas, setCitas] = useState([]);
+  const [estudios, setEstudios] = useState([]);
+  const [especialidades, setEspecialidades] = useState([]);
+  const [unidades, setUnidades] = useState([]);
+  const [diagnosticos, setDiagnosticos] = useState([]);
+  const [hospitales, setHospitales] = useState([]);
 
-  const fetchMedicos = async () => {
+  const fetchData = async (endpoint, setData) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}`);
       const data = await response.json();
-      setMedicos(data);
+      setData(data);
     } catch (error) {
-      console.error('Error fetching medicos:', error);
+      console.error(`Error fetching ${endpoint}:`, error);
     }
   };
 
   useEffect(() => {
-    if (selectedModules.includes('medicos')) {
-      fetchMedicos();
-    }
+    if (selectedModules.includes('medicos')) fetchData('medicos', setMedicos);
+    if (selectedModules.includes('usuarios')) fetchData('usuarios', setUsuarios);
+    if (selectedModules.includes('citas')) fetchData('citas', setCitas);
+    if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
+    if (selectedModules.includes('especialidades')) fetchData('especialidades', setEspecialidades);
+    if (selectedModules.includes('unidades')) fetchData('unidades', setUnidades);
+    if (selectedModules.includes('diagnosticos')) fetchData('diagnosticos', setDiagnosticos);
+    if (selectedModules.includes('hospitales')) fetchData('hospitales', setHospitales);
   }, [selectedModules]);
 
   const handleBackup = () => {
@@ -28,18 +40,46 @@ const BackupRecovery = () => {
       return;
     }
 
-    if (selectedModules.includes('medicos')) {
-      const dataStr = JSON.stringify(medicos, null, 2);
+    selectedModules.forEach(module => {
+      let data;
+      switch (module) {
+        case 'medicos':
+          data = medicos;
+          break;
+        case 'usuarios':
+          data = usuarios;
+          break;
+        case 'citas':
+          data = citas;
+          break;
+        case 'estudios':
+          data = estudios;
+          break;
+        case 'especialidades':
+          data = especialidades;
+          break;
+        case 'unidades':
+          data = unidades;
+          break;
+        case 'diagnosticos':
+          data = diagnosticos;
+          break;
+        case 'hospitales':
+          data = hospitales;
+          break;
+        default:
+          return;
+      }
+
+      const dataStr = JSON.stringify(data, null, 2);
       const blob = new Blob([dataStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'backup_medicos.json';
+      a.download = `backup_${module}.json`;
       a.click();
       URL.revokeObjectURL(url);
-    }
-
-    alert('Backup realizado con éxito.');
+    });
   };
 
   const handleRestore = (event) => {

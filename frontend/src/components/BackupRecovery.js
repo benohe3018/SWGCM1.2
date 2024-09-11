@@ -4,7 +4,6 @@ import './BackupRecovery.css';
 const BackupRecovery = () => {
   const [selectedModules, setSelectedModules] = useState([]);
   const [medicos, setMedicos] = useState([]);
-  const [usuarios, setUsuarios] = useState([]);
   const [citas, setCitas] = useState([]);
   const [estudios, setEstudios] = useState([]);
   const [especialidades, setEspecialidades] = useState([]);
@@ -24,7 +23,6 @@ const BackupRecovery = () => {
 
   useEffect(() => {
     if (selectedModules.includes('medicos')) fetchData('medicos', setMedicos);
-    if (selectedModules.includes('usuarios')) fetchData('usuarios', setUsuarios);
     if (selectedModules.includes('citas')) fetchData('citas', setCitas);
     if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
     if (selectedModules.includes('especialidades')) fetchData('especialidades', setEspecialidades);
@@ -44,9 +42,6 @@ const BackupRecovery = () => {
       switch (module) {
         case 'medicos':
           data = medicos;
-          break;
-        case 'usuarios':
-          data = usuarios;
           break;
         case 'citas':
           data = citas;
@@ -88,18 +83,43 @@ const BackupRecovery = () => {
       reader.onload = async (e) => {
         try {
           const data = JSON.parse(e.target.result);
-          // Enviar datos al backend
-          const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/restore`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
-          if (response.ok) {
-            alert('Datos restaurados con éxito.');
+          let endpoint = '';
+  
+          // Determina el endpoint basado en el contenido del archivo
+          if (data.length > 0) {
+            if (data[0].nombre_medico) {
+              endpoint = 'medicos';
+            } else if (data[0].cita_id) {
+              endpoint = 'citas';
+            } else if (data[0].estudio_id) {
+              endpoint = 'estudios';
+            } else if (data[0].especialidad_id) {
+              endpoint = 'especialidades';
+            } else if (data[0].unidad_id) {
+              endpoint = 'unidades';
+            } else if (data[0].diagnostico_id) {
+              endpoint = 'diagnosticos';
+            } else if (data[0].hospital_id) {
+              endpoint = 'hospitales';
+            }
+          }
+  
+          if (endpoint) {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}/restore`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            });
+  
+            if (response.ok) {
+              alert('Datos restaurados con éxito.');
+            } else {
+              alert('Error al restaurar los datos.');
+            }
           } else {
-            alert('Error al restaurar los datos.');
+            alert('Formato de archivo no reconocido.');
           }
         } catch (error) {
           console.error('Error al restaurar los datos:', error);
@@ -125,10 +145,6 @@ const BackupRecovery = () => {
         <label>
           <input type="checkbox" value="medicos" onChange={handleModuleSelection} />
           Médicos
-        </label>
-        <label>
-          <input type="checkbox" value="usuarios" onChange={handleModuleSelection} />
-          Usuarios
         </label>
         <label>
           <input type="checkbox" value="citas" onChange={handleModuleSelection} />

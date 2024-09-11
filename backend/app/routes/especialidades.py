@@ -82,5 +82,4 @@ def restore_especialidades():
         db.session.commit()
         return jsonify({'message': 'Datos restaurados con éxito.'}), 200
     except Exception as e:
-        logging.error("Error al restaurar los datos: %s", str(e))
         return jsonify({'error': 'Error al restaurar los datos.'}), 500

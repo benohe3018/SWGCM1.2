@@ -88,9 +88,19 @@ const BackupRecovery = () => {
       reader.onload = async (e) => {
         try {
           const data = JSON.parse(e.target.result);
-          // Aquí deberías enviar los datos al backend para restaurarlos
-          console.log('Datos a restaurar:', data);
-          alert('Datos restaurados con éxito.');
+          // Enviar datos al backend
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/restore`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          if (response.ok) {
+            alert('Datos restaurados con éxito.');
+          } else {
+            alert('Error al restaurar los datos.');
+          }
         } catch (error) {
           console.error('Error al restaurar los datos:', error);
           alert('Error al restaurar los datos.');

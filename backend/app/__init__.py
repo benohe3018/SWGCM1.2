@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-from .routes.logs import logs_bp
+
 import os
 
 db = SQLAlchemy()
@@ -23,6 +23,7 @@ from .routes.hospitales import hospitales_bp
 from .routes.pacientes_prueba import pacientes_prueba_bp 
 from .routes.especialidades import especialidades_bp
 from .routes.diagnosticos import diagnosticos_bp
+from .routes.logs import logs_bp
 
 def create_app():
     relative_static_folder_path = '../../frontend/build'

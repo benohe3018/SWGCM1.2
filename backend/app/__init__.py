@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from .routes.logs import logs_bp
 import os
 
 db = SQLAlchemy()
@@ -55,6 +56,7 @@ def create_app():
     app.register_blueprint(pacientes_prueba_bp, url_prefix='/api')
     app.register_blueprint(especialidades_bp, url_prefix='/api')
     app.register_blueprint(diagnosticos_bp, url_prefix='/api')
+    app.register_blueprint(logs_bp, url_prefix='/api')
     
 
     @app.route('/', defaults={'path': ''})

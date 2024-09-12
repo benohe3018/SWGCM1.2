@@ -7,7 +7,7 @@ const LogsViewer = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await fetch('/api/logs');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/logs`);
         const data = await response.json();
         setLogs(data.logs);
       } catch (error) {

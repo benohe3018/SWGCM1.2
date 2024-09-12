@@ -237,12 +237,14 @@ const Sidebar = () => {
 
   const renderAdminSubmenu = () => (
     <li onClick={() => handleSubmenuToggle('admin')}>
-      <span>Modulo de Administración</span>
+      <span>Módulo de Administración</span>
       <span className={`arrow ${openSubmenu.admin ? 'open' : ''}`}>&#9660;</span>
       {openSubmenu.admin && (
         <ul className="submenu">
           <li><Link to="/admin/backup-recovery">Backup y Recuperación de Datos</Link></li>
-          {/* Aquí puedes añadir más opciones de administración */}
+          {user.role === 'superUsuario' && (
+            <li><Link to="/admin/logs">Ver Logs de la Aplicación</Link></li>
+          )}
         </ul>
       )}
     </li>

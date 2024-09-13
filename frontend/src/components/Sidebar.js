@@ -242,8 +242,7 @@ const Sidebar = () => {
       {openSubmenu.admin && (
         <ul className="submenu">
           <li><Link to="/admin/backup-recovery">Backup y Recuperación de Datos</Link></li>
-          <li><Link to="/admin/logs">Ver Logs de la Aplicación</Link></li>
-          
+          {/* <li><Link to="/admin/logs">Ver Logs de la Aplicación</Link></li> */}          
         </ul>
       )}
     </li>

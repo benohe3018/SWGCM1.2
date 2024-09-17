@@ -111,6 +111,13 @@ const Sidebar = () => {
           </button>
         </li>
       </ul>
+      {user && (
+        <div className="active-user">
+          <p>
+            Usuario activo: {user.username} ({user.role})
+          </p>
+        </div>
+      )}
     </div>
   );
 

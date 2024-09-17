@@ -54,7 +54,7 @@
 
 /* Botón Hamburguesa */
 .hamburger {
-  display: block; /* Mostrar por defecto en móviles */
+  display: block; /* Mostrar en móviles */
   cursor: pointer;
   position: fixed;
   top: 1.25rem; /* 20px */
@@ -76,7 +76,7 @@
 .mobile-menu {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: -75%; /* Oculto por defecto */
   width: 75%;
   max-width: 300px;
   height: 100%;
@@ -88,7 +88,7 @@
 }
 
 .mobile-menu.open {
-  right: 0;
+  right: 0; /* Deslizar desde la derecha */
 }
 
 .mobile-menu ul {
@@ -105,10 +105,17 @@
 .mobile-menu ul li a {
   color: white;
   text-decoration: none;
+  display: block;
 }
 
 .mobile-menu ul li:hover {
   background-color: #4a8b7f;
+}
+
+.mobile-menu .active-user {
+  font-size: 0.75rem; /* 12px */
+  color: black;
+  margin-top: 1.25rem; /* 20px */
 }
 
 /* Overlay */
@@ -127,11 +134,12 @@
   z-index: 999;
 }
 
+
 /* Medias Queries */
 
 /* Tablets y Pantallas Mayores */
-@media (min-width: 768px) {
-  /* Mostrar Sidebar por defecto */
+/* A partir de 820px, mostrar la sidebar y ocultar el menú móvil y el botón hamburguesa */
+@media (min-width: 820px) {
   .sidebar {
     display: block;
     position: fixed;
@@ -146,17 +154,15 @@
     z-index: 1000;
   }
 
-  /* Ocultar Botón Hamburguesa */
   .hamburger {
     display: none;
   }
 
-  /* Ocultar Menú Móvil */
   .mobile-menu {
     display: none;
   }
 
-  /* Ajustar Margen del Contenido */
+  /* Ajustar margen del contenido */
   .main-layout .content {
     margin-left: 15.625rem; /* 250px */
   }
@@ -165,3 +171,4 @@
     padding-left: 15.625rem; /* 250px */
   }
 }
+

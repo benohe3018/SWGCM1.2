@@ -10,57 +10,71 @@
 
 .content {
   flex: 1;
-  padding: 20px;
+  padding: 1.25rem; /* Equivale a 20px (16px * 1.25) */
   box-sizing: border-box;
   background-color: whitesmoke;
-  margin-top: 60px; /* Espacio para el header */
+  margin-top: 3.75rem; /* Espacio para el header (60px) */
 }
 
 .header-texts {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 1.125rem; /* Equivale a 18px */
+  margin-bottom: 0.625rem; /* Equivale a 10px */
 }
 
 .welcome-message {
-  font-size: 16px;
+  font-size: 1rem; /* Equivale a 16px */
 }
 
 .department-name {
-  font-size: 14px;
+  font-size: 0.875rem; /* Equivale a 14px */
 }
 
 .mr-machine {
   width: 100%;
-  max-width: 300px;
-  margin: 10px auto;
+  max-width: 18.75rem; /* Equivale a 300px */
+  margin: 0.625rem auto; /* Equivale a 10px */
   display: block;
 }
 
-/* Ajustes para pantallas medianas (tabletas) */
-@media (min-width: 481px) and (max-width: 768px) {
+/* Ajustes para pantallas de al menos 481px (tabletas y superiores) */
+@media (min-width: 481px) {
   .content {
-    padding: 15px;
+    padding: 1.5625rem; /* Equivale a 25px */
+    margin-top: 3.75rem; /* Mantener espacio para el header (60px) */
   }
-  
+
   .mr-machine {
-    max-width: 400px;
-    margin: 15px auto;
+    max-width: 25rem; /* Equivale a 400px */
+    margin: 0.9375rem auto; /* Equivale a 15px */
   }
 }
 
-/* Ajustes para habitaciones grandes */
-@media (min-width: 1025px) {
+/* Ajustes para pantallas de al menos 769px (laptops pequeñas y superiores) */
+@media (min-width: 769px) {
   .main-layout {
     flex-direction: row;
   }
 
   .content {
-    padding: 30px;
-    margin-top: 0;
+    padding: 1.875rem; /* Equivale a 30px */
+    margin-top: 0; /* Eliminar margen superior si el header se muestra lateralmente */
+    margin-left: 15.625rem; /* Espacio para la sidebar (250px) */
   }
 
   .mr-machine {
-    max-width: 500px;
-    margin: 20px auto;
+    max-width: 31.25rem; /* Equivale a 500px */
+    margin: 1.25rem auto; /* Equivale a 20px */
+  }
+}
+
+/* Ajustes para pantallas de al menos 1025px (pantallas grandes) */
+@media (min-width: 1025px) {
+  .content {
+    padding: 2.5rem; /* Equivale a 40px */
+  }
+
+  .mr-machine {
+    max-width: 37.5rem; /* Equivale a 600px */
+    margin: 1.5625rem auto; /* Equivale a 25px */
   }
 }

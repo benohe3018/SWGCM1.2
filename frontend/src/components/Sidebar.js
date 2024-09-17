@@ -1,24 +1,44 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import './Sidebar.css';
 
-const Sidebar = ({ user, handleChangeSession, handleExitSystem }) => {
+const Sidebar = () => {
+  const { user, logout } = useAuth();
+  const [openSubmenu, setOpenSubmenu] = useState({
+    medicos: false,
+    usuarios: false,
+    citas: false,
+    estudios: false,
+    especialidades: false,
+    unidades: false,
+    diagnosticos: false,
+    hospitales: false,
+    informes: false,
+    admin: false
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openSubmenu, setOpenSubmenu] = useState({}); // Para manejar el estado de los submenús
+
+  const navigate = useNavigate();
+
+  const handleSubmenuToggle = (menu) => {
+    setOpenSubmenu(prevState => ({
+      ...prevState,
+      [menu]: !prevState[menu]
+    }));
+  };
+
+  const handleChangeSession = () => {
+    logout();
+    navigate('/');
+  };
+
+  const handleExitSystem = () => {
+    window.close();
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  const handleSubmenuToggle = (submenu) => {
-    setOpenSubmenu((prev) => ({
-      ...prev,
-      [submenu]: !prev[submenu],
-    }));
   };
 
   const renderMenu = (role) => {
@@ -222,24 +242,20 @@ const Sidebar = ({ user, handleChangeSession, handleExitSystem }) => {
       {openSubmenu.admin && (
         <ul className="submenu">
           <li><Link to="/admin/backup-recovery">Backup y Recuperación de Datos</Link></li>
-          {/* <li><Link to="/admin/logs">Ver Logs de la Aplicación</Link></li> */}
+          {/* <li><Link to="/admin/logs">Ver Logs de la Aplicación</Link></li> */}          
         </ul>
       )}
     </li>
   );
 
   return (
-    <div className="main-sidebar-container">
-      <div className={`sidebar ${isMenuOpen ? 'active' : ''}`}>
+    <div>
+      <div className="sidebar">
         <h2>Bienvenido</h2>
         <ul>
           {renderMenu(user.role)}
-          <li>
-            <button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button>
-          </li>
-          <li>
-            <button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button>
-          </li>
+          <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
+          <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
         </ul>
         {user && (
           <div className="active-user">
@@ -247,17 +263,20 @@ const Sidebar = ({ user, handleChangeSession, handleExitSystem }) => {
           </div>
         )}
       </div>
-      <div
-        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-        onClick={toggleMenu}
-        aria-label="Toggle navigation"
-        aria-expanded={isMenuOpen}
-      >
+      <div className="hamburger" onClick={toggleMenu}>
         <div className="line"></div>
         <div className="line"></div>
         <div className="line"></div>
       </div>
-      {isMenuOpen && <div className="overlay" onClick={closeMenu}></div>}
+      {isMenuOpen && (
+        <div className="hamburger-menu">
+          <ul>
+            {renderMenu(user.role)}
+            <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
+            <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

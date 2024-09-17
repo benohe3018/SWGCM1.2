@@ -96,6 +96,24 @@ const Sidebar = () => {
     }
   };
 
+  const renderMobileMenu = () => (
+    <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+      <ul>
+        {renderMenu(user && user.role)}
+        <li>
+          <button onClick={handleChangeSession} className="sidebar-button">
+            Cambiar Sesión
+          </button>
+        </li>
+        <li>
+          <button onClick={handleExitSystem} className="sidebar-button">
+            Cerrar Página
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
+
   const renderMedicosSubmenu = () => (
     <li onClick={() => handleSubmenuToggle('medicos')}>
       <span>Módulo de Médicos</span>
@@ -250,7 +268,8 @@ const Sidebar = () => {
 
   return (
     <div className="main-sidebar-container">
-      <div className={`sidebar ${isMenuOpen ? 'active' : ''}`}>
+      {/* Sidebar fija para pantallas grandes */}
+      <div className="sidebar">
         <h2>Bienvenido</h2>
         <ul>
           {renderMenu(user && user.role)}
@@ -273,16 +292,20 @@ const Sidebar = () => {
           </div>
         )}
       </div>
-      <div
-        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-        onClick={toggleMenu}
-      >
+
+      {/* Botón Hamburguesa para móviles */}
+      <div className="hamburger" onClick={toggleMenu}>
         <div className="line"></div>
         <div className="line"></div>
         <div className="line"></div>
       </div>
+
+      {/* Menú móvil */}
       {isMenuOpen && (
-        <div className="overlay" onClick={toggleMenu}></div>
+        <>
+          {renderMobileMenu()}
+          <div className="overlay" onClick={toggleMenu}></div>
+        </>
       )}
     </div>
   );

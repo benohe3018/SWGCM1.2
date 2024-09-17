@@ -2,17 +2,7 @@
 
 /* Estilos Base - Mobile-First */
 .sidebar {
-  background-color: #12322B;
-  color: white;
-  padding: 0.9375rem; /* 15px */
-  box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  left: -15.625rem; /* -250px, ocultar sidebar en móviles */
-  height: 100vh;
-  width: 15.625rem; /* 250px */
-  transition: left 0.3s ease;
-  z-index: 1000;
+  display: none;
 }
 
 .sidebar.active {
@@ -82,6 +72,45 @@
   margin: 0.3125rem 0; /* 5px */
 }
 
+/* Menú Móvil */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 75%;
+  max-width: 300px;
+  height: 100%;
+  background-color: #12322B;
+  color: white;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-menu ul li {
+  padding: 0.625rem 0; /* 10px */
+  cursor: pointer;
+  font-size: 1rem; /* 16px */
+}
+
+.mobile-menu ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.mobile-menu ul li:hover {
+  background-color: #4a8b7f;
+}
+
 /* Overlay */
 .overlay {
   display: none;
@@ -100,11 +129,21 @@
 
 /* Medias Queries */
 
-/* Tablets y Pantallas Medianas */
-@media (min-width: 480px) {
+/* Tablets y Pantallas Mayores */
+@media (min-width: 768px) {
   /* Mostrar Sidebar por defecto */
   .sidebar {
+    display: block;
+    position: fixed;
+    top: 0;
     left: 0;
+    width: 15.625rem; /* 250px */
+    height: 100vh;
+    background-color: #12322B;
+    color: white;
+    padding: 0.9375rem; /* 15px */
+    box-sizing: border-box;
+    z-index: 1000;
   }
 
   /* Ocultar Botón Hamburguesa */
@@ -112,21 +151,9 @@
     display: none;
   }
 
-  /* Ajustar Main Layout para incluir sidebar */
-  .main-layout .content {
-    margin-left: 15.625rem; /* 250px */
-  }
-
-  .login-header {
-    padding-left: 15.625rem; /* 250px */
-  }
-}
-
-/* Laptops y Pantallas Grandes */
-@media (min-width: 1024px) {
-  /* Ancho de Sidebar */
-  .sidebar {
-    width: 15.625rem; /* 250px */
+  /* Ocultar Menú Móvil */
+  .mobile-menu {
+    display: none;
   }
 
   /* Ajustar Margen del Contenido */

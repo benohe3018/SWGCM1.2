@@ -4,13 +4,13 @@
 .sidebar {
   background-color: #12322B;
   color: white;
-  padding: 15px;
+  padding: 0.9375rem; /* 15px */
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  left: -250px; /* Ocultar sidebar por defecto en móviles */
+  left: -15.625rem; /* -250px, ocultar sidebar en móviles */
   height: 100vh;
-  width: 250px;
+  width: 15.625rem; /* 250px */
   transition: left 0.3s ease;
   z-index: 1000;
 }
@@ -21,8 +21,8 @@
 
 .sidebar h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 18px;
+  margin-bottom: 1.25rem; /* 20px */
+  font-size: 1.125rem; /* 18px */
 }
 
 .sidebar ul {
@@ -31,9 +31,9 @@
 }
 
 .sidebar ul li {
-  padding: 10px 0;
+  padding: 0.625rem 0; /* 10px */
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
 }
 
 .sidebar ul li a {
@@ -47,164 +47,94 @@
 }
 
 .active-user {
-  font-size: 12px;
+  font-size: 0.75rem; /* 12px */
   color: black;
-  margin-top: 20px;
+  margin-top: 1.25rem; /* 20px */
 }
 
 .sidebar-button {
-  font-size: 14px;
-  padding: 5px 10px;
+  font-size: 0.875rem; /* 14px */
+  padding: 0.3125rem 0.625rem; /* 5px 10px */
   background: whitesmoke;
   color: black;
   border: none;
-  border-radius: 3px;
+  border-radius: 0.1875rem; /* 3px */
   cursor: pointer;
 }
 
-/* Hamburger Button */
+/* Botón Hamburguesa */
 .hamburger {
-  display: none; /* Oculto por defecto */
+  display: block; /* Mostrar por defecto en móviles */
   cursor: pointer;
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 1.25rem; /* 20px */
+  left: 1.25rem; /* 20px */
   z-index: 1001;
   background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 0.625rem; /* 10px */
+  border-radius: 0.3125rem; /* 5px */
 }
 
 .hamburger div {
-  width: 30px;
-  height: 3px;
+  width: 1.875rem; /* 30px */
+  height: 0.1875rem; /* 3px */
   background-color: #12322B;
-  margin: 5px 0;
+  margin: 0.3125rem 0; /* 5px */
 }
 
-/* Hamburger Menu */
-.hamburger-menu {
+/* Overlay */
+.overlay {
   display: none;
+}
+
+.overlay.active {
+  display: block;
   position: fixed;
-  top: 60px; /* Debe estar debajo del botón hamburger */
+  top: 0;
   left: 0;
   width: 100%;
-  background-color: #12322B;
-  padding: 10px 0;
-  z-index: 1000;
-}
-
-.hamburger-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.hamburger-menu ul li {
-  padding: 10px 20px;
-  color: white;
-  font-size: 16px;
-}
-
-.hamburger-menu ul li:hover {
-  background-color: #4a8b7f;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 /* Medias Queries */
 
 /* Tablets y Pantallas Medianas */
-@media (min-width: 481px) {
-
+@media (min-width: 480px) {
   /* Mostrar Sidebar por defecto */
   .sidebar {
     left: 0;
   }
 
-  /* Ocultar Hamburger en pantallas medianas */
+  /* Ocultar Botón Hamburguesa */
   .hamburger {
     display: none;
   }
 
   /* Ajustar Main Layout para incluir sidebar */
   .main-layout .content {
-    margin-left: 250px;
+    margin-left: 15.625rem; /* 250px */
   }
 
   .login-header {
-    padding-left: 250px;
-  }
-}
-
-/* Móviles Pequeños */
-@media (max-width: 480px) {
-  
-  /* Mostrar Hamburger */
-  .hamburger {
-    display: block;
-  }
-
-  /* Ocultar Sidebar inicialmente */
-  .sidebar {
-    left: -250px;
-  }
-
-  .sidebar.active {
-    left: 0;
-  }
-
-  /* Mostrar Hamburger Menu */
-  .hamburger-menu.active {
-    display: block;
-  }
-
-  /* Ajustar Main Layout cuando Sidebar está oculto */
-  .main-layout .content {
-    margin-left: 0;
-  }
-
-  .login-header {
-    padding-left: 0;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    transition: left 0.3s ease;
-  }
-
-  .sidebar.active {
-    left: 0;
-  }
-
-  /* Sidebar Menu Items */
-  .sidebar ul li {
-    text-align: center;
-    font-size: 16px;
-    padding: 15px 0;
-  }
-
-  .active-user {
-    text-align: center;
-    margin-top: 20px;
+    padding-left: 15.625rem; /* 250px */
   }
 }
 
 /* Laptops y Pantallas Grandes */
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
+  /* Ancho de Sidebar */
   .sidebar {
-    width: 250px;
+    width: 15.625rem; /* 250px */
   }
 
+  /* Ajustar Margen del Contenido */
   .main-layout .content {
-    margin-left: 250px;
+    margin-left: 15.625rem; /* 250px */
   }
 
   .login-header {
-    padding-left: 250px;
+    padding-left: 15.625rem; /* 250px */
   }
 }
-/*TODO*/
-/*TODO2*/

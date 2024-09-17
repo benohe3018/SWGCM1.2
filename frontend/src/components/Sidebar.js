@@ -15,16 +15,16 @@ const Sidebar = () => {
     diagnosticos: false,
     hospitales: false,
     informes: false,
-    admin: false
+    admin: false,
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmenuToggle = (menu) => {
-    setOpenSubmenu(prevState => ({
+    setOpenSubmenu((prevState) => ({
       ...prevState,
-      [menu]: !prevState[menu]
+      [menu]: !prevState[menu],
     }));
   };
 
@@ -249,33 +249,40 @@ const Sidebar = () => {
   );
 
   return (
-    <div>
-      <div className="sidebar">
+    <div className="main-sidebar-container">
+      <div className={`sidebar ${isMenuOpen ? 'active' : ''}`}>
         <h2>Bienvenido</h2>
         <ul>
-          {renderMenu(user.role)}
-          <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
-          <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
+          {renderMenu(user && user.role)}
+          <li>
+            <button onClick={handleChangeSession} className="sidebar-button">
+              Cambiar Sesión
+            </button>
+          </li>
+          <li>
+            <button onClick={handleExitSystem} className="sidebar-button">
+              Cerrar Página
+            </button>
+          </li>
         </ul>
         {user && (
           <div className="active-user">
-            <p>Usuario activo: {user.username} ({user.role})</p>
+            <p>
+              Usuario activo: {user.username} ({user.role})
+            </p>
           </div>
         )}
       </div>
-      <div className="hamburger" onClick={toggleMenu}>
+      <div
+        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+        onClick={toggleMenu}
+      >
         <div className="line"></div>
         <div className="line"></div>
         <div className="line"></div>
       </div>
       {isMenuOpen && (
-        <div className="hamburger-menu">
-          <ul>
-            {renderMenu(user.role)}
-            <li><button onClick={handleChangeSession} className="sidebar-button">Cambiar Sesión</button></li>
-            <li><button onClick={handleExitSystem} className="sidebar-button">Cerrar Página</button></li>
-          </ul>
-        </div>
+        <div className="overlay" onClick={toggleMenu}></div>
       )}
     </div>
   );

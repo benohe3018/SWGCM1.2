@@ -1,17 +1,22 @@
 /* Sidebar.css */
 
+/* Estilos Base - Mobile-First */
 .sidebar {
-  height: 100vh;
   background-color: #12322B;
   color: white;
   padding: 15px;
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  left: 0;
-  overflow-y: auto;
-  z-index: 1000;
+  left: -250px; /* Ocultar sidebar por defecto en móviles */
+  height: 100vh;
   width: 250px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  left: 0; /* Mostrar sidebar cuando está activa */
 }
 
 .sidebar h2 {
@@ -22,15 +27,13 @@
 
 .sidebar ul {
   list-style: none;
-  display: contents;
+  padding: 0;
 }
 
 .sidebar ul li {
-  padding: 7px;
+  padding: 10px 0;
   cursor: pointer;
-  position: relative;
-  text-align: left;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .sidebar ul li a {
@@ -38,141 +41,36 @@
   text-decoration: none;
   display: block;
 }
+
 .sidebar ul li:hover {
-  background-color: #4a8b7f; /* Cambia este color al que prefieras */
+  background-color: #4a8b7f;
 }
+
 .active-user {
   font-size: 12px;
   color: black;
+  margin-top: 20px;
 }
 
-.submenu {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  top: 0;
-  background-color: #12322B;
-  width: 100%;
-  z-index: 1000;
-  padding: 0;
-  list-style: none;
-  font-size: 0.9em;
+.sidebar-button {
+  font-size: 14px;
+  padding: 5px 10px;
+  background: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
-.submenu li {
-  font-size: 0.8em;
-}
-
-.sidebar-button{
-  font-size: 12px;
-  padding: 1px;
-}
-
-.arrow {
-  margin-left: 40px;
-  transform: rotate(90deg);
-  display: none;
-}
-
-.arrow.open {
-  transform: rotate(180deg);
-}
-
-.main-layout .content {
-  margin-left: 250px; /* Ajustar esto al ancho de tu barra lateral */
-  padding: 20px;
-}
-
-/* Ajustes adicionales para el encabezado */
-.login-header {
-  padding-left: 250px; /* Ajustar esto al ancho de tu barra lateral */
-}
-@media (max-width: 480px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    display: none;
-  }
-
-  .hamburger-menu {
-    display: block;
-    position: fixed;
-    top: 20px;
-    left: 70px;
-    z-index: 1001;
-    background-color: #12322B; /* Cambia el color de fondo */
-    padding: 5px;
-    border-radius: 5px;
-    color: white; /* Asegura que el texto sea visible */
-    font-size: 14px;
-    width: 120px;
-  }
-
-  .hamburger-menu ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .hamburger-menu ul li {
-    padding: 5px;
-    cursor: pointer;
-    position: relative;
-    color: white; /* Asegura que el texto sea visible */
-  }
-
-  .hamburger-menu ul li a {
-    color: white; /* Asegura que los enlaces sean visibles */
-    text-decoration: none;
-    display: block;
-  }
-
-  .hamburger-menu ul li:hover {
-    background-color: #4a8b7f; /* Cambia este color al que prefieras */
-  }
-
-  .hamburger-menu .submenu {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 0;
-    background-color: #12322B;
-    width: 100%;
-    z-index: 1000;
-    padding: 0;
-    list-style: none;
-    font-size: 0.9em;
-  }
-
-  .hamburger-menu .submenu li {
-    font-size: 0.8em;
-  }
-  .sidebar-button {
-    font-size: 14px;
-    padding: 1px;
-    background: whitesmoke;
-    color: black;
-}
-}
-
-@media (max-width: 819px) {
-  .hamburger {
-    display: block;
-  }
-}
-
-@media (min-width: 820px) {
-  .hamburger {
-    display: none;
-  }
-}
-
+/* Hamburger Button */
 .hamburger {
+  display: none; /* Oculto por defecto */
   cursor: pointer;
   position: fixed;
-  top: 150px;
-  left: 25px;
+  top: 20px;
+  left: 20px;
   z-index: 1001;
-  background-color: #fff; /* Cambia el color de fondo */
+  background-color: #fff;
   padding: 10px;
   border-radius: 5px;
 }
@@ -180,9 +78,131 @@
 .hamburger div {
   width: 30px;
   height: 3px;
-  background-color: #12322B; /* Cambia el color de las líneas */
+  background-color: #12322B;
   margin: 5px 0;
 }
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  position: fixed;
+  top: 60px; /* Debe estar debajo del botón hamburger */
+  left: 0;
+  width: 100%;
+  background-color: #12322B;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.hamburger-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hamburger-menu ul li {
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+}
+
+.hamburger-menu ul li:hover {
+  background-color: #4a8b7f;
+}
+
+/* Medias Queries */
+
+/* Tablets y Pantallas Medianas */
+@media (min-width: 481px) {
+
+  /* Mostrar Sidebar por defecto */
+  .sidebar {
+    left: 0;
+  }
+
+  /* Ocultar Hamburger en pantallas medianas */
+  .hamburger {
+    display: none;
+  }
+
+  /* Ajustar Main Layout para incluir sidebar */
+  .main-layout .content {
+    margin-left: 250px;
+  }
+
+  .login-header {
+    padding-left: 250px;
+  }
+}
+
+/* Móviles Pequeños */
+@media (max-width: 480px) {
   
-  
-  
+  /* Mostrar Hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* Ocultar Sidebar inicialmente */
+  .sidebar {
+    left: -250px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Mostrar Hamburger Menu */
+  .hamburger-menu.active {
+    display: block;
+  }
+
+  /* Ajustar Main Layout cuando Sidebar está oculto */
+  .main-layout .content {
+    margin-left: 0;
+  }
+
+  .login-header {
+    padding-left: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Sidebar Menu Items */
+  .sidebar ul li {
+    text-align: center;
+    font-size: 16px;
+    padding: 15px 0;
+  }
+
+  .active-user {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+/* Laptops y Pantallas Grandes */
+@media (min-width: 1025px) {
+  .sidebar {
+    width: 250px;
+  }
+
+  .main-layout .content {
+    margin-left: 250px;
+  }
+
+  .login-header {
+    padding-left: 250px;
+  }
+}

@@ -1,87 +1,66 @@
 /* main-layout.css */
+
+/* Estilos Base - Mobile-First */
 .main-layout {
   display: flex;
-  flex-direction: column; /* Asegura que los elementos se apilen verticalmente en pantallas pequeñas */
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start; /* Alinear al inicio para evitar centrado inesperado */
+  width: 100%;
 }
-  
-  .sidebar {
-    width: 145px; /* Ancho fijo para la barra lateral */
-    background-color: #12322B;
-    color: white;
+
+.content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: whitesmoke;
+  margin-top: 60px; /* Espacio para el header */
+}
+
+.header-texts {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.welcome-message {
+  font-size: 16px;
+}
+
+.department-name {
+  font-size: 14px;
+}
+
+.mr-machine {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto;
+  display: block;
+}
+
+/* Ajustes para pantallas medianas (tabletas) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .content {
     padding: 15px;
-    box-sizing: border-box;
   }
   
+  .mr-machine {
+    max-width: 400px;
+    margin: 15px auto;
+  }
+}
+
+/* Ajustes para habitaciones grandes */
+@media (min-width: 1025px) {
+  .main-layout {
+    flex-direction: row;
+  }
+
   .content {
-    flex: 1; /* El contenido principal ocupa todo el espacio disponible */
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: whitesmoke;
+    padding: 30px;
+    margin-top: 0;
   }
 
   .mr-machine {
-    width: 100%;
-    max-width: 300px;
-    margin: 10px auto; /* Agrega margen superior e inferior */
-    display: block; /* Asegura que se comporte como un bloque en el flujo del documento */
-  }
-  
-
-  /* main-layout.css */
-
-/* Ajustes para pantallas medianas (tabletas) */
-@media (max-width: 768px) {
-  .header, .mr-machine {
-    display: block; /* Asegúrate de que estén visibles */
-    margin: 0 auto; /* Centra la imagen */
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
-    max-width: 300px; /* Controla el tamaño máximo de la imagen */
-  }
-  .sidebar {
-    width: 250px; /* Ancho fijo para la barra lateral */
-    background-color: #12322B;
-    color: white;
-    padding: 15px;
-    box-sizing: border-box;
+    max-width: 500px;
+    margin: 20px auto;
   }
 }
-  
-  /* Ajustes para pantallas pequeñas (móviles) */
-  @media (max-width: 480px) {
-    .main-layout {
-      flex-direction: column;
-    }
-   
-    .content {
-      padding: 5px; /* Reduce aún más el padding */
-    }
-    .sidebar {
-      width: 150px; /* Ancho fijo para la barra lateral */
-      background-color: #12322B;
-      color: white;
-      padding: 2px;
-      box-sizing: border-box;
-    }
-    .header-texts {
-      font-size: 18px; /* Reduce el tamaño de la fuente para el header */
-      margin-bottom: 10px;
-    }
-  
-    .welcome-message {
-      font-size: 16px; /* Reduce el tamaño de la fuente del mensaje de bienvenida */
-    }
-  
-    .department-name {
-      font-size: 14px; /* Reduce el tamaño de la fuente del nombre del departamento */
-    }
-  
-    .mr-machine {
-      width: 100%;
-      max-width: 400px; /* Aumenta el tamaño de la imagen para un mejor ajuste */
-      margin-top: 15px;
-      margin-left: 75px;
-    }
-  }
-  
-  

@@ -1,60 +1,73 @@
+/* ===================== */
+/*   Estilos Base (Mobile-First) */
+/* ===================== */
 .delete-medico-page {
-  background-color: whitesmoke; /* Color de fondo */
-  height: 100vh; /* Altura completa de la ventana del navegador */
+  background-color: whitesmoke;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
+  justify-content: flex-start;
   font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   color: #0C231E;
+  padding: 10px;
 }
-
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
 
 .delete-medico-header {
   display: flex;
-  flex-direction: inline-flex;
-  background-color: whitesmoke; /* Color del encabezado */
-  padding: 10px 20px;
+  flex-direction: column;
+  background-color: whitesmoke;
+  padding: 10px;
   box-sizing: border-box;
-  top: 0; /* Cambio realizado aquí para asegurarse de que esté en la parte superior */
-  z-index: 100; /* Para asegurarse de que esté por encima de otros elementos */
+  width: 100%;
+  align-items: center;
 }
 
 .delete-header-logo {
-  margin-right: 40px; /* Agrega margen a la izquierda del logo */
-  height:60px;
+  height: 60px;
+  margin-bottom: 10px;
 }
 
 .delete-header-texts {
   text-align: center;
-  flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
+  width: 100%;
 }
 
 .delete-welcome-message {
-  font-size: 24px;
+  font-size: 1.5em;
   margin: 0;
-  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
 }
 
 .delete-department-name {
-  font-size: 18px;
+  font-size: 1.2em;
   margin: 0;
-  color: #0C231E;
 }
 
 .delete-medico-content {
-  margin-top: 20px; /* Ajusta este valor si es necesario */
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.delete-medico-search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   justify-content: center;
-  margin-left: 150px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.delete-medico-search-container input,
+.delete-medico-search-container select {
+  width: 90%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .delete-medico-table-container {
@@ -68,59 +81,33 @@
   margin-bottom: 20px;
 }
 
-.delete-medico-table th, .delete-medico-table td {
+.delete-medico-table th,
+.delete-medico-table td {
   border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
+  padding: 8px;
+  text-align: left;
+  font-size: 0.9em;
 }
 
 .delete-medico-table th {
   background-color: #f4f4f4;
 }
 
-.success-message {
-  color: green;
-  margin-bottom: 20px;
-}
-
-.delete-medico-search-container {
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
-  display: flex;
-  }
-
-.delete-medico-search-container input {
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  margin: 0px;
-}
-
-.delete-medico-search-container select {
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin: 0px
-}
-
 .pagination-delete-medico {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin: 20px 0;
 }
 
 .pagination-delete-medico button {
-  padding: 10px 15px;
-  margin: 0 5px;
+  padding: 8px 12px;
+  margin: 0 3px;
   background-color: #12322B;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 0.9em;
 }
 
 .pagination-delete-medico button.active {
@@ -137,72 +124,177 @@
   margin-top: 20px;
 }
 
-@media (max-width: 480px) {
+/* ===================== */
+/*   Breakpoint: 481px - 768px */
+/* ===================== */
+@media (min-width: 481px) and (max-width: 768px) {
   .delete-medico-header {
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
-    text-align: center; /* Centra el texto del header */
-    flex-direction: column;
-    margin-left: 40px;
-    align-items: flex-start;
-  }
-
-  .delete-header-texts{
-    text-align: center;
-    width: 90%;
-    margin-left: 50px;;
-  }
-
-  .delete-welcome-message{
-    font-size: 1.2em;
-    text-align: center;
-    margin-right: 90px;
-  }
-
-  .delete-department-name{
-    font-size: 1.0em;
-    text-align: center;
-    margin-right: 90px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .delete-header-logo {
-    height: 60px; /* Ajusta el tamaño del logo */
-    margin-left: 150px; /* Elimina el margen derecho */
-    margin-bottom: 10px; /* Espacio entre el logo y los textos */
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+
+  .delete-header-texts {
+    text-align: left;
+    width: auto;
+  }
+
+  .delete-welcome-message {
+    font-size: 1.8em;
+  }
+
+  .delete-department-name {
+    font-size: 1.4em;
+  }
+
+  .delete-medico-content {
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
   }
 
   .delete-medico-search-container {
-    width: 300px;
-    margin-left: 20px;
-    margin-top: 10px;
+    flex-direction: row;
+    width: auto;
   }
 
   .delete-medico-search-container input,
   .delete-medico-search-container select {
-    width: 70%; /* Asegura que ocupen todo el ancho disponible */
-    margin-bottom: 15px;
+    width: auto;
+    margin: 0 5px;
   }
-  .delete-medico-table-container{
-    width: 90%;
-    overflow-x: auto;
-    margin-top: 0px;
-  }
-  .delete-medico-table{
-    width: 100%;
-    border-collapse: collapse;
-  }
+
   .delete-medico-table th,
   .delete-medico-table td {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: left;
-    font-size: 9px;
+    padding: 10px;
+    font-size: 1em;
   }
-  .delete-medico-table th {
-    background-color: #f2f2f2;
-    color: #333;
-    }
 
+  .pagination-delete-medico {
+    margin: 15px 0;
+  }
 }
 
+/* ===================== */
+/*   Breakpoint: 769px - 1024px */
+/* ===================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .delete-medico-page {
+    padding: 20px;
+  }
 
-  
+  .delete-medico-header {
+    padding: 15px 30px;
+  }
+
+  .delete-medico-search-container input,
+  .delete-medico-search-container select {
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .delete-medico-table th,
+  .delete-medico-table td {
+    padding: 12px;
+    font-size: 1em;
+  }
+
+  .pagination-delete-medico button {
+    padding: 10px 15px;
+    font-size: 1em;
+  }
+}
+
+/* ===================== */
+/*   Breakpoint: 1025px - 1280px */
+/* ===================== */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .delete-medico-page {
+    padding: 30px;
+  }
+
+  .delete-medico-header {
+    padding: 20px 40px;
+  }
+
+  .delete-medico-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .delete-medico-search-container {
+    flex-direction: row;
+    width: 50%;
+  }
+
+  .delete-medico-search-container input,
+  .delete-medico-search-container select {
+    width: 45%;
+    margin: 0 10px;
+  }
+
+  .delete-medico-table-container {
+    width: 100%;
+  }
+
+  .delete-medico-table th,
+  .delete-medico-table td {
+    padding: 15px;
+    font-size: 1em;
+  }
+
+  .pagination-delete-medico button {
+    padding: 12px 18px;
+    font-size: 1.1em;
+  }
+}
+
+/* ===================== */
+/*   Breakpoint: 1281px en adelante */
+/* ===================== */
+@media (min-width: 1281px) {
+  .delete-medico-page {
+    padding: 40px;
+  }
+
+  .delete-medico-header {
+    padding: 25px 50px;
+  }
+
+  .delete-welcome-message {
+    font-size: 2em;
+  }
+
+  .delete-department-name {
+    font-size: 1.6em;
+  }
+
+  .delete-medico-content {
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+
+  .delete-medico-search-container input,
+  .delete-medico-search-container select {
+    width: 40%;
+    margin: 0 15px;
+  }
+
+  .delete-medico-table th,
+  .delete-medico-table td {
+    padding: 20px;
+    font-size: 1.1em;
+  }
+
+  .pagination-delete-medico button {
+    padding: 15px 20px;
+    font-size: 1.2em;
+  }
+}

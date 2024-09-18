@@ -21,6 +21,16 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
   const [searchField, setSearchField] = useState('nombre_especialidad');
   const especialidadesPerPage = 10;
 
+  // Función para manejar cambios en los inputs
+  const handleInputChange = (e, idEspecialidad, field) => {
+    const newEspecialidades = [...especialidades];
+    const index = newEspecialidades.findIndex(esp => esp.id === idEspecialidad);
+    if (index !== -1) {
+      newEspecialidades[index][field] = e.target.value;
+      setEspecialidades(newEspecialidades);
+    }
+  };
+
   useEffect(() => {
     if (location.pathname === '/crear-especialidad') {
       setVista('crear');
@@ -169,16 +179,17 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
   }
 
   return (
-    <div className="especialidades-medicas-page">
-      <header className="especialidades-medicas-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="especialidades-header-logo" />
-        <div className="especialidades-header-texts">
-          <h1 className="especialidades-welcome-message">Sistema de Gestión de Especialidades Médicas</h1>
-          <h2 className="especialidades-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+    <div className="especialidades-medicas">
+      <header className="especialidades-medicas__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="especialidades-medicas__header-logo" />
+        <div className="especialidades-medicas__header-texts">
+          <h1 className="especialidades-medicas__welcome-message">Sistema de Gestión de Especialidades Médicas</h1>
+          <h2 className="especialidades-medicas__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      <div className="especialidades-medicas-content">
-        {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
+      <div className="especialidades-medicas__content">
+        {mensaje && <div className="especialidades-medicas__message-confirmation">{mensaje}</div>}
+
         {vista === 'crear' && (
           <FormularioEspecialidad
             modo="crear"
@@ -186,42 +197,46 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
             onCancel={() => navigate('/ver-especialidades')}
           />
         )}
+
         {vista === 'ver' && (
           <>
-            <div className="busqueda-especialidades-medicas">
+            <div className="especialidades-medicas__search-container">
               <input
                 type="text"
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={handleSearch}
+                className="especialidades-medicas__search-input"
               />
-              <select value={searchField} onChange={handleFieldChange}>
+              <select
+                value={searchField}
+                onChange={handleFieldChange}
+                className="especialidades-medicas__search-select"
+              >
                 <option value="nombre_especialidad">Nombre de la Especialidad</option>
               </select>
             </div>
-            <div className="tabla-especialidades-container">
-              <table className="tabla-especialidades">
+            <div className="especialidades-medicas__table-container">
+              <table className="especialidades-medicas__table">
                 <thead>
                   <tr>
-                    
-                    <th>Nombre de la Especialidad</th>
+                    <th className="especialidades-medicas__table-header">Nombre de la Especialidad</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
-                    <tr key={especialidad.id}>
-                      
-                      <td>{especialidad.nombre_especialidad}</td>
+                    <tr key={especialidad.id} className="especialidades-medicas__table-row">
+                      <td className="especialidades-medicas__table-data">{especialidad.nombre_especialidad}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-especialidad">
+              <div className="especialidades-medicas__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`especialidades-medicas__pagination-button ${page === currentPage ? 'active' : ''}`}
                   >
                     {page}
                   </button>
@@ -230,50 +245,49 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
             </div>
           </>
         )}
+
         {vista === 'editar' && (
           <>
-            <div className="busqueda-especialidades-medicas">
+            <div className="especialidades-medicas__search-container">
               <input
                 type="text"
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={handleSearch}
+                className="especialidades-medicas__search-input"
               />
-              <select value={searchField} onChange={handleFieldChange}>
+              <select
+                value={searchField}
+                onChange={handleFieldChange}
+                className="especialidades-medicas__search-select"
+              >
                 <option value="nombre_especialidad">Nombre de la Especialidad</option>
               </select>
             </div>
-            <div className="tabla-especialidades-container">
-              <table className="tabla-especialidades">
+            <div className="especialidades-medicas__table-container">
+              <table className="especialidades-medicas__table">
                 <thead>
                   <tr>
-                    
-                    <th>Nombre de la Especialidad</th>
-                    <th>Acciones</th>
+                    <th className="especialidades-medicas__table-header">Nombre de la Especialidad</th>
+                    <th className="especialidades-medicas__table-header">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
-                    <tr key={especialidad.id}>
-                      
-                      <td>
+                    <tr key={especialidad.id} className="especialidades-medicas__table-row">
+                      <td className="especialidades-medicas__table-data">
                         <input
                           type="text"
                           value={especialidad.nombre_especialidad}
-                          onChange={(e) => {
-                            const newEspecialidades = [...especialidades];
-                            const index = newEspecialidades.findIndex(esp => esp.id === especialidad.id);
-                            newEspecialidades[index].nombre_especialidad = e.target.value;
-                            setEspecialidades(newEspecialidades);
-                          }}
-                          style={{ width: '100px' }} // Ajusta el tamaño del input
-                          />
+                          onChange={(e) => handleInputChange(e, especialidad.id, 'nombre_especialidad')}
+                          className="especialidades-medicas__input"
+                        />
                       </td>
-                      <td>
-                        <div className="botones-acciones">
+                      <td className="especialidades-medicas__table-data">
+                        <div className="especialidades-medicas__actions">
                           <button
                             onClick={() => handleEditarEspecialidad(especialidad)}
-                            className="editar-button"
+                            className="especialidades-medicas__button especialidades-medicas__button--guardar"
                           >
                             Guardar
                           </button>
@@ -283,12 +297,12 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-especialidad">
+              <div className="especialidades-medicas__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`especialidades-medicas__pagination-button ${page === currentPage ? 'active' : ''}`}
                   >
                     {page}
                   </button>
@@ -297,38 +311,42 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
             </div>
           </>
         )}
+
         {vista === 'eliminar' && (
           <>
-            <div className="busqueda-especialidades-medicas">
+            <div className="especialidades-medicas__search-container">
               <input
                 type="text"
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={handleSearch}
+                className="especialidades-medicas__search-input"
               />
-              <select value={searchField} onChange={handleFieldChange}>
+              <select
+                value={searchField}
+                onChange={handleFieldChange}
+                className="especialidades-medicas__search-select"
+              >
                 <option value="nombre_especialidad">Nombre de la Especialidad</option>
               </select>
             </div>
-            <div className="tabla-especialidades-container">
-              <table className="tabla-especialidades">
+            <div className="especialidades-medicas__table-container">
+              <table className="especialidades-medicas__table">
                 <thead>
                   <tr>
-                    
-                    <th>Nombre de la Especialidad</th>
-                    <th>Acciones</th>
+                    <th className="especialidades-medicas__table-header">Nombre de la Especialidad</th>
+                    <th className="especialidades-medicas__table-header">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentEspecialidades.map((especialidad) => (
-                    <tr key={especialidad.id}>
-                      
-                      <td>{especialidad.nombre_especialidad}</td>
-                      <td>
-                        <div className="botones-acciones">
+                    <tr key={especialidad.id} className="especialidades-medicas__table-row">
+                      <td className="especialidades-medicas__table-data">{especialidad.nombre_especialidad}</td>
+                      <td className="especialidades-medicas__table-data">
+                        <div className="especialidades-medicas__actions">
                           <button
                             onClick={() => handleEliminarEspecialidad(especialidad.id)}
-                            className="eliminar-button"
+                            className="especialidades-medicas__button especialidades-medicas__button--eliminar"
                           >
                             Eliminar
                           </button>
@@ -338,12 +356,12 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-especialidad">
+              <div className="especialidades-medicas__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`especialidades-medicas__pagination-button ${page === currentPage ? 'active' : ''}`}
                   >
                     {page}
                   </button>
@@ -363,5 +381,6 @@ const EspecialidadesMedicas = ({ vistaInicial }) => {
     </div>
   );
 };
+
 
 export default EspecialidadesMedicas;

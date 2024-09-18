@@ -1,175 +1,284 @@
-/* src/components/EspecialidadesMedicas.css */
+/* EspecialidadesMedicas.css */
 
-.especialidades-medicas-page {
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: black;
-  }
-  
-  .especialidades-medicas-header {
-    display: flex;
-    background-color: whitesmoke;
-    padding: 10px 20px;
-    box-sizing: border-box;
-  }
-  
-  .especialidades-header-logo {
-    height: 60px;
-    margin-right: 40px
-  }
-  
-  .especialidades-header-texts {
-    text-align: center;
-    flex-grow: 1;
-  }
-  
-  .especialidades-welcome-message {
-    font-size: 24px;
-    margin: 0;
-    color: #0C231E;
-  }
-  
-  .especialidades-department-name {
-    font-size: 18px;
-    margin: 0;
-    color: #0C231E;
-  }
+/* Estilos Base - Mobile-First */
 
-  .busqueda-especialidades-medicas{
-    display: flex;
+.especialidades-medicas {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  color: #0C231E;
+}
+
+.especialidades-medicas__header {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 1rem; /* 16px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.especialidades-medicas__header-logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
+}
+
+.especialidades-medicas__header-texts {
+  text-align: center;
+}
+
+.especialidades-medicas__welcome-message {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #0C231E;
+}
+
+.especialidades-medicas__department-name {
+  font-size: 1.125rem; /* 18px */
+  margin: 0;
+}
+
+.especialidades-medicas__mr-machine {
+  width: 100%;
+  max-width: 18.75rem; /* 300px */
+  margin-top: 2rem;
+}
+
+.especialidades-medicas__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem; /* 16px */
+  align-items: center;
+}
+
+.especialidades-medicas__message-confirmation {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 0.625rem; /* 10px */
+  border-radius: 0.3125rem; /* 5px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.especialidades-medicas__search-container {
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  flex-direction: row;
-  }
+  width: 100%;
+  max-width: 25rem; /* 400px */
+  margin-bottom: 1.25rem; /* 20px */
+}
 
-  .busqueda-especialidades-medicas input[type="text"] {
-    padding: 10px;
-    width: 50%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 0px;
-  }
-  
-  .busqueda-especialidades-medicas select {
-    padding: 10px;
-  font-size: 16px;
+.especialidades-medicas__search-input,
+.especialidades-medicas__search-select {
+  padding: 0.625rem; /* 10px */
+  font-size: 1rem; /* 16px */
   border: 1px solid #ddd;
-  border-radius: 5px;
-  margin:0px;
-  margin-left: 10px;
-  }
-  
-  .especialidades-medicas-content {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .tabla-especialidades-container {
-    width: 100%;
-    overflow-x: auto;
-    margin-top: 40px;
-  }
-  
-  .tabla-especialidades {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .tabla-especialidades th, .tabla-especialidades td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .tabla-especialidades th {
-    background-color: #f4f4f4;
-  }
-  
-  .botones-acciones {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .editar-button {
-    background-color: #0C231E;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .editar-button:hover {
-    background-color: whitesmoke;
-    color: black;
-  }
-  
-  .eliminar-button {
-    background-color: #dc3545;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .eliminar-button:hover {
-    background-color: whitesmoke;
-    color: black;
-  }
-  
-  .mensaje-confirmacion {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    text-align: center;
-  }
-  
-  .pagination-read-usuario {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pagination-read-usuario button {
-    margin: 0 5px;
-    padding: 10px 15px;
-    border: none;
-    background-color: #0C231E;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .pagination-read-usuario button.active {
-    background-color: #0C231E;
+  border-radius: 0.3125rem; /* 5px */
+  margin-right: 0.625rem; /* 10px */
+  width: 100%;
+}
+
+.especialidades-medicas__table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+}
+
+.especialidades-medicas__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem; /* 20px */
+  table-layout: fixed; /* Distribuye las columnas de manera uniforme */
+}
+
+.especialidades-medicas__table th,
+.especialidades-medicas__table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem; /* 8px */
+  font-size: 0.875rem; /* 14px */
+  text-align: left;
+  word-wrap: break-word; /* Permite que el texto se ajuste */
+}
+
+.especialidades-medicas__table th {
+  background-color: whitesmoke;
+  color: #0C231E;
+}
+
+.especialidades-medicas__input,
+.especialidades-medicas__textarea {
+  width: 100%;
+  padding: 0.375rem; /* 6px */
+  font-size: 0.875rem; /* 14px */
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem; /* 5px */
+  box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
+}
+
+.especialidades-medicas__actions {
+  display: flex;
+  gap: 0.625rem; /* 10px */
+}
+
+.especialidades-medicas__button {
+  background-color: #006AA7;
+  color: white;
+  border: none;
+  padding: 0.3125rem 0.625rem; /* 5px 10px */
+  cursor: pointer;
+  border-radius: 0.3125rem; /* 5px */
+  font-size: 0.875rem; /* 14px */
+}
+
+.especialidades-medicas__button--guardar {
+  background-color: #27AE60;
+}
+
+.especialidades-medicas__button--eliminar {
+  background-color: #E74C3C;
+}
+
+.especialidades-medicas__button:hover {
+  opacity: 0.9;
+}
+
+.especialidades-medicas__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem; /* 20px */
+}
+
+.especialidades-medicas__pagination-button {
+  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  margin: 0 0.3125rem; /* 0 5px */
+  background-color: #12322B;
+  color: white;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}
+
+.especialidades-medicas__pagination-button.active {
+  background-color: #0C231E;
+}
+
+.especialidades-medicas__pagination-button:hover {
+  background-color: #0C231E;
+}
+
+/* Media Queries */
+
+/* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
+  .especialidades-medicas {
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar si existe */
   }
 
-  @media (max-width: 480px) {
-    .especialidades-medicas-header{
-      width: 100%; /* Asegura que el header ocupe todo el ancho */
-      text-align: center; /* Centra el texto del header */
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .especialidades-header-logo {
-      height: 50px;
-      margin-left: 150px;
-      margin-bottom: 10px;
-    }
+  .especialidades-medicas__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
   }
-  
+
+  .especialidades-medicas__header-logo {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
+  }
+
+  .especialidades-medicas__header-texts {
+    text-align: left;
+  }
+
+  .especialidades-medicas__welcome-message {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+
+  .especialidades-medicas__department-name {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
+  .especialidades-medicas__content {
+    padding: 2rem; /* 32px */
+  }
+
+  .especialidades-medicas__search-container {
+    max-width: none;
+    width: 100%;
+  }
+
+  .especialidades-medicas__table th,
+  .especialidades-medicas__table td {
+    padding: 0.75rem; /* 12px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .especialidades-medicas__input,
+  .especialidades-medicas__textarea {
+    padding: 0.5rem; /* 8px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .especialidades-medicas__pagination {
+    margin-top: 1.875rem; /* 30px */
+  }
+}
+
+/* Pantallas medianas (máximo 819px) */
+@media (max-width: 819px) {
+  .especialidades-medicas__table th,
+  .especialidades-medicas__table td {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.375rem; /* 6px */
+  }
+
+  .especialidades-medicas__input,
+  .especialidades-medicas__textarea {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.375rem; /* 6px */
+  }
+
+  .especialidades-medicas__button {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+/* Pantallas pequeñas (máximo 560px) */
+@media (max-width: 560px) {
+  .especialidades-medicas__table th,
+  .especialidades-medicas__table td {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .especialidades-medicas__input,
+  .especialidades-medicas__textarea {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .especialidades-medicas__button {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+/* Pantallas pequeñas (máximo 420px) */
+@media (max-width: 420px) {
+  .especialidades-medicas__table-container {
+    display: block; /* Ocultar la tabla */
+  }
+}
+
+/* Pantallas medianas (mínimo 421px) */
+@media (min-width: 421px) {
+  .especialidades-medicas__table-container {
+    display: block; /* Mostrar la tabla */
+  }
+}

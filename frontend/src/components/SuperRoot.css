@@ -1,14 +1,17 @@
 /* SuperRoot.css */
 
+/* Estilos Base - Mobile-First */
+
 .super-root {
   display: flex;
+  flex-direction: column;
 }
 
 .super-root__content-area {
-  margin-left: 250px; /* Ajusta según el ancho de tu sidebar */
-  width: calc(100% - 250px);
+  margin-left: 0;
+  width: 100%;
   background-color: whitesmoke;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,61 +23,24 @@
 .super-root__header {
   width: 100%;
   background-color: whitesmoke;
-  padding: 20px;
+  padding: 1.25rem; /* 20px */
   box-sizing: border-box;
-  top: 0;
   z-index: 100;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.super-root__header-content { 
-  width: 100%; 
+.super-root__header-content {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
 }
-
-.super-root__hamburger-container {
-  margin-right: 20px; /* Espacio entre el menú y el logo */
-}
-
-.hamburger {
-  cursor: pointer;
-  position: absolute; /* Cambia de fixed a absolute */
-  top: 20px; /* Ajusta la posición vertical */
-  z-index: 1001;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.hamburger-menu {
-  background-color: #12322b;
-  border-radius: 5px;
-  color: #fff;
-  display: block;
-  font-size: 14px;
-  left: 10px;
-  padding: 5px;
-  position: fixed;
-  top: 70px;
-  width: 120px;
-  z-index: 1001;
-}
-
-.hamburger div {
-  width: 30px;
-  height: 3px;
-  background-color: #12322B;
-  margin: 5px 0;
-}
-
 
 .super-root__header-logo {
-  height: 50px;
+  height: 3.125rem; /* 50px */
+  margin-bottom: 0.625rem; /* 10px */
 }
 
 .super-root__header-texts {
@@ -83,83 +49,91 @@
 
 .super-root__welcome-message {
   color: #12322b;
-  font-size: 24px;
-  margin: 5px;
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
 }
 
 .super-root__department-name {
   color: black;
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
   margin: 0;
 }
 
 .super-root__main {
-  margin-top: 150px; 
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
 .super-root__mr-machine {
   width: 100%;
-  max-width: 300px;
-  margin-top: 20px;
+  max-width: 18.75rem; /* 300px */
+  margin-top: 1.25rem; /* 20px */
 }
 
-@media (max-width: 480px) {
-  .sidebar {
-    background-color: #12322b;
-    color: #fff;
-    padding: 15px;
-    width: 160px;
+/* Media Queries */
+
+/* Pantallas medianas y tablets (mínimo 480px) */
+@media (min-width: 480px) {
+  .super-root {
+    flex-direction: row;
   }
 
   .super-root__content-area {
-    margin-left: 0; 
-    width: 100%;
+    margin-left: 15.625rem; /* 250px */
+    width: calc(100% - 15.625rem); /* Ajustar según el ancho de la sidebar */
   }
 
   .super-root__header {
-    padding: 10px;
-    flex-direction: column; /* Logo y textos en columna */
-    align-items: flex-start; /* Alinea a la izquierda */
-    margin-left: 40px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.25rem; /* 20px */
   }
 
   .super-root__header-content {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    display:flex;
-    flex-direction: column; /* Logo y textos en columna */
+    flex-direction: row;
+    align-items: center;
   }
 
   .super-root__header-logo {
-    height: 60px; /* Ajusta el tamaño del logo */
-    margin-left: 140px; /* Elimina el margen derecho */
-    margin-bottom: 10px; /* Espacio entre el logo y los textos */
-  }
-
-  .super-root__header-texts {
-    text-align: left; /* Alinea los textos a la izquierda */
+    height: 3.125rem; /* 50px */
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0; /* Eliminar margen inferior */
   }
 
   .super-root__welcome-message {
-    font-size: 1.2em;
-    text-align: center;
-    margin-right: 40px;
+    font-size: 1.5rem; /* 24px */
+    text-align: left;
+    margin: 0;
   }
 
   .super-root__department-name {
-    font-size: 1.0em;
-    text-align: center;
-    margin-right: 40px;
+    font-size: 1rem; /* 16px */
+    text-align: left;
+    margin: 0;
   }
 
   .super-root__mr-machine {
-    margin-left: 20px;
-    margin-top: 70px;
-    width: 100%;
+    max-width: 25rem; /* 400px */
+    margin-top: 2.5rem; /* 40px */
   }
 }
-/*TODO*/
+
+/* Pantallas grandes (mínimo 1024px) */
+@media (min-width: 1024px) {
+  .super-root__welcome-message {
+    font-size: 2rem; /* 32px */
+  }
+
+  .super-root__department-name {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  .super-root__mr-machine {
+    max-width: 31.25rem; /* 500px */
+    margin-top: 3.125rem; /* 50px */
+  }
+}

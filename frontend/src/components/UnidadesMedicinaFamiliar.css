@@ -182,6 +182,11 @@
 
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
+
+.unidades-medicina-familiar{
+  margin-left: 15.625rem; /* 250px, ancho de la sidebar si existe */
+}
+
   .unidades-medicina-familiar__header {
     flex-direction: row;
     align-items: center;

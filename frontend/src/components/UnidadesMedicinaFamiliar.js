@@ -7,7 +7,6 @@ import { getUnidades, createUnidad, updateUnidad, deleteUnidad } from './unidade
 import FormularioUnidad from './FormularioUnidad';
 import ModalConfirmacion from './ModalConfirmacion';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import mrMachine from '../images/MRMachine.jpg';
 
 const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   const location = useLocation();
@@ -23,6 +22,8 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre_unidad_medica');
   const unidadesPerPage = 10;
+
+  
 
   useEffect(() => {
     if (location.pathname === '/crear-unidad') {
@@ -204,18 +205,26 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
     return <div>Error: {error}</div>;
   }
 
+  const handleInputChange = (e, id, campo) => {
+    const nuevasUnidades = unidades.map((u) =>
+      u.id_unidad_medica === id ? { ...u, [campo]: e.target.value } : u
+    );
+    setUnidades(nuevasUnidades);
+  };
+
   return (
-    <div className="unidades-medicina-familiar-page">
-      <header className="unidades-medicina-familiar-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="umf-header-logo" />
-        <div className="umf-header-texts">
-          <h1 className="umf-welcome-message">Sistema de Gestión de Unidades de Medicina Familiar</h1>
-          <h2 className="umf-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+    <div className="unidades-medicina-familiar">
+      <header className="unidades-medicina-familiar__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="unidades-medicina-familiar__header-logo" />
+        <div className="unidades-medicina-familiar__header-texts">
+          <h1 className="unidades-medicina-familiar__welcome-message">Sistema de Gestión de Unidades de Medicina Familiar</h1>
+          <h2 className="unidades-medicina-familiar__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
-      <div className="unidades-medicina-familiar-content">
-        {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
+
+     <div className="unidades-medicina-familiar__content">
+        {mensaje && <div className="unidades-medicina-familiar__message-confirmation">{mensaje}</div>}
+
         {vista === 'crear' && (
           <FormularioUnidad
             modo="crear"
@@ -223,43 +232,50 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
             onCancel={() => navigate('/ver-unidades')}
           />
         )}
+
         {vista === 'ver' && (
           <>
-            <div className="busqueda-unidad">
+            <div className="unidades-medicina-familiar__search">
               <input
                 type="text"
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={handleSearch}
+                className="unidades-medicina-familiar__search-input"
               />
-              <select value={searchField} onChange={handleFieldChange}>
+              <select
+                value={searchField}
+                onChange={handleFieldChange}
+                className="unidades-medicina-familiar__search-select"
+              >
                 <option value="nombre_unidad_medica">Nombre de la Unidad</option>
                 <option value="direccion_unidad_medica">Dirección de la Unidad</option>
               </select>
             </div>
-            <div className="tabla-unidades-container">
-              <table className="tabla-unidades">
+
+            <div className="unidades-medicina-familiar__table-container">
+              <table className="unidades-medicina-familiar__table">
                 <thead>
                   <tr>
-                    <th>Nombre de la Unidad</th>
-                    <th>Dirección de la Unidad</th>
+                    <th className="unidades-medicina-familiar__table-header">Nombre de la Unidad</th>
+                    <th className="unidades-medicina-familiar__table-header">Dirección de la Unidad</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentUnidades.map((unidad) => (
-                    <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.nombre_unidad_medica}</td>
-                      <td>{unidad.direccion_unidad_medica}</td>
+                  {unidades.map((unidad) => (
+                    <tr key={unidad.id_unidad_medica} className="unidades-medicina-familiar__table-row">
+                      <td className="unidades-medicina-familiar__table-data">{unidad.nombre_unidad_medica}</td>
+                      <td className="unidades-medicina-familiar__table-data">{unidad.direccion_unidad_medica}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-usuario">
+              <div className="unidades-medicina-familiar__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`unidades-medicina-familiar__pagination-button ${page === currentPage ? 'unidades-medicina-familiar__pagination-button--active' : ''}`}
                   >
                     {page}
                   </button>
@@ -268,65 +284,59 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
             </div>
           </>
         )}
+
         {vista === 'editar' && (
           <>
-            <div className="busqueda-unidad">
+            <div className="unidades-medicina-familiar__search">
               <input
                 type="text"
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={handleSearch}
+                className="unidades-medicina-familiar__search-input"
               />
-              <select value={searchField} onChange={handleFieldChange}>
+              <select
+                value={searchField}
+                onChange={handleFieldChange}
+                className="unidades-medicina-familiar__search-select"
+              >
                 <option value="nombre_unidad_medica">Nombre de la Unidad</option>
                 <option value="direccion_unidad_medica">Dirección de la Unidad</option>
               </select>
             </div>
-            <div className="tabla-unidades-container">
-              <table className="tabla-unidades">
+            <div className="unidades-medicina-familiar__table-container">
+              <table className="unidades-medicina-familiar__table">
                 <thead>
                   <tr>
-                    <th>Nombre de la Unidad</th>
-                    <th>Dirección de la Unidad</th>
-                    <th>Acciones</th>
+                    <th className="unidades-medicina-familiar__table-header">Nombre de la Unidad</th>
+                    <th className="unidades-medicina-familiar__table-header">Dirección de la Unidad</th>
+                    <th className="unidades-medicina-familiar__table-header">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentUnidades.map((unidad) => (
-                    <tr key={unidad.id_unidad_medica}>
-                      <td>
+                  {unidades.map((unidad) => (
+                    <tr key={unidad.id_unidad_medica} className="unidades-medicina-familiar__table-row">
+                      <td className="unidades-medicina-familiar__table-data">
                         <input
                           type="text"
                           value={unidad.nombre_unidad_medica}
-                          onChange={(e) => {
-                            const nuevasUnidades = unidades.map((u) =>
-                              u.id_unidad_medica === unidad.id_unidad_medica
-                                ? { ...u, nombre_unidad_medica: e.target.value }
-                                : u
-                            );
-                            setUnidades(nuevasUnidades);
-                          }}
+                          onChange={(e) => handleInputChange(e, unidad.id_unidad_medica, 'nombre_unidad_medica')}
+                          className="unidades-medicina-familiar__input"
                         />
                       </td>
-                      <td>
+                      <td className="unidades-medicina-familiar__table-data">
                         <input
                           type="text"
                           value={unidad.direccion_unidad_medica}
-                          onChange={(e) => {
-                            const nuevasUnidades = unidades.map((u) =>
-                              u.id_unidad_medica === unidad.id_unidad_medica
-                                ? { ...u, direccion_unidad_medica: e.target.value }
-                                : u
-                            );
-                            setUnidades(nuevasUnidades);
-                          }}
+                          onChange={(e) => handleInputChange(e, unidad.id_unidad_medica, 'direccion_unidad_medica')}
+                          className="unidades-medicina-familiar__input"
                         />
                       </td>
-                      <td>
-                        <div className="botones-acciones">
+                      <td className="unidades-medicina-familiar__table-data">
+                        <div className="unidades-medicina-familiar__actions">
                           <button
                             onClick={() => handleEditarUnidad(unidad)}
-                            className="guardar-button"
+                            className="unidades-medicina-familiar__button unidades-medicina-familiar__button--guardar"
                           >
                             Guardar
                           </button>
@@ -336,12 +346,12 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-usuario">
+              <div className="unidades-medicina-familiar__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`unidades-medicina-familiar__pagination-button ${page === currentPage ? 'unidades-medicina-familiar__pagination-button--active' : ''}`}
                   >
                     {page}
                   </button>
@@ -350,39 +360,45 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
             </div>
           </>
         )}
+
         {vista === 'eliminar' && (
           <>
-            <div className="busqueda-unidad">
+            <div className="unidades-medicina-familiar__search">
               <input
                 type="text"
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={handleSearch}
+                className="unidades-medicina-familiar__search-input"
               />
-              <select value={searchField} onChange={handleFieldChange}>
+              <select
+                value={searchField}
+                onChange={handleFieldChange}
+                className="unidades-medicina-familiar__search-select"
+              >
                 <option value="nombre_unidad_medica">Nombre de la Unidad</option>
                 <option value="direccion_unidad_medica">Dirección de la Unidad</option>
               </select>
             </div>
-            <div className="tabla-unidades-container">
-              <table className="tabla-unidades">
+            <div className="unidades-medicina-familiar__table-container">
+              <table className="unidades-medicina-familiar__table">
                 <thead>
                   <tr>
-                    <th>Nombre de la Unidad</th>
-                    <th>Dirección de la Unidad</th>
-                    <th>Acciones</th>
+                    <th className="unidades-medicina-familiar__table-header">Nombre de la Unidad</th>
+                    <th className="unidades-medicina-familiar__table-header">Dirección de la Unidad</th>
+                    <th className="unidades-medicina-familiar__table-header">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentUnidades.map((unidad) => (
-                    <tr key={unidad.id_unidad_medica}>
-                      <td>{unidad.nombre_unidad_medica}</td>
-                      <td>{unidad.direccion_unidad_medica}</td>
-                      <td>
-                        <div className="botones-acciones">
+                  {unidades.map((unidad) => (
+                    <tr key={unidad.id_unidad_medica} className="unidades-medicina-familiar__table-row">
+                      <td className="unidades-medicina-familiar__table-data">{unidad.nombre_unidad_medica}</td>
+                      <td className="unidades-medicina-familiar__table-data">{unidad.direccion_unidad_medica}</td>
+                      <td className="unidades-medicina-familiar__table-data">
+                        <div className="unidades-medicina-familiar__actions">
                           <button
                             onClick={() => handleEliminarUnidad(unidad.id_unidad_medica)}
-                            className="eliminar-button"
+                            className="unidades-medicina-familiar__button unidades-medicina-familiar__button--eliminar"
                           >
                             Eliminar
                           </button>
@@ -392,12 +408,12 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-usuario">
+              <div className="unidades-medicina-familiar__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`unidades-medicina-familiar__pagination-button ${page === currentPage ? 'unidades-medicina-familiar__pagination-button--active' : ''}`}
                   >
                     {page}
                   </button>
@@ -407,6 +423,7 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
           </>
         )}
       </div>
+
       {mostrarModal && (
         <ModalConfirmacion
           mensaje="¿Estás seguro de que deseas eliminar esta unidad?"

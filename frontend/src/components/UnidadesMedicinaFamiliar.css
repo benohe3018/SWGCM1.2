@@ -1,139 +1,309 @@
-/* src/components/UnidadesMedicinaFamiliar.css */
+/* UnidadesMedicinaFamiliar.css */
 
-.unidades-medicina-familiar-page {
+/* Estilos Base - Mobile-First */
+
+.unidades-medicina-familiar {
   background-color: whitesmoke;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #0C231E;
+  text-align: center;
+}
+
+.unidades-medicina-familiar__header {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 1rem; /* 16px */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #0C231E;
 }
 
-.unidades-medicina-familiar-header {
-  width: 100%;
-  background-color: whitesmoke;
-  padding: 20px;
-  box-sizing: border-box;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
+.unidades-medicina-familiar__header-logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
+  margin-left: 0.625rem; /* 10px */
+  margin-right: 2.5rem; /* 40px */
 }
 
-.umf-header-logo {
-  margin-left: 10px;
-  margin-right: 40px;
-  height:60px
-}
-
-.umf-header-texts {
+.unidades-medicina-familiar__header-texts {
   text-align: center;
   flex-grow: 1;
 }
 
-.umf-welcome-message {
-  font-size: 24px;
+.unidades-medicina-familiar__welcome-message {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #0C231E;
+}
+
+.unidades-medicina-familiar__department-name {
+  font-size: 1.125rem; /* 18px */
   margin: 0;
   color: #0C231E;
 }
 
-.umf-department-name {
-  font-size: 18px;
-  margin: 0;
-  color: #0C231E;
-}
-
-.unidades-medicina-familiar-content {
-  margin-top: 20px;
+.unidades-medicina-familiar__mr-machine {
   width: 100%;
+  max-width: 18.75rem; /* 300px */
+  margin-top: 2rem;
+}
+
+.unidades-medicina-familiar__content {
+  flex: 1;
+  padding: 1rem; /* 16px */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 1.25rem; /* 20px */
 }
 
-/* Estilo para la barra de búsqueda */
-.busqueda-unidad {
+.unidades-medicina-familiar__message-confirmation {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 0.625rem; /* 10px */
+  border-radius: 0.3125rem; /* 5px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.unidades-medicina-familiar__search {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  flex-direction: row;
-  
-}
-
-.busqueda-unidad input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 60%;
-  margin:0px;
-}
-
-.busqueda-unidad select {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin:0px
-}
-
-/* Contenedor de la tabla */
-.tabla-unidades-container {
   width: 100%;
-  overflow-x: auto;
+  max-width: 25rem; /* 400px */
+  margin-bottom: 1.25rem; /* 20px */
+  flex-direction: row;
 }
 
-.tabla-unidades {
+.unidades-medicina-familiar__search-input,
+.unidades-medicina-familiar__search-select {
+  padding: 0.625rem; /* 10px */
+  font-size: 1rem; /* 16px */
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem; /* 5px */
+  margin-right: 0.625rem; /* 10px */
+  width: 100%;
+}
+
+.unidades-medicina-familiar__search-select {
+  margin-right: 0;
+}
+
+.unidades-medicina-familiar__table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+}
+
+.unidades-medicina-familiar__table {
   width: 100%;
   border-collapse: collapse;
-  display: inline;
+  margin-bottom: 1.25rem; /* 20px */
+  table-layout: fixed; /* Distribuye las columnas de manera uniforme */
 }
 
-.tabla-unidades th, .tabla-unidades td {
+.unidades-medicina-familiar__table th,
+.unidades-medicina-familiar__table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.5rem; /* 8px */
+  font-size: 0.875rem; /* 14px */
   text-align: center;
+  word-wrap: break-word; /* Permite que el texto se ajuste */
 }
 
-.tabla-unidades th {
+.unidades-medicina-familiar__table th {
   background-color: #f2f2f2;
   color: #333;
 }
 
-/* Paginación */
-.pagination-read-usuario {
-  margin-top: 20px;
+.unidades-medicina-familiar__input {
+  width: 100%;
+  padding: 0.375rem; /* 6px */
+  font-size: 0.875rem; /* 14px */
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem; /* 5px */
+  box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
 }
 
-.pagination-read-usuario button {
-  margin: 0 5px;
-  padding: 10px;
-  border: none;
+.unidades-medicina-familiar__actions {
+  display: flex;
+  gap: 0.625rem; /* 10px */
+}
+
+.unidades-medicina-familiar__button {
   background-color: #12322B;
   color: white;
-  border-radius: 5px;
+  border: none;
+  padding: 0.3125rem 0.625rem; /* 5px 10px */
+  border-radius: 0.3125rem; /* 5px */
+  font-size: 0.875rem; /* 14px */
   cursor: pointer;
 }
 
-.pagination-read-usuario button.active {
+.unidades-medicina-familiar__button--guardar {
+  background-color: #12322B;
+}
+
+.unidades-medicina-familiar__button--eliminar {
+  background-color: red;
+}
+
+.unidades-medicina-familiar__button:hover {
+  opacity: 0.9;
+}
+
+.unidades-medicina-familiar__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem; /* 20px */
+}
+
+.unidades-medicina-familiar__pagination-button {
+  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  margin: 0 0.3125rem; /* 0 5px */
+  background-color: #12322B;
+  color: white;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}
+
+.unidades-medicina-familiar__pagination-button--active {
   background-color: #0C231E;
 }
-@media (max-width: 480px) {
-  .unidades-medicina-familiar-header{
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
-    text-align: center; /* Centra el texto del header */
-    flex-direction: column;
-    align-items: flex-start;
+
+.unidades-medicina-familiar__pagination-button:hover {
+  background-color: #0C231E;
+}
+
+/* Estilos para la imagen de la máquina de resonancia magnética */
+.unidades-medicina-familiar__mr-machine {
+  width: 100%;
+  max-width: 300px; /* 18.75rem */
+  margin-top: 2rem;
+}
+
+/* Media Queries */
+
+/* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
+  .unidades-medicina-familiar__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
   }
 
-  .umf-header-logo {
+  .unidades-medicina-familiar__header-logo {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
+    margin-left: 0; /* Elimina margen izquierdo si es necesario */
+  }
+
+  .unidades-medicina-familiar__header-texts {
+    text-align: left;
+  }
+
+  .unidades-medicina-familiar__welcome-message {
+    font-size: 2rem; /* 32px */
+  }
+
+  .unidades-medicina-familiar__department-name {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  .unidades-medicina-familiar__content {
+    padding: 2rem; /* 32px */
+  }
+
+  .unidades-medicina-familiar__search {
+    max-width: none;
+    width: 100%;
+  }
+
+  .unidades-medicina-familiar__table th,
+  .unidades-medicina-familiar__table td {
+    padding: 0.75rem; /* 12px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .unidades-medicina-familiar__input {
+    padding: 0.5rem; /* 8px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .unidades-medicina-familiar__pagination {
+    margin-top: 1.875rem; /* 30px */
+  }
+}
+
+/* Pantallas medianas (máximo 819px) */
+@media (max-width: 819px) {
+  .unidades-medicina-familiar__table th,
+  .unidades-medicina-familiar__table td {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.375rem; /* 6px */
+  }
+
+  .unidades-medicina-familiar__button {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+/* Pantallas pequeñas (máximo 560px) */
+@media (max-width: 560px) {
+  .unidades-medicina-familiar__table th,
+  .unidades-medicina-familiar__table td {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .unidades-medicina-familiar__button {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+/* Pantallas muy pequeñas (máximo 420px) */
+@media (max-width: 420px) {
+  .unidades-medicina-familiar__header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+  }
+
+  .unidades-medicina-familiar__header-logo {
     height: 50px;
-    margin-left: 150px;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: 10px;
+  }
+
+  .unidades-medicina-familiar__table-container {
+    display: block; /* Ocultar la tabla en pantallas muy pequeñas */
+  }
+
+  /* Ajustes para la barra de búsqueda en pantallas muy pequeñas */
+  .unidades-medicina-familiar__search {
+    flex-direction: column;
+  }
+
+  .unidades-medicina-familiar__search-input,
+  .unidades-medicina-familiar__search-select {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.625rem; /* 10px */
+  }
+}
+
+/* Pantallas medianas (mínimo 421px) y máximo 819px */
+@media (min-width: 421px) and (max-width: 819px) {
+  .unidades-medicina-familiar__table-container {
+    display: block; /* Mostrar la tabla */
   }
 }

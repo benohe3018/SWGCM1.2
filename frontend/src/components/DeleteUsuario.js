@@ -61,70 +61,72 @@ const DeleteUsuario = () => {
   const totalPages = Math.ceil(filteredUsuarios.length / usuariosPerPage);
 
   return (
-    <div className="delete-usuario-page">
-      <header className="delete-usuario-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo-delete-usuario" />
-        <div className="header-texts-delete-usuario">
-          <h1 className="welcome-message-delete-usuario">Bienvenido al Módulo de gestión de Usuarios</h1>
-          <h2 className="department-name-delete-usuario">Borrar Registros de Usuarios</h2>
+    <div className="delete-usuario">
+      <header className="delete-usuario__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="delete-usuario__header-logo" />
+        <div className="delete-usuario__header-texts">
+          <h1 className="delete-usuario__welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
+          <h2 className="delete-usuario__department-name">Borrar Registros de Usuarios</h2>
         </div>
       </header>
-      <div className="delete-usuario-content">
+      <div className="main-layout">
         <Sidebar />
-        <div className="delete-search-container">
-          <input
-            type="text"
-            placeholder="Buscar..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-          <select value={searchField} onChange={handleFieldChange}>
-            <option value="nombre_usuario">Nombre Usuario</option>
-            <option value="nombre_real">Nombre Real</option>
-            <option value="apellido_paterno">Apellido Paterno</option>
-            <option value="apellido_materno">Apellido Materno</option>
-          </select>
-        </div>
-        <div className="usuario-table-container">
-          <table className="usuario-table">
-            <thead>
-              <tr>
-                <th>Nombre Usuario</th>
-                <th>Nombre Real</th>
-                <th>Apellido Paterno</th>
-                <th>Apellido Materno</th>
-                <th>Matricula</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentUsuarios.map(usuario => (
-                <tr key={usuario.id}>
-                  <td>{usuario.nombre_usuario}</td>
-                  <td>{usuario.nombre_real}</td>
-                  <td>{usuario.apellido_paterno}</td>
-                  <td>{usuario.apellido_materno}</td>
-                  <td>{usuario.matricula}</td>
-                  <td>
-                    <button onClick={() => handleDelete(usuario.id)}>Eliminar</button>
-                  </td>
+        <div className="delete-usuario__content">
+          <div className="delete-usuario__search-container">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+            <select value={searchField} onChange={handleFieldChange}>
+              <option value="nombre_usuario">Nombre Usuario</option>
+              <option value="nombre_real">Nombre Real</option>
+              <option value="apellido_paterno">Apellido Paterno</option>
+              <option value="apellido_materno">Apellido Materno</option>
+            </select>
+          </div>
+          <div className="delete-usuario__table-container">
+            <table className="delete-usuario__table">
+              <thead>
+                <tr>
+                  <th>Nombre Usuario</th>
+                  <th>Nombre Real</th>
+                  <th>Apellido Paterno</th>
+                  <th>Apellido Materno</th>
+                  <th>Matrícula</th>
+                  <th>Acciones</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentUsuarios.map(usuario => (
+                  <tr key={usuario.id}>
+                    <td>{usuario.nombre_usuario}</td>
+                    <td>{usuario.nombre_real}</td>
+                    <td>{usuario.apellido_paterno}</td>
+                    <td>{usuario.apellido_materno}</td>
+                    <td>{usuario.matricula}</td>
+                    <td>
+                      <button onClick={() => handleDelete(usuario.id)}>Eliminar</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="delete-usuario__pagination">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={page === currentPage ? 'active' : ''}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+          {message && <p className="delete-usuario__message-success">{message}</p>}
         </div>
-        <div className="pagination-delete-usuario">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={page === currentPage ? 'active' : ''}
-            >
-              {page}
-            </button>
-          ))}
-        </div>
-        {message && <p className="message-delete-success">{message}</p>}
       </div>
     </div>
   );

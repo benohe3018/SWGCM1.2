@@ -78,13 +78,14 @@
 
 .gestion-citas__table-container {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
 }
 
 .gestion-citas__table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.25rem; /* 20px */
+  table-layout: fixed; /* Distribuye las columnas de manera uniforme */
 }
 
 .gestion-citas__table th,
@@ -93,6 +94,7 @@
   padding: 0.5rem; /* 8px */
   font-size: 0.875rem; /* 14px */
   text-align: left;
+  word-wrap: break-word; /* Permite que el texto se ajuste */
 }
 
 .gestion-citas__table th {
@@ -102,10 +104,12 @@
 
 .gestion-citas__input {
   width: 100%;
+  max-width: 100%; /* Asegura que el input no exceda el ancho de la celda */
   padding: 0.375rem; /* 6px */
   font-size: 0.875rem; /* 14px */
   border: 1px solid #ddd;
   border-radius: 0.3125rem; /* 5px */
+  box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
 }
 
 .gestion-citas__actions {
@@ -252,6 +256,25 @@
 
   .gestion-citas__button {
     font-size: 0.75rem; /* 12px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+/* Pantallas pequeñas (máximo 560px) */
+@media (max-width: 560px) {
+  .gestion-citas__table th,
+  .gestion-citas__table td {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .gestion-citas__input {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .gestion-citas__button {
+    font-size: 0.625rem; /* 10px */
     padding: 0.25rem 0.5rem; /* 4px 8px */
   }
 }

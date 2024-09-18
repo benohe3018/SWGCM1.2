@@ -3,10 +3,10 @@
 /* Estilos Base - Mobile-First */
 
 .create-medico {
-  background-color: whitesmoke;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  background-color: whitesmoke;
   font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #0C231E;
 }
@@ -16,7 +16,6 @@
   background-color: whitesmoke;
   padding: 1.25rem; /* 20px */
   box-sizing: border-box;
-  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,8 +42,13 @@
   margin: 0;
 }
 
-.create-medico__content {
+.main-layout {
+  display: flex;
+  flex: 1;
   width: 100%;
+}
+
+.create-medico__content {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -123,17 +127,13 @@
 
 /* Media Queries */
 
-/* Pantallas medianas (mínimo 820px) */
+/* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
-  .create-medico {
-    flex-direction: row;
-  }
-
   .create-medico__header {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding: 1.25rem; /* 20px */
+    padding: 1.25rem 2rem; /* 20px 32px */
   }
 
   .create-medico__header-logo {
@@ -145,19 +145,13 @@
     text-align: left;
   }
 
-  .create-medico__welcome-message {
-    font-size: 2rem; /* 32px */
-    margin: 0;
-  }
-
-  .create-medico__department-name {
-    font-size: 1.25rem; /* 20px */
-    margin: 0;
+  .main-layout {
+    display: flex;
+    width: 100%;
   }
 
   .create-medico__content {
     margin-left: 15.625rem; /* 250px */
-    width: calc(100% - 15.625rem);
     padding: 2rem; /* 32px */
   }
 

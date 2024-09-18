@@ -1,196 +1,195 @@
 /* CreateMedicos.css */
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+/* Estilos Base - Mobile-First */
 
-.create-medico { /* Bloque principal */
+.create-medico {
   background-color: whitesmoke;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: white;
-  width: 100%; 
-  
+  color: #0C231E;
 }
 
-.create-medico__header { /* Elemento del header */
+.create-medico__header {
   width: 100%;
   background-color: whitesmoke;
-  padding: 20px;
+  padding: 1.25rem; /* 20px */
   box-sizing: border-box;
-  top: 0;
   z-index: 100;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.create-medico__header-logo { /* Elemento del logo */
-  height: 50px;
-  margin-right:40px ;
+.create-medico__header-logo {
+  height: 3.125rem; /* 50px */
+  margin-bottom: 0.625rem; /* 10px */
 }
 
-.create-medico__header-texts { /* Elemento de textos del header */
+.create-medico__header-texts {
   text-align: center;
 }
 
-.create-medico__welcome-message { /* Elemento del mensaje de bienvenida */
+.create-medico__welcome-message {
   color: #12322b;
-  font-size: 24px;
-  margin: 5px;
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
 }
 
-.create-medico__department-name { /* Elemento del nombre del departamento */
+.create-medico__department-name {
   color: black;
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
   margin: 0;
 }
 
-.create-medico__content { /* Elemento del contenido principal */
-  width: 100%; 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.create-medico__form { /* Elemento del formulario */
+.create-medico__content {
   width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 20px; /* Espacio alrededor del formulario */
+  align-items: center;
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
 }
 
-.create-medico__form-description { /* Elemento de descripción del formulario */
-  color: #12322B;
-  font-size: 1.2em; 
-  margin-bottom: 20px;
-  text-align: center;
-  margin-top: 0px;
-}
-
-.create-medico__form-group { /* Elemento de grupo de formulario */
+.create-medico__form {
+  width: 100%;
+  max-width: 25rem; /* 400px */
   display: flex;
-  flex-direction: row; 
-  align-items: flex-start;
-  margin-bottom: 20px;
+  flex-direction: column;
 }
 
-.create-medico__form-label { /* Elemento de etiqueta de formulario */
-  width: 100%; 
-  margin-bottom: 5px; 
+.create-medico__form-description {
+  color: #12322B;
+  font-size: 1.2rem; /* 19.2px */
+  margin-bottom: 1.25rem; /* 20px */
+  text-align: center;
+  margin-top: 0;
+}
+
+.create-medico__form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem; /* 16px */
+}
+
+.create-medico__form-label {
+  margin-bottom: 0.3125rem; /* 5px */
   font-weight: bold;
   color: #12322B;
 }
 
-.create-medico__form-input, 
-.create-medico__form-select { /* Elementos de entrada y selección de formulario */
-  width: 100%; 
-  padding: 10px;
+.create-medico__form-input,
+.create-medico__form-select {
+  padding: 0.625rem; /* 10px */
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 12px; 
+  border-radius: 0.3125rem; /* 5px */
+  font-size: 1rem; /* 16px */
   color: #12322B;
 }
 
-.create-medico__button { /* Elemento del botón */
-  padding: 10px 20px;
+.create-medico__button {
+  padding: 0.625rem; /* 10px */
   background-color: #12322B;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem; /* 5px */
   cursor: pointer;
   font-weight: bold;
   text-align: center;
-  width: 100%; 
+  width: 100%;
+  margin-top: 1rem; /* 16px */
 }
 
 .create-medico__button:hover {
   background-color: #0C231E;
 }
 
-.create-medico__message-POST-success, 
-.create-medico__message-POST-failed { /* Elementos de mensaje de éxito/fallo */
-  font-size: 1em; 
-  margin-top: 10px;
-}
-.hamburger {
-  cursor: pointer;
-  position: absolute; /* Cambia de fixed a absolute */
-  top: 20px; /* Ajusta la posición vertical */
-  z-index: 1001;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
+.create-medico__message-POST-success,
+.create-medico__message-POST-failed {
+  font-size: 1rem; /* 16px */
+  margin-top: 0.625rem; /* 10px */
+  text-align: center;
 }
 
-.hamburger-menu {
-  background-color: #12322b;
-  border-radius: 5px;
-  color: #fff;
-  display: block;
-  font-size: 14px;
-  left: 10px;
-  padding: 5px;
-  position: fixed;
-  top: 70px;
-  width: 120px;
-  z-index: 1001;
+.create-medico__message-POST-success {
+  color: green;
 }
 
-.hamburger div {
-  width: 30px;
-  height: 3px;
-  background-color: #12322B;
-  margin: 5px 0;
+.create-medico__message-POST-failed {
+  color: red;
 }
 
-/* Media Queries para pantallas pequeñas */
-@media (max-width: 768px) { 
+/* Media Queries */
+
+/* Pantallas medianas (mínimo 820px) */
+@media (min-width: 820px) {
+  .create-medico {
+    flex-direction: row;
+  }
+
   .create-medico__header {
-    flex-direction: column; /* Apila el logo y los textos */
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.25rem; /* 20px */
+  }
+
+  .create-medico__header-logo {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
   }
 
   .create-medico__header-texts {
-    margin-top: 10px; /* Espacio entre el logo y los textos */
+    text-align: left;
+  }
+
+  .create-medico__welcome-message {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+
+  .create-medico__department-name {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
+  .create-medico__content {
+    margin-left: 15.625rem; /* 250px */
+    width: calc(100% - 15.625rem);
+    padding: 2rem; /* 32px */
   }
 
   .create-medico__form {
-    padding: 10px; /* Reduce el espacio alrededor del formulario */
+    max-width: 31.25rem; /* 500px */
   }
 
   .create-medico__form-description {
-    font-size: 1.2em; 
-  }
-}
-
-/* Media Queries para tabletas */
-@media (min-width: 481px) and (max-width: 768px) {
-  .create-medico__form {
-    width: 80%;
-    padding: 15px;
+    font-size: 1.5rem; /* 24px */
+    margin-bottom: 1.875rem; /* 30px */
   }
 
-  .create-medico__form-description {
-    font-size: 1.4em;
+  .create-medico__form-group {
+    flex-direction: row;
+    align-items: center;
   }
-}
 
-/* Media Queries para escritorios */
-@media (min-width: 769px) {
-  .create-medico__form {
+  .create-medico__form-label {
+    width: 40%;
+    margin-bottom: 0;
+    margin-right: 1.25rem; /* 20px */
+    text-align: right;
+  }
+
+  .create-medico__form-input,
+  .create-medico__form-select {
     width: 60%;
-    padding: 20px;
   }
 
-  .create-medico__form-description {
-    font-size: 1.5em;
+  .create-medico__button {
+    width: auto;
+    align-self: center;
+    padding: 0.75rem 1.5rem; /* 12px 24px */
   }
 }

@@ -124,7 +124,7 @@
 }
 
 .especialidades-medicas__button {
-  background-color: #006AA7;
+  background-color: #12322B;
   color: white;
   border: none;
   padding: 0.3125rem 0.625rem; /* 5px 10px */
@@ -134,11 +134,11 @@
 }
 
 .especialidades-medicas__button--guardar {
-  background-color: #27AE60;
+  background-color: #12322B;
 }
 
 .especialidades-medicas__button--eliminar {
-  background-color: #E74C3C;
+  background-color: red;
 }
 
 .especialidades-medicas__button:hover {

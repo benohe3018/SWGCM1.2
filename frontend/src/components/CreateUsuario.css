@@ -2,7 +2,7 @@
 
 /* Estilos Base - Mobile-First */
 
-.create-usuario {
+.create-usuario-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -11,7 +11,7 @@
   color: #0C231E;
 }
 
-.create-usuario__header {
+.create-usuario-header {
   width: 100%;
   background-color: whitesmoke;
   padding: 1.25rem; /* 20px */
@@ -21,22 +21,22 @@
   align-items: center;
 }
 
-.create-usuario__header-logo {
+.header-logo {
   height: 3.75rem; /* 60px */
   margin-bottom: 0.625rem; /* 10px */
 }
 
-.create-usuario__header-texts {
+.header-texts {
   text-align: center;
 }
 
-.create-usuario__welcome-message {
+.welcome-message-create-usuario {
   font-size: 1.5rem; /* 24px */
   margin: 0.3125rem; /* 5px */
   color: #12322b;
 }
 
-.create-usuario__department-name {
+.department-name-create-usuario {
   font-size: 1.125rem; /* 18px */
   margin: 0;
   color: #0C231E;
@@ -48,7 +48,7 @@
   width: 100%;
 }
 
-.create-usuario__content {
+.create-usuario-content {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -57,14 +57,14 @@
   box-sizing: border-box;
 }
 
-.create-usuario__form {
+.create-usuario-content form {
   width: 100%;
   max-width: 25rem; /* 400px */
   display: flex;
   flex-direction: column;
 }
 
-.create-usuario__form-description {
+.form-description-create-usuario {
   color: #12322B;
   font-size: 1.2rem; /* 19.2px */
   margin-bottom: 1.25rem; /* 20px */
@@ -72,20 +72,29 @@
   margin-top: 0;
 }
 
-.create-usuario__form-group {
+.form-group-create-usuario {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem; /* 16px */
 }
 
-.create-usuario__form-label {
+.password-container-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem; /* 16px */
+  position: relative;
+}
+
+.form-group-create-usuario label,
+.password-container-form-group label {
   font-weight: bold;
   color: #12322B;
   margin-bottom: 0.3125rem; /* 5px */
 }
 
-.create-usuario__form-input,
-.create-usuario__form-select {
+.form-group-create-usuario input,
+.form-group-create-usuario select,
+.password-container-form-group input {
   padding: 0.625rem; /* 10px */
   border: 1px solid #ccc;
   border-radius: 0.3125rem; /* 5px */
@@ -94,14 +103,9 @@
   width: 100%;
 }
 
-.create-usuario__password-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.create-usuario__toggle-show-password {
+.toggle-show-password {
   position: absolute;
+  top: 2.5rem; /* Ajustar según la altura del input */
   right: 0.625rem; /* 10px */
   background: none;
   border: none;
@@ -109,7 +113,7 @@
   color: #12322B;
 }
 
-.create-usuario__button {
+.create-usuario-button {
   padding: 0.625rem; /* 10px */
   background-color: #12322B;
   color: white;
@@ -122,24 +126,24 @@
   margin-top: 1rem; /* 16px */
 }
 
-.create-usuario__button:hover {
+.create-usuario-button:hover {
   background-color: #0C231E;
 }
 
-.create-usuario__message-POST-success {
-  color: green;
-  font-weight: bold;
+.message-POST-success,
+.message-POST-failed {
   font-size: 1rem; /* 16px */
   margin-top: 1.25rem; /* 20px */
   text-align: center;
+  font-weight: bold;
 }
 
-.create-usuario__message-POST-failed {
+.message-POST-success {
+  color: green;
+}
+
+.message-POST-failed {
   color: red;
-  font-weight: bold;
-  font-size: 1rem; /* 16px */
-  margin-top: 1.25rem; /* 20px */
-  text-align: center;
 }
 
 /* Media Queries */
@@ -147,70 +151,79 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
 
-  .create-usuario {
+  .create-usuario-page {
     margin-left: 15.625rem; /* 250px, ancho de la sidebar */
   }
 
-  .create-usuario__header {
+  .create-usuario-header {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     padding: 1.25rem 2rem; /* 20px 32px */
   }
 
-  .create-usuario__header-logo {
+  .header-logo {
     margin-right: 1.25rem; /* 20px */
     margin-bottom: 0;
   }
 
-  .create-usuario__header-texts {
+  .header-texts {
     text-align: left;
   }
 
-  .create-usuario__welcome-message {
+  .welcome-message-create-usuario {
     font-size: 2rem; /* 32px */
     margin: 0;
   }
 
-  .create-usuario__department-name {
+  .department-name-create-usuario {
     font-size: 1.25rem; /* 20px */
     margin: 0;
   }
 
-  .create-usuario__content {
+  .create-usuario-content {
     padding: 2rem; /* 32px */
   }
 
-  .create-usuario__form {
+  .create-usuario-content form {
     max-width: 31.25rem; /* 500px */
   }
 
-  .create-usuario__form-description {
+  .form-description-create-usuario {
     font-size: 1.5rem; /* 24px */
     margin-bottom: 1.875rem; /* 30px */
   }
 
-  .create-usuario__form-group {
+  .form-group-create-usuario,
+  .password-container-form-group {
     flex-direction: row;
     align-items: center;
   }
 
-  .create-usuario__form-label {
+  .form-group-create-usuario label,
+  .password-container-form-group label {
     width: 40%;
     margin-bottom: 0;
     margin-right: 1.25rem; /* 20px */
     text-align: right;
   }
 
-  .create-usuario__form-input,
-  .create-usuario__form-select {
+  .form-group-create-usuario input,
+  .form-group-create-usuario select,
+  .password-container-form-group input {
     width: 60%;
   }
 
-  .create-usuario__button {
+  .toggle-show-password {
+    position: absolute;
+    right: 0.625rem; /* 10px */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .create-usuario-button {
     width: auto;
     align-self: center;
     padding: 0.75rem 1.5rem; /* 12px 24px */
   }
 }
-/*TODO*/

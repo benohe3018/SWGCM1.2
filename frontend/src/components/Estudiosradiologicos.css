@@ -1,26 +1,27 @@
-/* Base Styles - Mobile First */
+/* Estilos Base - Mobile-First */
 
 .estudios-radiologicos {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: whitesmoke;
-  font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  width: 100%;
   color: #0C231E;
 }
 
 .estudios-radiologicos__header {
   width: 100%;
+  background-color: whitesmoke;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: whitesmoke;
 }
 
 .estudios-radiologicos__header-logo {
   height: 3.75rem; /* 60px */
-  margin-bottom: 0.625rem; /* 10px */
+  margin-bottom: 0.625rem;
 }
 
 .estudios-radiologicos__header-texts {
@@ -28,28 +29,22 @@
 }
 
 .estudios-radiologicos__welcome-message {
-  font-size: 1.5rem; /* 24px */
-  margin: 0.3125rem; /* 5px */
+  font-size: 1.5rem;
+  margin: 0.3125rem;
   color: #0C231E;
 }
 
 .estudios-radiologicos__department-name {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.125rem;
   margin: 0;
-}
-
-.estudios-radiologicos__mr-machine {
-  width: 100%;
-  max-width: 18.75rem; /* 300px */
-  margin-top: 2rem;
 }
 
 .estudios-radiologicos__content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 1rem;
+  align-items: center;
 }
 
 .estudios-radiologicos__message-confirmation {
@@ -61,22 +56,16 @@
 }
 
 .estudios-radiologicos__search-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   max-width: 25rem;
   margin-bottom: 1.25rem;
 }
 
-.estudios-radiologicos__search-input,
-.estudios-radiologicos__search-select {
+.estudios-radiologicos__search-container input {
+  width: 100%;
   padding: 0.625rem;
-  font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 0.3125rem;
-  margin-right: 0.625rem;
-  width: 100%;
 }
 
 .estudios-radiologicos__table-container {
@@ -88,24 +77,26 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.25rem;
-  table-layout: fixed;
+  table-layout: fixed; /* Distribuye las columnas de manera uniforme */
 }
 
 .estudios-radiologicos__table th,
 .estudios-radiologicos__table td {
   border: 1px solid #ddd;
   padding: 0.5rem;
-  text-align: center;
   font-size: 0.875rem;
+  text-align: left;
+  word-wrap: break-word;
 }
 
 .estudios-radiologicos__table th {
-  background-color: #f4f4f4;
+  background-color: whitesmoke;
+  color: #0C231E;
 }
 
-.estudios-radiologicos__input,
-.estudios-radiologicos__textarea {
+.estudios-radiologicos__input {
   width: 100%;
+  max-width: 100%;
   padding: 0.375rem;
   font-size: 0.875rem;
   border: 1px solid #ddd;
@@ -119,21 +110,21 @@
 }
 
 .estudios-radiologicos__button {
-  background-color: #006aa7;
+  background-color: #006AA7;
   color: white;
-  padding: 0.3125rem 0.625rem;
   border: none;
-  border-radius: 0.3125rem;
+  padding: 0.3125rem 0.625rem;
   cursor: pointer;
+  border-radius: 0.3125rem;
   font-size: 0.875rem;
 }
 
-.estudios-radiologicos__button--edit {
-  background-color: #27ae60;
+.estudios-radiologicos__button--eliminar {
+  background-color: #E74C3C;
 }
 
-.estudios-radiologicos__button--delete {
-  background-color: #e74c3c;
+.estudios-radiologicos__button--guardar {
+  background-color: #27AE60;
 }
 
 .estudios-radiologicos__button:hover {
@@ -143,40 +134,134 @@
 .estudios-radiologicos__pagination {
   display: flex;
   justify-content: center;
+  margin-top: 1.25rem;
 }
 
-.estudios-radiologicos__pagination-button {
+.estudios-radiologicos__pagination button {
   padding: 0.625rem 0.9375rem;
   margin: 0 0.3125rem;
-  background-color: #12322b;
+  background-color: #12322B;
   color: white;
   border: none;
   border-radius: 0.3125rem;
   cursor: pointer;
 }
 
-.estudios-radiologicos__pagination-button.active {
-  background-color: #0c231e;
+.estudios-radiologicos__pagination button.active {
+  background-color: #0C231E;
 }
 
-@media (max-width: 480px) {
+.estudios-radiologicos__pagination button:hover {
+  background-color: #0C231E;
+}
+
+/* Media Queries */
+
+/* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
+  .estudios-radiologicos {
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
+  }
+
   .estudios-radiologicos__header {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
   }
 
   .estudios-radiologicos__header-logo {
-    height: 3rem;
-    margin-bottom: 1rem;
+    margin-right: 1.25rem;
+    margin-bottom: 0;
   }
 
-  .estudios-radiologicos__search-input,
-  .estudios-radiologicos__search-select {
-    font-size: 0.875rem;
-    padding: 0.5rem;
+  .estudios-radiologicos__header-texts {
+    text-align: left;
+  }
+
+  .estudios-radiologicos__welcome-message {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .estudios-radiologicos__department-name {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .estudios-radiologicos__content {
+    padding: 2rem;
+  }
+
+  .estudios-radiologicos__search-container {
+    max-width: none;
+    width: 100%;
   }
 
   .estudios-radiologicos__table th,
   .estudios-radiologicos__table td {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .estudios-radiologicos__input {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .estudios-radiologicos__pagination {
+    margin-top: 1.875rem;
+  }
+}
+
+/* Pantallas medianas (máximo 819px) */
+@media (max-width: 819px) {
+  .estudios-radiologicos__table th,
+  .estudios-radiologicos__table td {
     font-size: 0.75rem;
+    padding: 0.375rem;
+  }
+
+  .estudios-radiologicos__input {
+    font-size: 0.75rem;
+    padding: 0.375rem;
+  }
+
+  .estudios-radiologicos__button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Pantallas pequeñas (máximo 560px) */
+@media (max-width: 560px) {
+  .estudios-radiologicos__table th,
+  .estudios-radiologicos__table td {
+    font-size: 0.625rem;
+    padding: 0.25rem;
+  }
+
+  .estudios-radiologicos__input {
+    font-size: 0.625rem;
+    padding: 0.25rem;
+  }
+
+  .estudios-radiologicos__button {
+    font-size: 0.625rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Pantallas pequeñas (máximo 420px) */
+@media (max-width: 420px) {
+  .estudios-radiologicos__table-container {
+    display: none; /* Ocultar la tabla */
+  }
+}
+
+/* Pantallas medianas (mínimo 421px) */
+@media (min-width: 421px) {
+  .estudios-radiologicos__table-container {
+    display: block; /* Mostrar la tabla */
   }
 }

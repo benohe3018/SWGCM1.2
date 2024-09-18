@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.eb222117.css",
+    "main.css": "/static/css/main.7a74d715.css",
     "main.js": "/static/js/main.ccd3fb8a.js",
     "static/js/239.dfdb0d71.chunk.js": "/static/js/239.dfdb0d71.chunk.js",
     "static/js/213.1276bd44.chunk.js": "/static/js/213.1276bd44.chunk.js",
@@ -9,7 +9,7 @@
     "static/media/LogoIMSS.jpg": "/static/media/LogoIMSS.288a0e2c08e364e4c496.jpg",
     "static/media/MRMachine.jpg": "/static/media/MRMachine.c76547b3d57e82b89a66.jpg",
     "index.html": "/index.html",
-    "main.eb222117.css.map": "/static/css/main.eb222117.css.map",
+    "main.7a74d715.css.map": "/static/css/main.7a74d715.css.map",
     "main.ccd3fb8a.js.map": "/static/js/main.ccd3fb8a.js.map",
     "239.dfdb0d71.chunk.js.map": "/static/js/239.dfdb0d71.chunk.js.map",
     "213.1276bd44.chunk.js.map": "/static/js/213.1276bd44.chunk.js.map",
@@ -17,7 +17,7 @@
     "453.d855a71b.chunk.js.map": "/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb222117.css",
+    "static/css/main.7a74d715.css",
     "static/js/main.ccd3fb8a.js"
   ]
 }

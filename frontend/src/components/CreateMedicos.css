@@ -129,6 +129,17 @@
 
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
+
+  .create-medico {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: whitesmoke;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #0C231E;
+    margin-left: 25rem;
+  }
+
   .create-medico__header {
     flex-direction: row;
     align-items: center;

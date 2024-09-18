@@ -52,18 +52,18 @@ const ReadUsuario = () => {
   const totalPages = Math.ceil(filteredUsuarios.length / usuariosPerPage);
 
   return (
-    <div className="read-usuario-page">
-      <header className="read-usuario-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="read-usuario-header-logo" />
-        <div className="read-usuarios-header-texts">
-          <h1 className="read-usuario-welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
-          <h2 className="read-usuario-department-name">Usuarios Registrados en la base de datos</h2>
+    <div className="read-usuario">
+      <header className="read-usuario__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="read-usuario__header-logo" />
+        <div className="read-usuario__header-texts">
+          <h1 className="read-usuario__welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
+          <h2 className="read-usuario__department-name">Usuarios Registrados en la base de datos</h2>
         </div>
       </header>
       <div className="main-layout">
         <Sidebar />
-        <div className="read-usuario-content">
-          <div className="read-usuario-search-container">
+        <div className="read-usuario__content">
+          <div className="read-usuario__search-container">
             <input
               type="text"
               placeholder="Buscar..."
@@ -77,12 +77,12 @@ const ReadUsuario = () => {
               <option value="apellido_materno">Apellido Materno</option>
             </select>
           </div>
-          <div className="read-usuario-table-container">
+          <div className="read-usuario__table-container">
             {isLoading ? (
               <p>Cargando...</p>
             ) : (
               <>
-                <table className="read-usuario-table">
+                <table className="read-usuario__table">
                   <thead>
                     <tr>
                       <th>Nombre de Usuario</th>
@@ -106,7 +106,7 @@ const ReadUsuario = () => {
                     ))}
                   </tbody>
                 </table>
-                <div className="pagination-read-usuario">
+                <div className="read-usuario__pagination">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                     <button
                       key={page}

@@ -1,173 +1,186 @@
-.read-usuario-page {
-  background-color: whitesmoke; /* Color de fondo */
-  height: 100vh; /* Altura completa de la ventana del navegador */
+/* ReadUsuario.css */
+
+/* Estilos Base - Mobile-First */
+
+.read-usuario {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Cambio realizado aquí para alinear al inicio */
-  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #0C231E;
-}
-
-.read-usuario-header {
+  min-height: 100vh;
   background-color: whitesmoke;
-  padding: 20px;
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #0C231E;
+}
+
+.read-usuario__header {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 1.25rem; /* 20px */
   box-sizing: border-box;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centra el contenido del header */
-}
-
-.read-usuario-header-logo {
-  margin-left: 10px; /* Agrega margen a la izquierda del logo */
-  margin-right:40px;
-  height:60px;
-}
-
-.read-usuarios-header-texts {
-  text-align: center;
-  flex-grow: 1; /* Hace que los textos ocupen el espacio restante */
-}
-
-.read-usuario-welcome-message {
-  font-size: 24px;
-  margin: 0;
-  color: #0C231E;
-}
-
-.read-usuario-department-name {
-  font-size: 18px;
-  margin: 0;
-  color: #0C231E;
-}
-
-.read-usuario-content {
-  margin-top: 20px;
-  width: 100%; /* Cambiado a 100% para mejor responsividad */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.read-usuario-search-container {
+.read-usuario__header-logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
+}
+
+.read-usuario__header-texts {
+  text-align: center;
+}
+
+.read-usuario__welcome-message {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #12322B;
+}
+
+.read-usuario__department-name {
+  font-size: 1.125rem; /* 18px */
+  margin: 0;
+  color: #0C231E;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.read-usuario__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
-  display: flex; /* Asegura que el contenedor de búsqueda use flexbox */
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
 }
 
-.read-usuario-search-container input {
-  padding: 10px;
-  font-size: 16px;
+.read-usuario__search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 25rem; /* 400px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.read-usuario__search-container input,
+.read-usuario__search-container select {
+  padding: 0.625rem; /* 10px */
+  font-size: 1rem; /* 16px */
   border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-right: 5px;
-  margin: 0px;
+  border-radius: 0.3125rem; /* 5px */
+  margin-bottom: 0.625rem; /* 10px */
 }
 
-.read-usuario-search-container select {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.read-usuario-table-container {
-  width: 80%; /* Cambiado a 100% para mejor responsividad */
+.read-usuario__table-container {
+  width: 100%;
   overflow-x: auto;
-  margin-right: 10px;
 }
 
-.read-usuario-table {
+.read-usuario__table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.read-usuario-table th, .read-usuario-table td {
+.read-usuario__table th,
+.read-usuario__table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.5rem; /* 8px */
   text-align: left;
+  font-size: 0.875rem; /* 14px */
 }
 
-.read-usuario-table th {
+.read-usuario__table th {
   background-color: #f2f2f2;
   color: #333;
 }
 
-.pagination-read-usuario {
-  margin-top: 20px;
+.read-usuario__pagination {
+  margin-top: 1.25rem; /* 20px */
 }
 
-.pagination-read-usuario button {
-  margin: 0 5px;
-  padding: 10px;
+.read-usuario__pagination button {
+  margin: 0 0.3125rem; /* 5px */
+  padding: 0.625rem; /* 10px */
   border: none;
   background-color: #12322B;
   color: white;
-  border-radius: 5px;
+  border-radius: 0.3125rem; /* 5px */
   cursor: pointer;
 }
 
-.pagination-read-usuario button.active {
+.read-usuario__pagination button.active {
   background-color: #0C231E;
 }
 
-/* Nuevos estilos para la responsividad */
-@media (max-width: 480px) {
-  .read-usuario-header {
-    flex-direction: column; /* Apila el logo y los textos */
-    align-items: center; /* Centra el contenido */
-  }
+/* Media Queries */
 
-  .read-usuario-header-logo {
-    height: 60px; /* Ajusta el tamaño del logo */
-    margin-bottom: 10px; /* Espacio entre el logo y los textos */
-  }
-
-  .read-usuario-welcome-message {
-    font-size: 1.2em;
-  }
-
-  .read-usuario-department-name {
-    font-size: 1.0em;
-  }
-
-  .read-usuario-content {
-    padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
-    width: 100%; /* Ajusta el ancho para pantallas pequeñas */
-  }
-
-  .read-usuario-search-container {
-    flex-direction: column; /* Apila el input y el select */
-    width: 50%; /* Asegura que ocupe todo el ancho */
-    margin-top: -20px;
-  }
-
-  .read-usuario-search-container input,
-  .read-usuario-search-container select {
-    width: 100%; /* Asegura que ocupen todo el ancho disponible */
-    margin-bottom: 15px;
-  }
-
-  .read-usuario-table th, .read-usuario-table td {
-    padding: 6px; /* Reducir padding en pantallas pequeñas */
-    font-size: 6.5px;
-  }
-}
-
-@media (max-width: 819px) {
-  .hamburger {
-    display: block;
-  }
-}
-
+/* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
-  .hamburger {
-    display: none;
+  .read-usuario {
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
+  }
+
+  .read-usuario__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.25rem 2rem;
+  }
+
+  .read-usuario__header-logo {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
+  }
+
+  .read-usuario__header-texts {
+    text-align: left;
+  }
+
+  .read-usuario__welcome-message {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+
+  .read-usuario__department-name {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
+  .read-usuario__content {
+    padding: 2rem; /* 32px */
+  }
+
+  .read-usuario__search-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: none;
+    width: 100%;
+    margin-bottom: 1.875rem; /* 30px */
+  }
+
+  .read-usuario__search-container input,
+  .read-usuario__search-container select {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
+    width: auto;
+  }
+
+  .read-usuario__table-container {
+    width: 100%;
+  }
+
+  .read-usuario__table th,
+  .read-usuario__table td {
+    padding: 0.75rem; /* 12px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .read-usuario__pagination {
+    margin-top: 1.875rem; /* 30px */
   }
 }

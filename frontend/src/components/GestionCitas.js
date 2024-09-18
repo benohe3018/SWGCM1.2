@@ -23,6 +23,15 @@ const GestionCitas = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const pacientesPerPage = 10;
 
+  const handleInputChange = (e, pacienteId, campo) => {
+    const newPacientes = [...pacientesPrueba];
+    const index = newPacientes.findIndex(p => p.id === pacienteId);
+    if (index !== -1) {
+      newPacientes[index][campo] = e.target.value;
+      setPacientesPrueba(newPacientes);
+    }
+  };
+
   useEffect(() => {
     if (location.pathname === '/crear-cita') {
       setVista('crear');
@@ -165,20 +174,20 @@ const GestionCitas = () => {
   }
 
   return (
-    <div className="gestion-citas-page">
-      <header className="gestion-citas-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="gestion-citas-medicas-header-logo" />
-        <div className="gestion-citas-medicas-header-texts">
-          <h1 className="gestion-citas-medicas-welcome-message">Sistema de Gestión de Citas Médicas</h1>
-          <h2 className="gestion-citas-medicas-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+    <div className="gestion-citas">
+      <header className="gestion-citas__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="gestion-citas__header-logo" />
+        <div className="gestion-citas__header-texts">
+          <h1 className="gestion-citas__welcome-message">Sistema de Gestión de Citas Médicas</h1>
+          <h2 className="gestion-citas__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
-      <div className="gestion-citas-content">
-        {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
+      {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="gestion-citas__mr-machine" />}
+      <div className="gestion-citas__content">
+        {mensaje && <div className="gestion-citas__message-confirmation">{mensaje}</div>}
         
         {/* Campo de búsqueda */}
-        <div className="gestion-citas-search-container">
+        <div className="gestion-citas__search-container">
           <input
             type="text"
             placeholder="Buscar paciente..."
@@ -186,7 +195,7 @@ const GestionCitas = () => {
             onChange={handleSearch}
           />
         </div>
-
+  
         {vista === 'crear' && (
           <FormularioPaciente
             modo="crear"
@@ -197,10 +206,10 @@ const GestionCitas = () => {
             onCancel={() => setVista('ver')}
           />
         )}
-
+  
         {vista === 'ver' && (
-          <div className="gestion-citas-tabla-container">
-            <table className="gestion-citas-ver-tabla">
+          <div className="gestion-citas__table-container">
+            <table className="gestion-citas__table gestion-citas__table--ver">
               <thead>
                 <tr>
                   <th>Fecha y Hora</th>
@@ -222,7 +231,7 @@ const GestionCitas = () => {
                 ))}
               </tbody>
             </table>
-            <div className="gestion-citas-pagination">
+            <div className="gestion-citas__pagination">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button
                   key={page}
@@ -235,10 +244,10 @@ const GestionCitas = () => {
             </div>
           </div>
         )}
-
+  
         {vista === 'editar' && (
-          <div className="gestion-citas-tabla-container">
-            <table className="gestion-citas-editar-tabla">
+          <div className="gestion-citas__table-container">
+            <table className="gestion-citas__table gestion-citas__table--editar">
               <thead>
                 <tr>
                   <th>Fecha y Hora</th>
@@ -253,74 +262,50 @@ const GestionCitas = () => {
                 {currentPacientes.map((paciente) => (
                   <tr key={paciente.id}>
                     <td>
-                      <input className="input-gestion-citas"
+                      <input
+                        className="gestion-citas__input"
                         type="datetime-local"
                         value={paciente.fecha_hora_estudio}
-                        onChange={(e) => {
-                          const newPacientes = [...pacientesPrueba];
-                          const index = newPacientes.findIndex(p => p.id === paciente.id);
-                          newPacientes[index].fecha_hora_estudio = e.target.value;
-                          setPacientesPrueba(newPacientes);
-                        }}
+                        onChange={(e) => handleInputChange(e, paciente.id, 'fecha_hora_estudio')}
                       />
                     </td>
                     <td>
-                      <input className="input-gestion-citas"
+                      <input
+                        className="gestion-citas__input"
                         type="text"
                         value={paciente.nombre_completo}
-                        onChange={(e) => {
-                          const newPacientes = [...pacientesPrueba];
-                          const index = newPacientes.findIndex(p => p.id === paciente.id);
-                          newPacientes[index].nombre_completo = e.target.value;
-                          setPacientesPrueba(newPacientes);
-                        }}
-                        style={{ width: '140px' }} // Ajusta el tamaño del input
+                        onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo')}
                       />
                     </td>
                     <td>
-                      <input className="input-gestion-citas"
+                      <input
+                        className="gestion-citas__input"
                         type="text"
                         value={paciente.nombre_completo_medico}
-                        onChange={(e) => {
-                          const newPacientes = [...pacientesPrueba];
-                          const index = newPacientes.findIndex(p => p.id === paciente.id);
-                          newPacientes[index].nombre_completo_medico = e.target.value;
-                          setPacientesPrueba(newPacientes);
-                        }}
-                        style={{ width: '150px' }} // Ajusta el tamaño del input
+                        onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
                       />
                     </td>
                     <td>
-                      <input className="input-gestion-citas"
+                      <input
+                        className="gestion-citas__input"
                         type="text"
                         value={paciente.estudio_solicitado}
-                        onChange={(e) => {
-                          const newPacientes = [...pacientesPrueba];
-                          const index = newPacientes.findIndex(p => p.id === paciente.id);
-                          newPacientes[index].estudio_solicitado = e.target.value;
-                          setPacientesPrueba(newPacientes);
-                        }}
-                        style={{ width: '100px' }} // Ajusta el tamaño del input
+                        onChange={(e) => handleInputChange(e, paciente.id, 'estudio_solicitado')}
                       />
                     </td>
                     <td>
-                      <input className="input-gestion-citas"
+                      <input
+                        className="gestion-citas__input"
                         type="text"
                         value={paciente.hospital_envia}
-                        onChange={(e) => {
-                          const newPacientes = [...pacientesPrueba];
-                          const index = newPacientes.findIndex(p => p.id === paciente.id);
-                          newPacientes[index].hospital_envia = e.target.value;
-                          setPacientesPrueba(newPacientes);
-                        }}
-                        style={{ width: '50px' }} // Ajusta el tamaño del input
+                        onChange={(e) => handleInputChange(e, paciente.id, 'hospital_envia')}
                       />
                     </td>
                     <td>
-                      <div className="gestion-citas-botones-acciones">
+                      <div className="gestion-citas__actions">
                         <button
                           onClick={() => handleEditarPaciente(paciente)}
-                          className="gestion-citas-boton-guardar"
+                          className="gestion-citas__button gestion-citas__button--guardar"
                         >
                           Guardar
                         </button>
@@ -330,7 +315,7 @@ const GestionCitas = () => {
                 ))}
               </tbody>
             </table>
-            <div className="gestion-citas-pagination">
+            <div className="gestion-citas__pagination">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button
                   key={page}
@@ -343,10 +328,10 @@ const GestionCitas = () => {
             </div>
           </div>
         )}
-
+  
         {vista === 'eliminar' && (
-          <div className="gestion-citas-tabla-container">
-            <table className="gestion-citas-eliminar-tabla">
+          <div className="gestion-citas__table-container">
+            <table className="gestion-citas__table gestion-citas__table--eliminar">
               <thead>
                 <tr>
                   <th>Fecha y Hora</th>
@@ -366,10 +351,10 @@ const GestionCitas = () => {
                     <td>{paciente.estudio_solicitado}</td>
                     <td>{paciente.hospital_envia}</td>
                     <td>
-                      <div className="gestion-citas-botones-acciones">
+                      <div className="gestion-citas__actions">
                         <button
                           onClick={() => handleEliminarPaciente(paciente.id)}
-                          className="gestion-citas-eliminar-button"
+                          className="gestion-citas__button gestion-citas__button--eliminar"
                         >
                           Eliminar
                         </button>
@@ -379,7 +364,7 @@ const GestionCitas = () => {
                 ))}
               </tbody>
             </table>
-            <div className="gestion-citas-pagination">
+            <div className="gestion-citas__pagination">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button
                   key={page}
@@ -401,7 +386,7 @@ const GestionCitas = () => {
         />
       )}
     </div>
-  );
+  );  
 };
 
 export default GestionCitas;

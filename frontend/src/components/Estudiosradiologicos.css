@@ -255,7 +255,7 @@
 /* Pantallas pequeñas (máximo 420px) */
 @media (max-width: 420px) {
   .estudios-radiologicos__table-container {
-    display: none; /* Ocultar la tabla */
+    display: block; /* Ocultar la tabla */
   }
 }
 

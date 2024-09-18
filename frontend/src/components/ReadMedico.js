@@ -51,37 +51,37 @@ const ReadMedico = () => {
   const totalPages = Math.ceil(filteredMedicos.length / medicosPerPage);
 
   return (
-    <div className="read-medico-page">
-      <Sidebar />
-      <header className="read-medico-header">
+    <div className="read-medico">
+      <header className="read-medico__header">
         <img src={logoIMSS} alt="Logo IMSS" className="read-medico__header-logo" />
-        <div className="header-texts">
-          <h1 className="welcome-message-ReadMedico">Bienvenido al Módulo de gestión de Médicos</h1>
-          <h2 className="department-name-ReadMedico">Médicos Registrados en la base de datos</h2>
+        <div className="read-medico__header-texts">
+          <h1 className="read-medico__welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h2 className="read-medico__department-name">Médicos Registrados en la base de datos</h2>
         </div>
       </header>
-      
-      <div className="read-medico-content">
-        <div className="read-medico-search-container">
-          <input
-            type="text"
-            placeholder="Buscar..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-          <select value={searchField} onChange={handleFieldChange}>
-            <option value="nombre">Nombre</option>
-            <option value="apellidoPaterno">Apellido Paterno</option>
-            <option value="apellidoMaterno">Apellido Materno</option>
-          </select>
-        </div>
-        <div className="table-container">
-          {isLoading ? (
-            <p>Cargando...</p>
-          ) : (
-            <>
-              <div className="medico-table-container">
-                <table className="medico-table">
+
+      <div className="main-layout">
+        <Sidebar />
+        <div className="read-medico__content">
+          <div className="read-medico__search-container">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+            <select value={searchField} onChange={handleFieldChange}>
+              <option value="nombre">Nombre</option>
+              <option value="apellidoPaterno">Apellido Paterno</option>
+              <option value="apellidoMaterno">Apellido Materno</option>
+            </select>
+          </div>
+          <div className="read-medico__table-container">
+            {isLoading ? (
+              <p>Cargando...</p>
+            ) : (
+              <>
+                <table className="read-medico__table">
                   <thead>
                     <tr>
                       <th>Nombre</th>
@@ -92,7 +92,7 @@ const ReadMedico = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentMedicos.map(medico => (
+                    {currentMedicos.map((medico) => (
                       <tr key={medico.id_medico}>
                         <td>{medico.nombre_medico}</td>
                         <td>{medico.apellido_paterno_medico}</td>
@@ -103,20 +103,20 @@ const ReadMedico = () => {
                     ))}
                   </tbody>
                 </table>
-              </div>
-              <div className="pagination-read-medico">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                  <button
-                    key={page}
-                    onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
+                <div className="read-medico__pagination">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={page === currentPage ? 'active' : ''}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

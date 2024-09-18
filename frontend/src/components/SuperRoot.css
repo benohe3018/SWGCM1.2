@@ -127,7 +127,7 @@
 @media (min-width: 1200px) {
   .super-root__content-area {
     max-width: 75rem; /* 1200px */
-    margin-left: 15.625rem; /* 250px */
+    margin-left: 28rem; /* 250px */
     margin-right: auto;
   }
 

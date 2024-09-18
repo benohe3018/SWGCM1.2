@@ -76,14 +76,15 @@
 /* Media Queries */
 
 /* Pantallas medianas y tablets (mínimo 480px) */
-@media (min-width: 480px) {
+/* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
   .super-root {
     flex-direction: row;
   }
 
   .super-root__content-area {
     margin-left: 15.625rem; /* 250px */
-    width: calc(100% - 15.625rem); /* Ajustar según el ancho de la sidebar */
+    width: calc(100% - 15.625rem);
   }
 
   .super-root__header {
@@ -101,26 +102,27 @@
   .super-root__header-logo {
     height: 3.125rem; /* 50px */
     margin-right: 1.25rem; /* 20px */
-    margin-bottom: 0; /* Eliminar margen inferior */
+    margin-bottom: 0;
   }
 
   .super-root__welcome-message {
-    font-size: 1.5rem; /* 24px */
+    font-size: 2rem; /* 32px */
     text-align: left;
     margin: 0;
   }
 
   .super-root__department-name {
-    font-size: 1rem; /* 16px */
+    font-size: 1.25rem; /* 20px */
     text-align: left;
     margin: 0;
   }
 
   .super-root__mr-machine {
-    max-width: 25rem; /* 400px */
-    margin-top: 2.5rem; /* 40px */
+    max-width: 31.25rem; /* 500px */
+    margin-top: 3.125rem; /* 50px */
   }
 }
+
 
 /* Pantallas grandes (mínimo 1024px) */
 @media (min-width: 1024px) {

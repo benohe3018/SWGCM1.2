@@ -1,160 +1,215 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+/* CreateUsuario.css */
+
+/* Estilos Base - Mobile-First */
+
+.create-usuario {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #0C231E;
 }
 
-.create-usuario-page {
+.create-usuario__header {
+  width: 100%;
   background-color: whitesmoke;
-  height: 100vh;
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: white;
 }
 
-.create-usuario-header {
-  background-color: whitesmoke;
-  padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.create-usuario__header-logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
 }
 
-.header-texts {
-  margin-left: 20px;
-  text-align: left;
+.create-usuario__header-texts {
+  text-align: center;
 }
 
-.welcome-message-create-usuario{
-  font-size: 24px;
-  margin: 0;
-  color: #0C231E; /* Ajusta el color y tamaño según la preferencia */
+.create-usuario__welcome-message {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #12322b;
 }
 
-.department-name-create-usuario{
-  font-size: 18px;
+.create-usuario__department-name {
+  font-size: 1.125rem; /* 18px */
   margin: 0;
   color: #0C231E;
 }
 
-.header-logo {
-  height: 60px;
+.main-layout {
+  display: flex;
+  flex: 1;
+  width: 100%;
 }
 
-.create-usuario-content {
-  width: 100%;
+.create-usuario__content {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-.form-description-create-usuario{
-  color: black;
-  font-size: 14px;
-}
-
-.form-group-create-usuario{
-  width: 100%;
-  display: flex;
-  padding: 5px;
-}
-
-.form-group-create-usuario {
-  flex-direction: row;
-  margin-bottom: 5px;
   align-items: center;
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
 }
 
-label {
+.create-usuario__form {
+  width: 100%;
+  max-width: 25rem; /* 400px */
+  display: flex;
+  flex-direction: column;
+}
+
+.create-usuario__form-description {
+  color: #12322B;
+  font-size: 1.2rem; /* 19.2px */
+  margin-bottom: 1.25rem; /* 20px */
+  text-align: center;
+  margin-top: 0;
+}
+
+.create-usuario__form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem; /* 16px */
+}
+
+.create-usuario__form-label {
   font-weight: bold;
   color: #12322B;
-  margin-right: 10px;
+  margin-bottom: 0.3125rem; /* 5px */
 }
 
-input, select {
-  padding: 10px;
+.create-usuario__form-input,
+.create-usuario__form-select {
+  padding: 0.625rem; /* 10px */
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 0.3125rem; /* 5px */
+  font-size: 1rem; /* 16px */
   color: #12322B;
+  width: 100%;
 }
 
-.password-container-form-group {
+.create-usuario__password-container {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.toggle-show-password {
+.create-usuario__toggle-show-password {
   position: absolute;
-  right: 0px;
+  right: 0.625rem; /* 10px */
   background: none;
   border: none;
   cursor: pointer;
   color: #12322B;
 }
 
-.create-usuario-button {
+.create-usuario__button {
+  padding: 0.625rem; /* 10px */
   background-color: #12322B;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem; /* 5px */
   cursor: pointer;
-  margin-left: 100px;
-  margin-top: 5px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem; /* 16px */
 }
 
-.create-usuario-button:hover {
+.create-usuario__button:hover {
   background-color: #0C231E;
 }
 
-.message-POST-success {
+.create-usuario__message-POST-success {
   color: green;
   font-weight: bold;
-  margin-top: 20px;
+  font-size: 1rem; /* 16px */
+  margin-top: 1.25rem; /* 20px */
+  text-align: center;
 }
 
-.message-POST-failed {
+.create-usuario__message-POST-failed {
   color: red;
   font-weight: bold;
-  margin-top: 20px;
+  font-size: 1rem; /* 16px */
+  margin-top: 1.25rem; /* 20px */
+  text-align: center;
 }
 
-/* Media Queries for responsiveness */
-@media (max-width: 768px) {
-  .create-usuario-header {
-    flex-direction: column;
+/* Media Queries */
+
+/* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
+
+  .create-usuario {
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
+  }
+
+  .create-usuario__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.25rem 2rem; /* 20px 32px */
+  }
+
+  .create-usuario__header-logo {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
+  }
+
+  .create-usuario__header-texts {
+    text-align: left;
+  }
+
+  .create-usuario__welcome-message {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+
+  .create-usuario__department-name {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
+  .create-usuario__content {
+    padding: 2rem; /* 32px */
+  }
+
+  .create-usuario__form {
+    max-width: 31.25rem; /* 500px */
+  }
+
+  .create-usuario__form-description {
+    font-size: 1.5rem; /* 24px */
+    margin-bottom: 1.875rem; /* 30px */
+  }
+
+  .create-usuario__form-group {
+    flex-direction: row;
     align-items: center;
   }
 
-  .create-usuario-content {
-    width: 80%;
+  .create-usuario__form-label {
+    width: 40%;
+    margin-bottom: 0;
+    margin-right: 1.25rem; /* 20px */
+    text-align: right;
   }
 
-  .form-group-create-usuario {
-    padding: 10px;
-  }
-
-  .form-description-create-usuario {
-    font-size: 1.2em;
-    color: black;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-  .create-usuario-content {
-    width: 80%;
-  }
-
-}
-
-@media (min-width: 769px) {
-  .create-usuario-content {
+  .create-usuario__form-input,
+  .create-usuario__form-select {
     width: 60%;
+  }
+
+  .create-usuario__button {
+    width: auto;
+    align-self: center;
+    padding: 0.75rem 1.5rem; /* 12px 24px */
   }
 }

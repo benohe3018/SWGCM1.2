@@ -121,6 +121,7 @@
 .especialidades-medicas__actions {
   display: flex;
   gap: 0.625rem; /* 10px */
+  justify-content: center;
 }
 
 .especialidades-medicas__button {
@@ -226,6 +227,10 @@
 
   .especialidades-medicas__pagination {
     margin-top: 1.875rem; /* 30px */
+  }
+
+  .especialidades-medicas__actions{
+    justify-content: center;
   }
 }
 

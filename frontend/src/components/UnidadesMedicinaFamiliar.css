@@ -258,7 +258,7 @@
 
   /* Mejor alineación de los botones en vistas grandes */
   .unidades-medicina-familiar__actions {
-    justify-content: flex-start;
+    justify-content: center;
   }
 }
 

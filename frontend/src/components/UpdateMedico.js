@@ -134,19 +134,19 @@ const UpdateMedico = () => {
   ];
 
   return (
-    <div className="update-medico-page">
-      <header className="update-medico-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="update-header-logo" />
-        <div className="update-header-text">
-          <h1 className="update-welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
-          <h2 className="update-department-name">Actualizar Registros de Médicos</h2>
-        </div>
-      </header>
-      <div className="main-layout">
-        <Sidebar />
-        <div className="update-medico-content">
-          {successMessage && <p className="success-message">{successMessage}</p>}
-          <div className="update-medico-search-container">
+    <div className="update-medico">
+    <header className="update-medico__header">
+      <img src={logoIMSS} alt="Logo IMSS" className="update-medico__header-logo" />
+      <div className="update-medico__header-texts">
+        <h1 className="update-medico__welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+        <h2 className="update-medico__department-name">Actualizar Registros de Médicos</h2>
+      </div>
+    </header>
+    <div className="main-layout">
+      <Sidebar />
+      <div className="update-medico__content">
+        {successMessage && <p className="update-medico__success-message">{successMessage}</p>}
+        <div className="update-medico__search-container">
             <input
               type="text"
               placeholder="Buscar..."
@@ -159,8 +159,8 @@ const UpdateMedico = () => {
               <option value="apellido_materno_medico">Apellido Materno</option>
             </select>
           </div>
-          <div className="update-medico-table-container">
-            <table className="update-medico-table">
+          <div className="update-medico__table-container">
+            <table className="update-medico__table">
               <thead>
                 <tr>
                   <th>Nombre</th>
@@ -226,7 +226,7 @@ const UpdateMedico = () => {
               </tbody>
             </table>
           </div>
-          <div className="pagination-update-medico">
+          <div className="update-medico__pagination">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
               <button 
                 key={page}

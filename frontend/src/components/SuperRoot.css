@@ -123,19 +123,28 @@
   }
 }
 
+/* Pantallas extra grandes (mínimo 1200px) */
+@media (min-width: 1200px) {
+  .super-root__content-area {
+    max-width: 75rem; /* 1200px */
+    margin-left: 15.625rem; /* 250px */
+    margin-right: auto;
+  }
 
-/* Pantallas grandes (mínimo 1024px) */
-@media (min-width: 1024px) {
+  .super-root__header {
+    padding: 1.5rem 2rem; /* Ajustar padding */
+  }
+
   .super-root__welcome-message {
-    font-size: 2rem; /* 32px */
+    font-size: 2.25rem; /* 36px */
   }
 
   .super-root__department-name {
-    font-size: 1.25rem; /* 20px */
+    font-size: 1.5rem; /* 24px */
   }
 
   .super-root__mr-machine {
-    max-width: 31.25rem; /* 500px */
-    margin-top: 3.125rem; /* 50px */
+    max-width: 37.5rem; /* 600px */
+    margin-top: 3.75rem; /* 60px */
   }
 }

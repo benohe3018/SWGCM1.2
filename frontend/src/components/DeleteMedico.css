@@ -1,300 +1,199 @@
-/* ===================== */
-/*   Estilos Base (Mobile-First) */
-/* ===================== */
-.delete-medico-page {
-  background-color: whitesmoke;
+/* DeleteMedico.css */
+
+/* Estilos Base - Mobile-First */
+
+.delete-medico {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #0C231E;
-  padding: 10px;
-}
-
-.delete-medico-header {
-  display: flex;
-  flex-direction: column;
   background-color: whitesmoke;
-  padding: 10px;
+  font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #0C231E;
+  padding: 0; /* Eliminamos el padding extra */
+}
+
+.delete-medico__header {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 1.25rem; /* 20px */
   box-sizing: border-box;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.delete-header-logo {
-  height: 60px;
-  margin-bottom: 10px;
+.delete-medico__header-logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
 }
 
-.delete-header-texts {
+.delete-medico__header-texts {
   text-align: center;
-  width: 100%;
 }
 
-.delete-welcome-message {
-  font-size: 1.5em;
+.delete-medico__welcome-message {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #12322B;
+}
+
+.delete-medico__department-name {
+  font-size: 1.125rem; /* 18px */
   margin: 0;
 }
 
-.delete-department-name {
-  font-size: 1.2em;
-  margin: 0;
-}
-
-.delete-medico-content {
+.main-layout {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.delete-medico-search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
+  flex: 1;
   width: 100%;
 }
 
-.delete-medico-search-container input,
-.delete-medico-search-container select {
-  width: 90%;
-  padding: 8px;
-  border-radius: 5px;
+.delete-medico__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
+}
+
+.delete-medico__search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 25rem; /* 400px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.delete-medico__search-container input,
+.delete-medico__search-container select {
+  width: 100%;
+  padding: 0.625rem; /* 10px */
+  border-radius: 0.3125rem; /* 5px */
   border: 1px solid #ccc;
+  margin-bottom: 0.625rem; /* 10px */
 }
 
-.delete-medico-table-container {
+.delete-medico__table-container {
   width: 100%;
   overflow-x: auto;
+  flex: 1;
 }
 
-.delete-medico-table {
+.delete-medico__table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; /* 20px */
 }
 
-.delete-medico-table th,
-.delete-medico-table td {
+.delete-medico__table th,
+.delete-medico__table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.5rem; /* 8px */
   text-align: left;
-  font-size: 0.9em;
+  font-size: 0.875rem; /* 14px */
 }
 
-.delete-medico-table th {
+.delete-medico__table th {
   background-color: #f4f4f4;
 }
 
-.pagination-delete-medico {
+.delete-medico__pagination {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 1.25rem 0; /* 20px */
 }
 
-.pagination-delete-medico button {
-  padding: 8px 12px;
-  margin: 0 3px;
+.delete-medico__pagination button {
+  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  margin: 0 0.3125rem; /* 5px */
   background-color: #12322B;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem; /* 5px */
   cursor: pointer;
-  font-size: 0.9em;
+  font-size: 0.875rem; /* 14px */
 }
 
-.pagination-delete-medico button.active {
+.delete-medico__pagination button.active {
   background-color: #0C231E;
 }
 
-.pagination-delete-medico button:hover {
+.delete-medico__pagination button:hover {
   background-color: #0C231E;
 }
 
-.message-delete-success {
+.delete-medico__message-success {
   color: green;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 1.25rem; /* 20px */
 }
 
-/* ===================== */
-/*   Breakpoint: 481px - 768px */
-/* ===================== */
-@media (min-width: 481px) and (max-width: 768px) {
-  .delete-medico-header {
+/* Media Queries */
+
+/* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
+  .delete-medico {
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
+  }
+
+  .delete-medico__header {
     flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
+    padding: 1.25rem 2rem;
   }
 
-  .delete-header-logo {
+  .delete-medico__header-logo {
+    margin-right: 1.25rem; /* 20px */
     margin-bottom: 0;
-    margin-right: 20px;
   }
 
-  .delete-header-texts {
+  .delete-medico__header-texts {
     text-align: left;
+  }
+
+  .delete-medico__welcome-message {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+
+  .delete-medico__department-name {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
+  .delete-medico__content {
+    padding: 2rem; /* 32px */
+  }
+
+  .delete-medico__search-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: none;
+    width: 100%;
+    margin-bottom: 1.875rem; /* 30px */
+  }
+
+  .delete-medico__search-container input,
+  .delete-medico__search-container select {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
     width: auto;
   }
 
-  .delete-welcome-message {
-    font-size: 1.8em;
+  .delete-medico__table th,
+  .delete-medico__table td {
+    padding: 0.75rem; /* 12px */
+    font-size: 1rem; /* 16px */
   }
 
-  .delete-department-name {
-    font-size: 1.4em;
+  .delete-medico__pagination {
+    margin: 1.875rem 0; /* 30px */
   }
 
-  .delete-medico-content {
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .delete-medico-search-container {
-    flex-direction: row;
-    width: auto;
-  }
-
-  .delete-medico-search-container input,
-  .delete-medico-search-container select {
-    width: auto;
-    margin: 0 5px;
-  }
-
-  .delete-medico-table th,
-  .delete-medico-table td {
-    padding: 10px;
-    font-size: 1em;
-  }
-
-  .pagination-delete-medico {
-    margin: 15px 0;
-  }
-}
-
-/* ===================== */
-/*   Breakpoint: 769px - 1024px */
-/* ===================== */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .delete-medico-page {
-    padding: 20px;
-  }
-
-  .delete-medico-header {
-    padding: 15px 30px;
-  }
-
-  .delete-medico-search-container input,
-  .delete-medico-search-container select {
-    padding: 10px;
-    font-size: 1em;
-  }
-
-  .delete-medico-table th,
-  .delete-medico-table td {
-    padding: 12px;
-    font-size: 1em;
-  }
-
-  .pagination-delete-medico button {
-    padding: 10px 15px;
-    font-size: 1em;
-  }
-}
-
-/* ===================== */
-/*   Breakpoint: 1025px - 1280px */
-/* ===================== */
-@media (min-width: 1025px) and (max-width: 1280px) {
-  .delete-medico-page {
-    padding: 30px;
-  }
-
-  .delete-medico-header {
-    padding: 20px 40px;
-  }
-
-  .delete-medico-content {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .delete-medico-search-container {
-    flex-direction: row;
-    width: 50%;
-  }
-
-  .delete-medico-search-container input,
-  .delete-medico-search-container select {
-    width: 45%;
-    margin: 0 10px;
-  }
-
-  .delete-medico-table-container {
-    width: 100%;
-  }
-
-  .delete-medico-table th,
-  .delete-medico-table td {
-    padding: 15px;
-    font-size: 1em;
-  }
-
-  .pagination-delete-medico button {
-    padding: 12px 18px;
-    font-size: 1.1em;
-  }
-}
-
-/* ===================== */
-/*   Breakpoint: 1281px en adelante */
-/* ===================== */
-@media (min-width: 1281px) {
-  .delete-medico-page {
-    padding: 40px;
-  }
-
-  .delete-medico-header {
-    padding: 25px 50px;
-  }
-
-  .delete-welcome-message {
-    font-size: 2em;
-  }
-
-  .delete-department-name {
-    font-size: 1.6em;
-  }
-
-  .delete-medico-content {
-    max-width: 1200px;
-    margin: 20px auto;
-  }
-
-  .delete-medico-search-container input,
-  .delete-medico-search-container select {
-    width: 40%;
-    margin: 0 15px;
-  }
-
-  .delete-medico-table th,
-  .delete-medico-table td {
-    padding: 20px;
-    font-size: 1.1em;
-  }
-
-  .pagination-delete-medico button {
-    padding: 15px 20px;
-    font-size: 1.2em;
+  .delete-medico__pagination button {
+    font-size: 1rem; /* 16px */
   }
 }

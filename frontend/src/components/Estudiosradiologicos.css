@@ -1,177 +1,182 @@
-.estudios-radiologicos-page {
-  background-color: whitesmoke;
-  height: 100vh;
+/* Base Styles - Mobile First */
+
+.estudios-radiologicos {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  min-height: 100vh;
+  background-color: whitesmoke;
   font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: black;
-}
-
-.estudios-radiologicos-header {
-  display: flex;
-  background-color: whitesmoke;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  flex-direction: row;
-}
-
-.header-texts {
-  text-align: center;
-  flex-grow: 1;
-}
-
-.estudios-radiologicos-header-logo{
-  height: 60px;
-  margin-right: 40px ;
-}
-
-.welcome-message-estudios-radiologicos {
-  font-size: 24px;
-  margin: 0;
   color: #0C231E;
 }
 
-.department-name-estudios-radiologicos {
-  font-size: 18px;
-  margin: 0;
-  color: #0C231E;
-}
-
-.estudios-radiologicos-content {
-  width: 110%;
+.estudios-radiologicos__header {
+  width: 100%;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: whitesmoke;
 }
 
-.tabla-estudios-container {
+.estudios-radiologicos__header-logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
+}
+
+.estudios-radiologicos__header-texts {
+  text-align: center;
+}
+
+.estudios-radiologicos__welcome-message {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #0C231E;
+}
+
+.estudios-radiologicos__department-name {
+  font-size: 1.125rem; /* 18px */
+  margin: 0;
+}
+
+.estudios-radiologicos__mr-machine {
+  width: 100%;
+  max-width: 18.75rem; /* 300px */
+  margin-top: 2rem;
+}
+
+.estudios-radiologicos__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.estudios-radiologicos__message-confirmation {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
+  margin-bottom: 1.25rem;
+}
+
+.estudios-radiologicos__search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 25rem;
+  margin-bottom: 1.25rem;
+}
+
+.estudios-radiologicos__search-input,
+.estudios-radiologicos__search-select {
+  padding: 0.625rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem;
+  margin-right: 0.625rem;
+  width: 100%;
+}
+
+.estudios-radiologicos__table-container {
   width: 100%;
   overflow-x: auto;
 }
 
-.tabla-estudios {
+.estudios-radiologicos__table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  table-layout: fixed;
 }
 
-.tabla-estudios th, .tabla-estudios td {
+.estudios-radiologicos__table th,
+.estudios-radiologicos__table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 0.5rem;
   text-align: center;
+  font-size: 0.875rem;
 }
 
-.tabla-estudios th {
+.estudios-radiologicos__table th {
   background-color: #f4f4f4;
 }
 
-.busqueda-estudio {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  flex-direction: row;
-}
-
-.busqueda-estudio input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 60%;
-  margin:0px;
-  margin-right: 10px;
-}
-
-.busqueda-estudio select {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin:0px;
-}
-
-.pagination-read-usuario {
-  margin-top: 20px;
-}
-
-.pagination-read-usuario button {
-  margin: 0 5px;
-  padding: 10px;
-  border: none;
-  background-color: #12322B;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pagination-read-usuario button.active {
-  background-color: #0C231E;
-}
-
-.mensaje-confirmacion {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.botones-acciones {
-  display: flex;
-  gap: 10px;
-}
-
-.editar-button {
-  background-color: #0C231E;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.editar-button:hover {
-  background-color: whitesmoke;
-  color: black;
-}
-
-.eliminar-button {
-  background-color: #dc3545;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.eliminar-button:hover {
-  background-color: whitesmoke;
-  color: black;
-}
-
-.mr-machine {
+.estudios-radiologicos__input,
+.estudios-radiologicos__textarea {
   width: 100%;
-  max-width: 300px;
-  margin-top: 2rem;
-  display: flex;
+  padding: 0.375rem;
+  font-size: 0.875rem;
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem;
+  box-sizing: border-box;
 }
+
+.estudios-radiologicos__actions {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.estudios-radiologicos__button {
+  background-color: #006aa7;
+  color: white;
+  padding: 0.3125rem 0.625rem;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.estudios-radiologicos__button--edit {
+  background-color: #27ae60;
+}
+
+.estudios-radiologicos__button--delete {
+  background-color: #e74c3c;
+}
+
+.estudios-radiologicos__button:hover {
+  opacity: 0.9;
+}
+
+.estudios-radiologicos__pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.estudios-radiologicos__pagination-button {
+  padding: 0.625rem 0.9375rem;
+  margin: 0 0.3125rem;
+  background-color: #12322b;
+  color: white;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}
+
+.estudios-radiologicos__pagination-button.active {
+  background-color: #0c231e;
+}
+
 @media (max-width: 480px) {
-  .estudios-radiologicos-header{
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
-    text-align: center; /* Centra el texto del header */
+  .estudios-radiologicos__header {
     flex-direction: column;
-    align-items: flex-start;
   }
 
-  .estudios-radiologicos-header-logo {
-    height: 50px;
-    margin-left: 150px;
-    margin-bottom: 10px;
+  .estudios-radiologicos__header-logo {
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .estudios-radiologicos__search-input,
+  .estudios-radiologicos__search-select {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+
+  .estudios-radiologicos__table th,
+  .estudios-radiologicos__table td {
+    font-size: 0.75rem;
   }
 }

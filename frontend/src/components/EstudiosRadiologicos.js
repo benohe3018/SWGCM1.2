@@ -22,6 +22,15 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
     const [searchField, setSearchField] = useState('nombre_estudio');
     const estudiosPerPage = 10;
 
+const handleInputChange = (e, idEstudio, field) => {
+    const newEstudios = [...estudios];  // Copiamos el array de estudios
+    const index = newEstudios.findIndex(est => est.id_estudio === idEstudio);  // Encontramos el índice del estudio correspondiente  
+        if (index !== -1) {
+            newEstudios[index][field] = e.target.value;  // Actualizamos el campo que ha cambiado
+            setEstudios(newEstudios);  // Actualizamos el estado con los nuevos estudios
+        }
+    };
+
     useEffect(() => {
         if (location.pathname === '/crear-estudio') {
             setVista('crear');
@@ -152,17 +161,17 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
     }
 
     return (
-        <div className="estudios-radiologicos-page">
-            <header className="estudios-radiologicos-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="estudios-radiologicos-header-logo" />
-                <div className="header-texts">
-                    <h1 className="welcome-message-estudios-radiologicos">Sistema de Gestión de Estudios Radiológicos</h1>
-                    <h2 className="department-name-estudios-radiologicos">Departamento de Resonancia Magnética - HGR #46</h2>
+        <div className="estudios-radiologicos">
+            <header className="estudios-radiologicos__header">
+                <img src={logoIMSS} alt="Logo IMSS" className="estudios-radiologicos__header-logo" />
+                <div className="estudios-radiologicos__header-texts">
+                    <h1 className="estudios-radiologicos__welcome-message">Sistema de Gestión de Estudios Radiológicos</h1>
+                    <h2 className="estudios-radiologicos__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
                 </div>
             </header>
-            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
-            <div className="estudios-radiologicos-content">
-                {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
+            {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="estudios-radiologicos__mr-machine" />}
+            <div className="estudios-radiologicos__content">
+                {mensaje && <div className="estudios-radiologicos__message-confirmation">{mensaje}</div>}
                 {vista === 'crear' && (
                     <FormularioEstudio
                         modo="crear"
@@ -172,20 +181,21 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                 )}
                 {vista === 'ver' && (
                     <>
-                        <div className="busqueda-estudio">
+                        <div className="estudios-radiologicos__search-container">
                             <input
                                 type="text"
                                 placeholder="Buscar..."
                                 value={searchTerm}
                                 onChange={handleSearch}
+                                className="estudios-radiologicos__search-input"
                             />
-                            <select value={searchField} onChange={handleFieldChange}>
+                            <select value={searchField} onChange={handleFieldChange} className="estudios-radiologicos__search-select">
                                 <option value="nombre_estudio">Nombre del Estudio</option>
                                 <option value="descripcion_estudio">Descripción del Estudio</option>
                             </select>
                         </div>
-                        <div className="tabla-estudios-container">
-                            <table className="tabla-estudios">
+                        <div className="estudios-radiologicos__table-container">
+                            <table className="estudios-radiologicos__table">
                                 <thead>
                                     <tr>
                                         <th>Nombre del Estudio</th>
@@ -201,12 +211,12 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                     ))}
                                 </tbody>
                             </table>
-                            <div className="pagination-read-usuario">
+                            <div className="estudios-radiologicos__pagination">
                                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                                     <button
                                         key={page}
                                         onClick={() => setCurrentPage(page)}
-                                        className={page === currentPage ? 'active' : ''}
+                                        className={`estudios-radiologicos__pagination-button ${page === currentPage ? 'active' : ''}`}
                                     >
                                         {page}
                                     </button>
@@ -217,20 +227,21 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                 )}
                 {vista === 'editar' && (
                     <>
-                        <div className="busqueda-estudio">
+                        <div className="estudios-radiologicos__search-container">
                             <input
                                 type="text"
                                 placeholder="Buscar..."
                                 value={searchTerm}
                                 onChange={handleSearch}
+                                className="estudios-radiologicos__search-input"
                             />
-                            <select value={searchField} onChange={handleFieldChange}>
+                            <select value={searchField} onChange={handleFieldChange} className="estudios-radiologicos__search-select">
                                 <option value="nombre_estudio">Nombre del Estudio</option>
                                 <option value="descripcion_estudio">Descripción del Estudio</option>
                             </select>
                         </div>
-                        <div className="tabla-estudios-container">
-                            <table className="tabla-estudios">
+                        <div className="estudios-radiologicos__table-container">
+                            <table className="estudios-radiologicos__table">
                                 <thead>
                                     <tr>
                                         <th>Nombre del Estudio</th>
@@ -241,37 +252,26 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                 <tbody>
                                     {currentEstudios.map((estudio) => (
                                         <tr key={estudio.id_estudio}>
-                                            
                                             <td>
                                                 <input
                                                     type="text"
                                                     value={estudio.nombre_estudio}
-                                                    onChange={(e) => {
-                                                        const newEstudios = [...estudios];
-                                                        const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
-                                                        newEstudios[index].nombre_estudio = e.target.value;
-                                                        setEstudios(newEstudios);
-                                                    }}
-                                                    style={{ width: '200px', resize: 'none' }}
+                                                    onChange={(e) => handleInputChange(e, estudio.id_estudio, 'nombre_estudio')}
+                                                    className="estudios-radiologicos__input"
                                                 />
                                             </td>
                                             <td>
                                                 <textarea
                                                     value={estudio.descripcion_estudio}
-                                                    onChange={(e) => {
-                                                    const newEstudios = [...estudios];
-                                                    const index = newEstudios.findIndex(est => est.id_estudio === estudio.id_estudio);
-                                                    newEstudios[index].descripcion_estudio = e.target.value;
-                                                    setEstudios(newEstudios);
-                                                    }}
-                                                    style={{ width: '150px', height: '80px', resize: 'none' }} // Ajusta el tamaño y evita el redimensionamiento
+                                                    onChange={(e) => handleInputChange(e, estudio.id_estudio, 'descripcion_estudio')}
+                                                    className="estudios-radiologicos__textarea"
                                                 />
                                             </td>
                                             <td>
-                                                <div className="botones-acciones">
+                                                <div className="estudios-radiologicos__actions">
                                                     <button
                                                         onClick={() => handleEditarEstudio(estudio)}
-                                                        className="editar-button"
+                                                        className="estudios-radiologicos__button estudios-radiologicos__button--edit"
                                                     >
                                                         Guardar
                                                     </button>
@@ -281,12 +281,12 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                     ))}
                                 </tbody>
                             </table>
-                            <div className="pagination-read-usuario">
+                            <div className="estudios-radiologicos__pagination">
                                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                                     <button
                                         key={page}
                                         onClick={() => setCurrentPage(page)}
-                                        className={page === currentPage ? 'active' : ''}
+                                        className={`estudios-radiologicos__pagination-button ${page === currentPage ? 'active' : ''}`}
                                     >
                                         {page}
                                     </button>
@@ -297,23 +297,23 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                 )}
                 {vista === 'eliminar' && (
                     <>
-                        <div className="busqueda-estudio">
+                        <div className="estudios-radiologicos__search-container">
                             <input
                                 type="text"
                                 placeholder="Buscar..."
                                 value={searchTerm}
                                 onChange={handleSearch}
+                                className="estudios-radiologicos__search-input"
                             />
-                            <select value={searchField} onChange={handleFieldChange}>
+                            <select value={searchField} onChange={handleFieldChange} className="estudios-radiologicos__search-select">
                                 <option value="nombre_estudio">Nombre del Estudio</option>
                                 <option value="descripcion_estudio">Descripción del Estudio</option>
                             </select>
                         </div>
-                        <div className="tabla-estudios-container">
-                            <table className="tabla-estudios">
+                        <div className="estudios-radiologicos__table-container">
+                            <table className="estudios-radiologicos__table">
                                 <thead>
                                     <tr>
-                                        
                                         <th>Nombre del Estudio</th>
                                         <th>Descripción</th>
                                         <th>Acciones</th>
@@ -322,14 +322,13 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                 <tbody>
                                     {currentEstudios.map((estudio) => (
                                         <tr key={estudio.id_estudio}>
-                                            
                                             <td>{estudio.nombre_estudio}</td>
                                             <td>{estudio.descripcion_estudio}</td>
                                             <td>
-                                                <div className="botones-acciones">
+                                                <div className="estudios-radiologicos__actions">
                                                     <button
                                                         onClick={() => handleEliminarEstudio(estudio.id_estudio)}
-                                                        className="eliminar-button"
+                                                        className="estudios-radiologicos__button estudios-radiologicos__button--delete"
                                                     >
                                                         Eliminar
                                                     </button>
@@ -339,12 +338,12 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
                                     ))}
                                 </tbody>
                             </table>
-                            <div className="pagination-read-usuario">
+                            <div className="estudios-radiologicos__pagination">
                                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                                     <button
                                         key={page}
                                         onClick={() => setCurrentPage(page)}
-                                        className={page === currentPage ? 'active' : ''}
+                                        className={`estudios-radiologicos__pagination-button ${page === currentPage ? 'active' : ''}`}
                                     >
                                         {page}
                                     </button>
@@ -363,6 +362,7 @@ const EstudiosRadiologicos = ({ vistaInicial }) => {
             )}
         </div>
     );
-};
+    };
+    
 
 export default EstudiosRadiologicos;

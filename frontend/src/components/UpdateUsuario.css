@@ -1,195 +1,195 @@
 /* UpdateUsuario.css */
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+/* Estilos Base - Mobile-First */
 
-.update-usuario-page {
-  background-color: whitesmoke;
-  height: 100vh;
+.update-usuario {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  min-height: 100vh;
+  background-color: whitesmoke;
   font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
   color: #0C231E;
 }
 
-.update-usuario-header {
-  display: flex;
-  background-color: whitesmoke;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  top: 0;
-  z-index: 100;
-}
-
-.header-logo-update-usuario {
-  height: 60px;
-}
-
-.header-texts-update-usuario {
-  margin-left: 20px;
-  text-align: left;
-}
-
-.welcome-message-update-usuario {
-  font-size: 24px;
-  margin: 0;
-  color: #0C231E;
-}
-
-.department-name-update-usuario {
-  font-size: 18px;
-  margin: 0;
-  color: #0C231E;
-  margin-left:150px;
-}
-
-.update-usuario-content {
+.update-usuario__header {
   width: 100%;
+  background-color: whitesmoke;
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.success-message {
-  color: green;
-  margin-bottom: 20px;
+.update-usuario__header-logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
 }
 
-.update-search-container {
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
+.update-usuario__header-texts {
+  text-align: center;
+}
+
+.update-usuario__welcome-message {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #12322B;
+}
+
+.update-usuario__department-name {
+  font-size: 1.125rem; /* 18px */
+  margin: 0;
+  color: #0C231E;
+}
+
+.main-layout {
   display: flex;
+  flex: 1;
+  width: 100%;
 }
 
-.update-search-container input, .update-search-container select {
+.update-usuario__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
+}
+
+.update-usuario__success-message {
+  color: green;
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.update-usuario__search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 25rem; /* 400px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.update-usuario__search-container input,
+.update-usuario__search-container select {
   border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  padding: 5px;
-  line-height: normal;
-  margin: 0px;
-  vertical-align: middle;
+  border-radius: 0.3125rem; /* 5px */
+  font-size: 1rem; /* 16px */
+  padding: 0.625rem; /* 10px */
+  margin-bottom: 0.625rem; /* 10px */
 }
 
-.table-container-update-usuario {
+.update-usuario__table-container {
   width: 100%;
   overflow-x: auto;
+  flex: 1;
 }
 
-.usuario-table-update {
-  width: 90%;
+.update-usuario__table {
+  width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
-  margin-left:120px;
+  margin-bottom: 1.25rem; /* 20px */
 }
 
-.usuario-table-update th, .usuario-table-update td {
+.update-usuario__table th,
+.update-usuario__table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 0.5rem; /* 8px */
   text-align: center;
+  font-size: 0.875rem; /* 14px */
 }
 
-.usuario-table-update th{
+.update-usuario__table th {
   background-color: #f4f4f4;
 }
 
-.pagination-update-usuario {
+.update-usuario__pagination {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: 1.25rem; /* 20px */
+  margin-top: 0.625rem; /* 10px */
 }
 
-.pagination-update-usuario button {
-  padding: 10px 15px;
-  margin: 0 5px;
+.update-usuario__pagination button {
+  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  margin: 0 0.3125rem; /* 5px */
   background-color: #12322B;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem; /* 5px */
   cursor: pointer;
 }
 
-.pagination-update-usuario button.active {
+.update-usuario__pagination button.active {
   background-color: #0C231E;
 }
 
-.pagination-update-usuario button:hover {
+.update-usuario__pagination button:hover {
   background-color: #0C231E;
 }
 
-/* Responsividad */
-@media (max-width: 480px) {
-  .update-usuario-header {
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
-    text-align: center; /* Centra el texto del header */
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 40px;
+/* Media Queries */
+
+/* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
+  .update-usuario {
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
   }
 
-  .header-texts-update-usuario {
-    text-align: center;
-    width: 90%;
-    margin-left: 50px;
+  .update-usuario__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.25rem 2rem;
   }
 
-  .welcome-message-update-usuario {
-    font-size: 1.2em;
-    text-align: center;
-    margin-right: 90px;
+  .update-usuario__header-logo {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
   }
 
-  .department-name-update-usuario {
-    font-size: 1.0em;
-    text-align: center;
-    margin-right: 90px;
+  .update-usuario__header-texts {
+    text-align: left;
   }
 
-  .update-usuario-content {
-    padding: 0 5px; /* Reducir el padding en pantallas pequeñas */
+  .update-usuario__welcome-message {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+
+  .update-usuario__department-name {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
+  .update-usuario__content {
+    padding: 2rem; /* 32px */
+  }
+
+  .update-usuario__search-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: none;
     width: 100%;
+    margin-bottom: 1.875rem; /* 30px */
   }
 
-  .update-search-container {
-    width: 250px;
-    margin-top: 10px;
-    margin-right: 10px;
+  .update-usuario__search-container input,
+  .update-usuario__search-container select {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
+    width: auto;
   }
 
-  .update-search-container input,
-  .update-search-container select {
-    width: 70%; /* Asegura que ocupen todo el ancho disponible */
-    margin-bottom: 15px;
+  .update-usuario__table th,
+  .update-usuario__table td {
+    padding: 0.75rem; /* 12px */
+    font-size: 1rem; /* 16px */
   }
 
-  .usuario-table-update th, .usuario-table-update td {
-    padding: 6px; /* Reducir padding en pantallas pequeñas */
-    font-size: 7.0px;
-  }
-
-  .usuario-table-update {
-    width: 100%;
-    border-collapse: collapse;
-    margin-right: 40px;
-  }
-
-  .table-container-update-usuario {
-    width: 90%;
-    overflow-x: auto;
-    margin-top: 0px;
-  }
-  .header-logo-update-usuario{
-    margin-left: 180px; 
-    height: 60px;
+  .update-usuario__pagination {
+    margin-bottom: 1.875rem; /* 30px */
+    margin-top: 0.625rem; /* 10px */
   }
 }

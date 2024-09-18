@@ -135,19 +135,19 @@ const UpdateUsuario = () => {
   ];
 
   return (
-    <div className="update-usuario-page">
-      <header className="update-usuario-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="header-logo-update-usuario" />
-        <div className="header-texts-update-usuario">
-          <h1 className="welcome-message-update-usuario">Bienvenido al Módulo de actualización de Usuarios</h1>
-          <h2 className="department-name-update-usuario">Actualizar Registros de Usuarios</h2>
+    <div className="update-usuario">
+      <header className="update-usuario__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="update-usuario__header-logo" />
+        <div className="update-usuario__header-texts">
+          <h1 className="update-usuario__welcome-message">Bienvenido al Módulo de actualización de Usuarios</h1>
+          <h2 className="update-usuario__department-name">Actualizar Registros de Usuarios</h2>
         </div>
       </header>
       <div className="main-layout">
         <Sidebar />
-        <div className="update-usuario-content">
-          {successMessage && <p className="success-message">{successMessage}</p>}
-          <div className="update-search-container">
+        <div className="update-usuario__content">
+          {successMessage && <p className="update-usuario__success-message">{successMessage}</p>}
+          <div className="update-usuario__search-container">
             <input
               type="text"
               placeholder="Buscar..."
@@ -161,8 +161,8 @@ const UpdateUsuario = () => {
               <option value="apellido_materno">Apellido Materno</option>
             </select>
           </div>
-          <div className="table-container-update-usuario">
-            <table className="usuario-table-update">
+          <div className="update-usuario__table-container">
+            <table className="update-usuario__table">
               <thead>
                 <tr>
                   <th>Nombre de Usuario</th>
@@ -236,7 +236,7 @@ const UpdateUsuario = () => {
               </tbody>
             </table>
           </div>
-          <div className="pagination-update-usuario">
+          <div className="update-usuario__pagination">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
               <button 
                 key={page}
@@ -250,7 +250,7 @@ const UpdateUsuario = () => {
         </div>
       </div>
     </div>
-  );
+  ); 
 };
 
 export default UpdateUsuario;

@@ -66,7 +66,7 @@
 }
 
 .hamburger div {
-  width: 1.875rem; /* 30px */
+  width: 2.5rem; /* 40px */
   height: 0.1875rem; /* 3px */
   background-color: #12322B;
   margin: 0.3125rem 0; /* 5px */
@@ -74,19 +74,22 @@
 
 /* Menú Móvil */
 .mobile-menu {
-  top: 0;
+  position: fixed;
+  top: calc(1.25rem + 2.5rem + 0.625rem); /* Ajustar según la posición y tamaño del botón hamburguesa */
+  left: -100%; /* Oculto por defecto */
   width: 75%;
   max-width: 300px;
-  height: 100%;
+  height: calc(100% - (1.25rem + 2.5rem + 0.625rem)); /* Ajustar la altura para evitar desbordamiento */
   background-color: #12322B;
   color: white;
-  transition: right 0.3s ease;
-  z-index: 1000;
+  transition: left 0.3s ease;
+  z-index: 1001; /* Asegurar que está por encima de otros elementos */
   padding: 1rem;
+  overflow-y: auto; 
 }
 
 .mobile-menu.open {
-  right: 0; /* Deslizar desde la derecha */
+  left: 0; /* Deslizar desde la derecha */
 }
 
 .mobile-menu ul {

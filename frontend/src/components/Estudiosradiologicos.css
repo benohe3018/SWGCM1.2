@@ -110,7 +110,7 @@
 }
 
 .estudios-radiologicos__button {
-  background-color: #006AA7;
+  background-color: #12322B;
   color: white;
   border: none;
   padding: 0.3125rem 0.625rem;
@@ -120,7 +120,7 @@
 }
 
 .estudios-radiologicos__button--eliminar {
-  background-color: #E74C3C;
+  background-color: red;
 }
 .estudios-radiologicos__textarea{
   width: 100%;
@@ -134,7 +134,7 @@
 
 
 .estudios-radiologicos__button--guardar {
-  background-color: #27AE60;
+  background-color: #12322B;
 }
 
 .estudios-radiologicos__button:hover {

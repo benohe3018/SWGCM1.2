@@ -25,8 +25,6 @@
 .unidades-medicina-familiar__header-logo {
   height: 3.75rem; /* 60px */
   margin-bottom: 0.625rem; /* 10px */
-  margin-left: 0.625rem; /* 10px */
-  margin-right: 2.5rem; /* 40px */
 }
 
 .unidades-medicina-familiar__header-texts {
@@ -180,13 +178,6 @@
   background-color: #0C231E;
 }
 
-/* Estilos para la imagen de la máquina de resonancia magnética */
-.unidades-medicina-familiar__mr-machine {
-  width: 100%;
-  max-width: 300px; /* 18.75rem */
-  margin-top: 2rem;
-}
-
 /* Media Queries */
 
 /* Pantallas grandes (mínimo 820px) */
@@ -199,13 +190,14 @@
   }
 
   .unidades-medicina-familiar__header-logo {
-    margin-right: 1.25rem; /* 20px */
     margin-bottom: 0;
-    margin-left: 0; /* Elimina margen izquierdo si es necesario */
+    margin-left: 0; /* Eliminamos margen izquierdo para mejor alineación */
+    margin-right: 1.25rem; /* 20px */
   }
 
   .unidades-medicina-familiar__header-texts {
     text-align: left;
+    flex-grow: 1;
   }
 
   .unidades-medicina-familiar__welcome-message {
@@ -218,11 +210,19 @@
 
   .unidades-medicina-familiar__content {
     padding: 2rem; /* 32px */
+    margin-top: 2rem; /* Aumentamos el margen superior para pantallas grandes */
   }
 
   .unidades-medicina-familiar__search {
     max-width: none;
-    width: 100%;
+    width: 50%; /* Aumentamos el ancho de la barra de búsqueda */
+    margin-bottom: 1.875rem; /* 30px */
+  }
+
+  .unidades-medicina-familiar__search-input,
+  .unidades-medicina-familiar__search-select {
+    font-size: 1rem; /* 16px */
+    padding: 0.5rem; /* 8px */
   }
 
   .unidades-medicina-familiar__table th,
@@ -238,6 +238,23 @@
 
   .unidades-medicina-familiar__pagination {
     margin-top: 1.875rem; /* 30px */
+  }
+
+  /* Disposición de las vistas de edición y eliminación */
+  .unidades-medicina-familiar__edit,
+  .unidades-medicina-familiar__delete {
+    width: 100%;
+    max-width: 60rem; /* 960px */
+    margin: 0 auto;
+  }
+
+  .unidades-medicina-familiar__table-container {
+    width: 100%;
+  }
+
+  /* Mejor alineación de los botones en vistas grandes */
+  .unidades-medicina-familiar__actions {
+    justify-content: flex-start;
   }
 }
 
@@ -291,6 +308,8 @@
   /* Ajustes para la barra de búsqueda en pantallas muy pequeñas */
   .unidades-medicina-familiar__search {
     flex-direction: column;
+    width: 100%;
+    max-width: none;
   }
 
   .unidades-medicina-familiar__search-input,

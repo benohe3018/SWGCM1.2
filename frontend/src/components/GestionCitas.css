@@ -182,6 +182,43 @@
   text-align: center;
 }
 
+.gestion-citas__cards-container {
+  display: none; /* Oculto por defecto, se mostrará en pantallas pequeñas */
+  width: 100%;
+}
+
+.gestion-citas__card {
+  border: 1px solid #ddd;
+  padding: 0.625rem; /* 10px */
+  margin-bottom: 1rem; /* 16px */
+  border-radius: 0.3125rem; /* 5px */
+  background-color: white;
+}
+
+.gestion-citas__card-item {
+  margin-bottom: 0.5rem; /* 8px */
+  font-size: 0.875rem; /* 14px */
+}
+
+.gestion-citas__card-item strong {
+  font-weight: bold;
+}
+
+.gestion-citas__card-item label {
+  display: block;
+  margin-bottom: 0.25rem; /* 4px */
+}
+
+.gestion-citas__card-item input {
+  width: 100%;
+  padding: 0.375rem; /* 6px */
+  font-size: 0.875rem; /* 14px */
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem; /* 5px */
+  box-sizing: border-box;
+}
+
+
 /* Media Queries */
 
 /* Pantallas grandes (mínimo 820px) */
@@ -278,3 +315,24 @@
     padding: 0.25rem 0.5rem; /* 4px 8px */
   }
 }
+
+/* Pantallas pequeñas (máximo 420px) */
+@media (max-width: 420px) {
+  .gestion-citas__table-container {
+    display: none; /* Ocultar la tabla */
+  }
+  .gestion-citas__cards-container {
+    display: block; /* Mostrar las tarjetas */
+  }
+}
+
+/* Pantallas medianas (mínimo 421px) */
+@media (min-width: 421px) {
+  .gestion-citas__cards-container {
+    display: none; /* Ocultar las tarjetas */
+  }
+  .gestion-citas__table-container {
+    display: block; /* Mostrar la tabla */
+  }
+}
+

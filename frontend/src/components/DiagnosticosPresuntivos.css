@@ -161,82 +161,83 @@
 }
 
   /* Pantallas grandes (mínimo 820px) */
+/* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
-  .diagnosticos-presuntivos {
+  .hospitales {
     margin-left: 15.625rem; /* 250px, ancho de la barra lateral si existe */
   }
 
-  .diagnosticos-presuntivos__header {
+  .hospitales__header {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     padding: 1rem 2rem;
   }
 
-  .diagnosticos-presuntivos__logo {
+  .hospitales__header-logo {
     margin-right: 1.25rem; /* 20px */
     margin-bottom: 0;
   }
 
-  .diagnosticos-presuntivos__texts {
+  .hospitales__header-texts {
     text-align: left;
   }
 
-  .diagnosticos-presuntivos__title {
+  .hospitales__welcome-message {
     font-size: 2rem; /* 32px */
     margin: 0;
   }
 
-  .diagnosticos-presuntivos__subtitle {
+  .hospitales__department-name {
     font-size: 1.25rem; /* 20px */
     margin: 0;
   }
 
-  .diagnosticos-presuntivos__content {
+  .hospitales__content {
     padding: 2rem; /* 32px */
   }
 
-  .diagnosticos-presuntivos__busqueda {
+  .hospitales__search {
     max-width: none;
     width: 100%;
   }
 
-  .diagnosticos-presuntivos__tabla th,
-  .diagnosticos-presuntivos__tabla td {
+  .hospitales__table th,
+  .hospitales__table td {
     padding: 0.75rem; /* 12px */
     font-size: 1rem; /* 16px */
   }
 
-  .diagnosticos-presuntivos__tabla input,
-  .diagnosticos-presuntivos__tabla textarea {
+  .hospitales__table input,
+  .hospitales__table textarea {
     padding: 0.5rem; /* 8px */
     font-size: 1rem; /* 16px */
   }
 
-  .diagnosticos-presuntivos__paginacion {
+  .hospitales__pagination {
     margin-top: 1.875rem; /* 30px */
   }
 
-  .diagnosticos-presuntivos__acciones {
+  .hospitales__actions {
     justify-content: center;
   }
 }
 
 /* Pantallas medianas (máximo 819px) */
 @media (max-width: 819px) {
-  .diagnosticos-presuntivos__tabla th,
-  .diagnosticos-presuntivos__tabla td {
+  .hospitales__table th,
+  .hospitales__table td {
     font-size: 0.75rem; /* 12px */
     padding: 0.375rem; /* 6px */
   }
 
-  .diagnosticos-presuntivos__tabla input,
-  .diagnosticos-presuntivos__tabla textarea {
+  .hospitales__table input,
+  .hospitales__table textarea {
     font-size: 0.75rem; /* 12px */
     padding: 0.375rem; /* 6px */
   }
 
-  .diagnosticos-presuntivos__boton {
+  .hospitales__button {
     font-size: 0.75rem; /* 12px */
     padding: 0.25rem 0.5rem; /* 4px 8px */
   }
@@ -244,19 +245,19 @@
 
 /* Pantallas pequeñas (máximo 560px) */
 @media (max-width: 560px) {
-  .diagnosticos-presuntivos__tabla th,
-  .diagnosticos-presuntivos__tabla td {
+  .hospitales__table th,
+  .hospitales__table td {
     font-size: 0.625rem; /* 10px */
     padding: 0.25rem; /* 4px */
   }
 
-  .diagnosticos-presuntivos__tabla input,
-  .diagnosticos-presuntivos__tabla textarea {
+  .hospitales__table input,
+  .hospitales__table textarea {
     font-size: 0.625rem; /* 10px */
     padding: 0.25rem; /* 4px */
   }
 
-  .diagnosticos-presuntivos__boton {
+  .hospitales__button {
     font-size: 0.625rem; /* 10px */
     padding: 0.25rem 0.5rem; /* 4px 8px */
   }
@@ -264,14 +265,14 @@
 
 /* Pantallas muy pequeñas (máximo 420px) */
 @media (max-width: 420px) {
-  .diagnosticos-presuntivos__tabla-container {
+  .hospitales__table-container {
     display: block; /* Ocultar la tabla */
   }
 }
 
 /* Pantallas medianas (mínimo 421px) */
 @media (min-width: 421px) {
-  .diagnosticos-presuntivos__tabla-container {
+  .hospitales__table-container {
     display: block; /* Mostrar la tabla */
   }
 }

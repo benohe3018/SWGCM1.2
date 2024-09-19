@@ -62,29 +62,43 @@ const ReporteEstudios = () => {
     }
 
     return (
-        <div className="reportes-estudios-page">
-            <header className="reportes-estudios-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="reportes-estudios-header-logo" />
-                <div className="reportes-estudios-header-text">
-                    <h1 className="welcome-reportes-estudios">Reporte de Estudios</h1>
-                    <h2 className="departamento-reportes-estudios">Generar Informe de Estudios Registrados</h2>
+        <div className="reporte-estudios">
+            <header className="reporte-estudios__header">
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-estudios__logo" />
+                <div className="reporte-estudios__header-texts">
+                    <h1 className="reporte-estudios__welcome-message">Reporte de Estudios</h1>
+                    <h2 className="reporte-estudios__department-name">Generar Informe de Estudios Registrados</h2>
                 </div>
             </header>
-            <div className="reporte-busqueda-estudio">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-                <select value={searchField} onChange={handleFieldChange}>
-                    <option value="nombre_estudio">Nombre del Estudio</option>
-                    <option value="descripcion_estudio">Descripción del Estudio</option>
-                </select>
+    
+            <div className="reporte-estudios__busqueda">
+                <div className="reporte-estudios__busqueda-fila">
+                    <input
+                        type="text"
+                        placeholder="Buscar..."
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        className="reporte-estudios__busqueda-input"
+                    />
+                    <select
+                        value={searchField}
+                        onChange={handleFieldChange}
+                        className="reporte-estudios__busqueda-select"
+                    >
+                        <option value="nombre_estudio">Nombre del Estudio</option>
+                        <option value="descripcion_estudio">Descripción del Estudio</option>
+                    </select>
+                </div>
+                <button
+                    className="reporte-estudios__pdf-button"
+                    onClick={generatePDF}
+                >
+                    Imprimir Reporte en PDF
+                </button>
             </div>
-            <button className="reporte-estudios-radiologicos-boton" onClick={generatePDF}> Imprimir Reporte en PDF</button>
-            <div className="tabla-estudios-container">
-                <table className="tabla-estudios">
+    
+            <div className="reporte-estudios__tabla-container">
+                <table className="reporte-estudios__tabla">
                     <thead>
                         <tr>
                             <th>Nombre del Estudio</th>

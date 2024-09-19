@@ -250,7 +250,7 @@
   /* Pantallas muy pequeñas (máximo 420px) */
   @media (max-width: 420px) {
     .reporte-especialidades__tabla-container {
-      display: none; /* Ocultar la tabla para evitar desbordamientos */
+      display: block; /* Ocultar la tabla para evitar desbordamientos */
     }
   
     .reporte-especialidades__pdf-button {

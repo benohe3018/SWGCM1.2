@@ -8,6 +8,7 @@
   color: #0C231E;
   padding: 0;
   margin: 0;
+  margin-left: 5.000rem; /* 80px */
 }
 
 .backup-recovery__header {
@@ -17,6 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: whitesmoke;
 }
 
 .backup-recovery__header-logo {
@@ -54,6 +56,9 @@
 
 .backup-recovery__form-group {
   margin-bottom: 1rem; /* 16px */
+  display: flex;
+  flex-direction: column; /* Cambia a columna para mejor organización */
+  align-items: flex-start;
 }
 
 .backup-recovery__form-label {

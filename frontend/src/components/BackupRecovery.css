@@ -17,7 +17,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .backup-recovery__header-logo {
@@ -87,7 +86,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .backup-recovery {
-    margin-left: 15.625rem; /* 250px, ancho de la barra lateral si existe */   
+    margin-left: 28.000rem; /* 250px, ancho de la barra lateral si existe */   
   }
 
   .backup-recovery__header {
@@ -112,6 +111,12 @@
     padding: 0.75rem 1.5rem; /* 12px 24px */
     font-size: 1.125rem; /* 18px */
   }
+
+  .backup-recovery__form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+}
 }
 
 /* Pantallas medianas (máximo 819px) */

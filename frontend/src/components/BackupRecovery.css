@@ -44,6 +44,8 @@
 .backup-recovery__content {
   flex: 1; /* Permite que el contenido ocupe el espacio restante */
   padding: 1rem; /* 16px */
+  display: flex;
+  flex-direction: column; /* Cambia a columna para mejor organización */
 }
 
 .backup-recovery__form-description {
@@ -91,6 +93,8 @@
   .backup-recovery__content {
     padding: 2rem; /* 32px */
     flex: 1; /* Asegura que el contenido ocupe el espacio restante */
+    display: flex;
+    flex-direction: column; /* Mantiene la disposición en columna */
   }
 
   .backup-recovery__form-description {
@@ -126,6 +130,7 @@
   }
 }
 
+/* Pantallas muy pequeñas (máximo 420px) */
 @media (max-width: 420px) {
   .backup-recovery__form-description {
     font-size: 0.875rem; /* 14px */

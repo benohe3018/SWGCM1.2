@@ -102,47 +102,58 @@ const ReporteCitas = () => {
     }
 
     return (
-        <div className="reporte-citas-page">
-            <header className="reporte-citas-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="citas-header-logo" />
-                <div className="reporte-citas-header-texts">
-                    <h1 className="welcome-reportes-citas">Reporte de las Citas</h1>
-                    <h2 className="departamento-reportes-citas">Generar Informe de citas Registradas</h2>
+        <div className="reporte-citas">
+            <header className="reporte-citas__header">
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-citas__header-logo" />
+                <div className="reporte-citas__header-texts">
+                    <h1 className="reporte-citas__welcome-message">Reporte de las Citas</h1>
+                    <h2 className="reporte-citas__department-name">Generar Informe de citas Registradas</h2>
                 </div>
             </header>
-            <div className="busqueda-cita">
-                <div className="fila">
+    
+            <div className="reporte-citas__busqueda">
+                <div className="reporte-citas__fila">
                     <input
                         type="text"
                         placeholder="Buscar..."
                         value={searchTerm}
                         onChange={handleSearch}
+                        className="reporte-citas__busqueda-input"
                     />
-                    
                 </div>
-                <div className="fila">
+                <div className="reporte-citas__fila">
                     <input
                         type="date"
                         value={fechaInicio}
                         onChange={(e) => setFechaInicio(e.target.value)}
                         placeholder="Fecha Inicio"
+                        className="reporte-citas__fecha-inicio"
                     />
                     <input
                         type="date"
                         value={fechaFin}
                         onChange={(e) => setFechaFin(e.target.value)}
                         placeholder="Fecha Fin"
+                        className="reporte-citas__fecha-fin"
                     />
                 </div>
-                <div className="fila">
-                    <select value={turno} onChange={(e) => setTurno(e.target.value)}>
+                <div className="reporte-citas__fila">
+                    <select
+                        value={turno}
+                        onChange={(e) => setTurno(e.target.value)}
+                        className="reporte-citas__select-turno"
+                    >
                         <option value="">Turno</option>
                         <option value="">Todos los Turnos</option>
                         <option value="matutino">Matutino</option>
                         <option value="vespertino">Vespertino</option>
                         <option value="nocturno">Nocturno</option>
                     </select>
-                    <select value={searchField} onChange={handleFieldChange}>
+                    <select
+                        value={searchField}
+                        onChange={handleFieldChange}
+                        className="reporte-citas__select-campo"
+                    >
                         <option value="Seleccionar">Seleccionar</option>
                         <option value="nombre_completo">Paciente</option>
                         <option value="nombre_completo_medico">Médico</option>
@@ -150,10 +161,16 @@ const ReporteCitas = () => {
                         <option value="hospital_envia">Hospital</option>
                     </select>
                 </div>
-                <button className="generarPDF-Reporte-Citas" onClick={generatePDF}>Imprimir Reporte PDF</button>
+                <button
+                    className="reporte-citas__pdf-button"
+                    onClick={generatePDF}
+                >
+                    Imprimir Reporte PDF
+                </button>
             </div>
-            <div className="tabla-citas-container">
-                <table className="tabla-citas">
+    
+            <div className="reporte-citas__tabla-container">
+                <table className="reporte-citas__tabla">
                     <thead>
                         <tr>
                             <th>Fecha y Hora</th>
@@ -175,9 +192,13 @@ const ReporteCitas = () => {
                         ))}
                     </tbody>
                 </table>
-                <div className="pagination-reporte-citas">
+                <div className="reporte-citas__pagination">
                     {Array.from({ length: Math.ceil(filteredCitas.length / citasPerPage) }, (_, i) => (
-                        <button key={i + 1} onClick={() => paginate(i + 1)} className={currentPage === i + 1 ? 'active' : ''}>
+                        <button
+                            key={i + 1}
+                            onClick={() => paginate(i + 1)}
+                            className={`reporte-citas__pagination-button ${currentPage === i + 1 ? 'reporte-citas__pagination-button--active' : ''}`}
+                        >
                             {i + 1}
                         </button>
                     ))}

@@ -1,213 +1,314 @@
-.reporte-citas-page {
-    background-color: whitesmoke;
-    height: 100vh;
+/* Estilos Base */
+.reporte-citas {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #0C231E;
-}
-.reporte-citas-header-texts{
-    text-align: center;
-    flex-grow: 1; /* Ocupa el espacio restante */
-}
-
-.reporte-citas-header {
-      background-color: #f5f5f5;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: inline-flex;
-      padding: 10px 20px;
-      top: 0;
-      z-index: 100;
-}
-
-.citas-header-logo {
-    height: 60px;
-    margin-right: 10px;
-}
-
-.welcome-reportes-citas {
-    font-size: 24px;
-    margin: 0;
-    color: #0C231E; /* Color y tamaño */
-}
-
-.departamento-reportes-citas {
-    font-size: 18px;
-    margin: 0;
-    color: #0C231E;
-}
-
-.busqueda-cita {
-    margin: 20px 0;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.busqueda-cita {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.fila {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
     width: 100%;
-    max-width: 600px; /* Ajusta según sea necesario */
-    flex-direction: row;
-}
-
-.busqueda-cita input,
-.busqueda-cita select {
-    padding: 10px;
-    font-size: 16px;
+    color: #0C231E;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .reporte-citas__header {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1rem; /* 16px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reporte-citas__header-logo {
+    height: 3.75rem; /* 60px */
+    margin-bottom: 0.625rem; /* 10px */
+  }
+  
+  .reporte-citas__header-texts {
+    text-align: center;
+  }
+  
+  .reporte-citas__welcome-message {
+    font-size: 1.5rem; /* 24px */
+    margin: 0.3125rem 0; /* 5px arriba y abajo */
+    color: #0C231E;
+  }
+  
+  .reporte-citas__department-name {
+    font-size: 1.125rem; /* 18px */
+    margin: 0;
+    color: #555555;
+  }
+  
+  .reporte-citas__busqueda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem; /* 16px */
+    background-color: #ffffff;
+    margin: 1rem;
+    border-radius: 0.3125rem; /* 5px */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reporte-citas__fila {
+    display: flex;
+    width: 100%;
+    max-width: 25rem; /* 400px */
+    margin-bottom: 0.75rem; /* 12px */
+  }
+  
+  .reporte-citas__busqueda-input,
+  .reporte-citas__fecha-inicio,
+  .reporte-citas__fecha-fin,
+  .reporte-citas__select-turno,
+  .reporte-citas__select-campo {
+    padding: 0.5rem; /* 8px */
+    font-size: 1rem; /* 16px */
     border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 60%;
-    max-width: 300px; /* Limitar el ancho máximo para inputs */
-}
-
-.generarPDF-Reporte-Citas {
-    background-color: #0C231E;
-    color: white;
-    padding: 10px 15px;
+    border-radius: 0.3125rem; /* 5px */
+    margin-right: 0.5rem; /* 8px */
+    flex: 1;
+  }
+  
+  .reporte-citas__busqueda-input:last-child,
+  .reporte-citas__fecha-fin,
+  .reporte-citas__select-campo {
+    margin-right: 0; /* Remover margen en el último elemento de la fila */
+  }
+  
+  .reporte-citas__pdf-button {
+    background-color: #12322B;
+    color: #ffffff;
     border: none;
-    border-radius: 4px;
+    padding: 0.5rem 1rem; /* 8px 16px */
     cursor: pointer;
-    margin-top: 10px;
-}
-
-.generarPDF-Reporte-Citas:hover {
-    background-color: whitesmoke;
-    color: black;
-}
-
-.tabla-citas-container {
-    width: 80%;
-    overflow-x: auto;
-    margin-top: 0px;
-}
-
-.tabla-citas {
+    border-radius: 0.3125rem; /* 5px */
+    font-size: 1rem; /* 16px */
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .reporte-citas__pdf-button:hover {
+    opacity: 0.9;
+  }
+  
+  .reporte-citas__tabla-container {
+    width: 100%;
+    padding: 1rem; /* 16px */
+    background-color: #ffffff;
+    margin: 1rem;
+    border-radius: 0.3125rem; /* 5px */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+  }
+  
+  .reporte-citas__tabla {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-.tabla-citas th, .tabla-citas td {
+    margin-bottom: 1.25rem; /* 20px */
+    table-layout: fixed; /* Distribuye las columnas de manera uniforme */
+  }
+  
+  .reporte-citas__tabla th,
+  .reporte-citas__tabla td {
     border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-.tabla-citas th {
-    background-color: #f4f4f4;
-}
-
-.pagination-reporte-citas {
-    margin-top: 20px;
-}
-
-.pagination-reporte-citas  {
-    margin: 0 5px;
-    padding: 10px;
+    padding: 0.5rem; /* 8px */
+    font-size: 0.875rem; /* 14px */
+    text-align: left;
+    word-wrap: break-word; /* Permite que el texto se ajuste */
+  }
+  
+  .reporte-citas__tabla th {
+    background-color: #f2f2f2;
+    color: #0C231E;
+  }
+  
+  .reporte-citas__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem; /* 16px */
+  }
+  
+  .reporte-citas__pagination-button {
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+    margin: 0 0.25rem; /* 0 4px */
+    background-color: #12322B;
+    color: #ffffff;
     border: none;
-    background-color: whitesmoke;
-    color: white;
-    border-radius: 5px;
+    border-radius: 0.3125rem; /* 5px */
     cursor: pointer;
-}
-
-.pagination-reporte-citas.active {
-    background-color: whitesmoke;
-}
-
-@media (max-width: 480px) {
-    .reporte-citas-header {
-        width: 100%;
-        text-align: center;
-        flex-direction: column;
+    font-size: 0.875rem; /* 14px */
+    transition: background-color 0.3s ease;
+  }
+  
+  .reporte-citas__pagination-button:hover {
+    background-color: #0C231E;
+  }
+  
+  .reporte-citas__pagination-button--active {
+    background-color: #0C231E;
+  }
+  
+  /* Media Queries */
+  
+  /* Pantallas grandes (mínimo 820px) */
+  @media (min-width: 820px) {
+    .reporte-citas {
+      margin-left: 15.625rem; /* 250px, ancho de la barra lateral si existe */
     }
-
-    .citas-header-logo {
-        height: 50px;
-        margin-left: 50px;
-        margin-bottom: 10px;
+  
+    .reporte-citas__header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem 2rem;
     }
-
-    .welcome-reportes-citas {
-        display: flex;
-        flex-direction: column;
-        font-size: 1.0em;
-        margin-bottom: 0px;
+  
+    .reporte-citas__header-logo {
+      margin-right: 1.25rem; /* 20px */
+      margin-bottom: 0;
     }
-    
-    .departamento-reportes-citas {
-        display: flex;
-        flex-direction: column;
-        font-size: 0.8em;
-        margin-top: 0px;
+  
+    .reporte-citas__header-texts {
+      text-align: left;
     }
-
-    .busqueda-cita, .fila {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
+  
+    .reporte-citas__welcome-message {
+      font-size: 2rem; /* 32px */
+      margin: 0;
     }
-    .busqueda-cita {
-        align-items: center;
-        flex-direction: column;
-        margin: 20px 0;
+  
+    .reporte-citas__department-name {
+      font-size: 1.25rem; /* 20px */
+      margin: 0;
     }
-
-    .busqueda-cita input,
-    .busqueda-cita select {
-        width: 80%;
-        margin-bottom: 0px;
-        font-size: 8px;
+  
+    .reporte-citas__busqueda {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 2rem; /* 32px */
     }
-
-    .generarPDF-Reporte-Citas {
-        background-color: #0c231e;
-        border: none;
-        border-radius: 4px;
-        color: #fff;
-        cursor: pointer;
-        padding: 10px 15px;
-        margin-top: 10px;
-        margin-bottom: 0px;
+  
+    .reporte-citas__fila {
+      max-width: none;
+      width: 48%;
+      margin-bottom: 1rem; /* 16px */
     }
-
-    .tabla-citas-container {
-        width: 100%;
-        margin-top: 0px;
+  
+    .reporte-citas__busqueda-input,
+    .reporte-citas__fecha-inicio,
+    .reporte-citas__fecha-fin,
+    .reporte-citas__select-turno,
+    .reporte-citas__select-campo {
+      font-size: 1rem; /* 16px */
+      padding: 0.75rem; /* 12px */
+      margin-right: 0.5rem; /* 8px */
     }
-    .tabla-citas {
-        border-collapse: collapse;
-        margin-bottom: 20px;
-        width: 90%;
-        margin-left: 20px;
+  
+    .reporte-citas__pdf-button {
+      font-size: 1rem; /* 16px */
+      padding: 0.75rem 1.5rem; /* 12px 24px */
+      margin-top: 1rem;
     }
-    .tabla-citas td, .tabla-citas th {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: center;
-        font-size: 9px;
+  
+    .reporte-citas__tabla th,
+    .reporte-citas__tabla td {
+      padding: 0.75rem; /* 12px */
+      font-size: 1rem; /* 16px */
     }
-    .pagination-reporte-citas{
-        margin-top: 0px;
-        width: 40%;
-        margin-left: 20px;
-        background:whitesmoke ;
+  
+    .reporte-citas__pagination {
+      margin-top: 1.875rem; /* 30px */
     }
-}
+  
+    .reporte-citas__pagination-button {
+      font-size: 1rem; /* 16px */
+      padding: 0.5rem 1.25rem; /* 8px 20px */
+    }
+  }
+  
+  /* Pantallas medianas (máximo 819px) */
+  @media (max-width: 819px) {
+    .reporte-citas__tabla th,
+    .reporte-citas__tabla td {
+      font-size: 0.75rem; /* 12px */
+      padding: 0.375rem; /* 6px */
+    }
+  
+    .reporte-citas__pagination-button {
+      font-size: 0.75rem; /* 12px */
+      padding: 0.375rem 0.75rem; /* 6px 12px */
+    }
+  
+    .reporte-citas__pdf-button {
+      font-size: 0.875rem; /* 14px */
+      padding: 0.5rem 1rem; /* 8px 16px */
+    }
+  
+    .reporte-citas__welcome-message {
+      font-size: 1.75rem; /* 28px */
+    }
+  
+    .reporte-citas__department-name {
+      font-size: 1rem; /* 16px */
+    }
+  
+    .reporte-citas__busqueda {
+      padding: 1.5rem; /* 24px */
+    }
+  }
+  
+  /* Pantallas pequeñas (máximo 560px) */
+  @media (max-width: 560px) {
+    .reporte-citas__tabla th,
+    .reporte-citas__tabla td {
+      font-size: 0.625rem; /* 10px */
+      padding: 0.25rem; /* 4px */
+    }
+  
+    .reporte-citas__pagination-button {
+      font-size: 0.625rem; /* 10px */
+      padding: 0.25rem 0.5rem; /* 4px 8px */
+    }
+  
+    .reporte-citas__pdf-button {
+      font-size: 0.75rem; /* 12px */
+      padding: 0.375rem 0.75rem; /* 6px 12px */
+    }
+  
+    .reporte-citas__welcome-message {
+      font-size: 1.5rem; /* 24px */
+    }
+  
+    .reporte-citas__department-name {
+      font-size: 0.875rem; /* 14px */
+    }
+  
+    .reporte-citas__fila {
+      max-width: 100%;
+      width: 100%;
+      margin-bottom: 0.5rem; /* 8px */
+    }
+  }
+  
+  /* Pantallas muy pequeñas (máximo 420px) */
+  @media (max-width: 420px) {
+    .reporte-citas__tabla-container {
+      display: block; /* Ocultar la tabla para evitar desbordamientos */
+    }
+  
+    .reporte-citas__pdf-button {
+      width: 100%; /* Botón ocupa todo el ancho disponible */
+      margin-bottom: 1rem; /* Espacio inferior */
+    }
+  }
+  
+  /* Pantallas mayores a 420px */
+  @media (min-width: 421px) {
+    .reporte-citas__tabla-container {
+      display: block; /* Mostrar la tabla */
+    }
+  }

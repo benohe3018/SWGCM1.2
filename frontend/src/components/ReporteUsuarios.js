@@ -80,39 +80,44 @@ const ReporteUsuarios = () => {
   };
 
   return (
-    <div className="reporte-usuario-page">
+    <div className="reporte-usuario">
       <Sidebar />
-      <header className="reporte-usuario-header">
+      <header className="reporte-usuario__header">
         <img src={logoIMSS} alt="Logo IMSS" className="reporte-usuario__header-logo" />
-        <div className="reporte-usuario-header-texts">
-          <h1 className="welcome-message-ReporteUsuario">Reporte de Usuarios</h1>
-          <h2 className="department-name-ReporteUsuario">Generar informe de usuarios registrados</h2>
+        <div className="reporte-usuario__header-texts">
+          <h1 className="reporte-usuario__welcome-message">Reporte de Usuarios</h1>
+          <h2 className="reporte-usuario__department-name">Generar informe de usuarios registrados</h2>
         </div>
       </header>
       
-      <div className="reporte-usuario-content">
-        <div className="reporte-usuario-busqueda">
+      <div className="reporte-usuario__content">
+        <div className="reporte-usuario__busqueda">
           <input
             type="text"
             placeholder="Buscar..."
             value={searchTerm}
             onChange={handleSearch}
+            className="reporte-usuario__busqueda-input"
           />
-          <select value={searchField} onChange={handleFieldChange}>
+          <select
+            value={searchField}
+            onChange={handleFieldChange}
+            className="reporte-usuario__busqueda-select"
+          >
             <option value="nombre">Nombre</option>
             <option value="apellido">Apellido</option>
           </select>
         </div>
-        <button onClick={generatePDF} className="pdf-button">Imprimir Reporte en PDF</button>
-        <div className="table-container">
+        <button onClick={generatePDF} className="reporte-usuario__pdf-button">Imprimir Reporte en PDF</button>
+        <div className="reporte-usuario__table-container">
           {isLoading ? (
-            <p>Cargando...</p>
+            <p className="reporte-usuario__loading-text">Cargando...</p>
           ) : (
             <>
-              <div className="usuario-table-container">
-                <table className="usuario-table">
+              <div className="reporte-usuario__table-wrapper">
+                <table className="reporte-usuario__table">
                   <thead>
-                  <tr>
+                    <tr>
                       <th>Nombre de Usuario</th>
                       <th>Nombre Real</th>
                       <th>Apellido Paterno</th>
@@ -135,12 +140,12 @@ const ReporteUsuarios = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="pagination-reporte-usuario">
+              <div className="reporte-usuario__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`reporte-usuario__pagination-button ${page === currentPage ? 'reporte-usuario__pagination-button--active' : ''}`}
                   >
                     {page}
                   </button>

@@ -59,28 +59,29 @@ const ReporteDiagnosticoPresuntivo = () => {
     }
 
     return (
-        <div className="reporte-diagnostico-presuntivo-page">
-            <header className="reporte-diagnostico-presuntivo-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="reporte-diagnostico-presuntivo-header-logo" />
-                <div className="diagnostico-presuntivo-header-text">
-                    <h1 className="welcome-reportes-Diagnosticos">Reporte de Estudios</h1>
-                    <h2 className="departamento-reportes-Diagnosticos">Generar Informe de Diagnosticos Registrados</h2>
+        <div className="reporte-diagnostico-presuntivo">
+            <header className="reporte-diagnostico-presuntivo__header">
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-diagnostico-presuntivo__logo" />
+                <div className="reporte-diagnostico-presuntivo__header-texts">
+                    <h1 className="reporte-diagnostico-presuntivo__welcome-message">Reporte de Estudios</h1>
+                    <h2 className="reporte-diagnostico-presuntivo__department-name">Generar Informe de Diagnosticos Registrados</h2>
                 </div>
             </header>
-            <div className="reporte-busqueda-diagnostico">
+            <div className="reporte-diagnostico-presuntivo__busqueda">
                 <input
                     type="text"
                     placeholder="Buscar..."
                     value={searchTerm}
                     onChange={handleSearch}
+                    className="reporte-diagnostico-presuntivo__busqueda-input"
                 />
-                <select value={searchField} onChange={handleFieldChange}>
+                <select value={searchField} onChange={handleFieldChange} className="reporte-diagnostico-presuntivo__busqueda-select">
                     <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
                 </select>
             </div>
-            <button className="reporte-diagnostico-presuntivo-boton" onClick={generatePDF}>Imprimir Reporte en PDF</button>
-            <div className="tabla-reporte-diagnosticos-container">
-                <table className="tabla-reporte-diagnosticos">
+            <button className="reporte-diagnostico-presuntivo__pdf-button" onClick={generatePDF}>Imprimir Reporte en PDF</button>
+            <div className="reporte-diagnostico-presuntivo__tabla-container">
+                <table className="reporte-diagnostico-presuntivo__tabla">
                     <thead>
                         <tr>
                             <th>Nombre del Diagnóstico</th>

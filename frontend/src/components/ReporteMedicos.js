@@ -68,18 +68,18 @@ const ReporteMedicos = () => {
   };
 
   return (
-    <div className="reporte-medico-page">
+    <div className="reporte-medico">
       <Sidebar />
-      <header className="reporte-medico-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="reporte-medico-header-logo" />
-        <div className="reporte-medico-header-texts">
-          <h1 className="welcome-message-reporte-medico">Reporte de Médicos</h1>
-          <h2 className="department-name-reporte-medico">Generar informe de médicos registrados</h2>
+      <header className="reporte-medico__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="reporte-medico__header-logo" />
+        <div className="reporte-medico__header-texts">
+          <h1 className="reporte-medico__welcome-message">Reporte de Médicos</h1>
+          <h2 className="reporte-medico__department-name">Generar informe de médicos registrados</h2>
         </div>
       </header>
       
-      <div className="reporte-medico-content">
-        <div className="busqueda-reporte-medico">
+      <div className="reporte-medico__content">
+        <div className="reporte-medico__busqueda">
           <input
             type="text"
             placeholder="Buscar..."
@@ -92,14 +92,14 @@ const ReporteMedicos = () => {
             <option value="apellidoMaterno">Apellido Materno</option>
           </select>
         </div>
-        <button onClick={generatePDF} className="pdf-button">Imprimir Reporte en PDF</button>
-        <div className="table-container">
+        <button onClick={generatePDF} className="reporte-medico__pdf-button">Imprimir Reporte en PDF</button>
+        <div className="reporte-medico__table-container">
           {isLoading ? (
             <p>Cargando...</p>
           ) : (
             <>
-              <div className="medico-table-container">
-                <table className="medico-table">
+              <div className="reporte-medico__table-wrapper">
+                <table className="reporte-medico__table">
                   <thead>
                     <tr>
                       <th>Nombre</th>
@@ -122,12 +122,12 @@ const ReporteMedicos = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="pagination-read-medico">
+              <div className="reporte-medico__pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`reporte-medico__pagination-button ${page === currentPage ? 'reporte-medico__pagination-button--active' : ''}`}
                   >
                     {page}
                   </button>

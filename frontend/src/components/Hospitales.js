@@ -192,17 +192,23 @@ const handleEditarHospital = async (hospitalEditado) => {
   }
 
   return (
-    <div className="hospitales-page">
-      <header className="hospitales-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="hg-header-logo" />
-        <div className="hg-header-texts">
-          <h1 className="hg-welcome-message">Sistema de Gestión de Hospitales</h1>
-          <h2 className="hg-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+    <div className="hospitales">
+      <header className="hospitales__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="hospitales__header-logo" />
+        <div className="hospitales__header-texts">
+          <h1 className="hospitales__welcome-message">Sistema de Gestión de Hospitales</h1>
+          <h2 className="hospitales__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="mr-machine" />}
-      <div className="hospitales-content">
-        {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
+      {vista === '' && (
+        <img
+          src={mrMachine}
+          alt="Máquina de resonancia magnética"
+          className="hospitales__machine-image"
+        />
+      )}
+      <div className="hospitales__content">
+        {mensaje && <div className="hospitales__message-confirmation">{mensaje}</div>}
         {vista === 'crear' && (
           <FormularioHospital
             modo="crear"
@@ -212,7 +218,7 @@ const handleEditarHospital = async (hospitalEditado) => {
         )}
         {vista === 'ver' && (
           <>
-            <div className="busqueda-hospital">
+            <div className="hospitales__search">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -224,8 +230,8 @@ const handleEditarHospital = async (hospitalEditado) => {
                 <option value="ciudad_hospital">Ciudad del Hospital</option>
               </select>
             </div>
-            <div className="tabla-hospitales-container">
-              <table className="tabla-hospitales">
+            <div className="hospitales__table-container">
+              <table className="hospitales__table">
                 <thead>
                   <tr>
                     <th>Nombre del Hospital</th>
@@ -241,12 +247,14 @@ const handleEditarHospital = async (hospitalEditado) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-usuario">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <div className="hospitales__pagination">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`hospitales__pagination-button ${
+                      page === currentPage ? 'hospitales__pagination-button--active' : ''
+                    }`}
                   >
                     {page}
                   </button>
@@ -257,7 +265,7 @@ const handleEditarHospital = async (hospitalEditado) => {
         )}
         {vista === 'editar' && (
           <>
-            <div className="busqueda-hospital">
+            <div className="hospitales__search">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -269,8 +277,8 @@ const handleEditarHospital = async (hospitalEditado) => {
                 <option value="ciudad_hospital">Ciudad del Hospital</option>
               </select>
             </div>
-            <div className="tabla-hospitales-container">
-              <table className="tabla-hospitales">
+            <div className="hospitales__table-container">
+              <table className="hospitales__table">
                 <thead>
                   <tr>
                     <th>Nombre del Hospital</th>
@@ -287,7 +295,7 @@ const handleEditarHospital = async (hospitalEditado) => {
                           value={hospital.nombre_hospital}
                           onChange={(e) => {
                             const newHospitales = [...hospitales];
-                            const index = newHospitales.findIndex(h => h.id === hospital.id);
+                            const index = newHospitales.findIndex((h) => h.id === hospital.id);
                             newHospitales[index].nombre_hospital = e.target.value;
                             setHospitales(newHospitales);
                           }}
@@ -299,17 +307,17 @@ const handleEditarHospital = async (hospitalEditado) => {
                           value={hospital.ciudad_hospital}
                           onChange={(e) => {
                             const newHospitales = [...hospitales];
-                            const index = newHospitales.findIndex(h => h.id === hospital.id);
+                            const index = newHospitales.findIndex((h) => h.id === hospital.id);
                             newHospitales[index].ciudad_hospital = e.target.value;
                             setHospitales(newHospitales);
                           }}
                         />
                       </td>
                       <td>
-                        <div className="botones-acciones">
+                        <div className="hospitales__actions">
                           <button
                             onClick={() => handleEditarHospital(hospital)}
-                            className="editar-button"
+                            className="hospitales__button hospitales__button--guardar"
                           >
                             Guardar
                           </button>
@@ -319,12 +327,14 @@ const handleEditarHospital = async (hospitalEditado) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-usuario">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <div className="hospitales__pagination">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`hospitales__pagination-button ${
+                      page === currentPage ? 'hospitales__pagination-button--active' : ''
+                    }`}
                   >
                     {page}
                   </button>
@@ -335,7 +345,7 @@ const handleEditarHospital = async (hospitalEditado) => {
         )}
         {vista === 'eliminar' && (
           <>
-            <div className="busqueda-hospital">
+            <div className="hospitales__search">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -347,8 +357,8 @@ const handleEditarHospital = async (hospitalEditado) => {
                 <option value="ciudad_hospital">Ciudad del Hospital</option>
               </select>
             </div>
-            <div className="tabla-hospitales-container">
-              <table className="tabla-hospitales">
+            <div className="hospitales__table-container">
+              <table className="hospitales__table">
                 <thead>
                   <tr>
                     <th>Nombre del Hospital</th>
@@ -362,10 +372,10 @@ const handleEditarHospital = async (hospitalEditado) => {
                       <td>{hospital.nombre_hospital}</td>
                       <td>{hospital.ciudad_hospital}</td>
                       <td>
-                        <div className="botones-acciones">
+                        <div className="hospitales__actions">
                           <button
                             onClick={() => handleEliminarHospital(hospital.id)}
-                            className="eliminar-button"
+                            className="hospitales__button hospitales__button--eliminar"
                           >
                             Eliminar
                           </button>
@@ -375,12 +385,14 @@ const handleEditarHospital = async (hospitalEditado) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-usuario">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <div className="hospitales__pagination">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`hospitales__pagination-button ${
+                      page === currentPage ? 'hospitales__pagination-button--active' : ''
+                    }`}
                   >
                     {page}
                   </button>

@@ -62,29 +62,43 @@ const ReporteUMF = () => {
     }
 
     return (
-        <div className="reporte-umf-page">
-            <header className="reporte-umf-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="umf-header-logo" />
-                <div className="umf-header-text">
-                <h1 className="welcome-reporte-umf">Reporte de Unidades de Medicina Familiar</h1>
-                <h2 className="departamento-reporte-umf">Generar Informe de Unidades de Medicina Familiar Registrados</h2>
+        <div className="reporte-umf">
+            <header className="reporte-umf__header">
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-umf__logo" />
+                <div className="reporte-umf__header-texts">
+                    <h1 className="reporte-umf__welcome-message">Reporte de Unidades de Medicina Familiar</h1>
+                    <h2 className="reporte-umf__department-name">Generar Informe de Unidades de Medicina Familiar Registrados</h2>
                 </div>
             </header>
-            <div className="reporte-busqueda-unidad">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-                <select value={searchField} onChange={handleFieldChange}>
-                    <option value="nombre_unidad_medica">Nombre de la Unidad</option>
-                    <option value="direccion_unidad_medica">Dirección de la Unidad</option>
-                </select>
+    
+            <div className="reporte-umf__busqueda">
+                <div className="reporte-umf__busqueda-fila">
+                    <input
+                        type="text"
+                        placeholder="Buscar..."
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        className="reporte-umf__busqueda-input"
+                    />
+                    <select
+                        value={searchField}
+                        onChange={handleFieldChange}
+                        className="reporte-umf__busqueda-select"
+                    >
+                        <option value="nombre_unidad_medica">Nombre de la Unidad</option>
+                        <option value="direccion_unidad_medica">Dirección de la Unidad</option>
+                    </select>
+                </div>
+                <button
+                    className="reporte-umf__pdf-button"
+                    onClick={generatePDF}
+                >
+                    Imprimir Reporte en PDF
+                </button>
             </div>
-            <button className="reporte-umf-boton" onClick={generatePDF}>Imprimir Reporte en PDF</button>
-            <div className="tabla-reporte-unidades-container">
-                <table className="tabla-reporte-unidades">
+    
+            <div className="reporte-umf__tabla-container">
+                <table className="reporte-umf__tabla">
                     <thead>
                         <tr>
                             <th>Nombre de la Unidad</th>

@@ -59,28 +59,42 @@ const ReportesEspecialidades = () => {
     }
 
     return (
-        <div className="reportes-especialidades-page">
-            <header className="reportes-especialidades-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="reportes-especialidades-header-logo" />
-                <div className="reportes-especialidades-header-text">
-                    <h1 className="welcome-reporte-especialidades">Reporte de Especialidades Médicas</h1>
-                    <h2 className="departamento-reportes-especialidades">Generar Informe de Especialidades Registrados</h2>
+        <div className="reporte-especialidades">
+            <header className="reporte-especialidades__header">
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-especialidades__logo" />
+                <div className="reporte-especialidades__header-texts">
+                    <h1 className="reporte-especialidades__welcome-message">Reporte de Especialidades Médicas</h1>
+                    <h2 className="reporte-especialidades__department-name">Generar Informe de Especialidades Registrados</h2>
                 </div>
             </header>
-            <div className="reporte-busqueda-especialidad">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-                <select value={searchField} onChange={handleFieldChange}>
-                    <option value="nombre_especialidad">Nombre de la Especialidad</option>
-                </select>
+    
+            <div className="reporte-especialidades__busqueda">
+                <div className="reporte-especialidades__busqueda-fila">
+                    <input
+                        type="text"
+                        placeholder="Buscar..."
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        className="reporte-especialidades__busqueda-input"
+                    />
+                    <select
+                        value={searchField}
+                        onChange={handleFieldChange}
+                        className="reporte-especialidades__busqueda-select"
+                    >
+                        <option value="nombre_especialidad">Nombre de la Especialidad</option>
+                    </select>
+                </div>
+                <button
+                    className="reporte-especialidades__pdf-button"
+                    onClick={generatePDF}
+                >
+                    Imprimir Reporte en PDF
+                </button>
             </div>
-            <button className="reporte-especialidades-boton" onClick={generatePDF}>Imprimir Reporte en PDF</button>
-            <div className="tabla-reporte-especialidades-container">
-                <table className="tabla-reporte-especialidades">
+    
+            <div className="reporte-especialidades__tabla-container">
+                <table className="reporte-especialidades__tabla">
                     <thead>
                         <tr>
                             <th>Nombre de la Especialidad</th>

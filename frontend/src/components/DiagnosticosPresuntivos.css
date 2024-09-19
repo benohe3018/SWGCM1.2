@@ -1,143 +1,278 @@
-.diagnosticos-presuntivos-page {
-    padding: 20px;
-  }
-  
-  .diagnosticos-presuntivos-header-logo{
-    margin-left: 10px;
-    height: 60px;
-    margin-right: 40px;
+.diagnosticos-presuntivos {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  color: #0C231E;
+}
+
+.diagnosticos-presuntivos__header {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 1rem; /* 16px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.diagnosticos-presuntivos__logo {
+  height: 3.75rem; /* 60px */
+  margin-bottom: 0.625rem; /* 10px */
+}
+
+.diagnosticos-presuntivos__texts {
+  text-align: center;
+}
+
+.diagnosticos-presuntivos__title {
+  font-size: 1.5rem; /* 24px */
+  margin: 0.3125rem; /* 5px */
+  color: #0C231E;
+}
+
+.diagnosticos-presuntivos__subtitle {
+  font-size: 1.125rem; /* 18px */
+  margin: 0;
+}
+
+.diagnosticos-presuntivos__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem; /* 16px */
+  align-items: center;
+}
+
+.diagnosticos-presuntivos__mensaje-confirmacion {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 0.625rem; /* 10px */
+  border-radius: 0.3125rem; /* 5px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.diagnosticos-presuntivos__busqueda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 25rem; /* 400px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.diagnosticos-presuntivos__busqueda input,
+.diagnosticos-presuntivos__busqueda select {
+  padding: 0.625rem; /* 10px */
+  font-size: 1rem; /* 16px */
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem; /* 5px */
+  margin-right: 0.625rem; /* 10px */
+  width: 100%;
+}
+
+.diagnosticos-presuntivos__tabla-container {
+  width: 100%;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+}
+
+.diagnosticos-presuntivos__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem; /* 20px */
+  table-layout: fixed; /* Distribuye las columnas de manera uniforme */
+}
+
+.diagnosticos-presuntivos__tabla th,
+.diagnosticos-presuntivos__tabla td {
+  border: 1px solid #ddd;
+  padding: 0.5rem; /* 8px */
+  font-size: 0.875rem; /* 14px */
+  text-align: left;
+  word-wrap: break-word; /* Permite que el texto se ajuste */
+}
+
+.diagnosticos-presuntivos__tabla th {
+  background-color: whitesmoke;
+  color: #0C231E;
+}
+
+.diagnosticos-presuntivos__tabla input,
+.diagnosticos-presuntivos__tabla textarea {
+  width: 100%;
+  padding: 0.375rem; /* 6px */
+  font-size: 0.875rem; /* 14px */
+  border: 1px solid #ddd;
+  border-radius: 0.3125rem; /* 5px */
+  box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
+}
+
+.diagnosticos-presuntivos__acciones {
+  display: flex;
+  gap: 0.625rem; /* 10px */
+  justify-content: center;
+}
+
+.diagnosticos-presuntivos__boton {
+  background-color: #12322B;
+  color: white;
+  border: none;
+  padding: 0.3125rem 0.625rem; /* 5px 10px */
+  cursor: pointer;
+  border-radius: 0.3125rem; /* 5px */
+  font-size: 0.875rem; /* 14px */
+}
+
+.diagnosticos-presuntivos__boton--editar {
+  background-color: #12322B;
+}
+
+.diagnosticos-presuntivos__boton--eliminar {
+  background-color: red;
+}
+
+.diagnosticos-presuntivos__boton:hover {
+  opacity: 0.9;
+}
+
+.diagnosticos-presuntivos__paginacion {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem; /* 20px */
+}
+
+.diagnosticos-presuntivos__paginacion-boton {
+  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  margin: 0 0.3125rem; /* 0 5px */
+  background-color: #12322B;
+  color: white;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}
+
+.diagnosticos-presuntivos__paginacion-boton--activo {
+  background-color: #0C231E;
+}
+
+.diagnosticos-presuntivos__paginacion-boton:hover {
+  background-color: #0C231E;
+}
+
+  /* Pantallas grandes (mínimo 820px) */
+@media (min-width: 820px) {
+  .diagnosticos-presuntivos {
+    margin-left: 15.625rem; /* 250px, ancho de la barra lateral si existe */
   }
 
-  .diagnosticos-presuntivos-header {
-    display: flex;
+  .diagnosticos-presuntivos__header {
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-   
-  .diagnosticos-presuntivos-header-texts {
-    text-align: center;
-  }
-  
-  .diagnosticos-presuntivos-welcome-page {
-    font-size: 24px;
-    color: #004d40;
-  }
-  
-  .diagnosticos-presuntivos-department-name {
-    font-size: 18px;
-  }
-  
-  .diagnosticos-presuntivos-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .mensaje-confirmacion {
-    text-align: center;
-    color: green;
-    margin-bottom: 20px;
-  }
-  
-  .busqueda-diagnostico {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-        align-items: center;
-        flex-direction: row;
-  }
-  
-  .busqueda-diagnostico input {
-    width: 70%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin: 0px;
-  }
-  
-  .busqueda-diagnostico select {
-    width: 45%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin: 0px;
-  }
-  
-  .tabla-diagnosticos-presuntivos-container {
-    overflow-x: auto;
-    width: 100%;
-  }
-  
-  .tabla-diagnosticos {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .tabla-diagnosticos th,
-  .tabla-diagnosticos td {
-    border: 1px solid #ccc;
-    padding: 5px;
-    text-align: center;
-  }
-  
-  .pagination-read-diagnostico {
-    text-align: center;
-  }
-  
-  .pagination-read-diagnostico button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .pagination-read-diagnostico .active {
-    background-color: #0C231E;
-    color: white;
-  }
-  
-  .botones-acciones {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .editar-button {
-    background-color: #0C231E;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .eliminar-button {
-    background-color: #dc3545;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .editar-button:hover, .eliminar-button:hover {
-    opacity: 0.8;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
   }
 
-  @media (max-width: 480px) {
-    .diagnosticos-presuntivos-header{
-      width: 100%; /* Asegura que el header ocupe todo el ancho */
-      text-align: center; /* Centra el texto del header */
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .diagnosticos-presuntivos-header-logo {
-      height: 50px;
-      margin-left: 150px;
-      margin-bottom: 10px;
-    }
+  .diagnosticos-presuntivos__logo {
+    margin-right: 1.25rem; /* 20px */
+    margin-bottom: 0;
   }
+
+  .diagnosticos-presuntivos__texts {
+    text-align: left;
+  }
+
+  .diagnosticos-presuntivos__title {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+
+  .diagnosticos-presuntivos__subtitle {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
+  .diagnosticos-presuntivos__content {
+    padding: 2rem; /* 32px */
+  }
+
+  .diagnosticos-presuntivos__busqueda {
+    max-width: none;
+    width: 100%;
+  }
+
+  .diagnosticos-presuntivos__tabla th,
+  .diagnosticos-presuntivos__tabla td {
+    padding: 0.75rem; /* 12px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .diagnosticos-presuntivos__tabla input,
+  .diagnosticos-presuntivos__tabla textarea {
+    padding: 0.5rem; /* 8px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .diagnosticos-presuntivos__paginacion {
+    margin-top: 1.875rem; /* 30px */
+  }
+
+  .diagnosticos-presuntivos__acciones {
+    justify-content: center;
+  }
+}
+
+/* Pantallas medianas (máximo 819px) */
+@media (max-width: 819px) {
+  .diagnosticos-presuntivos__tabla th,
+  .diagnosticos-presuntivos__tabla td {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.375rem; /* 6px */
+  }
+
+  .diagnosticos-presuntivos__tabla input,
+  .diagnosticos-presuntivos__tabla textarea {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.375rem; /* 6px */
+  }
+
+  .diagnosticos-presuntivos__boton {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+/* Pantallas pequeñas (máximo 560px) */
+@media (max-width: 560px) {
+  .diagnosticos-presuntivos__tabla th,
+  .diagnosticos-presuntivos__tabla td {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .diagnosticos-presuntivos__tabla input,
+  .diagnosticos-presuntivos__tabla textarea {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .diagnosticos-presuntivos__boton {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+/* Pantallas muy pequeñas (máximo 420px) */
+@media (max-width: 420px) {
+  .diagnosticos-presuntivos__tabla-container {
+    display: none; /* Ocultar la tabla */
+  }
+}
+
+/* Pantallas medianas (mínimo 421px) */
+@media (min-width: 421px) {
+  .diagnosticos-presuntivos__tabla-container {
+    display: block; /* Mostrar la tabla */
+  }
+}
   

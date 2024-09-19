@@ -166,16 +166,16 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
   }
 
   return (
-    <div className="diagnosticos-presuntivos-page">
-      <header className="diagnosticos-presuntivos-header">
-        <img src={logoIMSS} alt="Logo IMSS" className="diagnosticos-presuntivos-header-logo" />
-        <div className="diagnosticos-presuntivos-header-texts">
-          <h1 className="diagnosticos presuntivos-welcome-page">Sistema de Gestión de Diagnósticos Presuntivos</h1>
-          <h2 className="diagnosticos-presuntivos-department-name">Departamento de Resonancia Magnética - HGR #46</h2>
+    <div className="diagnosticos-presuntivos">
+      <header className="diagnosticos-presuntivos__header">
+        <img src={logoIMSS} alt="Logo IMSS" className="diagnosticos-presuntivos__logo" />
+        <div className="diagnosticos-presuntivos__texts">
+          <h1 className="diagnosticos-presuntivos__title">Sistema de Gestión de Diagnósticos Presuntivos</h1>
+          <h2 className="diagnosticos-presuntivos__subtitle">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>
-      <div className="diagnosticos-presuntivos-content">
-        {mensaje && <div className="mensaje-confirmacion">{mensaje}</div>}
+      <div className="diagnosticos-presuntivos__content">
+        {mensaje && <div className="diagnosticos-presuntivos__mensaje-confirmacion">{mensaje}</div>}
         {vista === 'crear' && (
           <FormularioDiagnosticoPresuntivo
             modo="crear"
@@ -185,7 +185,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
         )}
         {vista === 'ver' && (
           <>
-            <div className="busqueda-diagnostico">
+            <div className="diagnosticos-presuntivos__busqueda">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -196,29 +196,29 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
               </select>
             </div>
-            <div className="tabla-diagnosticos-presuntivos-container">
-              <table className="tabla-diagnosticos">
+            <div className="diagnosticos-presuntivos__tabla-container">
+              <table className="diagnosticos-presuntivos__tabla">
                 <thead>
                   <tr>
-                    
                     <th>Nombre del Diagnóstico</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentDiagnosticos.map((diagnostico) => (
                     <tr key={diagnostico.id}>
-                      
                       <td>{diagnostico.nombre_diagnostico}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-diagnostico">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <div className="diagnosticos-presuntivos__paginacion">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`diagnosticos-presuntivos__paginacion-boton${
+                      page === currentPage ? ' diagnosticos-presuntivos__paginacion-boton--activo' : ''
+                    }`}
                   >
                     {page}
                   </button>
@@ -229,7 +229,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
         )}
         {vista === 'editar' && (
           <>
-            <div className="busqueda-diagnostico">
+            <div className="diagnosticos-presuntivos__busqueda">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -240,11 +240,10 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
               </select>
             </div>
-            <div className="tabla-diagnosticos-presuntivos-container">
-              <table className="tabla-diagnosticos">
+            <div className="diagnosticos-presuntivos__tabla-container">
+              <table className="diagnosticos-presuntivos__tabla">
                 <thead>
                   <tr>
-                    
                     <th>Nombre del Diagnóstico</th>
                     <th>Acciones</th>
                   </tr>
@@ -252,24 +251,23 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <tbody>
                   {currentDiagnosticos.map((diagnostico) => (
                     <tr key={diagnostico.id}>
-                      
                       <td>
                         <input
                           type="text"
                           value={diagnostico.nombre_diagnostico}
                           onChange={(e) => {
                             const newDiagnosticos = [...diagnosticos];
-                            const index = newDiagnosticos.findIndex(diag => diag.id === diagnostico.id);
+                            const index = newDiagnosticos.findIndex((diag) => diag.id === diagnostico.id);
                             newDiagnosticos[index].nombre_diagnostico = e.target.value;
                             setDiagnosticos(newDiagnosticos);
                           }}
                         />
                       </td>
                       <td>
-                        <div className="botones-acciones">
+                        <div className="diagnosticos-presuntivos__acciones">
                           <button
                             onClick={() => handleEditarDiagnostico(diagnostico)}
-                            className="editar-button"
+                            className="diagnosticos-presuntivos__boton diagnosticos-presuntivos__boton--editar"
                           >
                             Guardar
                           </button>
@@ -279,12 +277,14 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-diagnostico">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <div className="diagnosticos-presuntivos__paginacion">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`diagnosticos-presuntivos__paginacion-boton${
+                      page === currentPage ? ' diagnosticos-presuntivos__paginacion-boton--activo' : ''
+                    }`}
                   >
                     {page}
                   </button>
@@ -295,7 +295,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
         )}
         {vista === 'eliminar' && (
           <>
-            <div className="busqueda-diagnostico">
+            <div className="diagnosticos-presuntivos__busqueda">
               <input
                 type="text"
                 placeholder="Buscar..."
@@ -306,11 +306,10 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
               </select>
             </div>
-            <div className="tabla-diagnosticos-presuntivos-container">
-              <table className="tabla-diagnosticos">
+            <div className="diagnosticos-presuntivos__tabla-container">
+              <table className="diagnosticos-presuntivos__tabla">
                 <thead>
                   <tr>
-                    
                     <th>Nombre del Diagnóstico</th>
                     <th>Acciones</th>
                   </tr>
@@ -318,13 +317,12 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                 <tbody>
                   {currentDiagnosticos.map((diagnostico) => (
                     <tr key={diagnostico.id}>
-                      
                       <td>{diagnostico.nombre_diagnostico}</td>
                       <td>
-                        <div className="botones-acciones">
+                        <div className="diagnosticos-presuntivos__acciones">
                           <button
                             onClick={() => handleEliminarDiagnostico(diagnostico.id)}
-                            className="eliminar-button"
+                            className="diagnosticos-presuntivos__boton diagnosticos-presuntivos__boton--eliminar"
                           >
                             Eliminar
                           </button>
@@ -334,12 +332,14 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
                   ))}
                 </tbody>
               </table>
-              <div className="pagination-read-diagnostico">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <div className="diagnosticos-presuntivos__paginacion">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}
+                    className={`diagnosticos-presuntivos__paginacion-boton${
+                      page === currentPage ? ' diagnosticos-presuntivos__paginacion-boton--activo' : ''
+                    }`}
                   >
                     {page}
                   </button>

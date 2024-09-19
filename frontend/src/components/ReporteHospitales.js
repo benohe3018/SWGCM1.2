@@ -62,29 +62,30 @@ const ReporteHospitales = () => {
     }
 
     return (
-        <div className="reporte-hospitales-page">
-            <header className="reporte-hospitales-header">
-                <img src={logoIMSS} alt="Logo IMSS" className="reporte-hg-header-logo" />
-                <div className="reporte-hospitales-header-text">
-                    <h1 className="welcome-reporte-hospitales">Reporte de Hospitales</h1>
-                    <h2 className="departamento-reporte-hospitales">Generar Informe de hospitales Registrados</h2>
+        <div className="reporte-hospitales">
+            <header className="reporte-hospitales__header">
+                <img src={logoIMSS} alt="Logo IMSS" className="reporte-hospitales__logo" />
+                <div className="reporte-hospitales__header-texts">
+                    <h1 className="reporte-hospitales__welcome-message">Reporte de Hospitales</h1>
+                    <h2 className="reporte-hospitales__department-name">Generar Informe de hospitales Registrados</h2>
                 </div>
             </header>
-            <div className="busqueda-reporte-hospital">
+            <div className="reporte-hospitales__busqueda">
                 <input
                     type="text"
                     placeholder="Buscar..."
                     value={searchTerm}
                     onChange={handleSearch}
+                    className="reporte-hospitales__busqueda-input"
                 />
-                <select value={searchField} onChange={handleFieldChange}>
+                <select value={searchField} onChange={handleFieldChange} className="reporte-hospitales__busqueda-select">
                     <option value="nombre_hospital">Nombre del Hospital</option>
                     <option value="ciudad_hospital">Ciudad del Hospital</option>
                 </select>
+                <button className="reporte-hospitales__pdf-button" onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
-            <button className="imprimir-reporte-hospitales-boton" onClick={generatePDF}>Imprimir Reporte en PDF</button>
-            <div className="tabla-reporte-hospitales-container">
-                <table className="tabla-reporte-hospitales">
+            <div className="reporte-hospitales__tabla-container">
+                <table className="reporte-hospitales__tabla">
                     <thead>
                         <tr>
                             <th>Nombre del Hospital</th>

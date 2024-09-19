@@ -78,8 +78,8 @@ const ReporteDiagnosticoPresuntivo = () => {
                 <select value={searchField} onChange={handleFieldChange} className="reporte-diagnostico-presuntivo__busqueda-select">
                     <option value="nombre_diagnostico">Nombre del Diagnóstico</option>
                 </select>
+                <button className="reporte-diagnostico-presuntivo__pdf-button" onClick={generatePDF}>Imprimir Reporte en PDF</button>
             </div>
-            <button className="reporte-diagnostico-presuntivo__pdf-button" onClick={generatePDF}>Imprimir Reporte en PDF</button>
             <div className="reporte-diagnostico-presuntivo__tabla-container">
                 <table className="reporte-diagnostico-presuntivo__tabla">
                     <thead>

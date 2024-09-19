@@ -88,6 +88,14 @@
 @media (min-width: 820px) {
   .backup-recovery {
     flex-direction: row; /* Cambia a disposición de fila */
+    
+  }
+
+  .backup-recovery__header {
+    flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem 2rem;
   }
 
   .backup-recovery__content {

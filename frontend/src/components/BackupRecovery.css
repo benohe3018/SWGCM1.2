@@ -87,8 +87,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .backup-recovery {
-    flex-direction: row; /* Cambia a disposición de fila */
-    
+    margin-left: 15.625rem; /* 250px, ancho de la barra lateral si existe */   
   }
 
   .backup-recovery__header {

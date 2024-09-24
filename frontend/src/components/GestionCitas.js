@@ -266,8 +266,16 @@ const GestionCitas = () => {
               ))}
             </div>
             <div className="gestion-citas__pagination">
-              {/* ... paginación existente ... */}
-            </div>
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+        <button
+          key={page}
+          onClick={() => setCurrentPage(page)}
+          className={page === currentPage ? 'active' : ''}
+        >
+          {page}
+        </button>
+      ))}
+    </div>
           </>
         )}
 

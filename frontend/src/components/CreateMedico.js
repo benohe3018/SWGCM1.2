@@ -20,7 +20,7 @@ const CreateMedico = () => {
 
   const isValidApellido = (apellido) => {
     if (apellido === '') return true; 
-    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]*$/; 
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/; 
     return regex.test(apellido) && apellido.length <= 50;
   };
 
@@ -37,11 +37,11 @@ const CreateMedico = () => {
       return;
     }
     if (!isValidApellido(apellidoPaterno)) {
-      alert('Por favor, introduce un apellido paterno válido (puede estar vacío).');
+      alert('Por favor, introduce un apellido paterno válido(El campo no debe de estar vacío).');
       return;
     }
     if (!isValidApellido(apellidoMaterno)) {
-      alert('Por favor, introduce un apellido materno válido (puede estar vacío).');
+      alert('Por favor, introduce un apellido materno válido(El campo no debe de estar vacío).');
       return;
     }
     if (!isValidMatricula(matricula)) {

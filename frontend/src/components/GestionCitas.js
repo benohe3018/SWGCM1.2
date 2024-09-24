@@ -211,8 +211,38 @@ const GestionCitas = () => {
           <>
             <div className="gestion-citas__table-container">
               <table className="gestion-citas__table gestion-citas__table--ver">
-                {/* ... tabla existente ... */}
+                <thead>
+                  <tr>
+                    <th>Fecha y Hora</th>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                    <th>Estudio</th>
+                    <th>Hospital</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentPacientes.map((paciente) => (
+                    <tr key={paciente.id}>
+                      <td>{paciente.fecha_hora_estudio}</td>
+                      <td>{paciente.nombre_completo}</td>
+                      <td>{paciente.nombre_completo_medico}</td>
+                      <td>{paciente.estudio_solicitado}</td>
+                      <td>{paciente.hospital_envia}</td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
+            </div>
+            <div className="gestion-citas__pagination">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
             </div>
             <div className="gestion-citas__cards-container">
               {currentPacientes.map((paciente) => (

@@ -233,17 +233,6 @@ const GestionCitas = () => {
                 </tbody>
               </table>
             </div>
-            <div className="gestion-citas__pagination">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={page === currentPage ? 'active' : ''}
-                >
-                  {page}
-                </button>
-              ))}
-            </div>
             <div className="gestion-citas__cards-container">
               {currentPacientes.map((paciente) => (
                 <div key={paciente.id} className="gestion-citas__card">
@@ -266,7 +255,15 @@ const GestionCitas = () => {
               ))}
             </div>
             <div className="gestion-citas__pagination">
-              {/* ... paginación existente ... */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={page === currentPage ? 'active' : ''}
+                >
+                  {page}
+                </button>
+              ))}
             </div>
           </>
         )}

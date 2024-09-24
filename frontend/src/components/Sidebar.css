@@ -3,7 +3,6 @@
 /* Estilos Base - Mobile-First */
 .sidebar {
   display: none;
-  background-color: rgba(18, 50, 43, 0.8); /* Color con transparencia */
 }
 
 .sidebar.active {
@@ -38,9 +37,8 @@
 }
 
 .active-user {
-  font-size: 0.75rem; /* 12px */
-  color: black;
-  margin-top: 1.25rem; /* 20px */
+  font-size: 0.9rem; /* 12px */
+  color: whitesmoke;
 }
 
 .sidebar-button {
@@ -91,6 +89,8 @@
 
 .mobile-menu.open {
   left: 0; /* Deslizar desde la derecha */
+  background-color: rgba(18, 50, 43, 0.9); /* Color con transparencia */
+
 }
 
 .mobile-menu ul {

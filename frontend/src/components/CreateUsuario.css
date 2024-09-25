@@ -183,6 +183,7 @@
 
   .create-usuario-content {
     padding: 2rem; /* 32px */
+    margin-left: 30.0rem; /* 250px, ancho de la sidebar */
   }
 
   .create-usuario-content form {

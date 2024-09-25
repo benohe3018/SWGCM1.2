@@ -232,6 +232,7 @@
     align-items: center;
     justify-content: flex-start;
     padding: 1rem 2rem;
+    margin-left: 30.0rem;
   }
 
   .gestion-citas__header-logo {

@@ -152,7 +152,7 @@
 @media (min-width: 820px) {
 
   .create-usuario-page {
-    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
+    margin-left: 30.0rem; 
   }
 
   .create-usuario-header {
@@ -183,7 +183,6 @@
 
   .create-usuario-content {
     padding: 2rem; /* 32px */
-    margin-left: 30.0rem; /* 250px, ancho de la sidebar */
   }
 
   .create-usuario-content form {

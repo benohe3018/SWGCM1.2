@@ -68,11 +68,12 @@
 
 .read-usuario__search-container input,
 .read-usuario__search-container select {
-  padding: 0.625rem; /* 10px */
-  font-size: 1rem; /* 16px */
-  border: 1px solid #ddd;
+  padding: 0.5rem; /* 10px */
+  font-size: 0.875rem; /* 16px */
+  border: 0.5px solid #ddd;
   border-radius: 0.3125rem; /* 5px */
-  margin-bottom: 0.625rem; /* 10px */
+  margin-bottom: 0.5rem; /* 10px */
+  margin: 5px;
 }
 
 .read-usuario__table-container {
@@ -87,10 +88,10 @@
 
 .read-usuario__table th,
 .read-usuario__table td {
-  border: 1px solid #ddd;
-  padding: 0.5rem; /* 8px */
+  border: 0.25rem solid #ddd;
+  padding: 0.25rem; /* 8px */
   text-align: left;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.5rem; /* 14px */
 }
 
 .read-usuario__table th {

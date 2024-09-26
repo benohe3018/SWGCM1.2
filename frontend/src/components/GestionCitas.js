@@ -199,11 +199,12 @@ const GestionCitas = () => {
           onChange={handleSearch}
         />
         <select value={searchTerm} onChange={handleFieldChange}>
-          <option value="nombre_completo">Paciente</option>
-          <option value="nombre_completo_medico">Médico</option>
-          <option value="estudio_solicitado">Estudio</option>
-          <option value="hospital_envia">Hospital</option>
-          <option value="fecha_hora_estudio">Fecha y Hora</option>
+          <option value="Seleccione"></option>
+          <option >Paciente</option>
+          <option >Médico</option>
+          <option >Estudio</option>
+          <option >Hospital</option>
+          <option >Fecha y Hora</option>
         </select>
       </div>
 

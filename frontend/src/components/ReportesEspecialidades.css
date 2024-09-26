@@ -255,7 +255,7 @@
     }
   
     .reporte-especialidades__pdf-button {
-      width: 100%; /* Botón ocupa todo el ancho disponible */
+      width: 80%; /* Botón ocupa todo el ancho disponible */
       margin-bottom: 1rem; /* Espacio inferior */
     }
   }

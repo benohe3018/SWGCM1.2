@@ -299,6 +299,7 @@
   @media (max-width: 420px) {
     .reporte-citas__tabla-container {
       display: block; /* Ocultar la tabla para evitar desbordamientos */
+      width: 80%;
     }
   
     .reporte-citas__pdf-button {

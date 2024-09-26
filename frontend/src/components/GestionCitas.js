@@ -155,6 +155,10 @@ const GestionCitas = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleFieldChange = (e) =>{
+    setSearchTerm(e.target.value);
+  }
+
   const filteredPacientes = pacientesPrueba.filter((paciente) => {
     return paciente.nombre_completo.toLowerCase().includes(searchTerm.toLowerCase());
   });
@@ -188,13 +192,20 @@ const GestionCitas = () => {
         
         {/* Campo de búsqueda */}
         <div className="gestion-citas__search-container">
-          <input
-            type="text"
-            placeholder="Buscar paciente..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        <select value={searchTerm} onChange={handleFieldChange}>
+          <option value="nombre_completo">Paciente</option>
+          <option value="nombre_completo_medico">Médico</option>
+          <option value="estudio_solicitado">Estudio</option>
+          <option value="hospital_envia">Hospital</option>
+          <option value="fecha_hora_estudio">Fecha y Hora</option>
+        </select>
+      </div>
 
         {vista === 'crear' && (
           <FormularioPaciente

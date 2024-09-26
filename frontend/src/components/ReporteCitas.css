@@ -58,6 +58,7 @@
     width: 100%;
     max-width: 25rem; /* 400px */
     margin-bottom: 0.75rem; /* 12px */
+    flex-direction: column;
   }
   
   .reporte-citas__busqueda-input,

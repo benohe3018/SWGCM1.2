@@ -68,36 +68,35 @@
 
 .delete-medico__search-container input,
 .delete-medico__search-container select {
-  width: 100%;
-  padding: 0.625rem; /* 10px */
+  padding: 0.5rem; /* 10px */
+  font-size: 0.875rem; /* 16px */
+  border: 1px solid #ddd;
   border-radius: 0.3125rem; /* 5px */
-  border: 1px solid #ccc;
-  margin-bottom: 0.625rem; /* 10px */
+  margin-bottom: 0.5rem; /* 10px */
 }
 
 .delete-medico__table-container {
   width: 100%;
   overflow-x: auto;
-  flex: 1;
-  min-width: 0; /* Añadido */
 }
 
 .delete-medico__table {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1.25rem; /* 20px */
+  overflow-x:auto;
 }
 
 .delete-medico__table th,
 .delete-medico__table td {
-  border: 1px solid #ddd;
-  padding: 0.5rem; /* 8px */
+  border: 0.25rem solid #ddd;
+  padding: 0.25rem; /* 8px */
   text-align: left;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.5rem; /* 14px */
 }
 
 .delete-medico__table th {
   background-color: #f4f4f4;
+  color: #333;
+
 }
 
 .delete-medico__pagination {

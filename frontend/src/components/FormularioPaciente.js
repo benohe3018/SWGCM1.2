@@ -189,6 +189,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
 
   return (
     <form className="form-paciente" onSubmit={handleSubmit}>
+      <h3 className="form-description-create-cita">Capture los datos de la cita</h3>
       <div className="form-group-cita-medica">
         <label htmlFor="fecha_hora_estudio">Fecha del Estudio:</label>
         <input

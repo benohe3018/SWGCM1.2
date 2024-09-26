@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f9f9f9;
+    background-color: whitesmoke;
     font-family: Arial, sans-serif;
     width: 100%;
     color: #0C231E;
@@ -13,7 +13,7 @@
   
   .reporte-estudios__header {
     width: 100%;
-    background-color: #ffffff;
+    background-color: whitesmoke;
     padding: 1rem; /* 16px */
     display: flex;
     flex-direction: column;
@@ -47,7 +47,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem; /* 16px */
-    background-color: #ffffff;
+    background-color: whitesmoke;
     margin: 1rem;
     border-radius: 0.3125rem; /* 5px */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -56,7 +56,7 @@
   .reporte-estudios__busqueda-fila {
     display: flex;
     width: 100%;
-    max-width: 25rem; /* 400px */
+    max-width: 20rem; /* 400px */
     margin-bottom: 0.75rem; /* 12px */
   }
   
@@ -91,9 +91,9 @@
   }
   
   .reporte-estudios__tabla-container {
-    width: 100%;
+    width: 85%;
     padding: 1rem; /* 16px */
-    background-color: #ffffff;
+    background-color: whitesmoke;
     margin: 1rem;
     border-radius: 0.3125rem; /* 5px */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -109,15 +109,15 @@
   
   .reporte-estudios__tabla th,
   .reporte-estudios__tabla td {
-    border: 1px solid #ddd;
-    padding: 0.5rem; /* 8px */
-    font-size: 0.875rem; /* 14px */
+    border: 1px solid whitesmoke;
+    padding: 0.3rem; /* 8px */
+    font-size: 0.75rem; /* 14px */
     text-align: left;
     word-wrap: break-word; /* Permite que el texto se ajuste */
   }
   
   .reporte-estudios__tabla th {
-    background-color: #f2f2f2;
+    background-color: whitesmoke;
     color: #0C231E;
   }
   

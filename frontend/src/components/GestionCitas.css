@@ -227,7 +227,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .gestion-citas {
-    margin-left: 1.625rem; /* 250px, ancho de la sidebar si existe */
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar si existe */
   }
 
   .gestion-citas__header {
@@ -235,7 +235,6 @@
     align-items: center;
     justify-content: flex-start;
     padding: 1rem 2rem;
-    margin-left: 15.625rem;
   }
 
   .gestion-citas__header-logo {

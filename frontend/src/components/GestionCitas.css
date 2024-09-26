@@ -64,9 +64,10 @@
 }
 
 .gestion-citas__search-container {
-  width: 100%;
+  width: 40%;
   max-width: 25rem; /* 400px */
   margin-bottom: 1.25rem; /* 20px */
+  display: flex;
 }
 
 .gestion-citas__search-container input, select {
@@ -261,7 +262,8 @@
 
   .gestion-citas__search-container {
     max-width: none;
-    width: 10%;
+    width: 40%;
+    display: flex;
   }
 
   .gestion-citas__table th,

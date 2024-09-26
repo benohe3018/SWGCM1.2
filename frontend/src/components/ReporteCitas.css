@@ -114,8 +114,8 @@
   .reporte-citas__tabla th,
   .reporte-citas__tabla td {
     border: 1px solid #ddd;
-    padding: 0.5rem; /* 8px */
-    font-size: 0.875rem; /* 14px */
+    padding: 0.3rem; /* 8px */
+    font-size: 0.75rem; /* 14px */
     text-align: left;
     word-wrap: break-word; /* Permite que el texto se ajuste */
   }

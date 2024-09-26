@@ -97,7 +97,7 @@
   .reporte-citas__tabla-container {
     width: 85%;
     padding: 1rem; /* 16px */
-    background-color: #ffffff;
+    background-color: whitesmoke;
     margin: 1rem;
     border-radius: 0.3125rem; /* 5px */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -121,7 +121,7 @@
   }
   
   .reporte-citas__tabla th {
-    background-color: #f2f2f2;
+    background-color: whitesmoke;
     color: #0C231E;
   }
   

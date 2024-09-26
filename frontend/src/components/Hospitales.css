@@ -11,7 +11,8 @@
 .hospitales__header {
   width: 100%;
   background-color: whitesmoke;
-  padding: 1rem; /* 16px */
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -273,6 +274,20 @@
   .hospitales__table-container {
     display: block; /* Ocultar la tabla */
   }
+
+  .hospitales__search{
+    flex-direction: column;
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  .hospitales__search-input,
+  .hospitales__search-select {
+    flex-direction: column;
+    width: 100%;
+    max-width: 20rem;
+  }
+
 }
 
 /* Pantallas medianas (mínimo 421px) */

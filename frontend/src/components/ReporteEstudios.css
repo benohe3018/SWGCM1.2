@@ -109,7 +109,7 @@
   
   .reporte-estudios__tabla th,
   .reporte-estudios__tabla td {
-    border: 1px solid whitesmoke;
+    border: 1px solid #ddd;
     padding: 0.3rem; /* 8px */
     font-size: 0.75rem; /* 14px */
     text-align: left;

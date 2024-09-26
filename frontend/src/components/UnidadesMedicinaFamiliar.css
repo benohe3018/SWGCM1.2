@@ -15,7 +15,7 @@
 .unidades-medicina-familiar__header {
   width: 100%;
   background-color: whitesmoke;
-  padding: 1rem; /* 16px */
+  padding: 1.25rem; /* 20px */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,6 @@
 
 .unidades-medicina-familiar__header-texts {
   text-align: center;
-  flex-grow: 1;
 }
 
 .unidades-medicina-familiar__welcome-message {
@@ -41,7 +40,6 @@
 .unidades-medicina-familiar__department-name {
   font-size: 1.125rem; /* 18px */
   margin: 0;
-  color: #0C231E;
 }
 
 .unidades-medicina-familiar__mr-machine {
@@ -52,12 +50,10 @@
 
 .unidades-medicina-familiar__content {
   flex: 1;
-  padding: 1rem; /* 16px */
   display: flex;
   flex-direction: column;
+  padding: 1rem; /* 16px */
   align-items: center;
-  justify-content: center;
-  margin-top: 1.25rem; /* 20px */
 }
 
 .unidades-medicina-familiar__message-confirmation {

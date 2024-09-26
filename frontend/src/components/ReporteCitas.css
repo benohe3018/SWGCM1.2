@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f9f9f9;
+    background-color: whitesmoke;
     font-family: Arial, sans-serif;
     width: 100%;
     color: #0C231E;
@@ -13,7 +13,7 @@
   
   .reporte-citas__header {
     width: 100%;
-    background-color: #ffffff;
+    background-color: whitesmoke;
     padding: 1rem; /* 16px */
     display: flex;
     flex-direction: column;
@@ -47,7 +47,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem; /* 16px */
-    background-color: #ffffff;
+    background-color: whitesmoke;
     margin: 1rem;
     border-radius: 0.3125rem; /* 5px */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -95,7 +95,7 @@
   }
   
   .reporte-citas__tabla-container {
-    width: 90%;
+    width: 85%;
     padding: 1rem; /* 16px */
     background-color: #ffffff;
     margin: 1rem;

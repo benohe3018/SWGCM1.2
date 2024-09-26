@@ -21,6 +21,7 @@ const GestionCitas = () => {
   const [cargando, setCargando] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchField, setSearchField] = useState('nombre_completo');
   const pacientesPerPage = 10;
 
   const handleInputChange = (e, pacienteId, campo) => {
@@ -156,7 +157,7 @@ const GestionCitas = () => {
   };
 
   const handleFieldChange = (e) =>{
-    setSearchTerm(e.target.value);
+    setSearchField(e.target.value);
   }
 
   const filteredPacientes = pacientesPrueba.filter((paciente) => {
@@ -198,8 +199,8 @@ const GestionCitas = () => {
           value={searchTerm}
           onChange={handleSearch}
         />
-        <select value={searchTerm} onChange={handleFieldChange}>
-          <option value="Seleccione"></option>
+        <select value={searchField} onChange={handleFieldChange}>
+          <option >Seleccione</option>
           <option >Paciente</option>
           <option >Médico</option>
           <option >Estudio</option>

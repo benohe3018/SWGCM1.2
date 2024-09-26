@@ -294,13 +294,20 @@
     text-align: center;
   }
 
+  .unidades-medicina-familiar__header-logo {
+    height: 50px;
+    margin-left: 20rem;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
   .unidades-medicina-familiar__table-container {
     display: block; /* Ocultar la tabla en pantallas muy pequeñas */
   }
 
   /* Ajustes para la barra de búsqueda en pantallas muy pequeñas */
   .unidades-medicina-familiar__search {
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     max-width: 20rem;
   }

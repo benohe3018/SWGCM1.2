@@ -206,6 +206,7 @@ const GestionCitas = () => {
         {mensaje && <div className="gestion-citas__message-confirmation">{mensaje}</div>}
         
         {/* Campo de búsqueda */}
+        {vista !== 'crear' && (
         <div className="gestion-citas__search-container">
         <input
           type="text"
@@ -222,6 +223,7 @@ const GestionCitas = () => {
           <option value="fecha_hora_estudio">Fecha y Hora</option>
         </select>
       </div>
+    )}
 
         {vista === 'crear' && (
           <FormularioPaciente

@@ -70,10 +70,10 @@
 .delete-medico__search-container select {
   padding: 0.5rem; /* 10px */
   font-size: 0.875rem; /* 16px */
-  border: 1px solid #ddd;
+  border: 0.5px solid #ddd;
   border-radius: 0.3125rem; /* 5px */
   margin-bottom: 0.5rem; /* 10px */
-  margin: 0;
+  margin: 5px;
 }
 
 .delete-medico__table-container {

@@ -280,6 +280,19 @@
   .especialidades-medicas__table-container {
     display: block; /* Ocultar la tabla */
   }
+
+  .especialidades-medicas__search-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  .especialidades-medicas__search-container-input,
+  .especialidades-medicas__search-container-select {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 5px; /* 10px */
+  }
 }
 
 /* Pantallas medianas (mínimo 421px) */

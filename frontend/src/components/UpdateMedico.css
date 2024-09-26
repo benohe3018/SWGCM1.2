@@ -68,6 +68,7 @@
   width: 100%;
   max-width: 20rem; /* 400px */
   margin-bottom: 1.25rem; /* 20px */
+  margin: 0;
 }
 
 .update-medico__search-container input,

@@ -87,10 +87,10 @@
 
 .read-medico__table th,
 .read-medico__table td {
-  border: 0.5rem solid #ddd;
-  padding: 0.5rem; /* 8px */
+  border: 0.25rem solid #ddd;
+  padding: 0.25rem; /* 8px */
   text-align: left;
-  font-size: 0.75rem; /* 14px */
+  font-size: 0.5rem; /* 14px */
 }
 
 .read-medico__table th {

@@ -121,7 +121,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .read-usuario {
-    margin-left: 30.0rem; 
+    margin-left: 15.625rem; 
   }
 
   .read-usuario__header {

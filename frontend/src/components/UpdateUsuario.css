@@ -133,7 +133,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .update-usuario {
-    margin-left: 30.0rem; 
+    margin-left: 15.625rem; 
   }
 
   .update-usuario__header {

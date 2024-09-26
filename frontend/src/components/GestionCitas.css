@@ -74,6 +74,8 @@
   padding: 0.625rem; /* 10px */
   border: 1px solid #ddd;
   border-radius: 0.3125rem; /* 5px */
+  margin:0px;
+  margin-left: 5px;
 }
 
 .gestion-citas__table-container {

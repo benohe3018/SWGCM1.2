@@ -13,7 +13,8 @@
 .estudios-radiologicos__header {
   width: 100%;
   background-color: whitesmoke;
-  padding: 1rem;
+  padding: 1.25rem; /* 20px */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -161,7 +161,21 @@ const GestionCitas = () => {
   }
 
   const filteredPacientes = pacientesPrueba.filter((paciente) => {
-    return paciente.nombre_completo.toLowerCase().includes(searchTerm.toLowerCase());
+    if (!searchTerm) {
+      return true; // Mostrar todos los pacientes si no hay término de búsqueda
+    }
+    if (!searchField) {
+      // Si no se ha seleccionado un campo específico, puedes buscar en todos los campos
+      return Object.values(paciente).some((field) =>
+        field && field.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    const fieldValue = paciente[searchField];
+    if (fieldValue) {
+      return fieldValue.toString().toLowerCase().includes(searchTerm.toLowerCase());
+    } else {
+      return false;
+    }
   });
 
   const indexOfLastPaciente = currentPage * pacientesPerPage;
@@ -200,12 +214,12 @@ const GestionCitas = () => {
           onChange={handleSearch}
         />
         <select value={searchField} onChange={handleFieldChange}>
-          <option >Seleccione</option>
-          <option >Paciente</option>
-          <option >Médico</option>
-          <option >Estudio</option>
-          <option >Hospital</option>
-          <option >Fecha y Hora</option>
+          <option value="">Seleccione</option>
+          <option value="nombre_completo">Paciente</option>
+          <option value="nombre_completo_medico">Médico</option>
+          <option value="estudio_solicitado">Estudio</option>
+          <option value="hospital_envia">Hospital</option>
+          <option value="fecha_hora_estudio">Fecha y Hora</option>
         </select>
       </div>
 

@@ -10,7 +10,6 @@
 }
 
 .reporte-usuario__header {
-  width: 100%;
   background-color: whitesmoke;
   padding: 1rem; /* 16px */
   display: flex;
@@ -50,9 +49,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   max-width: 25rem; /* 400px */
   margin-bottom: 1.25rem; /* 20px */
+  flex-direction: column;
 }
 
 .reporte-usuario__busqueda-input,
@@ -82,17 +81,17 @@
 }
 
 .reporte-usuario__table-container {
-  width: 100%;
+  padding: 1rem; /* 16px */
+  background-color: whitesmoke;
+  margin: 1rem;
+  border-radius: 0.3125rem; /* 5px */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow-x: auto; /* Permite desplazamiento horizontal */
 }
 
 .reporte-usuario__loading-text {
   font-size: 1rem; /* 16px */
   color: #0C231E;
-}
-
-.reporte-usuario__table-wrapper {
-  width: 100%;
 }
 
 .reporte-usuario__table {
@@ -107,7 +106,7 @@
   border: 1px solid #ddd;
   padding: 0.5rem; /* 8px */
   font-size: 0.875rem; /* 14px */
-  text-align: left;
+  text-align: center;
   word-wrap: break-word; /* Permite que el texto se ajuste */
 }
 

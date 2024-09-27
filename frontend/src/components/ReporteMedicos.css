@@ -10,7 +10,6 @@
 }
 
 .reporte-medico__header {
-  width: 100%;
   background-color: whitesmoke;
   padding: 1rem; /* 16px */
   display: flex;
@@ -50,9 +49,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   max-width: 25rem; /* 400px */
   margin-bottom: 1.25rem; /* 20px */
+  flex-direction: column;
 }
 
 .reporte-medico__busqueda input,
@@ -81,8 +80,12 @@
 }
 
 .reporte-medico__table-container {
-  width: 100%;
-  overflow-x: auto; /* Permite desplazamiento horizontal */
+    padding: 1rem; /* 16px */
+    background-color: whitesmoke;
+    margin: 1rem;
+    border-radius: 0.3125rem; /* 5px */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Permite desplazamiento horizontal */
 }
 
 .reporte-medico__table {

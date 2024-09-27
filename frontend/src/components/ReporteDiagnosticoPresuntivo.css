@@ -84,13 +84,13 @@
   }
   
   .reporte-diagnostico-presuntivo__tabla-container {
-    width: 100%;
     padding: 1rem; /* 16px */
     background-color: whitesmoke;
     margin: 1rem;
     border-radius: 0.3125rem; /* 5px */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-x: auto; /* Permite desplazamiento horizontal */
+    align-items: center;
   }
   
   .reporte-diagnostico-presuntivo__tabla {

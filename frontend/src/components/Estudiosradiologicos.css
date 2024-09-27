@@ -206,6 +206,15 @@
 
   .estudios-radiologicos__search-container {
     width: 100%;
+    display: flex
+  }
+
+  .estudios-radiologicos__search-container input,
+  .estudios-radiologicos__search-container select {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid #ddd;
+    border-radius: 0.3125rem;
   }
 
   .estudios-radiologicos__table th,

@@ -229,12 +229,11 @@
   .estudios-radiologicos__header {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between; /* Ajustar la justificación */
     padding: 1rem 3rem; /* Aumentar el padding */
   }
 
   .estudios-radiologicos__header-logo {
-    margin-right: 2rem; /* Aumentar el margen derecho */
+    margin-right: 10rem; /* Aumentar el margen derecho */
     margin-bottom: 0;
   }
 

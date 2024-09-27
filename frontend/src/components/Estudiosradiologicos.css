@@ -224,6 +224,35 @@
   }
 }
 
+/* Pantallas muy grandes (mínimo 1200px) */
+@media (min-width: 1200px) {
+  .estudios-radiologicos__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Ajustar la justificación */
+    padding: 1rem 3rem; /* Aumentar el padding */
+  }
+
+  .estudios-radiologicos__header-logo {
+    margin-right: 2rem; /* Aumentar el margen derecho */
+    margin-bottom: 0;
+  }
+
+  .estudios-radiologicos__header-texts {
+    text-align: left; /* Alinear el texto a la izquierda */
+  }
+
+  .estudios-radiologicos__welcome-message {
+    font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .estudios-radiologicos__department-name {
+    font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+}
+
 /* Pantallas medianas (máximo 819px) */
 @media (max-width: 819px) {
   .estudios-radiologicos__table th,

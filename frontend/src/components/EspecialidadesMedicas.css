@@ -210,8 +210,10 @@
   }
 
   .especialidades-medicas__search-container {
-    max-width: none;
-    width: 100%;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   margin: 0;
   }
 
   .especialidades-medicas__table th,

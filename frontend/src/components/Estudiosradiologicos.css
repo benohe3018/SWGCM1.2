@@ -215,6 +215,7 @@
     padding: 0.625rem;
     border: 1px solid #ddd;
     border-radius: 0.3125rem;
+    height: fit-content;
   }
 
   .estudios-radiologicos__table th,

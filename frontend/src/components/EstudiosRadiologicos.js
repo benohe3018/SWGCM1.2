@@ -190,8 +190,9 @@ const handleInputChange = (e, idEstudio, field) => {
                                 className="estudios-radiologicos__search-input"
                             />
                             <select value={searchField} onChange={handleFieldChange} className="estudios-radiologicos__search-select">
-                                <option value="nombre_estudio">Nombre del Estudio</option>
-                                <option value="descripcion_estudio">Descripción del Estudio</option>
+                                <option >Seleccione</option>
+                                <option value="nombre_estudio">Nombre</option>
+                                <option value="descripcion_estudio">Descripción</option>
                             </select>
                         </div>
                         <div className="estudios-radiologicos__table-container">

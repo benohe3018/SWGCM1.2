@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f9f9f9;
+    background-color: whitesmoke;
     font-family: Arial, sans-serif;
     width: 100%;
     color: #0C231E;
@@ -12,8 +12,7 @@
   }
   
   .reporte-hospitales__header {
-    width: 100%;
-    background-color: #ffffff;
+    background-color: whitesmoke;
     padding: 1rem; /* 16px */
     display: flex;
     flex-direction: column;
@@ -47,7 +46,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem; /* 16px */
-    background-color: #ffffff;
+    background-color: whitesmoke;
     margin: 1rem;
     border-radius: 0.3125rem; /* 5px */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -77,6 +76,7 @@
     border-radius: 0.3125rem; /* 5px */
     font-size: 1rem; /* 16px */
     transition: background-color 0.3s ease, opacity 0.3s ease;
+    margin-top: 10px;
   }
   
   .reporte-hospitales__pdf-button:hover {
@@ -84,9 +84,8 @@
   }
   
   .reporte-hospitales__tabla-container {
-    width: 100%;
     padding: 1rem; /* 16px */
-    background-color: #ffffff;
+    background-color: whitesmoke;
     margin: 1rem;
     border-radius: 0.3125rem; /* 5px */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -110,7 +109,7 @@
   }
   
   .reporte-hospitales__tabla th {
-    background-color: #f2f2f2;
+    background-color: whitesmoke;
     color: #0C231E;
   }
   

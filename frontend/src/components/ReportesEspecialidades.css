@@ -12,7 +12,6 @@
   }
   
   .reporte-especialidades__header {
-    width: 100%;
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
@@ -92,7 +91,6 @@
   }
   
   .reporte-especialidades__tabla-container {
-    width: 100%;
     padding: 1rem; /* 16px */
     background-color: whitesmoke;
     margin: 1rem;
@@ -102,7 +100,7 @@
   }
   
   .reporte-especialidades__tabla {
-    width: 85%;
+    width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.25rem; /* 20px */
     table-layout: fixed; /* Distribuye las columnas de manera uniforme */
@@ -113,7 +111,7 @@
     border: 1px solid #ddd;
     padding: 0.3rem; /* 8px */
     font-size: 0.75rem; /* 14px */
-    text-align: left;
+    text-align: center;
     word-wrap: break-word; /* Permite que el texto se ajuste */
   }
   

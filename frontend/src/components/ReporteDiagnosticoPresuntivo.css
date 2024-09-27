@@ -97,6 +97,7 @@
     border-collapse: collapse;
     margin-bottom: 1.25rem; /* 20px */
     table-layout: fixed; /* Distribuye las columnas de manera uniforme */
+    width: 80%;
   }
   
   .reporte-diagnostico-presuntivo__tabla th,

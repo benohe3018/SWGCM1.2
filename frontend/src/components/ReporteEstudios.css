@@ -135,6 +135,7 @@
       align-items: center;
       justify-content: flex-start;
       padding: 1rem 2rem;
+      box-shadow: none;
     }
   
     .reporte-estudios__logo {
@@ -157,10 +158,11 @@
     }
   
     .reporte-estudios__busqueda {
-      flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 2rem; /* 32px */
+      box-shadow: none;
+      
     }
   
     .reporte-estudios__busqueda-fila {
@@ -186,6 +188,117 @@
     .reporte-estudios__tabla td {
       padding: 0.75rem; /* 12px */
       font-size: 1rem; /* 16px */
+    }
+  }
+
+    @media (min-width: 1200px) {
+    .reporte-estudios__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 3rem; /* Aumentar el padding */
+      box-shadow: none;
+    }
+  
+    .reporte-estudios__logo {
+      margin-bottom: 0;
+    }
+  
+    .reporte-estudios__header-texts {
+      text-align: center; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-estudios__welcome-message {
+      font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-estudios__department-name {
+      font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-estudios__busqueda {
+      padding: 2rem; /* 32px */
+    }
+  
+    .reporte-estudios__busqueda-fila {
+      width: 48%;
+      margin-bottom: 1rem; /* 16px */
+    }
+  
+    .reporte-estudios__busqueda-input,
+    .reporte-estudios__busqueda-select {
+      font-size: 1rem; /* 16px */
+      padding: 0.75rem; /* 12px */
+      margin-right: 0.5rem; /* 8px */
+    }
+  
+    .reporte-estudios__pdf-button {
+      font-size: 1rem; /* 16px */
+      padding: 0.75rem 1.5rem; /* 12px 24px */
+      margin-top: 1rem;
+    }
+  
+    .reporte-estudios__tabla th,
+    .reporte-estudios__tabla td {
+      padding: 0.75rem; /* 12px */
+      font-size: 1rem; /* 16px */
+    }
+  }
+
+    @media (min-width: 1800px) {
+    .reporte-estudios__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 4rem; /* Aumentar el padding */
+      box-shadow: none;
+    }
+  
+    .reporte-estudios__logo {
+      margin-left: 12rem; /* Aumentar el margen izquierdo */
+      margin-bottom: 0;
+    }
+  
+    .reporte-estudios__header-texts {
+      text-align: left; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-estudios__welcome-message {
+      font-size: 3rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-estudios__department-name {
+      font-size: 2rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-estudios__busqueda {
+      padding: 2.5rem; /* 40px */
+    }
+  
+    .reporte-estudios__busqueda-fila {
+      width: 48%;
+      margin-bottom: 1.5rem; /* 24px */
+    }
+  
+    .reporte-estudios__busqueda-input,
+    .reporte-estudios__busqueda-select {
+      font-size: 1.25rem; /* 20px */
+      padding: 1rem; /* 16px */
+      margin-right: 0.75rem; /* 12px */
+    }
+  
+    .reporte-estudios__pdf-button {
+      font-size: 1.25rem; /* 20px */
+      padding: 1rem 2rem; /* 16px 32px */
+      margin-top: 1.5rem;
+    }
+  
+    .reporte-estudios__tabla th,
+    .reporte-estudios__tabla td {
+      padding: 1rem; /* 16px */
+      font-size: 1.25rem; /* 20px */
     }
   }
   

@@ -214,9 +214,10 @@
   }
 
   .unidades-medicina-familiar__search {
-    max-width: none;
-    width: 50%; /* Aumentamos el ancho de la barra de búsqueda */
-    margin-bottom: 1.875rem; /* 30px */
+    width: 100%; /* Aumentamos el ancho de la barra de búsqueda */
+    margin-bottom: 2rem; /* 30px */
+    display: flex;
+    flex-direction: column;
   }
 
   .unidades-medicina-familiar__search-input,
@@ -255,6 +256,62 @@
   /* Mejor alineación de los botones en vistas grandes */
   .unidades-medicina-familiar__actions {
     justify-content: center;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1200px) */
+@media (min-width: 1200px) {
+  .unidades-medicina-familiar__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 3rem; /* Aumentar el padding */
+  }
+
+  .unidades-medicina-familiar__header-logo {
+    margin-left: 10rem; /* Aumentar el margen izquierdo */
+    margin-bottom: 0;
+  }
+
+  .unidades-medicina-familiar__header-texts {
+    text-align: left; /* Alinear el texto a la izquierda */
+  }
+
+  .unidades-medicina-familiar__welcome-message {
+    font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .unidades-medicina-familiar__department-name {
+    font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1800px) */
+@media (min-width: 1800px) {
+  .unidades-medicina-familiar__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 4rem; /* Aumentar el padding */
+  }
+
+  .unidades-medicina-familiar__header-logo {
+    margin-left: 12rem; /* Aumentar el margen izquierdo */
+    margin-bottom: 0;
+  }
+
+  .unidades-medicina-familiar__header-texts {
+    text-align: left; /* Alinear el texto a la izquierda */
+  }
+
+  .unidades-medicina-familiar__welcome-message {
+    font-size: 3rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .unidades-medicina-familiar__department-name {
+    font-size: 2rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
   }
 }
 

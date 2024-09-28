@@ -214,11 +214,9 @@
     flex-direction: row;
     align-items: center;
     padding: 1.25rem 3rem; /* Aumentar el padding */
-    margin-left: 10rem;
   }
 
   .create-medico__header-logo {
-    margin-left: 10rem; /* Aumentar el margen izquierdo */
     margin-bottom: 0;
   }
 
@@ -242,7 +240,6 @@
     flex-direction: row;
     align-items: center;
     padding: 1.25rem 4rem; /* Aumentar el padding */
-    margin-left: 10rem;
   }
 
   .create-medico__header-logo {

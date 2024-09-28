@@ -132,7 +132,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .update-medico {
-    margin-left: 30rem; /* 250px, ancho de la sidebar */
+    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
   }
 
   .update-medico__header {
@@ -189,5 +189,110 @@
 
   .update-medico__pagination {
     margin-bottom: 1.875rem; /* 30px */
+  }
+}
+
+@media (min-width: 1200px) {
+  .update-medico__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1.25rem 3rem; /* Aumentar el padding */
+  }
+
+  .update-medico__header-logo {
+    margin-bottom: 0;
+  }
+
+  .update-medico__header-texts {
+    text-align: center; /* Alinear el texto a la izquierda */
+  }
+
+  .update-medico__welcome-message {
+    font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .update-medico__department-name {
+    font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+}
+
+@media (min-width: 1800px) {
+  .update-medico__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1.25rem 4rem; /* Aumentar el padding */
+  }
+
+  .update-medico__header-logo {
+    margin-left: 12rem; /* Aumentar el margen izquierdo */
+    margin-bottom: 0;
+  }
+
+  .update-medico__header-texts {
+    text-align: left; /* Alinear el texto a la izquierda */
+  }
+
+  .update-medico__welcome-message {
+    font-size: 3rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .update-medico__department-name {
+    font-size: 2rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+}
+
+@media (max-width: 819px) {
+  .update-medico__search-container input,
+  .update-medico__search-container select {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.375rem; /* 6px */
+  }
+
+  .update-medico__pagination button {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.375rem 0.75rem; /* 6px 12px */
+  }
+}
+
+@media (max-width: 560px) {
+  .update-medico__search-container input,
+  .update-medico__search-container select {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem; /* 4px */
+  }
+
+  .update-medico__pagination button {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.25rem 0.5rem; /* 4px 8px */
+  }
+}
+
+@media (max-width: 420px) {
+  .update-medico__search-container {
+    width: 100%;
+    max-width: 20rem; /* 320px */
+  }
+
+  .update-medico__search-container input,
+  .update-medico__search-container select {
+    width: 100%;
+    max-width: 20rem; /* 320px */
+  }
+}
+
+@media (min-width: 421px) {
+  .update-medico__search-container {
+    width: 100%;
+    max-width: 25rem; /* 400px */
+  }
+
+  .update-medico__search-container input,
+  .update-medico__search-container select {
+    width: 100%;
+    max-width: 25rem; /* 400px */
   }
 }

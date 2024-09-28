@@ -135,7 +135,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .delete-usuario {
-    margin-left: 15.625rem; 
+    margin-left: 30rem; 
   }
 
   .delete-usuario__header {

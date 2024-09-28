@@ -188,7 +188,6 @@
     }
   
     .reporte-citas__busqueda {
-      flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 2rem; /* 32px */
@@ -209,6 +208,7 @@
       font-size: 1rem; /* 16px */
       padding: 0.75rem; /* 12px */
       margin-right: 0.5rem; /* 8px */
+      margin-top: 0.5rem;
     }
   
     .reporte-citas__pdf-button {

@@ -217,7 +217,7 @@ const UnidadesMedicinaFamiliar = ({ vistaInicial }) => {
       <header className="unidades-medicina-familiar__header">
         <img src={logoIMSS} alt="Logo IMSS" className="unidades-medicina-familiar__header-logo" />
         <div className="unidades-medicina-familiar__header-texts">
-          <h1 className="unidades-medicina-familiar__welcome-message">Sistema de Gestión de Unidades de Medicina Familiar</h1>
+          <h1 className="unidades-medicina-familiar__welcome-message">Sistema de Gestión de UMF</h1>
           <h2 className="unidades-medicina-familiar__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>

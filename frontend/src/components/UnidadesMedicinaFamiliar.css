@@ -274,11 +274,11 @@
   }
 
   .unidades-medicina-familiar__header-texts {
-    text-align: left; /* Alinear el texto a la izquierda */
+    text-align: center; /* Alinear el texto a la izquierda */
   }
 
   .unidades-medicina-familiar__welcome-message {
-    font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+    font-size: 2rem; /* Aumentar el tamaño de la fuente */
     margin: 0;
   }
 

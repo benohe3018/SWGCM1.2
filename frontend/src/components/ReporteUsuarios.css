@@ -150,7 +150,6 @@
   }
 
   .reporte-usuario__header {
-    flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     padding: 1rem 2rem;
@@ -162,7 +161,7 @@
   }
 
   .reporte-usuario__header-texts {
-    text-align: left;
+    text-align: center;
   }
 
   .reporte-usuario__welcome-message {
@@ -180,7 +179,8 @@
   }
 
   .reporte-usuario__busqueda {
-    max-width: none;
+    display: flex;
+    flex-direction: column;
     width: 100%;
   }
 
@@ -209,6 +209,63 @@
   .reporte-usuario__pagination-button {
     font-size: 1rem; /* 16px */
     padding: 0.625rem 1.25rem; /* 10px 20px */
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1800px) */
+/* Pantallas muy grandes (mínimo 1200px) */
+@media (min-width: 1200px) {
+  .reporte-usuario__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 3rem; /* Aumentar el padding */
+  }
+
+  .reporte-usuario__header-logo {
+    margin-left: 10rem; /* Aumentar el margen izquierdo */
+    margin-bottom: 0;
+  }
+
+  .reporte-usuario__header-texts {
+    text-align: center; /* Alinear el texto a la izquierda */
+  }
+
+  .reporte-usuario__welcome-message {
+    font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .reporte-usuario__department-name {
+    font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1800px) */
+@media (min-width: 1800px) {
+  .hospitales__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 4rem; /* Aumentar el padding */
+  }
+
+  .hospitales__header-logo {
+    margin-left: 12rem; /* Aumentar el margen izquierdo */
+    margin-bottom: 0;
+  }
+
+  .hospitales__header-texts {
+    text-align: left; /* Alinear el texto a la izquierda */
+  }
+
+  .hospitales__welcome-message {
+    font-size: 3rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .hospitales__department-name {
+    font-size: 2rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
   }
 }
 

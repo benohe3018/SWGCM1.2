@@ -137,7 +137,7 @@
     background-color: whitesmoke;
     font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #0C231E;
-    margin-left: 25rem;
+    margin-left: 30rem;
   }
 
   .create-medico__header {
@@ -147,14 +147,25 @@
     padding: 1.25rem 2rem; /* 20px 32px */
   }
 
+  .create-medico__header-texts {
+    text-align: left;
+  }
+
+  .create-medico__welcome-message {
+    font-size: 2rem; /* 32px */
+    margin: 0;
+  }
+  .create-medico__department-name {
+    font-size: 1.25rem; /* 20px */
+    margin: 0;
+  }
+
   .create-medico__header-logo {
     margin-right: 1.25rem; /* 20px */
     margin-bottom: 0;
   }
 
-  .create-medico__header-texts {
-    text-align: left;
-  }
+  
 
   .main-layout {
     display: flex;

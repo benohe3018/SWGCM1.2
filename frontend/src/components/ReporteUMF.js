@@ -66,7 +66,7 @@ const ReporteUMF = () => {
             <header className="reporte-umf__header">
                 <img src={logoIMSS} alt="Logo IMSS" className="reporte-umf__logo" />
                 <div className="reporte-umf__header-texts">
-                    <h1 className="reporte-umf__welcome-message">Reporte de Unidades de Medicina Familiar</h1>
+                    <h1 className="reporte-umf__welcome-message">Sistema de Gestión de Reportes Médicos</h1>
                     <h2 className="reporte-umf__department-name">Generar Informe de Unidades de Medicina Familiar Registrados</h2>
                 </div>
             </header>

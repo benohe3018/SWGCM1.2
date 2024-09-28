@@ -132,6 +132,7 @@
       align-items: center;
       justify-content: flex-start;
       padding: 1rem 2rem;
+      box-shadow: none;
     }
   
     .reporte-especialidades__logo {
@@ -154,10 +155,10 @@
     }
   
     .reporte-especialidades__busqueda {
-      flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 2rem; /* 32px */
+      box-shadow: none;
     }
   
     .reporte-especialidades__busqueda-fila {
@@ -191,9 +192,11 @@
       flex-direction: row;
       align-items: center;
       padding: 1rem 3rem; /* Aumentar el padding */
+      box-shadow: none;
     }
   
     .reporte-especialidades__logo {
+      margin-right: 1.25rem; /* 20px */
       margin-bottom: 0;
     }
   

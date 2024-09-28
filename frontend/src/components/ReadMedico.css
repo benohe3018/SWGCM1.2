@@ -121,7 +121,7 @@
 /* Pantallas grandes (mínimo 820px) */
 @media (min-width: 820px) {
   .read-medico {
-    margin-left: 15.625rem; /* 250px, ancho de la sidebar */
+    margin-left: 30rem; /* 250px, ancho de la sidebar */
 
   }
 

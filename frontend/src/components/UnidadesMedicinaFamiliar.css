@@ -192,21 +192,21 @@
 
   .unidades-medicina-familiar__header-logo {
     margin-bottom: 0;
-    margin-left: 0; /* Eliminamos margen izquierdo para mejor alineación */
     margin-right: 1.25rem; /* 20px */
   }
 
   .unidades-medicina-familiar__header-texts {
-    text-align: left;
-    flex-grow: 1;
+    text-align: center;
   }
 
   .unidades-medicina-familiar__welcome-message {
-    font-size: 1.5rem; /* 32px */
+    font-size: 2rem; /* 32px */
+    margin: 0;
   }
 
   .unidades-medicina-familiar__department-name {
     font-size: 1.25rem; /* 20px */
+    margin: 0;
   }
 
   .unidades-medicina-familiar__content {
@@ -215,15 +215,16 @@
 
   .unidades-medicina-familiar__search {
     width: 100%; /* Aumentamos el ancho de la barra de búsqueda */
-    margin-bottom: 2rem; /* 30px */
     display: flex;
-    flex-direction: column;
   }
 
   .unidades-medicina-familiar__search-input,
   .unidades-medicina-familiar__search-select {
-    font-size: 1rem; /* 16px */
-    padding: 0.5rem; /* 8px */
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid #ddd;
+    border-radius: 0.3125rem;
+    height: fit-content;
   }
 
   .unidades-medicina-familiar__table th,
@@ -277,7 +278,7 @@
   }
 
   .unidades-medicina-familiar__welcome-message {
-    font-size: 2.0rem; /* Aumentar el tamaño de la fuente */
+    font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
     margin: 0;
   }
 

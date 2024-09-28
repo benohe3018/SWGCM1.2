@@ -165,6 +165,7 @@
       align-items: center;
       justify-content: flex-start;
       padding: 1rem 2rem;
+      box-shadow: none;
     }
   
     .reporte-citas__header-logo {
@@ -191,6 +192,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 2rem; /* 32px */
+      box-shadow:none;
     }
   
     .reporte-citas__fila {
@@ -237,6 +239,7 @@
       align-items: center;
       padding: 1rem 3rem; /* Aumentar el padding */
       margin-left: 10rem;
+      box-shadow:none;
     }
   
     .reporte-citas__header-logo {
@@ -257,6 +260,7 @@
       font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
       margin: 0;
     }
+
   }
 
     @media (min-width: 1800px) {
@@ -285,6 +289,11 @@
       font-size: 2rem; /* Aumentar el tamaño de la fuente */
       margin: 0;
     }
+
+    .reporte-citas__busqueda {
+      box-shadow:none;
+    }
+
   }
   
   /* Pantallas medianas (máximo 819px) */

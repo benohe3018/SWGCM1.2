@@ -238,6 +238,18 @@
   }
 }
 
+@media (max-width: 895px) {
+  .read-usuario__table th,
+  .read-usuario__table td {
+    padding: 0.25rem; /* 4px */
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .read-usuario__table-container {
+    overflow-x: auto; /* Asegura que la tabla sea desplazable horizontalmente */
+  }
+}
+
 @media (max-width: 819px) {
   .read-usuario__search-container input,
   .read-usuario__search-container select {

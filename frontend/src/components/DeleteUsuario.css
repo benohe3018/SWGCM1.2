@@ -252,6 +252,18 @@
   }
 }
 
+@media (max-width: 895px) {
+  .delete-usuario__table th,
+  .delete-usuario__table td {
+    padding: 0.25rem; /* 4px */
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .delete-usuario__table-container {
+    overflow-x: auto; /* Asegura que la tabla sea desplazable horizontalmente */
+  }
+}
+
 @media (max-width: 819px) {
   .delete-usuario__search-container input,
   .delete-usuario__search-container select {

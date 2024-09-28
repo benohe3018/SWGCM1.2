@@ -220,6 +220,18 @@
   }
 }
 
+@media (max-width: 895px) {
+  .update-usuario__table th,
+  .update-usuario__table td {
+    padding: 0.25rem; /* 4px */
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .update-usuario__table-container {
+    overflow-x: auto; /* Asegura que la tabla sea desplazable horizontalmente */
+  }
+}
+
 @media (min-width: 1800px) {
   .update-usuario__header {
     flex-direction: row;

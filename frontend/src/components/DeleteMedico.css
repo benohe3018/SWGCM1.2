@@ -253,6 +253,18 @@
   }
 }
 
+@media (max-width: 895px) {
+  .delete-medico__table th,
+  .delete-medico__table td {
+    padding: 0.25rem; /* 4px */
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .delete-medico__table-container {
+    overflow-x: auto; /* Asegura que la tabla sea desplazable horizontalmente */
+  }
+}
+
 @media (max-width: 819px) {
   .delete-medico__search-container input,
   .delete-medico__search-container select {

@@ -215,6 +215,13 @@
    flex-direction: row;
    margin: bottom 2rem;;
   }
+  .especialidades-medicas__search-input,
+  .especialidades-medicas__search-select{
+    font-size: 1rem; /* 16px */
+      padding: 0.75rem; /* 12px */
+      margin-right: 0.5rem; /* 8px */
+      margin: 0;
+   }
 
   .especialidades-medicas__table th,
   .especialidades-medicas__table td {

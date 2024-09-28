@@ -229,12 +229,13 @@
 }
 
 /* Pantallas muy grandes (mínimo 1800px) */
-@media (min-width: 1800px) {
+@media (min-width: 1900px) {
   .hospitales__header {
     flex-direction: row;
     align-items: center;
     padding: 1rem 4rem; /* Aumentar el padding */
     margin-left: 30rem;
+    
   }
 
   .hospitales__header-logo {

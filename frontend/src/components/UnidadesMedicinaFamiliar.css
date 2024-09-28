@@ -218,7 +218,6 @@
     max-width: none;
     width: 40%;
     display: flex;
-    margin: 0;
   }
 
   .unidades-medicina-familiar__search-input,
@@ -288,6 +287,11 @@
   .unidades-medicina-familiar__department-name {
     font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
     margin: 0;
+  }
+
+  .unidades-medicina-familiar__search-input,
+  .unidades-medicina-familiar__search-select {
+      margin-right: 0.5rem; /* 8px */
   }
 }
 

@@ -198,7 +198,6 @@
   }
 }
 
-/* Pantallas muy grandes (mínimo 1800px) */
 /* Pantallas muy grandes (mínimo 1200px) */
 @media (min-width: 1200px) {
   .reporte-medico__header {
@@ -234,7 +233,7 @@
     flex-direction: row;
     align-items: center;
     padding: 1rem 4rem; /* Aumentar el padding */
-    
+    margin-left: 10rem;
   }
 
   .hospitales__header-logo {

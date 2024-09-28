@@ -270,6 +270,12 @@
     font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
     margin: 0;
   }
+
+  .especialidades-medicas__search-input,
+  .especialidades-medicas__search-select{
+      margin-right: 0.5rem; /* 8px */
+   }
+
 }
 
 /* Pantallas muy grandes (mínimo 1800px) */

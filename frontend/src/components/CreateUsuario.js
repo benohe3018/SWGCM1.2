@@ -215,7 +215,7 @@ const CreateUsuario = () => {
             </div>
             <div className="password-container-form-group">
               <label htmlFor="confirmContraseña">Confirmar Contraseña:</label>
-              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Confirmar" />
+              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Mayusculas, minusculas y numeros" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>

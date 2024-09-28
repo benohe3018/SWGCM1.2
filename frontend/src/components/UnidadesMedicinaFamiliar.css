@@ -218,6 +218,7 @@
     max-width: none;
     width: 40%;
     display: flex;
+    margin: 0;
   }
 
   .unidades-medicina-familiar__search-input,
@@ -225,6 +226,7 @@
     font-size: 1rem; /* 16px */
       padding: 0.75rem; /* 12px */
       margin-right: 0.5rem; /* 8px */
+      margin: 0;
   }
 
   .unidades-medicina-familiar__table th,

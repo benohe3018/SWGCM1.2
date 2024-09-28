@@ -239,6 +239,18 @@
   }
 }
 
+@media (max-width: 895px) {
+  .read-medico__table th,
+  .read-medico__table td {
+    padding: 0.25rem; /* 4px */
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .read-medico__table-container {
+    overflow-x: auto; /* Asegura que la tabla sea desplazable horizontalmente */
+  }
+}
+
 @media (max-width: 819px) {
   .read-medico__search-container input,
   .read-medico__search-container select {

@@ -73,7 +73,7 @@ const ReporteMedicos = () => {
       <header className="reporte-medico__header">
         <img src={logoIMSS} alt="Logo IMSS" className="reporte-medico__header-logo" />
         <div className="reporte-medico__header-texts">
-          <h1 className="reporte-medico__welcome-message">Reporte de Médicos</h1>
+          <h1 className="reporte-medico__welcome-message">Sistema de Gestión de Médicos</h1>
           <h2 className="reporte-medico__department-name">Generar informe de médicos registrados</h2>
         </div>
       </header>

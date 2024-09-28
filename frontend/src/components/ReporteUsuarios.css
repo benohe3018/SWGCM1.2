@@ -223,6 +223,7 @@
     flex-direction: row;
     align-items: center;
     padding: 1rem 3rem; /* Aumentar el padding */
+    margin-left: 20rem;
   }
 
   .reporte-usuario__header-logo {

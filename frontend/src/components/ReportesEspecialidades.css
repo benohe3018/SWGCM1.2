@@ -129,7 +129,6 @@
     }
   
     .reporte-especialidades__header {
-      flex-direction: row;
       align-items: center;
       justify-content: flex-start;
       padding: 1rem 2rem;
@@ -184,6 +183,58 @@
     .reporte-especialidades__tabla td {
       padding: 0.75rem; /* 12px */
       font-size: 1rem; /* 16px */
+    }
+  }
+
+    @media (min-width: 1200px) {
+    .reporte-especialidades__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 3rem; /* Aumentar el padding */
+    }
+  
+    .reporte-especialidades__logo {
+      margin-bottom: 0;
+    }
+  
+    .reporte-especialidades__header-texts {
+      text-align: center; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-especialidades__welcome-message {
+      font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-especialidades__department-name {
+      font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  }
+
+    @media (min-width: 1800px) {
+    .reporte-especialidades__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 4rem; /* Aumentar el padding */
+    }
+  
+    .reporte-especialidades__logo {
+      margin-bottom: 0;
+    }
+  
+    .reporte-especialidades__header-texts {
+      text-align: left; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-especialidades__welcome-message {
+      font-size: 3rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-especialidades__department-name {
+      font-size: 2rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
     }
   }
   

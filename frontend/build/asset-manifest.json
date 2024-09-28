@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6424d12f.css",
-    "main.js": "/static/js/main.1f0da2fd.js",
+    "main.css": "/static/css/main.eb0eb74a.css",
+    "main.js": "/static/js/main.5bbe649a.js",
     "static/js/239.dfdb0d71.chunk.js": "/static/js/239.dfdb0d71.chunk.js",
     "static/js/213.1276bd44.chunk.js": "/static/js/213.1276bd44.chunk.js",
     "static/js/732.e07811ab.chunk.js": "/static/js/732.e07811ab.chunk.js",
@@ -9,15 +9,15 @@
     "static/media/LogoIMSS.jpg": "/static/media/LogoIMSS.288a0e2c08e364e4c496.jpg",
     "static/media/MRMachine.jpg": "/static/media/MRMachine.c76547b3d57e82b89a66.jpg",
     "index.html": "/index.html",
-    "main.6424d12f.css.map": "/static/css/main.6424d12f.css.map",
-    "main.1f0da2fd.js.map": "/static/js/main.1f0da2fd.js.map",
+    "main.eb0eb74a.css.map": "/static/css/main.eb0eb74a.css.map",
+    "main.5bbe649a.js.map": "/static/js/main.5bbe649a.js.map",
     "239.dfdb0d71.chunk.js.map": "/static/js/239.dfdb0d71.chunk.js.map",
     "213.1276bd44.chunk.js.map": "/static/js/213.1276bd44.chunk.js.map",
     "732.e07811ab.chunk.js.map": "/static/js/732.e07811ab.chunk.js.map",
     "453.d855a71b.chunk.js.map": "/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6424d12f.css",
-    "static/js/main.1f0da2fd.js"
+    "static/css/main.eb0eb74a.css",
+    "static/js/main.5bbe649a.js"
   ]
 }

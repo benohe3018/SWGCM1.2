@@ -135,6 +135,7 @@
   
     .reporte-hospitales__header-texts {
       text-align: left;
+      box-shadow: none;
     }
   
     .reporte-hospitales__welcome-message {
@@ -148,10 +149,10 @@
     }
   
     .reporte-hospitales__busqueda {
-      flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 2rem; /* 32px */
+      box-shadow: none;
     }
   
     .reporte-hospitales__busqueda-input,
@@ -171,6 +172,62 @@
     .reporte-hospitales__tabla td {
       padding: 0.75rem; /* 12px */
       font-size: 1rem; /* 16px */
+    }
+  }
+
+    @media (min-width: 1200px) {
+    .reporte-hospitales__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 3rem; /* Aumentar el padding */
+      box-shadow: none;
+    }
+  
+    .reporte-hospitales__logo {
+      margin-bottom: 0;
+      margin-right: 1.25rem; /* Aumentar el margen derecho */
+    }
+  
+    .reporte-hospitales__header-texts {
+      text-align: center; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-hospitales__welcome-message {
+      font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-hospitales__department-name {
+      font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  }
+
+    @media (min-width: 1800px) {
+    .reporte-hospitales__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 4rem; /* Aumentar el padding */
+      margin-left: 10rem;
+    }
+  
+    .reporte-hospitales__logo {
+      margin-left: 12rem; /* Aumentar el margen izquierdo */
+      margin-bottom: 0;
+    }
+  
+    .reporte-hospitales__header-texts {
+      text-align: left; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-hospitales__welcome-message {
+      font-size: 3rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-hospitales__department-name {
+      font-size: 2rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
     }
   }
   

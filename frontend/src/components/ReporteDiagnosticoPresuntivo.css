@@ -127,6 +127,7 @@
       align-items: center;
       justify-content: flex-start;
       padding: 1rem 2rem;
+      box-shadow: none;
     }
   
     .reporte-diagnostico-presuntivo__logo {
@@ -149,10 +150,10 @@
     }
   
     .reporte-diagnostico-presuntivo__busqueda {
-      flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 2rem; /* 32px */
+      box-shadow: none;
     }
   
     .reporte-diagnostico-presuntivo__busqueda-input,
@@ -172,6 +173,60 @@
     .reporte-diagnostico-presuntivo__tabla td {
       padding: 0.75rem; /* 12px */
       font-size: 1rem; /* 16px */
+    }
+  }
+
+    @media (min-width: 1200px) {
+    .reporte-diagnostico-presuntivo__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 3rem; /* Aumentar el padding */
+    }
+  
+    .reporte-diagnostico-presuntivo__logo {
+      margin-bottom: 0;
+      margin-right: 1.25rem;
+    }
+  
+    .reporte-diagnostico-presuntivo__header-texts {
+      text-align: center; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-diagnostico-presuntivo__welcome-message {
+      font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-diagnostico-presuntivo__department-name {
+      font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  }
+
+    @media (min-width: 1800px) {
+    .reporte-diagnostico-presuntivo__header {
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem 4rem; /* Aumentar el padding */
+    }
+  
+    .reporte-diagnostico-presuntivo__logo {
+      margin-left: 12rem; /* Aumentar el margen izquierdo */
+      margin-bottom: 0;
+    }
+  
+    .reporte-diagnostico-presuntivo__header-texts {
+      text-align: left; /* Alinear el texto a la izquierda */
+    }
+  
+    .reporte-diagnostico-presuntivo__welcome-message {
+      font-size: 3rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
+    }
+  
+    .reporte-diagnostico-presuntivo__department-name {
+      font-size: 2rem; /* Aumentar el tamaño de la fuente */
+      margin: 0;
     }
   }
   

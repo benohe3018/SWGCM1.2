@@ -66,7 +66,7 @@ const ReporteEstudios = () => {
             <header className="reporte-estudios__header">
                 <img src={logoIMSS} alt="Logo IMSS" className="reporte-estudios__logo" />
                 <div className="reporte-estudios__header-texts">
-                    <h1 className="reporte-estudios__welcome-message">RSistema de Gestión de Reportes Médicos</h1>
+                    <h1 className="reporte-estudios__welcome-message">Sistema de Gestión de Reportes Médicos</h1>
                     <h2 className="reporte-estudios__department-name">Generar Informe de Estudios Registrados</h2>
                 </div>
             </header>

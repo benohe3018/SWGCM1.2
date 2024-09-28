@@ -180,7 +180,7 @@
   }
 
   .diagnosticos-presuntivos__texts {
-    text-align: left;
+    text-align: center;
   }
 
   .diagnosticos-presuntivos__title {
@@ -198,8 +198,9 @@
   }
 
   .diagnosticos-presuntivos__busqueda {
-    max-width: none;
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .diagnosticos-presuntivos__tabla th,
@@ -220,6 +221,62 @@
 
   .diagnosticos-presuntivos__acciones {
     justify-content: center;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1200px) */
+@media (min-width: 1200px) {
+  .diagnosticos-presuntivos__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 3rem; /* Aumentar el padding */
+  }
+
+  .diagnosticos-presuntivos__logo {
+    margin-left: 10rem; /* Aumentar el margen izquierdo */
+    margin-bottom: 0;
+  }
+
+  .diagnosticos-presuntivos__texts {
+    text-align: center; /* Alinear el texto a la izquierda */
+  }
+
+  .diagnosticos-presuntivos__title {
+    font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .diagnosticos-presuntivos__subtitle {
+    font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1800px) */
+@media (min-width: 1800px) {
+  .unidades-medicina-familiar__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 4rem; /* Aumentar el padding */
+  }
+
+  .unidades-medicina-familiar__header-logo {
+    margin-left: 12rem; /* Aumentar el margen izquierdo */
+    margin-bottom: 0;
+  }
+
+  .unidades-medicina-familiar__header-texts {
+    text-align: left; /* Alinear el texto a la izquierda */
+  }
+
+  .unidades-medicina-familiar__welcome-message {
+    font-size: 3rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
+  }
+
+  .unidades-medicina-familiar__department-name {
+    font-size: 2rem; /* Aumentar el tamaño de la fuente */
+    margin: 0;
   }
 }
 

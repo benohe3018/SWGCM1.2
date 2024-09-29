@@ -57,33 +57,40 @@ const CreateUsuario = () => {
     return true;
   };
 
-  const isValidPassword = (password) => {
-    // Verifica la longitud de la contraseña
+  const [passwordValidationMessage, setPasswordValidationMessage] = useState('');
+  const [passwordMatchMessage, setPasswordMatchMessage] = useState('');
+
+  const validatePassword = (password) => {
+    let message = '';
     if (password.length < 8 || password.length > 50) {
-      return false;
+      message = 'La contraseña debe tener entre 8 y 50 caracteres.';
+    } else if (/^\d+$/.test(password)) {
+      message = 'La contraseña no puede ser solo números.';
+    } else if (/^[^a-zA-Z0-9]+$/.test(password)) {
+      message = 'La contraseña no puede contener solo caracteres especiales o espacios.';
+    } else if (!/[a-zA-Z]/.test(password)) {
+      message = 'La contraseña debe contener al menos una letra.';
+    } else if (!/\d/.test(password)) {
+      message = 'La contraseña debe contener al menos un número.';
     }
+    setPasswordValidationMessage(message);
+    return message === '';
+  };
   
-    // Verifica que la contraseña no sea solo números
-    if (/^\d+$/.test(password)) {
-      return false;
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setContraseña(newPassword);
+    validatePassword(newPassword);
+  };
+  
+  const handleConfirmPasswordChange = (e) => {
+    const confirmPassword = e.target.value;
+    setConfirmContraseña(confirmPassword);
+    if (contraseña !== confirmPassword) {
+      setPasswordMatchMessage('Las contraseñas no coinciden.');
+    } else {
+      setPasswordMatchMessage('');
     }
-  
-    // Verifica que la contraseña no contenga solo caracteres especiales o espacios
-    if (/^[^a-zA-Z0-9]+$/.test(password)) {
-      return false;
-    }
-  
-    // Verifica que la contraseña contenga al menos una letra
-    if (!/[a-zA-Z]/.test(password)) {
-      return false;
-    }
-  
-    // Verifica que la contraseña contenga al menos un número
-    if (!/\d/.test(password)) {
-      return false;
-    }
-  
-    return true;
   };
 
   const handleSubmit = async (event) => {
@@ -100,7 +107,7 @@ const CreateUsuario = () => {
       alert('Por favor, introduce un nombre de usuario válido deben ser caracteres alfanumericos (4-20 caracteres).');
       return;
     }
-    if (!isValidPassword(contraseña)) {
+    if (!validatePassword(contraseña)) {
       alert('Por favor, introduce una contraseña válida (8-50 caracteres).');
       return;
     }
@@ -208,17 +215,19 @@ const CreateUsuario = () => {
             </div>
             <div className="password-container-form-group">
               <label htmlFor="contraseña">Contraseña:</label>
-              <input type={showPassword ? "text" : "password"} id="contraseña" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Mayusculas, minusculas y numeros" />
+              <input type={showPassword ? "text" : "password"} id="contraseña" value={contraseña} onChange={handlePasswordChange} placeholder="Mayusculas, minusculas y numeros" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+              {passwordValidationMessage && <p className="validation-message">{passwordValidationMessage}</p>}
             </div>
             <div className="password-container-form-group">
               <label htmlFor="confirmContraseña">Confirmar Contraseña:</label>
-              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Mayusculas, minusculas y numeros" />
+              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={handleConfirmPasswordChange} placeholder="Mayusculas, minusculas y numeros" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+              {passwordMatchMessage && <p className="validation-message">{passwordMatchMessage}</p>}
             </div>
             <div className="form-group-create-usuario">
               <label htmlFor="nombreReal">Nombre Real:</label>
@@ -240,7 +249,7 @@ const CreateUsuario = () => {
               <label htmlFor="rol">Rol:</label>
               <select id="rol" value={rol} onChange={e => setRol(e.target.value)}>
                 <option value="">Seleccione un rol</option>
-                {['root', 'Admin', 'Usuario_administrador', 'Usuario_de_Campo',].map(rol => (
+                {roles.map(rol => (
                   <option key={rol} value={rol}>{rol}</option>
                 ))}
               </select>

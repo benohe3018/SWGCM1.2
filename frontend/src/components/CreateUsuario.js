@@ -63,7 +63,7 @@ const CreateUsuario = () => {
   const validatePassword = (password) => {
     let message = '';
     if (password.length < 8 || password.length > 50) {
-      message = 'La contraseña debe tener entre 8 y 50 caracteres.';
+      message = 'La contraseña debe tener entre 8 y 12 caracteres alfanumericos.';
     } else if (/^\d+$/.test(password)) {
       message = 'La contraseña no puede ser solo números.';
     } else if (/^[^a-zA-Z0-9]+$/.test(password)) {

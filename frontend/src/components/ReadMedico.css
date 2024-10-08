@@ -263,6 +263,17 @@
     font-size: 0.75rem; /* 12px */
     padding: 0.375rem 0.75rem; /* 6px 12px */
   }
+
+  .read-medico__table th,
+  .read-medico__table td {
+    padding: 0.2rem; /* 4px */
+    font-size: 0.5rem; /* 12px */
+  }
+
+  .read-medico__table-container {
+    overflow-x: auto; /* Asegura que la tabla sea desplazable horizontalmente */
+  }
+
 }
 
 @media (max-width: 560px) {

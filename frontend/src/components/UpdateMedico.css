@@ -94,9 +94,9 @@
 .update-medico__table th,
 .update-medico__table td {
   border: 0.10rem solid #ddd;
-  padding: 0.10rem; /* 8px */
+  padding: 0.25rem; /* 8px */
   text-align: left;
-  font-size: 0.25rem; /* 14px */
+  font-size: 0.5rem; /* 14px */
 }
 
 .update-medico__table th {
@@ -269,6 +269,18 @@
     font-size: 0.75rem; /* 12px */
     padding: 0.375rem 0.75rem; /* 6px 12px */
   }
+
+  .update-medico__table th,
+  .update-medico__table td {
+    padding: 0.2rem; /* 12px */
+    font-size: 0.5rem; /* 16px */
+  }
+
+  .update-medico__table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
 }
 
 @media (max-width: 560px) {

@@ -83,12 +83,13 @@
 
 .read-usuario__table {
   width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
 }
 
 .read-usuario__table th,
 .read-usuario__table td {
-  border: 0.25rem solid #ddd;
+  border: 0.10rem solid #ddd;
   padding: 0.25rem; /* 8px */
   text-align: left;
   font-size: 0.5rem; /* 14px */

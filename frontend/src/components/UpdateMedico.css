@@ -169,7 +169,7 @@
   .update-medico__search-container {
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     max-width: none;
     width: 100%;
     margin-bottom: 1.875rem; /* 30px */

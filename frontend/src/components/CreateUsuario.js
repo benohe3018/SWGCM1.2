@@ -208,14 +208,14 @@ const CreateUsuario = () => {
             </div>
             <div className="password-container-form-group">
               <label htmlFor="contraseña">Contraseña:</label>
-              <input type={showPassword ? "text" : "password"} id="contraseña" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Mayusculas, minusculas y numeros" />
+              <input type={showPassword ? "text" : "password"} id="contraseña" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="8-12 caracteres Alfanuméricos" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             <div className="password-container-form-group">
               <label htmlFor="confirmContraseña">Confirmar Contraseña:</label>
-              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="Mayusculas, minusculas y numeros" />
+              <input type={showPassword ? "text" : "password"} id="confirmContraseña" value={confirmContraseña} onChange={e => setConfirmContraseña(e.target.value)} placeholder="8-12 caracteres Alfanuméricos" />
               <button type="button" onClick={toggleShowPassword} className="toggle-show-password">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>

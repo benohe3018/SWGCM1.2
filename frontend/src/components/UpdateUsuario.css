@@ -222,20 +222,10 @@
     margin: 0;
   }
   .update-usuario__search-container {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    max-width: none;
-    width: 100%;
-    margin-bottom: 1.875rem; /* 30px */
+    margin-left: 25.00rem;
   }
 
-  .update-usuario__search-container input,
-  .update-usuario__search-container select {
-    margin-right: 1.25rem; /* 20px */
-    margin-bottom: 0;
-    width: auto;
-  }
+  
 }
 
 @media (max-width: 895px) {

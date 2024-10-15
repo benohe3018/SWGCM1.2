@@ -193,7 +193,7 @@ const CreateUsuario = () => {
       <header className="create-usuario-header">
         <img src={logoIMSS} alt="Logo IMSS" className="header-logo" />
         <div className="header-texts">
-          <h1 className="welcome-message-create-usuario">Módulo de captura de usuarios</h1>
+          <h1 className="welcome-message-create-usuario">Bienvenido al Módulo de Gestión de Usuarios</h1>
           <h2 className="department-name-create-usuario">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>

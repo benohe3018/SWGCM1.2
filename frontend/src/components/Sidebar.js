@@ -105,11 +105,11 @@ const Sidebar = () => {
             Cambiar Sesión
           </button>
         </li>
-        <li>
+        {/*<li>
           <button onClick={handleExitSystem} className="sidebar-button">
             Cerrar Página
           </button>
-        </li>
+        </li>*/}
       </ul>
       {user && (
         <div className="active-user">

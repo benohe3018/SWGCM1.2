@@ -115,7 +115,7 @@ const CreateMedico = () => {
       <header className="create-medico__header">
         <img src={logoIMSS} alt="Logo IMSS" className="create-medico__header-logo" />
         <div className="create-medico__header-texts">
-          <h1 className="create-medico__welcome-message">Bienvenido al Módulo de Gestión de Médicos</h1>
+          <h1 className="create-medico__welcome-message">Sistema de Gestión de Médicos</h1>
           <h2 className="create-medico__department-name">Departamento de Resonancia Magnética - HGR #46</h2>
         </div>
       </header>

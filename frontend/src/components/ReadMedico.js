@@ -55,7 +55,7 @@ const ReadMedico = () => {
       <header className="read-medico__header">
         <img src={logoIMSS} alt="Logo IMSS" className="read-medico__header-logo" />
         <div className="read-medico__header-texts">
-          <h1 className="read-medico__welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h1 className="read-medico__welcome-message">Sistema de Gestión de Médicos</h1>
           <h2 className="read-medico__department-name">Médicos Registrados en la base de datos</h2>
         </div>
       </header>

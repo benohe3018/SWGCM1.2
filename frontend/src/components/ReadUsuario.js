@@ -56,7 +56,7 @@ const ReadUsuario = () => {
       <header className="read-usuario__header">
         <img src={logoIMSS} alt="Logo IMSS" className="read-usuario__header-logo" />
         <div className="read-usuario__header-texts">
-          <h1 className="read-usuario__welcome-message">Bienvenido al Módulo de gestión de Usuarios</h1>
+          <h1 className="read-usuario__welcome-message">Sistema de Gestión de Usuarios</h1>
           <h2 className="read-usuario__department-name">Usuarios Registrados en la base de datos</h2>
         </div>
       </header>

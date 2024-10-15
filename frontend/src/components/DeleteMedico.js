@@ -63,7 +63,7 @@ const DeleteMedico = () => {
       <header className="delete-medico__header">
         <img src={logoIMSS} alt="Logo IMSS" className="delete-medico__header-logo" />
         <div className="delete-medico__header-texts">
-          <h1 className="delete-medico__welcome-message">Bienvenido al Módulo de gestión de Médicos</h1>
+          <h1 className="delete-medico__welcome-message">Sistema de Gestión de Médicos</h1>
           <h2 className="delete-medico__department-name">Borrar Registros de Médicos</h2>
         </div>
       </header>

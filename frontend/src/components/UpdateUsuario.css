@@ -196,14 +196,12 @@
 }
 
 @media (min-width: 1200px) {
-  .update-usuario {
-    margin-left: 15.625rem; 
-  }
-
+  
   .update-usuario__header {
     flex-direction: row;
     align-items: center;
     padding: 1.25rem 3rem; /* Aumentar el padding */
+    margin-left: 15.00rem;
   }
 
   .update-usuario__header-logo {

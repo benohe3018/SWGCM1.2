@@ -191,6 +191,7 @@
     flex-direction: row;
     align-items: center;
     padding: 1.25rem 3rem; /* Aumentar el padding */
+    margin-left: 15.00rem;
   }
 
   .read-usuario__header-logo {
@@ -209,6 +210,10 @@
   .read-usuario__department-name {
     font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
     margin: 0;
+  }
+
+  .update-usuario__search-container {
+    margin-left: 25.00rem;
   }
 }
 

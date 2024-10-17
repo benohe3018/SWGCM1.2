@@ -139,7 +139,7 @@ const UpdateUsuario = () => {
       <header className="update-usuario__header">
         <img src={logoIMSS} alt="Logo IMSS" className="update-usuario__header-logo" />
         <div className="update-usuario__header-texts">
-          <h1 className="update-usuario__welcome-message">Bienvenido al Módulo de actualización de Usuarios</h1>
+          <h1 className="update-usuario__welcome-message">Sistema de Gestión de Usuarios</h1>
           <h2 className="update-usuario__department-name">Actualizar Registros de Usuarios</h2>
         </div>
       </header>

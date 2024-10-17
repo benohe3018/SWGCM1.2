@@ -196,6 +196,10 @@
 }
 
 @media (min-width: 1200px) {
+
+  .update-usuario {
+    margin-left: 15.625rem; 
+  }
   
   .update-usuario__header {
     flex-direction: row;
@@ -221,9 +225,7 @@
     font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
     margin: 0;
   }
-  .update-usuario__search-container {
-    margin-left: 25.00rem;
-  }
+  
 
 }
 

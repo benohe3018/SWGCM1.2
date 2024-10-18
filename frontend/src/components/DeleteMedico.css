@@ -233,6 +233,7 @@
     flex-direction: row;
     align-items: center;
     padding: 1.25rem 4rem; /* Aumentar el padding */
+    margin-left: 0px;
   }
 
   .delete-medico__header-logo {

@@ -3,6 +3,6 @@
 __pycahe__/
 instance/
 venv/
-.env
+../env/
 .venv/
 

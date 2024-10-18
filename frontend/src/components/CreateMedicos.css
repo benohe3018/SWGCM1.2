@@ -237,6 +237,17 @@
 }
 
 @media (min-width: 1800px) {
+
+  .create-medico {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: whitesmoke;
+    font-family: 'Montserrat', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #0C231E;
+    margin-left: 15.625rem;
+  }
+
   .create-medico__header {
     flex-direction: row;
     align-items: center;

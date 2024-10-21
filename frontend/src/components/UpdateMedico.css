@@ -181,6 +181,9 @@
     margin-bottom: 0;
     width: auto;
   }
+  .update-medico__table-container{
+    width: 100%;
+  }
 
   .update-medico__table th,
   .update-medico__table td {

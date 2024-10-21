@@ -23,6 +23,13 @@ def create_paciente_prueba():
 
     try:
         fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
+
+        # Validar si ya existe una cita en la misma fecha y hora
+        existing_cita = PacientePrueba.query.filter_by(fecha_hora_estudio=fecha_hora_estudio).first()
+        if existing_cita:
+            logging.error("Ya existe una cita en la misma fecha y hora: %s", fecha_hora_estudio)
+            return jsonify({"error": "Ya existe una cita en la misma día y hora, modifique el horario/día por favor"}), 400
+
         encrypted_nss = encrypt_data(data['nss'], key)
         encrypted_nombre_paciente = encrypt_data(data['nombre_paciente'], key)
         encrypted_apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)

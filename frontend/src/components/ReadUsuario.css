@@ -184,6 +184,8 @@
 
   .read-usuario__pagination {
     margin-top: 1.875rem; /* 30px */
+    display: flex;
+    justify-content: center;
   }
 }
 @media (min-width: 1200px) {

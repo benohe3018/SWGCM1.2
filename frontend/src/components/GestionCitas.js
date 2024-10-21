@@ -107,10 +107,12 @@ const GestionCitas = () => {
         } else {
             setError(result.error);
             setMensaje(null);
+            setVista('crear'); // Mantener la vista en 'crear' incluso en caso de error
         }
     } catch (error) {
         setError('Error al crear el paciente');
         setMensaje(null);
+        setVista('crear'); // Mantener la vista en 'crear' incluso en caso de error
     }
 };
 

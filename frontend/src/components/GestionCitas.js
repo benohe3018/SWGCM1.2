@@ -88,15 +88,31 @@ const GestionCitas = () => {
 
   const handleCrearPaciente = async (datosPaciente) => {
     try {
-      await createPacientePrueba(datosPaciente);
-      await cargarPacientesPrueba();
-      setVista('ver');
-      setMensaje('La cita se ha creado exitosamente.');
-      setTimeout(() => setMensaje(null), 3000);
+        const response = await fetch('/api/pacientes_prueba', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datosPaciente),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            setMensaje(result.message);
+            setError(null);
+            // Resetear el formulario
+            setPacienteSeleccionado(null);
+            setVista('crear'); // Mantener la vista en 'crear'
+        } else {
+            setError(result.error);
+            setMensaje(null);
+        }
     } catch (error) {
-      setError("No se pudo crear la cita. Por favor, intente de nuevo.");
+        setError('Error al crear el paciente');
+        setMensaje(null);
     }
-  };
+};
 
   const handleEditarPaciente = async (pacienteEditado) => {
     try {
@@ -224,7 +240,8 @@ const GestionCitas = () => {
         </select>
       </div>
     )}
-
+        {mensaje && <div className="gestion-citas__message-confirmation">{mensaje}</div>}
+        {error && <div className="gestion-citas__message-error">{error}</div>}
         {vista === 'crear' && (
           <FormularioPaciente
             modo="crear"
@@ -232,6 +249,8 @@ const GestionCitas = () => {
             estudios={estudios}
             hospitales={hospitales}
             onSubmit={handleCrearPaciente}
+            pacienteSeleccionado={pacienteSeleccionado}
+            setPacienteSeleccionado={setPacienteSeleccionado}
             onCancel={() => setVista('ver')}
           />
         )}

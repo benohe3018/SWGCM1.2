@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getPacientesPrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
+import { getPacientesPrueba,createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
 import FormularioPaciente from './FormularioPaciente';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';
@@ -127,6 +127,13 @@ const GestionCitas = () => {
         setError('Error al crear el paciente');
         setMensaje(null);
         setVista('crear'); // Mantener la vista en 'crear' incluso en caso de error
+    }
+    try {
+      await createPacientePrueba(datosPaciente);
+      setMensaje('Paciente creado exitosamente');
+      cargarPacientesPrueba(); // Recargar los datos después de crear
+    } catch (error) {
+      setError('Error al crear el paciente');
     }
     
 };

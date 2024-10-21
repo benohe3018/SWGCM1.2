@@ -192,7 +192,9 @@
   }
 
   .update-medico__pagination {
-    margin-bottom: 1.875rem; /* 30px */
+    margin: 1.875rem 0; /* 30px */
+    display: flex;
+    justify-content: center;
   }
 }
 

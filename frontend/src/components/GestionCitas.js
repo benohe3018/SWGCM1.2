@@ -221,7 +221,8 @@ const GestionCitas = () => {
       </header>
       {vista === '' && <img src={mrMachine} alt="Máquina de resonancia magnética" className="gestion-citas__mr-machine" />}
       <div className="gestion-citas__content">
-        {mensaje && <div className="gestion-citas__message-confirmation">{mensaje}</div>}
+      {mensaje && <div className="gestion-citas__message-confirmation">{mensaje}</div>}
+      {error && <div className="gestion-citas__message-error">{error}</div>}
         
         {/* Campo de búsqueda */}
         {vista !== 'crear' && (
@@ -242,8 +243,7 @@ const GestionCitas = () => {
         </select>
       </div>
     )}
-        {mensaje && <div className="gestion-citas__message-confirmation">{mensaje}</div>}
-        {error && <div className="gestion-citas__message-error">{error}</div>}
+        
         {vista === 'crear' && (
           <FormularioPaciente
             modo="crear"

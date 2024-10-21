@@ -113,11 +113,12 @@ const GestionCitas = () => {
         const result = await response.json();
 
         if (response.ok) {
-          setMensaje(result.message);
-          setError(null);
-          // Reinicia el formulario cambiando el estado
-          setFormResetToggle(prev => !prev); // Alterna entre true y false
-          setVista('crear'); // Mantén la vista en 'crear'
+            setMensaje(result.message);
+            setError(null);
+            // Reinicia el formulario cambiando el estado
+            setFormResetToggle(prev => !prev); // Alterna entre true y false
+            setVista('crear'); // Mantén la vista en 'crear'
+            cargarPacientesPrueba(); // Recargar los datos después de crear
         } else {
             setError(result.error);
             setMensaje(null);
@@ -128,14 +129,6 @@ const GestionCitas = () => {
         setMensaje(null);
         setVista('crear'); // Mantener la vista en 'crear' incluso en caso de error
     }
-    try {
-      await createPacientePrueba(datosPaciente);
-      setMensaje('Paciente creado exitosamente');
-      cargarPacientesPrueba(); // Recargar los datos después de crear
-    } catch (error) {
-      setError('Error al crear el paciente');
-    }
-    
 };
 
   const handleEditarPaciente = async (pacienteEditado) => {

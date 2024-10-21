@@ -59,7 +59,7 @@ def create_paciente_prueba():
         
         logging.info("Paciente prueba creado exitosamente con hospital_envia: %s", data['hospital_envia'])
 
-        return jsonify({"message": "Paciente prueba creado exitosamente"}), 201
+        return jsonify({"message": "Cita creada exitosamente"}), 201
     except SQLAlchemyError as e:
         db.session.rollback()
         logging.error("Error en la base de datos al crear paciente prueba: %s", str(e))

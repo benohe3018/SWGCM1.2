@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './FormularioPaciente.css';
-import { getEspecialidadesMedicas, getUnidadesMedicas, getDiagnosticosPresuntivos, getHospitales } from './citasService';
+import {
+  getEspecialidadesMedicas,
+  getUnidadesMedicas,
+  getDiagnosticosPresuntivos,
+  getHospitales
+} from './citasService';
 
-const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState({
+const FormularioPaciente = ({
+  modo,
+  pacienteInicial,
+  medicos,
+  estudios,
+  onSubmit,
+  onCancel,
+  formResetToggle,          // Añadido para resetear todo el formulario
+  resetDateTimeFieldsToggle // Añadido para resetear solo fecha y hora
+}) => {
+  // Estado inicial del formulario
+  const initialState = {
     id: '',
     fecha_hora_estudio: '',
+    hora_estudio: '',
     nss: '',
     nombre_paciente: '',
     apellido_paterno_paciente: '',
@@ -18,13 +34,28 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     nombre_completo_medico: '',
     estudio_solicitado: '',
     hospital_envia: ''
-  });
+  };
 
+  const [formData, setFormData] = useState(initialState);
   const [especialidades, setEspecialidades] = useState([]);
   const [unidadesMedicas, setUnidadesMedicas] = useState([]);
   const [diagnosticosPresuntivos, setDiagnosticosPresuntivos] = useState([]);
   const [hospitales, setHospitales] = useState([]);
   const [horariosDisponibles, setHorariosDisponibles] = useState([]);
+
+  // Efecto para resetear todo el formulario al cambiar formResetToggle
+  useEffect(() => {
+    setFormData(initialState);
+  }, [formResetToggle]);
+
+  // Efecto para resetear solo fecha y hora al cambiar resetDateTimeFieldsToggle
+  useEffect(() => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      fecha_hora_estudio: '',
+      hora_estudio: ''
+    }));
+  }, [resetDateTimeFieldsToggle]);
 
   useEffect(() => {
     if (modo === 'editar' && pacienteInicial) {
@@ -40,12 +71,18 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [especialidadesData, unidadesMedicasData, diagnosticosPresuntivosData, hospitalesData] = await Promise.all([
+        const [
+          especialidadesData,
+          unidadesMedicasData,
+          diagnosticosPresuntivosData,
+          hospitalesData
+        ] = await Promise.all([
           getEspecialidadesMedicas(),
           getUnidadesMedicas(),
           getDiagnosticosPresuntivos(),
           getHospitales()
         ]);
+
         setEspecialidades(especialidadesData);
         setUnidadesMedicas(unidadesMedicasData);
         setDiagnosticosPresuntivos(diagnosticosPresuntivosData);
@@ -54,6 +91,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         console.error('Error fetching dropdown data:', error);
       }
     };
+
     fetchData();
   }, []);
 
@@ -76,16 +114,22 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   };
 
   const handleMedicoChange = (e) => {
-    const selectedMedico = medicos.find(medico => medico.id_medico === parseInt(e.target.value));
+    const selectedMedico = medicos.find(
+      (medico) => medico.id_medico === parseInt(e.target.value)
+    );
     setFormData({
       ...formData,
       id_medico_refiere: e.target.value,
-      nombre_completo_medico: selectedMedico ? `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}` : ''
+      nombre_completo_medico: selectedMedico
+        ? `${selectedMedico.nombre_medico} ${selectedMedico.apellido_paterno_medico} ${selectedMedico.apellido_materno_medico}`
+        : ''
     });
   };
 
   const handleEstudioChange = (e) => {
-    const selectedEstudio = estudios.find(estudio => estudio.id_estudio === parseInt(e.target.value));
+    const selectedEstudio = estudios.find(
+      (estudio) => estudio.id_estudio === parseInt(e.target.value)
+    );
     setFormData({
       ...formData,
       id_estudio_radiologico: e.target.value,
@@ -96,11 +140,21 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validaciones existentes
     const isValidNSS = (nss) => /^\d{11}$/.test(nss);
-    const isValidName = (name) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(name) && name.length >= 1 && name.length <= 50;
-    const isValidSpeciality = (speciality) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$/.test(speciality) && speciality.length >= 1 && speciality.length <= 50;
+    const isValidName = (name) =>
+      /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(name) &&
+      name.length >= 1 &&
+      name.length <= 50;
+    const isValidSpeciality = (speciality) =>
+      /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(speciality) &&
+      speciality.length >= 1 &&
+      speciality.length <= 50;
     const isValidUnidadMedica = (unidad) => /^UMF#\d+$/.test(unidad);
-    const isValidDiagnostico = (diagnostico) => /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(diagnostico) && diagnostico.length >= 1 && diagnostico.length <= 50;
+    const isValidDiagnostico = (diagnostico) =>
+      /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/.test(diagnostico) &&
+      diagnostico.length >= 1 &&
+      diagnostico.length <= 50;
 
     if (!isValidNSS(formData.nss)) {
       alert('El NSS debe ser un número de 11 dígitos.');
@@ -138,7 +192,7 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
     }
 
     if (!isValidUnidadMedica(formData.unidad_medica_procedencia)) {
-      alert('La unidad médica de procedencia debe contener solo números.');
+      alert('La unidad médica de procedencia debe seguir el formato UMF#número.');
       return;
     }
 
@@ -164,32 +218,21 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
   };
 
   const handleCancel = () => {
-    const isConfirmed = window.confirm("¿Está seguro que desea cancelar? Los cambios no guardados se perderán.");
+    const isConfirmed = window.confirm(
+      '¿Está seguro que desea cancelar? Los cambios no guardados se perderán.'
+    );
 
     if (isConfirmed) {
-      setFormData({
-        id: '',
-        fecha_hora_estudio: '',
-        nss: '',
-        nombre_paciente: '',
-        apellido_paterno_paciente: '',
-        apellido_materno_paciente: '',
-        especialidad_medica: '',
-        id_medico_refiere: '',
-        id_estudio_radiologico: '',
-        unidad_medica_procedencia: '',
-        diagnostico_presuntivo: '',
-        nombre_completo_medico: '',
-        estudio_solicitado: '',
-        hospital_envia: ''
-      });
+      setFormData(initialState);
       onCancel();
     }
   };
 
   return (
     <form className="form-paciente" onSubmit={handleSubmit}>
-      <h3 className="form-description-create-cita">Capture los datos de la cita</h3>
+      <h3 className="form-description-create-cita">
+        Capture los datos de la cita
+      </h3>
       <div className="form-group-cita-medica">
         <label htmlFor="fecha_hora_estudio">Fecha del Estudio:</label>
         <input
@@ -220,26 +263,69 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-group-cita-medica">
         <label htmlFor="nss">NSS del Paciente:</label>
-        <input type="text" id="nss" name="nss" value={formData.nss} onChange={handleChange} required />
+        <input
+          type="text"
+          id="nss"
+          name="nss"
+          value={formData.nss}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div className="form-group-cita-medica">
         <label htmlFor="nombre_paciente">Nombre del Paciente:</label>
-        <input type="text" id="nombre_paciente" name="nombre_paciente" value={formData.nombre_paciente} onChange={handleChange} required />
+        <input
+          type="text"
+          id="nombre_paciente"
+          name="nombre_paciente"
+          value={formData.nombre_paciente}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div className="form-group-cita-medica">
-        <label htmlFor="apellido_paterno_paciente">Apellido Paterno del Paciente:</label>
-        <input type="text" id="apellido_paterno_paciente" name="apellido_paterno_paciente" value={formData.apellido_paterno_paciente} onChange={handleChange} required />
+        <label htmlFor="apellido_paterno_paciente">
+          Apellido Paterno del Paciente:
+        </label>
+        <input
+          type="text"
+          id="apellido_paterno_paciente"
+          name="apellido_paterno_paciente"
+          value={formData.apellido_paterno_paciente}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div className="form-group-cita-medica">
-        <label htmlFor="apellido_materno_paciente">Apellido Materno del Paciente:</label>
-        <input type="text" id="apellido_materno_paciente" name="apellido_materno_paciente" value={formData.apellido_materno_paciente} onChange={handleChange} required />
+        <label htmlFor="apellido_materno_paciente">
+          Apellido Materno del Paciente:
+        </label>
+        <input
+          type="text"
+          id="apellido_materno_paciente"
+          name="apellido_materno_paciente"
+          value={formData.apellido_materno_paciente}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div className="form-group-cita-medica">
-        <label htmlFor="especialidad_medica">Especialidad Médica que Envía:</label>
-        <select id="especialidad_medica" name="especialidad_medica" value={formData.especialidad_medica} onChange={handleChange} required>
+        <label htmlFor="especialidad_medica">
+          Especialidad Médica que Envía:
+        </label>
+        <select
+          id="especialidad_medica"
+          name="especialidad_medica"
+          value={formData.especialidad_medica}
+          onChange={handleChange}
+          required
+        >
           <option value="">Seleccione una Especialidad</option>
           {especialidades.map((especialidad) => (
-            <option key={especialidad.id_especialidad} value={especialidad.nombre_especialidad}>
+            <option
+              key={especialidad.id_especialidad}
+              value={especialidad.nombre_especialidad}
+            >
               {especialidad.nombre_especialidad}
             </option>
           ))}
@@ -247,7 +333,13 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-group-cita-medica">
         <label htmlFor="id_medico_refiere">Médico que Refiere:</label>
-        <select id="id_medico_refiere" name="id_medico_refiere" value={formData.id_medico_refiere} onChange={handleMedicoChange} required>
+        <select
+          id="id_medico_refiere"
+          name="id_medico_refiere"
+          value={formData.id_medico_refiere}
+          onChange={handleMedicoChange}
+          required
+        >
           <option value="">Seleccione un Médico</option>
           {medicos.map((medico) => (
             <option key={medico.id_medico} value={medico.id_medico}>
@@ -258,7 +350,13 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-group-cita-medica">
         <label htmlFor="id_estudio_radiologico">Estudio Solicitado:</label>
-        <select id="id_estudio_radiologico" name="id_estudio_radiologico" value={formData.id_estudio_radiologico} onChange={handleEstudioChange} required>
+        <select
+          id="id_estudio_radiologico"
+          name="id_estudio_radiologico"
+          value={formData.id_estudio_radiologico}
+          onChange={handleEstudioChange}
+          required
+        >
           <option value="">Seleccione un Estudio</option>
           {estudios.map((estudio) => (
             <option key={estudio.id_estudio} value={estudio.id_estudio}>
@@ -268,8 +366,16 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
         </select>
       </div>
       <div className="form-group-cita-medica">
-        <label htmlFor="unidad_medica_procedencia">Unidad Médica de Procedencia:</label>
-        <select id="unidad_medica_procedencia" name="unidad_medica_procedencia" value={formData.unidad_medica_procedencia} onChange={handleChange} required>
+        <label htmlFor="unidad_medica_procedencia">
+          Unidad Médica de Procedencia:
+        </label>
+        <select
+          id="unidad_medica_procedencia"
+          name="unidad_medica_procedencia"
+          value={formData.unidad_medica_procedencia}
+          onChange={handleChange}
+          required
+        >
           <option value="">Seleccione una Unidad Médica</option>
           {unidadesMedicas.map((unidad) => (
             <option key={unidad.id_unidad} value={unidad.nombre_unidad}>
@@ -280,10 +386,19 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-group-cita-medica">
         <label htmlFor="diagnostico_presuntivo">Diagnóstico Presuntivo:</label>
-        <select id="diagnostico_presuntivo" name="diagnostico_presuntivo" value={formData.diagnostico_presuntivo} onChange={handleChange} required>
+        <select
+          id="diagnostico_presuntivo"
+          name="diagnostico_presuntivo"
+          value={formData.diagnostico_presuntivo}
+          onChange={handleChange}
+          required
+        >
           <option value="">Seleccione un Diagnóstico</option>
           {diagnosticosPresuntivos.map((diagnostico) => (
-            <option key={diagnostico.id_diagnostico} value={diagnostico.nombre_diagnostico}>
+            <option
+              key={diagnostico.id_diagnostico}
+              value={diagnostico.nombre_diagnostico}
+            >
               {diagnostico.nombre_diagnostico}
             </option>
           ))}
@@ -291,7 +406,13 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-group-cita-medica">
         <label htmlFor="hospital_envia">Hospital que Envía:</label>
-        <select id="hospital_envia" name="hospital_envia" value={formData.hospital_envia} onChange={handleChange} required>
+        <select
+          id="hospital_envia"
+          name="hospital_envia"
+          value={formData.hospital_envia}
+          onChange={handleChange}
+          required
+        >
           <option value="">Seleccione un Hospital</option>
           {hospitales.map((hospital) => (
             <option key={hospital.id_hospital} value={hospital.nombre_hospital}>
@@ -302,7 +423,9 @@ const FormularioPaciente = ({ modo, pacienteInicial, medicos, estudios, onSubmit
       </div>
       <div className="form-actions">
         <button type="submit">Enviar</button>
-        <button type="button" onClick={handleCancel}>Cancelar</button>
+        <button type="button" onClick={handleCancel}>
+          Cancelar
+        </button>
       </div>
     </form>
   );

@@ -23,6 +23,7 @@ const GestionCitas = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState('nombre_completo');
   const pacientesPerPage = 10;
+  const [formResetToggle, setFormResetToggle] = useState(false);
 
   const handleInputChange = (e, pacienteId, campo) => {
     const newPacientes = [...pacientesPrueba];
@@ -31,7 +32,20 @@ const GestionCitas = () => {
       newPacientes[index][campo] = e.target.value;
       setPacientesPrueba(newPacientes);
     }
+
+    
   };
+
+  useEffect(() => {
+    if (mensaje) {
+      const timer = setTimeout(() => {
+        setMensaje(null);
+      }, 5000); // 5000 milisegundos = 5 segundos
+
+      // Limpia el temporizador si el componente se desmonta o si 'mensaje' cambia
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
 
   useEffect(() => {
     if (location.pathname === '/crear-cita') {
@@ -99,11 +113,11 @@ const GestionCitas = () => {
         const result = await response.json();
 
         if (response.ok) {
-            setMensaje(result.message);
-            setError(null);
-            // Resetear el formulario
-            setPacienteSeleccionado(null);
-            setVista('crear'); // Mantener la vista en 'crear'
+          setMensaje(result.message);
+          setError(null);
+          // Reinicia el formulario cambiando el estado
+          setFormResetToggle(prev => !prev); // Alterna entre true y false
+          setVista('crear'); // Mantén la vista en 'crear'
         } else {
             setError(result.error);
             setMensaje(null);
@@ -114,6 +128,7 @@ const GestionCitas = () => {
         setMensaje(null);
         setVista('crear'); // Mantener la vista en 'crear' incluso en caso de error
     }
+    
 };
 
   const handleEditarPaciente = async (pacienteEditado) => {
@@ -250,6 +265,7 @@ const GestionCitas = () => {
             pacienteSeleccionado={pacienteSeleccionado}
             setPacienteSeleccionado={setPacienteSeleccionado}
             onCancel={() => setVista('ver')}
+            formResetToggle={formResetToggle}
           />
         )}
 

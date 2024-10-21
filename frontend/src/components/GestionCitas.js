@@ -206,10 +206,6 @@ const GestionCitas = () => {
     return <div>Cargando datos...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
     <div className="gestion-citas">
       <header className="gestion-citas__header">

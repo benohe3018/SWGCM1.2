@@ -69,9 +69,9 @@ const GestionCitas = () => {
        console.log('Datos inicializados:', { pacientesData, medicosData, estudiosData, hospitalesData });
       pacientesData.sort((a, b) => a.id - b.id);
       setPacientesPrueba(pacientesData);
-      setMedicos(medicosData);
-      setEstudios(estudiosData);
-      setHospitales(hospitalesData);
+      setMedicos(Array.isArray(medicosData) ? medicosData : [medicosData]);
+    setEstudios(Array.isArray(estudiosData) ? estudiosData : [estudiosData]);
+    setHospitales(Array.isArray(hospitalesData) ? hospitalesData : [hospitalesData]);
       setError(null);
     } catch (error) {
       console.error("Error al inicializar datos:", error);

@@ -131,25 +131,30 @@ const GestionCitas = () => {
     }
 };
 
-  const handleEditarPaciente = async (pacienteEditado) => {
-    try {
+const handleEditarPaciente = async (pacienteEditado) => {
+  try {
       if (!pacienteEditado.id) {
-        throw new Error("El ID del paciente no está definido");
+          throw new Error("El ID del paciente no está definido");
+      }
+
+      const nombreCompletoParts = pacienteEditado.nombre_completo.split(' ');
+      if (nombreCompletoParts.length < 3) {
+          throw new Error("El nombre completo debe incluir nombre, apellido paterno y apellido materno");
       }
 
       const pacienteData = {
-        id: pacienteEditado.id,
-        fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
-        nss: pacienteEditado.nss,
-        nombre_paciente: pacienteEditado.nombre_completo.split(' ')[0],
-        apellido_paterno_paciente: pacienteEditado.nombre_completo.split(' ')[1],
-        apellido_materno_paciente: pacienteEditado.nombre_completo.split(' ')[2],
-        especialidad_medica: pacienteEditado.especialidad_medica,
-        nombre_completo_medico: pacienteEditado.nombre_completo_medico,
-        estudio_solicitado: pacienteEditado.estudio_solicitado,
-        unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
-        diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
-        hospital_envia: pacienteEditado.hospital_envia
+          id: pacienteEditado.id,
+          fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
+          nss: pacienteEditado.nss,
+          nombre_paciente: nombreCompletoParts[0],
+          apellido_paterno_paciente: nombreCompletoParts[1],
+          apellido_materno_paciente: nombreCompletoParts[2],
+          especialidad_medica: pacienteEditado.especialidad_medica,
+          nombre_completo_medico: pacienteEditado.nombre_completo_medico,
+          estudio_solicitado: pacienteEditado.estudio_solicitado,
+          unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
+          diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
+          hospital_envia: pacienteEditado.hospital_envia
       };
 
       await updatePacientePrueba(pacienteEditado.id, pacienteData);
@@ -158,10 +163,10 @@ const GestionCitas = () => {
       setVista('ver');
       setMensaje('Paciente actualizado exitosamente.');
       setTimeout(() => setMensaje(null), 3000);
-    } catch (error) {
+  } catch (error) {
       setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
-    }
-  };
+  }
+};
 
   const handleEliminarPaciente = (id) => {
     const numericId = Number(id);

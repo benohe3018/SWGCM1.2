@@ -57,11 +57,7 @@ const GestionCitas = () => {
     }
   }, [location.pathname]);
 
-  useEffect(() => {
-    inicializarDatos();
-  }, [inicializarDatos]);
-
-  const inicializarDatos = useCallback(async () => {
+    const inicializarDatos = useCallback(async () => {
     try {
       setCargando(true);
       const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
@@ -70,7 +66,7 @@ const GestionCitas = () => {
         getEstudios(),
         getHospitales()
       ]);
-      console.log('Datos inicializados:', { pacientesData, medicosData, estudiosData, hospitalesData });
+       console.log('Datos inicializados:', { pacientesData, medicosData, estudiosData, hospitalesData });
       pacientesData.sort((a, b) => a.id - b.id);
       setPacientesPrueba(pacientesData);
       setMedicos(medicosData);
@@ -85,7 +81,9 @@ const GestionCitas = () => {
     }
   }, []);
 
-  
+  useEffect(() => {
+    inicializarDatos();
+  }, [inicializarDatos]);  
 
   const cargarPacientesPrueba = async () => {
     try {

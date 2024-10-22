@@ -139,6 +139,49 @@ def update_paciente_prueba(id):
         logging.error("Error desconocido al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error desconocido"}), 500
 
+@pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['PUT'])
+def update_paciente_prueba(id):
+    data = request.get_json()
+    logging.info(f"Datos recibidos para actualización: {data}")
+
+    required_fields = ['fecha_hora_estudio', 'nss', 'nombre_paciente', 'apellido_paterno_paciente', 'apellido_materno_paciente', 'especialidad_medica', 'nombre_completo_medico', 'estudio_solicitado', 'unidad_medica_procedencia', 'diagnostico_presuntivo', 'hospital_envia']
+
+    for field in required_fields:
+        if field not in data:
+            logging.error(f"Campo faltante en la solicitud PUT: {field}")
+            return jsonify({"error": f"Falta el campo requerido: {field}"}), 400
+
+    key = os.getenv('ENCRYPTION_KEY').encode()
+
+    try:
+        paciente = PacientePrueba.query.get(id)
+        if not paciente:
+            return jsonify({"error": "Paciente no encontrado"}), 404
+
+        paciente.fecha_hora_estudio = datetime.strptime(data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
+        paciente.nss = encrypt_data(data['nss'], key)
+        paciente.nombre_paciente = encrypt_data(data['nombre_paciente'], key)
+        paciente.apellido_paterno_paciente = encrypt_data(data['apellido_paterno_paciente'], key)
+        paciente.apellido_materno_paciente = encrypt_data(data['apellido_materno_paciente'], key)
+        paciente.especialidad_medica = encrypt_data(data['especialidad_medica'], key)
+        paciente.nombre_completo_medico = encrypt_data(data['nombre_completo_medico'], key)
+        paciente.estudio_solicitado = encrypt_data(data['estudio_solicitado'], key)
+        paciente.unidad_medica_procedencia = encrypt_data(data['unidad_medica_procedencia'], key)
+        paciente.diagnostico_presuntivo = encrypt_data(data['diagnostico_presuntivo'], key)
+        paciente.hospital_envia = data['hospital_envia']  # No encriptar este campo
+
+        db.session.commit()
+        return jsonify({"message": "Paciente actualizado exitosamente"}), 200
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        logging.error("Error en la base de datos al actualizar paciente: %s", str(e))
+        return jsonify({"error": "Error en la base de datos"}), 500
+    except Exception as e:
+        logging.error("Error desconocido al actualizar paciente: %s", str(e))
+        return jsonify({"error": "Error desconocido"}), 500
+
+
+
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
     print(f"Recibida solicitud DELETE para paciente con ID: {id}")

@@ -371,6 +371,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
                   className="gestion-citas__input"
                   value={paciente.nombre_completo_medico}
                   onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
+                  disabled={!medicos.length}
                 >
                   <option value="">Seleccione un médico</option>
                   {medicos.map((medico) => (
@@ -385,6 +386,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
                   className="gestion-citas__input"
                   value={paciente.estudio_solicitado}
                   onChange={(e) => handleInputChange(e, paciente.id, 'estudio_solicitado')}
+                  disabled={!estudios.length}
                 >
                   <option value="">Seleccione un estudio</option>
                   {estudios.map((estudio) => (
@@ -399,6 +401,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
                   className="gestion-citas__input"
                   value={paciente.hospital_envia}
                   onChange={(e) => handleInputChange(e, paciente.id, 'hospital_envia')}
+                  disabled={!hospitales.length}
                 >
                   <option value="">Seleccione un hospital</option>
                   {hospitales.map((hospital) => (
@@ -450,6 +453,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
               className="gestion-citas__input"
               value={paciente.nombre_completo_medico}
               onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
+              disabled={!medicos.length}
             >
               <option value="">Seleccione un médico</option>
               {medicos.map((medico) => (
@@ -465,6 +469,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
               className="gestion-citas__input"
               value={paciente.estudio_solicitado}
               onChange={(e) => handleInputChange(e, paciente.id, 'estudio_solicitado')}
+              disabled={!estudios.length}
             >
               <option value="">Seleccione un estudio</option>
               {estudios.map((estudio) => (
@@ -480,6 +485,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
               className="gestion-citas__input"
               value={paciente.hospital_envia}
               onChange={(e) => handleInputChange(e, paciente.id, 'hospital_envia')}
+              disabled={!hospitales.length}
             >
               <option value="">Seleccione un hospital</option>
               {hospitales.map((hospital) => (

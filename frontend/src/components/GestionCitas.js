@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import './GestionCitas.css';
 import logoIMSS from '../images/LogoIMSS.jpg';
-import { getPacientesPrueba,createPacientePrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
+import { getPacientesPrueba, updatePacientePrueba, deletePacientePrueba, getMedicos, getEstudios, getHospitales } from './citasService';
 import FormularioPaciente from './FormularioPaciente';
 import ModalConfirmacion from './ModalConfirmacion';
 import mrMachine from '../images/MRMachine.jpg';

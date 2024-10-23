@@ -132,34 +132,38 @@ const GestionCitas = () => {
 
 const handleEditarPaciente = async (pacienteEditado) => {
   try {
-    const nombreCompletoParts = pacienteEditado.nombre_completo.split(' ');
+      if (!pacienteEditado.id) {
+          throw new Error("El ID del paciente no está definido");
+      }
 
-    const pacienteData = {
-      id: pacienteEditado.id,
-      fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
-      nss: pacienteEditado.nss,
-      nombre_paciente: nombreCompletoParts[0],
-      apellido_paterno_paciente: nombreCompletoParts[1],
-      apellido_materno_paciente: nombreCompletoParts[2],
-      especialidad_medica: pacienteEditado.especialidad_medica,
-      id_medico_refiere: pacienteEditado.id_medico_refiere,
-      nombre_completo_medico: pacienteEditado.nombre_completo_medico,
-      id_estudio_radiologico: pacienteEditado.id_estudio_radiologico,
-      estudio_solicitado: pacienteEditado.estudio_solicitado,
-      unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
-      diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
-      id_hospital_envia: pacienteEditado.id_hospital_envia,
-      hospital_envia: pacienteEditado.hospital_envia
-    };
+      const nombreCompletoParts = pacienteEditado.nombre_completo.split(' ');
+      if (nombreCompletoParts.length < 3) {
+          throw new Error("El nombre completo debe incluir nombre, apellido paterno y apellido materno");
+      }
 
-    await updatePacientePrueba(pacienteEditado.id, pacienteData);
-    await cargarPacientesPrueba();
-    setPacienteSeleccionado(null);
-    setVista('ver');
-    setMensaje('Paciente actualizado exitosamente.');
-    setTimeout(() => setMensaje(null), 3000);
+      const pacienteData = {
+          id: pacienteEditado.id,
+          fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
+          nss: pacienteEditado.nss,
+          nombre_paciente: nombreCompletoParts[0],
+          apellido_paterno_paciente: nombreCompletoParts[1],
+          apellido_materno_paciente: nombreCompletoParts[2],
+          especialidad_medica: pacienteEditado.especialidad_medica,
+          nombre_completo_medico: pacienteEditado.nombre_completo_medico,
+          estudio_solicitado: pacienteEditado.estudio_solicitado,
+          unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
+          diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
+          hospital_envia: pacienteEditado.hospital_envia
+      };
+
+      await updatePacientePrueba(pacienteEditado.id, pacienteData);
+      await cargarPacientesPrueba();
+      setPacienteSeleccionado(null);
+      setVista('ver');
+      setMensaje('Paciente actualizado exitosamente.');
+      setTimeout(() => setMensaje(null), 3000);
   } catch (error) {
-    setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
+      setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
   }
 };
 
@@ -364,49 +368,49 @@ const handleEditarPaciente = async (pacienteEditado) => {
                 />
               </td>
               <td>
-              <select
-                className="gestion-citas__input"
-                value={paciente.nombre_completo_medico}
-                onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
-                disabled={!medicos.length}
-              >
-                <option value="">Seleccione un médico</option>
-                {medicos.map((medico) => (
-                  <option key={medico.id_medico} value={medico.id_medico}>
-                    {medico.nombre_completo}
-                  </option>
-                ))}
-              </select>
+                <select
+                  className="gestion-citas__input"
+                  value={paciente.nombre_completo_medico}
+                  onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
+                  disabled={!medicos.length}
+                >
+                  <option value="">Seleccione un médico</option>
+                  {medicos.map((medico) => (
+                    <option key={medico.id} value={medico.nombre_completo}>
+                      {medico.nombre_completo}
+                    </option>
+                  ))}
+                </select>
               </td>
               <td>
-              <select
-                className="gestion-citas__input"
-                value={paciente.id_estudio_radiologico}
-                onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
-                disabled={!estudios.length}
-              >
-                <option value="">Seleccione un estudio</option>
-                {estudios.map((estudio) => (
-                  <option key={estudio.id_estudio} value={estudio.id_estudio}>
-                    {estudio.nombre_estudio}
-                  </option>
-                ))}
-              </select>
+                <select
+                  className="gestion-citas__input"
+                  value={paciente.estudio_solicitado}
+                  onChange={(e) => handleInputChange(e, paciente.id, 'estudio_solicitado')}
+                  disabled={!estudios.length}
+                >
+                  <option value="">Seleccione un estudio</option>
+                  {estudios.map((estudio) => (
+                    <option key={estudio.id} value={estudio.nombre}>
+                      {estudio.nombre}
+                    </option>
+                  ))}
+                </select>
               </td>
               <td>
-              <select
-                className="gestion-citas__input"
-                value={paciente.id_hospital_envia}
-                onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
-                disabled={!hospitales.length}
-              >
-                <option value="">Seleccione un hospital</option>
-                {hospitales.map((hospital) => (
-                  <option key={hospital.id_hospital} value={hospital.id_hospital}>
-                    {hospital.nombre_hospital}
-                  </option>
-                ))}
-              </select>
+                <select
+                  className="gestion-citas__input"
+                  value={paciente.hospital_envia}
+                  onChange={(e) => handleInputChange(e, paciente.id, 'hospital_envia')}
+                  disabled={!hospitales.length}
+                >
+                  <option value="">Seleccione un hospital</option>
+                  {hospitales.map((hospital) => (
+                    <option key={hospital.id} value={hospital.nombre}>
+                      {hospital.nombre}
+                    </option>
+                  ))}
+                </select>
               </td>
               <td>
                 <div className="gestion-citas__actions">
@@ -454,7 +458,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
             >
               <option value="">Seleccione un médico</option>
               {medicos.map((medico) => (
-                <option key={medico.id_medico} value={medico.nombre_completo}>
+                <option key={medico.id} value={medico.nombre_completo}>
                   {medico.nombre_completo}
                 </option>
               ))}

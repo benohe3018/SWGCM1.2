@@ -174,8 +174,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
           apellido_materno_paciente: nombreCompletoParts[2],
           especialidad_medica: pacienteEditado.especialidad_medica,
           nombre_completo_medico: pacienteEditado.nombre_completo_medico,
-          id_medico_refiere: pacienteEditado.id_medico_refiere, // Mantener el id del médico
-          id_estudio_radiologico: pacienteEditado.id_estudio_radiologico, // Mantener el id del estudio
+          estudio_solicitado: pacienteEditado.estudio_solicitado,
           unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
           diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
           hospital_envia: pacienteEditado.hospital_envia

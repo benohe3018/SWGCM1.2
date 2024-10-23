@@ -81,9 +81,12 @@ const handleInputChange = (e, idEstudio, field) => {
         try {
             await createEstudio(nuevoEstudio);
             setMensaje('Estudio creado exitosamente.');
+            // Actualizar la lista de estudios inmediatamente después de crear un nuevo registro
+            await cargarEstudios();
             setTimeout(() => {
                 setMensaje(null);
-                navigate('/ver-estudios'); 
+                // Mantener al usuario en la vista "crear"
+                setVista('crear');
             }, 3000); 
         } catch (error) {
             console.error("Error al crear estudio:", error);

@@ -34,6 +34,8 @@ const GestionCitas = () => {
     }
   };
 
+  
+
   useEffect(() => {
     if (mensaje) {
       const timer = setTimeout(() => {

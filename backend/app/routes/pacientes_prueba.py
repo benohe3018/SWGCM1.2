@@ -180,8 +180,6 @@ def update_paciente_prueba(id):
         logging.error("Error desconocido al actualizar paciente: %s", str(e))
         return jsonify({"error": "Error desconocido"}), 500
 
-
-
 @pacientes_prueba_bp.route('/pacientes_prueba/<int:id>', methods=['DELETE'])
 def delete_paciente_prueba(id):
     print(f"Recibida solicitud DELETE para paciente con ID: {id}")

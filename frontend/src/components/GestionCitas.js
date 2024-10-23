@@ -368,49 +368,49 @@ const handleEditarPaciente = async (pacienteEditado) => {
                 />
               </td>
               <td>
-                <select
-                  className="gestion-citas__input"
-                  value={paciente.nombre_completo_medico}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
-                  disabled={!medicos.length}
-                >
-                  <option value="">Seleccione un médico</option>
-                  {medicos.map((medico) => (
-                    <option key={medico.id} value={medico.nombre_completo}>
-                      {medico.nombre_completo}
-                    </option>
-                  ))}
-                </select>
+              <select
+                className="gestion-citas__input"
+                value={paciente.id_medico_refiere}
+                onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
+                disabled={!medicos.length}
+              >
+                <option value="">Seleccione un médico</option>
+                {medicos.map((medico) => (
+                  <option key={medico.id_medico} value={medico.id_medico}>
+                    {medico.nombre_completo}
+                  </option>
+                ))}
+              </select>
               </td>
               <td>
-                <select
-                  className="gestion-citas__input"
-                  value={paciente.estudio_solicitado}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'estudio_solicitado')}
-                  disabled={!estudios.length}
-                >
-                  <option value="">Seleccione un estudio</option>
-                  {estudios.map((estudio) => (
-                    <option key={estudio.id} value={estudio.nombre}>
-                      {estudio.nombre}
-                    </option>
-                  ))}
-                </select>
+              <select
+                className="gestion-citas__input"
+                value={paciente.id_estudio_radiologico}
+                onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
+                disabled={!estudios.length}
+              >
+                <option value="">Seleccione un estudio</option>
+                {estudios.map((estudio) => (
+                  <option key={estudio.id_estudio} value={estudio.id_estudio}>
+                    {estudio.nombre_estudio}
+                  </option>
+                ))}
+              </select>
               </td>
               <td>
-                <select
-                  className="gestion-citas__input"
-                  value={paciente.hospital_envia}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'hospital_envia')}
-                  disabled={!hospitales.length}
-                >
-                  <option value="">Seleccione un hospital</option>
-                  {hospitales.map((hospital) => (
-                    <option key={hospital.id} value={hospital.nombre}>
-                      {hospital.nombre}
-                    </option>
-                  ))}
-                </select>
+              <select
+                className="gestion-citas__input"
+                value={paciente.id_hospital_envia}
+                onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
+                disabled={!hospitales.length}
+              >
+                <option value="">Seleccione un hospital</option>
+                {hospitales.map((hospital) => (
+                  <option key={hospital.id_hospital} value={hospital.id_hospital}>
+                    {hospital.nombre_hospital}
+                  </option>
+                ))}
+              </select>
               </td>
               <td>
                 <div className="gestion-citas__actions">

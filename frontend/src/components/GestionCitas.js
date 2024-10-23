@@ -24,6 +24,7 @@ const GestionCitas = () => {
   const [searchField, setSearchField] = useState('nombre_completo');
   const pacientesPerPage = 10;
   const [formResetToggle, setFormResetToggle] = useState(false);
+  const [horariosDisponibles, setHorariosDisponibles] = useState([]);
 
   const handleInputChange = (e, pacienteId, campo) => {
     const newPacientes = [...pacientesPrueba];
@@ -32,13 +33,27 @@ const GestionCitas = () => {
       if (campo === 'id_medico_refiere') {
         const medicoSeleccionado = medicos.find(medico => medico.id_medico === parseInt(e.target.value));
         newPacientes[index]['nombre_completo_medico'] = medicoSeleccionado ? `${medicoSeleccionado.nombre_medico} ${medicoSeleccionado.apellido_paterno_medico} ${medicoSeleccionado.apellido_materno_medico}` : '';
+      } else if (campo === 'fecha_hora_estudio' || campo === 'hora_estudio') {
+        const fecha = campo === 'fecha_hora_estudio' ? e.target.value : newPacientes[index]['fecha_hora_estudio'].split('T')[0];
+        const hora = campo === 'hora_estudio' ? e.target.value : newPacientes[index]['fecha_hora_estudio'].split('T')[1];
+        newPacientes[index]['fecha_hora_estudio'] = `${fecha}T${hora}`;
+      } else {
+        newPacientes[index][campo] = e.target.value;
       }
-      newPacientes[index][campo] = e.target.value;
       setPacientesPrueba(newPacientes);
     }
   };
 
-  
+  useEffect(() => {
+    const generarHorariosDisponibles = () => {
+      const horarios = [
+        '07:15', '07:45', '08:25', '09:05', '09:45', '10:25', '11:05', '11:45', '12:25',
+        '14:00', '14:40', '15:20', '16:00', '16:40', '17:20', '18:00', '18:40', '19:20'
+      ];
+      setHorariosDisponibles(horarios);
+    };
+    generarHorariosDisponibles();
+  }, []);
 
   useEffect(() => {
     if (mensaje) {
@@ -360,10 +375,22 @@ const handleEditarPaciente = async (pacienteEditado) => {
               <td>
                 <input
                   className="gestion-citas__input"
-                  type="datetime-local"
-                  value={paciente.fecha_hora_estudio}
+                  type="date"
+                  value={paciente.fecha_hora_estudio.split('T')[0]}
                   onChange={(e) => handleInputChange(e, paciente.id, 'fecha_hora_estudio')}
                 />
+                <select
+                  className="gestion-citas__input"
+                  value={paciente.fecha_hora_estudio.split('T')[1]}
+                  onChange={(e) => handleInputChange(e, paciente.id, 'hora_estudio')}
+                >
+                  <option value="">Seleccione una hora</option>
+                  {horariosDisponibles.map((hora) => (
+                    <option key={hora} value={hora}>
+                      {hora}
+                    </option>
+                  ))}
+                </select>
               </td>
               <td>
                 <input
@@ -383,8 +410,8 @@ const handleEditarPaciente = async (pacienteEditado) => {
                   <option value="">Seleccione un médico</option>
                   {medicos.map((medico) => (
                     <option key={medico.id_medico} value={medico.id_medico}>
-              {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
-              </option>
+                      {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
+                    </option>
                   ))}
                 </select>
               </td>
@@ -412,7 +439,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
                 >
                   <option value="">Seleccione un hospital</option>
                   {hospitales.map((hospital) => (
-                    <option key={hospital.id_hospita} value={hospital.id_hospital}>
+                    <option key={hospital.id_hospital} value={hospital.id_hospital}>
                       {hospital.nombre_hospital}
                     </option>
                   ))}
@@ -440,10 +467,22 @@ const handleEditarPaciente = async (pacienteEditado) => {
             <label><strong>Fecha y Hora:</strong></label>
             <input
               className="gestion-citas__input"
-              type="datetime-local"
-              value={paciente.fecha_hora_estudio}
+              type="date"
+              value={paciente.fecha_hora_estudio.split('T')[0]}
               onChange={(e) => handleInputChange(e, paciente.id, 'fecha_hora_estudio')}
             />
+            <select
+              className="gestion-citas__input"
+              value={paciente.fecha_hora_estudio.split('T')[1]}
+              onChange={(e) => handleInputChange(e, paciente.id, 'hora_estudio')}
+            >
+              <option value="">Seleccione una hora</option>
+              {horariosDisponibles.map((hora) => (
+                <option key={hora} value={hora}>
+                  {hora}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="gestion-citas__card-item">
             <label><strong>Paciente:</strong></label>
@@ -474,8 +513,8 @@ const handleEditarPaciente = async (pacienteEditado) => {
             <label><strong>Estudio:</strong></label>
             <select
               className="gestion-citas__input"
-              value={paciente.estudio_solicitado}
-              onChange={(e) => handleInputChange(e, paciente.id, 'estudio_solicitado')}
+              value={paciente.id_estudio_radiologico}
+              onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
               disabled={!estudios.length}
             >
               <option value="">Seleccione un estudio</option>
@@ -490,13 +529,13 @@ const handleEditarPaciente = async (pacienteEditado) => {
             <label><strong>Hospital:</strong></label>
             <select
               className="gestion-citas__input"
-              value={paciente.hospital_envia}
-              onChange={(e) => handleInputChange(e, paciente.id, 'hospital_envia')}
+              value={paciente.id_hospital_envia}
+              onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
               disabled={!hospitales.length}
             >
               <option value="">Seleccione un hospital</option>
               {hospitales.map((hospital) => (
-                <option key={hospital.id_hospita} value={hospital.id_hospita}>
+                <option key={hospital.id_hospital} value={hospital.id_hospital}>
                   {hospital.nombre_hospital}
                 </option>
               ))}

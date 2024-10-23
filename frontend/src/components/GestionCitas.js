@@ -173,7 +173,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
       );
 
       if (citaExistente) {
-        setError("Ya existe una cita agendada para esa fecha y hora.");
+        setError("Ya existe una cita agendada para esa fecha y hora selecciona otra.");
         return;
       }
 

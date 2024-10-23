@@ -29,6 +29,10 @@ const GestionCitas = () => {
     const newPacientes = [...pacientesPrueba];
     const index = newPacientes.findIndex(p => p.id === pacienteId);
     if (index !== -1) {
+      if (campo === 'id_medico_refiere') {
+        const medicoSeleccionado = medicos.find(medico => medico.id_medico === parseInt(e.target.value));
+        newPacientes[index]['nombre_completo_medico'] = medicoSeleccionado ? `${medicoSeleccionado.nombre_medico} ${medicoSeleccionado.apellido_paterno_medico} ${medicoSeleccionado.apellido_materno_medico}` : '';
+      }
       newPacientes[index][campo] = e.target.value;
       setPacientesPrueba(newPacientes);
     }

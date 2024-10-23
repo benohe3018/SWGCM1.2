@@ -165,6 +165,18 @@ const handleEditarPaciente = async (pacienteEditado) => {
           throw new Error("El nombre completo debe incluir nombre, apellido paterno y apellido materno");
       }
 
+      const formattedDateTime = `${pacienteEditado.fecha_hora_estudio.split('T')[0]}T${pacienteEditado.fecha_hora_estudio.split('T')[1]}`;
+
+    // Verificar disponibilidad
+      const citaExistente = pacientesPrueba.find(paciente => 
+        paciente.fecha_hora_estudio === formattedDateTime && paciente.id !== pacienteEditado.id
+      );
+
+      if (citaExistente) {
+        setError("Ya existe una cita agendada para esa fecha y hora.");
+        return;
+      }
+
       const pacienteData = {
           id: pacienteEditado.id,
           fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,

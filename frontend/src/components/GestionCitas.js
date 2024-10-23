@@ -476,8 +476,8 @@ const handleEditarPaciente = async (pacienteEditado) => {
             >
               <option value="">Seleccione un estudio</option>
               {estudios.map((estudio) => (
-                <option key={estudio.id} value={estudio.nombre}>
-                  {estudio.nombre}
+                <option key={estudio.id_estudio} value={estudio.id_estudio}>
+                  {estudio.nombre_estudio}
                 </option>
               ))}
             </select>
@@ -492,8 +492,8 @@ const handleEditarPaciente = async (pacienteEditado) => {
             >
               <option value="">Seleccione un hospital</option>
               {hospitales.map((hospital) => (
-                <option key={hospital.id} value={hospital.nombre}>
-                  {hospital.nombre}
+                <option key={hospital.id_hospita} value={hospital.id_hospita}>
+                  {hospital.nombre_hospital}
                 </option>
               ))}
             </select>

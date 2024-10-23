@@ -80,7 +80,7 @@ const GestionCitas = () => {
     setHospitales(Array.isArray(hospitalesData) ? hospitalesData : [hospitalesData]);
       setError(null);
     } catch (error) {
-      console.error("Error al inicializar datos:", error);
+      console.error("Error al inicializar los datos:", error);
       setError("Hubo un problema al cargar los datos. Por favor, intente de nuevo.");
     } finally {
       setCargando(false);

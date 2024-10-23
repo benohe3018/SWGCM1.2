@@ -63,7 +63,13 @@ const FormularioPaciente = ({
         ...pacienteInicial,
         id: pacienteInicial.id || '',
         fecha_hora_estudio: pacienteInicial.fecha_hora_estudio.split('T')[0],
-        hora_estudio: pacienteInicial.fecha_hora_estudio.split('T')[1]
+        hora_estudio: pacienteInicial.fecha_hora_estudio.split('T')[1],
+        especialidad_medica: pacienteInicial.especialidad_medica.id_especialidad,
+        id_medico_refiere: pacienteInicial.id_medico_refiere.id_medico,
+        id_estudio_radiologico: pacienteInicial.id_estudio_radiologico.id_estudio,
+        unidad_medica_procedencia: pacienteInicial.unidad_medica_procedencia.id_unidad,
+        diagnostico_presuntivo: pacienteInicial.diagnostico_presuntivo.id_diagnostico,
+        hospital_envia: pacienteInicial.hospital_envia.id_hospital
       });
     }
   }, [modo, pacienteInicial]);
@@ -324,7 +330,7 @@ const FormularioPaciente = ({
           {especialidades.map((especialidad) => (
             <option
               key={especialidad.id_especialidad}
-              value={especialidad.nombre_especialidad}
+              value={especialidad.id_especialidad}
             >
               {especialidad.nombre_especialidad}
             </option>
@@ -378,7 +384,7 @@ const FormularioPaciente = ({
         >
           <option value="">Seleccione una Unidad Médica</option>
           {unidadesMedicas.map((unidad) => (
-            <option key={unidad.id_unidad} value={unidad.nombre_unidad}>
+            <option key={unidad.id_unidad} value={unidad.id_unidad}>
               {unidad.nombre_unidad}
             </option>
           ))}
@@ -397,7 +403,7 @@ const FormularioPaciente = ({
           {diagnosticosPresuntivos.map((diagnostico) => (
             <option
               key={diagnostico.id_diagnostico}
-              value={diagnostico.nombre_diagnostico}
+              value={diagnostico.id_diagnostico}
             >
               {diagnostico.nombre_diagnostico}
             </option>
@@ -415,7 +421,7 @@ const FormularioPaciente = ({
         >
           <option value="">Seleccione un Hospital</option>
           {hospitales.map((hospital) => (
-            <option key={hospital.id_hospital} value={hospital.nombre_hospital}>
+            <option key={hospital.id_hospital} value={hospital.id_hospital}>
               {hospital.nombre_hospital}
             </option>
           ))}

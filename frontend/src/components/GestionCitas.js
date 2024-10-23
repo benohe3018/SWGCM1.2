@@ -29,16 +29,7 @@ const GestionCitas = () => {
     const newPacientes = [...pacientesPrueba];
     const index = newPacientes.findIndex(p => p.id === pacienteId);
     if (index !== -1) {
-      const valor = e.target.value;
-      newPacientes[index][campo] = valor;
-  
-      if (campo === 'id_medico_refiere') {
-        const medicoSeleccionado = medicos.find(medico => medico.id_medico === parseInt(valor));
-        newPacientes[index]['nombre_completo_medico'] = medicoSeleccionado
-          ? medicoSeleccionado.nombre_completo
-          : '';
-      }
-  
+      newPacientes[index][campo] = e.target.value;
       setPacientesPrueba(newPacientes);
     }
   };
@@ -375,13 +366,13 @@ const handleEditarPaciente = async (pacienteEditado) => {
               <td>
               <select
                 className="gestion-citas__input"
-                value={paciente.id_medico_refiere}
-                onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
+                value={paciente.nombre_completo_medico}
+                onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
                 disabled={!medicos.length}
               >
                 <option value="">Seleccione un médico</option>
                 {medicos.map((medico) => (
-                  <option key={medico.id_medico} value={medico.id_medico}>
+                  <option key={medico.id_medico} value={medico.nombre_completo}>
                     {medico.nombre_completo}
                   </option>
                 ))}
@@ -457,13 +448,13 @@ const handleEditarPaciente = async (pacienteEditado) => {
             <label><strong>Médico:</strong></label>
             <select
               className="gestion-citas__input"
-              value={paciente.id_medico_refiere}
-              onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
+              value={paciente.nombre_completo_medico}
+              onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
               disabled={!medicos.length}
             >
               <option value="">Seleccione un médico</option>
               {medicos.map((medico) => (
-                <option key={medico.id_medico} value={medico.id_medico}>
+                <option key={medico.id_medico} value={medico.nombre_completo}>
                   {medico.nombre_completo}
                 </option>
               ))}

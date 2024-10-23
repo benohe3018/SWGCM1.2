@@ -373,7 +373,7 @@ const handleEditarPaciente = async (pacienteEditado) => {
                 <option value="">Seleccione un médico</option>
                 {medicos.map((medico) => (
                   <option key={medico.id_medico} value={medico.id_medico}>
-                    {medico.nombre_medico}
+                    {medico.nombre_completo}
                   </option>
                 ))}
               </select>

@@ -452,13 +452,13 @@ const handleEditarPaciente = async (pacienteEditado) => {
             <label><strong>Médico:</strong></label>
             <select
               className="gestion-citas__input"
-              value={paciente.nombre_completo_medico}
-              onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo_medico')}
+              value={paciente.id_medico_refiere}
+              onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
               disabled={!medicos.length}
             >
               <option value="">Seleccione un médico</option>
               {medicos.map((medico) => (
-                <option key={medico.id} value={medico.nombre_completo}>
+                <option key={medico.id_medico} value={medico.id_medico}>
                   {medico.nombre_completo}
                 </option>
               ))}

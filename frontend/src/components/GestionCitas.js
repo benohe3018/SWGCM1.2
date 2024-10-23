@@ -29,7 +29,16 @@ const GestionCitas = () => {
     const newPacientes = [...pacientesPrueba];
     const index = newPacientes.findIndex(p => p.id === pacienteId);
     if (index !== -1) {
-      newPacientes[index][campo] = e.target.value;
+      const valor = e.target.value;
+      newPacientes[index][campo] = valor;
+  
+      if (campo === 'id_medico_refiere') {
+        const medicoSeleccionado = medicos.find(medico => medico.id_medico === parseInt(valor));
+        newPacientes[index]['nombre_completo_medico'] = medicoSeleccionado
+          ? medicoSeleccionado.nombre_completo
+          : '';
+      }
+  
       setPacientesPrueba(newPacientes);
     }
   };
@@ -132,38 +141,34 @@ const GestionCitas = () => {
 
 const handleEditarPaciente = async (pacienteEditado) => {
   try {
-      if (!pacienteEditado.id) {
-          throw new Error("El ID del paciente no está definido");
-      }
+    const nombreCompletoParts = pacienteEditado.nombre_completo.split(' ');
 
-      const nombreCompletoParts = pacienteEditado.nombre_completo.split(' ');
-      if (nombreCompletoParts.length < 3) {
-          throw new Error("El nombre completo debe incluir nombre, apellido paterno y apellido materno");
-      }
+    const pacienteData = {
+      id: pacienteEditado.id,
+      fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
+      nss: pacienteEditado.nss,
+      nombre_paciente: nombreCompletoParts[0],
+      apellido_paterno_paciente: nombreCompletoParts[1],
+      apellido_materno_paciente: nombreCompletoParts[2],
+      especialidad_medica: pacienteEditado.especialidad_medica,
+      id_medico_refiere: pacienteEditado.id_medico_refiere,
+      nombre_completo_medico: pacienteEditado.nombre_completo_medico,
+      id_estudio_radiologico: pacienteEditado.id_estudio_radiologico,
+      estudio_solicitado: pacienteEditado.estudio_solicitado,
+      unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
+      diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
+      id_hospital_envia: pacienteEditado.id_hospital_envia,
+      hospital_envia: pacienteEditado.hospital_envia
+    };
 
-      const pacienteData = {
-          id: pacienteEditado.id,
-          fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
-          nss: pacienteEditado.nss,
-          nombre_paciente: nombreCompletoParts[0],
-          apellido_paterno_paciente: nombreCompletoParts[1],
-          apellido_materno_paciente: nombreCompletoParts[2],
-          especialidad_medica: pacienteEditado.especialidad_medica,
-          nombre_completo_medico: pacienteEditado.nombre_completo_medico,
-          estudio_solicitado: pacienteEditado.estudio_solicitado,
-          unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
-          diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
-          hospital_envia: pacienteEditado.hospital_envia
-      };
-
-      await updatePacientePrueba(pacienteEditado.id, pacienteData);
-      await cargarPacientesPrueba();
-      setPacienteSeleccionado(null);
-      setVista('ver');
-      setMensaje('Paciente actualizado exitosamente.');
-      setTimeout(() => setMensaje(null), 3000);
+    await updatePacientePrueba(pacienteEditado.id, pacienteData);
+    await cargarPacientesPrueba();
+    setPacienteSeleccionado(null);
+    setVista('ver');
+    setMensaje('Paciente actualizado exitosamente.');
+    setTimeout(() => setMensaje(null), 3000);
   } catch (error) {
-      setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
+    setError("No se pudo editar el paciente. Por favor, intente de nuevo.");
   }
 };
 

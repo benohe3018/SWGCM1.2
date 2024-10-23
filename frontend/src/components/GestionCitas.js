@@ -33,6 +33,9 @@ const GestionCitas = () => {
       if (campo === 'id_medico_refiere') {
         const medicoSeleccionado = medicos.find(medico => medico.id_medico === parseInt(e.target.value));
         newPacientes[index]['nombre_completo_medico'] = medicoSeleccionado ? `${medicoSeleccionado.nombre_medico} ${medicoSeleccionado.apellido_paterno_medico} ${medicoSeleccionado.apellido_materno_medico}` : '';
+      } else if (campo === 'id_estudio_radiologico') {
+        const estudioSeleccionado = estudios.find(estudio => estudio.id_estudio === parseInt(e.target.value));
+        newPacientes[index]['estudio_solicitado'] = estudioSeleccionado ? estudioSeleccionado.nombre_estudio : '';
       } else if (campo === 'fecha_hora_estudio' || campo === 'hora_estudio') {
         const fecha = campo === 'fecha_hora_estudio' ? e.target.value : newPacientes[index]['fecha_hora_estudio'].split('T')[0];
         const hora = campo === 'hora_estudio' ? e.target.value : newPacientes[index]['fecha_hora_estudio'].split('T')[1];
@@ -171,7 +174,8 @@ const handleEditarPaciente = async (pacienteEditado) => {
           apellido_materno_paciente: nombreCompletoParts[2],
           especialidad_medica: pacienteEditado.especialidad_medica,
           nombre_completo_medico: pacienteEditado.nombre_completo_medico,
-          estudio_solicitado: pacienteEditado.estudio_solicitado,
+          id_medico_refiere: pacienteEditado.id_medico_refiere, // Mantener el id del médico
+          id_estudio_radiologico: pacienteEditado.id_estudio_radiologico, // Mantener el id del estudio
           unidad_medica_procedencia: pacienteEditado.unidad_medica_procedencia,
           diagnostico_presuntivo: pacienteEditado.diagnostico_presuntivo,
           hospital_envia: pacienteEditado.hospital_envia

@@ -376,8 +376,8 @@ const handleEditarPaciente = async (pacienteEditado) => {
                 >
                   <option value="">Seleccione un médico</option>
                   {medicos.map((medico) => (
-                    <option key={medico.id} value={medico.nombre_completo}>
-                      {medico.nombre_completo}
+                    <option key={medico.id} value={medico.id_medico}>
+                      {medico.nombre_medico}
                     </option>
                   ))}
                 </select>
@@ -385,14 +385,14 @@ const handleEditarPaciente = async (pacienteEditado) => {
               <td>
                 <select
                   className="gestion-citas__input"
-                  value={paciente.estudio_solicitado}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'estudio_solicitado')}
+                  value={paciente.id_estudio_radiologico}
+                  onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
                   disabled={!estudios.length}
                 >
                   <option value="">Seleccione un estudio</option>
                   {estudios.map((estudio) => (
-                    <option key={estudio.id} value={estudio.nombre}>
-                      {estudio.nombre}
+                    <option key={estudio.id_estudio} value={estudio.id_estudio}>
+                      {estudio.nombre_estudio}
                     </option>
                   ))}
                 </select>
@@ -400,14 +400,14 @@ const handleEditarPaciente = async (pacienteEditado) => {
               <td>
                 <select
                   className="gestion-citas__input"
-                  value={paciente.hospital_envia}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'hospital_envia')}
+                  value={paciente.id_hospital_envia}
+                  onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
                   disabled={!hospitales.length}
                 >
                   <option value="">Seleccione un hospital</option>
                   {hospitales.map((hospital) => (
-                    <option key={hospital.id} value={hospital.nombre}>
-                      {hospital.nombre}
+                    <option key={hospital.id_hospita} value={hospital.id_hospital}>
+                      {hospital.nombre_hospital}
                     </option>
                   ))}
                 </select>

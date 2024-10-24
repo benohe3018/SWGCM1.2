@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 const BackupRecovery = () => {
   const [selectedModules, setSelectedModules] = useState([]);
   const [medicos, setMedicos] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
   const [citas, setCitas] = useState([]);
   const [estudios, setEstudios] = useState([]);
   const [especialidades, setEspecialidades] = useState([]);
@@ -25,6 +26,7 @@ const BackupRecovery = () => {
 
   useEffect(() => {
     if (selectedModules.includes('medicos')) fetchData('medicos', setMedicos);
+    if (selectedModules.includes('usuarios')) fetchData('usuarios', setUsuarios);
     if (selectedModules.includes('citas')) fetchData('citas', setCitas);
     if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
     if (selectedModules.includes('especialidades')) fetchData('especialidades', setEspecialidades);
@@ -38,12 +40,15 @@ const BackupRecovery = () => {
       alert('Por favor, seleccione los módulos a respaldar.');
       return;
     }
-
+  
     selectedModules.forEach(module => {
       let data;
       switch (module) {
         case 'medicos':
           data = medicos;
+          break;
+        case 'usuarios':
+          data = usuarios;
           break;
         case 'citas':
           data = citas;
@@ -66,7 +71,14 @@ const BackupRecovery = () => {
         default:
           return;
       }
-
+  
+      console.log(`Datos de ${module}:`, data); // Registro de depuración
+  
+      if (data.length === 0) {
+        console.warn(`No hay datos para el módulo ${module}.`);
+        return;
+      }
+  
       const dataStr = JSON.stringify(data, null, 2);
       const blob = new Blob([dataStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
@@ -92,6 +104,8 @@ const BackupRecovery = () => {
             if (data[0].nombre_medico) {
               endpoint = 'medicos';
             } else if (data[0].cita_id) {
+              endpoint = 'usuarios';
+            }else if (data[0].cita_id) {
               endpoint = 'citas';
             } else if (data[0].estudio_id) {
               endpoint = 'estudios';
@@ -162,6 +176,7 @@ const BackupRecovery = () => {
           </div>
           <button className="backup-recovery__button" onClick={handleBackup}>Realizar Backup</button>
           <input type="file" className="backup-recovery__file-input" onChange={handleRestore} />
+          <button className="backup-recovery__button" onClick={handleRestore}>Restaurar Datos</button>
         </div>
       </div>
     </div>

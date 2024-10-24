@@ -103,7 +103,15 @@ const BackupRecovery = () => {
               endpoint = 'diagnosticos';
             } else if (data[0].hospital_id) {
               endpoint = 'hospitales';
+            } else {
+              console.error('Formato de archivo no reconocido:', data[0]);
+              alert('Formato de archivo no reconocido.');
+              return;
             }
+          } else {
+            console.error('Archivo vacío o formato no reconocido.');
+            alert('Archivo vacío o formato no reconocido.');
+            return;
           }
   
           if (endpoint) {
@@ -118,10 +126,9 @@ const BackupRecovery = () => {
             if (response.ok) {
               alert('Datos restaurados con éxito.');
             } else {
+              console.error('Error al restaurar los datos:', response.statusText);
               alert('Error al restaurar los datos.');
             }
-          } else {
-            alert('Formato de archivo no reconocido.');
           }
         } catch (error) {
           console.error('Error al restaurar los datos:', error);

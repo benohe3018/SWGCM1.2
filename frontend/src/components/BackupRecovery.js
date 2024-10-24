@@ -40,7 +40,7 @@ const BackupRecovery = () => {
       alert('Por favor, seleccione los módulos a respaldar.');
       return;
     }
-  
+
     selectedModules.forEach(module => {
       let data;
       switch (module) {
@@ -71,14 +71,14 @@ const BackupRecovery = () => {
         default:
           return;
       }
-  
+
       console.log(`Datos de ${module}:`, data); // Registro de depuración
-  
+
       if (data.length === 0) {
         console.warn(`No hay datos para el módulo ${module}.`);
         return;
       }
-  
+
       const dataStr = JSON.stringify(data, null, 2);
       const blob = new Blob([dataStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
@@ -98,14 +98,14 @@ const BackupRecovery = () => {
         try {
           const data = JSON.parse(e.target.result);
           let endpoint = '';
-  
+
           // Determina el endpoint basado en el contenido del archivo
           if (data.length > 0) {
             if (data[0].nombre_medico) {
               endpoint = 'medicos';
-            } else if (data[0].cita_id) {
+            } else if (data[0].usuario_id) {
               endpoint = 'usuarios';
-            }else if (data[0].cita_id) {
+            } else if (data[0].cita_id) {
               endpoint = 'citas';
             } else if (data[0].estudio_id) {
               endpoint = 'estudios';
@@ -117,9 +117,17 @@ const BackupRecovery = () => {
               endpoint = 'diagnosticos';
             } else if (data[0].hospital_id) {
               endpoint = 'hospitales';
+            } else {
+              console.error('Formato de archivo no reconocido:', data[0]);
+              alert('Formato de archivo no reconocido.');
+              return;
             }
+          } else {
+            console.error('Archivo vacío o formato no reconocido.');
+            alert('Archivo vacío o formato no reconocido.');
+            return;
           }
-  
+
           if (endpoint) {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}/restore`, {
               method: 'POST',
@@ -128,14 +136,13 @@ const BackupRecovery = () => {
               },
               body: JSON.stringify(data),
             });
-  
+
             if (response.ok) {
               alert('Datos restaurados con éxito.');
             } else {
+              console.error('Error al restaurar los datos:', response.statusText);
               alert('Error al restaurar los datos.');
             }
-          } else {
-            alert('Formato de archivo no reconocido.');
           }
         } catch (error) {
           console.error('Error al restaurar los datos:', error);

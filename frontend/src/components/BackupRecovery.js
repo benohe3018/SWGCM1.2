@@ -17,6 +17,9 @@ const BackupRecovery = () => {
   const fetchData = async (endpoint, setData) => {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}`);
+      if (!response.ok) {
+        throw new Error(`Error fetching ${endpoint}: ${response.statusText}`);
+      }
       const data = await response.json();
       console.log(`Datos obtenidos de ${endpoint}:`, data); // Registro de depuración
       setData(data);
@@ -30,8 +33,8 @@ const BackupRecovery = () => {
     if (selectedModules.includes('usuarios')) fetchData('usuarios', setUsuarios);
     if (selectedModules.includes('citas')) fetchData('citas', setCitas);
     if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
-    if (selectedModules.includes('especialidades')) fetchData('especialidades', setEspecialidades);
-    if (selectedModules.includes('unidades')) fetchData('unidades', setUnidades);
+    if (selectedModules.includes('especialidades/list')) fetchData('especialidades/list', setEspecialidades);
+    if (selectedModules.includes('unidades/list')) fetchData('unidades/list', setUnidades);
     if (selectedModules.includes('diagnosticos')) fetchData('diagnosticos', setDiagnosticos);
     if (selectedModules.includes('hospitales')) fetchData('hospitales', setHospitales);
   }, [selectedModules]);
@@ -57,10 +60,10 @@ const BackupRecovery = () => {
         case 'estudios':
           data = estudios;
           break;
-        case 'especialidades':
+        case 'especialidades/list':
           data = especialidades;
           break;
-        case 'unidades':
+        case 'unidades/list':
           data = unidades;
           break;
         case 'diagnosticos':
@@ -75,7 +78,7 @@ const BackupRecovery = () => {
 
       console.log(`Datos de ${module}:`, data); // Registro de depuración
 
-      if (data.length === 0) {
+      if (!data || data.length === 0) {
         console.warn(`No hay datos para el módulo ${module}.`);
         return;
       }
@@ -111,9 +114,9 @@ const BackupRecovery = () => {
             } else if (data[0].estudio_id) {
               endpoint = 'estudios';
             } else if (data[0].especialidad_id) {
-              endpoint = 'especialidades';
+              endpoint = 'especialidades/restore';
             } else if (data[0].unidad_id) {
-              endpoint = 'unidades';
+              endpoint = 'unidades/restore';
             } else if (data[0].diagnostico_id) {
               endpoint = 'diagnosticos';
             } else if (data[0].hospital_id) {
@@ -130,7 +133,7 @@ const BackupRecovery = () => {
           }
 
           if (endpoint) {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}/restore`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -175,10 +178,10 @@ const BackupRecovery = () => {
         <div className="backup-recovery__content">
           <h3 className="backup-recovery__form-description">Seleccione los módulos a respaldar:</h3>
           <div className="backup-recovery__form-group">
-            {['medicos', 'usuarios', 'citas', 'estudios', 'especialidades', 'unidades', 'diagnosticos', 'hospitales'].map(module => (
+            {['medicos', 'usuarios', 'citas', 'estudios', 'especialidades/list', 'unidades/list', 'diagnosticos', 'hospitales'].map(module => (
               <label key={module} className="backup-recovery__form-label">
                 <input type="checkbox" value={module} onChange={handleModuleSelection} />
-                {module.charAt(0).toUpperCase() + module.slice(1)}
+                {module.charAt(0).toUpperCase() + module.slice(1).replace(/-/g, ' ')}
               </label>
             ))}
           </div>

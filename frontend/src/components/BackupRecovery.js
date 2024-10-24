@@ -38,7 +38,7 @@ const BackupRecovery = () => {
       alert('Por favor, seleccione los módulos a respaldar.');
       return;
     }
-
+  
     selectedModules.forEach(module => {
       let data;
       switch (module) {
@@ -66,7 +66,14 @@ const BackupRecovery = () => {
         default:
           return;
       }
-
+  
+      console.log(`Datos de ${module}:`, data); // Registro de depuración
+  
+      if (data.length === 0) {
+        console.warn(`No hay datos para el módulo ${module}.`);
+        return;
+      }
+  
       const dataStr = JSON.stringify(data, null, 2);
       const blob = new Blob([dataStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);

@@ -71,6 +71,7 @@ const DiagnosticosPresuntivos = ({ vistaInicial }) => {
     try {
       await createDiagnostico(nuevoDiagnostico);
       setMensaje('Diagnóstico creado exitosamente.');
+      await cargarDiagnosticos();
       setTimeout(() => {
         setMensaje(null);
       },3000); 

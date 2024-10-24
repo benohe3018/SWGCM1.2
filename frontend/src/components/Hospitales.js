@@ -85,14 +85,14 @@ const Hospitales = ({ vistaInicial }) => {
   const validarCiudadHospital = (ciudad) => {
     const ciudadRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ][a-zA-Z0-9\s#,.]*$/;
     if (!ciudad) {
-      return 'La ciudad del hospital es obligatoria';
+        return 'La ciudad del hospital es obligatoria';
     } else if (!ciudadRegex.test(ciudad)) {
-      return 'La ciudad del hospital debe comenzar con letras y puede incluir números y espacios';
+        return 'La ciudad del hospital debe comenzar con letras y puede incluir números y espacios';
     } else if (ciudad.length < 2 || ciudad.length > 100) {
-      return 'La ciudad del hospital debe tener entre 2 y 100 caracteres no mas';
+        return 'La ciudad del hospital debe tener entre 2 y 100 caracteres';
     }
     return null;
-  };
+};
   
   const handleCrearHospital = async (nuevoHospital) => {
     console.log('Creating hospital:', nuevoHospital);

@@ -4,20 +4,17 @@ import './FormularioEspecialidad.css';
 const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaje, error }) => {
   const [nombreEspecialidad, setNombreEspecialidad] = useState(especialidad ? especialidad.nombre_especialidad : '');
 
-  // Este efecto se asegura de que el campo se vacíe cuando se cambia a modo "crear"
   useEffect(() => {
     if (modo === 'crear') {
       setNombreEspecialidad('');
     }
   }, [mensaje]);
 
-  // Función de validación utilizando una expresión regular
   const validarNombreEspecialidad = (nombre) => {
     const regex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]*$/;
     return regex.test(nombre);
   };
 
-  // Función que maneja el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!nombreEspecialidad) {
@@ -29,9 +26,9 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
       return;
     }
     onSubmit({ nombre_especialidad: nombreEspecialidad });
+    setNombreEspecialidad(''); // Limpiar el campo de texto después de enviar el formulario
   };
 
-  // Función que maneja los cambios en el campo de entrada
   const handleChange = (e) => {
     setNombreEspecialidad(e.target.value);
   };
@@ -55,6 +52,8 @@ const FormularioEspecialidad = ({ modo, especialidad, onSubmit, onCancel, mensaj
           <button type="button" className="cancel-button" onClick={onCancel}>Cancelar</button>
         </div>
       </form>
+      {mensaje && <div className="mensaje-exito">{mensaje}</div>}
+      {error && <div className="mensaje-error">{error}</div>}
     </div>
   );
 };

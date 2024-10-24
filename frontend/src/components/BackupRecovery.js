@@ -31,10 +31,10 @@ const BackupRecovery = () => {
   useEffect(() => {
     if (selectedModules.includes('medicos')) fetchData('medicos', setMedicos);
     if (selectedModules.includes('usuarios')) fetchData('usuarios', setUsuarios);
-    if (selectedModules.includes('citas')) fetchData('citas', setCitas);
+    if (selectedModules.includes('citas')) fetchData('pacientes_prueba', setCitas);
     if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
-    if (selectedModules.includes('especialidades/list')) fetchData('especialidades/list', setEspecialidades);
-    if (selectedModules.includes('unidades/list')) fetchData('unidades/list', setUnidades);
+    if (selectedModules.includes('especialidades')) fetchData('especialidades/list', setEspecialidades);
+    if (selectedModules.includes('unidades')) fetchData('unidades/list', setUnidades);
     if (selectedModules.includes('diagnosticos')) fetchData('diagnosticos', setDiagnosticos);
     if (selectedModules.includes('hospitales')) fetchData('hospitales', setHospitales);
   }, [selectedModules]);
@@ -60,10 +60,10 @@ const BackupRecovery = () => {
         case 'estudios':
           data = estudios;
           break;
-        case 'especialidades/list':
+        case 'especialidades':
           data = especialidades;
           break;
-        case 'unidades/list':
+        case 'unidades':
           data = unidades;
           break;
         case 'diagnosticos':
@@ -106,21 +106,21 @@ const BackupRecovery = () => {
           // Determina el endpoint basado en el contenido del archivo
           if (data.length > 0) {
             if (data[0].nombre_medico) {
-              endpoint = 'medicos';
+              endpoint = 'medicos/restore';
             } else if (data[0].usuario_id) {
-              endpoint = 'usuarios';
+              endpoint = 'usuarios/restore';
             } else if (data[0].cita_id) {
-              endpoint = 'citas';
+              endpoint = 'citas/restore';
             } else if (data[0].estudio_id) {
-              endpoint = 'estudios';
+              endpoint = 'estudios/restore';
             } else if (data[0].especialidad_id) {
               endpoint = 'especialidades/restore';
             } else if (data[0].unidad_id) {
               endpoint = 'unidades/restore';
             } else if (data[0].diagnostico_id) {
-              endpoint = 'diagnosticos';
+              endpoint = 'diagnosticos/restore';
             } else if (data[0].hospital_id) {
-              endpoint = 'hospitales';
+              endpoint = 'hospitales/restore';
             } else {
               console.error('Formato de archivo no reconocido:', data[0]);
               alert('Formato de archivo no reconocido.');
@@ -178,7 +178,7 @@ const BackupRecovery = () => {
         <div className="backup-recovery__content">
           <h3 className="backup-recovery__form-description">Seleccione los módulos a respaldar:</h3>
           <div className="backup-recovery__form-group">
-            {['medicos', 'usuarios', 'citas', 'estudios', 'especialidades/list', 'unidades/list', 'diagnosticos', 'hospitales'].map(module => (
+            {['medicos', 'usuarios', 'citas', 'estudios', 'especialidades', 'unidades', 'diagnosticos', 'hospitales'].map(module => (
               <label key={module} className="backup-recovery__form-label">
                 <input type="checkbox" value={module} onChange={handleModuleSelection} />
                 {module.charAt(0).toUpperCase() + module.slice(1).replace(/-/g, ' ')}

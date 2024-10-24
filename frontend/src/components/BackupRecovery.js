@@ -34,56 +34,49 @@ const BackupRecovery = () => {
   }, [selectedModules]);
 
   const handleBackup = () => {
-  if (selectedModules.length === 0) {
-    alert('Por favor, seleccione los módulos a respaldar.');
-    return;
-  }
-
-  selectedModules.forEach(module => {
-    let data;
-    switch (module) {
-      case 'medicos':
-        data = medicos;
-        break;
-      case 'citas':
-        data = citas;
-        break;
-      case 'estudios':
-        data = estudios;
-        break;
-      case 'especialidades':
-        data = especialidades;
-        break;
-      case 'unidades':
-        data = unidades;
-        break;
-      case 'diagnosticos':
-        data = diagnosticos;
-        break;
-      case 'hospitales':
-        data = hospitales;
-        break;
-      default:
-        return;
-    }
-
-    console.log(`Datos de ${module}:`, data); // Registro de depuración
-
-    if (data.length === 0) {
-      console.warn(`No hay datos para el módulo ${module}.`);
+    if (selectedModules.length === 0) {
+      alert('Por favor, seleccione los módulos a respaldar.');
       return;
     }
 
-    const dataStr = JSON.stringify(data, null, 2);
-    const blob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `backup_${module}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-};
+    selectedModules.forEach(module => {
+      let data;
+      switch (module) {
+        case 'medicos':
+          data = medicos;
+          break;
+        case 'citas':
+          data = citas;
+          break;
+        case 'estudios':
+          data = estudios;
+          break;
+        case 'especialidades':
+          data = especialidades;
+          break;
+        case 'unidades':
+          data = unidades;
+          break;
+        case 'diagnosticos':
+          data = diagnosticos;
+          break;
+        case 'hospitales':
+          data = hospitales;
+          break;
+        default:
+          return;
+      }
+
+      const dataStr = JSON.stringify(data, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `backup_${module}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  };
 
   const handleRestore = (event) => {
     const file = event.target.files[0];
@@ -110,15 +103,7 @@ const BackupRecovery = () => {
               endpoint = 'diagnosticos';
             } else if (data[0].hospital_id) {
               endpoint = 'hospitales';
-            } else {
-              console.error('Formato de archivo no reconocido:', data[0]);
-              alert('Formato de archivo no reconocido.');
-              return;
             }
-          } else {
-            console.error('Archivo vacío o formato no reconocido.');
-            alert('Archivo vacío o formato no reconocido.');
-            return;
           }
   
           if (endpoint) {
@@ -133,9 +118,10 @@ const BackupRecovery = () => {
             if (response.ok) {
               alert('Datos restaurados con éxito.');
             } else {
-              console.error('Error al restaurar los datos:', response.statusText);
               alert('Error al restaurar los datos.');
             }
+          } else {
+            alert('Formato de archivo no reconocido.');
           }
         } catch (error) {
           console.error('Error al restaurar los datos:', error);

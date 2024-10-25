@@ -114,17 +114,17 @@ const BackupRecovery = () => {
           // Determina el endpoint basado en el contenido del archivo
           if (data[0].nombre_medico) {
             endpoint = 'medicos/restore';
-          } else if (data[0].usuario_id) {
+          } else if (data[0].nombre_usuario) {
             endpoint = 'usuarios/restore';
-          } else if (data[0].cita_id) {
+          } else if (data[0].id) {
             endpoint = 'citas/restore';
-          } else if (data[0].estudio_id) {
+          } else if (data[0].nombre_estudio) {
             endpoint = 'estudios/restore';
-          } else if (data[0].especialidad_id) {
+          } else if (data[0].nombre_especialidad) {
             endpoint = 'especialidades/restore';
-          } else if (data[0].unidad_id) {
+          } else if (data[0].nombre_unidad) {
             endpoint = 'unidades/restore';
-          } else if (data[0].diagnostico_id) {
+          } else if (data[0].nombre_diagnostico) {
             endpoint = 'diagnosticos/restore';
           } else if (data[0].nombre_hospital) {
             endpoint = 'hospitales/restore';

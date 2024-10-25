@@ -126,7 +126,7 @@ const BackupRecovery = () => {
             endpoint = 'unidades/restore';
           } else if (data[0].diagnostico_id) {
             endpoint = 'diagnosticos/restore';
-          } else if (data[0].hospital_id) {
+          } else if (data[0].nombre_hospital) {
             endpoint = 'hospitales/restore';
           } else {
             console.error('Formato de archivo no reconocido:', data[0]);

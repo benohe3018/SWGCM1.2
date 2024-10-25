@@ -101,34 +101,36 @@ const BackupRecovery = () => {
       reader.onload = async (e) => {
         try {
           const data = JSON.parse(e.target.result);
+
+          // Verificar que el archivo JSON no esté vacío y sea un array
+          if (!Array.isArray(data) || data.length === 0) {
+            console.error('Archivo vacío o formato no reconocido.');
+            alert('Archivo vacío o formato no reconocido.');
+            return;
+          }
+
           let endpoint = '';
 
           // Determina el endpoint basado en el contenido del archivo
-          if (data.length > 0) {
-            if (data[0].nombre_medico) {
-              endpoint = 'medicos/restore';
-            } else if (data[0].usuario_id) {
-              endpoint = 'usuarios/restore';
-            } else if (data[0].cita_id) {
-              endpoint = 'citas/restore';
-            } else if (data[0].estudio_id) {
-              endpoint = 'estudios/restore';
-            } else if (data[0].especialidad_id) {
-              endpoint = 'especialidades/restore';
-            } else if (data[0].unidad_id) {
-              endpoint = 'unidades/restore';
-            } else if (data[0].diagnostico_id) {
-              endpoint = 'diagnosticos/restore';
-            } else if (data[0].hospital_id) {
-              endpoint = 'hospitales/restore';
-            } else {
-              console.error('Formato de archivo no reconocido:', data[0]);
-              alert('Formato de archivo no reconocido.');
-              return;
-            }
+          if (data[0].nombre_medico) {
+            endpoint = 'medicos/restore';
+          } else if (data[0].usuario_id) {
+            endpoint = 'usuarios/restore';
+          } else if (data[0].cita_id) {
+            endpoint = 'citas/restore';
+          } else if (data[0].estudio_id) {
+            endpoint = 'estudios/restore';
+          } else if (data[0].especialidad_id) {
+            endpoint = 'especialidades/restore';
+          } else if (data[0].unidad_id) {
+            endpoint = 'unidades/restore';
+          } else if (data[0].diagnostico_id) {
+            endpoint = 'diagnosticos/restore';
+          } else if (data[0].hospital_id) {
+            endpoint = 'hospitales/restore';
           } else {
-            console.error('Archivo vacío o formato no reconocido.');
-            alert('Archivo vacío o formato no reconocido.');
+            console.error('Formato de archivo no reconocido:', data[0]);
+            alert('Formato de archivo no reconocido.');
             return;
           }
 

@@ -200,6 +200,55 @@ def delete_paciente_prueba(id):
         print(error_msg)
         logging.error(error_msg)
         return jsonify({"error": "Error en la base de datos"}), 500
+    
+@pacientes_prueba_bp.route('/pacientes_prueba/restore', methods=['POST'])
+def restore_citas():
+  try:
+      citas = request.get_json()
+      key = os.getenv('ENCRYPTION_KEY').encode()
+
+      for cita_data in citas:
+          # Verificar si la cita ya existe
+          existing_cita = PacientePrueba.query.filter_by(id=cita_data['id']).first()
+
+          fecha_hora_estudio = datetime.strptime(cita_data['fecha_hora_estudio'], '%Y-%m-%dT%H:%M')
+
+          if existing_cita:
+              # Actualizar campos de la cita existente
+              existing_cita.fecha_hora_estudio = fecha_hora_estudio
+              existing_cita.nss = encrypt_data(cita_data['nss'], key)
+              existing_cita.nombre_paciente = encrypt_data(cita_data['nombre_paciente'], key)
+              existing_cita.apellido_paterno_paciente = encrypt_data(cita_data['apellido_paterno_paciente'], key)
+              existing_cita.apellido_materno_paciente = encrypt_data(cita_data['apellido_materno_paciente'], key)
+              existing_cita.especialidad_medica = encrypt_data(cita_data['especialidad_medica'], key)
+              existing_cita.nombre_completo_medico = encrypt_data(cita_data['nombre_completo_medico'], key)
+              existing_cita.estudio_solicitado = encrypt_data(cita_data['estudio_solicitado'], key)
+              existing_cita.unidad_medica_procedencia = encrypt_data(cita_data['unidad_medica_procedencia'], key)
+              existing_cita.diagnostico_presuntivo = encrypt_data(cita_data['diagnostico_presuntivo'], key)
+              existing_cita.hospital_envia = cita_data['hospital_envia']
+          else:
+              # Crear una nueva cita
+              nueva_cita = PacientePrueba(
+                  fecha_hora_estudio=fecha_hora_estudio,
+                  nss=encrypt_data(cita_data['nss'], key),
+                  nombre_paciente=encrypt_data(cita_data['nombre_paciente'], key),
+                  apellido_paterno_paciente=encrypt_data(cita_data['apellido_paterno_paciente'], key),
+                  apellido_materno_paciente=encrypt_data(cita_data['apellido_materno_paciente'], key),
+                  especialidad_medica=encrypt_data(cita_data['especialidad_medica'], key),
+                  nombre_completo_medico=encrypt_data(cita_data['nombre_completo_medico'], key),
+                  estudio_solicitado=encrypt_data(cita_data['estudio_solicitado'], key),
+                  unidad_medica_procedencia=encrypt_data(cita_data['unidad_medica_procedencia'], key),
+                  diagnostico_presuntivo=encrypt_data(cita_data['diagnostico_presuntivo'], key),
+                  hospital_envia=cita_data['hospital_envia']
+              )
+              db.session.add(nueva_cita)
+
+      db.session.commit()
+      return jsonify({'message': 'Citas restauradas con éxito.'}), 200
+  except Exception as e:
+      db.session.rollback()
+      logging.error(f'Error al restaurar las citas: {str(e)}')
+      return jsonify({'error': 'Error al restaurar las citas.'}), 500
 
 
 

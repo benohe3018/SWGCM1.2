@@ -127,7 +127,7 @@ const BackupRecovery = () => {
           } else if (data[0].nombre_hospital) {
             endpoint = 'hospitales/restore';
           } else if (data[0].fecha_hora_estudio) {
-            endpoint = 'citas/restore';
+            endpoint = 'pacientes_prueba/restore';
           } else {
             console.error('Formato de archivo no reconocido:', data[0]);
             alert('Formato de archivo no reconocido.');

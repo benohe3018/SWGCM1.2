@@ -213,14 +213,25 @@ def restore_citas():
 
       for cita_data in citas:
           # Validar campos requeridos
-          required_fields = ['id', 'fecha_hora_estudio', 'nss', 'nombre_paciente', 'apellido_paterno_paciente',
-                             'apellido_materno_paciente', 'especialidad_medica', 'nombre_completo_medico',
+          required_fields = ['id', 'fecha_hora_estudio', 'nss', 'especialidad_medica', 'nombre_completo_medico',
                              'estudio_solicitado', 'unidad_medica_procedencia', 'diagnostico_presuntivo',
                              'hospital_envia']
           missing_fields = [field for field in required_fields if field not in cita_data or not cita_data[field]]
           if missing_fields:
               logging.error(f"Faltan campos requeridos en cita_data: {missing_fields}")
               return jsonify({'error': f"Faltan campos requeridos en los datos de la cita: {', '.join(missing_fields)}"}), 400
+
+          # Descomponer nombre completo si los campos individuales no están presentes
+          if not all(field in cita_data for field in ['nombre_paciente', 'apellido_paterno_paciente', 'apellido_materno_paciente']):
+              if 'nombre_completo' in cita_data and cita_data['nombre_completo']:
+                  nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente = descomponer_nombre_completo(cita_data['nombre_completo'])
+              else:
+                  logging.error("Falta 'nombre_completo' para descomponer nombre y apellidos.")
+                  return jsonify({'error': "Falta 'nombre_completo' para descomponer nombre y apellidos."}), 400
+          else:
+              nombre_paciente = cita_data['nombre_paciente']
+              apellido_paterno_paciente = cita_data['apellido_paterno_paciente']
+              apellido_materno_paciente = cita_data['apellido_materno_paciente']
 
           # Parsear la fecha
           try:
@@ -237,9 +248,9 @@ def restore_citas():
                   # Actualizar campos de la cita existente
                   existing_cita.fecha_hora_estudio = fecha_hora_estudio
                   existing_cita.nss = encrypt_data(cita_data['nss'], key)
-                  existing_cita.nombre_paciente = encrypt_data(cita_data['nombre_paciente'], key)
-                  existing_cita.apellido_paterno_paciente = encrypt_data(cita_data['apellido_paterno_paciente'], key)
-                  existing_cita.apellido_materno_paciente = encrypt_data(cita_data['apellido_materno_paciente'], key)
+                  existing_cita.nombre_paciente = encrypt_data(nombre_paciente, key)
+                  existing_cita.apellido_paterno_paciente = encrypt_data(apellido_paterno_paciente, key)
+                  existing_cita.apellido_materno_paciente = encrypt_data(apellido_materno_paciente, key)
                   existing_cita.especialidad_medica = encrypt_data(cita_data['especialidad_medica'], key)
                   existing_cita.nombre_completo_medico = encrypt_data(cita_data['nombre_completo_medico'], key)
                   existing_cita.estudio_solicitado = encrypt_data(cita_data['estudio_solicitado'], key)
@@ -251,9 +262,9 @@ def restore_citas():
                   nueva_cita = PacientePrueba(
                       fecha_hora_estudio=fecha_hora_estudio,
                       nss=encrypt_data(cita_data['nss'], key),
-                      nombre_paciente=encrypt_data(cita_data['nombre_paciente'], key),
-                      apellido_paterno_paciente=encrypt_data(cita_data['apellido_paterno_paciente'], key),
-                      apellido_materno_paciente=encrypt_data(cita_data['apellido_materno_paciente'], key),
+                      nombre_paciente=encrypt_data(nombre_paciente, key),
+                      apellido_paterno_paciente=encrypt_data(apellido_paterno_paciente, key),
+                      apellido_materno_paciente=encrypt_data(apellido_materno_paciente, key),
                       especialidad_medica=encrypt_data(cita_data['especialidad_medica'], key),
                       nombre_completo_medico=encrypt_data(cita_data['nombre_completo_medico'], key),
                       estudio_solicitado=encrypt_data(cita_data['estudio_solicitado'], key),
@@ -274,6 +285,21 @@ def restore_citas():
       db.session.rollback()
       logging.error(f'Error general al restaurar las citas: {str(e)}')
       return jsonify({'error': f'Error al restaurar las citas: {str(e)}'}), 500
+  
+def descomponer_nombre_completo(nombre_completo):
+  partes = nombre_completo.strip().split()
+  if len(partes) >= 3:
+      # Últimas dos partes son los apellidos
+      apellido_paterno_paciente = partes[-2]
+      apellido_materno_paciente = partes[-1]
+      # El resto son los nombres
+      nombre_paciente = ' '.join(partes[:-2])
+  else:
+      # Si hay menos de 3 partes, asumimos una estructura básica
+      nombre_paciente = partes[0] if len(partes) > 0 else ''
+      apellido_paterno_paciente = partes[1] if len(partes) > 1 else ''
+      apellido_materno_paciente = ''
+  return nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente
 
 
 

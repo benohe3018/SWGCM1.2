@@ -34,7 +34,7 @@ const BackupRecovery = () => {
     if (selectedModules.includes('citas')) fetchData('pacientes_prueba/restore', setCitas);
     if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
     if (selectedModules.includes('especialidades')) fetchData('especialidades/list', setEspecialidades);
-    if (selectedModules.includes('unidades')) fetchData('unidades/list', setUnidades);
+    if (selectedModules.includes('unidades')) fetchData('unidades_medicina_familiar/restore', setUnidades);
     if (selectedModules.includes('diagnosticos')) fetchData('diagnosticos', setDiagnosticos);
     if (selectedModules.includes('hospitales')) fetchData('hospitales', setHospitales);
   }, [selectedModules]);
@@ -121,7 +121,7 @@ const BackupRecovery = () => {
           } else if (data[0].nombre_especialidad) {
             endpoint = 'especialidades/restore';
           } else if (data[0].nombre_unidad) {
-            endpoint = 'unidades/restore';
+            endpoint = 'unidades_medicina_familiar/restore';
           } else if (data[0].nombre_diagnostico) {
             endpoint = 'diagnosticos/restore';
           } else if (data[0].nombre_hospital) {

@@ -31,7 +31,7 @@ const BackupRecovery = () => {
   useEffect(() => {
     if (selectedModules.includes('medicos')) fetchData('medicos', setMedicos);
     if (selectedModules.includes('usuarios')) fetchData('usuarios', setUsuarios);
-    if (selectedModules.includes('citas')) fetchData('pacientes_prueba', setCitas);
+    if (selectedModules.includes('citas')) fetchData('pacientes_prueba/restore', setCitas);
     if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
     if (selectedModules.includes('especialidades')) fetchData('especialidades/list', setEspecialidades);
     if (selectedModules.includes('unidades')) fetchData('unidades/list', setUnidades);

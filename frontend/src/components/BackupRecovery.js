@@ -120,7 +120,7 @@ const BackupRecovery = () => {
             endpoint = 'estudios/restore';
           } else if (data[0].nombre_especialidad) {
             endpoint = 'especialidades/restore';
-          } else if (data[0].nombre_unidad) {
+          } else if (data[0].nombre_unidad_medica) {
             endpoint = 'unidades_medicina_familiar/restore';
           } else if (data[0].nombre_diagnostico) {
             endpoint = 'diagnosticos/restore';

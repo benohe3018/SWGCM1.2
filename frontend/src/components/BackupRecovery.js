@@ -189,7 +189,7 @@ const BackupRecovery = () => {
           </div>
           <button className="backup-recovery__button" onClick={handleBackup}>Realizar Backup</button>
           <input type="file" className="backup-recovery__file-input" onChange={handleRestore} />
-          <button className="backup-recovery__button" onClick={handleRestore}>Restaurar Datos</button>
+          <button className="backup-recovery__button" onClick={handleRestore}>Restaurar los Datos</button>
         </div>
       </div>
     </div>

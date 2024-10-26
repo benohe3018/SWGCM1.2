@@ -116,8 +116,6 @@ const BackupRecovery = () => {
             endpoint = 'medicos/restore';
           } else if (data[0].nombre_usuario) {
             endpoint = 'usuarios/restore';
-          } else if (data[0].id) {
-            endpoint = 'citas/restore';
           } else if (data[0].nombre_estudio) {
             endpoint = 'estudios/restore';
           } else if (data[0].nombre_especialidad) {
@@ -128,6 +126,8 @@ const BackupRecovery = () => {
             endpoint = 'diagnosticos/restore';
           } else if (data[0].nombre_hospital) {
             endpoint = 'hospitales/restore';
+          } else if (data[0].id && data[0].fecha_cita) {
+            endpoint = 'citas/restore';
           } else {
             console.error('Formato de archivo no reconocido:', data[0]);
             alert('Formato de archivo no reconocido.');

@@ -37,11 +37,11 @@ const CreateMedico = () => {
       return;
     }
     if (!isValidApellido(apellidoPaterno)) {
-      alert('Por favor, introduce un apellido paterno válido(El campo no debe de estar vacío).');
+      alert('Por favor, introduce un apellido paterno válido(El campo no debe de estar vacío ni debe de contener caracteres especiales).');
       return;
     }
     if (!isValidApellido(apellidoMaterno)) {
-      alert('Por favor, introduce un apellido materno válido(El campo no debe de estar vacío).');
+      alert('Por favor, introduce un apellido materno válido(El campo no debe de estar vacío ni debe de contener caracteres especiales).');
       return;
     }
     if (!isValidMatricula(matricula)) {
@@ -56,7 +56,7 @@ const CreateMedico = () => {
     const responseCheck = await fetch(`${process.env.REACT_APP_API_URL}/api/medicos/matricula/${matricula}`);
     const dataCheck = await responseCheck.json();
     if (responseCheck.ok && Object.keys(dataCheck).length > 0) {
-      alert('El médico ya existe en la base de datos. Intente con un nuevo registro');
+      alert('La matricula ya existe en la base de datos. Intente con una nueva matricula');
       return;
     }
 

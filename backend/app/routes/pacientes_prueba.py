@@ -201,7 +201,7 @@ def delete_paciente_prueba(id):
         logging.error(error_msg)
         return jsonify({"error": "Error en la base de datos"}), 500
     
-@pacientes_prueba_bp.route('/pacientes_prueba/restore', methods=['GET'])
+@pacientes_prueba_bp.route('/pacientes_prueba/restore', methods=['POST'])
 def restore_citas():
   try:
       citas = request.get_json()

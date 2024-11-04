@@ -9,24 +9,24 @@ import mrMachine from '../images/MRMachine.jpg';
 
 const GestionCitas = () => {
   const location = useLocation();
-  const [vista, setVista] = useState('');
-  const [pacientesPrueba, setPacientesPrueba] = useState([]);
+  const [vista, setVista] = useState('');//Controlamos la vista actual(Crear, Editar, Actualizar y Eliminar)
+  const [pacientesPrueba, setPacientesPrueba] = useState([]);//Almacenamos los datos obtenidos de la API
   const [medicos, setMedicos] = useState([]);
   const [estudios, setEstudios] = useState([]);
   const [hospitales, setHospitales] = useState([]);
-  const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
+  const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);//Almacenamos el paciente actual seleccionado(para editar o eliminar)
   const [mostrarModal, setMostrarModal] = useState(false);
-  const [error, setError] = useState(null);
-  const [mensaje, setMensaje] = useState(null);
-  const [cargando, setCargando] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState(null);//Manejamos los errores 
+  const [mensaje, setMensaje] = useState(null);//Manejamos la confirmacion de los procesos 
+  const [cargando, setCargando] = useState(true);//Indicamos si los datos están cargando
+  const [currentPage, setCurrentPage] = useState(1);//Implementamos la paginacion
+  const [searchTerm, setSearchTerm] = useState('');//Implementamos la busqueda por terminos
   const [searchField, setSearchField] = useState('nombre_completo');
   const pacientesPerPage = 10;
-  const [formResetToggle, setFormResetToggle] = useState(false);
-  const [horariosDisponibles, setHorariosDisponibles] = useState([]);
+  const [formResetToggle, setFormResetToggle] = useState(false);//Controlamos el reinicio del formulario
+  const [horariosDisponibles, setHorariosDisponibles] = useState([]);//Manejamos los horarios disponibles para citas
 
-  const handleInputChange = (e, pacienteId, campo) => {
+  const handleInputChange = (e, pacienteId, campo) => {//Maneja los cambios en los inputs de los pacientes, actualizando el estado correspondiente.
     const newPacientes = [...pacientesPrueba];
     const index = newPacientes.findIndex(p => p.id === pacienteId);
     if (index !== -1) {
@@ -47,7 +47,7 @@ const GestionCitas = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect(() => {//Inicializamos los horarios disponibles para las citas
     const generarHorariosDisponibles = () => {
       const horarios = [
         '07:15', '07:45', '08:25', '09:05', '09:45', '10:25', '11:05', '11:45', '12:25',
@@ -69,7 +69,7 @@ const GestionCitas = () => {
     }
   }, [mensaje]);
 
-  useEffect(() => {
+  useEffect(() => {//Actualizamos las vistas dependiendo de la ruta
     if (location.pathname === '/crear-cita') {
       setVista('crear');
     } else if (location.pathname === '/ver-citas') {
@@ -81,7 +81,7 @@ const GestionCitas = () => {
     }
   }, [location.pathname]);
 
-    const inicializarDatos = useCallback(async () => {
+    const inicializarDatos = useCallback(async () => {//Obtenemos los datos desde la API y los almacenamos en el estado, se ejecuta al montar el componente
     try {
       setCargando(true);
       const [pacientesData, medicosData, estudiosData, hospitalesData] = await Promise.all([
@@ -109,7 +109,7 @@ const GestionCitas = () => {
     inicializarDatos();
   }, [inicializarDatos]);  
 
-  const cargarPacientesPrueba = async () => {
+  const cargarPacientesPrueba = async () => {//Obtenemos y actualizamos la lista de pacientes
     try {
       setCargando(true);
       const data = await getPacientesPrueba();
@@ -123,7 +123,7 @@ const GestionCitas = () => {
     }
   };
 
-  const handleCrearPaciente = async (datosPaciente) => {
+  const handleCrearPaciente = async (datosPaciente) => {//Enviamos una solicitud POST para crear y actualizar un nuevo paciente
     try {
         const response = await fetch('/api/pacientes_prueba', {
             method: 'POST',
@@ -154,7 +154,7 @@ const GestionCitas = () => {
     }
 };
 
-const handleEditarPaciente = async (pacienteEditado) => {
+const handleEditarPaciente = async (pacienteEditado) => {//Enviamos una solicitud PUT para actualizare un paciente existente
   try {
       if (!pacienteEditado.id) {
           throw new Error("El ID del paciente no está definido");

@@ -286,6 +286,42 @@ def restore_citas():
       logging.error(f'Error general al restaurar las citas: {str(e)}')
       return jsonify({'error': f'Error al restaurar las citas: {str(e)}'}), 500
   
+
+@pacientes_prueba_bp.route('/pacientes_prueba', methods=['GET'])
+def get_citas():
+    try:
+        # Recupera todas las citas de la base de datos
+        citas = PacientePrueba.query.all()
+        key_str = os.getenv('ENCRYPTION_KEY')
+        if not key_str:
+            logging.error("ENCRYPTION_KEY no está definida.")
+            return jsonify({'error': 'Clave de encriptación no definida en el servidor.'}), 500
+        key = key_str.encode()
+
+        # Prepara la lista de citas a devolver, desencriptando los datos necesarios
+        citas_list = []
+        for cita in citas:
+            citas_list.append({
+                'id': cita.id,
+                'fecha_hora_estudio': cita.fecha_hora_estudio.strftime('%Y-%m-%dT%H:%M'),
+                'nss': decrypt_data(cita.nss, key),
+                'nombre_paciente': decrypt_data(cita.nombre_paciente, key),
+                'apellido_paterno_paciente': decrypt_data(cita.apellido_paterno_paciente, key),
+                'apellido_materno_paciente': decrypt_data(cita.apellido_materno_paciente, key),
+                'especialidad_medica': decrypt_data(cita.especialidad_medica, key),
+                'nombre_completo_medico': decrypt_data(cita.nombre_completo_medico, key),
+                'estudio_solicitado': decrypt_data(cita.estudio_solicitado, key),
+                'unidad_medica_procedencia': decrypt_data(cita.unidad_medica_procedencia, key),
+                'diagnostico_presuntivo': decrypt_data(cita.diagnostico_presuntivo, key),
+                'hospital_envia': cita.hospital_envia
+            })
+
+        return jsonify(citas_list), 200
+    except Exception as e:
+        logging.error(f'Error al recuperar las citas: {str(e)}')
+        return jsonify({'error': f'Error al recuperar las citas: {str(e)}'}), 500
+
+  
 def descomponer_nombre_completo(nombre_completo):
   partes = nombre_completo.strip().split()
   if len(partes) >= 3:

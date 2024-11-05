@@ -14,9 +14,10 @@ const BackupRecovery = () => {
   const [diagnosticos, setDiagnosticos] = useState([]);
   const [hospitales, setHospitales] = useState([]);
 
-  const fetchData = async (endpoint, setData) => {
+  const fetchData = async (endpoint, setData, params = {}) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}`);
+      const query = new URLSearchParams(params).toString();
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}?${query}`);
       if (!response.ok) {
         throw new Error(`Error fetching ${endpoint}: ${response.statusText}`);
       }
@@ -31,7 +32,7 @@ const BackupRecovery = () => {
   useEffect(() => {
     if (selectedModules.includes('medicos')) fetchData('medicos', setMedicos);
     if (selectedModules.includes('usuarios')) fetchData('usuarios', setUsuarios);
-    if (selectedModules.includes('citas')) fetchData('pacientes_prueba/restore', setCitas);
+    if (selectedModules.includes('citas')) fetchData('pacientes_prueba', setCitas);
     if (selectedModules.includes('estudios')) fetchData('estudios', setEstudios);
     if (selectedModules.includes('especialidades')) fetchData('especialidades/list', setEspecialidades);
     if (selectedModules.includes('unidades')) fetchData('unidades_medicina_familiar', setUnidades);

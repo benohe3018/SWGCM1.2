@@ -123,6 +123,12 @@ const GestionCitas = () => {
     }
   };
 
+  useEffect(() => {
+    if (vista === 'ver') {
+      cargarPacientesPrueba();
+    }
+  }, [vista, cargarPacientesPrueba]);
+
   const handleCrearPaciente = async (datosPaciente) => {//Enviamos una solicitud POST para crear y actualizar un nuevo paciente
     try {
         const response = await fetch('/api/pacientes_prueba', {

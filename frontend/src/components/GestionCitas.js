@@ -156,6 +156,12 @@ const GestionCitas = () => {
     }
 };
 
+const isPastDate = (fechaHora) => {
+  const fechaCita = new Date(fechaHora);
+  const fechaActual = new Date();
+  return fechaCita < fechaActual;
+};
+
 const handleEditarPaciente = async (pacienteEditado) => {//Enviamos una solicitud PUT para actualizare un paciente existente
   try {
       if (!pacienteEditado.id) {
@@ -178,7 +184,7 @@ const handleEditarPaciente = async (pacienteEditado) => {//Enviamos una solicitu
         setError("Ya existe una cita agendada para esa fecha y hora selecciona otra.");
         return;
       }
-
+     
       const pacienteData = {
           id: pacienteEditado.id,
           fecha_hora_estudio: pacienteEditado.fecha_hora_estudio,
@@ -372,7 +378,7 @@ const handleEditarPaciente = async (pacienteEditado) => {//Enviamos una solicitu
           </>
         )}
 
-{vista === 'editar' && (
+        {vista === 'editar' && (
   <>
     <div className="gestion-citas__table-container">
       <table className="gestion-citas__table gestion-citas__table--editar">
@@ -387,187 +393,201 @@ const handleEditarPaciente = async (pacienteEditado) => {//Enviamos una solicitu
           </tr>
         </thead>
         <tbody>
-          {currentPacientes.map((paciente) => (
-            <tr key={paciente.id}>
-              <td>
-                <input
-                  className="gestion-citas__input"
-                  type="date"
-                  value={paciente.fecha_hora_estudio.split('T')[0]}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'fecha_hora_estudio')}
-                />
-                <select
-                  className="gestion-citas__input"
-                  value={paciente.fecha_hora_estudio.split('T')[1]}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'hora_estudio')}
-                >
-                  <option value="">Seleccione una hora</option>
-                  {horariosDisponibles.map((hora) => (
-                    <option key={hora} value={hora}>
-                      {hora}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <input
-                  className="gestion-citas__input"
-                  type="text"
-                  value={paciente.nombre_completo}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo')}
-                />
-              </td>
-              <td>
-                <select
-                  className="gestion-citas__input"
-                  value={paciente.id_medico_refiere}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
-                  disabled={!medicos.length}
-                >
-                  <option value="">Seleccione un médico</option>
-                  {medicos.map((medico) => (
-                    <option key={medico.id_medico} value={medico.id_medico}>
-                      {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <select
-                  className="gestion-citas__input"
-                  value={paciente.id_estudio_radiologico}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
-                  disabled={!estudios.length}
-                >
-                  <option value="">Seleccione un estudio</option>
-                  {estudios.map((estudio) => (
-                    <option key={estudio.id_estudio} value={estudio.id_estudio}>
-                      {estudio.nombre_estudio}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <select
-                  className="gestion-citas__input"
-                  value={paciente.id_hospital_envia}
-                  onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
-                  disabled={!hospitales.length}
-                >
-                  <option value="">Seleccione un hospital</option>
-                  {hospitales.map((hospital) => (
-                    <option key={hospital.id_hospital} value={hospital.id_hospital}>
-                      {hospital.nombre_hospital}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <div className="gestion-citas__actions">
-                  <button
-                    onClick={() => handleEditarPaciente(paciente)}
-                    className="gestion-citas__button gestion-citas__button--guardar"
+          {currentPacientes.map((paciente) => {
+            const isPast = isPastDate(paciente.fecha_hora_estudio);
+            return (
+              <tr key={paciente.id}>
+                <td>
+                  <input
+                    className="gestion-citas__input"
+                    type="date"
+                    value={paciente.fecha_hora_estudio.split('T')[0]}
+                    onChange={(e) => handleInputChange(e, paciente.id, 'fecha_hora_estudio')}
+                    disabled={isPast}
+                  />
+                  <select
+                    className="gestion-citas__input"
+                    value={paciente.fecha_hora_estudio.split('T')[1]}
+                    onChange={(e) => handleInputChange(e, paciente.id, 'hora_estudio')}
+                    disabled={isPast}
                   >
-                    Guardar
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
+                    <option value="">Seleccione una hora</option>
+                    {horariosDisponibles.map((hora) => (
+                      <option key={hora} value={hora}>
+                        {hora}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <input
+                    className="gestion-citas__input"
+                    type="text"
+                    value={paciente.nombre_completo}
+                    onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo')}
+                    disabled={isPast}
+                  />
+                </td>
+                <td>
+                  <select
+                    className="gestion-citas__input"
+                    value={paciente.id_medico_refiere}
+                    onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
+                    disabled={!medicos.length || isPast}
+                  >
+                    <option value="">Seleccione un médico</option>
+                    {medicos.map((medico) => (
+                      <option key={medico.id_medico} value={medico.id_medico}>
+                        {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <select
+                    className="gestion-citas__input"
+                    value={paciente.id_estudio_radiologico}
+                    onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
+                    disabled={!estudios.length || isPast}
+                  >
+                    <option value="">Seleccione un estudio</option>
+                    {estudios.map((estudio) => (
+                      <option key={estudio.id_estudio} value={estudio.id_estudio}>
+                        {estudio.nombre_estudio}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <select
+                    className="gestion-citas__input"
+                    value={paciente.id_hospital_envia}
+                    onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
+                    disabled={!hospitales.length || isPast}
+                  >
+                    <option value="">Seleccione un hospital</option>
+                    {hospitales.map((hospital) => (
+                      <option key={hospital.id_hospital} value={hospital.id_hospital}>
+                        {hospital.nombre_hospital}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <div className="gestion-citas__actions">
+                    <button
+                      onClick={() => handleEditarPaciente(paciente)}
+                      className="gestion-citas__button gestion-citas__button--guardar"
+                      disabled={isPast}
+                    >
+                      Guardar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
     <div className="gestion-citas__cards-container">
-      {currentPacientes.map((paciente) => (
-        <div key={paciente.id} className="gestion-citas__card">
-          <div className="gestion-citas__card-item">
-            <label><strong>Fecha y Hora:</strong></label>
-            <input
-              className="gestion-citas__input"
-              type="date"
-              value={paciente.fecha_hora_estudio.split('T')[0]}
-              onChange={(e) => handleInputChange(e, paciente.id, 'fecha_hora_estudio')}
-            />
-            <select
-              className="gestion-citas__input"
-              value={paciente.fecha_hora_estudio.split('T')[1]}
-              onChange={(e) => handleInputChange(e, paciente.id, 'hora_estudio')}
-            >
-              <option value="">Seleccione una hora</option>
-              {horariosDisponibles.map((hora) => (
-                <option key={hora} value={hora}>
-                  {hora}
-                </option>
-              ))}
-            </select>
+      {currentPacientes.map((paciente) => {
+        const isPast = isPastDate(paciente.fecha_hora_estudio);
+        return (
+          <div key={paciente.id} className="gestion-citas__card">
+            <div className="gestion-citas__card-item">
+              <label><strong>Fecha y Hora:</strong></label>
+              <input
+                className="gestion-citas__input"
+                type="date"
+                value={paciente.fecha_hora_estudio.split('T')[0]}
+                onChange={(e) => handleInputChange(e, paciente.id, 'fecha_hora_estudio')}
+                disabled={isPast}
+              />
+              <select
+                className="gestion-citas__input"
+                value={paciente.fecha_hora_estudio.split('T')[1]}
+                onChange={(e) => handleInputChange(e, paciente.id, 'hora_estudio')}
+                disabled={isPast}
+              >
+                <option value="">Seleccione una hora</option>
+                {horariosDisponibles.map((hora) => (
+                  <option key={hora} value={hora}>
+                    {hora}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="gestion-citas__card-item">
+              <label><strong>Paciente:</strong></label>
+              <input
+                className="gestion-citas__input"
+                type="text"
+                value={paciente.nombre_completo}
+                onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo')}
+                disabled={isPast}
+              />
+            </div>
+            <div className="gestion-citas__card-item">
+              <label><strong>Médico:</strong></label>
+              <select
+                className="gestion-citas__input"
+                value={paciente.id_medico_refiere}
+                onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
+                disabled={!medicos.length || isPast}
+              >
+                <option value="">Seleccione un médico</option>
+                {medicos.map((medico) => (
+                  <option key={medico.id_medico} value={medico.id_medico}>
+                    {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="gestion-citas__card-item">
+              <label><strong>Estudio:</strong></label>
+              <select
+                className="gestion-citas__input"
+                value={paciente.id_estudio_radiologico}
+                onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
+                disabled={!estudios.length || isPast}
+              >
+                <option value="">Seleccione un estudio</option>
+                {estudios.map((estudio) => (
+                  <option key={estudio.id_estudio} value={estudio.id_estudio}>
+                    {estudio.nombre_estudio}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="gestion-citas__card-item">
+              <label><strong>Hospital:</strong></label>
+              <select
+                className="gestion-citas__input"
+                value={paciente.id_hospital_envia}
+                onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
+                disabled={!hospitales.length || isPast}
+              >
+                <option value="">Seleccione un hospital</option>
+                {hospitales.map((hospital) => (
+                  <option key={hospital.id_hospital} value={hospital.id_hospital}>
+                    {hospital.nombre_hospital}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="gestion-citas__actions">
+              <button
+                onClick={() => handleEditarPaciente(paciente)}
+                className="gestion-citas__button gestion-citas__button--guardar"
+                disabled={isPast}
+              >
+                Guardar
+              </button>
+            </div>
           </div>
-          <div className="gestion-citas__card-item">
-            <label><strong>Paciente:</strong></label>
-            <input
-              className="gestion-citas__input"
-              type="text"
-              value={paciente.nombre_completo}
-              onChange={(e) => handleInputChange(e, paciente.id, 'nombre_completo')}
-            />
-          </div>
-          <div className="gestion-citas__card-item">
-            <label><strong>Médico:</strong></label>
-            <select
-              className="gestion-citas__input"
-              value={paciente.id_medico_refiere}
-              onChange={(e) => handleInputChange(e, paciente.id, 'id_medico_refiere')}
-              disabled={!medicos.length}
-            >
-              <option value="">Seleccione un médico</option>
-              {medicos.map((medico) => (
-                <option key={medico.id_medico} value={medico.id_medico}>
-                  {`${medico.nombre_medico} ${medico.apellido_paterno_medico} ${medico.apellido_materno_medico}`}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="gestion-citas__card-item">
-            <label><strong>Estudio:</strong></label>
-            <select
-              className="gestion-citas__input"
-              value={paciente.id_estudio_radiologico}
-              onChange={(e) => handleInputChange(e, paciente.id, 'id_estudio_radiologico')}
-              disabled={!estudios.length}
-            >
-              <option value="">Seleccione un estudio</option>
-              {estudios.map((estudio) => (
-                <option key={estudio.id_estudio} value={estudio.id_estudio}>
-                  {estudio.nombre_estudio}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="gestion-citas__card-item">
-            <label><strong>Hospital:</strong></label>
-            <select
-              className="gestion-citas__input"
-              value={paciente.id_hospital_envia}
-              onChange={(e) => handleInputChange(e, paciente.id, 'id_hospital_envia')}
-              disabled={!hospitales.length}
-            >
-              <option value="">Seleccione un hospital</option>
-              {hospitales.map((hospital) => (
-                <option key={hospital.id_hospital} value={hospital.id_hospital}>
-                  {hospital.nombre_hospital}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="gestion-citas__actions">
-            <button
-              onClick={() => handleEditarPaciente(paciente)}
-              className="gestion-citas__button gestion-citas__button--guardar"
-            >
-              Guardar
-            </button>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
     <div className="gestion-citas__pagination">
       {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (

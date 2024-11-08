@@ -74,6 +74,7 @@ const FormularioPaciente = ({
       setFormData(initialState);
     }
   }, [modo, pacienteInicial]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

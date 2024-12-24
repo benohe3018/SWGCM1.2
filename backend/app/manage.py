@@ -1,4 +1,4 @@
-from flask import Manager
+from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from app import app, db  # Asegúrate de que estén correctamente importados
 

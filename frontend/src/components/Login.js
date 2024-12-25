@@ -57,6 +57,7 @@ const Login = () => {
             setError('Rol no reconocido. Acceso no permitido.');
         }
       } catch (error) {
+        console.error('Error durante el proceso de login:', error.response || error.message); // Log del error
         setError('Error al iniciar sesión. Por favor intente de nuevo.');
       }
     });

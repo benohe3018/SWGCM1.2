@@ -29,7 +29,7 @@ const Login = () => {
       return;
     }
     window.grecaptcha.enterprise.ready(async () => {
-      const token = await window.grecaptcha.enterprise.execute('6LdTV84pAAAAAFx9i_tznOQS4J1wRyo3NEuP2gSn', {action: 'LOGIN'});
+      const token = await window.grecaptcha.enterprise.execute('6LdSpKUqAAAAANzvIE3NlIYWSKxdlrYmBBQCJRky', {action: 'LOGIN'});
 
       try {
         const encryptedPassword = encryptPassword(password);

@@ -45,7 +45,7 @@ def create_app():
     migrate.init_app(app, db)
     jwt = JWTManager(app)
 
-    CORS(app, resources={r"/api/*": {"origins": "*"}})  
+    CORS(app, resources={r"/api/*": {"origins": "https://swgcm-3ffb78d6324b.herokuapp.com"}})  
 
     app.register_blueprint(auth_bp, url_prefix='/api')
     app.register_blueprint(medicos_bp, url_prefix='/api')

@@ -78,7 +78,7 @@ def login():
 
     recaptcha_response = requests.post(recaptcha_url, json=recaptcha_payload)
     recaptcha_data = recaptcha_response.json()
-    print(f"reCAPTCHA response: {recaptcha_data}")
+    
 
     # Validar reCAPTCHA
     if (

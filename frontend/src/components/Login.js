@@ -29,38 +29,37 @@ const Login = () => {
       return;
     }
 
-    try {
-      const encryptedPassword = encryptPassword(password);
+    window.grecaptcha.enterprise.ready(async () => {
+      const token = await window.grecaptcha.enterprise.execute(
+        process.env.REACT_APP_RECAPTCHA_SITE_KEY,
+        { action: 'LOGIN' }
+      );
 
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
-        nombre_usuario: username,
-        password: encryptedPassword,
-      });
+      try {
+        const encryptedPassword = encryptPassword(password);
 
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('role', response.data.role);
-      login(username, response.data.role);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
+          nombre_usuario: username,
+          password: encryptedPassword,
+          captcha: token,
+        });
 
-      switch (response.data.role) {
-        case 'Admin':
-          navigate('/dashboard-root');
-          break;
-        case 'root':
-          navigate('/dashboard-root');
-          break;
-        case 'Usuario_administrador':
-          navigate('/dashboard-root');
-          break;
-        case 'Usuario_de_Campo':
-          navigate('/dashboard-root');
-          break;
-        default:
-          setError('Rol no reconocido. Acceso no permitido.');
-          break;
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('role', response.data.role);
+        login(username, response.data.role);
+
+        switch (response.data.role) {
+          case 'Admin':
+          case 'root':
+            navigate('/dashboard-root');
+            break;
+          default:
+            setError('Rol no reconocido. Acceso no permitido.');
+        }
+      } catch (error) {
+        setError('Error al iniciar sesión. Por favor intente de nuevo.');
       }
-    } catch (error) {
-      setError('Error al iniciar sesión. Por favor intente de nuevo');
-    }
+    });
   };
 
   return (

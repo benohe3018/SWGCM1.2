@@ -28,43 +28,39 @@ const Login = () => {
       setError('Por favor ingresa tu nombre de usuario y contraseña.');
       return;
     }
-    window.grecaptcha.enterprise.ready(async () => {
-      const token = await window.grecaptcha.enterprise.execute('6LdSpKUqAAAAANzvIE3NlIYWSKxdlrYmBBQCJRky', {action: 'LOGIN'});
 
-      try {
-        const encryptedPassword = encryptPassword(password);
+    try {
+      const encryptedPassword = encryptPassword(password);
 
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
-          nombre_usuario: username,
-          password: encryptedPassword,
-          captcha: token
-        });
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
+        nombre_usuario: username,
+        password: encryptedPassword,
+      });
 
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('role', response.data.role);
-        login(username, response.data.role);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('role', response.data.role);
+      login(username, response.data.role);
 
-        switch (response.data.role) {
-          case 'Admin':
-            navigate('/dashboard-root');
-            break;
-          case 'root':
-            navigate('/dashboard-root');
-            break;
-          case 'Usuario_administrador':
-            navigate('/dashboard-root');
-            break;
-          case 'Usuario_de_Campo':
-            navigate('/dashboard-root');
-            break;
-          default:
-            setError('Rol no reconocido. Acceso no permitido.');
-            break;
-        }
-      } catch (error) {
-        setError('Error al iniciar sesión. Por favor intente de nuevo');
+      switch (response.data.role) {
+        case 'Admin':
+          navigate('/dashboard-root');
+          break;
+        case 'root':
+          navigate('/dashboard-root');
+          break;
+        case 'Usuario_administrador':
+          navigate('/dashboard-root');
+          break;
+        case 'Usuario_de_Campo':
+          navigate('/dashboard-root');
+          break;
+        default:
+          setError('Rol no reconocido. Acceso no permitido.');
+          break;
       }
-    });
+    } catch (error) {
+      setError('Error al iniciar sesión. Por favor intente de nuevo');
+    }
   };
 
   return (
